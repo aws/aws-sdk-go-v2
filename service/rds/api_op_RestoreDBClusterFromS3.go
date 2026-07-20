@@ -25,6 +25,10 @@ import (
 // This operation only applies to Aurora DB clusters. The source DB engine must be
 // MySQL.
 //
+// You can use the AssociatedRoles parameter to associate one or more Amazon Web
+// Services Identity and Access Management (IAM) roles with the Aurora DB cluster
+// when you restore it from Amazon S3.
+//
 // [What is Amazon Aurora?]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
 // [Migrating Data from MySQL by Using an Amazon S3 Bucket]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html#AuroraMySQL.Migrating.ExtMySQL.S3
 func (c *Client) RestoreDBClusterFromS3(ctx context.Context, params *RestoreDBClusterFromS3Input, optFns ...func(*Options)) (*RestoreDBClusterFromS3Output, error) {
@@ -109,6 +113,13 @@ type RestoreDBClusterFromS3Input struct {
 	//
 	// This member is required.
 	SourceEngineVersion *string
+
+	// A list of Amazon Web Services Identity and Access Management (IAM) roles to
+	// associate with the DB cluster when it's restored from Amazon S3. Each role
+	// grants the DB cluster permission to access other Amazon Web Services on your
+	// behalf. For each role, specify a role ARN and, optionally, the feature name
+	// (such as s3Import , s3Export , or Lambda ).
+	AssociatedRoles []types.DBClusterAssociatedRole
 
 	// A list of Availability Zones (AZs) where instances in the restored DB cluster
 	// can be created.
@@ -213,7 +224,7 @@ type RestoreDBClusterFromS3Input struct {
 	// [IAM Database Authentication]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
 	EnableIAMDatabaseAuthentication *bool
 
-	// The life cycle type for this DB cluster.
+	// The lifecycle type for this DB cluster.
 	//
 	// By default, this value is set to open-source-rds-extended-support , which
 	// enrolls your DB cluster into Amazon RDS Extended Support. At the end of standard

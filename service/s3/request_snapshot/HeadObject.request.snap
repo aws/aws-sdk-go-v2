@@ -1,0 +1,14 @@
+HEAD /__Key__?partNumber=1&response-cache-control=__ResponseCacheControl__&response-content-disposition=__ResponseContentDisposition__&response-content-encoding=__ResponseContentEncoding__&response-content-language=__ResponseContentLanguage__&response-content-type=__ResponseContentType__&response-expires=Sat%2C+01+Jan+2000+00%3A00%3A00+GMT&versionId=__VersionId__
+
+If-Match: __IfMatch__
+If-Modified-Since: Sat, 01 Jan 2000 00:00:00 GMT
+If-None-Match: __IfNoneMatch__
+If-Unmodified-Since: Sat, 01 Jan 2000 00:00:00 GMT
+Range: __Range__
+X-Amz-Checksum-Mode: ENABLED
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Request-Payer: requester
+X-Amz-Server-Side-Encryption-Customer-Algorithm: __SSECustomerAlgorithm__
+X-Amz-Server-Side-Encryption-Customer-Key: __SSECustomerKey__
+X-Amz-Server-Side-Encryption-Customer-Key-Md5: __SSECustomerKeyMD5__
+

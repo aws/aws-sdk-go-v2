@@ -1,0 +1,5 @@
+POST /v2/delete-assertion
+
+Content-Type: application/json
+
+{"assertionId":"__AssertionId__","serviceArn":"__ServiceArn__"}

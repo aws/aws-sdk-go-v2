@@ -1,0 +1,5 @@
+POST /custom-data-identifiers
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","ignoreWords":["__Member__","__Member__"],"keywords":["__Member__","__Member__"],"maximumMatchDistance":1,"name":"__Name__","regex":"__Regex__","severityLevels":[{"occurrencesThreshold":1,"severity":"LOW"},{"occurrencesThreshold":1,"severity":"LOW"}],"tags":{"key0":"__Value__"}}

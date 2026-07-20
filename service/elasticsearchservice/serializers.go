@@ -682,6 +682,11 @@ func awsRestjson1_serializeOpDocumentCreateElasticsearchDomainInput(v *CreateEla
 		}
 	}
 
+	if len(v.EngineMode) > 0 {
+		ok := object.Key("EngineMode")
+		ok.String(string(v.EngineMode))
+	}
+
 	if v.LogPublishingOptions != nil {
 		ok := object.Key("LogPublishingOptions")
 		if err := awsRestjson1_serializeDocumentLogPublishingOptions(v.LogPublishingOptions, ok); err != nil {
@@ -708,6 +713,11 @@ func awsRestjson1_serializeOpDocumentCreateElasticsearchDomainInput(v *CreateEla
 		if err := awsRestjson1_serializeDocumentTagList(v.TagList, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.UseCase) > 0 {
+		ok := object.Key("UseCase")
+		ok.String(string(v.UseCase))
 	}
 
 	if v.VPCOptions != nil {
@@ -4017,6 +4027,11 @@ func awsRestjson1_serializeOpDocumentUpdateElasticsearchDomainConfigInput(v *Upd
 		}
 	}
 
+	if len(v.EngineMode) > 0 {
+		ok := object.Key("EngineMode")
+		ok.String(string(v.EngineMode))
+	}
+
 	if v.LogPublishingOptions != nil {
 		ok := object.Key("LogPublishingOptions")
 		if err := awsRestjson1_serializeDocumentLogPublishingOptions(v.LogPublishingOptions, ok); err != nil {
@@ -4036,6 +4051,11 @@ func awsRestjson1_serializeOpDocumentUpdateElasticsearchDomainConfigInput(v *Upd
 		if err := awsRestjson1_serializeDocumentSnapshotOptions(v.SnapshotOptions, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.UseCase) > 0 {
+		ok := object.Key("UseCase")
+		ok.String(string(v.UseCase))
 	}
 
 	if v.VPCOptions != nil {

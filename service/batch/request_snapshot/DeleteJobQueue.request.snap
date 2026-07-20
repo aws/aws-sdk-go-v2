@@ -1,0 +1,5 @@
+POST /v1/deletejobqueue
+
+Content-Type: application/json
+
+{"jobQueue":"__JobQueue__"}

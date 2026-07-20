@@ -14,9 +14,8 @@ import (
 // The primary region is going to be the AWS-Region where the operation is
 // executed. The secondary region has to be provided in request's parameters. From
 // the data flow standpoint there is no difference between primary and secondary
-// regions - sending traffic will be split equally between the two. The primary
-// region is the region where the resource has been created and where it can be
-// managed.
+// regions - sending traffic is divided between the two. The primary region is the
+// region where the resource has been created and where it can be managed.
 func (c *Client) CreateMultiRegionEndpoint(ctx context.Context, params *CreateMultiRegionEndpointInput, optFns ...func(*Options)) (*CreateMultiRegionEndpointOutput, error) {
 	if params == nil {
 		params = &CreateMultiRegionEndpointInput{}

@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/DescribeEC2InstanceLimits
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢oEC2InstanceTypeht2.microhLocationl__Location__

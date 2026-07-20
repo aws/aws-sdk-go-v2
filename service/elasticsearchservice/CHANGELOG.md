@@ -1,3 +1,16 @@
+# v1.44.0 (2026-07-13)
+
+* **Feature**: Adds support for the EngineMode and UseCase parameters on Amazon Elasticsearch Service domains, enabling GENERAL or OPTIMIZED engine modes and SEARCH, VECTOR, OBSERVABILITY, or MIXED usecases when creating and updating domain configurations.
+
+# v1.43.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.42.6 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.5 (2026-06-29)
 
 * No change notes available for this release.

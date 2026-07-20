@@ -31,6 +31,9 @@ type ListConnectorsV2Input struct {
 	// The status for the connectorV2.
 	ConnectorStatus types.ConnectorStatus
 
+	// The enablement status to filter connectors by.
+	EnablementStatus types.EnablementStatus
+
 	// The maximum number of results to be returned.
 	MaxResults *int32
 

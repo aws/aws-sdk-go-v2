@@ -876,6 +876,9 @@ type ElasticsearchDomainConfig struct {
 	// Specifies the EncryptionAtRestOptions for the Elasticsearch domain.
 	EncryptionAtRestOptions *EncryptionAtRestOptionsStatus
 
+	// The engine mode configured for the domain.
+	EngineMode *EngineModeStatus
+
 	// Log publishing options for the given domain.
 	LogPublishingOptions *LogPublishingOptionsStatus
 
@@ -887,6 +890,9 @@ type ElasticsearchDomainConfig struct {
 
 	// Specifies the SnapshotOptions for the Elasticsearch domain.
 	SnapshotOptions *SnapshotOptionsStatus
+
+	// The use case configured for the domain.
+	UseCase *UseCaseStatus
 
 	// The VPCOptions for the specified domain. For more information, see [VPC Endpoints for Amazon Elasticsearch Service Domains].
 	//
@@ -987,6 +993,9 @@ type ElasticsearchDomainStatus struct {
 	// 'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com' .
 	Endpoints map[string]string
 
+	// The engine mode for the domain.
+	EngineMode DomainEngineMode
+
 	// Log publishing options for the given domain.
 	LogPublishingOptions map[string]LogPublishingOption
 
@@ -1011,6 +1020,9 @@ type ElasticsearchDomainStatus struct {
 	// Elasticsearch Service is undergoing a version upgrade. False if the
 	// configuration is active.
 	UpgradeProcessing *bool
+
+	// The primary use case for the domain.
+	UseCase DomainUseCase
 
 	// The VPCOptions for the specified domain. For more information, see [VPC Endpoints for Amazon Elasticsearch Service Domains].
 	//
@@ -1064,6 +1076,22 @@ type EncryptionAtRestOptionsStatus struct {
 
 	//  Specifies the status of the Encryption At Rest options for the specified
 	// Elasticsearch domain.
+	//
+	// This member is required.
+	Status *OptionStatus
+
+	noSmithyDocumentSerde
+}
+
+// The status of the engine mode for the domain.
+type EngineModeStatus struct {
+
+	// The engine mode configured for the domain.
+	//
+	// This member is required.
+	Options DomainEngineMode
+
+	// The current status of the engine mode for the domain.
 	//
 	// This member is required.
 	Status *OptionStatus
@@ -1778,6 +1806,22 @@ type UpgradeStepItem struct {
 	//   - Succeeded with Issues
 	//   - Failed
 	UpgradeStepStatus UpgradeStatus
+
+	noSmithyDocumentSerde
+}
+
+// The status of the use case for the domain.
+type UseCaseStatus struct {
+
+	// The use case configured for the domain.
+	//
+	// This member is required.
+	Options DomainUseCase
+
+	// The current status of the use case for the domain.
+	//
+	// This member is required.
+	Status *OptionStatus
 
 	noSmithyDocumentSerde
 }

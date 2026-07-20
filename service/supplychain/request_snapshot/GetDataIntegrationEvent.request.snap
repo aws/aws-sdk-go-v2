@@ -1,0 +1,3 @@
+GET /api-data/data-integration/instance/__InstanceId__/data-integration-events/__EventId__
+
+

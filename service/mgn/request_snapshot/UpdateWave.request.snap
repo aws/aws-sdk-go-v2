@@ -1,0 +1,5 @@
+POST /UpdateWave
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","description":"__Description__","name":"__Name__","waveID":"__WaveID__"}

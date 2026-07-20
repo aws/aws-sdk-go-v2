@@ -15,11 +15,13 @@ import (
 // partial queries with valid address completion. Also, the API supports the
 // filtering of results based on geographic location, country, or specific place
 // types, and can be tailored using optional parameters like language and political
-// views.
+// views. Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps]
+// customers.
 //
 // For more information, see [Autocomplete] in the Amazon Location Service Developer Guide.
 //
 // [Autocomplete]: https://docs.aws.amazon.com/location/latest/developerguide/autocomplete.html
+// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 func (c *Client) Autocomplete(ctx context.Context, params *AutocompleteInput, optFns ...func(*Options)) (*AutocompleteOutput, error) {
 	if params == nil {
 		params = &AutocompleteInput{}
@@ -73,7 +75,7 @@ type AutocompleteInput struct {
 	// is no data for the result in the requested language, data will be returned in
 	// the default language for the entry.
 	//
-	// [BCP 47]: https://en.wikipedia.org/wiki/IETF_language_tag
+	// [BCP 47]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
 	Language *string
 
 	// An optional limit for the number of results returned in a single call.
@@ -121,7 +123,9 @@ type AutocompleteInput struct {
 	// code spans multiple localities and this value is empty, partial district or
 	// locality information may be returned under a single postal code result entry. If
 	// it's populated with the value EnumerateSpannedLocalities , all cities in that
-	// postal code are returned.
+	// postal code are returned. If it's populated with the value
+	// EnumerateSpannedDistricts , all combinations of the postal code with the
+	// corresponding district and city names are returned.
 	PostalCodeMode types.PostalCodeMode
 
 	noSmithyDocumentSerde

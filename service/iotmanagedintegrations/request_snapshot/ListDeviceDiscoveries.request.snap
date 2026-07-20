@@ -1,0 +1,3 @@
+GET /device-discoveries?MaxResults=1&NextToken=__NextToken__&StatusFilter=RUNNING&TypeFilter=ZWAVE
+
+

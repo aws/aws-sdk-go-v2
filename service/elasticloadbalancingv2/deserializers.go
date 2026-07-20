@@ -15073,6 +15073,19 @@ func awsAwsquery_deserializeDocumentSourceIpConditionConfig(v **types.SourceIpCo
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("IpAddressType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IpAddressType = types.SourceIpAddressTypeEnum(xtv)
+			}
+
 		case strings.EqualFold("Values", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentListOfString(&sv.Values, nodeDecoder); err != nil {

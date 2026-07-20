@@ -2223,6 +2223,22 @@ type PlacementStatistics struct {
 	noSmithyDocumentSerde
 }
 
+// The pricing attributes that apply to your Amazon SES account, including the
+// currently active pricing plan and any scheduled change for the next billing
+// cycle.
+type PricingAttributes struct {
+
+	// The pricing plan that is currently active on your Amazon SES account.
+	CurrentPlan PricingPlan
+
+	// The pricing plan that will become active at the start of the next billing
+	// cycle, if a scheduled change has been requested. This field is empty when no
+	// scheduled change is pending.
+	NextPlan PricingPlan
+
+	noSmithyDocumentSerde
+}
+
 // Represents the raw content of an email message.
 type RawMessage struct {
 

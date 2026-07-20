@@ -37,7 +37,9 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
+import software.amazon.smithy.go.codegen.integration.DefaultHTTPClient;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
+import software.amazon.smithy.go.codegen.integration.Replaces;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.go.codegen.requestcompression.RequestCompression;
 import software.amazon.smithy.model.Model;
@@ -50,7 +52,12 @@ import static software.amazon.smithy.go.codegen.SymbolUtils.sliceOf;
 
 /**
  * Registers additional AWS specific client configuration fields
+ *
+ * <p>Replaces smithy-go's generic {@link DefaultHTTPClient}: the SDK supplies its own HTTPClient config field and
+ * {@code resolveHTTPClient} default (a buildable client with AWS transport defaults), so the generic default is
+ * removed to avoid a duplicate resolver.
  */
+@Replaces(DefaultHTTPClient.class)
 public class AddAwsConfigFields implements GoIntegration {
     private static final Logger LOGGER = Logger.getLogger(AddAwsConfigFields.class.getName());
 

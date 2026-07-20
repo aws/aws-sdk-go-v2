@@ -19456,6 +19456,16 @@ func rpc2_deserializeOpErrorCreateLocation(resp *smithyhttp.Response) error {
 		}
 
 		return verr
+	case "UnsupportedRegionException":
+		verr, err := deserializeCBOR_UnsupportedRegionException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.gamelift#UnsupportedRegionException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
 	default:
 
 		return &smithy.GenericAPIError{Code: typ, Message: msg}
@@ -20760,6 +20770,16 @@ func rpc2_deserializeOpErrorDeleteLocation(resp *smithyhttp.Response) error {
 		}
 
 		return verr
+	case "UnsupportedRegionException":
+		verr, err := deserializeCBOR_UnsupportedRegionException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.gamelift#UnsupportedRegionException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
 	default:
 
 		return &smithy.GenericAPIError{Code: typ, Message: msg}
@@ -21278,6 +21298,16 @@ func rpc2_deserializeOpErrorDeregisterCompute(resp *smithyhttp.Response) error {
 		if err != nil {
 			return &smithy.DeserializationError{
 				Err:      fmt.Errorf("deserialize com.amazonaws.gamelift#UnauthorizedException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "UnsupportedRegionException":
+		verr, err := deserializeCBOR_UnsupportedRegionException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.gamelift#UnsupportedRegionException: %w", err),
 				Snapshot: payload,
 			}
 		}
@@ -25204,6 +25234,16 @@ func rpc2_deserializeOpErrorRegisterCompute(resp *smithyhttp.Response) error {
 		if err != nil {
 			return &smithy.DeserializationError{
 				Err:      fmt.Errorf("deserialize com.amazonaws.gamelift#UnauthorizedException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
+	case "UnsupportedRegionException":
+		verr, err := deserializeCBOR_UnsupportedRegionException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.gamelift#UnsupportedRegionException: %w", err),
 				Snapshot: payload,
 			}
 		}

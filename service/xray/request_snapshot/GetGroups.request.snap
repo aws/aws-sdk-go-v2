@@ -1,0 +1,5 @@
+POST /Groups
+
+Content-Type: application/json
+
+{"NextToken":"__NextToken__"}

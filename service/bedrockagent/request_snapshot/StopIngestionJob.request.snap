@@ -1,0 +1,3 @@
+POST /knowledgebases/__KnowledgeBaseId__/datasources/__DataSourceId__/ingestionjobs/__IngestionJobId__/stop
+
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.PutRemediationExceptions
+
+{"ConfigRuleName":"__ConfigRuleName__","ExpirationTime":946684800,"Message":"__Message__","ResourceKeys":[{"ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"},{"ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}]}

@@ -5068,6 +5068,13 @@ func awsRestjson1_serializeOpDocumentGetProfileRecommendationsInput(v *GetProfil
 		}
 	}
 
+	if v.DiversityConfig != nil {
+		ok := object.Key("DiversityConfig")
+		if err := awsRestjson1_serializeDocumentRecommendationDiversityConfig(v.DiversityConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)
@@ -10403,6 +10410,11 @@ func awsRestjson1_serializeOpDocumentUpdateRecommenderInput(v *UpdateRecommender
 		}
 	}
 
+	if v.RecommenderVersionName != nil {
+		ok := object.Key("RecommenderVersionName")
+		ok.String(*v.RecommenderVersionName)
+	}
+
 	return nil
 }
 
@@ -11118,6 +11130,66 @@ func awsRestjson1_serializeDocumentDimensionList(v []types.Dimension, value smit
 		if err := awsRestjson1_serializeDocumentDimension(v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDiversityColumn(v *types.DiversityColumn, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.CapType) > 0 {
+		ok := object.Key("CapType")
+		ok.String(string(v.CapType))
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Target != nil {
+		ok := object.Key("Target")
+		ok.String(*v.Target)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDiversityColumnsList(v []types.DiversityColumn, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentDiversityColumn(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDiversityConfig(v *types.DiversityConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DiversityColumns != nil {
+		ok := object.Key("DiversityColumns")
+		if err := awsRestjson1_serializeDocumentDiversityColumnsList(v.DiversityColumns, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDiversityValuesMap(v map[string]int32, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.Integer(v[key])
 	}
 	return nil
 }
@@ -12460,9 +12532,35 @@ func awsRestjson1_serializeDocumentRangeOverride(v *types.RangeOverride, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRecommendationDiversityConfig(v *types.RecommendationDiversityConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsRestjson1_serializeDocumentDiversityValuesMap(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRecommenderConfig(v *types.RecommenderConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DiversityConfig != nil {
+		ok := object.Key("DiversityConfig")
+		if err := awsRestjson1_serializeDocumentDiversityConfig(v.DiversityConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.EventsConfig != nil {
 		ok := object.Key("EventsConfig")

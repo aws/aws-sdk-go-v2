@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ProvisionIpamPoolCidr&Cidr=__Cidr__&CidrAuthorizationContext.Message=__Message__&CidrAuthorizationContext.Signature=__Signature__&ClientToken=__ClientToken__&DryRun=true&IpamExternalResourceVerificationTokenId=__IpamExternalResourceVerificationTokenId__&IpamPoolId=__IpamPoolId__&NetmaskLength=1&VerificationMethod=remarks-x509&Version=2016-11-15

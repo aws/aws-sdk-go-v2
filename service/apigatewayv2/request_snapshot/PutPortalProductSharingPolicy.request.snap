@@ -1,0 +1,5 @@
+PUT /v2/portalproducts/__PortalProductId__/sharingpolicy
+
+Content-Type: application/json
+
+{"policyDocument":"__PolicyDocument__"}

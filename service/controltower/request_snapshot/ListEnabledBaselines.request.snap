@@ -1,0 +1,5 @@
+POST /list-enabled-baselines
+
+Content-Type: application/json
+
+{"filter":{"baselineIdentifiers":["__Member__","__Member__"],"inheritanceDriftStatuses":["IN_SYNC","IN_SYNC"],"parentIdentifiers":["__Member__","__Member__"],"statuses":["SUCCEEDED","SUCCEEDED"],"targetIdentifiers":["__Member__","__Member__"]},"includeChildren":true,"maxResults":1,"nextToken":"__NextToken__"}

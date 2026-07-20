@@ -1,0 +1,5 @@
+POST /QueryVectors
+
+Content-Type: application/json
+
+{"indexArn":"__IndexArn__","indexName":"__IndexName__","nextToken":"__NextToken__","queryVector":{"float32":[1,1]},"returnDistance":true,"returnMetadata":true,"topK":1,"vectorBucketName":"__VectorBucketName__"}

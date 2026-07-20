@@ -1,0 +1,5 @@
+POST /accounts/__AccountId__/rooms/__RoomId__/memberships?operation=batch-create
+
+Content-Type: application/json
+
+{"MembershipItemList":[{"MemberId":"__MemberId__","Role":"Administrator"},{"MemberId":"__MemberId__","Role":"Administrator"}]}

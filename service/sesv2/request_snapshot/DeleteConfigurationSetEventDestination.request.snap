@@ -1,0 +1,3 @@
+DELETE /v2/email/configuration-sets/__ConfigurationSetName__/event-destinations/__EventDestinationName__
+
+

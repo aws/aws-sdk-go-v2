@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/graph/query?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"additionalAttributes":{"formNames":["__Member__","__Member__"]},"match":[{"relationPattern":{"maxPathLength":1,"relationDirection":"IN","relationType":"LINEAGE"}},{"relationPattern":{"maxPathLength":1,"relationDirection":"IN","relationType":"LINEAGE"}}]}

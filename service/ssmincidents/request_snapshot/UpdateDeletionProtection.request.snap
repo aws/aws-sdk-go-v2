@@ -1,0 +1,5 @@
+POST /updateDeletionProtection
+
+Content-Type: application/json
+
+{"arn":"__Arn__","clientToken":"__ClientToken__","deletionProtected":true}

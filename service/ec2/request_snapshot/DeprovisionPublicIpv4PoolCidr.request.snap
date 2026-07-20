@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeprovisionPublicIpv4PoolCidr&Cidr=__Cidr__&DryRun=true&PoolId=__PoolId__&Version=2016-11-15

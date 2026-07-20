@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=SendEmail&ConfigurationSetName=__ConfigurationSetName__&Destination.BccAddresses.member.1=__Member__&Destination.BccAddresses.member.2=__Member__&Destination.CcAddresses.member.1=__Member__&Destination.CcAddresses.member.2=__Member__&Destination.ToAddresses.member.1=__Member__&Destination.ToAddresses.member.2=__Member__&Message.Body.Html.Charset=__Charset__&Message.Body.Html.Data=__Data__&Message.Body.Text.Charset=__Charset__&Message.Body.Text.Data=__Data__&Message.Subject.Charset=__Charset__&Message.Subject.Data=__Data__&ReplyToAddresses.member.1=__Member__&ReplyToAddresses.member.2=__Member__&ReturnPath=__ReturnPath__&ReturnPathArn=__ReturnPathArn__&Source=__Source__&SourceArn=__SourceArn__&Tags.member.1.Name=__Name__&Tags.member.1.Value=__Value__&Tags.member.2.Name=__Name__&Tags.member.2.Value=__Value__&Version=2010-12-01

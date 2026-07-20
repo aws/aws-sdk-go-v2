@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: BaldrApiService.CreateCluster
+
+{"BackupRetentionPolicy":{"Type":"DAYS","Value":"__Value__"},"HsmType":"__HsmType__","Mode":"FIPS","NetworkType":"IPV4","SourceBackupId":"__SourceBackupId__","SubnetIds":["__Member__","__Member__"],"TagList":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

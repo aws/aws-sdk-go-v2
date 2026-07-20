@@ -1,0 +1,5 @@
+PATCH /global-networks/__GlobalNetworkId__/network-resources/__ResourceArn__/metadata
+
+Content-Type: application/json
+
+{"Metadata":{"key0":"__Value__"}}

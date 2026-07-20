@@ -202,6 +202,22 @@ type PutMetricAlarmInput struct {
 	// you are setting an "M out of N" alarm, this value is the N.
 	EvaluationPeriods *int32
 
+	// The evaluation window that the alarm uses to select the range of metric data
+	// that it evaluates. Specify either a sliding window or a wall clock window. If
+	// you omit this parameter, the alarm uses a sliding window.
+	//
+	// A sliding window advances each time the alarm is evaluated, forming a rolling
+	// time window. A wall clock window aligns the evaluated range to fixed clock
+	// boundaries, such as the top of the hour or the start of the day.
+	//
+	// You can use EvaluationWindow with any type of metric alarm except alarms that
+	// are based on a PromQL query.
+	//
+	// For more information, see [Alarm evaluation windows] in the CloudWatch User Guide.
+	//
+	// [Alarm evaluation windows]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html
+	EvaluationWindow types.EvaluationWindow
+
 	// The extended statistic for the metric specified in MetricName . When you call
 	// PutMetricAlarm and specify a MetricName , you must specify either Statistic or
 	// ExtendedStatistic but not both.

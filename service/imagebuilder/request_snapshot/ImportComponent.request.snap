@@ -1,0 +1,5 @@
+PUT /ImportComponent
+
+Content-Type: application/json
+
+{"changeDescription":"__ChangeDescription__","clientToken":"__ClientToken__","data":"__Data__","description":"__Description__","format":"SHELL","kmsKeyId":"__KmsKeyId__","name":"__Name__","platform":"Windows","semanticVersion":"__SemanticVersion__","tags":{"key0":"__Value__"},"type":"BUILD","uri":"__Uri__"}

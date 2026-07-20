@@ -254,6 +254,23 @@ func (ConformancePackState) Values() []ConformancePackState {
 	}
 }
 
+type ConnectorFilterName string
+
+// Enum values for ConnectorFilterName
+const (
+	ConnectorFilterNameProvider ConnectorFilterName = "provider"
+)
+
+// Values returns all known values for ConnectorFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorFilterName) Values() []ConnectorFilterName {
+	return []ConnectorFilterName{
+		"provider",
+	}
+}
+
 type DeliveryStatus string
 
 // Enum values for DeliveryStatus
@@ -552,6 +569,23 @@ func (Owner) Values() []Owner {
 		"CUSTOM_LAMBDA",
 		"AWS",
 		"CUSTOM_POLICY",
+	}
+}
+
+type Provider string
+
+// Enum values for Provider
+const (
+	ProviderAzure Provider = "AZURE"
+)
+
+// Values returns all known values for Provider. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Provider) Values() []Provider {
+	return []Provider{
+		"AZURE",
 	}
 }
 

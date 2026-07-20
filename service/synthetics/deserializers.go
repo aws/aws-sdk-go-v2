@@ -3932,6 +3932,15 @@ func awsRestjson1_deserializeDocumentCanary(v **types.Canary, value interface{})
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "KmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
 		case "MultiLocationConfig":
 			if err := awsRestjson1_deserializeDocumentMultiLocationConfig(&sv.MultiLocationConfig, value); err != nil {
 				return err

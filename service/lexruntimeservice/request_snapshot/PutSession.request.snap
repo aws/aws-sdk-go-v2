@@ -1,0 +1,6 @@
+POST /bot/__BotName__/alias/__BotAlias__/user/__UserId__/session
+
+Accept: __Accept__
+Content-Type: application/json
+
+{"activeContexts":[{"name":"__Name__","parameters":{"key0":"__Value__"},"timeToLive":{"timeToLiveInSeconds":1,"turnsToLive":1}},{"name":"__Name__","parameters":{"key0":"__Value__"},"timeToLive":{"timeToLiveInSeconds":1,"turnsToLive":1}}],"dialogAction":{"fulfillmentState":"Fulfilled","intentName":"__IntentName__","message":"__Message__","messageFormat":"PlainText","slots":{"key0":"__Value__"},"slotToElicit":"__SlotToElicit__","type":"ElicitIntent"},"recentIntentSummaryView":[{"checkpointLabel":"__CheckpointLabel__","confirmationStatus":"None","dialogActionType":"ElicitIntent","fulfillmentState":"Fulfilled","intentName":"__IntentName__","slots":{"key0":"__Value__"},"slotToElicit":"__SlotToElicit__"},{"checkpointLabel":"__CheckpointLabel__","confirmationStatus":"None","dialogActionType":"ElicitIntent","fulfillmentState":"Fulfilled","intentName":"__IntentName__","slots":{"key0":"__Value__"},"slotToElicit":"__SlotToElicit__"}],"sessionAttributes":{"key0":"__Value__"}}

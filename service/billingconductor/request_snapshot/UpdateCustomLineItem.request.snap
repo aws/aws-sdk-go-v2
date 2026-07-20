@@ -1,0 +1,5 @@
+POST /update-custom-line-item
+
+Content-Type: application/json
+
+{"Arn":"__Arn__","BillingPeriodRange":{"ExclusiveEndBillingPeriod":"__ExclusiveEndBillingPeriod__","InclusiveStartBillingPeriod":"__InclusiveStartBillingPeriod__"},"ChargeDetails":{"Flat":{"ChargeValue":1},"LineItemFilters":[{"Attribute":"LINE_ITEM_TYPE","AttributeValues":["__Member__","__Member__"],"MatchOption":"NOT_EQUAL","Values":["SAVINGS_PLAN_NEGATION","SAVINGS_PLAN_NEGATION"]},{"Attribute":"LINE_ITEM_TYPE","AttributeValues":["__Member__","__Member__"],"MatchOption":"NOT_EQUAL","Values":["SAVINGS_PLAN_NEGATION","SAVINGS_PLAN_NEGATION"]}],"Percentage":{"PercentageValue":1}},"Description":"__Description__","Name":"__Name__"}

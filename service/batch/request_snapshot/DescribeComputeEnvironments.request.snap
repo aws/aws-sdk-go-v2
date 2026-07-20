@@ -1,0 +1,5 @@
+POST /v1/describecomputeenvironments
+
+Content-Type: application/json
+
+{"computeEnvironments":["__Member__","__Member__"],"maxResults":1,"nextToken":"__NextToken__"}

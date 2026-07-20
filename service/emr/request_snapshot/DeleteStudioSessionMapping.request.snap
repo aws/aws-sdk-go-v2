@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ElasticMapReduce.DeleteStudioSessionMapping
+
+{"IdentityId":"__IdentityId__","IdentityName":"__IdentityName__","IdentityType":"USER","StudioId":"__StudioId__"}

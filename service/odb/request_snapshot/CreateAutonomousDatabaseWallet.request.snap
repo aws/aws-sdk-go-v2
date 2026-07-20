@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.CreateAutonomousDatabaseWallet
+
+{"autonomousDatabaseId":"__AutonomousDatabaseId__","clientToken":"__ClientToken__","password":"__Password__","passwordSource":"CUSTOMER_MANAGED_AWS_SECRET","passwordSourceConfiguration":{"customerManagedAwsSecret":{"externalIdType":"database_ocid","iamRoleArn":"__IamRoleArn__","secretId":"__SecretId__"}},"walletType":"REGIONAL"}

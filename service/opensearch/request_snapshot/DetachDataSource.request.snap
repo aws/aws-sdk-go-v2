@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/application/__Id__/detachDataSource
+
+Content-Type: application/json
+
+{"dataSourceArn":"__DataSourceArn__"}

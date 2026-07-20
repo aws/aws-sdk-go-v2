@@ -1,0 +1,5 @@
+POST /putAlternateContact
+
+Content-Type: application/json
+
+{"AccountId":"__AccountId__","AlternateContactType":"BILLING","EmailAddress":"__EmailAddress__","Name":"__Name__","PhoneNumber":"__PhoneNumber__","Title":"__Title__"}

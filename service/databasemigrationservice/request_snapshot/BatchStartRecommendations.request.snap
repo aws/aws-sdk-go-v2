@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.BatchStartRecommendations
+
+{"Data":[{"DatabaseId":"__DatabaseId__","Settings":{"InstanceSizingType":"__InstanceSizingType__","WorkloadType":"__WorkloadType__"}},{"DatabaseId":"__DatabaseId__","Settings":{"InstanceSizingType":"__InstanceSizingType__","WorkloadType":"__WorkloadType__"}}]}

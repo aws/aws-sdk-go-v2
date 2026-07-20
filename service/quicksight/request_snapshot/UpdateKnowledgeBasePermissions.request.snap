@@ -1,0 +1,5 @@
+POST /v1/accounts/__AwsAccountId__/knowledge-bases/__KnowledgeBaseId__/permissions
+
+Content-Type: application/json
+
+{"GrantPermissions":[{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"},{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"}],"RevokePermissions":[{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"},{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"}]}

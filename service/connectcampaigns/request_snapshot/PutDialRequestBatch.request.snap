@@ -1,0 +1,5 @@
+PUT /campaigns/__Id__/dial-requests
+
+Content-Type: application/json
+
+{"dialRequests":[{"attributes":{"key0":"__Value__"},"clientToken":"__ClientToken__","expirationTime":"2000-01-01T00:00:00Z","phoneNumber":"__PhoneNumber__"},{"attributes":{"key0":"__Value__"},"clientToken":"__ClientToken__","expirationTime":"2000-01-01T00:00:00Z","phoneNumber":"__PhoneNumber__"}]}

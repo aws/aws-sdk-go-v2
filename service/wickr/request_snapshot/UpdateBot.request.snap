@@ -1,0 +1,5 @@
+PATCH /networks/__NetworkId__/bots/__BotId__
+
+Content-Type: application/json
+
+{"challenge":"__Challenge__","displayName":"__DisplayName__","groupId":"__GroupId__","suspend":true}

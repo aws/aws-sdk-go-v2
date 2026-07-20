@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/UpdateAlias
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¤gAliasIdk__AliasId__dNameh__Name__kDescriptiono__Description__oRoutingStrategy£dTypefSIMPLEgFleetIdk__FleetId__gMessagek__Message__

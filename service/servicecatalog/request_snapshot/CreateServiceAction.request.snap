@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.CreateServiceAction
+
+{"AcceptLanguage":"__AcceptLanguage__","Definition":{"key0":"__Value__"},"DefinitionType":"SSM_AUTOMATION","Description":"__Description__","IdempotencyToken":"__IdempotencyToken__","Name":"__Name__"}

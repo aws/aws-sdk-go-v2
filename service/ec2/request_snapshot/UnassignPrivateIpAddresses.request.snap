@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=UnassignPrivateIpAddresses&Ipv4Prefix.1=__Member__&Ipv4Prefix.2=__Member__&NetworkInterfaceId=__NetworkInterfaceId__&PrivateIpAddress.1=__Member__&PrivateIpAddress.2=__Member__&Version=2016-11-15

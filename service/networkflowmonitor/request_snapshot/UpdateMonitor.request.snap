@@ -1,0 +1,5 @@
+PATCH /monitors/__MonitorName__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","localResourcesToAdd":[{"identifier":"__Identifier__","type":"AWS::EC2::VPC"},{"identifier":"__Identifier__","type":"AWS::EC2::VPC"}],"localResourcesToRemove":[{"identifier":"__Identifier__","type":"AWS::EC2::VPC"},{"identifier":"__Identifier__","type":"AWS::EC2::VPC"}],"remoteResourcesToAdd":[{"identifier":"__Identifier__","type":"AWS::EC2::VPC"},{"identifier":"__Identifier__","type":"AWS::EC2::VPC"}],"remoteResourcesToRemove":[{"identifier":"__Identifier__","type":"AWS::EC2::VPC"},{"identifier":"__Identifier__","type":"AWS::EC2::VPC"}]}

@@ -1513,6 +1513,239 @@ func awsRestjson1_serializeOpDocumentCreateIdNamespaceAssociationInput(v *Create
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateIntermediateTable struct {
+}
+
+func (*awsRestjson1_serializeOpCreateIntermediateTable) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateIntermediateTable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateIntermediateTableInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memberships/{membershipIdentifier}/intermediateTables")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateIntermediateTableInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateIntermediateTableInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateIntermediateTableInput(v *CreateIntermediateTableInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MembershipIdentifier == nil || len(*v.MembershipIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member membershipIdentifier must not be empty")}
+	}
+	if v.MembershipIdentifier != nil {
+		if err := encoder.SetURI("membershipIdentifier").String(*v.MembershipIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateIntermediateTableInput(v *CreateIntermediateTableInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("kmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.PopulationAnalysisConfiguration != nil {
+		ok := object.Key("populationAnalysisConfiguration")
+		if err := awsRestjson1_serializeDocumentPopulationAnalysisConfiguration(v.PopulationAnalysisConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RetentionInDays != nil {
+		ok := object.Key("retentionInDays")
+		ok.Integer(*v.RetentionInDays)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateIntermediateTableAnalysisRule struct {
+}
+
+func (*awsRestjson1_serializeOpCreateIntermediateTableAnalysisRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateIntermediateTableAnalysisRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateIntermediateTableAnalysisRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/analysisRule")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateIntermediateTableAnalysisRuleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateIntermediateTableAnalysisRuleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateIntermediateTableAnalysisRuleInput(v *CreateIntermediateTableAnalysisRuleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.IntermediateTableIdentifier == nil || len(*v.IntermediateTableIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member intermediateTableIdentifier must not be empty")}
+	}
+	if v.IntermediateTableIdentifier != nil {
+		if err := encoder.SetURI("intermediateTableIdentifier").String(*v.IntermediateTableIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.MembershipIdentifier == nil || len(*v.MembershipIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member membershipIdentifier must not be empty")}
+	}
+	if v.MembershipIdentifier != nil {
+		if err := encoder.SetURI("membershipIdentifier").String(*v.MembershipIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateIntermediateTableAnalysisRuleInput(v *CreateIntermediateTableAnalysisRuleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnalysisRulePolicy != nil {
+		ok := object.Key("analysisRulePolicy")
+		if err := awsRestjson1_serializeDocumentIntermediateTableAnalysisRulePolicy(v.AnalysisRulePolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.AnalysisRuleType) > 0 {
+		ok := object.Key("analysisRuleType")
+		ok.String(string(v.AnalysisRuleType))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateMembership struct {
 }
 
@@ -2461,6 +2694,175 @@ func awsRestjson1_serializeOpHttpBindingsDeleteIdNamespaceAssociationInput(v *De
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteIntermediateTable struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteIntermediateTable) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteIntermediateTable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteIntermediateTableInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteIntermediateTableInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteIntermediateTableInput(v *DeleteIntermediateTableInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.IntermediateTableIdentifier == nil || len(*v.IntermediateTableIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member intermediateTableIdentifier must not be empty")}
+	}
+	if v.IntermediateTableIdentifier != nil {
+		if err := encoder.SetURI("intermediateTableIdentifier").String(*v.IntermediateTableIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.MembershipIdentifier == nil || len(*v.MembershipIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member membershipIdentifier must not be empty")}
+	}
+	if v.MembershipIdentifier != nil {
+		if err := encoder.SetURI("membershipIdentifier").String(*v.MembershipIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteIntermediateTableAnalysisRule struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteIntermediateTableAnalysisRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteIntermediateTableAnalysisRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteIntermediateTableAnalysisRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/analysisRule/{analysisRuleType}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteIntermediateTableAnalysisRuleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteIntermediateTableAnalysisRuleInput(v *DeleteIntermediateTableAnalysisRuleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if len(v.AnalysisRuleType) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member analysisRuleType must not be empty")}
+	}
+	if len(v.AnalysisRuleType) > 0 {
+		if err := encoder.SetURI("analysisRuleType").String(string(v.AnalysisRuleType)); err != nil {
+			return err
+		}
+	}
+
+	if v.IntermediateTableIdentifier == nil || len(*v.IntermediateTableIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member intermediateTableIdentifier must not be empty")}
+	}
+	if v.IntermediateTableIdentifier != nil {
+		if err := encoder.SetURI("intermediateTableIdentifier").String(*v.IntermediateTableIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.MembershipIdentifier == nil || len(*v.MembershipIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member membershipIdentifier must not be empty")}
+	}
+	if v.MembershipIdentifier != nil {
+		if err := encoder.SetURI("membershipIdentifier").String(*v.MembershipIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteMember struct {
 }
 
@@ -2687,6 +3089,105 @@ func awsRestjson1_serializeOpHttpBindingsDeletePrivacyBudgetTemplateInput(v *Del
 		if err := encoder.SetURI("privacyBudgetTemplateIdentifier").String(*v.PrivacyBudgetTemplateIdentifier); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDisallowIntermediateTable struct {
+}
+
+func (*awsRestjson1_serializeOpDisallowIntermediateTable) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDisallowIntermediateTable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisallowIntermediateTableInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memberships/{membershipIdentifier}/disallowIntermediateTable")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDisallowIntermediateTableInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDisallowIntermediateTableInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDisallowIntermediateTableInput(v *DisallowIntermediateTableInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MembershipIdentifier == nil || len(*v.MembershipIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member membershipIdentifier must not be empty")}
+	}
+	if v.MembershipIdentifier != nil {
+		if err := encoder.SetURI("membershipIdentifier").String(*v.MembershipIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDisallowIntermediateTableInput(v *DisallowIntermediateTableInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IncludeDescendants != nil {
+		ok := object.Key("includeDescendants")
+		ok.Boolean(*v.IncludeDescendants)
+	}
+
+	if v.IntermediateTableName != nil {
+		ok := object.Key("intermediateTableName")
+		ok.String(*v.IntermediateTableName)
 	}
 
 	return nil
@@ -3787,6 +4288,175 @@ func awsRestjson1_serializeOpHttpBindingsGetIdNamespaceAssociationInput(v *GetId
 	}
 	if v.IdNamespaceAssociationIdentifier != nil {
 		if err := encoder.SetURI("idNamespaceAssociationIdentifier").String(*v.IdNamespaceAssociationIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.MembershipIdentifier == nil || len(*v.MembershipIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member membershipIdentifier must not be empty")}
+	}
+	if v.MembershipIdentifier != nil {
+		if err := encoder.SetURI("membershipIdentifier").String(*v.MembershipIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetIntermediateTable struct {
+}
+
+func (*awsRestjson1_serializeOpGetIntermediateTable) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetIntermediateTable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetIntermediateTableInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetIntermediateTableInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetIntermediateTableInput(v *GetIntermediateTableInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.IntermediateTableIdentifier == nil || len(*v.IntermediateTableIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member intermediateTableIdentifier must not be empty")}
+	}
+	if v.IntermediateTableIdentifier != nil {
+		if err := encoder.SetURI("intermediateTableIdentifier").String(*v.IntermediateTableIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.MembershipIdentifier == nil || len(*v.MembershipIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member membershipIdentifier must not be empty")}
+	}
+	if v.MembershipIdentifier != nil {
+		if err := encoder.SetURI("membershipIdentifier").String(*v.MembershipIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetIntermediateTableAnalysisRule struct {
+}
+
+func (*awsRestjson1_serializeOpGetIntermediateTableAnalysisRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetIntermediateTableAnalysisRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetIntermediateTableAnalysisRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/analysisRule/{analysisRuleType}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetIntermediateTableAnalysisRuleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetIntermediateTableAnalysisRuleInput(v *GetIntermediateTableAnalysisRuleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if len(v.AnalysisRuleType) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member analysisRuleType must not be empty")}
+	}
+	if len(v.AnalysisRuleType) > 0 {
+		if err := encoder.SetURI("analysisRuleType").String(string(v.AnalysisRuleType)); err != nil {
+			return err
+		}
+	}
+
+	if v.IntermediateTableIdentifier == nil || len(*v.IntermediateTableIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member intermediateTableIdentifier must not be empty")}
+	}
+	if v.IntermediateTableIdentifier != nil {
+		if err := encoder.SetURI("intermediateTableIdentifier").String(*v.IntermediateTableIdentifier); err != nil {
 			return err
 		}
 	}
@@ -5308,6 +5978,173 @@ func awsRestjson1_serializeOpHttpBindingsListIdNamespaceAssociationsInput(v *Lis
 	return nil
 }
 
+type awsRestjson1_serializeOpListIntermediateTables struct {
+}
+
+func (*awsRestjson1_serializeOpListIntermediateTables) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListIntermediateTables) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListIntermediateTablesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memberships/{membershipIdentifier}/intermediateTables")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListIntermediateTablesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListIntermediateTablesInput(v *ListIntermediateTablesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.MembershipIdentifier == nil || len(*v.MembershipIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member membershipIdentifier must not be empty")}
+	}
+	if v.MembershipIdentifier != nil {
+		if err := encoder.SetURI("membershipIdentifier").String(*v.MembershipIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListIntermediateTableVersions struct {
+}
+
+func (*awsRestjson1_serializeOpListIntermediateTableVersions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListIntermediateTableVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListIntermediateTableVersionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/versions")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListIntermediateTableVersionsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListIntermediateTableVersionsInput(v *ListIntermediateTableVersionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.IntermediateTableIdentifier == nil || len(*v.IntermediateTableIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member intermediateTableIdentifier must not be empty")}
+	}
+	if v.IntermediateTableIdentifier != nil {
+		if err := encoder.SetURI("intermediateTableIdentifier").String(*v.IntermediateTableIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.MembershipIdentifier == nil || len(*v.MembershipIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member membershipIdentifier must not be empty")}
+	}
+	if v.MembershipIdentifier != nil {
+		if err := encoder.SetURI("membershipIdentifier").String(*v.MembershipIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListMembers struct {
 }
 
@@ -6045,6 +6882,123 @@ func awsRestjson1_serializeOpDocumentPopulateIdMappingTableInput(v *PopulateIdMa
 	if len(v.JobType) > 0 {
 		ok := object.Key("jobType")
 		ok.String(string(v.JobType))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpPopulateIntermediateTable struct {
+}
+
+func (*awsRestjson1_serializeOpPopulateIntermediateTable) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPopulateIntermediateTable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PopulateIntermediateTableInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/populate")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsPopulateIntermediateTableInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPopulateIntermediateTableInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPopulateIntermediateTableInput(v *PopulateIntermediateTableInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.IntermediateTableIdentifier == nil || len(*v.IntermediateTableIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member intermediateTableIdentifier must not be empty")}
+	}
+	if v.IntermediateTableIdentifier != nil {
+		if err := encoder.SetURI("intermediateTableIdentifier").String(*v.IntermediateTableIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.MembershipIdentifier == nil || len(*v.MembershipIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member membershipIdentifier must not be empty")}
+	}
+	if v.MembershipIdentifier != nil {
+		if err := encoder.SetURI("membershipIdentifier").String(*v.MembershipIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPopulateIntermediateTableInput(v *PopulateIntermediateTableInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnalysisPayerAccountId != nil {
+		ok := object.Key("analysisPayerAccountId")
+		ok.String(*v.AnalysisPayerAccountId)
+	}
+
+	if v.ComputeConfiguration != nil {
+		ok := object.Key("computeConfiguration")
+		if err := awsRestjson1_serializeDocumentIntermediateTableComputeConfiguration(v.ComputeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Parameters != nil {
+		ok := object.Key("parameters")
+		if err := awsRestjson1_serializeDocumentParameterMap(v.Parameters, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -7652,6 +8606,235 @@ func awsRestjson1_serializeOpDocumentUpdateIdNamespaceAssociationInput(v *Update
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateIntermediateTable struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateIntermediateTable) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateIntermediateTable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateIntermediateTableInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateIntermediateTableInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateIntermediateTableInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateIntermediateTableInput(v *UpdateIntermediateTableInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.IntermediateTableIdentifier == nil || len(*v.IntermediateTableIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member intermediateTableIdentifier must not be empty")}
+	}
+	if v.IntermediateTableIdentifier != nil {
+		if err := encoder.SetURI("intermediateTableIdentifier").String(*v.IntermediateTableIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.MembershipIdentifier == nil || len(*v.MembershipIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member membershipIdentifier must not be empty")}
+	}
+	if v.MembershipIdentifier != nil {
+		if err := encoder.SetURI("membershipIdentifier").String(*v.MembershipIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateIntermediateTableInput(v *UpdateIntermediateTableInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Columns != nil {
+		ok := object.Key("columns")
+		if err := awsRestjson1_serializeDocumentIntermediateTableColumnList(v.Columns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("kmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateIntermediateTableAnalysisRule struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateIntermediateTableAnalysisRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateIntermediateTableAnalysisRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateIntermediateTableAnalysisRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/memberships/{membershipIdentifier}/intermediateTables/{intermediateTableIdentifier}/analysisRule/{analysisRuleType}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateIntermediateTableAnalysisRuleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateIntermediateTableAnalysisRuleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateIntermediateTableAnalysisRuleInput(v *UpdateIntermediateTableAnalysisRuleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if len(v.AnalysisRuleType) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member analysisRuleType must not be empty")}
+	}
+	if len(v.AnalysisRuleType) > 0 {
+		if err := encoder.SetURI("analysisRuleType").String(string(v.AnalysisRuleType)); err != nil {
+			return err
+		}
+	}
+
+	if v.IntermediateTableIdentifier == nil || len(*v.IntermediateTableIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member intermediateTableIdentifier must not be empty")}
+	}
+	if v.IntermediateTableIdentifier != nil {
+		if err := encoder.SetURI("intermediateTableIdentifier").String(*v.IntermediateTableIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.MembershipIdentifier == nil || len(*v.MembershipIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member membershipIdentifier must not be empty")}
+	}
+	if v.MembershipIdentifier != nil {
+		if err := encoder.SetURI("membershipIdentifier").String(*v.MembershipIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateIntermediateTableAnalysisRuleInput(v *UpdateIntermediateTableAnalysisRuleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnalysisRulePolicy != nil {
+		ok := object.Key("analysisRulePolicy")
+		if err := awsRestjson1_serializeDocumentIntermediateTableAnalysisRulePolicy(v.AnalysisRulePolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateMembership struct {
 }
 
@@ -8379,6 +9562,13 @@ func awsRestjson1_serializeDocumentAnalysisRuleCustom(v *types.AnalysisRuleCusto
 		ok.String(string(v.AdditionalAnalyses))
 	}
 
+	if v.AllowedAdditionalAnalyses != nil {
+		ok := object.Key("allowedAdditionalAnalyses")
+		if err := awsRestjson1_serializeDocumentAllowedAdditionalAnalyses(v.AllowedAdditionalAnalyses, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AllowedAnalyses != nil {
 		ok := object.Key("allowedAnalyses")
 		if err := awsRestjson1_serializeDocumentAllowedAnalysesList(v.AllowedAnalyses, ok); err != nil {
@@ -8389,6 +9579,13 @@ func awsRestjson1_serializeDocumentAnalysisRuleCustom(v *types.AnalysisRuleCusto
 	if v.AllowedAnalysisProviders != nil {
 		ok := object.Key("allowedAnalysisProviders")
 		if err := awsRestjson1_serializeDocumentAllowedAnalysisProviderList(v.AllowedAnalysisProviders, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AllowedResultReceivers != nil {
+		ok := object.Key("allowedResultReceivers")
+		if err := awsRestjson1_serializeDocumentAllowedResultReceivers(v.AllowedResultReceivers, ok); err != nil {
 			return err
 		}
 	}
@@ -9108,6 +10305,166 @@ func awsRestjson1_serializeDocumentIdNamespaceAssociationInputReferenceConfig(v 
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIntermediateTableAnalysisRuleCustom(v *types.IntermediateTableAnalysisRuleCustom, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AdditionalAnalyses) > 0 {
+		ok := object.Key("additionalAnalyses")
+		ok.String(string(v.AdditionalAnalyses))
+	}
+
+	if v.AllowedAdditionalAnalyses != nil {
+		ok := object.Key("allowedAdditionalAnalyses")
+		if err := awsRestjson1_serializeDocumentAllowedAdditionalAnalyses(v.AllowedAdditionalAnalyses, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AllowedAnalyses != nil {
+		ok := object.Key("allowedAnalyses")
+		if err := awsRestjson1_serializeDocumentAllowedAnalysesList(v.AllowedAnalyses, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AllowedAnalysisProviders != nil {
+		ok := object.Key("allowedAnalysisProviders")
+		if err := awsRestjson1_serializeDocumentAllowedAnalysisProviderList(v.AllowedAnalysisProviders, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AllowedResultReceivers != nil {
+		ok := object.Key("allowedResultReceivers")
+		if err := awsRestjson1_serializeDocumentAllowedResultReceivers(v.AllowedResultReceivers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DifferentialPrivacy != nil {
+		ok := object.Key("differentialPrivacy")
+		if err := awsRestjson1_serializeDocumentDifferentialPrivacyConfiguration(v.DifferentialPrivacy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DisallowedOutputColumns != nil {
+		ok := object.Key("disallowedOutputColumns")
+		if err := awsRestjson1_serializeDocumentAnalysisRuleColumnList(v.DisallowedOutputColumns, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIntermediateTableAnalysisRulePolicy(v types.IntermediateTableAnalysisRulePolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.IntermediateTableAnalysisRulePolicyMemberV1:
+		av := object.Key("v1")
+		if err := awsRestjson1_serializeDocumentIntermediateTableAnalysisRulePolicyV1(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIntermediateTableAnalysisRulePolicyV1(v types.IntermediateTableAnalysisRulePolicyV1, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.IntermediateTableAnalysisRulePolicyV1MemberCustom:
+		av := object.Key("custom")
+		if err := awsRestjson1_serializeDocumentIntermediateTableAnalysisRuleCustom(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIntermediateTableColumn(v *types.IntermediateTableColumn, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Type != nil {
+		ok := object.Key("type")
+		ok.String(*v.Type)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIntermediateTableColumnList(v []types.IntermediateTableColumn, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentIntermediateTableColumn(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIntermediateTableComputeConfiguration(v types.IntermediateTableComputeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.IntermediateTableComputeConfigurationMemberQueryComputeConfiguration:
+		av := object.Key("queryComputeConfiguration")
+		if err := awsRestjson1_serializeDocumentWorkerComputeConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIntermediateTableOutputConfiguration(v *types.IntermediateTableOutputConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.String(*v.Id)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentJobComputePaymentConfig(v *types.JobComputePaymentConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9587,6 +10944,41 @@ func awsRestjson1_serializeDocumentPaymentConfiguration(v *types.PaymentConfigur
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPopulationAnalysisConfiguration(v types.PopulationAnalysisConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.PopulationAnalysisConfigurationMemberSqlParameters:
+		av := object.Key("sqlParameters")
+		if err := awsRestjson1_serializeDocumentPopulationAnalysisSqlParameters(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPopulationAnalysisSqlParameters(v *types.PopulationAnalysisSqlParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnalysisTemplateArn != nil {
+		ok := object.Key("analysisTemplateArn")
+		ok.String(*v.AnalysisTemplateArn)
+	}
+
+	if v.QueryString != nil {
+		ok := object.Key("queryString")
+		ok.String(*v.QueryString)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPreviewPrivacyImpactParametersInput(v types.PreviewPrivacyImpactParametersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9849,6 +11241,12 @@ func awsRestjson1_serializeDocumentProtectedQueryOutputConfiguration(v types.Pro
 	case *types.ProtectedQueryOutputConfigurationMemberDistribute:
 		av := object.Key("distribute")
 		if err := awsRestjson1_serializeDocumentProtectedQueryDistributeOutputConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ProtectedQueryOutputConfigurationMemberIntermediateTable:
+		av := object.Key("intermediateTable")
+		if err := awsRestjson1_serializeDocumentIntermediateTableOutputConfiguration(&uv.Value, av); err != nil {
 			return err
 		}
 

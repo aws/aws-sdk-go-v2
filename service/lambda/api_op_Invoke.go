@@ -97,9 +97,15 @@ type InvokeInput struct {
 	// your function for synchronous invocations only.
 	ClientContext *string
 
-	// Optional unique name for the durable execution. When you start your special
-	// function, you can give it a unique name to identify this specific execution.
-	// It's like giving a nickname to a task.
+	// A unique name for the durable execution. If you invoke a durable function using
+	// a name that already exists with the same payload, Lambda returns the existing
+	// execution instead of creating a duplicate. If the payload differs, Lambda
+	// returns a DurableExecutionAlreadyStartedException error.
+	//
+	// If not specified, Lambda generates a unique identifier automatically. For more
+	// information, see [Execution names].
+	//
+	// [Execution names]: https://docs.aws.amazon.com/lambda/latest/dg/durable-execution-idempotency.html#durable-idempotency-execution-names
 	DurableExecutionName *string
 
 	// Choose from the following options.

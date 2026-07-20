@@ -4043,6 +4043,24 @@ func (m *awsAwsjson10_serializeOpUpdateOdbPeeringConnection) HandleSerialize(ctx
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson10_serializeDocumentAdminPasswordSourceConfigurationInput(v types.AdminPasswordSourceConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.AdminPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret:
+		av := object.Key("customerManagedAwsSecret")
+		if err := awsAwsjson10_serializeDocumentCustomerManagedAwsSecretConfigurationInput(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentAwsEncryptionKeyConfigurationInput(v *types.AwsEncryptionKeyConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4163,6 +4181,28 @@ func awsAwsjson10_serializeDocumentCustomerContacts(v []types.CustomerContact, v
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentCustomerManagedAwsSecretConfigurationInput(v *types.CustomerManagedAwsSecretConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ExternalIdType) > 0 {
+		ok := object.Key("externalIdType")
+		ok.String(string(v.ExternalIdType))
+	}
+
+	if v.IamRoleArn != nil {
+		ok := object.Key("iamRoleArn")
+		ok.String(*v.IamRoleArn)
+	}
+
+	if v.SecretId != nil {
+		ok := object.Key("secretId")
+		ok.String(*v.SecretId)
+	}
+
 	return nil
 }
 
@@ -4700,6 +4740,24 @@ func awsAwsjson10_serializeDocumentTransportableTablespace(v *types.Transportabl
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentWalletPasswordSourceConfigurationInput(v types.WalletPasswordSourceConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.WalletPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret:
+		av := object.Key("customerManagedAwsSecret")
+		if err := awsAwsjson10_serializeDocumentCustomerManagedAwsSecretConfigurationInput(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentWeeksOfMonth(v []int32, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4786,6 +4844,18 @@ func awsAwsjson10_serializeOpDocumentCreateAutonomousDatabaseInput(v *CreateAuto
 	if v.AdminPassword != nil {
 		ok := object.Key("adminPassword")
 		ok.String(*v.AdminPassword)
+	}
+
+	if len(v.AdminPasswordSource) > 0 {
+		ok := object.Key("adminPasswordSource")
+		ok.String(string(v.AdminPasswordSource))
+	}
+
+	if v.AdminPasswordSourceConfiguration != nil {
+		ok := object.Key("adminPasswordSourceConfiguration")
+		if err := awsAwsjson10_serializeDocumentAdminPasswordSourceConfigurationInput(v.AdminPasswordSourceConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.AllowlistedIps != nil {
@@ -5044,6 +5114,18 @@ func awsAwsjson10_serializeOpDocumentCreateAutonomousDatabaseWalletInput(v *Crea
 	if v.Password != nil {
 		ok := object.Key("password")
 		ok.String(*v.Password)
+	}
+
+	if len(v.PasswordSource) > 0 {
+		ok := object.Key("passwordSource")
+		ok.String(string(v.PasswordSource))
+	}
+
+	if v.PasswordSourceConfiguration != nil {
+		ok := object.Key("passwordSourceConfiguration")
+		if err := awsAwsjson10_serializeDocumentWalletPasswordSourceConfigurationInput(v.PasswordSourceConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.WalletType) > 0 {
@@ -5803,6 +5885,11 @@ func awsAwsjson10_serializeOpDocumentInitializeServiceInput(v *InitializeService
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AutonomousDatabaseOciAwsSecretsManagerIntegration) > 0 {
+		ok := object.Key("autonomousDatabaseOciAwsSecretsManagerIntegration")
+		ok.String(string(v.AutonomousDatabaseOciAwsSecretsManagerIntegration))
+	}
+
 	if v.OciIdentityDomain != nil {
 		ok := object.Key("ociIdentityDomain")
 		ok.Boolean(*v.OciIdentityDomain)
@@ -6402,6 +6489,18 @@ func awsAwsjson10_serializeOpDocumentUpdateAutonomousDatabaseInput(v *UpdateAuto
 	if v.AdminPassword != nil {
 		ok := object.Key("adminPassword")
 		ok.String(*v.AdminPassword)
+	}
+
+	if len(v.AdminPasswordSource) > 0 {
+		ok := object.Key("adminPasswordSource")
+		ok.String(string(v.AdminPasswordSource))
+	}
+
+	if v.AdminPasswordSourceConfiguration != nil {
+		ok := object.Key("adminPasswordSourceConfiguration")
+		if err := awsAwsjson10_serializeDocumentAdminPasswordSourceConfigurationInput(v.AdminPasswordSourceConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.AllowlistedIps != nil {

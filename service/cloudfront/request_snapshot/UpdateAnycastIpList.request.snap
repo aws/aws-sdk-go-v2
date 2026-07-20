@@ -1,0 +1,6 @@
+PUT /2020-05-31/anycast-ip-list/__Id__
+
+Content-Type: application/xml
+If-Match: __IfMatch__
+
+<UpdateAnycastIpListRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><IpAddressType>ipv4</IpAddressType><IpamCidrConfigs><IpamCidrConfig><AnycastIp>__AnycastIp__</AnycastIp><Cidr>__Cidr__</Cidr><IpamPoolArn>__IpamPoolArn__</IpamPoolArn><Status>provisioned</Status></IpamCidrConfig><IpamCidrConfig><AnycastIp>__AnycastIp__</AnycastIp><Cidr>__Cidr__</Cidr><IpamPoolArn>__IpamPoolArn__</IpamPoolArn><Status>provisioned</Status></IpamCidrConfig></IpamCidrConfigs></UpdateAnycastIpListRequest>

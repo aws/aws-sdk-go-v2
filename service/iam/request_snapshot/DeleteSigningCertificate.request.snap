@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteSigningCertificate&CertificateId=__CertificateId__&UserName=__UserName__&Version=2010-05-08

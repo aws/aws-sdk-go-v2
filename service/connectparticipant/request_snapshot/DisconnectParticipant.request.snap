@@ -1,0 +1,6 @@
+POST /participant/disconnect
+
+Content-Type: application/json
+X-Amz-Bearer: __ConnectionToken__
+
+{"ClientToken":"__ClientToken__"}

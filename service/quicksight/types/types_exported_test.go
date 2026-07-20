@@ -140,6 +140,12 @@ func ExampleDataSourceParameters_outputUsage() {
 	case *types.DataSourceParametersMemberExasolParameters:
 		_ = v.Value // Value is types.ExasolParameters
 
+	case *types.DataSourceParametersMemberFMKBParameters:
+		_ = v.Value // Value is types.FMKBParameters
+
+	case *types.DataSourceParametersMemberGoogleDriveParameters:
+		_ = v.Value // Value is types.GoogleDriveParameters
+
 	case *types.DataSourceParametersMemberImpalaParameters:
 		_ = v.Value // Value is types.ImpalaParameters
 
@@ -151,6 +157,9 @@ func ExampleDataSourceParameters_outputUsage() {
 
 	case *types.DataSourceParametersMemberMySqlParameters:
 		_ = v.Value // Value is types.MySqlParameters
+
+	case *types.DataSourceParametersMemberOneDriveParameters:
+		_ = v.Value // Value is types.OneDriveParameters
 
 	case *types.DataSourceParametersMemberOracleParameters:
 		_ = v.Value // Value is types.OracleParameters
@@ -181,6 +190,9 @@ func ExampleDataSourceParameters_outputUsage() {
 
 	case *types.DataSourceParametersMemberServiceNowParameters:
 		_ = v.Value // Value is types.ServiceNowParameters
+
+	case *types.DataSourceParametersMemberSharePointParameters:
+		_ = v.Value // Value is types.SharePointParameters
 
 	case *types.DataSourceParametersMemberSnowflakeParameters:
 		_ = v.Value // Value is types.SnowflakeParameters
@@ -218,6 +230,8 @@ func ExampleDataSourceParameters_outputUsage() {
 var _ *types.RedshiftParameters
 var _ *types.DatabricksParameters
 var _ *types.S3KnowledgeBaseParameters
+var _ *types.OneDriveParameters
+var _ *types.GoogleDriveParameters
 var _ *types.JiraParameters
 var _ *types.S3TablesParameters
 var _ *types.ImpalaParameters
@@ -231,6 +245,7 @@ var _ *types.WebCrawlerParameters
 var _ *types.PrestoParameters
 var _ *types.AuroraParameters
 var _ *types.S3Parameters
+var _ *types.SharePointParameters
 var _ *types.TwitterParameters
 var _ *types.AwsIotAnalyticsParameters
 var _ *types.AmazonElasticsearchParameters
@@ -240,6 +255,7 @@ var _ *types.AmazonOpenSearchParameters
 var _ *types.TrinoParameters
 var _ *types.OracleParameters
 var _ *types.TeradataParameters
+var _ *types.FMKBParameters
 var _ *types.ExasolParameters
 var _ *types.SqlServerParameters
 var _ *types.PostgreSqlParameters
@@ -299,6 +315,9 @@ func ExamplePhysicalTable_outputUsage() {
 	case *types.PhysicalTableMemberCustomSql:
 		_ = v.Value // Value is types.CustomSql
 
+	case *types.PhysicalTableMemberFileSource:
+		_ = v.Value // Value is types.FileSource
+
 	case *types.PhysicalTableMemberRelationalTable:
 		_ = v.Value // Value is types.RelationalTable
 
@@ -317,6 +336,7 @@ func ExamplePhysicalTable_outputUsage() {
 	}
 }
 
+var _ *types.FileSource
 var _ *types.S3Source
 var _ *types.CustomSql
 var _ *types.RelationalTable

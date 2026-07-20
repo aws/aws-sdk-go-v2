@@ -4,7 +4,9 @@ package computeoptimizer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,15 @@ type GetEnrollmentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnrollmentStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnrollmentStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnrollmentStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetEnrollmentStatusOutput struct {
 
 	// The Unix epoch timestamp, in seconds, of when the account enrollment status was
@@ -65,13 +76,59 @@ type GetEnrollmentStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnrollmentStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnrollmentStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnrollmentStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteTime(schemas.GetEnrollmentStatusResponse_lastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.MemberAccountsEnrolled != false {
+		s.WriteBool(schemas.GetEnrollmentStatusResponse_memberAccountsEnrolled, v.MemberAccountsEnrolled)
+	}
+	if v.NumberOfMemberAccountsOptedIn != nil {
+		s.WriteInt32(schemas.GetEnrollmentStatusResponse_numberOfMemberAccountsOptedIn, *v.NumberOfMemberAccountsOptedIn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetEnrollmentStatusResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetEnrollmentStatusResponse_statusReason, *v.StatusReason)
+	}
+}
+func (v *GetEnrollmentStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnrollmentStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnrollmentStatusResponse_lastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetEnrollmentStatusResponse_lastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.GetEnrollmentStatusResponse_memberAccountsEnrolled:
+			return d.ReadBool(schemas.GetEnrollmentStatusResponse_memberAccountsEnrolled, &v.MemberAccountsEnrolled)
+		case schemas.GetEnrollmentStatusResponse_numberOfMemberAccountsOptedIn:
+			v.NumberOfMemberAccountsOptedIn = new(int32)
+			return d.ReadInt32(schemas.GetEnrollmentStatusResponse_numberOfMemberAccountsOptedIn, v.NumberOfMemberAccountsOptedIn)
+		case schemas.GetEnrollmentStatusResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetEnrollmentStatusResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		case schemas.GetEnrollmentStatusResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetEnrollmentStatusResponse_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEnrollmentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetEnrollmentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnrollmentStatus, schemas.GetEnrollmentStatusRequest, schemas.GetEnrollmentStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetEnrollmentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnrollmentStatus, schemas.GetEnrollmentStatusRequest, schemas.GetEnrollmentStatusResponse), output: &GetEnrollmentStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

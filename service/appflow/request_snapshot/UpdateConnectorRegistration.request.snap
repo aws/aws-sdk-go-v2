@@ -1,0 +1,5 @@
+POST /update-connector-registration
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","connectorLabel":"__ConnectorLabel__","connectorProvisioningConfig":{"lambda":{"lambdaArn":"__LambdaArn__"}},"description":"__Description__"}

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyTransitGatewayMeteringPolicy&AddMiddleboxAttachmentId.1=__Member__&AddMiddleboxAttachmentId.2=__Member__&DryRun=true&RemoveMiddleboxAttachmentId.1=__Member__&RemoveMiddleboxAttachmentId.2=__Member__&TransitGatewayMeteringPolicyId=__TransitGatewayMeteringPolicyId__&Version=2016-11-15

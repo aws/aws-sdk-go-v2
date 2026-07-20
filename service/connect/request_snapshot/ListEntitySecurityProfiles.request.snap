@@ -1,0 +1,5 @@
+POST /entity-security-profiles-summary/__InstanceId__
+
+Content-Type: application/json
+
+{"EntityArn":"__EntityArn__","EntityType":"USER","MaxResults":1,"NextToken":"__NextToken__"}

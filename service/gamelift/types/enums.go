@@ -220,6 +220,7 @@ const (
 	ContainerFleetLocationStatusActive     ContainerFleetLocationStatus = "ACTIVE"
 	ContainerFleetLocationStatusUpdating   ContainerFleetLocationStatus = "UPDATING"
 	ContainerFleetLocationStatusDeleting   ContainerFleetLocationStatus = "DELETING"
+	ContainerFleetLocationStatusExpired    ContainerFleetLocationStatus = "EXPIRED"
 )
 
 // Values returns all known values for ContainerFleetLocationStatus. Note that
@@ -236,6 +237,7 @@ func (ContainerFleetLocationStatus) Values() []ContainerFleetLocationStatus {
 		"ACTIVE",
 		"UPDATING",
 		"DELETING",
+		"EXPIRED",
 	}
 }
 
@@ -268,6 +270,7 @@ const (
 	ContainerFleetStatusActive     ContainerFleetStatus = "ACTIVE"
 	ContainerFleetStatusUpdating   ContainerFleetStatus = "UPDATING"
 	ContainerFleetStatusDeleting   ContainerFleetStatus = "DELETING"
+	ContainerFleetStatusExpired    ContainerFleetStatus = "EXPIRED"
 )
 
 // Values returns all known values for ContainerFleetStatus. Note that this can be
@@ -283,6 +286,7 @@ func (ContainerFleetStatus) Values() []ContainerFleetStatus {
 		"ACTIVE",
 		"UPDATING",
 		"DELETING",
+		"EXPIRED",
 	}
 }
 
@@ -1465,6 +1469,7 @@ const (
 	EventCodeGenericEvent                               EventCode = "GENERIC_EVENT"
 	EventCodeFleetCreated                               EventCode = "FLEET_CREATED"
 	EventCodeFleetDeleted                               EventCode = "FLEET_DELETED"
+	EventCodeFleetExpired                               EventCode = "FLEET_EXPIRED"
 	EventCodeFleetScalingEvent                          EventCode = "FLEET_SCALING_EVENT"
 	EventCodeFleetStateDownloading                      EventCode = "FLEET_STATE_DOWNLOADING"
 	EventCodeFleetStateValidating                       EventCode = "FLEET_STATE_VALIDATING"
@@ -1529,6 +1534,7 @@ func (EventCode) Values() []EventCode {
 		"GENERIC_EVENT",
 		"FLEET_CREATED",
 		"FLEET_DELETED",
+		"FLEET_EXPIRED",
 		"FLEET_SCALING_EVENT",
 		"FLEET_STATE_DOWNLOADING",
 		"FLEET_STATE_VALIDATING",
@@ -1635,6 +1641,7 @@ const (
 	FleetStatusError       FleetStatus = "ERROR"
 	FleetStatusTerminated  FleetStatus = "TERMINATED"
 	FleetStatusNotFound    FleetStatus = "NOT_FOUND"
+	FleetStatusExpired     FleetStatus = "EXPIRED"
 )
 
 // Values returns all known values for FleetStatus. Note that this can be expanded
@@ -1653,6 +1660,7 @@ func (FleetStatus) Values() []FleetStatus {
 		"ERROR",
 		"TERMINATED",
 		"NOT_FOUND",
+		"EXPIRED",
 	}
 }
 

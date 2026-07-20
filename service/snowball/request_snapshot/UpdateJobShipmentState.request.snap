@@ -1,0 +1,7 @@
+POST /service/AWSIESnowballJobManagementService/operation/UpdateJobShipmentState
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢mShipmentStatehRECEIVEDeJobIdi__JobId__

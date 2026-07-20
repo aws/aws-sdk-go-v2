@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PaymentCryptographyControlPlane.GetParametersForExport
+
+{"KeyMaterialType":"TR34_KEY_BLOCK","ReuseLastGeneratedToken":true,"SigningKeyAlgorithm":"TDES_2KEY"}

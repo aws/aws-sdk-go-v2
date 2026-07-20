@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Kinesis_20131202.GetShardIterator
+
+{"ShardId":"__ShardId__","ShardIteratorType":"AT_SEQUENCE_NUMBER","StartingSequenceNumber":"__StartingSequenceNumber__","StreamARN":"__StreamARN__","StreamId":"__StreamId__","StreamName":"__StreamName__","Timestamp":946684800}

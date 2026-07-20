@@ -854,6 +854,25 @@ func (State) Values() []State {
 	}
 }
 
+type StorageTier string
+
+// Enum values for StorageTier
+const (
+	StorageTierStandard           StorageTier = "STANDARD"
+	StorageTierIntelligentTiering StorageTier = "INTELLIGENT_TIERING"
+)
+
+// Values returns all known values for StorageTier. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageTier) Values() []StorageTier {
+	return []StorageTier{
+		"STANDARD",
+		"INTELLIGENT_TIERING",
+	}
+}
+
 type SuppressionState string
 
 // Enum values for SuppressionState

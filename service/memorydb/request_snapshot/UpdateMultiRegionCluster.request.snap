@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonMemoryDB.UpdateMultiRegionCluster
+
+{"Description":"__Description__","EngineVersion":"__EngineVersion__","MultiRegionClusterName":"__MultiRegionClusterName__","MultiRegionParameterGroupName":"__MultiRegionParameterGroupName__","NodeType":"__NodeType__","ShardConfiguration":{"ShardCount":1},"UpdateStrategy":"coordinated"}

@@ -1870,6 +1870,8 @@ const (
 	RelatedEntityTypeAwsProducts             RelatedEntityType = "AwsProducts"
 	RelatedEntityTypeAwsMarketplaceOffers    RelatedEntityType = "AwsMarketplaceOffers"
 	RelatedEntityTypeAwsMarketplaceOfferSets RelatedEntityType = "AwsMarketplaceOfferSets"
+	RelatedEntityTypeAwsMarketplaceSolutions RelatedEntityType = "AwsMarketplaceSolutions"
+	RelatedEntityTypeAwsMarketplaceProducts  RelatedEntityType = "AwsMarketplaceProducts"
 )
 
 // Values returns all known values for RelatedEntityType. Note that this can be
@@ -1882,6 +1884,8 @@ func (RelatedEntityType) Values() []RelatedEntityType {
 		"AwsProducts",
 		"AwsMarketplaceOffers",
 		"AwsMarketplaceOfferSets",
+		"AwsMarketplaceSolutions",
+		"AwsMarketplaceProducts",
 	}
 }
 

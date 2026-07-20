@@ -59,6 +59,18 @@ type HttpPrefixHeadersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpPrefixHeadersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpPrefixHeadersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpPrefixHeadersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Foo != nil {
+		s.WriteString(schemas.HttpPrefixHeadersOutput_foo, *v.Foo)
+	}
+	serializeStringMap(s, schemas.HttpPrefixHeadersOutput_fooMap, v.FooMap)
+}
 func (v *HttpPrefixHeadersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HttpPrefixHeadersOutput, func(s *smithy.Schema) error {
 		switch s {

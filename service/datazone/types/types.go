@@ -1052,6 +1052,7 @@ type ConnectionCredentials struct {
 //	ConnectionPropertiesInputMemberMlflowProperties
 //	ConnectionPropertiesInputMemberRedshiftProperties
 //	ConnectionPropertiesInputMemberS3Properties
+//	ConnectionPropertiesInputMemberSnowflakeProperties
 //	ConnectionPropertiesInputMemberSparkEmrProperties
 //	ConnectionPropertiesInputMemberSparkGlueProperties
 //	ConnectionPropertiesInputMemberVpcProperties
@@ -1142,6 +1143,16 @@ type ConnectionPropertiesInputMemberS3Properties struct {
 
 func (*ConnectionPropertiesInputMemberS3Properties) isConnectionPropertiesInput() {}
 
+// The Snowflake-specific connection properties to use when creating the
+// connection.
+type ConnectionPropertiesInputMemberSnowflakeProperties struct {
+	Value SnowflakePropertiesInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesInputMemberSnowflakeProperties) isConnectionPropertiesInput() {}
+
 // The Spark EMR properties of a connection.
 type ConnectionPropertiesInputMemberSparkEmrProperties struct {
 	Value SparkEmrPropertiesInput
@@ -1200,6 +1211,7 @@ func (*ConnectionPropertiesInputMemberWorkflowsServerlessProperties) isConnectio
 //	ConnectionPropertiesOutputMemberMlflowProperties
 //	ConnectionPropertiesOutputMemberRedshiftProperties
 //	ConnectionPropertiesOutputMemberS3Properties
+//	ConnectionPropertiesOutputMemberSnowflakeProperties
 //	ConnectionPropertiesOutputMemberSparkEmrProperties
 //	ConnectionPropertiesOutputMemberSparkGlueProperties
 //	ConnectionPropertiesOutputMemberVpcProperties
@@ -1290,6 +1302,15 @@ type ConnectionPropertiesOutputMemberS3Properties struct {
 
 func (*ConnectionPropertiesOutputMemberS3Properties) isConnectionPropertiesOutput() {}
 
+// The Snowflake-specific connection properties for an existing connection.
+type ConnectionPropertiesOutputMemberSnowflakeProperties struct {
+	Value SnowflakePropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesOutputMemberSnowflakeProperties) isConnectionPropertiesOutput() {}
+
 // The Spark EMR properties of a connection.
 type ConnectionPropertiesOutputMemberSparkEmrProperties struct {
 	Value SparkEmrPropertiesOutput
@@ -1348,6 +1369,7 @@ func (*ConnectionPropertiesOutputMemberWorkflowsServerlessProperties) isConnecti
 //	ConnectionPropertiesPatchMemberMlflowProperties
 //	ConnectionPropertiesPatchMemberRedshiftProperties
 //	ConnectionPropertiesPatchMemberS3Properties
+//	ConnectionPropertiesPatchMemberSnowflakeProperties
 //	ConnectionPropertiesPatchMemberSparkEmrProperties
 //	ConnectionPropertiesPatchMemberVpcProperties
 type ConnectionPropertiesPatch interface {
@@ -1426,6 +1448,15 @@ type ConnectionPropertiesPatchMemberS3Properties struct {
 
 func (*ConnectionPropertiesPatchMemberS3Properties) isConnectionPropertiesPatch() {}
 
+// The Snowflake-specific connection properties to update.
+type ConnectionPropertiesPatchMemberSnowflakeProperties struct {
+	Value SnowflakePropertiesPatch
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesPatchMemberSnowflakeProperties) isConnectionPropertiesPatch() {}
+
 // The Spark EMR properties of a connection properties patch.
 type ConnectionPropertiesPatchMemberSparkEmrProperties struct {
 	Value SparkEmrPropertiesPatch
@@ -1491,6 +1522,63 @@ type ConnectionSummary struct {
 
 	// The scope of the connection.
 	Scope ConnectionScope
+
+	noSmithyDocumentSerde
+}
+
+// Contains the network and authentication settings for a connection, including
+// connection credentials, physical network requirements, and compute-environment
+// validation options.
+type ConnectivityProperties struct {
+
+	// The Athena properties for this configuration.
+	AthenaProperties map[string]string
+
+	// The authentication settings for this configuration.
+	AuthenticationConfiguration *AuthenticationConfigurationInput
+
+	// The connection properties for this configuration.
+	ConnectionProperties map[string]string
+
+	// The description of the connectivity configuration.
+	Description *string
+
+	// The name of the connectivity configuration.
+	Name *string
+
+	// The physical network requirements for the connection, such as the subnet,
+	// security group, and VPC settings needed to reach the data source.
+	PhysicalConnectionRequirements *PhysicalConnectionRequirements
+
+	// The Python properties for this configuration.
+	PythonProperties map[string]string
+
+	// The Spark properties for this configuration.
+	SparkProperties map[string]string
+
+	// Specifies whether to validate credentials for the connectivity configuration.
+	// Defaults to true if not specified.
+	ValidateCredentials *bool
+
+	// The compute environments to use when validating connectivity. The service
+	// validates that the connection is reachable from each specified environment.
+	ValidateForComputeEnvironments []ComputeEnvironments
+
+	noSmithyDocumentSerde
+}
+
+// Contains the connectivity settings to update on an existing connection. Include
+// only the fields you want to change.
+type ConnectivityPropertiesPatch struct {
+
+	// The authentication settings to update.
+	AuthenticationConfiguration *AuthenticationConfigurationPatch
+
+	// The connection properties to update.
+	ConnectionProperties map[string]string
+
+	// A description of the connectivity properties update.
+	Description *string
 
 	noSmithyDocumentSerde
 }
@@ -3551,6 +3639,21 @@ type IamUserProfileDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the configuration for mapping user identities to Snowflake users,
+// including the username attribute and optional prefix applied during the mapping.
+type IdentityMapping struct {
+
+	// The username attribute used for the identity mapping.
+	//
+	// This member is required.
+	UsernameAttribute *string
+
+	// The prefix used for the identity mapping.
+	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
 // The details of the import of the metadata form type.
 type Import struct {
 
@@ -3991,6 +4094,44 @@ type LineageSqlQueryRunDetails struct {
 
 	// The total queries processed in the SQL query run details of a data lineage run.
 	TotalQueriesProcessed *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains the settings for configuring lineage sync on a Snowflake connection,
+// including the schedule, timezone, and enabled state.
+type LineageSyncInput struct {
+
+	// Specifies whether lineage sync is enabled.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The schedule of the lineage sync.
+	Schedule *string
+
+	// The timezone of the lineage sync schedule.
+	Timezone Timezone
+
+	noSmithyDocumentSerde
+}
+
+// Contains the current state of lineage sync for a Snowflake connection,
+// including the schedule, timezone, enabled state, and the ID of the associated
+// lineage job.
+type LineageSyncOutput struct {
+
+	// Specifies whether lineage sync is enabled.
+	Enabled *bool
+
+	// The ID of the lineage sync job.
+	LineageJobId *string
+
+	// The schedule of the lineage sync.
+	Schedule *string
+
+	// The timezone of the lineage sync schedule.
+	Timezone Timezone
 
 	noSmithyDocumentSerde
 }
@@ -6556,6 +6697,78 @@ type SingleSignOn struct {
 
 	// The single sign-on user assignment in Amazon DataZone.
 	UserAssignment UserAssignment
+
+	noSmithyDocumentSerde
+}
+
+// Contains the Snowflake-specific settings required when creating or updating a
+// connection, including the Snowflake role, identity mapping, and lineage sync
+// configuration.
+type SnowflakePropertiesInput struct {
+
+	// The identity mapping configuration for the Snowflake connection.
+	//
+	// This member is required.
+	IdentityMapping *IdentityMapping
+
+	// The Snowflake role used to access Snowflake resources.
+	//
+	// This member is required.
+	SnowflakeRole *string
+
+	// The connectivity properties of the Snowflake connection.
+	ConnectivityProperties *ConnectivityProperties
+
+	// The lineage sync configuration for the Snowflake connection.
+	LineageSync *LineageSyncInput
+
+	noSmithyDocumentSerde
+}
+
+// Contains the Snowflake-specific settings returned for an existing connection,
+// including the current role, identity mapping, lineage sync state, and connection
+// status.
+type SnowflakePropertiesOutput struct {
+
+	// The identity mapping configuration for the Snowflake connection.
+	//
+	// This member is required.
+	IdentityMapping *IdentityMapping
+
+	// The lineage sync configuration for the Snowflake connection.
+	//
+	// This member is required.
+	LineageSync *LineageSyncOutput
+
+	// The Snowflake role used to access Snowflake resources.
+	//
+	// This member is required.
+	SnowflakeRole *string
+
+	// The status of the Snowflake connection.
+	//
+	// This member is required.
+	Status ConnectionStatus
+
+	// An error message returned if the Snowflake connection failed to establish or
+	// validate.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the Snowflake-specific settings to update on an existing connection.
+// Include only the fields you want to change.
+type SnowflakePropertiesPatch struct {
+
+	// The connectivity properties patch of the Snowflake connection.
+	ConnectivityPropertiesPatch *ConnectivityPropertiesPatch
+
+	// The lineage sync configuration for the Snowflake connection.
+	LineageSync *LineageSyncInput
+
+	// The Snowflake role used to access Snowflake resources.
+	SnowflakeRole *string
 
 	noSmithyDocumentSerde
 }

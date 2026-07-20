@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=AcceptCapacityReservationBillingOwnership&CapacityReservationId=__CapacityReservationId__&DryRun=true&Version=2016-11-15

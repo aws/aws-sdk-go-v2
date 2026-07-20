@@ -1,0 +1,5 @@
+POST /updateDataRetention
+
+Content-Type: application/json
+
+{"CurrentVersion":"__CurrentVersion__","DataRetentionChangeInHours":1,"Operation":"INCREASE_DATA_RETENTION","StreamARN":"__StreamARN__","StreamName":"__StreamName__"}

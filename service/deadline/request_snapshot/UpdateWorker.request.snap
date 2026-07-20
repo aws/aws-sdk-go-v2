@@ -1,0 +1,5 @@
+PATCH /2023-10-12/farms/__FarmId__/fleets/__FleetId__/workers/__WorkerId__
+
+Content-Type: application/json
+
+{"capabilities":{"amounts":[{"name":"__Name__","value":1},{"name":"__Name__","value":1}],"attributes":[{"name":"__Name__","values":["__Member__","__Member__"]},{"name":"__Name__","values":["__Member__","__Member__"]}]},"hostProperties":{"hostName":"__HostName__","ipAddresses":{"ipV4Addresses":["__Member__","__Member__"],"ipV6Addresses":["__Member__","__Member__"]}},"status":"STARTED"}

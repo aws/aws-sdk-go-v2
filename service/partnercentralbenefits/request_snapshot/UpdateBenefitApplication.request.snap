@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralBenefitsService.UpdateBenefitApplication
+
+{"Catalog":"__Catalog__","ClientToken":"__ClientToken__","Description":"__Description__","FileDetails":[{"BusinessUseCase":"__BusinessUseCase__","FileURI":"__FileURI__"},{"BusinessUseCase":"__BusinessUseCase__","FileURI":"__FileURI__"}],"Identifier":"__Identifier__","Name":"__Name__","PartnerContacts":[{"BusinessTitle":"__BusinessTitle__","Email":"__Email__","FirstName":"__FirstName__","LastName":"__LastName__","Phone":"__Phone__"},{"BusinessTitle":"__BusinessTitle__","Email":"__Email__","FirstName":"__FirstName__","LastName":"__LastName__","Phone":"__Phone__"}],"Revision":"__Revision__"}

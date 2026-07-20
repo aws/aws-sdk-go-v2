@@ -1,0 +1,3 @@
+GET /domains/__DomainName__/profile/__ProfileId__/calculated-attributes/__CalculatedAttributeName__
+
+

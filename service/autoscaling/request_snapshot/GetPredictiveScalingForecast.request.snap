@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=GetPredictiveScalingForecast&AutoScalingGroupName=__AutoScalingGroupName__&EndTime=2000-01-01T00%3A00%3A00Z&PolicyName=__PolicyName__&StartTime=2000-01-01T00%3A00%3A00Z&Version=2011-01-01

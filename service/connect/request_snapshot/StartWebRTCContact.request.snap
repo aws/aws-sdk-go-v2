@@ -1,0 +1,5 @@
+PUT /contact/webrtc
+
+Content-Type: application/json
+
+{"AllowedCapabilities":{"Agent":{"ScreenShare":"SEND","Video":"SEND"},"Customer":{"ScreenShare":"SEND","Video":"SEND"}},"Attributes":{"key0":"__Value__"},"ClientToken":"__ClientToken__","ContactFlowId":"__ContactFlowId__","Description":"__Description__","InstanceId":"__InstanceId__","ParticipantDetails":{"DisplayName":"__DisplayName__"},"References":{"key0":{"Arn":"__Arn__","Status":"AVAILABLE","StatusReason":"__StatusReason__","Type":"URL","Value":"__Value__"}},"RelatedContactId":"__RelatedContactId__"}

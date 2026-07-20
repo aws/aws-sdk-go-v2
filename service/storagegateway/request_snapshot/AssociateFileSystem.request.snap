@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StorageGateway_20130630.AssociateFileSystem
+
+{"AuditDestinationARN":"__AuditDestinationARN__","CacheAttributes":{"CacheStaleTimeoutInSeconds":1},"ClientToken":"__ClientToken__","EndpointNetworkConfiguration":{"IpAddresses":["__Member__","__Member__"]},"GatewayARN":"__GatewayARN__","LocationARN":"__LocationARN__","Password":"__Password__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"UserName":"__UserName__"}

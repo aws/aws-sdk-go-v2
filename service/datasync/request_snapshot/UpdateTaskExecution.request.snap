@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: FmrsService.UpdateTaskExecution
+
+{"Options":{"Atime":"NONE","BytesPerSecond":1,"Gid":"NONE","LogLevel":"OFF","Mtime":"NONE","ObjectTags":"PRESERVE","OverwriteMode":"ALWAYS","PosixPermissions":"NONE","PreserveDeletedFiles":"PRESERVE","PreserveDevices":"NONE","SecurityDescriptorCopyFlags":"NONE","TaskQueueing":"ENABLED","TransferMode":"CHANGED","Uid":"NONE","VerifyMode":"POINT_IN_TIME_CONSISTENT"},"TaskExecutionArn":"__TaskExecutionArn__"}

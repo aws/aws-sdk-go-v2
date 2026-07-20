@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyVpcTenancy&DryRun=true&InstanceTenancy=default&Version=2016-11-15&VpcId=__VpcId__

@@ -24302,6 +24302,46 @@ func awsAwsjson11_deserializeDocumentRuntimePlatform(v **types.RuntimePlatform, 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRuntimePlatformOverride(v **types.RuntimePlatformOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuntimePlatformOverride
+	if *v == nil {
+		sv = &types.RuntimePlatformOverride{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "cpuArchitecture":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CpuArchitecture = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentS3FilesVolumeConfiguration(v **types.S3FilesVolumeConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -26701,6 +26741,11 @@ func awsAwsjson11_deserializeDocumentServiceRevision(v **types.ServiceRevision, 
 				return err
 			}
 
+		case "overrides":
+			if err := awsAwsjson11_deserializeDocumentServiceRevisionOverrides(&sv.Overrides, value); err != nil {
+				return err
+			}
+
 		case "platformFamily":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -26860,6 +26905,42 @@ func awsAwsjson11_deserializeDocumentServiceRevisionLoadBalancers(v *[]types.Ser
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentServiceRevisionOverrides(v **types.ServiceRevisionOverrides, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceRevisionOverrides
+	if *v == nil {
+		sv = &types.ServiceRevisionOverrides{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "runtimePlatform":
+			if err := awsAwsjson11_deserializeDocumentRuntimePlatformOverride(&sv.RuntimePlatform, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

@@ -1,0 +1,3 @@
+DELETE /ml/modeltransform/__Id__?clean=true&neptuneIamRoleArn=__NeptuneIamRoleArn__
+
+

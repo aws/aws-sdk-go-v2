@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceId__/entities/__EntityId__/components-list
+
+Content-Type: application/json
+
+{"componentPath":"__ComponentPath__","maxResults":1,"nextToken":"__NextToken__"}

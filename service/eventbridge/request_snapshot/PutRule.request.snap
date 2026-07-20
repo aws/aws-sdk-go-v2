@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.PutRule
+
+{"Description":"__Description__","EventBusName":"__EventBusName__","EventPattern":"__EventPattern__","Name":"__Name__","RoleArn":"__RoleArn__","ScheduleExpression":"__ScheduleExpression__","State":"ENABLED","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

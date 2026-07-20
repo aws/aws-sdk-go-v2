@@ -1,0 +1,5 @@
+POST /transit-gateway-peerings
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","CoreNetworkId":"__CoreNetworkId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TransitGatewayArn":"__TransitGatewayArn__"}

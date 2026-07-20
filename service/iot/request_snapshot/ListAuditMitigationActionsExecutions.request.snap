@@ -1,0 +1,3 @@
+GET /audit/mitigationactions/executions?actionStatus=IN_PROGRESS&findingId=__FindingId__&maxResults=1&nextToken=__NextToken__&taskId=__TaskId__
+
+

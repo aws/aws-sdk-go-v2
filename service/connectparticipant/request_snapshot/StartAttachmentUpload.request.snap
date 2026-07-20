@@ -1,0 +1,6 @@
+POST /participant/start-attachment-upload
+
+Content-Type: application/json
+X-Amz-Bearer: __ConnectionToken__
+
+{"AttachmentName":"__AttachmentName__","AttachmentSizeInBytes":1,"ClientToken":"__ClientToken__","ContentType":"__ContentType__"}

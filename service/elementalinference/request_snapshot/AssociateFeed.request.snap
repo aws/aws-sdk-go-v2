@@ -1,0 +1,5 @@
+POST /v1/feed/__Id__/associate
+
+Content-Type: application/json
+
+{"associatedResourceName":"__AssociatedResourceName__","dryRun":true,"outputs":[{"description":"__Description__","name":"__Name__","outputConfig":{"cropping":{}},"status":"ENABLED"},{"description":"__Description__","name":"__Name__","outputConfig":{"cropping":{}},"status":"ENABLED"}]}

@@ -1,0 +1,5 @@
+PUT /v2/email/account/suppression
+
+Content-Type: application/json
+
+{"SuppressedReasons":["BOUNCE","BOUNCE"],"ValidationAttributes":{"ConditionThreshold":{"ConditionThresholdEnabled":"ENABLED","OverallConfidenceThreshold":{"ConfidenceVerdictThreshold":"MEDIUM"}}}}

@@ -1,0 +1,3 @@
+DELETE /applications/__ApplicationId__/plugins/__PluginId__
+
+

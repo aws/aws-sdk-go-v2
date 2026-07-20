@@ -25,7 +25,8 @@ type Address struct {
 	// This member is required.
 	ContactName *string
 
-	// The phone number of the contact.
+	// The phone number of the contact, including the country code (for example,
+	// +12065550100 ).
 	//
 	// This member is required.
 	ContactPhoneNumber *string

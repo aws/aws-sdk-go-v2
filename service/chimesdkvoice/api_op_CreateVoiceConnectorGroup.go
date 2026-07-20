@@ -37,6 +37,8 @@ type CreateVoiceConnectorGroupInput struct {
 	// This member is required.
 	Name *string
 
+	CallDistributionType types.CallDistributionType
+
 	// Lists the Voice Connectors that inbound calls are routed to.
 	VoiceConnectorItems []types.VoiceConnectorItem
 

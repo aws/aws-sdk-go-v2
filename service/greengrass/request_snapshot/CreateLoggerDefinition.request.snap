@@ -1,0 +1,6 @@
+POST /greengrass/definition/loggers
+
+Content-Type: application/json
+X-Amzn-Client-Token: __AmznClientToken__
+
+{"InitialVersion":{"Loggers":[{"Component":"GreengrassSystem","Id":"__Id__","Level":"DEBUG","Space":1,"Type":"FileSystem"},{"Component":"GreengrassSystem","Id":"__Id__","Level":"DEBUG","Space":1,"Type":"FileSystem"}]},"Name":"__Name__","tags":{"key0":"__Value__"}}

@@ -1,0 +1,6 @@
+404
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+£gMessagek__Message__fReasonrRESOURCE_NOT_FOUNDf__typexResourceNotFoundException

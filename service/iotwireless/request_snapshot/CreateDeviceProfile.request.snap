@@ -1,0 +1,5 @@
+POST /device-profiles
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","LoRaWAN":{"ClassBTimeout":1,"ClassCTimeout":1,"FactoryPresetFreqsList":[1,1],"MacVersion":"__MacVersion__","MaxDutyCycle":1,"MaxEirp":1,"PingSlotDr":1,"PingSlotFreq":1,"PingSlotPeriod":1,"RegParamsRevision":"__RegParamsRevision__","RfRegion":"__RfRegion__","RxDataRate2":1,"RxDelay1":1,"RxDrOffset1":1,"RxFreq2":1,"Supports32BitFCnt":true,"SupportsClassB":true,"SupportsClassC":true,"SupportsJoin":true},"Name":"__Name__","Sidewalk":{},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -1,0 +1,3 @@
+GET /accounts/__AccountId__/users/__UserId__/settings
+
+

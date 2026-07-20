@@ -1,0 +1,5 @@
+POST /listsourceassociations
+
+Content-Type: application/json
+
+{"associationStatus":"ASSOCIATING","maxResults":1,"nextToken":"__NextToken__","resourceShareArns":["__Member__","__Member__"],"sourceId":"__SourceId__","sourceType":"__SourceType__"}

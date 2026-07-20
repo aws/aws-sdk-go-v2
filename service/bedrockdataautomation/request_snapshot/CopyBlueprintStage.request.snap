@@ -1,0 +1,5 @@
+PUT /blueprints/__BlueprintArn__/copy-stage
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","sourceStage":"DEVELOPMENT","targetStage":"DEVELOPMENT"}

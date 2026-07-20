@@ -1,3 +1,20 @@
+# v1.46.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.46.0 (2026-07-09)
+
+* **Feature**: CloudWatch Synthetics adds support for customer managed KMS keys for canary environment variables. Customers can now encrypt their canary's Lambda function environment variables at rest using their own AWS KMS key, providing additional control over data protection.
+
+# v1.45.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.44.2 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.1 (2026-06-29)
 
 * No change notes available for this release.

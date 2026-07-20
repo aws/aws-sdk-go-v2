@@ -84,6 +84,9 @@ type UpdateBrokerInput struct {
 	// to brokers.
 	SecurityGroups []string
 
+	// The broker's storage size in GB.
+	StorageSize *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -148,6 +151,9 @@ type UpdateBrokerOutput struct {
 	// The list of security groups (1 minimum, 5 maximum) that authorizes connections
 	// to brokers.
 	SecurityGroups []string
+
+	// The broker's storage size in GB.
+	StorageSize *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

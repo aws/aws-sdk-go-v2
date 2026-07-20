@@ -1,0 +1,7 @@
+POST /service/ComputeOptimizerAutomationService/operation/ListAutomationEventSummaries
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¥inextTokenm__NextToken__gfilters‚¢dnameiAccountIdfvalues‚j__Member__j__Member__¢dnameiAccountIdfvalues‚j__Member__j__Member__rstartDateInclusivev__StartDateInclusive__pendDateExclusivet__EndDateExclusive__jmaxResults

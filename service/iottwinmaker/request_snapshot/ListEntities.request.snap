@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceId__/entities-list
+
+Content-Type: application/json
+
+{"filters":[{"parentEntityId":"__ListEntitiesFilterMemberParentEntityId__"},{"parentEntityId":"__ListEntitiesFilterMemberParentEntityId__"}],"maxResults":1,"nextToken":"__NextToken__"}

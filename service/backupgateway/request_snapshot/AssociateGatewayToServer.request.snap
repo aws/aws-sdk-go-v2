@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: BackupOnPremises_v20210101.AssociateGatewayToServer
+
+{"GatewayArn":"__GatewayArn__","ServerArn":"__ServerArn__"}

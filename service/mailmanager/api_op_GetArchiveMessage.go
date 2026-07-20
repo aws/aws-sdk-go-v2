@@ -56,11 +56,11 @@ type GetArchiveMessageOutput struct {
 }
 
 func (c *Client) addOperationGetArchiveMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetArchiveMessage{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetArchiveMessage{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetArchiveMessage{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetArchiveMessage{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -84,6 +84,9 @@ func (c *Client) addOperationGetArchiveMessageMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

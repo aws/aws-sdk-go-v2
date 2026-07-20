@@ -757,6 +757,23 @@ func (IssuerType) Values() []IssuerType {
 	}
 }
 
+type LimitClass string
+
+// Enum values for LimitClass
+const (
+	LimitClassApiCategory LimitClass = "API_CATEGORY"
+)
+
+// Values returns all known values for LimitClass. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LimitClass) Values() []LimitClass {
+	return []LimitClass{
+		"API_CATEGORY",
+	}
+}
+
 type LogLevel string
 
 // Enum values for LogLevel
@@ -813,6 +830,30 @@ func (OAuthFlowType) Values() []OAuthFlowType {
 		"code",
 		"implicit",
 		"client_credentials",
+	}
+}
+
+type PasswordHashingAlgorithmType string
+
+// Enum values for PasswordHashingAlgorithmType
+const (
+	PasswordHashingAlgorithmTypeBcrypt       PasswordHashingAlgorithmType = "BCRYPT"
+	PasswordHashingAlgorithmTypeScrypt       PasswordHashingAlgorithmType = "SCRYPT"
+	PasswordHashingAlgorithmTypeArgon2id     PasswordHashingAlgorithmType = "ARGON2ID"
+	PasswordHashingAlgorithmTypePbkdf2Sha256 PasswordHashingAlgorithmType = "PBKDF2_SHA256"
+)
+
+// Values returns all known values for PasswordHashingAlgorithmType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PasswordHashingAlgorithmType) Values() []PasswordHashingAlgorithmType {
+	return []PasswordHashingAlgorithmType{
+		"BCRYPT",
+		"SCRYPT",
+		"ARGON2ID",
+		"PBKDF2_SHA256",
 	}
 }
 

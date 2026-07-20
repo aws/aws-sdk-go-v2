@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.CreateEventDestination
+
+{"ClientToken":"__ClientToken__","CloudWatchLogsDestination":{"IamRoleArn":"__IamRoleArn__","LogGroupArn":"__LogGroupArn__"},"ConfigurationSetName":"__ConfigurationSetName__","EventDestinationName":"__EventDestinationName__","KinesisFirehoseDestination":{"DeliveryStreamArn":"__DeliveryStreamArn__","IamRoleArn":"__IamRoleArn__"},"MatchingEventTypes":["ALL","ALL"],"SnsDestination":{"TopicArn":"__TopicArn__"}}

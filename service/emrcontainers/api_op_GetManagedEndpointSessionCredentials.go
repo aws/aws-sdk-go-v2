@@ -69,6 +69,9 @@ type GetManagedEndpointSessionCredentialsOutput struct {
 	// The structure containing the session credentials.
 	Credentials types.Credentials
 
+	// The structure containing the session token being returned.
+	EndpointCredentials types.Credentials
+
 	// The date and time when the session token will expire.
 	ExpiresAt *time.Time
 

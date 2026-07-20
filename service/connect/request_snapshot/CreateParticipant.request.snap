@@ -1,0 +1,5 @@
+POST /contact/create-participant
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","ContactId":"__ContactId__","InstanceId":"__InstanceId__","ParticipantDetails":{"DisplayName":"__DisplayName__","ParticipantCapabilities":{"ScreenShare":"SEND","Video":"SEND"},"ParticipantRole":"AGENT"}}

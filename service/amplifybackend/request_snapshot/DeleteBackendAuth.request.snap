@@ -1,0 +1,5 @@
+POST /backend/__AppId__/auth/__BackendEnvironmentName__/remove
+
+Content-Type: application/json
+
+{"resourceName":"__ResourceName__"}

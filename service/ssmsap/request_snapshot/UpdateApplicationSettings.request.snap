@@ -1,0 +1,5 @@
+POST /update-application-settings
+
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__","Backint":{"BackintMode":"AWSBackup","EnsureNoBackupInProcess":true},"CredentialsToAddOrUpdate":[{"CredentialType":"ADMIN","DatabaseName":"__DatabaseName__","SecretId":"__SecretId__"},{"CredentialType":"ADMIN","DatabaseName":"__DatabaseName__","SecretId":"__SecretId__"}],"CredentialsToRemove":[{"CredentialType":"ADMIN","DatabaseName":"__DatabaseName__","SecretId":"__SecretId__"},{"CredentialType":"ADMIN","DatabaseName":"__DatabaseName__","SecretId":"__SecretId__"}],"DatabaseArn":"__DatabaseArn__"}

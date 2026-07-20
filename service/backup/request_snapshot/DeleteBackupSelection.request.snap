@@ -1,0 +1,3 @@
+DELETE /backup/plans/__BackupPlanId__/selections/__SelectionId__
+
+

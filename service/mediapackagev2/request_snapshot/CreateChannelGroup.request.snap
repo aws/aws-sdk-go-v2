@@ -1,0 +1,6 @@
+POST /channelGroup
+
+Content-Type: application/json
+X-Amzn-Client-Token: __ClientToken__
+
+{"ChannelGroupName":"__ChannelGroupName__","Description":"__Description__","tags":{"key0":"__Value__"}}

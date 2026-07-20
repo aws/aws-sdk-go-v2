@@ -1,0 +1,3 @@
+GET /streamsessions?ExportFilesStatus=SUCCEEDED&MaxResults=1&NextToken=__NextToken__&Status=ACTIVATING
+
+

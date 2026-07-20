@@ -1,0 +1,5 @@
+PUT /testsetgenerations
+
+Content-Type: application/json
+
+{"description":"__Description__","generationDataSource":{"conversationLogsDataSource":{"botAliasId":"__BotAliasId__","botId":"__BotId__","filter":{"endTime":946684800,"inputMode":"Speech","startTime":946684800},"localeId":"__LocaleId__"}},"roleArn":"__RoleArn__","storageLocation":{"kmsKeyArn":"__KmsKeyArn__","s3BucketName":"__S3BucketName__","s3Path":"__S3Path__"},"testSetName":"__TestSetName__","testSetTags":{"key0":"__Value__"}}

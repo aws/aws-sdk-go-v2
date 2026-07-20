@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.BatchCreateBillScenarioCommitmentModification
+
+{"billScenarioId":"__BillScenarioId__","clientToken":"__ClientToken__","commitmentModifications":[{"commitmentAction":{"addReservedInstanceAction":{"instanceCount":1,"reservedInstancesOfferingId":"__ReservedInstancesOfferingId__"}},"group":"__Group__","key":"__Key__","usageAccountId":"__UsageAccountId__"},{"commitmentAction":{"addReservedInstanceAction":{"instanceCount":1,"reservedInstancesOfferingId":"__ReservedInstancesOfferingId__"}},"group":"__Group__","key":"__Key__","usageAccountId":"__UsageAccountId__"}]}

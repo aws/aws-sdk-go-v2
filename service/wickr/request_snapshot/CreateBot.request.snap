@@ -1,0 +1,5 @@
+POST /networks/__NetworkId__/bots
+
+Content-Type: application/json
+
+{"challenge":"__Challenge__","displayName":"__DisplayName__","groupId":"__GroupId__","username":"__Username__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.GetParametersByPath
+
+{"MaxResults":1,"NextToken":"__NextToken__","ParameterFilters":[{"Key":"__Key__","Option":"__Option__","Values":["__Member__","__Member__"]},{"Key":"__Key__","Option":"__Option__","Values":["__Member__","__Member__"]}],"Path":"__Path__","Recursive":true,"WithDecryption":true}

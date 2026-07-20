@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateTransitGatewayVpcAttachment&DryRun=true&Options.ApplianceModeSupport=enable&Options.DnsSupport=enable&Options.Ipv6Support=enable&Options.SecurityGroupReferencingSupport=enable&SubnetIds.1=__Member__&SubnetIds.2=__Member__&TagSpecifications.1.ResourceType=capacity-reservation&TagSpecifications.1.Tag.1.Key=__Key__&TagSpecifications.1.Tag.1.Value=__Value__&TagSpecifications.1.Tag.2.Key=__Key__&TagSpecifications.1.Tag.2.Value=__Value__&TagSpecifications.2.ResourceType=capacity-reservation&TagSpecifications.2.Tag.1.Key=__Key__&TagSpecifications.2.Tag.1.Value=__Value__&TagSpecifications.2.Tag.2.Key=__Key__&TagSpecifications.2.Tag.2.Value=__Value__&TransitGatewayId=__TransitGatewayId__&Version=2016-11-15&VpcId=__VpcId__

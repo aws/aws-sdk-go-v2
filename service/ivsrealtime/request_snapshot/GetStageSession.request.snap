@@ -1,0 +1,5 @@
+POST /GetStageSession
+
+Content-Type: application/json
+
+{"sessionId":"__SessionId__","stageArn":"__StageArn__"}

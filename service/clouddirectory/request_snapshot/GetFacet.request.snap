@@ -1,0 +1,6 @@
+POST /amazonclouddirectory/2017-01-11/facet
+
+Content-Type: application/json
+X-Amz-Data-Partition: __SchemaArn__
+
+{"Name":"__Name__"}

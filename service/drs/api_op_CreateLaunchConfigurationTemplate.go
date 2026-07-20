@@ -50,6 +50,9 @@ type CreateLaunchConfigurationTemplateInput struct {
 	// Whether we want to activate post-launch actions.
 	PostLaunchEnabled *bool
 
+	// Recovery mode.
+	RecoveryMode types.RecoveryMode
+
 	// Request to associate tags during creation of a Launch Configuration Template.
 	Tags map[string]string
 

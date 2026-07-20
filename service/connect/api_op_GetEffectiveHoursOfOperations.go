@@ -61,7 +61,7 @@ type GetEffectiveHoursOfOperationsOutput struct {
 	// For more information about how override types are applied, see [Build your list of overrides] in the
 	// Administrator Guide.
 	//
-	// [Build your list of overrides]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+	// [Build your list of overrides]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
 	EffectiveOverrideHoursList []types.EffectiveOverrideHours
 
 	// The time zone for the hours of operation.

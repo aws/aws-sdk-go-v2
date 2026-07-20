@@ -53,8 +53,17 @@ type StartFHIRImportJobInput struct {
 	// The optional user-provided token used for ensuring API idempotency.
 	ClientToken *string
 
+	// A boolean value.
+	DriftDetectionEnabled bool
+
+	// A bounded-length string value.
+	InputFormat *string
+
 	// The import job name.
 	JobName *string
+
+	// A bounded-length string value.
+	ProfileId *string
 
 	// The validation level of the import job.
 	ValidationLevel types.ValidationLevel

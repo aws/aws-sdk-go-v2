@@ -1,0 +1,5 @@
+POST /delete-ms-teams-user-identity
+
+Content-Type: application/json
+
+{"ChatConfigurationArn":"__ChatConfigurationArn__","UserId":"__UserId__"}

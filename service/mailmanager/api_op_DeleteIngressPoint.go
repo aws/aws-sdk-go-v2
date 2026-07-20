@@ -42,11 +42,11 @@ type DeleteIngressPointOutput struct {
 }
 
 func (c *Client) addOperationDeleteIngressPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteIngressPoint{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteIngressPoint{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteIngressPoint{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteIngressPoint{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -70,6 +70,9 @@ func (c *Client) addOperationDeleteIngressPointMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -1,0 +1,5 @@
+POST /rerank
+
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","queries":[{"textQuery":{"text":"__Text__"},"type":"TEXT"},{"textQuery":{"text":"__Text__"},"type":"TEXT"}],"rerankingConfiguration":{"bedrockRerankingConfiguration":{"modelConfiguration":{"additionalModelRequestFields":{"key0":},"modelArn":"__ModelArn__"},"numberOfResults":1},"type":"BEDROCK_RERANKING_MODEL"},"sources":[{"inlineDocumentSource":{"textDocument":{"text":"__Text__"},"type":"TEXT"},"type":"INLINE"},{"inlineDocumentSource":{"textDocument":{"text":"__Text__"},"type":"TEXT"},"type":"INLINE"}]}

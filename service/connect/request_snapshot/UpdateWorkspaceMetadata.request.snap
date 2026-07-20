@@ -1,0 +1,5 @@
+POST /workspaces/__InstanceId__/__WorkspaceId__/metadata
+
+Content-Type: application/json
+
+{"Description":"__Description__","Name":"__Name__","Title":"__Title__"}

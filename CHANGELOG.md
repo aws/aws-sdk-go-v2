@@ -1,3 +1,1143 @@
+# Release (2026-07-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.34.0](service/bedrockagentcore/CHANGELOG.md#v1340-2026-07-20)
+  * **Feature**: Add W3C trace context headers (traceparent, tracestate, baggage) and X-Amzn-Trace-Id to InvokeHarness request for end-to-end observability propagation. Add toolResultMetadata to the streaming content block delta for MCP tool result meta delivery without oversized SSE frames.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.49.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1490-2026-07-20)
+  * **Feature**: This release adds support for specifying a connector version on Gateway targets to pin the connector's tool schema. It also introduces web-search connector version 1.2.0, which adds agent-side domain filtering, published date range filtering, and admin-side domain allowlisting.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.38.3](service/marketplacemetering/CHANGELOG.md#v1383-2026-07-20)
+  * **Documentation**: For new SaaS product integrations, CustomerIdentifier is not populated in ResolveCustomer responses and is not supported in BatchMeterUsage. Use CustomerAWSAccountId and LicenseArn instead.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.62.0](service/mediatailor/CHANGELOG.md#v1620-2026-07-20)
+  * **Feature**: This change adds api support for configuring ad decision server timeouts and concurrency fields on MediaTailor playback configurations
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.52.2](service/organizations/CHANGELOG.md#v1522-2026-07-20)
+  * **Documentation**: Updated InvalidInputException error documentation to clarify that the service validates free-text field values against common cross-site scripting (XSS) patterns.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.119.0](service/quicksight/CHANGELOG.md#v11190-2026-07-20)
+  * **Feature**: Adds support for custom permissions for Triggers, allowing administrators to control user access to Schedule, Inbound Email and Quick Event triggers.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.64.0](service/sesv2/CHANGELOG.md#v1640-2026-07-20)
+  * **Feature**: Amazon SES introduces three new Pricing Plans (Essentials, Pro, Enterprise), which bundle SES features under one pricing umbrella.  The new PutAccountPricingAttributes API lets the user set the account's plan, while current plan retrievalif done through the new PricingAttributes field on GetAccount.
+
+# Release (2026-07-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.65.0](service/cognitoidentityprovider/CHANGELOG.md#v1650-2026-07-17)
+  * **Feature**: Amazon Cognito user pools now support sending SMS via AWS End User Messaging. A new EumsSms object in SmsConfigurationType lets you deliver MFA and verification texts through AWS End User Messaging, alongside the existing Amazon SNS option.
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.14.0](service/gameliftstreams/CHANGELOG.md#v1140-2026-07-17)
+  * **Feature**: Amazon GameLift Streams now supports assigning an IAM role to a stream session, enabling your application to securely access resources in your AWS account, such as Amazon S3 buckets and DynamoDB tables.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.40.0](service/kinesisanalyticsv2/CHANGELOG.md#v1400-2026-07-17)
+  * **Feature**: Support for Flink 2.3 in Managed Service for Apache Flink
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.14.0](service/odb/CHANGELOG.md#v1140-2026-07-17)
+  * **Feature**: Adds support for sourcing Autonomous Database admin and wallet passwords from customer-managed AWS Secrets Manager secrets, including password source configuration and summaries, and enabling or disabling the OCI IAM service role for Secrets Manager integration via InitializeService.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.122.0](service/rds/CHANGELOG.md#v11220-2026-07-17)
+  * **Feature**: Adds the AssociatedRoles parameter to CreateDBCluster, RestoreDBClusterFromSnapshot, RestoreDBClusterToPointInTime, and RestoreDBClusterFromS3, letting customers associate IAM roles with an Aurora DB cluster at create or restore time instead of calling AddRoleToDBCluster afterward.
+
+# Release (2026-07-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.31.0](service/chimesdkvoice/CHANGELOG.md#v1310-2026-07-16)
+  * **Feature**: Marked CreateProxySession, DeleteProxySession, GetProxySession, ListProxySessions, UpdateProxySession, PutVoiceConnectorProxy, DeleteVoiceConnectorProxy, and GetVoiceConnectorProxy as deprecated.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.63.0](service/emr/CHANGELOG.md#v1630-2026-07-16)
+  * **Feature**: Amazon EMR updates the Session object returned by GetSession API
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.48.0](service/omics/CHANGELOG.md#v1480-2026-07-16)
+  * **Feature**: Adds support for returning the task UUID (universally unique identifier) in GetRunTask and ListRunTasks responses
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.64.2](service/redshift/CHANGELOG.md#v1642-2026-07-16)
+  * **Documentation**: Amazon Redshift - Added support for rg.large and rg.12xlarge node types in CreateCluster, ModifyCluster, and ResizeCluster API operations.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.105.2](service/s3/CHANGELOG.md#v11052-2026-07-16)
+  * **Documentation**: Documentation update for removing the 30 day minimum restriction for transition to Standard-IA or OneZone-IA storage classes
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.259.0](service/sagemaker/CHANGELOG.md#v12590-2026-07-16)
+  * **Feature**: Release support for g7 instance type for SageMaker inference endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/sustainability`: [v1.3.0](service/sustainability/CHANGELOG.md#v130-2026-07-16)
+  * **Feature**: Adds support for retrieving estimated water allocation data.
+
+# Release (2026-07-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.48.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1480-2026-07-15)
+  * **Feature**: Fix HarnessEndpointArn pattern to match the actual service-emitted ARN format ('harness-endpoint' instead of 'endpoint'). Add additionalParams to Gemini model configuration for passing provider-specific parameters through to the model unchanged.
+* `github.com/aws/aws-sdk-go-v2/service/comprehendmedical`: [v1.35.0](service/comprehendmedical/CHANGELOG.md#v1350-2026-07-15)
+  * **Feature**: Enable schema-based serialization.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.56.0](service/computeoptimizer/CHANGELOG.md#v1560-2026-07-15)
+  * **Feature**: Enable schema-based serialization.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.57.0](service/elasticloadbalancingv2/CHANGELOG.md#v1570-2026-07-15)
+  * **Feature**: This release adds support for the IpAddressType field on SourceIpConfig, enabling Network Load Balancer listener rules to match traffic based on whether the source IP is IPv4 or IPv6.
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.41.0](service/healthlake/CHANGELOG.md#v1410-2026-07-15)
+  * **Feature**: AWS HealthLake now offers data transformation in Preview to convert CSV and C-CDA data to FHIR R4. Customers can maintain reusable mapping profiles, run sync or async jobs with provenance tracking and drift detection, and use an AI agent to build and edit mapping logic from natural language.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.40.0](service/marketplaceentitlementservice/CHANGELOG.md#v1400-2026-07-15)
+  * **Feature**: Enable schema-based serialization.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.29.0](service/paymentcryptographydata/CHANGELOG.md#v1290-2026-07-15)
+  * **Feature**: Adds support for UnionPay session key derivation to the GenerateAuthRequestCryptogram, VerifyAuthRequestCryptogram, GenerateMac, and VerifyMac APIs.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.121.0](service/rds/CHANGELOG.md#v11210-2026-07-15)
+  * **Feature**: Adds support for modifying EngineLifecycleSupport on DB instances and DB clusters through ModifyDBInstance and ModifyDBCluster.
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.39.0](service/snowball/CHANGELOG.md#v1390-2026-07-15)
+  * **Feature**: Enable schema-based serialization.
+
+# Release (2026-07-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.183.0](service/connect/CHANGELOG.md#v11830-2026-07-14)
+  * **Feature**: This release adds SearchRules API which can be used to search for rules within an Amazon Connect instance.
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.41.0](service/drs/CHANGELOG.md#v1410-2026-07-14)
+  * **Feature**: Fast recovery of EC2 based drs workloads by skipping the conversion step
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.43.0](service/emrcontainers/CHANGELOG.md#v1430-2026-07-14)
+  * **Feature**: Introduced 5 new fields across 3 APIs as part of Spark Connect server launch for EMR on EKS. The fields added are sessionIdleTimeoutInMinutes, sessionEnabled, endpointToken, authProxyUrl and encryptionKeyArn.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.99.0](service/lambda/CHANGELOG.md#v1990-2026-07-14)
+  * **Feature**: AWS Lambda now returns a new DependencyError value in StateReasonCode and LastUpdateStatusReasonCode to provide more actionable information when a function reaches a failed state due to an error from an upstream dependency or service.
+* `github.com/aws/aws-sdk-go-v2/service/mq`: [v1.38.0](service/mq/CHANGELOG.md#v1380-2026-07-14)
+  * **Feature**: This release adds storage size parameter for Amazon MQ for RabbitMQ cluster deployment broker on engine version RabbitMQ 4.2. You can now set a configurable storage size within a range of sizes dependent on broker instance size.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.74.0](service/securityhub/CHANGELOG.md#v1740-2026-07-14)
+  * **Feature**: AWS Security Hub now provides an AI inventory, giving central security teams a continuously updated, organization-wide view of AI assets and their security posture
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.42.0](service/servicediscovery/CHANGELOG.md#v1420-2026-07-14)
+  * **Feature**: Fixed Cloud Map endpoint resolution to correctly route to the dualstack endpoint when dualstack is enabled.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.72.0](service/ssm/CHANGELOG.md#v1720-2026-07-14)
+  * **Feature**: Update AWS Systems Manager Automation Targets to be correct max value.
+
+# Release (2026-07-13)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.44.0](service/elasticsearchservice/CHANGELOG.md#v1440-2026-07-13)
+  * **Feature**: Adds support for the EngineMode and UseCase parameters on Amazon Elasticsearch Service domains, enabling GENERAL or OPTIMIZED engine modes and SEARCH, VECTOR, OBSERVABILITY, or MIXED usecases when creating and updating domain configurations.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.58.0](service/gamelift/CHANGELOG.md#v1580-2026-07-13)
+  * **Feature**: Amazon GameLift Servers now includes fleet expiration for managed fleets. A managed fleet expires one year after creation, transitioning to EXPIRED status, emitting a FLEET EXPIRED event, and scaling to zero instances. Expired fleets cannot host new game sessions or increase capacity.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.83.0](service/guardduty/CHANGELOG.md#v1830-2026-07-13)
+  * **Feature**: GuardDuty AI Protection is now publicly available. Findings include Bedrock guardrail details, model details, observation numbers, and continuous scan details. GuardrailArn and GuardrailVersion are deprecated in favor of the guardrails list.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.98.0](service/lambda/CHANGELOG.md#v1980-2026-07-13)
+  * **Feature**: Add Java 8, 11 and 17 on AL2023 (java8.al2023, java11.al2023, java17.al2023) support to AWS Lambda.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.37.0](service/redshiftserverless/CHANGELOG.md#v1370-2026-07-13)
+  * **Feature**: Add support for preserving datasharing, zero-ETL and S3 event integrations on snapshot restore to serverless namespace.
+
+# Release (2026-07-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.63.0](service/cloudwatch/CHANGELOG.md#v1630-2026-07-10)
+  * **Feature**: CloudWatch now assigns a unique identifier to each anomaly detector. PutAnomalyDetector and DescribeAnomalyDetectors return this AnomalyDetectorId, which you can use to describe or delete a specific anomaly detector directly.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.316.0](service/ec2/CHANGELOG.md#v13160-2026-07-10)
+  * **Feature**: New Amazon EC2 instances. M9g, M9gd, C9g, and C9gd on AWS Graviton5. C8in, M8in, and R8in add 600 Gbps network. C8ib, M8ib, and R8ib add 300 Gbps EBS. C8ine, M8ine, M8idn, R8idn, M8idb, and R8idb round out Intel Xeon 6. Mac-m3ultra with Apple M3 Ultra. G7 with NVIDIA RTX PRO 4500 Blackwell GPUs.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.52.0](service/inspector2/CHANGELOG.md#v1520-2026-07-10)
+  * **Feature**: Support for 3 day and 7 day ECR re-scan durations
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.97.0](service/lambda/CHANGELOG.md#v1970-2026-07-10)
+  * **Feature**: Added TelemetryConfig support for Managed Instances Capacity Provider, enabling customers to configure system log level and custom log group for managed instance logging.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanager`: [v1.40.0](service/licensemanager/CHANGELOG.md#v1400-2026-07-10)
+  * **Feature**: Added the ResetUsage field to the CreateLicenseVersion API. When set to true, the entitlement usage counts for the license are reset to 0. If it is false or not specified, entitlement usage is left unchanged.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.118.0](service/quicksight/CHANGELOG.md#v11180-2026-07-10)
+  * **Feature**: Provides CreateKnowledgeBase and UpdateKnowledgeBase APIs
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.258.0](service/sagemaker/CHANGELOG.md#v12580-2026-07-10)
+  * **Feature**: Release support for g4d, c6g, c7g, c8g instance types for SageMaker HyperPod
+
+# Release (2026-07-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.182.0](service/connect/CHANGELOG.md#v11820-2026-07-09)
+  * **Feature**: Amazon Connect - Added DeleteContactData API to support PII deletion of customer endpoint, additional email recipients and email subject.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.315.0](service/ec2/CHANGELOG.md#v13150-2026-07-09)
+  * **Feature**: Added support for additional override parameters in CreateFleet, including LaunchTemplateSpecificationUserData, KeyName, IamInstanceProfile, and MetadataOptions. The CreateFleet response now also includes SubnetId, AvailabilityZone, and AvailabilityZoneId for launched instances.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.82.0](service/guardduty/CHANGELOG.md#v1820-2026-07-09)
+  * **Feature**: Adding "AI Analyst" enum value for detector
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.54.0](service/ivs/CHANGELOG.md#v1540-2026-07-09)
+  * **Feature**: adds support for AWS IVS ad configuration APIs to allow for a postRollConfiguration object on the ad configuration resource
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.46.0](service/synthetics/CHANGELOG.md#v1460-2026-07-09)
+  * **Feature**: CloudWatch Synthetics adds support for customer managed KMS keys for canary environment variables. Customers can now encrypt their canary's Lambda function environment variables at rest using their own AWS KMS key, providing additional control over data protection.
+
+# Release (2026-07-08.2)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/signin`: [v1.4.0](service/signin/CHANGELOG.md#v140-2026-07-082)
+  * **Feature**: Adds support for OAuth 2.0 token operations in AWS Sign-In, CreateOAuth2TokenWithIAM (client credentials flow), IntrospectOAuth2TokenWithIAM (token inspection), and RevokeOAuth2TokenWithIAM (token revocation).
+
+# Release (2026-07-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.3.0](feature/s3/transfermanager/CHANGELOG.md#v030-2026-07-08)
+  * **Feature**: Add RequestChecksumCalculation config.
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.47.0](service/appconfig/CHANGELOG.md#v1470-2026-07-08)
+  * **Feature**: Update ExperimentRun APIs to support ConflictExceptions.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.47.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1470-2026-07-08)
+  * **Feature**: AgentCore Gateway now supports mapping allowed scopes to separate advertised scopes on the inbound authorizer.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.314.0](service/ec2/CHANGELOG.md#v13140-2026-07-08)
+  * **Feature**: Replace Root Volume now supports a VolumeId parameter. This allows the customer to pass in a pre-prepared volume as the target root volume for an RRV workflow.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.88.0](service/ecs/CHANGELOG.md#v1880-2026-07-08)
+  * **Feature**: Amazon ECS now automatically detects the correct CPU architecture for Express Mode services.
+* `github.com/aws/aws-sdk-go-v2/service/geoplaces`: [v1.11.0](service/geoplaces/CHANGELOG.md#v1110-2026-07-08)
+  * **Feature**: Added AddressNamesMode, AddressNameTranslations, MobilityMode, PostalCodeMode, SecondaryAddresses, and DriveThrough features across Places V2 APIs to support address name formatting,  multilingual translations, travel-aware search, multi-city postal codes, and unit-level address resolution.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.58.0](service/iotwireless/CHANGELOG.md#v1580-2026-07-08)
+  * **Feature**: Default session downlink transmission parameters have been added to the existing Multicast Group APIs. Explicit transmission parameters are no longer required when starting a multicast session during the FUOTA procedure.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehubv2`: [v1.2.0](service/resiliencehubv2/CHANGELOG.md#v120-2026-07-08)
+  * **Feature**: Next Generation Resilience Hub now supports filtering and sorting failure mode assessments, resource type filtering in ListResources, cross-region and cross-account topology edges, data recovery achievability status, and more granular dependency discovery progress tracking.
+
+# Release (2026-07-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.67.0](service/configservice/CHANGELOG.md#v1670-2026-07-07)
+  * **Feature**: Added support for connecting AWS Config to third-party cloud service providers. New APIs include PutConnector, GetConnector, DeleteConnector, and ListConnectors for managing connectors, and PutThirdPartyServiceLinkedConfigurationRecorder for creating third-party service-linked recorders.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.181.0](service/connect/CHANGELOG.md#v11810-2026-07-07)
+  * **Feature**: Adds support for CreateAuthCode and DeleteSession APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.313.0](service/ec2/CHANGELOG.md#v13130-2026-07-07)
+  * **Feature**: This launch surfaces the public SSM parameter associated with public AMIs in the AMI metadata.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.51.0](service/inspector2/CHANGELOG.md#v1510-2026-07-07)
+  * **Feature**: This release extends vulnerability management to Azure VM, container registries and function apps. Adds support for per-member-account scan configuration settings.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.96.0](service/lambda/CHANGELOG.md#v1960-2026-07-07)
+  * **Feature**: AWS Lambda Durable Functions now supports customer managed KMS keys. This allows customers to configure a KMS key in Durable Config to have all their durable execution data encrypted.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.42.0](service/marketplacecatalog/CHANGELOG.md#v1420-2026-07-07)
+  * **Feature**: This release enhances the ListEntities API to support ResellerRole filter for ResaleAuthorization entity.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.38.1](service/marketplacemetering/CHANGELOG.md#v1381-2026-07-07)
+  * **Documentation**: The usage reporting window for the BatchMeterUsage API has been extended from 6 hours to 24 hours. Sellers can now submit usage records for up to 24 hours after a metered event occurs. The existing 6-hour grace period at the end of a billing cycle still applies.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralrevenuemeasurement`: [v1.0.0](service/partnercentralrevenuemeasurement/CHANGELOG.md#v100-2026-07-07)
+  * **Release**: New AWS service client module
+  * **Feature**: Add support for AWS Partner Central Revenue Measurement API for creating, managing, and tracking revenue attributions and marketplace revenue share allocations.
+* `github.com/aws/aws-sdk-go-v2/service/route53globalresolver`: [v1.5.0](service/route53globalresolver/CHANGELOG.md#v150-2026-07-07)
+  * **Feature**: Adds ListSharedDNSViews operation to list all DNS Views shared with caller using AWS Resource Access Manager. Also updates ListHostedZoneAssociations operation so that resource ARN param is optional, allowing caller to list all HostedZoneAssociations in account.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.73.0](service/securityhub/CHANGELOG.md#v1730-2026-07-07)
+  * **Feature**: release SecurityHub MultiCloud integration with Azure
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.71.0](service/ssm/CHANGELOG.md#v1710-2026-07-07)
+  * **Feature**: Adding SSM Cloud Connector to support Azure Virtual Machines onboarding to AWS Systems Manager
+
+# Release (2026-07-06)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.50.0](service/accessanalyzer/CHANGELOG.md#v1500-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.33.0](service/account/CHANGELOG.md#v1330-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.42.0](service/acm/CHANGELOG.md#v1420-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.48.0](service/acmpca/CHANGELOG.md#v1480-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/aiops`: [v1.8.0](service/aiops/CHANGELOG.md#v180-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.45.0](service/amp/CHANGELOG.md#v1450-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.40.0](service/amplify/CHANGELOG.md#v1400-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/amplifybackend`: [v1.34.0](service/amplifybackend/CHANGELOG.md#v1340-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder`: [v1.30.0](service/amplifyuibuilder/CHANGELOG.md#v1300-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.41.0](service/apigateway/CHANGELOG.md#v1410-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi`: [v1.31.0](service/apigatewaymanagementapi/CHANGELOG.md#v1310-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.36.0](service/apigatewayv2/CHANGELOG.md#v1360-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.46.0](service/appconfig/CHANGELOG.md#v1460-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/appconfigdata`: [v1.25.0](service/appconfigdata/CHANGELOG.md#v1250-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/appfabric`: [v1.18.0](service/appfabric/CHANGELOG.md#v1180-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.53.0](service/appflow/CHANGELOG.md#v1530-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.39.0](service/appintegrations/CHANGELOG.md#v1390-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.44.0](service/applicationautoscaling/CHANGELOG.md#v1440-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler`: [v1.29.0](service/applicationcostprofiler/CHANGELOG.md#v1290-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice`: [v1.37.0](service/applicationdiscoveryservice/CHANGELOG.md#v1370-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/applicationinsights`: [v1.36.0](service/applicationinsights/CHANGELOG.md#v1360-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.24.0](service/applicationsignals/CHANGELOG.md#v1240-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/appmesh`: [v1.37.0](service/appmesh/CHANGELOG.md#v1370-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.41.0](service/apprunner/CHANGELOG.md#v1410-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.62.0](service/appstream/CHANGELOG.md#v1620-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.55.0](service/appsync/CHANGELOG.md#v1550-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.10.0](service/arcregionswitch/CHANGELOG.md#v1100-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.24.0](service/arczonalshift/CHANGELOG.md#v1240-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.18.0](service/artifact/CHANGELOG.md#v1180-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.59.0](service/athena/CHANGELOG.md#v1590-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.48.0](service/auditmanager/CHANGELOG.md#v1480-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.69.0](service/autoscaling/CHANGELOG.md#v1690-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/autoscalingplans`: [v1.32.0](service/autoscalingplans/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.113](service/b2bi/CHANGELOG.md#v100-preview113-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.58.0](service/backup/CHANGELOG.md#v1580-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/backupgateway`: [v1.28.0](service/backupgateway/CHANGELOG.md#v1280-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/backupsearch`: [v1.8.0](service/backupsearch/CHANGELOG.md#v180-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.67.0](service/batch/CHANGELOG.md#v1670-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/bcmdashboards`: [v1.4.0](service/bcmdashboards/CHANGELOG.md#v140-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/bcmdataexports`: [v1.17.0](service/bcmdataexports/CHANGELOG.md#v1170-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator`: [v1.12.0](service/bcmpricingcalculator/CHANGELOG.md#v1120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/bcmrecommendedactions`: [v1.3.0](service/bcmrecommendedactions/CHANGELOG.md#v130-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.65.0](service/bedrock/CHANGELOG.md#v1650-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.57.0](service/bedrockagent/CHANGELOG.md#v1570-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.33.0](service/bedrockagentcore/CHANGELOG.md#v1330-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.46.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1460-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.54.0](service/bedrockagentruntime/CHANGELOG.md#v1540-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.17.0](service/bedrockdataautomation/CHANGELOG.md#v1170-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomationruntime`: [v1.12.0](service/bedrockdataautomationruntime/CHANGELOG.md#v1120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.55.0](service/bedrockruntime/CHANGELOG.md#v1550-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.12.0](service/billing/CHANGELOG.md#v1120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+  * **Feature**: Adds support for managing AWS account credits and billing preferences, including retrieving credit details, viewing per-month credit allocation history, redeeming promotional codes, and configuring credit sharing and billing preferences.
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.31.0](service/billingconductor/CHANGELOG.md#v1310-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.42.0](service/braket/CHANGELOG.md#v1420-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.45.0](service/budgets/CHANGELOG.md#v1450-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/chatbot`: [v1.16.0](service/chatbot/CHANGELOG.md#v1160-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.43.0](service/chime/CHANGELOG.md#v1430-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkidentity`: [v1.29.0](service/chimesdkidentity/CHANGELOG.md#v1290-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.28.0](service/chimesdkmediapipelines/CHANGELOG.md#v1280-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.35.0](service/chimesdkmeetings/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging`: [v1.34.0](service/chimesdkmessaging/CHANGELOG.md#v1340-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.30.0](service/chimesdkvoice/CHANGELOG.md#v1300-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.47.0](service/cleanrooms/CHANGELOG.md#v1470-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.25.0](service/cleanroomsml/CHANGELOG.md#v1250-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.35.0](service/cloud9/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cloudcontrol`: [v1.31.0](service/cloudcontrol/CHANGELOG.md#v1310-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/clouddirectory`: [v1.32.0](service/clouddirectory/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.74.0](service/cloudformation/CHANGELOG.md#v1740-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.66.0](service/cloudfront/CHANGELOG.md#v1660-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore`: [v1.14.0](service/cloudfrontkeyvaluestore/CHANGELOG.md#v1140-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsm`: [v1.31.0](service/cloudhsm/CHANGELOG.md#v1310-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsmv2`: [v1.36.0](service/cloudhsmv2/CHANGELOG.md#v1360-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearch`: [v1.34.0](service/cloudsearch/CHANGELOG.md#v1340-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain`: [v1.30.0](service/cloudsearchdomain/CHANGELOG.md#v1300-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.57.0](service/cloudtrail/CHANGELOG.md#v1570-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtraildata`: [v1.19.0](service/cloudtraildata/CHANGELOG.md#v1190-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.62.0](service/cloudwatch/CHANGELOG.md#v1620-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchevents`: [v1.34.0](service/cloudwatchevents/CHANGELOG.md#v1340-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.79.0](service/cloudwatchlogs/CHANGELOG.md#v1790-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+  * **Feature**: Added PutStorageTierPolicy and GetStorageTierPolicy APIs to Amazon CloudWatch Logs. Customers can now configure account-level Intelligent Tiering to automatically optimize log storage costs by moving infrequently accessed data to lower-cost storage tiers.
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.40.0](service/codeartifact/CHANGELOG.md#v1400-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.71.0](service/codebuild/CHANGELOG.md#v1710-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/codecatalyst`: [v1.23.0](service/codecatalyst/CHANGELOG.md#v1230-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/codecommit`: [v1.35.0](service/codecommit/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/codeconnections`: [v1.12.0](service/codeconnections/CHANGELOG.md#v1120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/codedeploy`: [v1.37.0](service/codedeploy/CHANGELOG.md#v1370-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/codeguruprofiler`: [v1.31.0](service/codeguruprofiler/CHANGELOG.md#v1310-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/codegurureviewer`: [v1.36.0](service/codegurureviewer/CHANGELOG.md#v1360-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/codegurusecurity`: [v1.18.0](service/codegurusecurity/CHANGELOG.md#v1180-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.48.0](service/codepipeline/CHANGELOG.md#v1480-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/codestarconnections`: [v1.37.0](service/codestarconnections/CHANGELOG.md#v1370-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/codestarnotifications`: [v1.33.0](service/codestarnotifications/CHANGELOG.md#v1330-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentity`: [v1.35.0](service/cognitoidentity/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.64.0](service/cognitoidentityprovider/CHANGELOG.md#v1640-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/cognitosync`: [v1.31.0](service/cognitosync/CHANGELOG.md#v1310-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.42.0](service/comprehend/CHANGELOG.md#v1420-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/comprehendmedical`: [v1.34.0](service/comprehendmedical/CHANGELOG.md#v1340-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.55.0](service/computeoptimizer/CHANGELOG.md#v1550-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation`: [v1.4.0](service/computeoptimizerautomation/CHANGELOG.md#v140-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.66.0](service/configservice/CHANGELOG.md#v1660-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.180.0](service/connect/CHANGELOG.md#v11800-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaigns`: [v1.22.0](service/connectcampaigns/CHANGELOG.md#v1220-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.16.0](service/connectcampaignsv2/CHANGELOG.md#v1160-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.43.0](service/connectcases/CHANGELOG.md#v1430-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/connectcontactlens`: [v1.35.0](service/connectcontactlens/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/connecthealth`: [v1.5.0](service/connecthealth/CHANGELOG.md#v150-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.38.0](service/connectparticipant/CHANGELOG.md#v1380-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/controlcatalog`: [v1.17.0](service/controlcatalog/CHANGELOG.md#v1170-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.30.0](service/controltower/CHANGELOG.md#v1300-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/costandusagereportservice`: [v1.36.0](service/costandusagereportservice/CHANGELOG.md#v1360-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.66.0](service/costexplorer/CHANGELOG.md#v1660-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.25.0](service/costoptimizationhub/CHANGELOG.md#v1250-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.64.0](service/customerprofiles/CHANGELOG.md#v1640-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.65.0](service/databasemigrationservice/CHANGELOG.md#v1650-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/databrew`: [v1.41.0](service/databrew/CHANGELOG.md#v1410-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.43.0](service/dataexchange/CHANGELOG.md#v1430-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/datapipeline`: [v1.32.0](service/datapipeline/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.60.0](service/datasync/CHANGELOG.md#v1600-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.65.0](service/datazone/CHANGELOG.md#v1650-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/dax`: [v1.31.0](service/dax/CHANGELOG.md#v1310-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.34.0](service/deadline/CHANGELOG.md#v1340-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.40.0](service/detective/CHANGELOG.md#v1400-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.40.0](service/devicefarm/CHANGELOG.md#v1400-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.9.0](service/devopsagent/CHANGELOG.md#v190-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.42.0](service/devopsguru/CHANGELOG.md#v1420-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.42.0](service/directconnect/CHANGELOG.md#v1420-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.40.0](service/directoryservice/CHANGELOG.md#v1400-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/directoryservicedata`: [v1.9.0](service/directoryservicedata/CHANGELOG.md#v190-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/dlm`: [v1.38.0](service/dlm/CHANGELOG.md#v1380-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.50.0](service/docdb/CHANGELOG.md#v1500-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/docdbelastic`: [v1.22.0](service/docdbelastic/CHANGELOG.md#v1220-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.40.0](service/drs/CHANGELOG.md#v1400-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.15.0](service/dsql/CHANGELOG.md#v1150-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.60.0](service/dynamodb/CHANGELOG.md#v1600-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.35.0](service/dynamodbstreams/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ebs`: [v1.35.0](service/ebs/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.312.0](service/ec2/CHANGELOG.md#v13120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect`: [v1.34.0](service/ec2instanceconnect/CHANGELOG.md#v1340-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.59.0](service/ecr/CHANGELOG.md#v1590-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.40.0](service/ecrpublic/CHANGELOG.md#v1400-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.87.0](service/ecs/CHANGELOG.md#v1870-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.43.0](service/efs/CHANGELOG.md#v1430-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.89.0](service/eks/CHANGELOG.md#v1890-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/eksauth`: [v1.14.0](service/eksauth/CHANGELOG.md#v1140-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.55.0](service/elasticache/CHANGELOG.md#v1550-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk`: [v1.36.0](service/elasticbeanstalk/CHANGELOG.md#v1360-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing`: [v1.35.0](service/elasticloadbalancing/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.56.0](service/elasticloadbalancingv2/CHANGELOG.md#v1560-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.43.0](service/elasticsearchservice/CHANGELOG.md#v1430-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/elementalinference`: [v1.3.0](service/elementalinference/CHANGELOG.md#v130-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.62.0](service/emr/CHANGELOG.md#v1620-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.42.0](service/emrcontainers/CHANGELOG.md#v1420-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.43.0](service/emrserverless/CHANGELOG.md#v1430-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.29.0](service/entityresolution/CHANGELOG.md#v1290-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.47.0](service/eventbridge/CHANGELOG.md#v1470-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.12.0](service/evs/CHANGELOG.md#v1120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/finspace`: [v1.35.0](service/finspace/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/finspacedata`: [v1.35.0](service/finspacedata/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.45.0](service/firehose/CHANGELOG.md#v1450-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.39.0](service/fis/CHANGELOG.md#v1390-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.46.0](service/fms/CHANGELOG.md#v1460-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/forecast`: [v1.43.0](service/forecast/CHANGELOG.md#v1430-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/forecastquery`: [v1.31.0](service/forecastquery/CHANGELOG.md#v1310-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/frauddetector`: [v1.43.0](service/frauddetector/CHANGELOG.md#v1430-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/freetier`: [v1.15.0](service/freetier/CHANGELOG.md#v1150-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.67.0](service/fsx/CHANGELOG.md#v1670-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.57.0](service/gamelift/CHANGELOG.md#v1570-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.13.0](service/gameliftstreams/CHANGELOG.md#v1130-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/geomaps`: [v1.12.0](service/geomaps/CHANGELOG.md#v1120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/geoplaces`: [v1.10.0](service/geoplaces/CHANGELOG.md#v1100-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/georoutes`: [v1.13.0](service/georoutes/CHANGELOG.md#v1130-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/glacier`: [v1.34.0](service/glacier/CHANGELOG.md#v1340-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/globalaccelerator`: [v1.37.0](service/globalaccelerator/CHANGELOG.md#v1370-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.148.0](service/glue/CHANGELOG.md#v11480-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.37.0](service/grafana/CHANGELOG.md#v1370-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/greengrass`: [v1.34.0](service/greengrass/CHANGELOG.md#v1340-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.44.0](service/greengrassv2/CHANGELOG.md#v1440-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.44.0](service/groundstation/CHANGELOG.md#v1440-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.81.0](service/guardduty/CHANGELOG.md#v1810-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.39.0](service/health/CHANGELOG.md#v1390-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.40.0](service/healthlake/CHANGELOG.md#v1400-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.55.0](service/iam/CHANGELOG.md#v1550-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.38.0](service/identitystore/CHANGELOG.md#v1380-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.57.0](service/imagebuilder/CHANGELOG.md#v1570-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/inspector`: [v1.32.0](service/inspector/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.50.0](service/inspector2/CHANGELOG.md#v1500-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/inspectorscan`: [v1.15.0](service/inspectorscan/CHANGELOG.md#v1150-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/interconnect`: [v1.2.0](service/interconnect/CHANGELOG.md#v120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.28.0](service/internetmonitor/CHANGELOG.md#v1280-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.12.0](service/invoicing/CHANGELOG.md#v1120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.76.0](service/iot/CHANGELOG.md#v1760-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/iotdataplane`: [v1.34.0](service/iotdataplane/CHANGELOG.md#v1340-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor`: [v1.38.0](service/iotdeviceadvisor/CHANGELOG.md#v1380-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.33.0](service/iotfleetwise/CHANGELOG.md#v1330-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane`: [v1.32.0](service/iotjobsdataplane/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations`: [v1.11.0](service/iotmanagedintegrations/CHANGELOG.md#v1110-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling`: [v1.35.0](service/iotsecuretunneling/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.54.0](service/iotsitewise/CHANGELOG.md#v1540-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/iotthingsgraph`: [v1.32.0](service/iotthingsgraph/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/iottwinmaker`: [v1.31.0](service/iottwinmaker/CHANGELOG.md#v1310-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.57.0](service/iotwireless/CHANGELOG.md#v1570-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.53.0](service/ivs/CHANGELOG.md#v1530-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.23.0](service/ivschat/CHANGELOG.md#v1230-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.36.0](service/ivsrealtime/CHANGELOG.md#v1360-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.55.0](service/kafka/CHANGELOG.md#v1550-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/kafkaconnect`: [v1.32.0](service/kafkaconnect/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.62.0](service/kendra/CHANGELOG.md#v1620-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/kendraranking`: [v1.17.0](service/kendraranking/CHANGELOG.md#v1170-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.27.0](service/keyspaces/CHANGELOG.md#v1270-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/keyspacesstreams`: [v1.9.0](service/keyspacesstreams/CHANGELOG.md#v190-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.45.0](service/kinesis/CHANGELOG.md#v1450-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalytics`: [v1.32.0](service/kinesisanalytics/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.39.0](service/kinesisanalyticsv2/CHANGELOG.md#v1390-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.35.0](service/kinesisvideo/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia`: [v1.35.0](service/kinesisvideoarchivedmedia/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia`: [v1.29.0](service/kinesisvideomedia/CHANGELOG.md#v1290-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling`: [v1.30.0](service/kinesisvideosignaling/CHANGELOG.md#v1300-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideowebrtcstorage`: [v1.22.0](service/kinesisvideowebrtcstorage/CHANGELOG.md#v1220-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.54.0](service/kms/CHANGELOG.md#v1540-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.49.0](service/lakeformation/CHANGELOG.md#v1490-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.95.0](service/lambda/CHANGELOG.md#v1950-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/lambdacore`: [v1.1.0](service/lambdacore/CHANGELOG.md#v110-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/lambdamicrovms`: [v1.1.0](service/lambdamicrovms/CHANGELOG.md#v110-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/launchwizard`: [v1.16.0](service/launchwizard/CHANGELOG.md#v1160-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice`: [v1.37.0](service/lexmodelbuildingservice/CHANGELOG.md#v1370-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.63.0](service/lexmodelsv2/CHANGELOG.md#v1630-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimeservice`: [v1.31.0](service/lexruntimeservice/CHANGELOG.md#v1310-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimev2`: [v1.37.0](service/lexruntimev2/CHANGELOG.md#v1370-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanager`: [v1.39.0](service/licensemanager/CHANGELOG.md#v1390-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions`: [v1.22.0](service/licensemanagerlinuxsubscriptions/CHANGELOG.md#v1220-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions`: [v1.23.0](service/licensemanagerusersubscriptions/CHANGELOG.md#v1230-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.57.0](service/lightsail/CHANGELOG.md#v1570-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.53.0](service/location/CHANGELOG.md#v1530-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.38.0](service/lookoutequipment/CHANGELOG.md#v1380-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.28.0](service/m2/CHANGELOG.md#v1280-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/machinelearning`: [v1.36.0](service/machinelearning/CHANGELOG.md#v1360-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.53.0](service/macie2/CHANGELOG.md#v1530-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.20.0](service/mailmanager/CHANGELOG.md#v1200-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.0. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchain`: [v1.33.0](service/managedblockchain/CHANGELOG.md#v1330-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchainquery`: [v1.24.0](service/managedblockchainquery/CHANGELOG.md#v1240-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.18.0](service/marketplaceagreement/CHANGELOG.md#v1180-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.41.0](service/marketplacecatalog/CHANGELOG.md#v1410-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics`: [v1.32.0](service/marketplacecommerceanalytics/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacedeployment`: [v1.13.0](service/marketplacedeployment/CHANGELOG.md#v1130-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacediscovery`: [v1.2.0](service/marketplacediscovery/CHANGELOG.md#v120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.39.0](service/marketplaceentitlementservice/CHANGELOG.md#v1390-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.38.0](service/marketplacemetering/CHANGELOG.md#v1380-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacereporting`: [v1.9.0](service/marketplacereporting/CHANGELOG.md#v190-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.52.0](service/mediaconnect/CHANGELOG.md#v1520-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.95.0](service/mediaconvert/CHANGELOG.md#v1950-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.100.0](service/medialive/CHANGELOG.md#v11000-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.41.0](service/mediapackage/CHANGELOG.md#v1410-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.41.0](service/mediapackagev2/CHANGELOG.md#v1410-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagevod`: [v1.41.0](service/mediapackagevod/CHANGELOG.md#v1410-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/mediastore`: [v1.31.0](service/mediastore/CHANGELOG.md#v1310-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/mediastoredata`: [v1.31.0](service/mediastoredata/CHANGELOG.md#v1310-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.61.0](service/mediatailor/CHANGELOG.md#v1610-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.27.0](service/medicalimaging/CHANGELOG.md#v1270-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.35.0](service/memorydb/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.47.0](service/mgn/CHANGELOG.md#v1470-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhub`: [v1.33.0](service/migrationhub/CHANGELOG.md#v1330-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubconfig`: [v1.33.0](service/migrationhubconfig/CHANGELOG.md#v1330-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator`: [v1.20.0](service/migrationhuborchestrator/CHANGELOG.md#v1200-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces`: [v1.27.0](service/migrationhubrefactorspaces/CHANGELOG.md#v1270-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy`: [v1.28.0](service/migrationhubstrategy/CHANGELOG.md#v1280-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/mpa`: [v1.9.0](service/mpa/CHANGELOG.md#v190-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/mq`: [v1.37.0](service/mq/CHANGELOG.md#v1370-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/mturk`: [v1.32.0](service/mturk/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.42.0](service/mwaa/CHANGELOG.md#v1420-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/mwaaserverless`: [v1.2.0](service/mwaaserverless/CHANGELOG.md#v120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.47.0](service/neptune/CHANGELOG.md#v1470-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/neptunedata`: [v1.19.0](service/neptunedata/CHANGELOG.md#v1190-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.23.0](service/neptunegraph/CHANGELOG.md#v1230-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.63.0](service/networkfirewall/CHANGELOG.md#v1630-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/networkflowmonitor`: [v1.13.0](service/networkflowmonitor/CHANGELOG.md#v1130-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.43.0](service/networkmanager/CHANGELOG.md#v1430-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/networkmonitor`: [v1.15.0](service/networkmonitor/CHANGELOG.md#v1150-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/notifications`: [v1.9.0](service/notifications/CHANGELOG.md#v190-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/notificationscontacts`: [v1.7.0](service/notificationscontacts/CHANGELOG.md#v170-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/novaact`: [v1.2.0](service/novaact/CHANGELOG.md#v120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/oam`: [v1.25.0](service/oam/CHANGELOG.md#v1250-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.19.0](service/observabilityadmin/CHANGELOG.md#v1190-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.13.0](service/odb/CHANGELOG.md#v1130-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.47.0](service/omics/CHANGELOG.md#v1470-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.74.0](service/opensearch/CHANGELOG.md#v1740-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+  * **Feature**: This release introduces Saved Object Migration APIs, enabling users to migrate dashboards, visualizations, index patterns, and other saved objects from a data source into an Amazon OpenSearch Service application workspace with configurable export filters and conflict resolution strategies.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.33.0](service/opensearchserverless/CHANGELOG.md#v1330-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.52.0](service/organizations/CHANGELOG.md#v1520-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/osis`: [v1.23.0](service/osis/CHANGELOG.md#v1230-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.64.0](service/outposts/CHANGELOG.md#v1640-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralaccount`: [v1.5.0](service/partnercentralaccount/CHANGELOG.md#v150-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits`: [v1.2.0](service/partnercentralbenefits/CHANGELOG.md#v120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralchannel`: [v1.3.0](service/partnercentralchannel/CHANGELOG.md#v130-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.21.0](service/partnercentralselling/CHANGELOG.md#v1210-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.32.0](service/paymentcryptography/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.28.0](service/paymentcryptographydata/CHANGELOG.md#v1280-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorad`: [v1.17.0](service/pcaconnectorad/CHANGELOG.md#v1170-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep`: [v1.13.0](service/pcaconnectorscep/CHANGELOG.md#v1130-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.22.0](service/pcs/CHANGELOG.md#v1220-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.49.0](service/personalize/CHANGELOG.md#v1490-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/personalizeevents`: [v1.33.0](service/personalizeevents/CHANGELOG.md#v1330-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/personalizeruntime`: [v1.35.0](service/personalizeruntime/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.38.0](service/pi/CHANGELOG.md#v1380-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.41.0](service/pinpoint/CHANGELOG.md#v1410-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointemail`: [v1.31.0](service/pinpointemail/CHANGELOG.md#v1310-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice`: [v1.31.0](service/pinpointsmsvoice/CHANGELOG.md#v1310-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.31.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1310-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/pipes`: [v1.25.0](service/pipes/CHANGELOG.md#v1250-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.59.0](service/polly/CHANGELOG.md#v1590-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.43.0](service/pricing/CHANGELOG.md#v1430-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.41.0](service/proton/CHANGELOG.md#v1410-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/qapps`: [v1.13.0](service/qapps/CHANGELOG.md#v1130-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.36.0](service/qbusiness/CHANGELOG.md#v1360-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.33.0](service/qconnect/CHANGELOG.md#v1330-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.117.0](service/quicksight/CHANGELOG.md#v11170-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ram`: [v1.38.0](service/ram/CHANGELOG.md#v1380-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/rbin`: [v1.29.0](service/rbin/CHANGELOG.md#v1290-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.120.0](service/rds/CHANGELOG.md#v11200-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.34.0](service/rdsdata/CHANGELOG.md#v1340-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.64.0](service/redshift/CHANGELOG.md#v1640-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.41.0](service/redshiftdata/CHANGELOG.md#v1410-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.36.0](service/redshiftserverless/CHANGELOG.md#v1360-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.53.0](service/rekognition/CHANGELOG.md#v1530-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/repostspace`: [v1.16.0](service/repostspace/CHANGELOG.md#v1160-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.37.0](service/resiliencehub/CHANGELOG.md#v1370-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehubv2`: [v1.1.0](service/resiliencehubv2/CHANGELOG.md#v110-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.26.0](service/resourceexplorer2/CHANGELOG.md#v1260-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroups`: [v1.35.0](service/resourcegroups/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi`: [v1.34.0](service/resourcegroupstaggingapi/CHANGELOG.md#v1340-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.24.0](service/rolesanywhere/CHANGELOG.md#v1240-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.64.0](service/route53/CHANGELOG.md#v1640-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.37.0](service/route53domains/CHANGELOG.md#v1370-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/route53globalresolver`: [v1.4.0](service/route53globalresolver/CHANGELOG.md#v140-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/route53profiles`: [v1.11.0](service/route53profiles/CHANGELOG.md#v1110-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycluster`: [v1.30.0](service/route53recoverycluster/CHANGELOG.md#v1300-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig`: [v1.34.0](service/route53recoverycontrolconfig/CHANGELOG.md#v1340-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness`: [v1.28.0](service/route53recoveryreadiness/CHANGELOG.md#v1280-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.47.0](service/route53resolver/CHANGELOG.md#v1470-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.8.0](service/rtbfabric/CHANGELOG.md#v180-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.32.0](service/rum/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.105.0](service/s3/CHANGELOG.md#v11050-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.72.0](service/s3control/CHANGELOG.md#v1720-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/s3files`: [v1.2.0](service/s3files/CHANGELOG.md#v120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/s3outposts`: [v1.36.0](service/s3outposts/CHANGELOG.md#v1360-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.17.0](service/s3tables/CHANGELOG.md#v1170-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/s3vectors`: [v1.9.0](service/s3vectors/CHANGELOG.md#v190-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.257.0](service/sagemaker/CHANGELOG.md#v12570-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime`: [v1.34.0](service/sagemakera2iruntime/CHANGELOG.md#v1340-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakeredge`: [v1.33.0](service/sagemakeredge/CHANGELOG.md#v1330-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.37.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1370-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial`: [v1.21.0](service/sagemakergeospatial/CHANGELOG.md#v1210-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerjobruntime`: [v1.1.0](service/sagemakerjobruntime/CHANGELOG.md#v110-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakermetrics`: [v1.20.0](service/sagemakermetrics/CHANGELOG.md#v1200-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.42.0](service/sagemakerruntime/CHANGELOG.md#v1420-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntimehttp2`: [v1.2.0](service/sagemakerruntimehttp2/CHANGELOG.md#v120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/savingsplans`: [v1.34.0](service/savingsplans/CHANGELOG.md#v1340-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/scheduler`: [v1.19.0](service/scheduler/CHANGELOG.md#v1190-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/schemas`: [v1.36.0](service/schemas/CHANGELOG.md#v1360-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.43.0](service/secretsmanager/CHANGELOG.md#v1430-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.6.0](service/securityagent/CHANGELOG.md#v160-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.72.0](service/securityhub/CHANGELOG.md#v1720-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/securityir`: [v1.12.0](service/securityir/CHANGELOG.md#v1120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.27.0](service/securitylake/CHANGELOG.md#v1270-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository`: [v1.32.0](service/serverlessapplicationrepository/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.41.0](service/servicecatalog/CHANGELOG.md#v1410-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry`: [v1.37.0](service/servicecatalogappregistry/CHANGELOG.md#v1370-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.41.0](service/servicediscovery/CHANGELOG.md#v1410-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/servicequotas`: [v1.36.0](service/servicequotas/CHANGELOG.md#v1360-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ses`: [v1.36.0](service/ses/CHANGELOG.md#v1360-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.63.0](service/sesv2/CHANGELOG.md#v1630-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.44.0](service/sfn/CHANGELOG.md#v1440-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/shield`: [v1.36.0](service/shield/CHANGELOG.md#v1360-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/signer`: [v1.34.0](service/signer/CHANGELOG.md#v1340-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/signerdata`: [v1.2.0](service/signerdata/CHANGELOG.md#v120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/signin`: [v1.3.0](service/signin/CHANGELOG.md#v130-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/simpledbv2`: [v1.2.0](service/simpledbv2/CHANGELOG.md#v120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.38.0](service/snowball/CHANGELOG.md#v1380-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement`: [v1.27.0](service/snowdevicemanagement/CHANGELOG.md#v1270-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.41.0](service/sns/CHANGELOG.md#v1410-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.12.0](service/socialmessaging/CHANGELOG.md#v1120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.45.0](service/sqs/CHANGELOG.md#v1450-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.70.0](service/ssm/CHANGELOG.md#v1700-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ssmcontacts`: [v1.33.0](service/ssmcontacts/CHANGELOG.md#v1330-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ssmguiconnect`: [v1.7.0](service/ssmguiconnect/CHANGELOG.md#v170-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.41.0](service/ssmincidents/CHANGELOG.md#v1410-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ssmquicksetup`: [v1.10.0](service/ssmquicksetup/CHANGELOG.md#v1100-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.28.0](service/ssmsap/CHANGELOG.md#v1280-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/sso`: [v1.32.0](service/sso/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.41.0](service/ssoadmin/CHANGELOG.md#v1410-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/ssooidc`: [v1.37.0](service/ssooidc/CHANGELOG.md#v1370-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.45.0](service/storagegateway/CHANGELOG.md#v1450-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.44.0](service/sts/CHANGELOG.md#v1440-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/supplychain`: [v1.19.0](service/supplychain/CHANGELOG.md#v1190-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.33.0](service/support/CHANGELOG.md#v1330-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/supportapp`: [v1.20.0](service/supportapp/CHANGELOG.md#v1200-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/sustainability`: [v1.2.0](service/sustainability/CHANGELOG.md#v120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/swf`: [v1.36.0](service/swf/CHANGELOG.md#v1360-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.45.0](service/synthetics/CHANGELOG.md#v1450-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.19.0](service/taxsettings/CHANGELOG.md#v1190-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.42.0](service/textract/CHANGELOG.md#v1420-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.21.0](service/timestreaminfluxdb/CHANGELOG.md#v1210-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.38.0](service/timestreamquery/CHANGELOG.md#v1380-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamwrite`: [v1.37.0](service/timestreamwrite/CHANGELOG.md#v1370-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/tnb`: [v1.20.0](service/tnb/CHANGELOG.md#v1200-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.57.0](service/transcribe/CHANGELOG.md#v1570-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.36.0](service/transcribestreaming/CHANGELOG.md#v1360-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.74.0](service/transfer/CHANGELOG.md#v1740-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/translate`: [v1.35.0](service/translate/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/trustedadvisor`: [v1.16.0](service/trustedadvisor/CHANGELOG.md#v1160-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/uxc`: [v1.2.0](service/uxc/CHANGELOG.md#v120-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.35.0](service/verifiedpermissions/CHANGELOG.md#v1350-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/voiceid`: [v1.32.0](service/voiceid/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.24.0](service/vpclattice/CHANGELOG.md#v1240-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/waf`: [v1.32.0](service/waf/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/wafregional`: [v1.32.0](service/wafregional/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.75.0](service/wafv2/CHANGELOG.md#v1750-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.41.0](service/wellarchitected/CHANGELOG.md#v1410-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/wickr`: [v1.4.0](service/wickr/CHANGELOG.md#v140-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.34.0](service/wisdom/CHANGELOG.md#v1340-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/workdocs`: [v1.32.0](service/workdocs/CHANGELOG.md#v1320-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/workmail`: [v1.38.0](service/workmail/CHANGELOG.md#v1380-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/workmailmessageflow`: [v1.30.0](service/workmailmessageflow/CHANGELOG.md#v1300-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.71.0](service/workspaces/CHANGELOG.md#v1710-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesinstances`: [v1.7.0](service/workspacesinstances/CHANGELOG.md#v170-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.22.0](service/workspacesthinclient/CHANGELOG.md#v1220-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.41.0](service/workspacesweb/CHANGELOG.md#v1410-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+* `github.com/aws/aws-sdk-go-v2/service/xray`: [v1.38.0](service/xray/CHANGELOG.md#v1380-2026-07-06)
+  * **Feature**: Add request serialization snapshot tests.
+
+# Release (2026-07-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.63.0](service/cognitoidentityprovider/CHANGELOG.md#v1630-2026-07-02)
+  * **Feature**: Add support for provisioned limit management, enabling customers to view and update their provisioned API rate limits for Amazon Cognito User Pools programmatically through the new GetProvisionedLimit and UpdateProvisionedLimit APIs.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.65.0](service/configservice/CHANGELOG.md#v1650-2026-07-02)
+  * **Feature**: AWS Config now supports tag-on-create for organization-managed Config rules and conformance packs through the PutOrganizationConfigRule and PutOrganizationConformancePack APIs.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.63.0](service/customerprofiles/CHANGELOG.md#v1630-2026-07-02)
+  * **Feature**: Amazon Connect Customer Profiles adds support for diversityConfig to recommenderConfig which can be used for diversifying the recommendations. This release also includes model versioning support which helps customer to rollback trained models.
+* `github.com/aws/aws-sdk-go-v2/service/elementalinference`: [v1.2.0](service/elementalinference/CHANGELOG.md#v120-2026-07-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.60.0](service/mediatailor/CHANGELOG.md#v1600-2026-07-02)
+  * **Feature**: Added dual-stack (IPv4 and IPv6) endpoint fields to SSAI and Channel Assembly API responses.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.63.0](service/outposts/CHANGELOG.md#v1630-2026-07-02)
+  * **Feature**: Tighten Outpost site ContactPhoneNumber regex to perform phone number validation.
+
+# Release (2026-07-01)
+
+## General Highlights
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.2.13](feature/s3/transfermanager/CHANGELOG.md#v0213-2026-07-01)
+  * **Bug Fix**: Fix Transfer Manager error logic to preserve the first error found
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.17.0](service/artifact/CHANGELOG.md#v1170-2026-07-01)
+  * **Feature**: Add support for Assurance Assistant APIs for managing compliance inquiries along with tagging features.
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.34.8](service/cloud9/CHANGELOG.md#v1348-2026-07-01)
+  * **Documentation**: Since Amazon Linux 2 (AL2) will reach its end-of-life (EOL) and stop receiving security updates on June 30, 2026, Cloud9 will remove AL2 from AMI options in public API create-environment-ec2.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.179.0](service/connect/CHANGELOG.md#v11790-2026-07-01)
+  * **Feature**: Adds a new Amazon Connect Service API, SendOutboundWebNotification, that delivers web notifications to end-customer chat widget sessions. Callable only by the Amazon Connect Outbound Campaigns service principal.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.311.0](service/ec2/CHANGELOG.md#v13110-2026-07-01)
+  * **Feature**: Use declarative policies to enable VPC Encryption Controls across your organization or select accounts. Added AMD SEV-SNP support for EC2 Dedicated Hosts. Managed resource visibility settings control whether AWS-provisioned resources in your account appear in console views and API list operations.
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.12.0](service/gameliftstreams/CHANGELOG.md#v1120-2026-07-01)
+  * **Feature**: Added CreateStreamSessionAdminShell API operation to enable customers to establish secure terminal connections to the live runtime environment of streaming sessions for troubleshooting purposes.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.37.5](service/marketplacemetering/CHANGELOG.md#v1375-2026-07-01)
+  * **Documentation**: The usage reporting window for the BatchMeterUsage API has been extended from 6 hours to 24 hours. Sellers can now submit usage records for up to 24 hours after a metered event occurs.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.94.0](service/mediaconvert/CHANGELOG.md#v1940-2026-07-01)
+  * **Feature**: Adds support for integer-second duration normalization and the option to disable explicit weighted prediction.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.73.0](service/opensearch/CHANGELOG.md#v1730-2026-07-01)
+  * **Feature**: To create a Mustang domain via the AWS CLI, you must pass EngineMode OPTIMIZED (along with UseCase OBSERVABILITY or MIXED)  without it, the domain defaults to a regular (GENERAL) domain. Also this release includes Insights Feedback API which user can use to provide feedback for Insight API.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.116.0](service/quicksight/CHANGELOG.md#v11160-2026-07-01)
+  * **Feature**: Adding support for FileSource PhysicalTables.  This adds support for datasets with file sources.
+
+# Release (2026-06-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.41.0](service/acm/CHANGELOG.md#v1410-2026-06-30)
+  * **Feature**: AWS Certificate Manager now supports the Automatic Certificate Management Environment (ACME) protocol to issue public certificates. ACME is an industry-standard protocol for automating certificate lifecycle on customer-managed infrastructure such as on-premises servers and Kubernetes clusters.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.68.0](service/autoscaling/CHANGELOG.md#v1680-2026-06-30)
+  * **Feature**: This release adds support for a new reservations-then-balanced capacity distribution strategy, which first attempts to launch instances into your Capacity Reservations and then balances remaining capacity across healthy Availability Zones.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.46.0](service/cleanrooms/CHANGELOG.md#v1460-2026-06-30)
+  * **Feature**: Adds support for intermediate tables in AWS Clean Rooms collaborations.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.73.0](service/cloudformation/CHANGELOG.md#v1730-2026-06-30)
+  * **Feature**: AWS CloudFormation adds a DeploymentConfig parameter to enable Express mode, which completes stack operations as soon as resource configuration is applied. Also adds a DisableValidation parameter to skip pre-deployment validation, which now runs automatically on CreateStack and UpdateStak.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.61.0](service/cloudwatch/CHANGELOG.md#v1610-2026-06-30)
+  * **Feature**: Customers can configure alarms with wall-clock-aligned evaluation windows instead of sliding windows, with optional timezone support for daily or weekly periods
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.70.0](service/codebuild/CHANGELOG.md#v1700-2026-06-30)
+  * **Feature**: Adds support for host kernel selection for on-demand builds.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.178.0](service/connect/CHANGELOG.md#v11780-2026-06-30)
+  * **Feature**: Amazon Connect - Added CreateAttachedFile and StartContactConversationalAnalyticsJob APIs to import call recordings and run conversational analytics.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.64.0](service/datazone/CHANGELOG.md#v1640-2026-06-30)
+  * **Feature**: Amazon DataZone now supports SNOWFLAKE as a connection type in the CreateConnection API, enabling metadata and lineage retrieval from Snowflake databases. Specify snowflakeProperties with connection details, a Secrets Manager secret, an Athena spill bucket, and an identity mapping for Snowflake.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.310.0](service/ec2/CHANGELOG.md#v13100-2026-06-30)
+  * **Feature**: Adds ModifyVpcEndpointPayerResponsibility API, which enables VPC endpoint service owners to modify the billing account for VPC endpoint usage charges at the individual endpoint level
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.86.1](service/ecs/CHANGELOG.md#v1861-2026-06-30)
+  * **Documentation**: Updated threshold configuration documentation.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.88.0](service/eks/CHANGELOG.md#v1880-2026-06-30)
+  * **Feature**: Adds Kubernetes version rollback support, including the CancelUpdate operation to cancel an in-progress VersionRollback update, the RollbackConfig structure with a timeoutMinutes field, and the Cancellation structure surfaced via the new cancellation field on the Update object.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.62.0](service/networkfirewall/CHANGELOG.md#v1620-2026-06-30)
+  * **Feature**: AWS Network Firewall now supports container associations for monitoring ECS and EKS workloads. You can create container associations to dynamically track the IP addresses of running containers in your Amazon ECS and Amazon EKS clusters.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.18.0](service/observabilityadmin/CHANGELOG.md#v1180-2026-06-30)
+  * **Feature**: Organization and account level telemetry rule via Observability Admin and CloudWatch pipelines for metrics
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.20.0](service/partnercentralselling/CHANGELOG.md#v1200-2026-06-30)
+  * **Feature**: This release adds AwsMarketplaceSolutions and AwsMarketplaceProducts entity types to the Associate and Disassociate APIs, returns them in GetOpportunity, and adds AwsMarketplaceSolutionArn to ListSolutions ,letting partners link Marketplace listings directly to opportunities.
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.40.0](service/ssoadmin/CHANGELOG.md#v1400-2026-06-30)
+  * **Feature**: AWS IAM Identity Center now returns PrimaryRegion and Regions in the ListInstances response, providing information about replicated instances.
+* `github.com/aws/aws-sdk-go-v2/service/supportauthz`: [v1.0.0](service/supportauthz/CHANGELOG.md#v100-2026-06-30)
+  * **Release**: New AWS service client module
+  * **Feature**: New SDK release for SupportAuthZ.
+
 # Release (2026-06-29)
 
 ## General Highlights

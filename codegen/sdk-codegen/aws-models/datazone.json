@@ -3497,6 +3497,12 @@
                         "smithy.api#documentation": "<p>The Amazon S3 properties of a connection.</p>"
                     }
                 },
+                "snowflakeProperties": {
+                    "target": "com.amazonaws.datazone#SnowflakePropertiesInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Snowflake-specific connection properties to use when creating the connection.</p>"
+                    }
+                },
                 "amazonQProperties": {
                     "target": "com.amazonaws.datazone#AmazonQPropertiesInput",
                     "traits": {
@@ -3589,6 +3595,12 @@
                         "smithy.api#documentation": "<p>The Amazon S3 properties of a connection.</p>"
                     }
                 },
+                "snowflakeProperties": {
+                    "target": "com.amazonaws.datazone#SnowflakePropertiesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Snowflake-specific connection properties for an existing connection.</p>"
+                    }
+                },
                 "amazonQProperties": {
                     "target": "com.amazonaws.datazone#AmazonQPropertiesOutput",
                     "traits": {
@@ -3667,6 +3679,12 @@
                     "target": "com.amazonaws.datazone#S3PropertiesPatch",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon S3 properties of a connection properties patch.</p>"
+                    }
+                },
+                "snowflakeProperties": {
+                    "target": "com.amazonaws.datazone#SnowflakePropertiesPatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Snowflake-specific connection properties to update.</p>"
                     }
                 },
                 "amazonQProperties": {
@@ -3995,6 +4013,113 @@
                         "smithy.api#enumValue": "VPC"
                     }
                 }
+            }
+        },
+        "com.amazonaws.datazone#ConnectivityProperties": {
+            "type": "structure",
+            "members": {
+                "connectionProperties": {
+                    "target": "com.amazonaws.datazone#ConnectionProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection properties for this configuration.</p>"
+                    }
+                },
+                "physicalConnectionRequirements": {
+                    "target": "com.amazonaws.datazone#PhysicalConnectionRequirements",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The physical network requirements for the connection, such as the subnet, security group, and VPC settings needed to reach the data source.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connectivity configuration.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 41
+                        },
+                        "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFF\\t]*$"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the connectivity configuration.</p>",
+                        "smithy.api#length": {
+                            "max": 2048
+                        },
+                        "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFF\\r\\n\\t]*$"
+                    }
+                },
+                "validateCredentials": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to validate credentials for the connectivity configuration. Defaults to true if not specified.</p>"
+                    }
+                },
+                "validateForComputeEnvironments": {
+                    "target": "com.amazonaws.datazone#ComputeEnvironmentsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute environments to use when validating connectivity. The service validates that the connection is reachable from each specified environment.</p>"
+                    }
+                },
+                "sparkProperties": {
+                    "target": "com.amazonaws.datazone#PropertyMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Spark properties for this configuration.</p>"
+                    }
+                },
+                "athenaProperties": {
+                    "target": "com.amazonaws.datazone#PropertyMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Athena properties for this configuration.</p>"
+                    }
+                },
+                "pythonProperties": {
+                    "target": "com.amazonaws.datazone#PropertyMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Python properties for this configuration.</p>"
+                    }
+                },
+                "authenticationConfiguration": {
+                    "target": "com.amazonaws.datazone#AuthenticationConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication settings for this configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the network and authentication settings for a connection, including connection credentials, physical network requirements, and compute-environment validation options.</p>"
+            }
+        },
+        "com.amazonaws.datazone#ConnectivityPropertiesPatch": {
+            "type": "structure",
+            "members": {
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the connectivity properties update.</p>",
+                        "smithy.api#length": {
+                            "max": 2048
+                        },
+                        "smithy.api#pattern": "^[\\S\\s]*$"
+                    }
+                },
+                "connectionProperties": {
+                    "target": "com.amazonaws.datazone#ConnectionProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection properties to update.</p>"
+                    }
+                },
+                "authenticationConfiguration": {
+                    "target": "com.amazonaws.datazone#AuthenticationConfigurationPatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication settings to update.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the connectivity settings to update on an existing connection. Include only the fields you want to change.</p>"
             }
         },
         "com.amazonaws.datazone#CreateAccountPool": {
@@ -6652,7 +6777,7 @@
                 "environmentBlueprintIdentifier": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the blueprint with which the environment is being created.</p>"
+                        "smithy.api#documentation": "<p>The ID of the blueprint with which the environment is being created.</p> <note> <p>This parameter is only valid for V1 domains. If provided for a V2 domain, the service returns a ValidationException.</p> </note>"
                     }
                 },
                 "deploymentOrder": {
@@ -24012,6 +24137,27 @@
                 "smithy.api#documentation": "<p>The details of the IAM user profile.</p>"
             }
         },
+        "com.amazonaws.datazone#IdentityMapping": {
+            "type": "structure",
+            "members": {
+                "usernameAttribute": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username attribute used for the identity mapping.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "prefix": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix used for the identity mapping.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration for mapping user identities to Snowflake users, including the username attribute and optional prefix applied during the mapping.</p>"
+            }
+        },
         "com.amazonaws.datazone#Import": {
             "type": "structure",
             "members": {
@@ -25025,6 +25171,65 @@
                 "smithy.api#documentation": "<p>The SQL query run details of a data lineage run.</p>"
             }
         },
+        "com.amazonaws.datazone#LineageSyncInput": {
+            "type": "structure",
+            "members": {
+                "timezone": {
+                    "target": "com.amazonaws.datazone#Timezone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timezone of the lineage sync schedule.</p>"
+                    }
+                },
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether lineage sync is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "schedule": {
+                    "target": "com.amazonaws.datazone#LineageSyncScheduleCronString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule of the lineage sync.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the settings for configuring lineage sync on a Snowflake connection, including the schedule, timezone, and enabled state.</p>"
+            }
+        },
+        "com.amazonaws.datazone#LineageSyncOutput": {
+            "type": "structure",
+            "members": {
+                "lineageJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the lineage sync job.</p>"
+                    }
+                },
+                "timezone": {
+                    "target": "com.amazonaws.datazone#Timezone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timezone of the lineage sync schedule.</p>"
+                    }
+                },
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether lineage sync is enabled.</p>"
+                    }
+                },
+                "schedule": {
+                    "target": "com.amazonaws.datazone#LineageSyncScheduleCronString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule of the lineage sync.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the current state of lineage sync for a Snowflake connection, including the schedule, timezone, enabled state, and the ID of the associated lineage job.</p>"
+            }
+        },
         "com.amazonaws.datazone#LineageSyncSchedule": {
             "type": "structure",
             "members": {
@@ -25038,6 +25243,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The lineage sync schedule.</p>"
+            }
+        },
+        "com.amazonaws.datazone#LineageSyncScheduleCronString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The cron expression for the lineage sync schedule.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^cron\\((\\b[0-5]?[0-9]\\b) ([*]|\\b2[0-3]\\b|\\b[0-1]?[0-9]\\b) ([-?*,/\\dLW]){1,83} ([-*,/\\d]|[a-zA-Z]{3}){1,23} ([-?#*,/\\dL]|[a-zA-Z]{3}){1,13} ([^\\)]+)\\)$"
             }
         },
         "com.amazonaws.datazone#ListAccountPools": {
@@ -36367,6 +36583,119 @@
                     "min": 1,
                     "max": 100000
                 }
+            }
+        },
+        "com.amazonaws.datazone#SnowflakePropertiesInput": {
+            "type": "structure",
+            "members": {
+                "connectivityProperties": {
+                    "target": "com.amazonaws.datazone#ConnectivityProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connectivity properties of the Snowflake connection.</p>"
+                    }
+                },
+                "snowflakeRole": {
+                    "target": "com.amazonaws.datazone#SnowflakeRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Snowflake role used to access Snowflake resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "identityMapping": {
+                    "target": "com.amazonaws.datazone#IdentityMapping",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity mapping configuration for the Snowflake connection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lineageSync": {
+                    "target": "com.amazonaws.datazone#LineageSyncInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lineage sync configuration for the Snowflake connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the Snowflake-specific settings required when creating or updating a connection, including the Snowflake role, identity mapping, and lineage sync configuration.</p>"
+            }
+        },
+        "com.amazonaws.datazone#SnowflakePropertiesOutput": {
+            "type": "structure",
+            "members": {
+                "snowflakeRole": {
+                    "target": "com.amazonaws.datazone#SnowflakeRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Snowflake role used to access Snowflake resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "identityMapping": {
+                    "target": "com.amazonaws.datazone#IdentityMapping",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity mapping configuration for the Snowflake connection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lineageSync": {
+                    "target": "com.amazonaws.datazone#LineageSyncOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lineage sync configuration for the Snowflake connection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.datazone#ConnectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Snowflake connection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message returned if the Snowflake connection failed to establish or validate.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the Snowflake-specific settings returned for an existing connection, including the current role, identity mapping, lineage sync state, and connection status.</p>"
+            }
+        },
+        "com.amazonaws.datazone#SnowflakePropertiesPatch": {
+            "type": "structure",
+            "members": {
+                "connectivityPropertiesPatch": {
+                    "target": "com.amazonaws.datazone#ConnectivityPropertiesPatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connectivity properties patch of the Snowflake connection.</p>"
+                    }
+                },
+                "snowflakeRole": {
+                    "target": "com.amazonaws.datazone#SnowflakeRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Snowflake role used to access Snowflake resources.</p>"
+                    }
+                },
+                "lineageSync": {
+                    "target": "com.amazonaws.datazone#LineageSyncInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lineage sync configuration for the Snowflake connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the Snowflake-specific settings to update on an existing connection. Include only the fields you want to change.</p>"
+            }
+        },
+        "com.amazonaws.datazone#SnowflakeRole": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of the Snowflake role to use for the connection.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_$]+$"
             }
         },
         "com.amazonaws.datazone#SortFieldAccountPool": {

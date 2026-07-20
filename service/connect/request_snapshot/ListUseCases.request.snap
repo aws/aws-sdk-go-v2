@@ -1,0 +1,3 @@
+GET /instance/__InstanceId__/integration-associations/__IntegrationAssociationId__/use-cases?maxResults=1&nextToken=__NextToken__
+
+

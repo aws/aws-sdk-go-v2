@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/domain-info
+
+Content-Type: application/json
+
+{"DomainNames":["__Member__","__Member__"]}

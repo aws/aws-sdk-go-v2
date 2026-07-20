@@ -442,6 +442,9 @@ func ExampleHarnessContentBlockDelta_outputUsage() {
 	case *types.HarnessContentBlockDeltaMemberToolResult:
 		_ = v.Value // Value is []types.HarnessToolResultBlockDelta
 
+	case *types.HarnessContentBlockDeltaMemberToolResultMetadata:
+		_ = v.Value // Value is types.HarnessToolResultMetadataBlockDelta
+
 	case *types.HarnessContentBlockDeltaMemberToolUse:
 		_ = v.Value // Value is types.HarnessToolUseBlockDelta
 
@@ -454,6 +457,7 @@ func ExampleHarnessContentBlockDelta_outputUsage() {
 	}
 }
 
+var _ *types.HarnessToolResultMetadataBlockDelta
 var _ *types.HarnessToolUseBlockDelta
 var _ types.HarnessReasoningContentBlockDelta
 var _ *string

@@ -1,0 +1,3 @@
+GET /geofencing/v0/collections/__CollectionName__/geofences/__GeofenceId__
+
+

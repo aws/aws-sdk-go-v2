@@ -1,0 +1,5 @@
+PUT /replication/v1/replicators/__ReplicatorArn__/replication-info
+
+Content-Type: application/json
+
+{"consumerGroupReplication":{"consumerGroupsToExclude":["__Member__","__Member__"],"consumerGroupsToReplicate":["__Member__","__Member__"],"detectAndCopyNewConsumerGroups":true,"synchroniseConsumerGroupOffsets":true},"currentVersion":"__CurrentVersion__","logDelivery":{"replicatorLogDelivery":{"cloudWatchLogs":{"enabled":true,"logGroup":"__LogGroup__"},"firehose":{"deliveryStream":"__DeliveryStream__","enabled":true},"s3":{"bucket":"__Bucket__","enabled":true,"prefix":"__Prefix__"}}},"sourceKafkaClusterArn":"__SourceKafkaClusterArn__","sourceKafkaClusterId":"__SourceKafkaClusterId__","targetKafkaClusterArn":"__TargetKafkaClusterArn__","targetKafkaClusterId":"__TargetKafkaClusterId__","topicReplication":{"copyAccessControlListsForTopics":true,"copyTopicConfigurations":true,"detectAndCopyNewTopics":true,"topicsToExclude":["__Member__","__Member__"],"topicsToReplicate":["__Member__","__Member__"]}}

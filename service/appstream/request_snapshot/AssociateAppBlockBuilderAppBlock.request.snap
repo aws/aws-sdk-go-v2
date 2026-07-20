@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.AssociateAppBlockBuilderAppBlock
+
+{"AppBlockArn":"__AppBlockArn__","AppBlockBuilderName":"__AppBlockBuilderName__"}

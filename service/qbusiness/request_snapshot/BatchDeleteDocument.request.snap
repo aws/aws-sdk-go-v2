@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/indices/__IndexId__/documents/delete
+
+Content-Type: application/json
+
+{"dataSourceSyncId":"__DataSourceSyncId__","documents":[{"documentId":"__DocumentId__"},{"documentId":"__DocumentId__"}]}

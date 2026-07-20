@@ -8,6 +8,17 @@ import (
 	"time"
 )
 
+// The access control settings for a knowledge base. Use this structure to enable
+// or disable document-level access control lists (ACLs) that filter query results
+// based on the permissions from the source data connector.
+type AccessControlConfiguration struct {
+
+	// Specifies whether ACLs are enabled for the knowledge base.
+	IsACLEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // The Quick Sight customizations associated with your Amazon Web Services account
 // or a Quick Sight namespace in a specific Amazon Web Services Region.
 type AccountCustomization struct {
@@ -3555,6 +3566,10 @@ type Capabilities struct {
 	// The ability to perform actions using HuggingFace connectors.
 	HuggingFaceAction CapabilityState
 
+	// The ability to create, view, edit, delete, and run inbound email triggers for
+	// flows and automations.
+	InboundEmailTrigger CapabilityState
+
 	// The ability to include content in scheduled email reports.
 	IncludeContentInScheduledReportsEmail CapabilityState
 
@@ -3618,6 +3633,10 @@ type Capabilities struct {
 	// The ability to enable approvals for flow share.
 	PublishWithoutApproval CapabilityState
 
+	// The ability to create, view, edit, delete, and run Quick event triggers for
+	// flows and automations.
+	QuickEventTrigger CapabilityState
+
 	// The ability to rename shared folders.
 	RenameSharedFolders CapabilityState
 
@@ -3650,6 +3669,10 @@ type Capabilities struct {
 
 	// The ability to perform Scenario-related actions.
 	Scenario CapabilityState
+
+	// The ability to create, view, edit, delete, and run schedule triggers for flows
+	// and automations.
+	ScheduleTrigger CapabilityState
 
 	// The ability to enable users to upgrade their user role.
 	SelfUpgradeUserRole CapabilityState
@@ -3830,6 +3853,9 @@ type Capabilities struct {
 
 	// The ability to perform Topic-related actions.
 	Topic CapabilityState
+
+	// The ability to manage trigger-related settings for flows and automations.
+	Trigger CapabilityState
 
 	// The ability to use internet to enhance results in Chat Agents, Flows, and Quick
 	// Research. Web search queries will be processed securely in an Amazon Web
@@ -7083,6 +7109,15 @@ type DataSource struct {
 	// The time that this data source was created.
 	CreatedTime *time.Time
 
+	// The credential verification status of the data source. Valid values include:
+	//
+	//   - CONNECTED – Credential validation succeeded.
+	//
+	//   - AUTH_FAILED – Credential validation failed.
+	//
+	//   - NOT_VERIFIED – Credential validation has not been performed.
+	CredentialStatus CredentialStatus
+
 	// The ID of the data source. This ID is unique per Amazon Web Services Region for
 	// each Amazon Web Services account.
 	DataSourceId *string
@@ -7094,6 +7129,9 @@ type DataSource struct {
 
 	// Error information from the last update or the creation of the data source.
 	ErrorInfo *DataSourceErrorInfo
+
+	// The time that the credentials were last verified.
+	LastCredentialVerifiedAt *time.Time
 
 	// The last time that this data source was updated.
 	LastUpdatedTime *time.Time
@@ -7187,10 +7225,13 @@ type DataSourceErrorInfo struct {
 //	DataSourceParametersMemberCustomConnectionParameters
 //	DataSourceParametersMemberDatabricksParameters
 //	DataSourceParametersMemberExasolParameters
+//	DataSourceParametersMemberFMKBParameters
+//	DataSourceParametersMemberGoogleDriveParameters
 //	DataSourceParametersMemberImpalaParameters
 //	DataSourceParametersMemberJiraParameters
 //	DataSourceParametersMemberMariaDbParameters
 //	DataSourceParametersMemberMySqlParameters
+//	DataSourceParametersMemberOneDriveParameters
 //	DataSourceParametersMemberOracleParameters
 //	DataSourceParametersMemberPostgreSqlParameters
 //	DataSourceParametersMemberPrestoParameters
@@ -7201,6 +7242,7 @@ type DataSourceErrorInfo struct {
 //	DataSourceParametersMemberS3Parameters
 //	DataSourceParametersMemberS3TablesParameters
 //	DataSourceParametersMemberServiceNowParameters
+//	DataSourceParametersMemberSharePointParameters
 //	DataSourceParametersMemberSnowflakeParameters
 //	DataSourceParametersMemberSparkParameters
 //	DataSourceParametersMemberSqlServerParameters
@@ -7312,6 +7354,24 @@ type DataSourceParametersMemberExasolParameters struct {
 
 func (*DataSourceParametersMemberExasolParameters) isDataSourceParameters() {}
 
+// The parameters for a fully managed knowledge base data source.
+type DataSourceParametersMemberFMKBParameters struct {
+	Value FMKBParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceParametersMemberFMKBParameters) isDataSourceParameters() {}
+
+// The parameters for a Google Drive data source.
+type DataSourceParametersMemberGoogleDriveParameters struct {
+	Value GoogleDriveParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceParametersMemberGoogleDriveParameters) isDataSourceParameters() {}
+
 // The parameters for Impala.
 type DataSourceParametersMemberImpalaParameters struct {
 	Value ImpalaParameters
@@ -7347,6 +7407,15 @@ type DataSourceParametersMemberMySqlParameters struct {
 }
 
 func (*DataSourceParametersMemberMySqlParameters) isDataSourceParameters() {}
+
+// The parameters for an OneDrive data source.
+type DataSourceParametersMemberOneDriveParameters struct {
+	Value OneDriveParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceParametersMemberOneDriveParameters) isDataSourceParameters() {}
 
 // The parameters for Oracle.
 type DataSourceParametersMemberOracleParameters struct {
@@ -7437,6 +7506,15 @@ type DataSourceParametersMemberServiceNowParameters struct {
 }
 
 func (*DataSourceParametersMemberServiceNowParameters) isDataSourceParameters() {}
+
+// The parameters for a SharePoint data source.
+type DataSourceParametersMemberSharePointParameters struct {
+	Value SharePointParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceParametersMemberSharePointParameters) isDataSourceParameters() {}
 
 // The parameters for Snowflake.
 type DataSourceParametersMemberSnowflakeParameters struct {
@@ -8880,6 +8958,33 @@ type FieldTooltipItem struct {
 	noSmithyDocumentSerde
 }
 
+// A physical table type that contains the schema and upload settings for a
+// file-based data source.
+type FileSource struct {
+
+	// The Amazon Resource Name (ARN) for the data source.
+	//
+	// This member is required.
+	DataSourceArn *string
+
+	// The column schema of the file.
+	//
+	// This member is required.
+	InputColumns []InputColumn
+
+	// The zero-based index of the sheet to use within the file. For files that
+	// contain multiple sheets, this identifies which sheet to read. Files that contain
+	// a single sheet, or that have no concept of sheets, use sheet 0.
+	//
+	// This member is required.
+	SheetIndex int32
+
+	// Information about the format for the source file.
+	UploadSettings *UploadSettings
+
+	noSmithyDocumentSerde
+}
+
 // The aggregated field well of the filled map.
 type FilledMapAggregatedFieldWells struct {
 
@@ -9669,6 +9774,22 @@ type FlowSummary struct {
 
 	// The number of users who have used the flow.
 	UserCount int32
+
+	noSmithyDocumentSerde
+}
+
+// The connection parameters for a fully managed knowledge base data source.
+// Provide these parameters in the DataSourceParameters object when you create or
+// update a data source that uses a fully managed knowledge base.
+type FMKBParameters struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Bedrock knowledge base.
+	//
+	// This member is required.
+	KnowledgeBaseArn *string
+
+	// The IDs of the linked data sources.
+	LinkedDataSourceIds []string
 
 	noSmithyDocumentSerde
 }
@@ -11079,6 +11200,22 @@ type GlobalTableBorderOptions struct {
 	noSmithyDocumentSerde
 }
 
+// The connection parameters for a Google Drive data source. Provide these
+// parameters in the DataSourceParameters object when you create or update a data
+// source that uses Google Drive.
+type GoogleDriveParameters struct {
+
+	// The authentication type for the Google Drive data source. Valid values include:
+	//
+	//   - SERVICE_ACCOUNT – Server-to-server authentication using a Google service
+	//   account key.
+	//
+	//   - THREE_LEGGED_OAUTH – Interactive OAuth that requires user consent.
+	AuthType AuthType
+
+	noSmithyDocumentSerde
+}
+
 // Determines the gradient color settings.
 type GradientColor struct {
 
@@ -12334,6 +12471,9 @@ type KnowledgeBase struct {
 	// This member is required.
 	Status DataSetStatus
 
+	// The access control configuration for the knowledge base.
+	AccessControlConfiguration *AccessControlConfiguration
+
 	// The date and time that the knowledge base was created.
 	CreatedAt *time.Time
 
@@ -12349,7 +12489,7 @@ type KnowledgeBase struct {
 	// A summary of the first incomplete ingestion for the knowledge base.
 	FirstIncompleteIngestionSummary *KnowledgeBaseIngestionSummary
 
-	// Indicates whether email notifications are enabled for ingestion failures.
+	// Specifies whether email notifications are enabled for ingestion failures.
 	IsEmailNotificationOptedForIngestionFailures *bool
 
 	// The size of the knowledge base in bytes.
@@ -12378,9 +12518,6 @@ type KnowledgeBase struct {
 
 // The configuration settings for a knowledge base.
 type KnowledgeBaseConfiguration struct {
-
-	// Indicates whether event notifications are enabled for the knowledge base.
-	EventEnabled *bool
 
 	// The template configuration for the knowledge base.
 	TemplateConfiguration *KbTemplateConfiguration
@@ -14225,6 +14362,28 @@ type OAuthParameters struct {
 	noSmithyDocumentSerde
 }
 
+// The connection parameters for an OneDrive data source. Provide these parameters
+// in the DataSourceParameters object when you create or update a data source that
+// uses OneDrive.
+type OneDriveParameters struct {
+
+	// The authentication type for the OneDrive data source. Valid values include:
+	//
+	//   - TWO_LEGGED_OAUTH – Server-to-server authentication using client credentials
+	//   that do not require user interaction.
+	//
+	//   - THREE_LEGGED_OAUTH – Interactive OAuth that requires user consent.
+	AuthType AuthType
+
+	// The client ID for the OneDrive data source.
+	ClientId *string
+
+	// The tenant ID for the OneDrive data source.
+	TenantId *string
+
+	noSmithyDocumentSerde
+}
+
 // The parameters for Oracle.
 type OracleParameters struct {
 
@@ -14863,6 +15022,7 @@ type Permission struct {
 // The following types satisfy this interface:
 //
 //	PhysicalTableMemberCustomSql
+//	PhysicalTableMemberFileSource
 //	PhysicalTableMemberRelationalTable
 //	PhysicalTableMemberS3Source
 //	PhysicalTableMemberSaaSTable
@@ -14879,6 +15039,15 @@ type PhysicalTableMemberCustomSql struct {
 
 func (*PhysicalTableMemberCustomSql) isPhysicalTable() {}
 
+// A physical table type for a file data source.
+type PhysicalTableMemberFileSource struct {
+	Value FileSource
+
+	noSmithyDocumentSerde
+}
+
+func (*PhysicalTableMemberFileSource) isPhysicalTable() {}
+
 // A physical table type for relational data sources.
 type PhysicalTableMemberRelationalTable struct {
 	Value RelationalTable
@@ -14888,7 +15057,7 @@ type PhysicalTableMemberRelationalTable struct {
 
 func (*PhysicalTableMemberRelationalTable) isPhysicalTable() {}
 
-// A physical table type for as S3 data source.
+// A physical table type for an S3 data source.
 type PhysicalTableMemberS3Source struct {
 	Value S3Source
 
@@ -18028,6 +18197,33 @@ type SharedViewConfigurations struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// The connection parameters for a SharePoint data source. Provide these
+// parameters in the DataSourceParameters object when you create or update a data
+// source that uses SharePoint.
+type SharePointParameters struct {
+
+	// The SharePoint domain for the data source.
+	//
+	// This member is required.
+	SharePointDomain *string
+
+	// The authentication type for the SharePoint data source. Valid values include:
+	//
+	//   - TWO_LEGGED_OAUTH – Server-to-server authentication using client credentials
+	//   that do not require user interaction.
+	//
+	//   - THREE_LEGGED_OAUTH – Interactive OAuth that requires user consent.
+	AuthType AuthType
+
+	// The client ID for the SharePoint data source.
+	ClientId *string
+
+	// The tenant ID for the SharePoint data source.
+	TenantId *string
 
 	noSmithyDocumentSerde
 }

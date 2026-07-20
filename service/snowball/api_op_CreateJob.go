@@ -4,7 +4,9 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -245,6 +247,84 @@ type CreateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressId != nil {
+		s.WriteString(schemas.CreateJobRequest_AddressId, *v.AddressId)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.CreateJobRequest_ClusterId, *v.ClusterId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateJobRequest_Description, *v.Description)
+	}
+	if v.DeviceConfiguration != nil {
+		s.WriteStruct(schemas.CreateJobRequest_DeviceConfiguration)
+		v.DeviceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ForwardingAddressId != nil {
+		s.WriteString(schemas.CreateJobRequest_ForwardingAddressId, *v.ForwardingAddressId)
+	}
+	if v.ImpactLevel != "" {
+		s.WriteString(schemas.CreateJobRequest_ImpactLevel, string(v.ImpactLevel))
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.CreateJobRequest_JobType, string(v.JobType))
+	}
+	if v.KmsKeyARN != nil {
+		s.WriteString(schemas.CreateJobRequest_KmsKeyARN, *v.KmsKeyARN)
+	}
+	if v.LongTermPricingId != nil {
+		s.WriteString(schemas.CreateJobRequest_LongTermPricingId, *v.LongTermPricingId)
+	}
+	if v.Notification != nil {
+		s.WriteStruct(schemas.CreateJobRequest_Notification)
+		v.Notification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OnDeviceServiceConfiguration != nil {
+		s.WriteStruct(schemas.CreateJobRequest_OnDeviceServiceConfiguration)
+		v.OnDeviceServiceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PickupDetails != nil {
+		s.WriteStruct(schemas.CreateJobRequest_PickupDetails)
+		v.PickupDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RemoteManagement != "" {
+		s.WriteString(schemas.CreateJobRequest_RemoteManagement, string(v.RemoteManagement))
+	}
+	if v.Resources != nil {
+		s.WriteStruct(schemas.CreateJobRequest_Resources)
+		v.Resources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.CreateJobRequest_RoleARN, *v.RoleARN)
+	}
+	if v.ShippingOption != "" {
+		s.WriteString(schemas.CreateJobRequest_ShippingOption, string(v.ShippingOption))
+	}
+	if v.SnowballCapacityPreference != "" {
+		s.WriteString(schemas.CreateJobRequest_SnowballCapacityPreference, string(v.SnowballCapacityPreference))
+	}
+	if v.SnowballType != "" {
+		s.WriteString(schemas.CreateJobRequest_SnowballType, string(v.SnowballType))
+	}
+	if v.TaxDocuments != nil {
+		s.WriteStruct(schemas.CreateJobRequest_TaxDocuments)
+		v.TaxDocuments.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateJobOutput struct {
 
 	// The automatically generated ID for a job, for example
@@ -257,13 +337,32 @@ type CreateJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.CreateJobResult_JobId, *v.JobId)
+	}
+}
+func (v *CreateJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateJobResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateJobResult_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.CreateJobResult_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJob, schemas.CreateJobRequest, schemas.CreateJobResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJob, schemas.CreateJobRequest, schemas.CreateJobResult), output: &CreateJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

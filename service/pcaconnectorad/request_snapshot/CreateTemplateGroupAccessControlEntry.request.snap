@@ -1,0 +1,5 @@
+POST /templates/__TemplateArn__/accessControlEntries
+
+Content-Type: application/json
+
+{"AccessRights":{"AutoEnroll":"ALLOW","Enroll":"ALLOW"},"ClientToken":"__ClientToken__","GroupDisplayName":"__GroupDisplayName__","GroupSecurityIdentifier":"__GroupSecurityIdentifier__"}

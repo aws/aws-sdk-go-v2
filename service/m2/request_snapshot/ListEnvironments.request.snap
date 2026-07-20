@@ -1,0 +1,3 @@
+GET /environments?engineType=microfocus&maxResults=1&names=__Member__&names=__Member__&nextToken=__NextToken__
+
+

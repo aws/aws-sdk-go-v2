@@ -1,0 +1,5 @@
+POST /slos?IncludeLinkedAccounts=true&MaxResults=1&NextToken=__NextToken__&OperationName=__OperationName__&SloOwnerAwsAccountId=__SloOwnerAwsAccountId__
+
+Content-Type: application/json
+
+{"DependencyConfig":{"DependencyKeyAttributes":{"key0":"__Value__"},"DependencyOperationName":"__DependencyOperationName__"},"KeyAttributes":{"key0":"__Value__"},"MetricSource":{"MetricSourceAttributes":{"key0":"__Value__"},"MetricSourceKeyAttributes":{"key0":"__Value__"}},"MetricSourceTypes":["ServiceOperation","ServiceOperation"]}

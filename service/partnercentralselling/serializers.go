@@ -2946,6 +2946,17 @@ func awsAwsjson10_serializeDocumentAwsAccountList(v []string, value smithyjson.V
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentAwsMarketplaceSolutionArnList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentAwsSubmission(v *types.AwsSubmission, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5761,6 +5772,13 @@ func awsAwsjson10_serializeOpDocumentListResourceSnapshotsInput(v *ListResourceS
 func awsAwsjson10_serializeOpDocumentListSolutionsInput(v *ListSolutionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AwsMarketplaceSolutionArn != nil {
+		ok := object.Key("AwsMarketplaceSolutionArn")
+		if err := awsAwsjson10_serializeDocumentAwsMarketplaceSolutionArnList(v.AwsMarketplaceSolutionArn, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Catalog != nil {
 		ok := object.Key("Catalog")

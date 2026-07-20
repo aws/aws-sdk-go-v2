@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/AcceptMatch
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+£hTicketIdl__TicketId__iPlayerIds‚j__Member__j__Member__nAcceptanceTypefACCEPT

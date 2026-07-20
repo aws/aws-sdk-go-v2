@@ -1,0 +1,4 @@
+DELETE /api/v1/resources/__ResourceId__/permissions
+
+Authentication: __AuthenticationToken__
+

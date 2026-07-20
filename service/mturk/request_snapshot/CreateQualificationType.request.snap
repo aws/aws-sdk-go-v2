@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: MTurkRequesterServiceV20170117.CreateQualificationType
+
+{"AnswerKey":"__AnswerKey__","AutoGranted":true,"AutoGrantedValue":1,"Description":"__Description__","Keywords":"__Keywords__","Name":"__Name__","QualificationTypeStatus":"Active","RetryDelayInSeconds":1,"Test":"__Test__","TestDurationInSeconds":1}

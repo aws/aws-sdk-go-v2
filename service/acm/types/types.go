@@ -10,6 +10,15 @@ import (
 // Contains ACM-specific metadata about a certificate.
 type AcmCertificateMetadata struct {
 
+	// The ACME account identifier associated with the certificate.
+	AcmeAccountId *string
+
+	// The ARN of the ACME endpoint used to issue the certificate.
+	AcmeEndpointArn *string
+
+	// The origin of the certificate's key pair.
+	CertificateKeyPairOrigin CertificateKeyPairOrigin
+
 	// The time at which the certificate was requested.
 	CreatedAt *time.Time
 
@@ -80,6 +89,9 @@ type AcmCertificateMetadata struct {
 //
 // The following types satisfy this interface:
 //
+//	AcmCertificateMetadataFilterMemberAcmeAccountId
+//	AcmCertificateMetadataFilterMemberAcmeEndpointArn
+//	AcmCertificateMetadataFilterMemberCertificateKeyPairOrigin
 //	AcmCertificateMetadataFilterMemberExported
 //	AcmCertificateMetadataFilterMemberExportOption
 //	AcmCertificateMetadataFilterMemberInUse
@@ -91,6 +103,33 @@ type AcmCertificateMetadata struct {
 type AcmCertificateMetadataFilter interface {
 	isAcmCertificateMetadataFilter()
 }
+
+// Filter by ACME account identifier.
+type AcmCertificateMetadataFilterMemberAcmeAccountId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AcmCertificateMetadataFilterMemberAcmeAccountId) isAcmCertificateMetadataFilter() {}
+
+// Filter by ACME endpoint ARN.
+type AcmCertificateMetadataFilterMemberAcmeEndpointArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AcmCertificateMetadataFilterMemberAcmeEndpointArn) isAcmCertificateMetadataFilter() {}
+
+// Filter by certificate key pair origin.
+type AcmCertificateMetadataFilterMemberCertificateKeyPairOrigin struct {
+	Value CertificateKeyPairOrigin
+
+	noSmithyDocumentSerde
+}
+
+func (*AcmCertificateMetadataFilterMemberCertificateKeyPairOrigin) isAcmCertificateMetadataFilter() {}
 
 // Filter by whether the certificate has been exported.
 type AcmCertificateMetadataFilterMemberExported struct {
@@ -164,9 +203,285 @@ type AcmCertificateMetadataFilterMemberValidationMethod struct {
 
 func (*AcmCertificateMetadataFilterMemberValidationMethod) isAcmCertificateMetadataFilter() {}
 
+// Contains detailed information about an ACME account.
+type AcmeAccount struct {
+
+	// The URL of the ACME account.
+	AccountUrl *string
+
+	// The Amazon Resource Name (ARN) of the external account binding associated with
+	// this ACME account.
+	AcmeExternalAccountBindingArn *string
+
+	// The contact information for the ACME account.
+	Contacts []string
+
+	// The time at which the ACME account was created.
+	CreatedAt *time.Time
+
+	// The thumbprint of the public key associated with the ACME account.
+	PublicKeyThumbprint *string
+
+	// The status of the ACME account.
+	Status AcmeAccountStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about an ACME account.
+type AcmeAccountSummary struct {
+
+	// The URL of the ACME account.
+	AccountUrl *string
+
+	// The Amazon Resource Name (ARN) of the external account binding associated with
+	// this ACME account.
+	AcmeExternalAccountBindingArn *string
+
+	// The contact information for the ACME account.
+	Contacts []string
+
+	// The time at which the ACME account was created.
+	CreatedAt *time.Time
+
+	// The thumbprint of the public key associated with the ACME account.
+	PublicKeyThumbprint *string
+
+	// The status of the ACME account.
+	Status AcmeAccountStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed information about an ACME domain validation.
+type AcmeDomainValidation struct {
+
+	// The Amazon Resource Name (ARN) of the ACME domain validation.
+	AcmeDomainValidationArn *string
+
+	// The Amazon Resource Name (ARN) of the ACME endpoint.
+	AcmeEndpointArn *string
+
+	// The time at which the domain validation was created.
+	CreatedAt *time.Time
+
+	// The domain name being validated.
+	DomainName *string
+
+	// Details about the failure, if the validation failed.
+	FailureDetails *FailureDetails
+
+	// Details about the prevalidation configuration.
+	PrevalidationDetails PrevalidationDetails
+
+	// The type of prevalidation used.
+	PrevalidationType PrevalidationType
+
+	// The status of the domain validation.
+	Status AcmeDomainValidationStatus
+
+	// The time at which the domain validation was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about an ACME domain validation.
+type AcmeDomainValidationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the ACME domain validation.
+	AcmeDomainValidationArn *string
+
+	// The Amazon Resource Name (ARN) of the ACME endpoint.
+	AcmeEndpointArn *string
+
+	// The time at which the domain validation was created.
+	CreatedAt *time.Time
+
+	// The domain name being validated.
+	DomainName *string
+
+	// Details about the failure, if the validation failed.
+	FailureDetails *FailureDetails
+
+	// Details about the prevalidation configuration.
+	PrevalidationDetails PrevalidationDetails
+
+	// The type of prevalidation used.
+	PrevalidationType PrevalidationType
+
+	// The status of the domain validation.
+	Status AcmeDomainValidationStatus
+
+	// The time at which the domain validation was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed information about an ACME endpoint.
+type AcmeEndpoint struct {
+
+	// The Amazon Resource Name (ARN) of the ACME endpoint.
+	AcmeEndpointArn *string
+
+	// The authorization behavior of the ACME endpoint.
+	AuthorizationBehavior AcmeAuthorizationBehavior
+
+	// The certificate authority configuration for the ACME endpoint.
+	CertificateAuthority CertificateAuthority
+
+	// Tags applied to certificates issued through this ACME endpoint.
+	CertificateTags []Tag
+
+	// Whether ACME clients must provide contact information during account
+	// registration.
+	Contact AcmeContact
+
+	// The time at which the ACME endpoint was created.
+	CreatedAt *time.Time
+
+	// The URL of the ACME endpoint.
+	EndpointUrl *string
+
+	// The reason the ACME endpoint failed, if applicable.
+	FailureReason *string
+
+	// The status of the ACME endpoint.
+	Status AcmeEndpointStatus
+
+	// The time at which the ACME endpoint was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about an ACME endpoint.
+type AcmeEndpointSummary struct {
+
+	// The Amazon Resource Name (ARN) of the ACME endpoint.
+	AcmeEndpointArn *string
+
+	// The authorization behavior of the ACME endpoint.
+	AuthorizationBehavior AcmeAuthorizationBehavior
+
+	// The certificate authority configuration for the ACME endpoint.
+	CertificateAuthority CertificateAuthority
+
+	// Tags applied to certificates issued through this ACME endpoint.
+	CertificateTags []Tag
+
+	// Whether ACME clients must provide contact information during account
+	// registration.
+	Contact AcmeContact
+
+	// The time at which the ACME endpoint was created.
+	CreatedAt *time.Time
+
+	// The URL of the ACME endpoint.
+	EndpointUrl *string
+
+	// The reason the ACME endpoint failed, if applicable.
+	FailureReason *string
+
+	// The status of the ACME endpoint.
+	Status AcmeEndpointStatus
+
+	// The time at which the ACME endpoint was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed information about an ACME external account binding.
+type AcmeExternalAccountBinding struct {
+
+	// The Amazon Resource Name (ARN) of the ACME endpoint.
+	AcmeEndpointArn *string
+
+	// The Amazon Resource Name (ARN) of the ACME external account binding.
+	AcmeExternalAccountBindingArn *string
+
+	// The time at which the external account binding was created.
+	CreatedAt *time.Time
+
+	// The time at which the external account binding expires.
+	ExpiresAt *time.Time
+
+	// The time at which the external account binding was last used.
+	LastUsedAt *time.Time
+
+	// The time at which the external account binding was revoked.
+	RevokedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM role associated with the external
+	// account binding.
+	RoleArn *string
+
+	// The time at which the external account binding was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about an ACME external account binding.
+type AcmeExternalAccountBindingSummary struct {
+
+	// The Amazon Resource Name (ARN) of the ACME endpoint.
+	AcmeEndpointArn *string
+
+	// The Amazon Resource Name (ARN) of the ACME external account binding.
+	AcmeExternalAccountBindingArn *string
+
+	// The time at which the external account binding was created.
+	CreatedAt *time.Time
+
+	// The time at which the external account binding expires.
+	ExpiresAt *time.Time
+
+	// The time at which the external account binding was last used.
+	LastUsedAt *time.Time
+
+	// The time at which the external account binding was revoked.
+	RevokedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM role associated with the external
+	// account binding.
+	RoleArn *string
+
+	// The time at which the external account binding was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Defines the certificate authority to use for an ACME endpoint.
+//
+// The following types satisfy this interface:
+//
+//	CertificateAuthorityMemberPublicCertificateAuthority
+type CertificateAuthority interface {
+	isCertificateAuthority()
+}
+
+// Configuration for using a public certificate authority.
+type CertificateAuthorityMemberPublicCertificateAuthority struct {
+	Value PublicCertificateAuthority
+
+	noSmithyDocumentSerde
+}
+
+func (*CertificateAuthorityMemberPublicCertificateAuthority) isCertificateAuthority() {}
+
 // Contains metadata about an ACM certificate. This structure is returned in the
 // response to a DescribeCertificaterequest.
 type CertificateDetail struct {
+
+	// The ACME account identifier associated with the certificate.
+	AcmeAccountId *string
+
+	// The ARN of the ACME endpoint used to issue the certificate.
+	AcmeEndpointArn *string
 
 	// The Amazon Resource Name (ARN) of the certificate. For more information about
 	// ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
@@ -179,6 +494,9 @@ type CertificateDetail struct {
 	//
 	//     arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	CertificateAuthorityArn *string
+
+	// The origin of the certificate's key pair.
+	CertificateKeyPairOrigin CertificateKeyPairOrigin
 
 	// The time at which the certificate was requested.
 	CreatedAt *time.Time
@@ -469,6 +787,9 @@ type CertificateSummary struct {
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	CertificateArn *string
 
+	// The origin of the certificate's key pair.
+	CertificateKeyPairOrigin CertificateKeyPairOrigin
+
 	// The time at which the certificate was requested.
 	CreatedAt *time.Time
 
@@ -479,8 +800,7 @@ type CertificateSummary struct {
 	// Indicates if export is enabled for the certificate.
 	ExportOption CertificateExport
 
-	// Indicates whether the certificate has been exported. This value exists only
-	// when the certificate type is PRIVATE .
+	// Indicates whether the certificate has been exported.
 	Exported *bool
 
 	// Contains a list of Extended Key Usage X.509 v3 extension objects. Each object
@@ -678,6 +998,48 @@ type DnsNameFilter struct {
 	noSmithyDocumentSerde
 }
 
+// DNS prevalidation details including the resource record for validation.
+type DnsPrevalidationDetails struct {
+
+	// The scope of domains covered by this prevalidation.
+	DomainScope *DomainScope
+
+	// The Route 53 hosted zone ID for DNS validation.
+	HostedZoneId *string
+
+	// The DNS resource record to create for domain validation.
+	ResourceRecord *ResourceRecord
+
+	noSmithyDocumentSerde
+}
+
+// DNS prevalidation options for domain validation.
+type DnsPrevalidationOptions struct {
+
+	// The scope of domains covered by this prevalidation.
+	DomainScope *DomainScope
+
+	// The Route 53 hosted zone ID for DNS validation.
+	HostedZoneId *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the scope of domain validation.
+type DomainScope struct {
+
+	// Whether validation applies to the exact domain.
+	ExactDomain DomainScopeOption
+
+	// Whether validation applies to subdomains.
+	Subdomains DomainScopeOption
+
+	// Whether validation applies to wildcard domains.
+	Wildcards DomainScopeOption
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the validation of each domain name in the
 // certificate.
 type DomainValidation struct {
@@ -759,6 +1121,22 @@ type DomainValidationOption struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies an expiration configuration.
+type Expiration struct {
+
+	// The time unit for the expiration value.
+	//
+	// This member is required.
+	Type TimeType
+
+	// The numeric value of the expiration.
+	//
+	// This member is required.
+	Value *int64
+
+	noSmithyDocumentSerde
+}
+
 // Object containing expiration events options associated with an Amazon Web
 // Services account.
 type ExpiryEventsConfiguration struct {
@@ -801,6 +1179,18 @@ type ExtendedKeyUsage struct {
 	//
 	//   - 1.3.6.1.5.5.7.3.7 (IPSEC_USER)
 	OID *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a failure.
+type FailureDetails struct {
+
+	// A message describing the failure.
+	Message *string
+
+	// The reason for the failure.
+	Reason AcmeDomainValidationFailureReason
 
 	noSmithyDocumentSerde
 }
@@ -957,6 +1347,52 @@ type OtherName struct {
 
 	// Specifies an OID value.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the prevalidation configuration.
+//
+// The following types satisfy this interface:
+//
+//	PrevalidationDetailsMemberDnsPrevalidation
+type PrevalidationDetails interface {
+	isPrevalidationDetails()
+}
+
+// DNS-based prevalidation details.
+type PrevalidationDetailsMemberDnsPrevalidation struct {
+	Value DnsPrevalidationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*PrevalidationDetailsMemberDnsPrevalidation) isPrevalidationDetails() {}
+
+// Specifies prevalidation options for domain validation.
+//
+// The following types satisfy this interface:
+//
+//	PrevalidationOptionsMemberDnsPrevalidation
+type PrevalidationOptions interface {
+	isPrevalidationOptions()
+}
+
+// DNS-based prevalidation options.
+type PrevalidationOptionsMemberDnsPrevalidation struct {
+	Value DnsPrevalidationOptions
+
+	noSmithyDocumentSerde
+}
+
+func (*PrevalidationOptionsMemberDnsPrevalidation) isPrevalidationOptions() {}
+
+// Configuration for a public certificate authority.
+type PublicCertificateAuthority struct {
+
+	// The key algorithms allowed for certificates issued by this certificate
+	// authority.
+	AllowedKeyAlgorithms []PublicKeyAlgorithm
 
 	noSmithyDocumentSerde
 }
@@ -1234,10 +1670,13 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isAcmCertificateMetadataFilter() {}
+func (*UnknownUnionMember) isCertificateAuthority()         {}
 func (*UnknownUnionMember) isCertificateFilter()            {}
 func (*UnknownUnionMember) isCertificateFilterStatement()   {}
 func (*UnknownUnionMember) isCertificateMetadata()          {}
 func (*UnknownUnionMember) isGeneralName()                  {}
+func (*UnknownUnionMember) isPrevalidationDetails()         {}
+func (*UnknownUnionMember) isPrevalidationOptions()         {}
 func (*UnknownUnionMember) isSubjectAlternativeNameFilter() {}
 func (*UnknownUnionMember) isSubjectFilter()                {}
 func (*UnknownUnionMember) isX509AttributeFilter()          {}

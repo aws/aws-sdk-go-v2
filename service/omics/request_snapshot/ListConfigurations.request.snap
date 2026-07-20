@@ -1,0 +1,3 @@
+GET /configuration?maxResults=1&startingToken=__StartingToken__
+
+

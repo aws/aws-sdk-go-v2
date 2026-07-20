@@ -1,0 +1,3 @@
+GET /asset-models/__AssetModelId__/properties?assetModelVersion=__AssetModelVersion__&filter=ALL&maxResults=1&nextToken=__NextToken__
+
+

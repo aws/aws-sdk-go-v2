@@ -7,12 +7,70 @@ import (
 	"time"
 )
 
+// The configuration of the admin password source. This is a union, so only one of
+// the following members can be specified.
+//
+// The following types satisfy this interface:
+//
+//	AdminPasswordSourceConfigurationMemberCustomerManagedAwsSecret
+type AdminPasswordSourceConfiguration interface {
+	isAdminPasswordSourceConfiguration()
+}
+
+// The configuration for a customer-managed Amazon Web Services Secrets Manager
+// secret used as the admin password source.
+type AdminPasswordSourceConfigurationMemberCustomerManagedAwsSecret struct {
+	Value CustomerManagedAwsSecretConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AdminPasswordSourceConfigurationMemberCustomerManagedAwsSecret) isAdminPasswordSourceConfiguration() {
+}
+
+// The input configuration for the admin password source. This is a union, so only
+// one of the following members can be specified.
+//
+// The following types satisfy this interface:
+//
+//	AdminPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret
+type AdminPasswordSourceConfigurationInput interface {
+	isAdminPasswordSourceConfigurationInput()
+}
+
+// The configuration for using a customer-managed Amazon Web Services Secrets
+// Manager secret as the admin password source.
+type AdminPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret struct {
+	Value CustomerManagedAwsSecretConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*AdminPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret) isAdminPasswordSourceConfigurationInput() {
+}
+
+// A summary of the admin password source configuration for an Autonomous Database.
+type AdminPasswordSourceSummary struct {
+
+	// The source of the admin password for the Autonomous Database.
+	AdminPasswordSource AdminPasswordSource
+
+	// The configuration of the admin password source for the Autonomous Database.
+	AdminPasswordSourceConfiguration AdminPasswordSourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Information about an Autonomous Database.
 type AutonomousDatabase struct {
 
 	// The actual amount of data storage currently in use by the Autonomous Database,
 	// in TB.
 	ActualUsedDataStorageSizeInTBs *float64
+
+	// The summary of the admin password source configuration for the Autonomous
+	// Database.
+	AdminPasswordSourceSummary *AdminPasswordSourceSummary
 
 	// The amount of storage currently allocated to the Autonomous Database, in TB.
 	AllocatedStorageSizeInTBs *float64
@@ -583,6 +641,10 @@ type AutonomousDatabaseSummary struct {
 	// in TB.
 	ActualUsedDataStorageSizeInTBs *float64
 
+	// The summary of the admin password source configuration for the Autonomous
+	// Database.
+	AdminPasswordSourceSummary *AdminPasswordSourceSummary
+
 	// The amount of storage currently allocated to the Autonomous Database, in TB.
 	AllocatedStorageSizeInTBs *float64
 
@@ -954,6 +1016,10 @@ type AutonomousDatabaseVersionSummary struct {
 
 // The wallet details for an Autonomous Database.
 type AutonomousDatabaseWalletDetails struct {
+
+	// The summary of the password source configuration for the Autonomous Database
+	// wallet.
+	PasswordSourceSummary *WalletPasswordSourceSummary
 
 	// The current status of the Autonomous Database wallet.
 	Status AutonomousDatabaseWalletStatus
@@ -2151,6 +2217,44 @@ type CustomerContact struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration of a customer-managed Amazon Web Services Secrets Manager
+// secret used to supply a password.
+type CustomerManagedAwsSecretConfiguration struct {
+
+	// The type of Oracle Cloud Identifier (OCID) used as the external ID when
+	// assuming the IAM role.
+	ExternalIdType ExternalIdType
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) role that OCI assumes to retrieve the secret value.
+	IamRoleArn *string
+
+	// The identifier or ARN of the Amazon Web Services Secrets Manager secret that
+	// contains the password.
+	SecretId *string
+
+	noSmithyDocumentSerde
+}
+
+// The input configuration for a customer-managed Amazon Web Services Secrets
+// Manager secret used to supply a password.
+type CustomerManagedAwsSecretConfigurationInput struct {
+
+	// The type of Oracle Cloud Identifier (OCID) used as the external ID when
+	// assuming the IAM role.
+	ExternalIdType ExternalIdType
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) role that OCI assumes to retrieve the secret value.
+	IamRoleArn *string
+
+	// The identifier or ARN of the Amazon Web Services Secrets Manager secret that
+	// contains the password.
+	SecretId *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for creating an Autonomous Database as a clone of an existing
 // database.
 type DatabaseCloneConfiguration struct {
@@ -3063,6 +3167,13 @@ type OciIamRole struct {
 	// Management (IAM) service role.
 	IamRoleArn *string
 
+	// The current lifecycle status of the IAM service role.
+	Status OciIamRoleStatus
+
+	// Additional information about the current status of the IAM service role, if
+	// applicable.
+	StatusReason *string
+
 	noSmithyDocumentSerde
 }
 
@@ -3649,6 +3760,61 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration of the wallet password source. This is a union, so only one
+// of the following members can be specified.
+//
+// The following types satisfy this interface:
+//
+//	WalletPasswordSourceConfigurationMemberCustomerManagedAwsSecret
+type WalletPasswordSourceConfiguration interface {
+	isWalletPasswordSourceConfiguration()
+}
+
+// The configuration for a customer-managed Amazon Web Services Secrets Manager
+// secret used as the wallet password source.
+type WalletPasswordSourceConfigurationMemberCustomerManagedAwsSecret struct {
+	Value CustomerManagedAwsSecretConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*WalletPasswordSourceConfigurationMemberCustomerManagedAwsSecret) isWalletPasswordSourceConfiguration() {
+}
+
+// The input configuration for the wallet password source. This is a union, so
+// only one of the following members can be specified.
+//
+// The following types satisfy this interface:
+//
+//	WalletPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret
+type WalletPasswordSourceConfigurationInput interface {
+	isWalletPasswordSourceConfigurationInput()
+}
+
+// The configuration for using a customer-managed Amazon Web Services Secrets
+// Manager secret as the wallet password source.
+type WalletPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret struct {
+	Value CustomerManagedAwsSecretConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*WalletPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret) isWalletPasswordSourceConfigurationInput() {
+}
+
+// A summary of the password source configuration for an Autonomous Database
+// wallet.
+type WalletPasswordSourceSummary struct {
+
+	// The source of the password for the Autonomous Database wallet.
+	PasswordSource WalletPasswordSource
+
+	// The configuration of the password source for the Autonomous Database wallet.
+	PasswordSourceConfiguration WalletPasswordSourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for Zero-ETL access from the ODB network.
 type ZeroEtlAccess struct {
 
@@ -3672,6 +3838,10 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isEncryptionKeyConfiguration()      {}
-func (*UnknownUnionMember) isEncryptionKeyConfigurationInput() {}
-func (*UnknownUnionMember) isSourceConfiguration()             {}
+func (*UnknownUnionMember) isAdminPasswordSourceConfiguration()       {}
+func (*UnknownUnionMember) isAdminPasswordSourceConfigurationInput()  {}
+func (*UnknownUnionMember) isEncryptionKeyConfiguration()             {}
+func (*UnknownUnionMember) isEncryptionKeyConfigurationInput()        {}
+func (*UnknownUnionMember) isSourceConfiguration()                    {}
+func (*UnknownUnionMember) isWalletPasswordSourceConfiguration()      {}
+func (*UnknownUnionMember) isWalletPasswordSourceConfigurationInput() {}

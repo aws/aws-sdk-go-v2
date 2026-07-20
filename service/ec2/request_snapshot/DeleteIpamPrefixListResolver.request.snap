@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteIpamPrefixListResolver&DryRun=true&IpamPrefixListResolverId=__IpamPrefixListResolverId__&Version=2016-11-15

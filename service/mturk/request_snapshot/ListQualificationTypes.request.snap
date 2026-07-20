@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: MTurkRequesterServiceV20170117.ListQualificationTypes
+
+{"MaxResults":1,"MustBeOwnedByCaller":true,"MustBeRequestable":true,"NextToken":"__NextToken__","Query":"__Query__"}

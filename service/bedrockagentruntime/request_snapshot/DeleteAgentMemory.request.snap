@@ -1,0 +1,3 @@
+DELETE /agents/__AgentId__/agentAliases/__AgentAliasId__/memories?memoryId=__MemoryId__&sessionId=__SessionId__
+
+

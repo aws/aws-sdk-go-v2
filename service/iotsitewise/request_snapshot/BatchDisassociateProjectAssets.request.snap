@@ -1,0 +1,5 @@
+POST /projects/__ProjectId__/assets/disassociate
+
+Content-Type: application/json
+
+{"assetIds":["__Member__","__Member__"],"clientToken":"__ClientToken__"}

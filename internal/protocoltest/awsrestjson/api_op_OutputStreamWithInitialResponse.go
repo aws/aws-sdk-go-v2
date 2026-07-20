@@ -58,6 +58,14 @@ type OutputStreamWithInitialResponseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutputStreamWithInitialResponseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputStreamWithInitialResponseOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputStreamWithInitialResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
 func (v *OutputStreamWithInitialResponseOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OutputStreamWithInitialResponseOutput, func(s *smithy.Schema) error {
 		switch s {

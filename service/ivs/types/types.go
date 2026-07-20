@@ -28,6 +28,9 @@ type AdConfiguration struct {
 	// Ad configuration name. Defaults to “”.
 	Name *string
 
+	// Configuration for the post-roll ad break to use for this ad configuration.
+	PostRollConfiguration *PostRollConfiguration
+
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
 	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
 	// Tag Editor for details, including restrictions that apply to tags and "Tag
@@ -59,6 +62,9 @@ type AdConfigurationSummary struct {
 
 	// Ad configuration name. Defaults to “”.
 	Name *string
+
+	// Configuration for the post-roll ad break to use for this ad configuration.
+	PostRollConfiguration *PostRollConfiguration
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
 	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
@@ -505,6 +511,22 @@ type PlaybackRestrictionPolicySummary struct {
 	//
 	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for the post-roll ad break to use for this ad configuration.
+type PostRollConfiguration struct {
+
+	// Duration of the post-roll ad break, in seconds.
+	//
+	// This member is required.
+	DurationSeconds *int32
+
+	// Whether the post-roll ad configuration is enabled.
+	//
+	// This member is required.
+	Enabled bool
 
 	noSmithyDocumentSerde
 }

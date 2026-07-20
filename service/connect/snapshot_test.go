@@ -458,6 +458,30 @@ func TestCheckSnapshot_CreateAgentStatus(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateAttachedFile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAttachedFile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAttachedFile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateAuthCode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAuthCode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAuthCode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateContact(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateContact(context.Background(), nil, func(o *Options) {
@@ -914,6 +938,18 @@ func TestCheckSnapshot_DeleteAttachedFile(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteContactData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteContactData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteContactData")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteContactEvaluation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteContactEvaluation(context.Background(), nil, func(o *Options) {
@@ -1183,6 +1219,18 @@ func TestCheckSnapshot_DeleteSecurityProfile(t *testing.T) {
 	_, err := svc.DeleteSecurityProfile(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteSecurityProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3314,6 +3362,18 @@ func TestCheckSnapshot_SearchRoutingProfiles(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SearchRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SearchSecurityProfiles(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SearchSecurityProfiles(context.Background(), nil, func(o *Options) {
@@ -3434,6 +3494,18 @@ func TestCheckSnapshot_SendOutboundEmail(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SendOutboundWebNotification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendOutboundWebNotification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SendOutboundWebNotification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartAttachedFileUpload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartAttachedFileUpload(context.Background(), nil, func(o *Options) {
@@ -3451,6 +3523,18 @@ func TestCheckSnapshot_StartChatContact(t *testing.T) {
 	_, err := svc.StartChatContact(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartChatContact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartContactConversationalAnalyticsJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartContactConversationalAnalyticsJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartContactConversationalAnalyticsJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4921,6 +5005,30 @@ func TestUpdateSnapshot_CreateAgentStatus(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateAttachedFile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAttachedFile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAttachedFile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAuthCode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAuthCode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAuthCode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateContact(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateContact(context.Background(), nil, func(o *Options) {
@@ -5377,6 +5485,18 @@ func TestUpdateSnapshot_DeleteAttachedFile(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteContactData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteContactData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteContactData")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteContactEvaluation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteContactEvaluation(context.Background(), nil, func(o *Options) {
@@ -5646,6 +5766,18 @@ func TestUpdateSnapshot_DeleteSecurityProfile(t *testing.T) {
 	_, err := svc.DeleteSecurityProfile(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteSecurityProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7777,6 +7909,18 @@ func TestUpdateSnapshot_SearchRoutingProfiles(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SearchRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_SearchSecurityProfiles(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SearchSecurityProfiles(context.Background(), nil, func(o *Options) {
@@ -7897,6 +8041,18 @@ func TestUpdateSnapshot_SendOutboundEmail(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SendOutboundWebNotification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendOutboundWebNotification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SendOutboundWebNotification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartAttachedFileUpload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartAttachedFileUpload(context.Background(), nil, func(o *Options) {
@@ -7914,6 +8070,18 @@ func TestUpdateSnapshot_StartChatContact(t *testing.T) {
 	_, err := svc.StartChatContact(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartChatContact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartContactConversationalAnalyticsJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartContactConversationalAnalyticsJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartContactConversationalAnalyticsJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

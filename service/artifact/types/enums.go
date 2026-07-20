@@ -67,6 +67,94 @@ func (CustomerAgreementState) Values() []CustomerAgreementState {
 	}
 }
 
+type InputSource string
+
+// Enum values for InputSource
+const (
+	InputSourceText InputSource = "TEXT"
+	InputSourceFile InputSource = "FILE"
+)
+
+// Values returns all known values for InputSource. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InputSource) Values() []InputSource {
+	return []InputSource{
+		"TEXT",
+		"FILE",
+	}
+}
+
+type InquiryStatus string
+
+// Enum values for InquiryStatus
+const (
+	InquiryStatusProcessing  InquiryStatus = "PROCESSING"
+	InquiryStatusHumanReview InquiryStatus = "HUMAN_REVIEW"
+	InquiryStatusCompleted   InquiryStatus = "COMPLETED"
+	InquiryStatusFailed      InquiryStatus = "FAILED"
+)
+
+// Values returns all known values for InquiryStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InquiryStatus) Values() []InquiryStatus {
+	return []InquiryStatus{
+		"PROCESSING",
+		"HUMAN_REVIEW",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
+type InquiryStatusMessage string
+
+// Enum values for InquiryStatusMessage
+const (
+	InquiryStatusMessageSuccess               InquiryStatusMessage = "Compliance inquiry processing is complete."
+	InquiryStatusMessageMalwareDetectedError  InquiryStatusMessage = "Malware was detected on the file. Provide a new file and try again."
+	InquiryStatusMessageInProgress            InquiryStatusMessage = "Compliance inquiry processing is in-progress."
+	InquiryStatusMessageInternalError         InquiryStatusMessage = "An internal error occurred while processing the inquiry. Try again at a later time."
+	InquiryStatusMessageHumanReviewInProgress InquiryStatusMessage = "Human review is in progress."
+	InquiryStatusMessageCompletedWithErrors   InquiryStatusMessage = "Compliance inquiry processing is complete. One or more queries encountered errors during processing."
+)
+
+// Values returns all known values for InquiryStatusMessage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InquiryStatusMessage) Values() []InquiryStatusMessage {
+	return []InquiryStatusMessage{
+		"Compliance inquiry processing is complete.",
+		"Malware was detected on the file. Provide a new file and try again.",
+		"Compliance inquiry processing is in-progress.",
+		"An internal error occurred while processing the inquiry. Try again at a later time.",
+		"Human review is in progress.",
+		"Compliance inquiry processing is complete. One or more queries encountered errors during processing.",
+	}
+}
+
+type InquirySupportMode string
+
+// Enum values for InquirySupportMode
+const (
+	InquirySupportModeAiOnly      InquirySupportMode = "AI_ONLY"
+	InquirySupportModeFullSupport InquirySupportMode = "FULL_SUPPORT"
+)
+
+// Values returns all known values for InquirySupportMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InquirySupportMode) Values() []InquirySupportMode {
+	return []InquirySupportMode{
+		"AI_ONLY",
+		"FULL_SUPPORT",
+	}
+}
+
 type NotificationSubscriptionStatus string
 
 // Enum values for NotificationSubscriptionStatus
@@ -103,6 +191,71 @@ func (PublishedState) Values() []PublishedState {
 	return []PublishedState{
 		"PUBLISHED",
 		"UNPUBLISHED",
+	}
+}
+
+type QueryStatus string
+
+// Enum values for QueryStatus
+const (
+	QueryStatusProcessing QueryStatus = "PROCESSING"
+	QueryStatusCompleted  QueryStatus = "COMPLETED"
+	QueryStatusFailed     QueryStatus = "FAILED"
+)
+
+// Values returns all known values for QueryStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QueryStatus) Values() []QueryStatus {
+	return []QueryStatus{
+		"PROCESSING",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
+type QueryStatusMessage string
+
+// Enum values for QueryStatusMessage
+const (
+	QueryStatusMessageSuccess            QueryStatusMessage = "Query processing is complete."
+	QueryStatusMessageInProgress         QueryStatusMessage = "Query processing is in-progress."
+	QueryStatusMessageInternalError      QueryStatusMessage = "An internal error occurred while processing the query. Try again at a later time."
+	QueryStatusMessagePendingHumanReview QueryStatusMessage = "Query is pending human review."
+	QueryStatusMessageRestricted         QueryStatusMessage = "Query contains restricted or unsupported content."
+)
+
+// Values returns all known values for QueryStatusMessage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QueryStatusMessage) Values() []QueryStatusMessage {
+	return []QueryStatusMessage{
+		"Query processing is complete.",
+		"Query processing is in-progress.",
+		"An internal error occurred while processing the query. Try again at a later time.",
+		"Query is pending human review.",
+		"Query contains restricted or unsupported content.",
+	}
+}
+
+type ReviewType string
+
+// Enum values for ReviewType
+const (
+	ReviewTypeHuman ReviewType = "HUMAN"
+	ReviewTypeAi    ReviewType = "AI"
+)
+
+// Values returns all known values for ReviewType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReviewType) Values() []ReviewType {
+	return []ReviewType{
+		"HUMAN",
+		"AI",
 	}
 }
 

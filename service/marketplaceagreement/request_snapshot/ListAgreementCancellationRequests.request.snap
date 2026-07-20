@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSMPCommerceService_v20200301.ListAgreementCancellationRequests
+
+{"agreementId":"__AgreementId__","agreementType":"__AgreementType__","catalog":"__Catalog__","maxResults":1,"nextToken":"__NextToken__","partyType":"__PartyType__","status":"PENDING_APPROVAL"}

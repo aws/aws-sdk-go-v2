@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: MTurkRequesterServiceV20170117.SendTestEventNotification
+
+{"Notification":{"Destination":"__Destination__","EventTypes":["AssignmentAccepted","AssignmentAccepted"],"Transport":"Email","Version":"__Version__"},"TestEventType":"AssignmentAccepted"}

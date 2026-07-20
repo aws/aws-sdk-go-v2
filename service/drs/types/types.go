@@ -475,6 +475,9 @@ type LaunchConfigurationTemplate struct {
 	// Post-launch actions activated.
 	PostLaunchEnabled *bool
 
+	// Recovery mode.
+	RecoveryMode RecoveryMode
+
 	// Tags of the Launch Configuration Template.
 	Tags map[string]string
 

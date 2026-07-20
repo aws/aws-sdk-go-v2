@@ -36,11 +36,18 @@ type ListResourcesInput struct {
 	// Filter resources by AWS Region.
 	AwsRegion *string
 
+	// Specifies whether to filter non-billable resources. When true (the default),
+	// the operation returns only billable resources.
+	Billable *bool
+
 	// Pagination page size.
 	MaxResults *int32
 
 	// Pagination token.
 	NextToken *string
+
+	// The CloudFormation resource types to include in the response.
+	ResourceTypes []string
 
 	// Filter resources by service function identifier.
 	ServiceFunctionId *string

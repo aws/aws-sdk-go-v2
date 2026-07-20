@@ -1,3 +1,16 @@
+# v1.58.0 (2026-07-13)
+
+* **Feature**: Amazon GameLift Servers now includes fleet expiration for managed fleets. A managed fleet expires one year after creation, transitioning to EXPIRED status, emitting a FLEET EXPIRED event, and scaling to zero instances. Expired fleets cannot host new game sessions or increase capacity.
+
+# v1.57.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.56.2 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.1 (2026-06-29)
 
 * No change notes available for this release.

@@ -16,6 +16,21 @@ type AccountSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Citation information for AI-generated responses.
+type Citation struct {
+
+	// Content text from the compliance source.
+	SourceContent *string
+
+	// Label identifying the compliance source.
+	SourceLabel *string
+
+	// Link to the compliance source.
+	SourceLink *string
+
+	noSmithyDocumentSerde
+}
+
 // Summary for customer-agreement resource.
 type CustomerAgreementSummary struct {
 
@@ -57,6 +72,181 @@ type CustomerAgreementSummary struct {
 
 	// Type of the customer-agreement resource.
 	Type AgreementType
+
+	noSmithyDocumentSerde
+}
+
+// Content for creating a compliance inquiry - either a single query or file
+// content.
+//
+// The following types satisfy this interface:
+//
+//	InquiryContentMemberFileContent
+//	InquiryContentMemberQuery
+type InquiryContent interface {
+	isInquiryContent()
+}
+
+// File content with multiple questions.
+type InquiryContentMemberFileContent struct {
+	Value InquiryFileContent
+
+	noSmithyDocumentSerde
+}
+
+func (*InquiryContentMemberFileContent) isInquiryContent() {}
+
+// Single text query for AI-generated answer.
+type InquiryContentMemberQuery struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*InquiryContentMemberQuery) isInquiryContent() {}
+
+// Detailed information about a compliance inquiry.
+type InquiryDetail struct {
+
+	// ARN of the compliance inquiry resource.
+	//
+	// This member is required.
+	Arn *string
+
+	// Timestamp indicating when the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Unique resource ID for the compliance inquiry.
+	//
+	// This member is required.
+	Id *string
+
+	// Type of inquiry content (text or file).
+	//
+	// This member is required.
+	InputSource InputSource
+
+	// Title of the inquiry.
+	//
+	// This member is required.
+	Name *string
+
+	// Current processing status of the inquiry.
+	//
+	// This member is required.
+	Status InquiryStatus
+
+	// Status message providing additional context.
+	//
+	// This member is required.
+	StatusMessage InquiryStatusMessage
+
+	// Support mode for this inquiry. AI_ONLY provides AI-generated responses.
+	// FULL_SUPPORT includes human expert review.
+	SupportMode InquirySupportMode
+
+	// Timestamp indicating when the resource was last modified.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// File content structure for compliance inquiry uploads.
+type InquiryFileContent struct {
+
+	// Binary content of the uploaded file.
+	//
+	// This member is required.
+	Content []byte
+
+	// List of file sections/sheets to process.
+	FileSections []string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a compliance inquiry.
+type InquirySummary struct {
+
+	// ARN of the compliance inquiry resource.
+	//
+	// This member is required.
+	Arn *string
+
+	// Timestamp indicating when the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Unique resource ID for the compliance inquiry.
+	//
+	// This member is required.
+	Id *string
+
+	// Type of inquiry content (text or file).
+	//
+	// This member is required.
+	InputSource InputSource
+
+	// Title of the inquiry.
+	//
+	// This member is required.
+	Name *string
+
+	// Current processing status of the inquiry.
+	//
+	// This member is required.
+	Status InquiryStatus
+
+	// Status message providing additional context.
+	//
+	// This member is required.
+	StatusMessage InquiryStatusMessage
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a single query within a compliance inquiry.
+type QuerySummary struct {
+
+	// Timestamp when the query was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The actual query text.
+	//
+	// This member is required.
+	Query *string
+
+	// Sequential identifier of the query within the inquiry.
+	//
+	// This member is required.
+	QueryIdentifier *int32
+
+	// Current processing status of the query.
+	//
+	// This member is required.
+	Status QueryStatus
+
+	// Descriptive status message.
+	//
+	// This member is required.
+	StatusMessage QueryStatusMessage
+
+	// Supporting citations for the response.
+	Citations []Citation
+
+	// Generated response to the query.
+	Response *string
+
+	// Type of review for the response.
+	ReviewType ReviewType
+
+	// Ordered list of response version history entries, oldest first.
+	UpdatedResponseVersions []ResponseVersion
 
 	noSmithyDocumentSerde
 }
@@ -178,6 +368,22 @@ type ReportSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A versioned snapshot of a response edit.
+type ResponseVersion struct {
+
+	// The response text for this version.
+	//
+	// This member is required.
+	ResponseText *string
+
+	// ISO 8601 timestamp of when this edit was made.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Validation exception message and name.
 type ValidationExceptionField struct {
 
@@ -195,3 +401,14 @@ type ValidationExceptionField struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isInquiryContent() {}

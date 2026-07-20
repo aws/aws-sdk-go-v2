@@ -1,0 +1,4 @@
+PUT /__AccountId__/vaults/__VaultName__
+
+X-Amz-Glacier-Version: 2012-06-01
+

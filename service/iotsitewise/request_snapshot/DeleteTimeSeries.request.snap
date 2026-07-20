@@ -1,0 +1,5 @@
+POST /timeseries/delete?alias=__Alias__&assetId=__AssetId__&propertyId=__PropertyId__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__"}

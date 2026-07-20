@@ -114,6 +114,13 @@ type UpdateCanaryInput struct {
 	// [GetCanaryRuns]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html
 	FailureRetentionPeriodInDays *int32
 
+	// The Amazon Resource Name (ARN) of the customer-managed AWS Key Management
+	// Service (AWS KMS) key used to encrypt the canary's AWS Lambda function
+	// environment variables at rest. If you don't specify a value, the service uses an
+	// AWS-managed key. If you omit this parameter, the service retains the existing
+	// value. To revert to the AWS-managed key, set this parameter to an empty string.
+	KmsKeyArn *string
+
 	// Specifies whether to also delete the Lambda functions and layers used by this
 	// canary when the canary is deleted.
 	//

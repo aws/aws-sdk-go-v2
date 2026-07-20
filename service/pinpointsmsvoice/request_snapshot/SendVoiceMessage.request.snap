@@ -1,0 +1,5 @@
+POST /v1/sms-voice/voice/message
+
+Content-Type: application/json
+
+{"CallerId":"__CallerId__","ConfigurationSetName":"__ConfigurationSetName__","Content":{"CallInstructionsMessage":{"Text":"__Text__"},"PlainTextMessage":{"LanguageCode":"__LanguageCode__","Text":"__Text__","VoiceId":"__VoiceId__"},"SSMLMessage":{"LanguageCode":"__LanguageCode__","Text":"__Text__","VoiceId":"__VoiceId__"}},"DestinationPhoneNumber":"__DestinationPhoneNumber__","OriginationPhoneNumber":"__OriginationPhoneNumber__"}

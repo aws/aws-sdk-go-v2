@@ -2833,6 +2833,11 @@ func awsRestjson1_serializeOpDocumentTestTelemetryPipelineInput(v *TestTelemetry
 		}
 	}
 
+	if len(v.SignalType) > 0 {
+		ok := object.Key("SignalType")
+		ok.String(string(v.SignalType))
+	}
+
 	return nil
 }
 

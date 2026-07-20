@@ -1,0 +1,6 @@
+PATCH /2023-10-12/batch-update-job
+
+Content-Type: application/json
+X-Amz-Client-Token: __ClientToken__
+
+{"jobs":[{"description":"__Description__","farmId":"__FarmId__","jobId":"__JobId__","lifecycleStatus":"ARCHIVED","maxFailedTasksCount":1,"maxRetriesPerTask":1,"maxWorkerCount":1,"name":"__Name__","priority":1,"queueId":"__QueueId__","targetTaskRunStatus":"READY"},{"description":"__Description__","farmId":"__FarmId__","jobId":"__JobId__","lifecycleStatus":"ARCHIVED","maxFailedTasksCount":1,"maxRetriesPerTask":1,"maxWorkerCount":1,"name":"__Name__","priority":1,"queueId":"__QueueId__","targetTaskRunStatus":"READY"}]}

@@ -1,0 +1,5 @@
+POST /wireless-gateways/__Id__/tasks
+
+Content-Type: application/json
+
+{"WirelessGatewayTaskDefinitionId":"__WirelessGatewayTaskDefinitionId__"}

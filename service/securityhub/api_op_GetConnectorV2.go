@@ -74,6 +74,13 @@ type GetConnectorV2Output struct {
 	// The description of the connectorV2.
 	Description *string
 
+	// The enablement status of the connector.
+	EnablementStatus types.EnablementStatus
+
+	// The reason for the current enablement status. Provides additional context when
+	// the connector is in a failed state.
+	EnablementStatusReason *string
+
 	// The Amazon Resource Name (ARN) of KMS key used for the connectorV2.
 	KmsKeyArn *string
 

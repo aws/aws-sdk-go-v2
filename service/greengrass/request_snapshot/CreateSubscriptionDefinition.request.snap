@@ -1,0 +1,6 @@
+POST /greengrass/definition/subscriptions
+
+Content-Type: application/json
+X-Amzn-Client-Token: __AmznClientToken__
+
+{"InitialVersion":{"Subscriptions":[{"Id":"__Id__","Source":"__Source__","Subject":"__Subject__","Target":"__Target__"},{"Id":"__Id__","Source":"__Source__","Subject":"__Subject__","Target":"__Target__"}]},"Name":"__Name__","tags":{"key0":"__Value__"}}

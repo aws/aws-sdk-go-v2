@@ -4,7 +4,9 @@ package comprehendmedical
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type DescribeRxNormInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRxNormInferenceJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRxNormInferenceJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRxNormInferenceJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeRxNormInferenceJobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeRxNormInferenceJobOutput struct {
 
 	// An object that contains the properties associated with a detection job.
@@ -48,13 +62,34 @@ type DescribeRxNormInferenceJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRxNormInferenceJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRxNormInferenceJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRxNormInferenceJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComprehendMedicalAsyncJobProperties != nil {
+		s.WriteStruct(schemas.DescribeRxNormInferenceJobResponse_ComprehendMedicalAsyncJobProperties)
+		v.ComprehendMedicalAsyncJobProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeRxNormInferenceJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRxNormInferenceJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRxNormInferenceJobResponse_ComprehendMedicalAsyncJobProperties:
+			v.ComprehendMedicalAsyncJobProperties = &types.ComprehendMedicalAsyncJobProperties{}
+			return v.ComprehendMedicalAsyncJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRxNormInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeRxNormInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRxNormInferenceJob, schemas.DescribeRxNormInferenceJobRequest, schemas.DescribeRxNormInferenceJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeRxNormInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRxNormInferenceJob, schemas.DescribeRxNormInferenceJobRequest, schemas.DescribeRxNormInferenceJobResponse), output: &DescribeRxNormInferenceJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

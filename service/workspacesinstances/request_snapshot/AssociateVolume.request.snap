@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: EUCMIFrontendAPIService.AssociateVolume
+
+{"Device":"__Device__","VolumeId":"__VolumeId__","WorkspaceInstanceId":"__WorkspaceInstanceId__"}

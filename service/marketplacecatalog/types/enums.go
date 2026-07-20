@@ -400,6 +400,26 @@ func (OwnershipType) Values() []OwnershipType {
 	}
 }
 
+type ResaleAuthorizationResellerRoleString string
+
+// Enum values for ResaleAuthorizationResellerRoleString
+const (
+	ResaleAuthorizationResellerRoleStringChannelPartner ResaleAuthorizationResellerRoleString = "ChannelPartner"
+	ResaleAuthorizationResellerRoleStringDistributor    ResaleAuthorizationResellerRoleString = "Distributor"
+)
+
+// Values returns all known values for ResaleAuthorizationResellerRoleString. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResaleAuthorizationResellerRoleString) Values() []ResaleAuthorizationResellerRoleString {
+	return []ResaleAuthorizationResellerRoleString{
+		"ChannelPartner",
+		"Distributor",
+	}
+}
+
 type ResaleAuthorizationSortBy string
 
 // Enum values for ResaleAuthorizationSortBy

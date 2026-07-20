@@ -4,7 +4,9 @@ package computeoptimizer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,6 +69,24 @@ type GetLicenseRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLicenseRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLicenseRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLicenseRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.GetLicenseRecommendationsRequest_accountIds, v.AccountIds)
+	serializeLicenseRecommendationFilters(s, schemas.GetLicenseRecommendationsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetLicenseRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetLicenseRecommendationsRequest_nextToken, *v.NextToken)
+	}
+	serializeResourceArns(s, schemas.GetLicenseRecommendationsRequest_resourceArns, v.ResourceArns)
+}
+
 type GetLicenseRecommendationsOutput struct {
 
 	//  An array of objects that describe errors of the request.
@@ -84,13 +104,38 @@ type GetLicenseRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLicenseRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLicenseRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLicenseRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGetRecommendationErrors(s, schemas.GetLicenseRecommendationsResponse_errors, v.Errors)
+	serializeLicenseRecommendations(s, schemas.GetLicenseRecommendationsResponse_licenseRecommendations, v.LicenseRecommendations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetLicenseRecommendationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetLicenseRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLicenseRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLicenseRecommendationsResponse_errors:
+			return deserializeGetRecommendationErrors(d, schemas.GetLicenseRecommendationsResponse_errors, &v.Errors)
+		case schemas.GetLicenseRecommendationsResponse_licenseRecommendations:
+			return deserializeLicenseRecommendations(d, schemas.GetLicenseRecommendationsResponse_licenseRecommendations, &v.LicenseRecommendations)
+		case schemas.GetLicenseRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetLicenseRecommendationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLicenseRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetLicenseRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLicenseRecommendations, schemas.GetLicenseRecommendationsRequest, schemas.GetLicenseRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetLicenseRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLicenseRecommendations, schemas.GetLicenseRecommendationsRequest, schemas.GetLicenseRecommendationsResponse), output: &GetLicenseRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

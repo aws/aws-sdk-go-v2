@@ -1,0 +1,3 @@
+DELETE /reviewTemplates/__TemplateArn__?ClientRequestToken=__ClientRequestToken__
+
+

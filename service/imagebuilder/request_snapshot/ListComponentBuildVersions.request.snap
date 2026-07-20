@@ -1,0 +1,5 @@
+POST /ListComponentBuildVersions
+
+Content-Type: application/json
+
+{"componentVersionArn":"__ComponentVersionArn__","maxResults":1,"nextToken":"__NextToken__"}

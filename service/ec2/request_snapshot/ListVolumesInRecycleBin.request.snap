@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ListVolumesInRecycleBin&DryRun=true&MaxResults=1&NextToken=__NextToken__&Version=2016-11-15&VolumeId.1=__Member__&VolumeId.2=__Member__

@@ -1,0 +1,5 @@
+POST /network-migration/GetNetworkMigrationDefinition
+
+Content-Type: application/json
+
+{"networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__"}

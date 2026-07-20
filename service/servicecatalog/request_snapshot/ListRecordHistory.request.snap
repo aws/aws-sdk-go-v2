@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.ListRecordHistory
+
+{"AcceptLanguage":"__AcceptLanguage__","AccessLevelFilter":{"Key":"Account","Value":"__Value__"},"PageSize":1,"PageToken":"__PageToken__","SearchFilter":{"Key":"__Key__","Value":"__Value__"}}

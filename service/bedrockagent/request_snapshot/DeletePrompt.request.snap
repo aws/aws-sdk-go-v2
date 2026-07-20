@@ -1,0 +1,3 @@
+DELETE /prompts/__PromptIdentifier__/?promptVersion=__PromptVersion__
+
+

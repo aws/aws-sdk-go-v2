@@ -571,6 +571,27 @@ func (FleetStatusCode) Values() []FleetStatusCode {
 	}
 }
 
+type HostKernel string
+
+// Enum values for HostKernel
+const (
+	HostKernelLinuxKernel4      HostKernel = "LINUX_KERNEL_4"
+	HostKernelLinuxKernel6      HostKernel = "LINUX_KERNEL_6"
+	HostKernelLinuxKernelLatest HostKernel = "LINUX_KERNEL_LATEST"
+)
+
+// Values returns all known values for HostKernel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HostKernel) Values() []HostKernel {
+	return []HostKernel{
+		"LINUX_KERNEL_4",
+		"LINUX_KERNEL_6",
+		"LINUX_KERNEL_LATEST",
+	}
+}
+
 type ImagePullCredentialsType string
 
 // Enum values for ImagePullCredentialsType

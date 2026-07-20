@@ -751,6 +751,45 @@ type DimensionMemberProfileAttributes struct {
 
 func (*DimensionMemberProfileAttributes) isDimension() {}
 
+// Defines a diversity constraint for a single item column, specifying a cap type
+// and a target value or placeholder that controls how many recommended items may
+// share the same column value.
+type DiversityColumn struct {
+
+	// The type of diversity cap to apply. Valid values are PERCENTAGE (interpret
+	// Target as a percentage of returned items) and VALUE (interpret Target as an
+	// absolute count).
+	//
+	// This member is required.
+	CapType DiversityCapType
+
+	// The name of the item catalog column on which to apply the diversity cap. The
+	// column must be defined in the recommender schema.
+	//
+	// This member is required.
+	Name *string
+
+	// The diversity cap target. Either an integer literal (for example, "25" ) or a
+	// placeholder expression of the form $name whose value is supplied at inference
+	// time through GetProfileRecommendations .
+	//
+	// This member is required.
+	Target *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration that controls diversity of recommendation results by capping the
+// representation of specified item columns.
+type DiversityConfig struct {
+
+	// A list of up to two diversity columns. Each column defines a cap on the number
+	// or percentage of recommended items that share the same value for that column.
+	DiversityColumns []DiversityColumn
+
+	noSmithyDocumentSerde
+}
+
 // The standard domain object type.
 type DomainObjectTypeField struct {
 
@@ -2345,8 +2384,29 @@ type Recommendation struct {
 	noSmithyDocumentSerde
 }
 
+// Runtime diversity configuration for a GetProfileRecommendations request.
+type RecommendationDiversityConfig struct {
+
+	// Whether diversity-aware recommendations are enabled for this request.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// An optional map of placeholder name to integer cap value used to resolve $name
+	// placeholders defined in the recommender's DiversityConfig at inference time. Up
+	// to 2 entries are supported.
+	Values map[string]int32
+
+	noSmithyDocumentSerde
+}
+
 // Configuration settings that define the behavior and parameters of a recommender.
 type RecommenderConfig struct {
+
+	// Configuration for diversity-aware recommendations. When set, the recommender
+	// applies diversity constraints defined per item column to reduce
+	// over-concentration of similar items in the results.
+	DiversityConfig *DiversityConfig
 
 	// Configuration settings for how the recommender processes and uses events.
 	EventsConfig *EventsConfig
@@ -2563,6 +2623,9 @@ type RecommenderUpdate struct {
 	// The updated configuration settings applied to the recommender during this
 	// update.
 	RecommenderConfig *RecommenderConfig
+
+	// The name of the recommender version associated with this update operation.
+	RecommenderVersionName *string
 
 	// The current status of the recommender update operation.
 	Status RecommenderStatus
@@ -2991,6 +3054,9 @@ type TrainingMetrics struct {
 
 	// A collection of performance metrics and statistics from the training process.
 	Metrics map[string]float64
+
+	// The name of the recommender version that produced these training metrics.
+	RecommenderVersionName *string
 
 	// The timestamp when these training metrics were recorded.
 	Time *time.Time

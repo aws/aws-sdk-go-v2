@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSLookoutEquipmentFrontendService.StartDataIngestionJob
+
+{"ClientToken":"__ClientToken__","DatasetName":"__DatasetName__","IngestionInputConfiguration":{"S3InputConfiguration":{"Bucket":"__Bucket__","KeyPattern":"__KeyPattern__","Prefix":"__Prefix__"}},"RoleArn":"__RoleArn__"}

@@ -1,0 +1,5 @@
+POST /gremlin/profile
+
+Content-Type: application/json
+
+{"profile.chop":1,"gremlin":"__GremlinQuery__","profile.indexOps":true,"profile.results":true,"profile.serializer":"__Serializer__"}

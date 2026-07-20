@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyFpgaImageAttribute&Attribute=description&Description=__Description__&DryRun=true&FpgaImageId=__FpgaImageId__&LoadPermission.Add.1.Group=all&LoadPermission.Add.1.UserId=__UserId__&LoadPermission.Add.2.Group=all&LoadPermission.Add.2.UserId=__UserId__&LoadPermission.Remove.1.Group=all&LoadPermission.Remove.1.UserId=__UserId__&LoadPermission.Remove.2.Group=all&LoadPermission.Remove.2.UserId=__UserId__&Name=__Name__&OperationType=add&ProductCode.1=__Member__&ProductCode.2=__Member__&UserGroup.1=__Member__&UserGroup.2=__Member__&UserId.1=__Member__&UserId.2=__Member__&Version=2016-11-15

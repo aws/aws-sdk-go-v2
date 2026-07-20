@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateWorkforce
+
+{"IpAddressType":"ipv4","OidcConfig":{"AuthenticationRequestExtraParams":{"key0":"__Value__"},"AuthorizationEndpoint":"__AuthorizationEndpoint__","ClientId":"__ClientId__","ClientSecret":"__ClientSecret__","Issuer":"__Issuer__","JwksUri":"__JwksUri__","LogoutEndpoint":"__LogoutEndpoint__","Scope":"__Scope__","TokenEndpoint":"__TokenEndpoint__","UserInfoEndpoint":"__UserInfoEndpoint__"},"SourceIpConfig":{"Cidrs":["__Member__","__Member__"]},"WorkforceName":"__WorkforceName__","WorkforceVpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"Subnets":["__Member__","__Member__"],"VpcId":"__VpcId__"}}

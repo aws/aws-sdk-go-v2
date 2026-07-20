@@ -1,0 +1,14 @@
+PUT /v20180820/bucket/__Bucket__
+
+Content-Md5: s4FsirImFz1x0cKqYk7fYA==
+Content-Type: application/xml
+X-Amz-Acl: private
+X-Amz-Bucket-Object-Lock-Enabled: true
+X-Amz-Grant-Full-Control: __GrantFullControl__
+X-Amz-Grant-Read: __GrantRead__
+X-Amz-Grant-Read-Acp: __GrantReadACP__
+X-Amz-Grant-Write: __GrantWrite__
+X-Amz-Grant-Write-Acp: __GrantWriteACP__
+X-Amz-Outpost-Id: __OutpostId__
+
+<CreateBucketConfiguration xmlns="http://awss3control.amazonaws.com/doc/2018-08-20/"><LocationConstraint>EU</LocationConstraint></CreateBucketConfiguration>

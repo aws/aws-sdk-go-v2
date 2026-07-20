@@ -1,0 +1,5 @@
+POST /connector/create
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","name":"__Name__","provider":"AZURE","providerDetail":{"azure":{"autoInstallVMScanner":true,"awsConfigConnectorArn":"__AwsConfigConnectorArn__","azureRegions":["__Member__","__Member__"],"scopeConfiguration":{"containerImageScanning":{"scopeType":"TENANT","scopeValues":["__Member__","__Member__"]},"serverlessScanning":{"scopeType":"TENANT","scopeValues":["__Member__","__Member__"]},"vmScanning":{"scopeType":"TENANT","scopeValues":["__Member__","__Member__"]}}}},"tags":{"key0":"__Value__"}}

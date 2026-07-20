@@ -1,0 +1,5 @@
+POST /domainConfigurations/__DomainConfigurationName__
+
+Content-Type: application/json
+
+{"applicationProtocol":"SECURE_MQTT","authenticationType":"CUSTOM_AUTH_X509","authorizerConfig":{"allowAuthorizerOverride":true,"defaultAuthorizerName":"__DefaultAuthorizerName__"},"clientCertificateConfig":{"clientCertificateCallbackArn":"__ClientCertificateCallbackArn__"},"domainName":"__DomainName__","serverCertificateArns":["__Member__","__Member__"],"serverCertificateConfig":{"enableOCSPCheck":true,"ocspAuthorizedResponderArn":"__OcspAuthorizedResponderArn__","ocspLambdaArn":"__OcspLambdaArn__"},"serviceType":"DATA","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"tlsConfig":{"securityPolicy":"__SecurityPolicy__"},"validationCertificateArn":"__ValidationCertificateArn__"}

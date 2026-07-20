@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=GetTrustStoreRevocationContent&RevocationId=1&TrustStoreArn=__TrustStoreArn__&Version=2015-12-01

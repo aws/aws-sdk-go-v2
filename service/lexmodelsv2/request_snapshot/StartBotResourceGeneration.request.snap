@@ -1,0 +1,5 @@
+PUT /bots/__BotId__/botversions/__BotVersion__/botlocales/__LocaleId__/startgeneration
+
+Content-Type: application/json
+
+{"generationInputPrompt":"__GenerationInputPrompt__"}

@@ -185,6 +185,11 @@ func awsRestjson1_serializeOpDocumentCreateBrokerInput(v *CreateBrokerInput, val
 		}
 	}
 
+	if v.StorageSize != nil {
+		ok := object.Key("storageSize")
+		ok.Integer(*v.StorageSize)
+	}
+
 	if len(v.StorageType) > 0 {
 		ok := object.Key("storageType")
 		ok.String(string(v.StorageType))
@@ -2054,6 +2059,11 @@ func awsRestjson1_serializeOpDocumentUpdateBrokerInput(v *UpdateBrokerInput, val
 		if err := awsRestjson1_serializeDocument__listOf__string(v.SecurityGroups, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.StorageSize != nil {
+		ok := object.Key("storageSize")
+		ok.Integer(*v.StorageSize)
 	}
 
 	return nil

@@ -1,0 +1,5 @@
+POST /auth/code/__InstanceId__
+
+Content-Type: application/json
+
+{"MaxSessionDurationMinutes":1,"Scope":{"DomainName":"__DomainName__","EntityId":"__EntityId__","EntityType":"CUSTOMER_PROFILE","SecurityProfileIds":["__Member__","__Member__"]},"SessionInactivityDurationMinutes":1}

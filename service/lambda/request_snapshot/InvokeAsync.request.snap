@@ -1,0 +1,4 @@
+POST /2014-11-13/functions/__FunctionName__/invoke-async
+
+Content-Type: application/octet-stream
+

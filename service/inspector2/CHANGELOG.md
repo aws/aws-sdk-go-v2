@@ -1,3 +1,24 @@
+# v1.52.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.52.0 (2026-07-10)
+
+* **Feature**: Support for 3 day and 7 day ECR re-scan durations
+
+# v1.51.0 (2026-07-07)
+
+* **Feature**: This release extends vulnerability management to Azure VM, container registries and function apps. Adds support for per-member-account scan configuration settings.
+
+# v1.50.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.49.4 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.3 (2026-06-29)
 
 * No change notes available for this release.

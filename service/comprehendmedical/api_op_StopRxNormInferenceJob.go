@@ -4,6 +4,8 @@ package comprehendmedical
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,6 +36,18 @@ type StopRxNormInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopRxNormInferenceJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopRxNormInferenceJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopRxNormInferenceJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopRxNormInferenceJobRequest_JobId, *v.JobId)
+	}
+}
+
 type StopRxNormInferenceJobOutput struct {
 
 	// The identifier generated for the job. To get the status of job, use this
@@ -46,13 +60,32 @@ type StopRxNormInferenceJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopRxNormInferenceJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopRxNormInferenceJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopRxNormInferenceJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopRxNormInferenceJobResponse_JobId, *v.JobId)
+	}
+}
+func (v *StopRxNormInferenceJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopRxNormInferenceJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopRxNormInferenceJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StopRxNormInferenceJobResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopRxNormInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStopRxNormInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRxNormInferenceJob, schemas.StopRxNormInferenceJobRequest, schemas.StopRxNormInferenceJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStopRxNormInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRxNormInferenceJob, schemas.StopRxNormInferenceJobRequest, schemas.StopRxNormInferenceJobResponse), output: &StopRxNormInferenceJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,5 @@
+PATCH /classification-scopes/__Id__
+
+Content-Type: application/json
+
+{"s3":{"excludes":{"bucketNames":["__Member__","__Member__"],"operation":"ADD"}}}

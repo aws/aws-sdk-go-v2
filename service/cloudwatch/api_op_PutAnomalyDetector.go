@@ -111,6 +111,10 @@ type PutAnomalyDetectorInput struct {
 }
 
 type PutAnomalyDetectorOutput struct {
+
+	// The unique identifier of the anomaly detector that you created or updated.
+	AnomalyDetectorId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

@@ -1,0 +1,5 @@
+PATCH /sites/__SiteId__/rackPhysicalProperties
+
+Content-Type: application/json
+
+{"FiberOpticCableType":"SINGLE_MODE","MaximumSupportedWeightLbs":"NO_LIMIT","OpticalStandard":"OPTIC_10GBASE_SR","PowerConnector":"L6_30P","PowerDrawKva":"POWER_5_KVA","PowerFeedDrop":"ABOVE_RACK","PowerPhase":"SINGLE_PHASE","UplinkCount":"UPLINK_COUNT_1","UplinkGbps":"UPLINK_1G"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.RemovePermission
+
+{"EventBusName":"__EventBusName__","RemoveAllPermissions":true,"StatementId":"__StatementId__"}

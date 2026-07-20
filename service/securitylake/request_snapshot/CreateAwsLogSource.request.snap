@@ -1,0 +1,5 @@
+POST /v1/datalake/logsources/aws
+
+Content-Type: application/json
+
+{"sources":[{"accounts":["__Member__","__Member__"],"regions":["__Member__","__Member__"],"sourceName":"ROUTE53","sourceVersion":"__SourceVersion__"},{"accounts":["__Member__","__Member__"],"regions":["__Member__","__Member__"],"sourceName":"ROUTE53","sourceVersion":"__SourceVersion__"}]}

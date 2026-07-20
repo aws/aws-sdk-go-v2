@@ -1,0 +1,5 @@
+PUT /logging
+
+Content-Type: application/json
+
+{"loggingOptions":{"level":"ERROR"}}

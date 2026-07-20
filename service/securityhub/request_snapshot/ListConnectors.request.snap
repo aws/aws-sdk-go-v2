@@ -1,0 +1,3 @@
+GET /connectors?ConnectorStatus=CONNECTED&EnablementStatus=ENABLED&MaxResults=1&NextToken=__NextToken__&ProviderName=AZURE
+
+

@@ -1,0 +1,5 @@
+POST /packaging_groups
+
+Content-Type: application/json
+
+{"authorization":{"cdnIdentifierSecret":"__CdnIdentifierSecret__","secretsRoleArn":"__SecretsRoleArn__"},"egressAccessLogs":{"logGroupName":"__LogGroupName__"},"id":"__Id__","tags":{"key0":"__Value__"}}

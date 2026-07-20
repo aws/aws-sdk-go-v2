@@ -1,0 +1,5 @@
+POST /model-customization/custom-model-deployments
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","description":"__Description__","modelArn":"__ModelArn__","modelDeploymentName":"__ModelDeploymentName__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

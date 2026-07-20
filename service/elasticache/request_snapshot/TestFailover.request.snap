@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=TestFailover&NodeGroupId=__NodeGroupId__&ReplicationGroupId=__ReplicationGroupId__&Version=2015-02-02

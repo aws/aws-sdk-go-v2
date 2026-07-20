@@ -1,0 +1,5 @@
+PATCH /findingAggregator/update
+
+Content-Type: application/json
+
+{"FindingAggregatorArn":"__FindingAggregatorArn__","RegionLinkingMode":"__RegionLinkingMode__","Regions":["__Member__","__Member__"]}

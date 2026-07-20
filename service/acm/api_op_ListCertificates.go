@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -14,6 +15,10 @@ import (
 // only certificates that match a specific status be listed. You can also filter by
 // specific attributes of the certificate. Default filtering returns only RSA_2048
 // certificates. For more information, see Filters.
+//
+// By default, this action does not return certificates with a
+// CertificateKeyPairOrigin of ACME . To include ACME certificates, specify ACME
+// in the CertificateKeyPairOrigins filter.
 func (c *Client) ListCertificates(ctx context.Context, params *ListCertificatesInput, optFns ...func(*Options)) (*ListCertificatesOutput, error) {
 	if params == nil {
 		params = &ListCertificatesInput{}
@@ -30,6 +35,11 @@ func (c *Client) ListCertificates(ctx context.Context, params *ListCertificatesI
 }
 
 type ListCertificatesInput struct {
+
+	// Filter the certificate list by certificate key pair origin. Specify one or more
+	// CertificateKeyPairOrigin values. Default filtering returns only certificates
+	// with key pair origin of AWS_MANAGED and CUSTOMER_PROVIDED .
+	CertificateKeyPairOrigins []types.CertificateKeyPairOrigin
 
 	// Filter the certificate list by status value.
 	CertificateStatuses []types.CertificateStatus
@@ -57,6 +67,11 @@ type ListCertificatesInput struct {
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
+}
+
+func (in *ListCertificatesInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ServiceType = ptr.String("ACM")
 }
 
 type ListCertificatesOutput struct {

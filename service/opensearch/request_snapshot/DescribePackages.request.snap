@@ -1,0 +1,5 @@
+POST /2021-01-01/packages/describe
+
+Content-Type: application/json
+
+{"Filters":[{"Name":"PackageID","Value":["__Member__","__Member__"]},{"Name":"PackageID","Value":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__"}

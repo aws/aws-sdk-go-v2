@@ -1,0 +1,7 @@
+POST /service/MailManagerSvc/operation/CreateAddressListImportJob
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¤kClientTokeno__ClientToken__mAddressListIdq__AddressListId__dNameh__Name__pImportDataFormat¡nImportDataTypecCSV

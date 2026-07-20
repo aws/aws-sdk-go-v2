@@ -1,0 +1,5 @@
+POST /2020-05-31/tagging?Operation=Tag&Resource=__Resource__
+
+Content-Type: application/xml
+
+<Tags xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Items><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Items></Tags>

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=AssociateIamInstanceProfile&IamInstanceProfile.Arn=__Arn__&IamInstanceProfile.Name=__Name__&InstanceId=__InstanceId__&Version=2016-11-15

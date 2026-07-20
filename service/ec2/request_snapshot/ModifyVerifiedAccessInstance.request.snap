@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyVerifiedAccessInstance&CidrEndpointsCustomSubDomain=__CidrEndpointsCustomSubDomain__&ClientToken=__ClientToken__&Description=__Description__&DryRun=true&VerifiedAccessInstanceId=__VerifiedAccessInstanceId__&Version=2016-11-15

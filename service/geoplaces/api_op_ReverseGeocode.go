@@ -50,6 +50,11 @@ type ReverseGeocodeInput struct {
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	AdditionalFeatures []types.ReverseGeocodeAdditionalFeature
 
+	// Specifies how address names are returned. When set to Administrative , the
+	// service returns the official administrative names for address components.
+	// Administrative currently applies only to addresses in the United States.
+	AddressNamesMode types.ReverseGeocodeAddressNamesMode
+
 	// A structure which contains a set of inclusion/exclusion properties that results
 	// must possess in order to be returned as a result.
 	Filter *types.ReverseGeocodeFilter
@@ -82,7 +87,7 @@ type ReverseGeocodeInput struct {
 	// ap-southeast-5 regions support only the following codes: en, id, km, lo, ms,
 	// my, pt, th, tl, vi, zh
 	//
-	// [BCP 47]: https://en.wikipedia.org/wiki/IETF_language_tag
+	// [BCP 47]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Language *string
 

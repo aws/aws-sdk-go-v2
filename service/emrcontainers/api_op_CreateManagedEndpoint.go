@@ -71,6 +71,9 @@ type CreateManagedEndpointInput struct {
 	// configurations.
 	ConfigurationOverrides *types.ConfigurationOverrides
 
+	// The idle timeout in minutes for the managed endpoint session.
+	SessionIdleTimeoutInMinutes int32
+
 	// The tags of the managed endpoint.
 	Tags map[string]string
 

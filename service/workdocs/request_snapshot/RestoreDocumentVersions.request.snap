@@ -1,0 +1,4 @@
+POST /api/v1/documentVersions/restore/__DocumentId__
+
+Authentication: __AuthenticationToken__
+

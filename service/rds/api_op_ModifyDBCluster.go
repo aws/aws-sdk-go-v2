@@ -316,6 +316,26 @@ type ModifyDBClusterInput struct {
 	// [Using Amazon Performance Insights]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
 	EnablePerformanceInsights *bool
 
+	// The lifecycle type for this DB cluster.
+	//
+	// You can use this setting to enroll your DB cluster into Amazon RDS Extended
+	// Support or to opt out. With RDS Extended Support, you can run the selected major
+	// engine version on your DB cluster past the end of standard support for that
+	// engine version. For more information, see the following sections:
+	//
+	//   - Amazon Aurora - [Amazon RDS Extended Support with Amazon Aurora]in the Amazon Aurora User Guide
+	//
+	//   - Amazon RDS - [Amazon RDS Extended Support with Amazon RDS]in the Amazon RDS User Guide
+	//
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+	//
+	// Valid Values: open-source-rds-extended-support |
+	// open-source-rds-extended-support-disabled
+	//
+	// [Amazon RDS Extended Support with Amazon RDS]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+	// [Amazon RDS Extended Support with Amazon Aurora]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+	EngineLifecycleSupport *string
+
 	// The DB engine mode of the DB cluster, either provisioned or serverless .
 	//
 	// The DB engine mode can be modified only from serverless to provisioned .

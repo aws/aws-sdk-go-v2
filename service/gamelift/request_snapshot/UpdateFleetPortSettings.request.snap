@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/UpdateFleetPortSettings
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+£gFleetIdk__FleetId__xInboundPermissionAuthorizations‚¤hFromPortfToPortgIpRangek__IpRange__hProtocolcTCP¤gIpRangek__IpRange__hProtocolcTCPhFromPortfToPortxInboundPermissionRevocations‚¤fToPortgIpRangek__IpRange__hProtocolcTCPhFromPort¤hFromPortfToPortgIpRangek__IpRange__hProtocolcTCP

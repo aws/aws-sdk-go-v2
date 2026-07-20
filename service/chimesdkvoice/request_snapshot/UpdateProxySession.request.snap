@@ -1,0 +1,5 @@
+POST /voice-connectors/__VoiceConnectorId__/proxy-sessions/__ProxySessionId__
+
+Content-Type: application/json
+
+{"Capabilities":["Voice","Voice"],"ExpiryMinutes":1}

@@ -1,0 +1,3 @@
+GET /greengrass/definition/resources?MaxResults=__MaxResults__&NextToken=__NextToken__
+
+

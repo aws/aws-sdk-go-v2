@@ -1,3 +1,21 @@
+# v1.14.0 (2026-07-17)
+
+* **Feature**: Amazon GameLift Streams now supports assigning an IAM role to a stream session, enabling your application to securely access resources in your AWS account, such as Amazon S3 buckets and DynamoDB tables.
+
+# v1.13.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.13.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.12.0 (2026-07-01)
+
+* **Feature**: Added CreateStreamSessionAdminShell API operation to enable customers to establish secure terminal connections to the live runtime environment of streaming sessions for troubleshooting purposes.
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.13 (2026-06-29)
 
 * No change notes available for this release.

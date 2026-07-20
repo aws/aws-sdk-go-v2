@@ -1,0 +1,5 @@
+POST /2022-01-01/osis/untagResource?arn=__Arn__
+
+Content-Type: application/json
+
+{"TagKeys":["__Member__","__Member__"]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.StartMediaAnalysisJob
+
+{"ClientRequestToken":"__ClientRequestToken__","Input":{"S3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}},"JobName":"__JobName__","KmsKeyId":"__KmsKeyId__","OperationsConfig":{"DetectModerationLabels":{"MinConfidence":1,"ProjectVersion":"__ProjectVersion__"}},"OutputConfig":{"S3Bucket":"__S3Bucket__","S3KeyPrefix":"__S3KeyPrefix__"}}

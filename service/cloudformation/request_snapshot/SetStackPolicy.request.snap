@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=SetStackPolicy&StackName=__StackName__&StackPolicyBody=__StackPolicyBody__&StackPolicyURL=__StackPolicyURL__&Version=2010-05-15

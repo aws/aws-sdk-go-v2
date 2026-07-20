@@ -1,0 +1,5 @@
+POST /identities/set-token-vault-cmk
+
+Content-Type: application/json
+
+{"kmsConfiguration":{"keyType":"CustomerManagedKey","kmsKeyArn":"__KmsKeyArn__"},"tokenVaultId":"__TokenVaultId__"}

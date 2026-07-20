@@ -1,0 +1,5 @@
+PUT /gateways/__GatewayIdentifier__/synchronizeTargets
+
+Content-Type: application/json
+
+{"targetIdList":["__Member__","__Member__"]}

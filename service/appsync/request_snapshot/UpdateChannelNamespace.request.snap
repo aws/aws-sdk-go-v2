@@ -1,0 +1,5 @@
+POST /v2/apis/__ApiId__/channelNamespaces/__Name__
+
+Content-Type: application/json
+
+{"codeHandlers":"__CodeHandlers__","handlerConfigs":{"onPublish":{"behavior":"CODE","integration":{"dataSourceName":"__DataSourceName__","lambdaConfig":{"invokeType":"REQUEST_RESPONSE"}}},"onSubscribe":{"behavior":"CODE","integration":{"dataSourceName":"__DataSourceName__","lambdaConfig":{"invokeType":"REQUEST_RESPONSE"}}}},"publishAuthModes":[{"authType":"API_KEY"},{"authType":"API_KEY"}],"subscribeAuthModes":[{"authType":"API_KEY"},{"authType":"API_KEY"}]}

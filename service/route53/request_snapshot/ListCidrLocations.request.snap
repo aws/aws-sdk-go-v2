@@ -1,0 +1,3 @@
+GET /2013-04-01/cidrcollection/__CollectionId__?maxresults=1&nexttoken=__NextToken__
+
+

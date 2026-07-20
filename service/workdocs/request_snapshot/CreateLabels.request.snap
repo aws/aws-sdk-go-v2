@@ -1,0 +1,6 @@
+PUT /api/v1/resources/__ResourceId__/labels
+
+Authentication: __AuthenticationToken__
+Content-Type: application/json
+
+{"Labels":["__Member__","__Member__"]}

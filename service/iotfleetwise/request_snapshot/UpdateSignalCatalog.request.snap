@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.UpdateSignalCatalog
+
+{"description":"__Description__","name":"__Name__","nodesToAdd":[{"branch":{"comment":"__Comment__","deprecationMessage":"__DeprecationMessage__","description":"__Description__","fullyQualifiedName":"__FullyQualifiedName__"}},{"branch":{"comment":"__Comment__","deprecationMessage":"__DeprecationMessage__","description":"__Description__","fullyQualifiedName":"__FullyQualifiedName__"}}],"nodesToRemove":["__Member__","__Member__"],"nodesToUpdate":[{"branch":{"comment":"__Comment__","deprecationMessage":"__DeprecationMessage__","description":"__Description__","fullyQualifiedName":"__FullyQualifiedName__"}},{"branch":{"comment":"__Comment__","deprecationMessage":"__DeprecationMessage__","description":"__Description__","fullyQualifiedName":"__FullyQualifiedName__"}}]}

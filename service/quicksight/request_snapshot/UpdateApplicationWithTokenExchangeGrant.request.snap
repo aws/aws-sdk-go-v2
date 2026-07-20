@@ -1,0 +1,3 @@
+PUT /accounts/__AwsAccountId__/application-with-token-exchange-grant?namespace=__Namespace__
+
+

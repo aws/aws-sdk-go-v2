@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateIpamPool&AddressFamily=ipv4&AllocationDefaultNetmaskLength=1&AllocationMaxNetmaskLength=1&AllocationMinNetmaskLength=1&AllocationResourceTag.1.Key=__Key__&AllocationResourceTag.1.Value=__Value__&AllocationResourceTag.2.Key=__Key__&AllocationResourceTag.2.Value=__Value__&AutoImport=true&AwsService=ec2&ClientToken=__ClientToken__&Description=__Description__&DryRun=true&IpamScopeId=__IpamScopeId__&Locale=__Locale__&PublicIpSource=amazon&PubliclyAdvertisable=true&SourceIpamPoolId=__SourceIpamPoolId__&SourceResource.ResourceId=__ResourceId__&SourceResource.ResourceOwner=__ResourceOwner__&SourceResource.ResourceRegion=__ResourceRegion__&SourceResource.ResourceType=vpc&TagSpecification.1.ResourceType=capacity-reservation&TagSpecification.1.Tag.1.Key=__Key__&TagSpecification.1.Tag.1.Value=__Value__&TagSpecification.1.Tag.2.Key=__Key__&TagSpecification.1.Tag.2.Value=__Value__&TagSpecification.2.ResourceType=capacity-reservation&TagSpecification.2.Tag.1.Key=__Key__&TagSpecification.2.Tag.1.Value=__Value__&TagSpecification.2.Tag.2.Key=__Key__&TagSpecification.2.Tag.2.Value=__Value__&Version=2016-11-15

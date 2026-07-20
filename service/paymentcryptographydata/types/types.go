@@ -1506,6 +1506,7 @@ type SessionKeyAmex struct {
 //	SessionKeyDerivationMemberEmv2000
 //	SessionKeyDerivationMemberEmvCommon
 //	SessionKeyDerivationMemberMastercard
+//	SessionKeyDerivationMemberUnionPay
 //	SessionKeyDerivationMemberVisa
 type SessionKeyDerivation interface {
 	isSessionKeyDerivation()
@@ -1549,6 +1550,16 @@ type SessionKeyDerivationMemberMastercard struct {
 }
 
 func (*SessionKeyDerivationMemberMastercard) isSessionKeyDerivation() {}
+
+// Parameters to derive session key for a UnionPay payment card for Authorization
+// Request Cryptogram (ARQC) generation and verification.
+type SessionKeyDerivationMemberUnionPay struct {
+	Value SessionKeyUnionPay
+
+	noSmithyDocumentSerde
+}
+
+func (*SessionKeyDerivationMemberUnionPay) isSessionKeyDerivation() {}
 
 // Parameters to derive session key for a Visa payment cardfor ARQC verification.
 type SessionKeyDerivationMemberVisa struct {
@@ -1667,6 +1678,33 @@ type SessionKeyMastercard struct {
 	//
 	// This member is required.
 	UnpredictableNumber *string
+
+	noSmithyDocumentSerde
+}
+
+// Parameters to derive session key for a UnionPay payment card for Authorization
+// Request Cryptogram (ARQC) generation and verification.
+type SessionKeyUnionPay struct {
+
+	// The transaction counter that the terminal provides during transaction
+	// processing. This value is in hexadecimal format. For example, enter a decimal
+	// counter of 109 as 006D .
+	//
+	// This member is required.
+	ApplicationTransactionCounter *string
+
+	// A number that identifies and differentiates payment cards with the same Primary
+	// Account Number (PAN). If not used, enter 00 .
+	//
+	// This member is required.
+	PanSequenceNumber *string
+
+	// The Primary Account Number (PAN) of the cardholder. A PAN is a unique
+	// identifier for a payment credit or debit card and associates the card to a
+	// specific account holder.
+	//
+	// This member is required.
+	PrimaryAccountNumber *string
 
 	noSmithyDocumentSerde
 }

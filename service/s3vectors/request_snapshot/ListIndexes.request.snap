@@ -1,0 +1,5 @@
+POST /ListIndexes
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","prefix":"__Prefix__","vectorBucketArn":"__VectorBucketArn__","vectorBucketName":"__VectorBucketName__"}

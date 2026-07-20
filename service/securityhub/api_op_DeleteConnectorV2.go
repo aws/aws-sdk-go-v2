@@ -4,6 +4,7 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -35,6 +36,10 @@ type DeleteConnectorV2Input struct {
 }
 
 type DeleteConnectorV2Output struct {
+
+	// The enablement status of the connector after deletion.
+	EnablementStatus types.EnablementStatus
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

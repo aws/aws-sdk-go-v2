@@ -1,0 +1,5 @@
+POST /ListTableStorageOptimizers
+
+Content-Type: application/json
+
+{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","MaxResults":1,"NextToken":"__NextToken__","StorageOptimizerType":"COMPACTION","TableName":"__TableName__"}

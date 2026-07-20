@@ -270,6 +270,46 @@ func (m *validateOpCreateIdNamespaceAssociation) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateIntermediateTableAnalysisRule struct {
+}
+
+func (*validateOpCreateIntermediateTableAnalysisRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateIntermediateTableAnalysisRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateIntermediateTableAnalysisRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateIntermediateTableAnalysisRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateIntermediateTable struct {
+}
+
+func (*validateOpCreateIntermediateTable) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateIntermediateTable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateIntermediateTableInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateIntermediateTableInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMembership struct {
 }
 
@@ -490,6 +530,46 @@ func (m *validateOpDeleteIdNamespaceAssociation) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteIntermediateTableAnalysisRule struct {
+}
+
+func (*validateOpDeleteIntermediateTableAnalysisRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteIntermediateTableAnalysisRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteIntermediateTableAnalysisRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteIntermediateTableAnalysisRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteIntermediateTable struct {
+}
+
+func (*validateOpDeleteIntermediateTable) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteIntermediateTable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteIntermediateTableInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteIntermediateTableInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteMember struct {
 }
 
@@ -545,6 +625,26 @@ func (m *validateOpDeletePrivacyBudgetTemplate) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeletePrivacyBudgetTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisallowIntermediateTable struct {
+}
+
+func (*validateOpDisallowIntermediateTable) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisallowIntermediateTable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisallowIntermediateTableInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisallowIntermediateTableInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -825,6 +925,46 @@ func (m *validateOpGetIdNamespaceAssociation) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetIdNamespaceAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetIntermediateTableAnalysisRule struct {
+}
+
+func (*validateOpGetIntermediateTableAnalysisRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIntermediateTableAnalysisRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIntermediateTableAnalysisRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIntermediateTableAnalysisRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetIntermediateTable struct {
+}
+
+func (*validateOpGetIntermediateTable) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIntermediateTable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIntermediateTableInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIntermediateTableInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1170,6 +1310,46 @@ func (m *validateOpListIdNamespaceAssociations) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListIntermediateTables struct {
+}
+
+func (*validateOpListIntermediateTables) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListIntermediateTables) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListIntermediateTablesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListIntermediateTablesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListIntermediateTableVersions struct {
+}
+
+func (*validateOpListIntermediateTableVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListIntermediateTableVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListIntermediateTableVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListIntermediateTableVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListMembers struct {
 }
 
@@ -1325,6 +1505,26 @@ func (m *validateOpPopulateIdMappingTable) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPopulateIdMappingTableInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPopulateIntermediateTable struct {
+}
+
+func (*validateOpPopulateIntermediateTable) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPopulateIntermediateTable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PopulateIntermediateTableInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPopulateIntermediateTableInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1630,6 +1830,46 @@ func (m *validateOpUpdateIdNamespaceAssociation) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateIntermediateTableAnalysisRule struct {
+}
+
+func (*validateOpUpdateIntermediateTableAnalysisRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateIntermediateTableAnalysisRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateIntermediateTableAnalysisRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateIntermediateTableAnalysisRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateIntermediateTable struct {
+}
+
+func (*validateOpUpdateIntermediateTable) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateIntermediateTable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateIntermediateTableInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateIntermediateTableInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMembership struct {
 }
 
@@ -1762,6 +2002,14 @@ func addOpCreateIdNamespaceAssociationValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpCreateIdNamespaceAssociation{}, middleware.After)
 }
 
+func addOpCreateIntermediateTableAnalysisRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateIntermediateTableAnalysisRule{}, middleware.After)
+}
+
+func addOpCreateIntermediateTableValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateIntermediateTable{}, middleware.After)
+}
+
 func addOpCreateMembershipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMembership{}, middleware.After)
 }
@@ -1806,6 +2054,14 @@ func addOpDeleteIdNamespaceAssociationValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpDeleteIdNamespaceAssociation{}, middleware.After)
 }
 
+func addOpDeleteIntermediateTableAnalysisRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteIntermediateTableAnalysisRule{}, middleware.After)
+}
+
+func addOpDeleteIntermediateTableValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteIntermediateTable{}, middleware.After)
+}
+
 func addOpDeleteMemberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMember{}, middleware.After)
 }
@@ -1816,6 +2072,10 @@ func addOpDeleteMembershipValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeletePrivacyBudgetTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePrivacyBudgetTemplate{}, middleware.After)
+}
+
+func addOpDisallowIntermediateTableValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisallowIntermediateTable{}, middleware.After)
 }
 
 func addOpGetAnalysisTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -1872,6 +2132,14 @@ func addOpGetIdMappingTableValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetIdNamespaceAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIdNamespaceAssociation{}, middleware.After)
+}
+
+func addOpGetIntermediateTableAnalysisRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIntermediateTableAnalysisRule{}, middleware.After)
+}
+
+func addOpGetIntermediateTableValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIntermediateTable{}, middleware.After)
 }
 
 func addOpGetMembershipValidationMiddleware(stack *middleware.Stack) error {
@@ -1942,6 +2210,14 @@ func addOpListIdNamespaceAssociationsValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpListIdNamespaceAssociations{}, middleware.After)
 }
 
+func addOpListIntermediateTablesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListIntermediateTables{}, middleware.After)
+}
+
+func addOpListIntermediateTableVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListIntermediateTableVersions{}, middleware.After)
+}
+
 func addOpListMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMembers{}, middleware.After)
 }
@@ -1972,6 +2248,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPopulateIdMappingTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPopulateIdMappingTable{}, middleware.After)
+}
+
+func addOpPopulateIntermediateTableValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPopulateIntermediateTable{}, middleware.After)
 }
 
 func addOpPreviewPrivacyImpactValidationMiddleware(stack *middleware.Stack) error {
@@ -2032,6 +2312,14 @@ func addOpUpdateIdMappingTableValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpUpdateIdNamespaceAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateIdNamespaceAssociation{}, middleware.After)
+}
+
+func addOpUpdateIntermediateTableAnalysisRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateIntermediateTableAnalysisRule{}, middleware.After)
+}
+
+func addOpUpdateIntermediateTableValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateIntermediateTable{}, middleware.After)
 }
 
 func addOpUpdateMembershipValidationMiddleware(stack *middleware.Stack) error {
@@ -2744,6 +3032,117 @@ func validateIdNamespaceAssociationInputReferenceConfig(v *types.IdNamespaceAsso
 	}
 }
 
+func validateIntermediateTableAnalysisRuleCustom(v *types.IntermediateTableAnalysisRuleCustom) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IntermediateTableAnalysisRuleCustom"}
+	if v.DifferentialPrivacy != nil {
+		if err := validateDifferentialPrivacyConfiguration(v.DifferentialPrivacy); err != nil {
+			invalidParams.AddNested("DifferentialPrivacy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIntermediateTableAnalysisRulePolicy(v types.IntermediateTableAnalysisRulePolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IntermediateTableAnalysisRulePolicy"}
+	switch uv := v.(type) {
+	case *types.IntermediateTableAnalysisRulePolicyMemberV1:
+		if err := validateIntermediateTableAnalysisRulePolicyV1(uv.Value); err != nil {
+			invalidParams.AddNested("[v1]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIntermediateTableAnalysisRulePolicyV1(v types.IntermediateTableAnalysisRulePolicyV1) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IntermediateTableAnalysisRulePolicyV1"}
+	switch uv := v.(type) {
+	case *types.IntermediateTableAnalysisRulePolicyV1MemberCustom:
+		if err := validateIntermediateTableAnalysisRuleCustom(&uv.Value); err != nil {
+			invalidParams.AddNested("[custom]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIntermediateTableColumn(v *types.IntermediateTableColumn) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IntermediateTableColumn"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIntermediateTableColumnList(v []types.IntermediateTableColumn) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IntermediateTableColumnList"}
+	for i := range v {
+		if err := validateIntermediateTableColumn(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIntermediateTableOutputConfiguration(v *types.IntermediateTableOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IntermediateTableOutputConfiguration"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateJobComputePaymentConfig(v *types.JobComputePaymentConfig) error {
 	if v == nil {
 		return nil
@@ -3439,6 +3838,11 @@ func validateProtectedQueryOutputConfiguration(v types.ProtectedQueryOutputConfi
 			invalidParams.AddNested("[distribute]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ProtectedQueryOutputConfigurationMemberIntermediateTable:
+		if err := validateIntermediateTableOutputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[intermediateTable]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ProtectedQueryOutputConfigurationMemberMember:
 		if err := validateProtectedQueryMemberOutputConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[member]", err.(smithy.InvalidParamsError))
@@ -3899,9 +4303,6 @@ func validateOpCreateCollaborationInput(v *CreateCollaborationInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
-	}
 	if v.CreatorMemberAbilities == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CreatorMemberAbilities"))
 	}
@@ -4105,6 +4506,55 @@ func validateOpCreateIdNamespaceAssociationInput(v *CreateIdNamespaceAssociation
 		if err := validateIdMappingConfig(v.IdMappingConfig); err != nil {
 			invalidParams.AddNested("IdMappingConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateIntermediateTableAnalysisRuleInput(v *CreateIntermediateTableAnalysisRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIntermediateTableAnalysisRuleInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.IntermediateTableIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntermediateTableIdentifier"))
+	}
+	if len(v.AnalysisRuleType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisRuleType"))
+	}
+	if v.AnalysisRulePolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisRulePolicy"))
+	} else if v.AnalysisRulePolicy != nil {
+		if err := validateIntermediateTableAnalysisRulePolicy(v.AnalysisRulePolicy); err != nil {
+			invalidParams.AddNested("AnalysisRulePolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateIntermediateTableInput(v *CreateIntermediateTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIntermediateTableInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.PopulationAnalysisConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PopulationAnalysisConfiguration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4330,6 +4780,45 @@ func validateOpDeleteIdNamespaceAssociationInput(v *DeleteIdNamespaceAssociation
 	}
 }
 
+func validateOpDeleteIntermediateTableAnalysisRuleInput(v *DeleteIntermediateTableAnalysisRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteIntermediateTableAnalysisRuleInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.IntermediateTableIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntermediateTableIdentifier"))
+	}
+	if len(v.AnalysisRuleType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisRuleType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteIntermediateTableInput(v *DeleteIntermediateTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteIntermediateTableInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.IntermediateTableIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntermediateTableIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteMemberInput(v *DeleteMemberInput) error {
 	if v == nil {
 		return nil
@@ -4373,6 +4862,24 @@ func validateOpDeletePrivacyBudgetTemplateInput(v *DeletePrivacyBudgetTemplateIn
 	}
 	if v.PrivacyBudgetTemplateIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PrivacyBudgetTemplateIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisallowIntermediateTableInput(v *DisallowIntermediateTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisallowIntermediateTableInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.IntermediateTableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntermediateTableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4619,6 +5126,45 @@ func validateOpGetIdNamespaceAssociationInput(v *GetIdNamespaceAssociationInput)
 	invalidParams := smithy.InvalidParamsError{Context: "GetIdNamespaceAssociationInput"}
 	if v.IdNamespaceAssociationIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdNamespaceAssociationIdentifier"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIntermediateTableAnalysisRuleInput(v *GetIntermediateTableAnalysisRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIntermediateTableAnalysisRuleInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.IntermediateTableIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntermediateTableIdentifier"))
+	}
+	if len(v.AnalysisRuleType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisRuleType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIntermediateTableInput(v *GetIntermediateTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIntermediateTableInput"}
+	if v.IntermediateTableIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntermediateTableIdentifier"))
 	}
 	if v.MembershipIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
@@ -4906,6 +5452,39 @@ func validateOpListIdNamespaceAssociationsInput(v *ListIdNamespaceAssociationsIn
 	}
 }
 
+func validateOpListIntermediateTablesInput(v *ListIntermediateTablesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListIntermediateTablesInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListIntermediateTableVersionsInput(v *ListIntermediateTableVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListIntermediateTableVersionsInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.IntermediateTableIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntermediateTableIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListMembersInput(v *ListMembersInput) error {
 	if v == nil {
 		return nil
@@ -5021,6 +5600,24 @@ func validateOpPopulateIdMappingTableInput(v *PopulateIdMappingTableInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "PopulateIdMappingTableInput"}
 	if v.IdMappingTableIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdMappingTableIdentifier"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPopulateIntermediateTableInput(v *PopulateIntermediateTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PopulateIntermediateTableInput"}
+	if v.IntermediateTableIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntermediateTableIdentifier"))
 	}
 	if v.MembershipIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
@@ -5342,6 +5939,57 @@ func validateOpUpdateIdNamespaceAssociationInput(v *UpdateIdNamespaceAssociation
 	if v.IdMappingConfig != nil {
 		if err := validateIdMappingConfig(v.IdMappingConfig); err != nil {
 			invalidParams.AddNested("IdMappingConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateIntermediateTableAnalysisRuleInput(v *UpdateIntermediateTableAnalysisRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIntermediateTableAnalysisRuleInput"}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.IntermediateTableIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntermediateTableIdentifier"))
+	}
+	if len(v.AnalysisRuleType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisRuleType"))
+	}
+	if v.AnalysisRulePolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisRulePolicy"))
+	} else if v.AnalysisRulePolicy != nil {
+		if err := validateIntermediateTableAnalysisRulePolicy(v.AnalysisRulePolicy); err != nil {
+			invalidParams.AddNested("AnalysisRulePolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateIntermediateTableInput(v *UpdateIntermediateTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIntermediateTableInput"}
+	if v.IntermediateTableIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntermediateTableIdentifier"))
+	}
+	if v.MembershipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.Columns != nil {
+		if err := validateIntermediateTableColumnList(v.Columns); err != nil {
+			invalidParams.AddNested("Columns", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=BundleInstance&DryRun=true&InstanceId=__InstanceId__&Storage.S3.AWSAccessKeyId=__AWSAccessKeyId__&Storage.S3.Bucket=__Bucket__&Storage.S3.Prefix=__Prefix__&Storage.S3.UploadPolicy=YmxvYg%3D%3D&Storage.S3.UploadPolicySignature=__UploadPolicySignature__&Version=2016-11-15

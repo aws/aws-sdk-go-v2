@@ -6,6 +6,7 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -50,6 +51,11 @@ type UpdateCertificateOptionsInput struct {
 	Options *types.CertificateOptions
 
 	noSmithyDocumentSerde
+}
+
+func (in *UpdateCertificateOptionsInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ServiceType = ptr.String("ACM")
 }
 
 type UpdateCertificateOptionsOutput struct {

@@ -82,7 +82,7 @@ type SuggestInput struct {
 	// ap-southeast-5 regions support only the following codes: en, id, km, lo, ms,
 	// my, pt, th, tl, vi, zh
 	//
-	// [BCP 47]: https://en.wikipedia.org/wiki/IETF_language_tag
+	// [BCP 47]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Language *string
 
@@ -104,6 +104,10 @@ type SuggestInput struct {
 	//
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	PoliticalView *string
+
+	// Indicates the mode of mobility used by the end user. This is used to improve
+	// the relevance of search results. Valid values are Car , Scooter , and Truck .
+	TravelMode types.SuggestTravelMode
 
 	noSmithyDocumentSerde
 }

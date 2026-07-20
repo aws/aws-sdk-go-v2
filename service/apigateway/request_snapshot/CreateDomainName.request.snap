@@ -1,0 +1,6 @@
+POST /domainnames
+
+Accept: application/json
+Content-Type: application/json
+
+{"certificateArn":"__CertificateArn__","certificateBody":"__CertificateBody__","certificateChain":"__CertificateChain__","certificateName":"__CertificateName__","certificatePrivateKey":"__CertificatePrivateKey__","domainName":"__DomainName__","endpointAccessMode":"BASIC","endpointConfiguration":{"ipAddressType":"ipv4","types":["REGIONAL","REGIONAL"],"vpcEndpointIds":["__Member__","__Member__"]},"mutualTlsAuthentication":{"truststoreUri":"__TruststoreUri__","truststoreVersion":"__TruststoreVersion__"},"ownershipVerificationCertificateArn":"__OwnershipVerificationCertificateArn__","policy":"__Policy__","regionalCertificateArn":"__RegionalCertificateArn__","regionalCertificateName":"__RegionalCertificateName__","routingMode":"BASE_PATH_MAPPING_ONLY","securityPolicy":"TLS_1_0","tags":{"key0":"__Value__"}}

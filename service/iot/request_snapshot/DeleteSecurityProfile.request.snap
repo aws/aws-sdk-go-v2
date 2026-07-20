@@ -1,0 +1,3 @@
+DELETE /security-profiles/__SecurityProfileName__?expectedVersion=1
+
+

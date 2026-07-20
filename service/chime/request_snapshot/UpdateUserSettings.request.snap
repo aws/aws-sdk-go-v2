@@ -1,0 +1,5 @@
+PUT /accounts/__AccountId__/users/__UserId__/settings
+
+Content-Type: application/json
+
+{"UserSettings":{"Telephony":{"InboundCalling":true,"OutboundCalling":true,"SMS":true}}}

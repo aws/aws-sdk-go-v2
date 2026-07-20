@@ -1,0 +1,5 @@
+POST /routingcontrol
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","ClusterArn":"__ClusterArn__","ControlPanelArn":"__ControlPanelArn__","RoutingControlName":"__RoutingControlName__"}

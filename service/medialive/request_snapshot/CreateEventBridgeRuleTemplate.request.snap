@@ -1,0 +1,5 @@
+POST /prod/eventbridge-rule-templates
+
+Content-Type: application/json
+
+{"description":"__Description__","eventTargets":[{"arn":"__Arn__"},{"arn":"__Arn__"}],"eventType":"MEDIALIVE_MULTIPLEX_ALERT","groupIdentifier":"__GroupIdentifier__","name":"__Name__","requestId":"__RequestId__","tags":{"key0":"__Value__"}}

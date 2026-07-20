@@ -44,6 +44,11 @@ type GetPlaceInput struct {
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	AdditionalFeatures []types.GetPlaceAdditionalFeature
 
+	// Specifies how address names are returned. When set to Administrative , the
+	// service returns the official administrative names for address components.
+	// Administrative currently applies only to addresses in the United States.
+	AddressNamesMode types.GetPlaceAddressNamesMode
+
 	//  Indicates if the query results will be persisted in customer infrastructure.
 	// Defaults to SingleUse (not stored). Not supported in ap-southeast-1 and
 	// ap-southeast-5 regions for [GrabMaps] customers.
@@ -67,7 +72,7 @@ type GetPlaceInput struct {
 	// ap-southeast-5 regions support only the following codes: en, id, km, lo, ms,
 	// my, pt, th, tl, vi, zh
 	//
-	// [BCP 47]: https://en.wikipedia.org/wiki/IETF_language_tag
+	// [BCP 47]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Language *string
 
@@ -145,6 +150,14 @@ type GetPlaceOutput struct {
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Contacts *types.Contacts
 
+	// The list of supplier references available for this place. Requires the
+	// CrossReferences additional feature to be enabled.
+	CrossReferences []types.CrossReference
+
+	// If true , indicates that the coordinates of the position and access points of
+	// the point address are estimated.
+	EstimatedPointAddress *bool
+
 	//  List of food types offered by this result. Not available in ap-southeast-1 and
 	// ap-southeast-5 regions for [GrabMaps] customers.
 	//
@@ -176,6 +189,10 @@ type GetPlaceOutput struct {
 	//
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Phonemes *types.PhonemeDetails
+
+	// A list of place attributes for the result, such as whether the business offers
+	// drive-through service.
+	PlaceAttributes []types.PlaceAttribute
 
 	//  The alpha-2 or alpha-3 character code for the political view of a country. The
 	// political view applies to the results of the request to represent unresolved

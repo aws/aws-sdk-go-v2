@@ -7,6 +7,48 @@ import (
 	"time"
 )
 
+// Represents a message sent to the agent during chat-based profile customization.
+type AgentInputMessage struct {
+
+	// The text of your message to the agent.
+	//
+	// This member is required.
+	Body *string
+
+	// The type of input message, which determines how the agent processes your
+	// request. Valid values:
+	//
+	//   - normal : A regular message to the agent.
+	//
+	//   - confirmation_response : A response to a confirmation request from the agent.
+	//
+	// This member is required.
+	Type AgentInputMessageType
+
+	noSmithyDocumentSerde
+}
+
+// Represents a response message from the agent during chat-based profile
+// customization.
+type AgentOutputMessage struct {
+
+	// The text of the agent's response.
+	//
+	// This member is required.
+	Body *string
+
+	// The type of output message, which indicates how to interpret the agent's
+	// response.
+	//
+	// This member is required.
+	Type AgentOutputMessageType
+
+	// A list of selectable options presented when the response type is options .
+	OptionsList []string
+
+	noSmithyDocumentSerde
+}
+
 // The analytics configuration for a data store.
 type AnalyticsConfiguration struct {
 
@@ -14,6 +56,64 @@ type AnalyticsConfiguration struct {
 	Status AnalyticsStatus
 
 	noSmithyDocumentSerde
+}
+
+// The source for initial content when creating a data transformation profile.
+// Specify exactly one variant: a built-in starter profile, an existing profile
+// version to clone, raw profile content, or a sample data file.
+//
+// The following types satisfy this interface:
+//
+//	CreateDataTransformationProfileSourceMemberExistingVersionedProfileId
+//	CreateDataTransformationProfileSourceMemberProfileMapping
+//	CreateDataTransformationProfileSourceMemberSampleData
+//	CreateDataTransformationProfileSourceMemberStarterProfile
+type CreateDataTransformationProfileSource interface {
+	isCreateDataTransformationProfileSource()
+}
+
+// Creates the profile by cloning an existing profile at a specific version.
+type CreateDataTransformationProfileSourceMemberExistingVersionedProfileId struct {
+	Value ExistingVersionedProfileSource
+
+	noSmithyDocumentSerde
+}
+
+func (*CreateDataTransformationProfileSourceMemberExistingVersionedProfileId) isCreateDataTransformationProfileSource() {
+}
+
+// Creates the profile from raw profile content that you provide directly. Use
+// this variant for continuous integration and continuous delivery (CI/CD)
+// workflows.
+type CreateDataTransformationProfileSourceMemberProfileMapping struct {
+	Value ProfileMappingSource
+
+	noSmithyDocumentSerde
+}
+
+func (*CreateDataTransformationProfileSourceMemberProfileMapping) isCreateDataTransformationProfileSource() {
+}
+
+// Creates the profile from a sample data file stored in Amazon S3. Valid only
+// when the source format is Comma-separated values (CSV).
+type CreateDataTransformationProfileSourceMemberSampleData struct {
+	Value SampleDataSource
+
+	noSmithyDocumentSerde
+}
+
+func (*CreateDataTransformationProfileSourceMemberSampleData) isCreateDataTransformationProfileSource() {
+}
+
+// Creates the profile from a built-in starter profile. Valid only when the source
+// format is Consolidated Clinical Document Architecture (C-CDA).
+type CreateDataTransformationProfileSourceMemberStarterProfile struct {
+	Value StarterProfileSource
+
+	noSmithyDocumentSerde
+}
+
+func (*CreateDataTransformationProfileSourceMemberStarterProfile) isCreateDataTransformationProfileSource() {
 }
 
 // The filters applied to a data store query.
@@ -96,6 +196,96 @@ type DatastoreProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Contains summary information about a data transformation profile. To retrieve
+// profile content, call GetDataTransformationProfile .
+type DataTransformationProfileSummary struct {
+
+	// The unique identifier of the profile.
+	//
+	// This member is required.
+	ProfileId *string
+
+	// The source data format that this profile converts from.
+	//
+	// This member is required.
+	SourceFormat SourceFormat
+
+	// The target output format of the profile.
+	//
+	// This member is required.
+	TargetFormat TargetFormat
+
+	// The latest version number of the profile.
+	//
+	// This member is required.
+	Version *int32
+
+	// The timestamp when the profile was last updated.
+	LastUpdatedAt *time.Time
+
+	// A description of the profile's purpose.
+	ProfileDescription *string
+
+	// The name of the profile.
+	ProfileName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a specific version of a data transformation
+// profile. To retrieve profile content, call GetDataTransformationProfile .
+type DataTransformationProfileVersionSummary struct {
+
+	// The unique identifier of the profile.
+	//
+	// This member is required.
+	ProfileId *string
+
+	// The source data format that this profile converts from.
+	//
+	// This member is required.
+	SourceFormat SourceFormat
+
+	// The target output format of the profile.
+	//
+	// This member is required.
+	TargetFormat TargetFormat
+
+	// The version number.
+	//
+	// This member is required.
+	Version *int32
+
+	// A description of what changed in this version.
+	ChangeDescription *string
+
+	// The timestamp when this version was last updated.
+	LastUpdatedAt *time.Time
+
+	// The name of the profile.
+	ProfileName *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 output configuration for a data transformation job, including the
+// output location and encryption settings.
+type DataTransformationS3Configuration struct {
+
+	// The AWS Key Management Service (AWS KMS) key identifier used to encrypt the
+	// transformation job output written to Amazon S3.
+	//
+	// This member is required.
+	KmsKeyId *string
+
+	// The Amazon S3 URI where AWS HealthLake writes the converted output files.
+	//
+	// This member is required.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // The error information for CreateFHIRDatastore and DeleteFHIRDatastore actions.
 type ErrorCause struct {
 
@@ -104,6 +294,23 @@ type ErrorCause struct {
 
 	// The error message text for ErrorCause .
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Identifies an existing data transformation profile and version to clone when
+// creating a new profile.
+type ExistingVersionedProfileSource struct {
+
+	// The unique identifier of the existing profile to clone from.
+	//
+	// This member is required.
+	ProfileId *string
+
+	// The version number of the existing profile to clone from.
+	//
+	// This member is required.
+	Version *int32
 
 	noSmithyDocumentSerde
 }
@@ -284,12 +491,34 @@ type JobProgressReport struct {
 	// The transaction rate the import job is processed at.
 	Throughput *float64
 
+	// Number of CCDA files successfully transformed during the import's
+	// transformation phase. Populated only for import jobs that use the
+	// two-Step-Function (transformation + ingestion) flow; null for legacy single-SF
+	// imports and for pure FHIR imports that skip transformation.
+	TotalFilesConverted *int64
+
 	// The number of files that failed to be read from the S3 input bucket due to
 	// customer error.
 	TotalNumberOfFilesReadWithCustomerError *int64
 
 	// The number of files imported.
 	TotalNumberOfImportedFiles *int64
+
+	// The number of non-FHIR files imported.
+	TotalNumberOfImportedNonFhirFiles *int64
+
+	// The number of non-FHIR files that failed to be read from the S3 input bucket
+	// due to customer error.
+	TotalNumberOfNonFhirFilesReadWithCustomerError *int64
+
+	// The number of non-FHIR resources imported.
+	TotalNumberOfNonFhirResourcesImported *int64
+
+	// The number of non-FHIR resources scanned from the S3 input bucket.
+	TotalNumberOfNonFhirResourcesScanned *int64
+
+	// The number of non-FHIR resources that failed due to customer error.
+	TotalNumberOfNonFhirResourcesWithCustomerError *int64
 
 	// The number of resources imported.
 	TotalNumberOfResourcesImported *int64
@@ -303,8 +532,19 @@ type JobProgressReport struct {
 	// The number of files scanned from the S3 input bucket.
 	TotalNumberOfScannedFiles *int64
 
+	// The number of non-FHIR files scanned from the S3 input bucket.
+	TotalNumberOfScannedNonFhirFiles *int64
+
+	// Number of FHIR resources produced by the transformation phase. Populated only
+	// for import jobs that use the two-Step-Function flow; null for legacy single-SF
+	// imports and for pure FHIR imports.
+	TotalResourcesGenerated *int64
+
 	// The size (in MB) of files scanned from the S3 input bucket.
 	TotalSizeOfScannedFilesInMB *float64
+
+	// The size (in MB) of non-FHIR files scanned from the S3 input bucket.
+	TotalSizeOfScannedNonFhirFilesInMB *float64
 
 	noSmithyDocumentSerde
 }
@@ -372,6 +612,18 @@ type ProfileConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains raw content to use as the source when creating a data transformation
+// profile directly from a mapping.
+type ProfileMappingSource struct {
+
+	// The content as a map of file paths to profile strings.
+	//
+	// This member is required.
+	ProfileMapping map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of the S3 bucket for either an import or export job. This
 // includes assigning access permissions.
 type S3Configuration struct {
@@ -390,6 +642,19 @@ type S3Configuration struct {
 	noSmithyDocumentSerde
 }
 
+// Identifies a sample data file in Amazon S3 to use as the source when creating a
+// data transformation profile. Valid only when the source format is
+// Comma-separated values (CSV).
+type SampleDataSource struct {
+
+	// The Amazon S3 URI of the sample data file.
+	//
+	// This member is required.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // The server-side encryption key configuration for a customer-provided encryption
 // key.
 type SseConfiguration struct {
@@ -399,6 +664,19 @@ type SseConfiguration struct {
 	//
 	// This member is required.
 	KmsEncryptionConfig *KmsEncryptionConfig
+
+	noSmithyDocumentSerde
+}
+
+// Identifies a built-in starter profile to use as the source when creating a data
+// transformation profile. Valid only when the source format is Consolidated
+// Clinical Document Architecture (C-CDA).
+type StarterProfileSource struct {
+
+	// The name of the built-in starter profile.
+	//
+	// This member is required.
+	StarterProfileName *string
 
 	noSmithyDocumentSerde
 }
@@ -420,6 +698,165 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon S3 location and source format configuration for input data in a
+// transformation job.
+type TransformationInputDataConfig struct {
+
+	// The Amazon S3 URI of the input data to transform.
+	//
+	// This member is required.
+	S3Uri *string
+
+	// The format of the source data files (C-CDA or CSV).
+	SourceFormat SourceFormat
+
+	noSmithyDocumentSerde
+}
+
+// Contains progress metrics for a data transformation job, including counts of
+// files scanned, converted, and failed.
+type TransformationJobProgressReport struct {
+
+	// The total number of source files successfully converted.
+	//
+	// This member is required.
+	TotalFilesConverted *int64
+
+	// The total number of source files that failed conversion.
+	//
+	// This member is required.
+	TotalFilesFailed *int64
+
+	// The total number of source files scanned by the job.
+	//
+	// This member is required.
+	TotalFilesScanned *int64
+
+	// The total number of FHIR R4 resources generated across all converted files.
+	//
+	// This member is required.
+	TotalResourcesGenerated *int64
+
+	noSmithyDocumentSerde
+}
+
+// Contains the properties of a data transformation job, including its status,
+// configuration, and progress information. You retrieve this structure by calling
+// DescribeDataTransformationJob .
+type TransformationJobProperties struct {
+
+	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
+	// role that grants AWS HealthLake access to the specified Amazon S3 locations. AWS
+	// HealthLake assumes this role to read input files and write output files.
+	//
+	// This member is required.
+	DataAccessRoleArn *string
+
+	// The Amazon S3 location and format of the source files for this job.
+	//
+	// This member is required.
+	InputDataConfig *TransformationInputDataConfig
+
+	// The unique identifier of the data transformation job.
+	//
+	// This member is required.
+	JobId *string
+
+	// The current status of the data transformation job.
+	//
+	// This member is required.
+	JobStatus TransformationJobStatus
+
+	// The Amazon S3 location and encryption configuration for the converted output.
+	//
+	// This member is required.
+	OutputDataConfig *TransformationOutputDataConfig
+
+	// The timestamp when the job was submitted.
+	//
+	// This member is required.
+	SubmitTime *time.Time
+
+	// Specifies whether drift detection is enabled for this job. When enabled, AWS
+	// HealthLake writes a drift report to the output Amazon S3 location alongside the
+	// converted files.
+	DriftDetectionEnabled *bool
+
+	// The timestamp when the job completed or failed.
+	EndTime *time.Time
+
+	// The name of the data transformation job.
+	JobName *string
+
+	// The progress report for the data transformation job, including counts of files
+	// processed and resources generated.
+	JobProgressReport *TransformationJobProgressReport
+
+	// An informational message about the job, such as an error description if the job
+	// failed.
+	Message *string
+
+	// The unique identifier of the data transformation profile used for this job.
+	ProfileId *string
+
+	// The name of the data transformation profile used for this job.
+	ProfileName *string
+
+	// The version number of the data transformation profile used for this job.
+	ProfileVersion *int32
+
+	// Specifies whether FHIR R4 Provenance resource generation is enabled for this
+	// transformation job. When provenance is enabled, the service also generates
+	// related DocumentReference and Device resources.
+	ProvenanceEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a data transformation job. To retrieve full
+// job details, call DescribeDataTransformationJob .
+type TransformationJobSummary struct {
+
+	// The unique identifier of the job.
+	//
+	// This member is required.
+	JobId *string
+
+	// The current status of the job.
+	//
+	// This member is required.
+	JobStatus TransformationJobStatus
+
+	// The timestamp when the job was submitted.
+	//
+	// This member is required.
+	SubmitTime *time.Time
+
+	// The timestamp when the job completed.
+	EndTime *time.Time
+
+	// The name of the job.
+	JobName *string
+
+	// The source data format for this job.
+	SourceFormat SourceFormat
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 output location and encryption configuration for a transformation
+// job.
+type TransformationOutputDataConfig struct {
+
+	// The Amazon S3 output location and AWS Key Management Service (AWS KMS)
+	// encryption configuration.
+	//
+	// This member is required.
+	S3Configuration *DataTransformationS3Configuration
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -431,5 +868,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isInputDataConfig()  {}
-func (*UnknownUnionMember) isOutputDataConfig() {}
+func (*UnknownUnionMember) isCreateDataTransformationProfileSource() {}
+func (*UnknownUnionMember) isInputDataConfig()                       {}
+func (*UnknownUnionMember) isOutputDataConfig()                      {}

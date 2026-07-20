@@ -1,0 +1,5 @@
+PUT /kx/environments/__EnvironmentId__/databases/__DatabaseName__/dataviews/__DataviewName__
+
+Content-Type: application/x-amz-json-1.1
+
+{"changesetId":"__ChangesetId__","clientToken":"__ClientToken__","description":"__Description__","segmentConfigurations":[{"dbPaths":["__Member__","__Member__"],"onDemand":true,"volumeName":"__VolumeName__"},{"dbPaths":["__Member__","__Member__"],"onDemand":true,"volumeName":"__VolumeName__"}]}

@@ -33,13 +33,19 @@ type CreateAutonomousDatabaseWalletInput struct {
 	// This member is required.
 	AutonomousDatabaseId *string
 
-	// The password to encrypt the keys inside the wallet.
-	//
-	// This member is required.
-	Password *string
-
 	// A client-provided token to ensure the idempotency of the request.
 	ClientToken *string
+
+	// The password to encrypt the keys inside the wallet.
+	Password *string
+
+	// The source of the password for encrypting the wallet. When set to
+	// CUSTOMER_MANAGED_AWS_SECRET , the password is retrieved from an Amazon Web
+	// Services Secrets Manager secret.
+	PasswordSource types.WalletPasswordSource
+
+	// The configuration of the password source for the Autonomous Database wallet.
+	PasswordSourceConfiguration types.WalletPasswordSourceConfigurationInput
 
 	// The type of wallet to create, either a regional wallet or an instance wallet.
 	WalletType types.WalletType

@@ -285,6 +285,7 @@ const (
 	StreamSessionStatusReasonInvalidSignalRequest     StreamSessionStatusReason = "invalidSignalRequest"
 	StreamSessionStatusReasonPlacementTimeout         StreamSessionStatusReason = "placementTimeout"
 	StreamSessionStatusReasonAppLogS3DestinationError StreamSessionStatusReason = "applicationLogS3DestinationError"
+	StreamSessionStatusReasonAssumeRoleFailed         StreamSessionStatusReason = "assumeRoleFailed"
 	StreamSessionStatusReasonApplicationExit          StreamSessionStatusReason = "applicationExit"
 	StreamSessionStatusReasonConnectionTimeout        StreamSessionStatusReason = "connectionTimeout"
 	StreamSessionStatusReasonReconnectionTimeout      StreamSessionStatusReason = "reconnectionTimeout"
@@ -303,6 +304,7 @@ func (StreamSessionStatusReason) Values() []StreamSessionStatusReason {
 		"invalidSignalRequest",
 		"placementTimeout",
 		"applicationLogS3DestinationError",
+		"assumeRoleFailed",
 		"applicationExit",
 		"connectionTimeout",
 		"reconnectionTimeout",

@@ -225,6 +225,11 @@ func awsRestjson1_serializeOpDocumentCreateCanaryInput(v *CreateCanaryInput, val
 		ok.Integer(*v.FailureRetentionPeriodInDays)
 	}
 
+	if v.KmsKeyArn != nil {
+		ok := object.Key("KmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -2115,6 +2120,11 @@ func awsRestjson1_serializeOpDocumentUpdateCanaryInput(v *UpdateCanaryInput, val
 		ok.Integer(*v.FailureRetentionPeriodInDays)
 	}
 
+	if v.KmsKeyArn != nil {
+		ok := object.Key("KmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
 	if len(v.ProvisionedResourceCleanup) > 0 {
 		ok := object.Key("ProvisionedResourceCleanup")
 		ok.String(string(v.ProvisionedResourceCleanup))
@@ -2178,6 +2188,11 @@ func awsRestjson1_serializeOpDocumentUpdateCanaryInput(v *UpdateCanaryInput, val
 func awsRestjson1_serializeDocumentAddReplicaLocationInput(v *types.AddReplicaLocationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("KmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
 
 	if v.Location != nil {
 		ok := object.Key("Location")

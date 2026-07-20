@@ -21,6 +21,16 @@ import (
 // attributes. You can use Scopes and Filters independently or together. When both
 // are provided, Scopes narrows the data set first, and then Filters refines
 // results within that scoped data set.
+//
+// For AI/ML resources, the response includes the ResourceSubCategory field. For
+// self-hosted AI resources and their host resources, the response also includes
+// ResourceInfo with AI-specific details. Self-hosted AI resources use a
+// ResourceType with the SelfHosted::AI:: prefix, such as SelfHosted::AI::Model ,
+// SelfHosted::AI::Agent , SelfHosted::AI::InferenceEndpoint , and
+// SelfHosted::AI::ExternalEndpoint .
+//
+// If you filter by ResourceSubCategory , you must also include a ResourceCategory
+// string filter with comparison set to EQUALS and value AI/ML in the same request.
 func (c *Client) GetResourcesV2(ctx context.Context, params *GetResourcesV2Input, optFns ...func(*Options)) (*GetResourcesV2Output, error) {
 	if params == nil {
 		params = &GetResourcesV2Input{}

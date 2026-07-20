@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeStackResourceDrifts&MaxResults=1&NextToken=__NextToken__&StackName=__StackName__&StackResourceDriftStatusFilters.member.1=IN_SYNC&StackResourceDriftStatusFilters.member.2=IN_SYNC&Version=2010-05-15

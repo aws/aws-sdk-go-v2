@@ -4,7 +4,9 @@ package comprehendmedical
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type DescribeEntitiesDetectionV2JobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntitiesDetectionV2JobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntitiesDetectionV2JobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntitiesDetectionV2JobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeEntitiesDetectionV2JobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeEntitiesDetectionV2JobOutput struct {
 
 	// An object that contains the properties associated with a detection job.
@@ -48,13 +62,34 @@ type DescribeEntitiesDetectionV2JobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntitiesDetectionV2JobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntitiesDetectionV2JobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntitiesDetectionV2JobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComprehendMedicalAsyncJobProperties != nil {
+		s.WriteStruct(schemas.DescribeEntitiesDetectionV2JobResponse_ComprehendMedicalAsyncJobProperties)
+		v.ComprehendMedicalAsyncJobProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeEntitiesDetectionV2JobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEntitiesDetectionV2JobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEntitiesDetectionV2JobResponse_ComprehendMedicalAsyncJobProperties:
+			v.ComprehendMedicalAsyncJobProperties = &types.ComprehendMedicalAsyncJobProperties{}
+			return v.ComprehendMedicalAsyncJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEntitiesDetectionV2JobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeEntitiesDetectionV2Job{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntitiesDetectionV2Job, schemas.DescribeEntitiesDetectionV2JobRequest, schemas.DescribeEntitiesDetectionV2JobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeEntitiesDetectionV2Job{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntitiesDetectionV2Job, schemas.DescribeEntitiesDetectionV2JobRequest, schemas.DescribeEntitiesDetectionV2JobResponse), output: &DescribeEntitiesDetectionV2JobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyIntegration&DataFilter=__DataFilter__&Description=__Description__&IntegrationIdentifier=__IntegrationIdentifier__&IntegrationName=__IntegrationName__&Version=2014-10-31

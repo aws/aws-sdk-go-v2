@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceId__/apikeys
+
+Content-Type: application/json
+
+{"keyName":"__KeyName__","keyRole":"__KeyRole__","secondsToLive":1}

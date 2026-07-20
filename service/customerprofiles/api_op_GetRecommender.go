@@ -56,6 +56,10 @@ type GetRecommenderOutput struct {
 	// This member is required.
 	RecommenderRecipeName types.RecommenderRecipeName
 
+	// The name of the recommender version currently serving recommendations. Omitted
+	// when no active recommender version is set.
+	ActiveRecommenderVersionName *string
+
 	// The timestamp of when the recommender was created.
 	CreatedAt *time.Time
 

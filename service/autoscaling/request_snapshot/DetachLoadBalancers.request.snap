@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DetachLoadBalancers&AutoScalingGroupName=__AutoScalingGroupName__&LoadBalancerNames.member.1=__Member__&LoadBalancerNames.member.2=__Member__&Version=2011-01-01

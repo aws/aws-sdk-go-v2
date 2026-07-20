@@ -1,0 +1,5 @@
+POST /delete-slack-workspace-authorization
+
+Content-Type: application/json
+
+{"SlackTeamId":"__SlackTeamId__"}

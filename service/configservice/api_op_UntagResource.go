@@ -45,6 +45,8 @@ type UntagResourceInput struct {
 	//
 	//   - StoredQuery
 	//
+	//   - Connector
+	//
 	// This member is required.
 	ResourceArn *string
 

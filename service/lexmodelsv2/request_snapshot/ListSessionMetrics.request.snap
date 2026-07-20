@@ -1,0 +1,5 @@
+POST /bots/__BotId__/analytics/sessionmetrics
+
+Content-Type: application/json
+
+{"binBy":[{"interval":"OneHour","name":"ConversationStartTime","order":"Ascending"},{"interval":"OneHour","name":"ConversationStartTime","order":"Ascending"}],"endDateTime":946684800,"filters":[{"name":"BotAliasId","operator":"EQ","values":["__Member__","__Member__"]},{"name":"BotAliasId","operator":"EQ","values":["__Member__","__Member__"]}],"groupBy":[{"name":"ConversationEndState"},{"name":"ConversationEndState"}],"maxResults":1,"metrics":[{"name":"Count","order":"Ascending","statistic":"Sum"},{"name":"Count","order":"Ascending","statistic":"Sum"}],"nextToken":"__NextToken__","startDateTime":946684800}

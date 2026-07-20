@@ -8198,6 +8198,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A reasoning content delta.</p>"
                     }
+                },
+                "toolResultMetadata": {
+                    "target": "com.amazonaws.bedrockagentcore#HarnessToolResultMetadataBlockDelta",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tool result metadata delta.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8377,6 +8383,12 @@
                     "target": "com.amazonaws.bedrockagentcore#TopK",
                     "traits": {
                         "smithy.api#documentation": "<p>The topK set when calling the model.</p>"
+                    }
+                },
+                "additionalParams": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provider-specific parameters passed through to the Gemini model provider unchanged.</p>"
                     }
                 }
             },
@@ -8859,7 +8871,8 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 8
+                    "min": 8,
+                    "max": 16383
                 },
                 "smithy.api#pattern": "^https://[^#@]+$"
             }
@@ -8868,7 +8881,8 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1
+                    "min": 1,
+                    "max": 4096
                 }
             }
         },
@@ -8891,7 +8905,8 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 5
+                    "min": 5,
+                    "max": 16383
                 },
                 "smithy.api#pattern": "^s3://"
             }
@@ -9262,6 +9277,21 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.bedrockagentcore#HarnessToolResultContentBlock"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#HarnessToolResultMetadataBlockDelta": {
+            "type": "structure",
+            "members": {
+                "metadata": {
+                    "target": "com.amazonaws.bedrockagentcore#SensitiveText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The partial JSON-string fragment of the tool result metadata.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Delta payload for a tool result metadata.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#HarnessToolType": {
@@ -10268,6 +10298,20 @@
                         "smithy.api#httpHeader": "Mcp-Protocol-Version"
                     }
                 },
+                "mcpMethod": {
+                    "target": "com.amazonaws.bedrockagentcore#StringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MCP method being invoked. For example, <code>tools/call</code>, <code>resources/read</code>, or <code>prompts/get</code>.</p>",
+                        "smithy.api#httpHeader": "Mcp-Method"
+                    }
+                },
+                "mcpName": {
+                    "target": "com.amazonaws.bedrockagentcore#StringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the MCP resource, tool, or prompt being accessed. The value depends on the method:</p> <ul> <li> <p> <code>tools/call</code> – The tool name.</p> </li> <li> <p> <code>resources/read</code> – The resource URI.</p> </li> <li> <p> <code>prompts/get</code> – The prompt name.</p> </li> </ul>",
+                        "smithy.api#httpHeader": "Mcp-Name"
+                    }
+                },
                 "runtimeUserId": {
                     "target": "com.amazonaws.bedrockagentcore#StringType",
                     "traits": {
@@ -10724,6 +10768,50 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An identifier for the end user making the request. This value is passed through to the runtime container.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Runtime-User-Id"
+                    }
+                },
+                "traceParent": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>W3C trace context parent header containing version, trace ID, parent span ID, and trace flags.</p>",
+                        "smithy.api#httpHeader": "traceparent",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        }
+                    }
+                },
+                "traceState": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>W3C trace context state header for vendor-specific trace information.</p>",
+                        "smithy.api#httpHeader": "tracestate",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 512
+                        }
+                    }
+                },
+                "traceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Trace ID for maintaining observability through the operation.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Trace-Id",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        }
+                    }
+                },
+                "baggage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>W3C Baggage header for user-defined context propagation. Format: key1=value1,key2=value2</p>",
+                        "smithy.api#httpHeader": "baggage",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 8192
+                        }
                     }
                 },
                 "messages": {

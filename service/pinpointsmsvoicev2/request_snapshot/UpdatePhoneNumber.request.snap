@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.UpdatePhoneNumber
+
+{"DeletionProtectionEnabled":true,"InternationalSendingEnabled":true,"OptOutListName":"__OptOutListName__","PhoneNumberId":"__PhoneNumberId__","SelfManagedOptOutsEnabled":true,"TwoWayChannelArn":"__TwoWayChannelArn__","TwoWayChannelRole":"__TwoWayChannelRole__","TwoWayEnabled":true}

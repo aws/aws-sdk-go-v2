@@ -56,6 +56,19 @@ type XmlAttributesOnPayloadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlAttributesOnPayloadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlAttributesOnPayloadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlAttributesOnPayloadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Payload != nil {
+		s.WriteStruct(schemas.XmlAttributesOnPayloadResponse_payload)
+		v.Payload.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
 func (v *XmlAttributesOnPayloadOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlAttributesOnPayloadResponse, func(s *smithy.Schema) error {
 		switch s {

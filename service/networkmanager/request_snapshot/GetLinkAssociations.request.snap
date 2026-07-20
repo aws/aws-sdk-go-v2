@@ -1,0 +1,3 @@
+GET /global-networks/__GlobalNetworkId__/link-associations?deviceId=__DeviceId__&linkId=__LinkId__&maxResults=1&nextToken=__NextToken__
+
+

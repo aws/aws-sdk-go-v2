@@ -59,11 +59,11 @@ type ListArchivesOutput struct {
 }
 
 func (c *Client) addOperationListArchivesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListArchives{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListArchives{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListArchives{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListArchives{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -87,6 +87,9 @@ func (c *Client) addOperationListArchivesMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

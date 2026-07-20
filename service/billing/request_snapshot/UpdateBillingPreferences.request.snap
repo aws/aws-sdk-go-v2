@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.UpdateBillingPreferences
+
+{"billingPreferencesPerKey":[{"key":"__Key__","value":"ENABLED"},{"key":"__Key__","value":"ENABLED"}],"feature":"RI_SHARING"}

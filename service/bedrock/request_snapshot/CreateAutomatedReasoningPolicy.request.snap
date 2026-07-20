@@ -1,0 +1,5 @@
+POST /automated-reasoning-policies
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","description":"__Description__","kmsKeyId":"__KmsKeyId__","name":"__Name__","policyDefinition":{"rules":[{"alternateExpression":"__AlternateExpression__","expression":"__Expression__","id":"__Id__"},{"alternateExpression":"__AlternateExpression__","expression":"__Expression__","id":"__Id__"}],"types":[{"description":"__Description__","name":"__Name__","values":[{"description":"__Description__","value":"__Value__"},{"description":"__Description__","value":"__Value__"}]},{"description":"__Description__","name":"__Name__","values":[{"description":"__Description__","value":"__Value__"},{"description":"__Description__","value":"__Value__"}]}],"variables":[{"description":"__Description__","name":"__Name__","type":"__Type__"},{"description":"__Description__","name":"__Name__","type":"__Type__"}],"version":"__Version__"},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

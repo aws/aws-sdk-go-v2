@@ -1,0 +1,6 @@
+DELETE /__Key__?annotation=&annotationName=__AnnotationName__&versionId=__VersionId__
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Object-If-Match: __ObjectIfMatch__
+X-Amz-Request-Payer: requester
+

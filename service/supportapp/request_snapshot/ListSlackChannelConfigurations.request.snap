@@ -1,0 +1,5 @@
+POST /control/list-slack-channel-configurations
+
+Content-Type: application/json
+
+{"nextToken":"__NextToken__"}

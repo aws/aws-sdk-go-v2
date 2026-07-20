@@ -1,0 +1,5 @@
+POST /account/registerAccount
+
+Content-Type: application/json
+
+{"delegatedAdminAccount":"__DelegatedAdminAccount__","kmsKey":"__KmsKey__"}

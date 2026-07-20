@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.CreateApiDestination
+
+{"ConnectionArn":"__ConnectionArn__","Description":"__Description__","HttpMethod":"POST","InvocationEndpoint":"__InvocationEndpoint__","InvocationRateLimitPerSecond":1,"Name":"__Name__"}

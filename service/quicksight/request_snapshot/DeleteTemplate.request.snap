@@ -1,0 +1,3 @@
+DELETE /accounts/__AwsAccountId__/templates/__TemplateId__?version-number=1
+
+

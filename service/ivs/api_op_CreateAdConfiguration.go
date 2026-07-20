@@ -39,6 +39,10 @@ type CreateAdConfigurationInput struct {
 	// Ad configuration name. Defaults to “”.
 	Name *string
 
+	// Configuration for the post-roll ad break to use for this ad configuration.
+	// Default: disabled ( enabled set to false, durationSeconds set to 15).
+	PostRollConfiguration *types.PostRollConfiguration
+
 	// Array of 1-50 maps, each of the form string:string (key:value) . See [Best practices and strategies] in
 	// Tagging Amazon Web Services Resources and Tag Editor for details, including
 	// restrictions that apply to tags and "Tag naming limits and requirements"; Amazon

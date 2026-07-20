@@ -1,0 +1,5 @@
+PUT /notification-configurations/DEVICE_COMMAND
+
+Content-Type: application/json
+
+{"DestinationName":"__DestinationName__"}

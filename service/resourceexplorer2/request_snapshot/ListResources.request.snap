@@ -1,0 +1,5 @@
+POST /ListResources
+
+Content-Type: application/json
+
+{"Filters":{"FilterString":"__FilterString__"},"MaxResults":1,"NextToken":"__NextToken__","ViewArn":"__ViewArn__"}

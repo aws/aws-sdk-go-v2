@@ -4,7 +4,9 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,6 +40,18 @@ type DescribeReturnShippingLabelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReturnShippingLabelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReturnShippingLabelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReturnShippingLabelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeReturnShippingLabelRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeReturnShippingLabelOutput struct {
 
 	// The expiration date of the current return shipping label.
@@ -56,13 +70,48 @@ type DescribeReturnShippingLabelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReturnShippingLabelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReturnShippingLabelResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReturnShippingLabelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.DescribeReturnShippingLabelResult_ExpirationDate, *v.ExpirationDate)
+	}
+	if v.ReturnShippingLabelURI != nil {
+		s.WriteString(schemas.DescribeReturnShippingLabelResult_ReturnShippingLabelURI, *v.ReturnShippingLabelURI)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeReturnShippingLabelResult_Status, string(v.Status))
+	}
+}
+func (v *DescribeReturnShippingLabelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReturnShippingLabelResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReturnShippingLabelResult_ExpirationDate:
+			v.ExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeReturnShippingLabelResult_ExpirationDate, v.ExpirationDate)
+		case schemas.DescribeReturnShippingLabelResult_ReturnShippingLabelURI:
+			v.ReturnShippingLabelURI = new(string)
+			return d.ReadString(schemas.DescribeReturnShippingLabelResult_ReturnShippingLabelURI, v.ReturnShippingLabelURI)
+		case schemas.DescribeReturnShippingLabelResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeReturnShippingLabelResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ShippingLabelStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReturnShippingLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeReturnShippingLabel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReturnShippingLabel, schemas.DescribeReturnShippingLabelRequest, schemas.DescribeReturnShippingLabelResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeReturnShippingLabel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReturnShippingLabel, schemas.DescribeReturnShippingLabelRequest, schemas.DescribeReturnShippingLabelResult), output: &DescribeReturnShippingLabelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

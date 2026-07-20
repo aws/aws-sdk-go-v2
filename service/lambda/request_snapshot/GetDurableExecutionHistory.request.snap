@@ -1,0 +1,3 @@
+GET /2025-12-01/durable-executions/__DurableExecutionArn__/history?IncludeExecutionData=true&Marker=__Marker__&MaxItems=1&ReverseOrder=true
+
+

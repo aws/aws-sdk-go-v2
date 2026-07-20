@@ -261,6 +261,67 @@ func (m *awsAwsjson10_serializeOpDisassociateSourceViews) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpGetBillingPreferences struct {
+}
+
+func (*awsAwsjson10_serializeOpGetBillingPreferences) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpGetBillingPreferences) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetBillingPreferencesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBilling.GetBillingPreferences")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetBillingPreferencesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpGetBillingView struct {
 }
 
@@ -305,6 +366,128 @@ func (m *awsAwsjson10_serializeOpGetBillingView) HandleSerialize(ctx context.Con
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentGetBillingViewInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpGetCreditAllocationHistory struct {
+}
+
+func (*awsAwsjson10_serializeOpGetCreditAllocationHistory) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpGetCreditAllocationHistory) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetCreditAllocationHistoryInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBilling.GetCreditAllocationHistory")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetCreditAllocationHistoryInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpGetCredits struct {
+}
+
+func (*awsAwsjson10_serializeOpGetCredits) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpGetCredits) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetCreditsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBilling.GetCredits")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetCreditsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -566,6 +749,67 @@ func (m *awsAwsjson10_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpRedeemCredits struct {
+}
+
+func (*awsAwsjson10_serializeOpRedeemCredits) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpRedeemCredits) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RedeemCreditsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBilling.RedeemCredits")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentRedeemCreditsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpTagResource struct {
 }
 
@@ -688,6 +932,67 @@ func (m *awsAwsjson10_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpUpdateBillingPreferences struct {
+}
+
+func (*awsAwsjson10_serializeOpUpdateBillingPreferences) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpUpdateBillingPreferences) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateBillingPreferencesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBilling.UpdateBillingPreferences")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateBillingPreferencesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpUpdateBillingView struct {
 }
 
@@ -762,6 +1067,90 @@ func awsAwsjson10_serializeDocumentActiveTimeRange(v *types.ActiveTimeRange, val
 		ok.Double(smithytime.FormatEpochSeconds(*v.ActiveBeforeInclusive))
 	}
 
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentBillingFeatureFilter(v *types.BillingFeatureFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("name")
+		ok.String(string(v.Name))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		if err := awsAwsjson10_serializeDocumentBillingFeatureFilterValues(v.Value, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentBillingFeatureFilters(v []types.BillingFeatureFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentBillingFeatureFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentBillingFeatureFilterValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentBillingFeatures(v []types.BillingFeature, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentBillingPreferenceForKey(v *types.BillingPreferenceForKey, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if len(v.Value) > 0 {
+		ok := object.Key("value")
+		ok.String(string(v.Value))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentBillingPreferencesPerKey(v []types.BillingPreferenceForKey, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentBillingPreferenceForKey(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -1087,6 +1476,37 @@ func awsAwsjson10_serializeOpDocumentDisassociateSourceViewsInput(v *Disassociat
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentGetBillingPreferencesInput(v *GetBillingPreferencesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Features != nil {
+		ok := object.Key("features")
+		if err := awsAwsjson10_serializeDocumentBillingFeatures(v.Features, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Filters != nil {
+		ok := object.Key("filters")
+		if err := awsAwsjson10_serializeDocumentBillingFeatureFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentGetBillingViewInput(v *GetBillingViewInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1094,6 +1514,70 @@ func awsAwsjson10_serializeOpDocumentGetBillingViewInput(v *GetBillingViewInput,
 	if v.Arn != nil {
 		ok := object.Key("arn")
 		ok.String(*v.Arn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentGetCreditAllocationHistoryInput(v *GetCreditAllocationHistoryInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountId != nil {
+		ok := object.Key("accountId")
+		ok.String(*v.AccountId)
+	}
+
+	if v.CreditId != nil {
+		ok := object.Key("creditId")
+		ok.Long(*v.CreditId)
+	}
+
+	if v.EndDate != nil {
+		ok := object.Key("endDate")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndDate))
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.StartDate != nil {
+		ok := object.Key("startDate")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartDate))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentGetCreditsInput(v *GetCreditsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountId != nil {
+		ok := object.Key("accountId")
+		ok.String(*v.AccountId)
+	}
+
+	if v.EndDate != nil {
+		ok := object.Key("endDate")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndDate))
+	}
+
+	if v.PayerAccountFlag != nil {
+		ok := object.Key("payerAccountFlag")
+		ok.Boolean(*v.PayerAccountFlag)
+	}
+
+	if v.StartDate != nil {
+		ok := object.Key("startDate")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartDate))
 	}
 
 	return nil
@@ -1200,6 +1684,18 @@ func awsAwsjson10_serializeOpDocumentListTagsForResourceInput(v *ListTagsForReso
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentRedeemCreditsInput(v *RedeemCreditsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PromoCode != nil {
+		ok := object.Key("promoCode")
+		ok.String(*v.PromoCode)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1233,6 +1729,25 @@ func awsAwsjson10_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, v
 		if err := awsAwsjson10_serializeDocumentResourceTagKeyList(v.ResourceTagKeys, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentUpdateBillingPreferencesInput(v *UpdateBillingPreferencesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BillingPreferencesPerKey != nil {
+		ok := object.Key("billingPreferencesPerKey")
+		if err := awsAwsjson10_serializeDocumentBillingPreferencesPerKey(v.BillingPreferencesPerKey, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Feature) > 0 {
+		ok := object.Key("feature")
+		ok.String(string(v.Feature))
 	}
 
 	return nil

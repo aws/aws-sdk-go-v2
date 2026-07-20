@@ -1,0 +1,5 @@
+PUT /packaging_groups/__Id__/configure_logs
+
+Content-Type: application/json
+
+{"egressAccessLogs":{"logGroupName":"__LogGroupName__"}}

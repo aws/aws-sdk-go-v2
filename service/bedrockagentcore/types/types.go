@@ -2126,6 +2126,7 @@ func (*HarnessContentBlockMemberToolUse) isHarnessContentBlock() {}
 //	HarnessContentBlockDeltaMemberReasoningContent
 //	HarnessContentBlockDeltaMemberText
 //	HarnessContentBlockDeltaMemberToolResult
+//	HarnessContentBlockDeltaMemberToolResultMetadata
 //	HarnessContentBlockDeltaMemberToolUse
 type HarnessContentBlockDelta interface {
 	isHarnessContentBlockDelta()
@@ -2157,6 +2158,15 @@ type HarnessContentBlockDeltaMemberToolResult struct {
 }
 
 func (*HarnessContentBlockDeltaMemberToolResult) isHarnessContentBlockDelta() {}
+
+// A tool result metadata delta.
+type HarnessContentBlockDeltaMemberToolResultMetadata struct {
+	Value HarnessToolResultMetadataBlockDelta
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessContentBlockDeltaMemberToolResultMetadata) isHarnessContentBlockDelta() {}
 
 // A tool use input delta.
 type HarnessContentBlockDeltaMemberToolUse struct {
@@ -2289,6 +2299,10 @@ type HarnessGeminiModelConfig struct {
 	//
 	// This member is required.
 	ModelId *string
+
+	// Provider-specific parameters passed through to the Gemini model provider
+	// unchanged.
+	AdditionalParams document.Interface
 
 	// The maximum number of tokens to allow in the generated response per iteration.
 	MaxTokens *int32
@@ -2904,6 +2918,17 @@ type HarnessToolResultContentBlockMemberText struct {
 }
 
 func (*HarnessToolResultContentBlockMemberText) isHarnessToolResultContentBlock() {}
+
+// Delta payload for a tool result metadata.
+type HarnessToolResultMetadataBlockDelta struct {
+
+	// The partial JSON-string fragment of the tool result metadata.
+	//
+	// This member is required.
+	Metadata *string
+
+	noSmithyDocumentSerde
+}
 
 // A tool use request from the model.
 type HarnessToolUseBlock struct {

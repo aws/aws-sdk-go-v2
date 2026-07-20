@@ -1,0 +1,3 @@
+GET /v2/domains/__DomainIdentifier__/entities/ASSET/__EntityIdentifier__/attributes-metadata?attributeIdentifier=__Member__&attributeIdentifier=__Member__&entityRevision=__EntityRevision__
+
+

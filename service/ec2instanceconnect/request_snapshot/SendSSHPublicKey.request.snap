@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEC2InstanceConnectService.SendSSHPublicKey
+
+{"AvailabilityZone":"__AvailabilityZone__","InstanceId":"__InstanceId__","InstanceOSUser":"__InstanceOSUser__","SSHPublicKey":"__SSHPublicKey__"}

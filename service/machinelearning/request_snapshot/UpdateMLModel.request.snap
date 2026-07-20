@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonML_20141212.UpdateMLModel
+
+{"MLModelId":"__MLModelId__","MLModelName":"__MLModelName__","ScoreThreshold":1}

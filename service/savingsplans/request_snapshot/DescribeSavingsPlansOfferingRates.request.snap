@@ -1,0 +1,5 @@
+POST /DescribeSavingsPlansOfferingRates
+
+Content-Type: application/json
+
+{"filters":[{"name":"region","values":["__Member__","__Member__"]},{"name":"region","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__","operations":["__Member__","__Member__"],"products":["EC2","EC2"],"savingsPlanOfferingIds":["__Member__","__Member__"],"savingsPlanPaymentOptions":["All Upfront","All Upfront"],"savingsPlanTypes":["Compute","Compute"],"serviceCodes":["AmazonEC2","AmazonEC2"],"usageTypes":["__Member__","__Member__"]}

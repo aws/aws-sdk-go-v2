@@ -1,0 +1,3 @@
+GET /graphs/__GraphIdentifier__/endpoints/?maxResults=1&nextToken=__NextToken__
+
+

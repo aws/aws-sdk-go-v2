@@ -1,0 +1,5 @@
+POST /referencestore
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","name":"__Name__","sseConfig":{"keyArn":"__KeyArn__","type":"KMS"},"tags":{"key0":"__Value__"}}

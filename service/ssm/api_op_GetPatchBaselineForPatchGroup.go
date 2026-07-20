@@ -33,7 +33,7 @@ type GetPatchBaselineForPatchGroupInput struct {
 	PatchGroup *string
 
 	// Returns the operating system rule specified for patch groups using the patch
-	// baseline.
+	// baseline. The default value is WINDOWS .
 	OperatingSystem types.OperatingSystem
 
 	noSmithyDocumentSerde

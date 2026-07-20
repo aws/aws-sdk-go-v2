@@ -1,3 +1,16 @@
+# v1.24.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.24.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.23.1 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2026-06-29)
 
 * **Feature**: Amazon VPC Lattice now supports mutable idle timeout configuration on VPC Lattice Services

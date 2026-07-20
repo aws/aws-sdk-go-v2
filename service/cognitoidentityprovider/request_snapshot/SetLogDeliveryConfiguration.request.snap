@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.SetLogDeliveryConfiguration
+
+{"LogConfigurations":[{"CloudWatchLogsConfiguration":{"LogGroupArn":"__LogGroupArn__"},"EventSource":"userNotification","FirehoseConfiguration":{"StreamArn":"__StreamArn__"},"LogLevel":"ERROR","S3Configuration":{"BucketArn":"__BucketArn__"}},{"CloudWatchLogsConfiguration":{"LogGroupArn":"__LogGroupArn__"},"EventSource":"userNotification","FirehoseConfiguration":{"StreamArn":"__StreamArn__"},"LogLevel":"ERROR","S3Configuration":{"BucketArn":"__BucketArn__"}}],"UserPoolId":"__UserPoolId__"}

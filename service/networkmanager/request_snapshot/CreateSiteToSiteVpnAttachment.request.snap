@@ -1,0 +1,5 @@
+POST /site-to-site-vpn-attachments
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","CoreNetworkId":"__CoreNetworkId__","RoutingPolicyLabel":"__RoutingPolicyLabel__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VpnConnectionArn":"__VpnConnectionArn__"}

@@ -35,12 +35,14 @@ type GetEstimatedCarbonEmissionsDimensionValuesInput struct {
 	// This member is required.
 	Dimensions []types.Dimension
 
-	// The date range for fetching the dimension values.
+	//  The date range for fetching the dimension values. The range must include the
+	// start date of a month for that month's dimensions to be included in the
+	// response.
 	//
 	// This member is required.
 	TimePeriod *types.TimePeriod
 
-	// The maximum number of results to return in a single call. Default is 40.
+	// The maximum number of results to return in a single call. Default is 1000.
 	MaxResults *int32
 
 	// The pagination token specifying which page of results to return in the
@@ -126,7 +128,7 @@ func (c *Client) addOperationGetEstimatedCarbonEmissionsDimensionValuesMiddlewar
 // GetEstimatedCarbonEmissionsDimensionValuesPaginatorOptions is the paginator
 // options for GetEstimatedCarbonEmissionsDimensionValues
 type GetEstimatedCarbonEmissionsDimensionValuesPaginatorOptions struct {
-	// The maximum number of results to return in a single call. Default is 40.
+	// The maximum number of results to return in a single call. Default is 1000.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -1,0 +1,5 @@
+PUT /bots/__BotId__/botversions
+
+Content-Type: application/json
+
+{"botVersionLocaleSpecification":{"key0":{"sourceBotVersion":"__SourceBotVersion__"}},"description":"__Description__"}

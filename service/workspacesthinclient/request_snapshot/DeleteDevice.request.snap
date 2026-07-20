@@ -1,0 +1,3 @@
+DELETE /devices/__Id__?clientToken=__ClientToken__
+
+

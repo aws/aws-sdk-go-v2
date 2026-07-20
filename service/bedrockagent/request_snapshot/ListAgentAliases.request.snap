@@ -1,0 +1,5 @@
+POST /agents/__AgentId__/agentaliases/
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__"}

@@ -1,0 +1,5 @@
+PATCH /ipAccessSettings/__IpAccessSettingsArn__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","displayName":"__DisplayName__","ipRules":[{"description":"__Description__","ipRange":"__IpRange__"},{"description":"__Description__","ipRange":"__IpRange__"}]}

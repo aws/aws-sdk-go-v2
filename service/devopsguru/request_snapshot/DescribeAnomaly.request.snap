@@ -1,0 +1,3 @@
+GET /anomalies/__Id__?AccountId=__AccountId__
+
+

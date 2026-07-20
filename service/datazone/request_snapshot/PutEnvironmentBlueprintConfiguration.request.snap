@@ -1,0 +1,5 @@
+PUT /v2/domains/__DomainIdentifier__/environment-blueprint-configurations/__EnvironmentBlueprintIdentifier__
+
+Content-Type: application/json
+
+{"allowUserProvidedConfigurations":true,"enabledRegions":["__Member__","__Member__"],"environmentRolePermissionBoundary":"__EnvironmentRolePermissionBoundary__","globalParameters":{"key0":"__Value__"},"manageAccessRoleArn":"__ManageAccessRoleArn__","provisioningConfigurations":[{"lakeFormationConfiguration":{"locationRegistrationExcludeS3Locations":["__Member__","__Member__"],"locationRegistrationRole":"__LocationRegistrationRole__"}},{"lakeFormationConfiguration":{"locationRegistrationExcludeS3Locations":["__Member__","__Member__"],"locationRegistrationRole":"__LocationRegistrationRole__"}}],"provisioningRoleArn":"__ProvisioningRoleArn__","regionalParameters":{"key0":{"key0":"__Value__"}},"resourceConfigurations":[{"description":"__Description__","name":"__Name__","parameters":{"key0":"__Value__"},"region":"__Region__"},{"description":"__Description__","name":"__Name__","parameters":{"key0":"__Value__"},"region":"__Region__"}]}

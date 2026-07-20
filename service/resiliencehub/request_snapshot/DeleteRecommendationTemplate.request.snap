@@ -1,0 +1,5 @@
+POST /delete-recommendation-template
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","recommendationTemplateArn":"__RecommendationTemplateArn__"}

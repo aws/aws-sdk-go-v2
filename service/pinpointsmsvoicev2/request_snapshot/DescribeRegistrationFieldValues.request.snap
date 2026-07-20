@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DescribeRegistrationFieldValues
+
+{"FieldPaths":["__Member__","__Member__"],"MaxResults":1,"NextToken":"__NextToken__","RegistrationId":"__RegistrationId__","SectionPath":"__SectionPath__","VersionNumber":1}

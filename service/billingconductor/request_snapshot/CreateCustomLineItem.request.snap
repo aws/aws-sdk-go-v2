@@ -1,0 +1,6 @@
+POST /create-custom-line-item
+
+Content-Type: application/json
+X-Amzn-Client-Token: __ClientToken__
+
+{"AccountId":"__AccountId__","BillingGroupArn":"__BillingGroupArn__","BillingPeriodRange":{"ExclusiveEndBillingPeriod":"__ExclusiveEndBillingPeriod__","InclusiveStartBillingPeriod":"__InclusiveStartBillingPeriod__"},"ChargeDetails":{"Flat":{"ChargeValue":1},"LineItemFilters":[{"Attribute":"LINE_ITEM_TYPE","AttributeValues":["__Member__","__Member__"],"MatchOption":"NOT_EQUAL","Values":["SAVINGS_PLAN_NEGATION","SAVINGS_PLAN_NEGATION"]},{"Attribute":"LINE_ITEM_TYPE","AttributeValues":["__Member__","__Member__"],"MatchOption":"NOT_EQUAL","Values":["SAVINGS_PLAN_NEGATION","SAVINGS_PLAN_NEGATION"]}],"Percentage":{"AssociatedValues":["__Member__","__Member__"],"PercentageValue":1},"Type":"CREDIT"},"ComputationRule":"ITEMIZED","Description":"__Description__","Name":"__Name__","PresentationDetails":{"Service":"__Service__"},"Tags":{"key0":"__Value__"}}

@@ -1,0 +1,5 @@
+POST /export-vector-enrichment-jobs
+
+Content-Type: application/json
+
+{"Arn":"__Arn__","ClientToken":"__ClientToken__","ExecutionRoleArn":"__ExecutionRoleArn__","OutputConfig":{"S3Data":{"KmsKeyId":"__KmsKeyId__","S3Uri":"__S3Uri__"}}}

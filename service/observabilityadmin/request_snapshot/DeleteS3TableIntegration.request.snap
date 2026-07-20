@@ -1,0 +1,5 @@
+POST /DeleteS3TableIntegration
+
+Content-Type: application/json
+
+{"Arn":"__Arn__"}

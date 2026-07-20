@@ -33,6 +33,12 @@ func (c *Client) DescribeAnomalyDetectors(ctx context.Context, params *DescribeA
 
 type DescribeAnomalyDetectorsInput struct {
 
+	// Specifies the unique identifiers of the anomaly detectors to describe. You can
+	// specify up to 50 identifiers. If you specify this parameter, you cannot also
+	// specify the Namespace , MetricName , Dimensions , or AnomalyDetectorTypes
+	// metric filters.
+	AnomalyDetectorIds []string
+
 	// The anomaly detector types to request when using DescribeAnomalyDetectorsInput .
 	// If empty, defaults to SINGLE_METRIC .
 	AnomalyDetectorTypes []types.AnomalyDetectorType

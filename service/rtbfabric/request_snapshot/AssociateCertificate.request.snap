@@ -1,0 +1,5 @@
+POST /responder-gateway/__GatewayId__/certificate
+
+Content-Type: application/json
+
+{"acmCertificateArn":"__AcmCertificateArn__","clientToken":"__ClientToken__"}

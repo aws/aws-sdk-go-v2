@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/UpdateBuild
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+£gVersionk__Version__gBuildIdk__BuildId__dNameh__Name__

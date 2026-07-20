@@ -4,7 +4,9 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type DescribeClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.DescribeClusterRequest_ClusterId, *v.ClusterId)
+	}
+}
+
 type DescribeClusterOutput struct {
 
 	// Information about a specific cluster, including shipping information, cluster
@@ -48,13 +62,34 @@ type DescribeClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterMetadata != nil {
+		s.WriteStruct(schemas.DescribeClusterResult_ClusterMetadata)
+		v.ClusterMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeClusterResult_ClusterMetadata:
+			v.ClusterMetadata = &types.ClusterMetadata{}
+			return v.ClusterMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCluster, schemas.DescribeClusterRequest, schemas.DescribeClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCluster, schemas.DescribeClusterRequest, schemas.DescribeClusterResult), output: &DescribeClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

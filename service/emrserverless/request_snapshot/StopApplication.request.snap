@@ -1,0 +1,3 @@
+POST /applications/__ApplicationId__/stop
+
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.StartResourceEvaluation
+
+{"ClientToken":"__ClientToken__","EvaluationContext":{"EvaluationContextIdentifier":"__EvaluationContextIdentifier__"},"EvaluationMode":"DETECTIVE","EvaluationTimeout":1,"ResourceDetails":{"ResourceConfiguration":"__ResourceConfiguration__","ResourceConfigurationSchemaType":"CFN_RESOURCE_SCHEMA","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}}

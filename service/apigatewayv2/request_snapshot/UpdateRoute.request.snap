@@ -1,0 +1,5 @@
+PATCH /v2/apis/__ApiId__/routes/__RouteId__
+
+Content-Type: application/json
+
+{"apiKeyRequired":true,"authorizationScopes":["__Member__","__Member__"],"authorizationType":"NONE","authorizerId":"__AuthorizerId__","modelSelectionExpression":"__ModelSelectionExpression__","operationName":"__OperationName__","requestModels":{"key0":"__Value__"},"requestParameters":{"key0":{"required":true}},"routeKey":"__RouteKey__","routeResponseSelectionExpression":"__RouteResponseSelectionExpression__","target":"__Target__"}

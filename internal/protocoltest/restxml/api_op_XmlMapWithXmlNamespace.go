@@ -51,6 +51,15 @@ type XmlMapWithXmlNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlMapWithXmlNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlMapWithXmlNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlMapWithXmlNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeXmlMapWithXmlNamespaceInputOutputMap(s, schemas.XmlMapWithXmlNamespaceResponse_myMap, v.MyMap)
+}
 func (v *XmlMapWithXmlNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlMapWithXmlNamespaceResponse, func(s *smithy.Schema) error {
 		switch s {

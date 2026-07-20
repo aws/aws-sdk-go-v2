@@ -1,0 +1,5 @@
+PATCH /direct-connect-gateway-attachments/__AttachmentId__
+
+Content-Type: application/json
+
+{"EdgeLocations":["__Member__","__Member__"]}

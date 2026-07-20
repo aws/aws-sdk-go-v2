@@ -1,0 +1,5 @@
+POST /getSignalingChannelEndpoint
+
+Content-Type: application/json
+
+{"ChannelARN":"__ChannelARN__","SingleMasterChannelEndpointConfiguration":{"Protocols":["WSS","WSS"],"Role":"MASTER"}}

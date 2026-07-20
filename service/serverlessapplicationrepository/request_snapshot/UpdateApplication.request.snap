@@ -1,0 +1,5 @@
+PATCH /applications/__ApplicationId__
+
+Content-Type: application/json
+
+{"author":"__Author__","description":"__Description__","homePageUrl":"__HomePageUrl__","labels":["__Member__","__Member__"],"readmeBody":"__ReadmeBody__","readmeUrl":"__ReadmeUrl__"}

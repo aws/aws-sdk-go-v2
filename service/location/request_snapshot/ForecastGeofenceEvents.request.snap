@@ -1,0 +1,5 @@
+POST /geofencing/v0/collections/__CollectionName__/forecast-geofence-events
+
+Content-Type: application/json
+
+{"DeviceState":{"Position":[1,1],"Speed":1},"DistanceUnit":"Kilometers","MaxResults":1,"NextToken":"__NextToken__","SpeedUnit":"KilometersPerHour","TimeHorizonMinutes":1}

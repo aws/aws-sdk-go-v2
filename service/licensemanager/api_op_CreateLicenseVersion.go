@@ -83,6 +83,10 @@ type CreateLicenseVersionInput struct {
 	// Information about the license.
 	LicenseMetadata []types.Metadata
 
+	// Specifies whether to reset the license usage for the new license version. If
+	// you don't specify a value, the license usage is not reset.
+	ResetUsage bool
+
 	// Current version of the license.
 	SourceVersion *string
 

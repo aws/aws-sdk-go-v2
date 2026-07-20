@@ -4379,7 +4379,7 @@
                 "status": {
                     "target": "com.amazonaws.codebuild#DockerServerStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>A DockerServerStatus object to use for this docker server.</p>"
+                        "smithy.api#documentation": "<p>A DockerServerStatus object to use for this docker server.</p>\n         <note>\n            <p>Note that <code>status</code> is only an output and cannot be passed in as an input.</p>\n         </note>"
                     }
                 }
             },
@@ -5254,6 +5254,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> Information about the Git submodules configuration for an CodeBuild build project.\n        </p>"
+            }
+        },
+        "com.amazonaws.codebuild#HostKernel": {
+            "type": "enum",
+            "members": {
+                "LINUX_KERNEL_4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINUX_KERNEL_4"
+                    }
+                },
+                "LINUX_KERNEL_6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINUX_KERNEL_6"
+                    }
+                },
+                "LINUX_KERNEL_LATEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINUX_KERNEL_LATEST"
+                    }
+                }
             }
         },
         "com.amazonaws.codebuild#Identifiers": {
@@ -7300,6 +7323,12 @@
                     "target": "com.amazonaws.codebuild#DockerServer",
                     "traits": {
                         "smithy.api#documentation": "<p>A DockerServer object to use for this build project.</p>"
+                    }
+                },
+                "hostKernel": {
+                    "target": "com.amazonaws.codebuild#HostKernel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The host operating system kernel used for on-demand builds in the build project.\n            The host kernel does not affect the build environment operating system, which is determined by the image you specify.\n            Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LINUX_KERNEL_4</code>: Runs on an Amazon Linux 2 host (kernel 4.x).</p>\n            </li>\n            <li>\n               <p>\n                  <code>LINUX_KERNEL_6</code>: Runs on an Amazon Linux 2023 host (kernel 6.x).</p>\n            </li>\n            <li>\n               <p>\n                  <code>LINUX_KERNEL_LATEST</code>: Runs on the latest supported host kernel.</p>\n            </li>\n         </ul>\n         <p>This setting applies to the <code>LINUX_CONTAINER</code>, <code>ARM_CONTAINER</code>,\n            <code>LINUX_EC2</code>, and <code>ARM_EC2</code>\n            environment types. It is not applicable to Windows, Lambda, or Mac environment\n            types.</p>"
                     }
                 }
             },
@@ -9571,6 +9600,12 @@
                     "target": "com.amazonaws.codebuild#WrapperInt",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of additional automatic retries after a failed build. For example, if the \n            auto-retry limit is set to 2, CodeBuild will call the <code>RetryBuild</code> API to automatically \n            retry your build for up to 2 additional times.</p>"
+                    }
+                },
+                "hostKernelOverride": {
+                    "target": "com.amazonaws.codebuild#HostKernel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The host operating system kernel for this build that overrides the one specified in the\n            build project.</p>"
                     }
                 }
             },

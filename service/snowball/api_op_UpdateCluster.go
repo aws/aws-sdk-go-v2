@@ -4,7 +4,9 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,6 +72,48 @@ type UpdateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressId != nil {
+		s.WriteString(schemas.UpdateClusterRequest_AddressId, *v.AddressId)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.UpdateClusterRequest_ClusterId, *v.ClusterId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateClusterRequest_Description, *v.Description)
+	}
+	if v.ForwardingAddressId != nil {
+		s.WriteString(schemas.UpdateClusterRequest_ForwardingAddressId, *v.ForwardingAddressId)
+	}
+	if v.Notification != nil {
+		s.WriteStruct(schemas.UpdateClusterRequest_Notification)
+		v.Notification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OnDeviceServiceConfiguration != nil {
+		s.WriteStruct(schemas.UpdateClusterRequest_OnDeviceServiceConfiguration)
+		v.OnDeviceServiceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resources != nil {
+		s.WriteStruct(schemas.UpdateClusterRequest_Resources)
+		v.Resources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.UpdateClusterRequest_RoleARN, *v.RoleARN)
+	}
+	if v.ShippingOption != "" {
+		s.WriteString(schemas.UpdateClusterRequest_ShippingOption, string(v.ShippingOption))
+	}
+}
+
 type UpdateClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -77,13 +121,26 @@ type UpdateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterRequest, schemas.UpdateClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterRequest, schemas.UpdateClusterResult), output: &UpdateClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

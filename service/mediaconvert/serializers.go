@@ -6029,6 +6029,28 @@ func awsRestjson1_serializeDocumentDolbyVisionLevel6Metadata(v *types.DolbyVisio
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDurationControl(v *types.DurationControl, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IntegerDurationMaximumCompressionDenominator != nil {
+		ok := object.Key("integerDurationMaximumCompressionDenominator")
+		ok.Integer(*v.IntegerDurationMaximumCompressionDenominator)
+	}
+
+	if v.IntegerDurationMaximumCompressionNumerator != nil {
+		ok := object.Key("integerDurationMaximumCompressionNumerator")
+		ok.Integer(*v.IntegerDurationMaximumCompressionNumerator)
+	}
+
+	if v.IntegerDurationTrimThresholdMilliseconds != nil {
+		ok := object.Key("integerDurationTrimThresholdMilliseconds")
+		ok.Integer(*v.IntegerDurationTrimThresholdMilliseconds)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDvbNitSettings(v *types.DvbNitSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6984,6 +7006,11 @@ func awsRestjson1_serializeDocumentH264Settings(v *types.H264Settings, value smi
 	if len(v.EntropyEncoding) > 0 {
 		ok := object.Key("entropyEncoding")
 		ok.String(string(v.EntropyEncoding))
+	}
+
+	if len(v.ExplicitWeightedPrediction) > 0 {
+		ok := object.Key("explicitWeightedPrediction")
+		ok.String(string(v.ExplicitWeightedPrediction))
 	}
 
 	if len(v.FieldEncoding) > 0 {
@@ -11537,6 +11564,13 @@ func awsRestjson1_serializeDocumentVideoPreprocessor(v *types.VideoPreprocessor,
 	if v.DolbyVision != nil {
 		ok := object.Key("dolbyVision")
 		if err := awsRestjson1_serializeDocumentDolbyVision(v.DolbyVision, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DurationControl != nil {
+		ok := object.Key("durationControl")
+		if err := awsRestjson1_serializeDocumentDurationControl(v.DurationControl, ok); err != nil {
 			return err
 		}
 	}

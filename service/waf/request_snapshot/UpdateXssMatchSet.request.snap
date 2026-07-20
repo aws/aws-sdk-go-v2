@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20150824.UpdateXssMatchSet
+
+{"ChangeToken":"__ChangeToken__","Updates":[{"Action":"INSERT","XssMatchTuple":{"FieldToMatch":{"Data":"__Data__","Type":"URI"},"TextTransformation":"NONE"}},{"Action":"INSERT","XssMatchTuple":{"FieldToMatch":{"Data":"__Data__","Type":"URI"},"TextTransformation":"NONE"}}],"XssMatchSetId":"__XssMatchSetId__"}

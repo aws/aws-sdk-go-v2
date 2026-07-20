@@ -436,6 +436,37 @@ type AllowedExtension struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for conversational analytics.
+type AnalyticsConfiguration struct {
+
+	// The language configuration for conversational analytics.
+	//
+	// This member is required.
+	LanguageConfiguration *LanguageConfiguration
+
+	// The redaction configuration for conversational analytics.
+	//
+	// This member is required.
+	RedactionConfiguration *RedactionConfiguration
+
+	// The rules configuration for conversational analytics.
+	//
+	// This member is required.
+	RulesConfiguration *RulesConfiguration
+
+	// The sentiment configuration for conversational analytics.
+	//
+	// This member is required.
+	SentimentConfiguration *SentimentConfiguration
+
+	// The summary configuration for conversational analytics.
+	//
+	// This member is required.
+	SummaryConfiguration *SummaryConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // This API is in preview release for Connect Customer and is subject to change.
 //
 // Information about associations that are successfully created: DataSetId ,
@@ -897,6 +928,28 @@ type AuthenticationProfileSummary struct {
 
 	// The name of the authentication profile summary.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the scope configuration for an authorization code. Defines the
+// permissions and access boundaries for the session.
+type AuthScope struct {
+
+	// The type of entity to scope the session to.
+	//
+	// This member is required.
+	EntityType AuthCodeEntityType
+
+	// The name of the Customer Profiles domain to scope the session to.
+	DomainName *string
+
+	// The identifier of the entity to scope the session to.
+	EntityId *string
+
+	// The list of security profile identifiers to scope the session to. Maximum of 10
+	// security profiles.
+	SecurityProfileIds []string
 
 	noSmithyDocumentSerde
 }
@@ -2369,6 +2422,17 @@ type ContactSearchSummarySegmentAttributeValue struct {
 
 	// The value of a segment attribute represented as a string.
 	ValueString *string
+
+	noSmithyDocumentSerde
+}
+
+// Optional attributes used to populate the content of an outbound web
+// notification, such as recommender configuration for personalized content.
+type ContentAttributes struct {
+
+	// Configuration for the recommender used to generate personalized recommendations
+	// for the notification content.
+	RecommenderConfig *RecommenderConfig
 
 	noSmithyDocumentSerde
 }
@@ -6512,6 +6576,15 @@ type KinesisVideoStreamConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The language configuration for conversational analytics.
+type LanguageConfiguration struct {
+
+	// The language locale setting for conversational analytics.
+	LanguageLocale *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration information of an Amazon Lex bot.
 type LexBot struct {
 
@@ -8701,6 +8774,27 @@ type RealTimeContactAnalysisTranscriptItemWithContent struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for the recommender used to generate personalized recommendations
+// included in an outbound web notification.
+type RecommenderConfig struct {
+
+	// The name of the Amazon Personalize domain that hosts the recommender.
+	//
+	// This member is required.
+	DomainName *string
+
+	// The name of the recommender used to generate the recommendations.
+	//
+	// This member is required.
+	RecommenderName *string
+
+	// A map of contextual key-value pairs supplied to the recommender to influence
+	// the recommendations returned.
+	Context map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a voice recording, chat transcript, or screen recording.
 type RecordingInfo struct {
 
@@ -8839,6 +8933,33 @@ type RecurrencePattern struct {
 	// year, set ByWeekdayOccurrence=[2], Day=THURSDAY, ByMonth=[4], Frequency: YEARLY
 	// and INTERVAL=1.
 	ByWeekdayOccurrence []int32
+
+	noSmithyDocumentSerde
+}
+
+// The redaction configuration for conversational analytics.
+type RedactionConfiguration struct {
+
+	// Controls whether redaction is applied to the analytics output. Valid values:
+	// Enable | Disable .
+	//
+	// This member is required.
+	Behavior Behavior
+
+	// The redaction output policy that determines which versions of the transcript
+	// are stored. Valid values: None | RedactedOnly | RedactedAndOriginal .
+	//
+	// This member is required.
+	Policy Policy
+
+	// The list of PII entity types to redact from the transcript (for example, NAME ,
+	// ADDRESS , CREDIT_DEBIT_NUMBER ).
+	Entities []string
+
+	// The masking mode that determines how redacted content is replaced in the
+	// output. Valid values: PII (replaces with the literal string [PII]) | EntityType
+	// (replaces with the entity type name, for example [NAME]).
+	MaskMode MaskMode
 
 	noSmithyDocumentSerde
 }
@@ -9429,6 +9550,10 @@ type Rule struct {
 	// This member is required.
 	TriggerEventSource *RuleTriggerEventSource
 
+	// The list of capability tiers associated with the rule. Used for categorizing
+	// rules by capability (for example, GenerativeAI ).
+	RuleCapabilityTiers []RuleCapabilityTier
+
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
@@ -9496,6 +9621,137 @@ type RuleAction struct {
 	noSmithyDocumentSerde
 }
 
+// A list of conditions which would be applied together with an AND condition.
+type RuleAttributeAndCondition struct {
+
+	// A list of tag conditions that need to be applied with AND condition.
+	TagConditions []TagCondition
+
+	noSmithyDocumentSerde
+}
+
+// An object that can be used to specify tag conditions inside the SearchFilter .
+// This accepts an OR of AND (List of List) input where:
+//
+//   - The top level list specifies conditions that need to be applied with OR
+//     operator.
+//
+//   - The inner list specifies conditions that need to be applied with AND
+//     operator.
+type RuleAttributeFilter struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndCondition *RuleAttributeAndCondition
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []RuleAttributeAndCondition
+
+	// A leaf node condition which can be used to specify a tag condition, for
+	// example, HAVE BPO = 123 .
+	TagCondition *TagCondition
+
+	noSmithyDocumentSerde
+}
+
+// The rules configuration for conversational analytics. Controls whether Contact
+// Lens rules are evaluated against the analytics output.
+type RulesConfiguration struct {
+
+	// Controls whether Contact Lens rules are evaluated for the contact. Valid
+	// values: Enable | Disable .
+	Behavior Behavior
+
+	noSmithyDocumentSerde
+}
+
+// A summary of information about a rule, returned as part of the response to a
+// SearchRules operation.
+type RuleSearchSummary struct {
+
+	// A list of ActionTypes associated with a rule.
+	//
+	// This member is required.
+	ActionSummaries []ActionSummary
+
+	// The timestamp for when the rule was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the user who last updated the rule.
+	//
+	// This member is required.
+	LastUpdatedBy *string
+
+	// The timestamp for when the rule was last updated.
+	//
+	// This member is required.
+	LastUpdatedTime *time.Time
+
+	// The name of the rule.
+	//
+	// This member is required.
+	Name *string
+
+	// The publish status of the rule.
+	//
+	// This member is required.
+	PublishStatus RulePublishStatus
+
+	// The Amazon Resource Name (ARN) of the rule.
+	//
+	// This member is required.
+	RuleArn *string
+
+	// A unique identifier for the rule.
+	//
+	// This member is required.
+	RuleId *string
+
+	// The event source to trigger the rule.
+	//
+	// This member is required.
+	TriggerEventSource *RuleTriggerEventSource
+
+	// The list of capability tiers associated with the rule. Used for categorizing
+	// rules by capability (for example, GenerativeAI ).
+	RuleCapabilityTiers []RuleCapabilityTier
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria to be used to return rules.
+type RulesSearchCriteria struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []RulesSearchCriteria
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []RulesSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition.
+	//
+	// The currently supported values for FieldName are Name , PublishStatus ,
+	// EventSourceName , RuleId , IntegrationAssociationId , ActionSummaries , and
+	// RuleCapabilityTiers .
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filters to be applied to search results.
+type RulesSearchFilter struct {
+
+	// An object that can be used to specify tag conditions inside the SearchFilter .
+	AttributeFilter *RuleAttributeFilter
+
+	noSmithyDocumentSerde
+}
+
 // A list of ActionTypes associated with a rule.
 type RuleSummary struct {
 
@@ -9538,6 +9794,10 @@ type RuleSummary struct {
 	//
 	// This member is required.
 	RuleId *string
+
+	// The list of capability tiers associated with the rule. Used for categorizing
+	// rules by capability (for example, GenerativeAI ).
+	RuleCapabilityTiers []RuleCapabilityTier
 
 	noSmithyDocumentSerde
 }
@@ -10023,6 +10283,18 @@ type SendNotificationActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// The sentiment configuration for conversational analytics.
+type SentimentConfiguration struct {
+
+	// Controls whether sentiment analysis is applied to the analytics output. Valid
+	// values: Enable | Disable .
+	//
+	// This member is required.
+	Behavior Behavior
+
+	noSmithyDocumentSerde
+}
+
 // The reason for the exception.
 //
 // The following types satisfy this interface:
@@ -10210,6 +10482,18 @@ type SuccessfulRequest struct {
 	// Request identifier provided in the API call in the ContactDataRequest to create
 	// a contact.
 	RequestIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary configuration for conversational analytics.
+type SummaryConfiguration struct {
+
+	// The summary modes that determine what type of summarization is generated. Valid
+	// values: PostContact | AutomatedInteraction | ContactChain .
+	//
+	// This member is required.
+	SummaryModes []SummaryMode
 
 	noSmithyDocumentSerde
 }
@@ -11722,6 +12006,57 @@ type VoiceRecordingConfiguration struct {
 
 	// Identifies which track is being recorded.
 	VoiceRecordingTrack VoiceRecordingTrack
+
+	noSmithyDocumentSerde
+}
+
+// The content of an outbound web notification, including the notification type,
+// the view to render, and any optional attributes used to populate the view.
+type WebNotificationContent struct {
+
+	// The type of web notification to send.
+	//
+	// This member is required.
+	Type NotificationType
+
+	// Optional attributes used to populate the notification content, such as
+	// recommender configuration for personalized content.
+	Attributes *ContentAttributes
+
+	// The Amazon Resource Name (ARN) of the view to render for the notification.
+	ViewArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The source of an outbound web notification. Identifies the campaign and
+// outbound request that triggered the notification.
+type WebNotificationSource struct {
+
+	// Information about the campaign that triggered the web notification, including
+	// the campaign identifier and outbound request identifier.
+	//
+	// This member is required.
+	SourceCampaign *SourceCampaign
+
+	noSmithyDocumentSerde
+}
+
+// The destination for an outbound web notification, specifying the communication
+// widget that delivers the notification and the customer profile of the recipient.
+type WidgetDestination struct {
+
+	// The identifier of the customer profile associated with the browser session that
+	// should receive the notification.
+	//
+	// This member is required.
+	ProfileId *string
+
+	// The identifier of the communication widget that delivers the notification to
+	// the customer's browser.
+	//
+	// This member is required.
+	WidgetId *string
 
 	noSmithyDocumentSerde
 }

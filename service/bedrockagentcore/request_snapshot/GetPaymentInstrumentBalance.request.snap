@@ -1,0 +1,7 @@
+POST /payments/getPaymentInstrumentBalance
+
+Content-Type: application/json
+X-Amzn-Bedrock-Agentcore-Payments-Agent-Name: __AgentName__
+X-Amzn-Bedrock-Agentcore-Payments-User-Id: __UserId__
+
+{"chain":"BASE","paymentConnectorId":"__PaymentConnectorId__","paymentInstrumentId":"__PaymentInstrumentId__","paymentManagerArn":"__PaymentManagerArn__","token":"USDC"}

@@ -2902,6 +2902,12 @@ func awsRestjson1_serializeDocumentSessionKeyDerivation(v types.SessionKeyDeriva
 			return err
 		}
 
+	case *types.SessionKeyDerivationMemberUnionPay:
+		av := object.Key("UnionPay")
+		if err := awsRestjson1_serializeDocumentSessionKeyUnionPay(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.SessionKeyDerivationMemberVisa:
 		av := object.Key("Visa")
 		if err := awsRestjson1_serializeDocumentSessionKeyVisa(&uv.Value, av); err != nil {
@@ -3001,6 +3007,28 @@ func awsRestjson1_serializeDocumentSessionKeyMastercard(v *types.SessionKeyMaste
 	if v.UnpredictableNumber != nil {
 		ok := object.Key("UnpredictableNumber")
 		ok.String(*v.UnpredictableNumber)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSessionKeyUnionPay(v *types.SessionKeyUnionPay, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ApplicationTransactionCounter != nil {
+		ok := object.Key("ApplicationTransactionCounter")
+		ok.String(*v.ApplicationTransactionCounter)
+	}
+
+	if v.PanSequenceNumber != nil {
+		ok := object.Key("PanSequenceNumber")
+		ok.String(*v.PanSequenceNumber)
+	}
+
+	if v.PrimaryAccountNumber != nil {
+		ok := object.Key("PrimaryAccountNumber")
+		ok.String(*v.PrimaryAccountNumber)
 	}
 
 	return nil

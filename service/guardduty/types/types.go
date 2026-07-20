@@ -397,6 +397,49 @@ type AwsApiCallAction struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a Bedrock guardrail associated with a finding.
+type BedrockGuardrail struct {
+
+	// The ARN of the Bedrock guardrail.
+	Arn *string
+
+	// The version of the Bedrock guardrail.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the Bedrock guardrail that was involved in a finding.
+type BedrockGuardrailDetails struct {
+
+	// The list of content policy filters that matched during the guardrail evaluation.
+	ContentPolicyFilters []ContentPolicyFilter
+
+	// Indicates whether the guardrail intervened or not.
+	GuardrailAction GuardrailAction
+
+	// The ARN of the Bedrock guardrail. This field is deprecated. Use the guardrails
+	// list instead.
+	//
+	// Deprecated: Use guardrails list instead
+	GuardrailArn *string
+
+	// Indicates whether the guardrail was applied on the input or output of the model
+	// invocation.
+	GuardrailSource GuardrailSource
+
+	// The version of the Bedrock guardrail. This field is deprecated. Use the
+	// guardrails list instead.
+	//
+	// Deprecated: Use guardrails list instead
+	GuardrailVersion *string
+
+	// The list of Bedrock guardrails associated with the finding.
+	Guardrails []BedrockGuardrail
+
+	noSmithyDocumentSerde
+}
+
 // Contains information on how the bucker owner's S3 Block Public Access settings
 // are being applied to the S3 bucket. See [S3 Block Public Access]for more information.
 //
@@ -646,6 +689,22 @@ type ContainerInstanceDetails struct {
 	// Represents the nodes in the Amazon ECS cluster that has a HEALTHY coverage
 	// status.
 	CoveredContainerInstances *int64
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a content policy filter that matched during a
+// guardrail evaluation.
+type ContentPolicyFilter struct {
+
+	// The action taken by the guardrail filter.
+	Action ContentPolicyFilterAction
+
+	// The confidence level that the content matched the filter.
+	Confidence ConfidenceLevel
+
+	// The type of content that was filtered by the guardrail.
+	Type ContentPolicyFilterType
 
 	noSmithyDocumentSerde
 }
@@ -2794,6 +2853,15 @@ type MemberFeaturesConfigurationResult struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the AI model involved in a finding.
+type ModelDetail struct {
+
+	// The identifier of the AI model.
+	ModelId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the network connection.
 type NetworkConnection struct {
 
@@ -2930,6 +2998,9 @@ type NetworkInterface struct {
 
 // Contains information about the observed behavior.
 type Observations struct {
+
+	// The numeric values that were unusual.
+	Number []int64
 
 	// The text that was unusual.
 	Text []string
@@ -3624,6 +3695,11 @@ type RecoveryPointDetails struct {
 	// The name of the backup vault containing the recovery point.
 	BackupVaultName *string
 
+	// Contains information about the time range within the continuous backup in
+	// Amazon Web Services Backup that was scanned for a point-in-time recovery
+	// resource.
+	ContinuousScanDetails *ScanConfigurationContinuousScanDetails
+
 	// The Amazon Resource Name (ARN) of the recovery point.
 	RecoveryPointArn *string
 
@@ -3690,6 +3766,9 @@ type Resource struct {
 	// activity that prompted GuardDuty to generate a finding.
 	AccessKeyDetails *AccessKeyDetails
 
+	// Contains information about the Bedrock guardrail that was involved in a finding.
+	BedrockGuardrailDetails *BedrockGuardrailDetails
+
 	// Details of a container.
 	ContainerDetails *Container
 
@@ -3717,6 +3796,9 @@ type Resource struct {
 
 	// Contains information about the Lambda function that was involved in a finding.
 	LambdaDetails *LambdaDetails
+
+	// Contains information about the AI models involved in a finding.
+	ModelDetails []ModelDetail
 
 	// Contains information about the database instance to which an anomalous login
 	// attempt was made.

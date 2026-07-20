@@ -310,6 +310,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains details about an aggregation request based on code\n         repositories.</p>"
                     }
+                },
+                "vmInstanceAggregation": {
+                    "target": "com.amazonaws.inspector2#VmInstanceAggregation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details about an aggregation request based on virtual machine (VM) instances.</p>"
+                    }
+                },
+                "containerImageAggregation": {
+                    "target": "com.amazonaws.inspector2#ContainerImageAggregation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details about an aggregation request based on container images.</p>"
+                    }
+                },
+                "serverlessFunctionAggregation": {
+                    "target": "com.amazonaws.inspector2#ServerlessFunctionAggregation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details about an aggregation request based on serverless functions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -335,6 +353,18 @@
                     {
                         "value": "CODE_REPOSITORY",
                         "name": "CODE_REPOSITORY"
+                    },
+                    {
+                        "value": "Microsoft.Compute/virtualMachines",
+                        "name": "MICROSOFT_COMPUTE_VIRTUAL_MACHINES"
+                    },
+                    {
+                        "value": "Microsoft.ContainerRegistry/registry/containerImage",
+                        "name": "MICROSOFT_CONTAINER_REGISTRY_REGISTRY_CONTAINER_IMAGE"
+                    },
+                    {
+                        "value": "Microsoft.Web/sites",
+                        "name": "MICROSOFT_WEB_SITES"
                     }
                 ]
             }
@@ -413,6 +443,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains details about an aggregation response based on code\n         repositories.</p>"
                     }
+                },
+                "vmInstanceAggregation": {
+                    "target": "com.amazonaws.inspector2#VmInstanceAggregationResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details about an aggregation response based on VM instances.</p>"
+                    }
+                },
+                "containerImageAggregation": {
+                    "target": "com.amazonaws.inspector2#ContainerImageAggregationResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details about an aggregation response based on container images.</p>"
+                    }
+                },
+                "serverlessFunctionAggregation": {
+                    "target": "com.amazonaws.inspector2#ServerlessFunctionAggregationResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details about an aggregation response based on serverless functions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -476,6 +524,18 @@
                     {
                         "value": "CODE_REPOSITORY",
                         "name": "CODE_REPOSITORY"
+                    },
+                    {
+                        "value": "VM_INSTANCE",
+                        "name": "VM_INSTANCE"
+                    },
+                    {
+                        "value": "CONTAINER_IMAGE",
+                        "name": "CONTAINER_IMAGE"
+                    },
+                    {
+                        "value": "SERVERLESS_FUNCTION",
+                        "name": "SERVERLESS_FUNCTION"
                     }
                 ]
             }
@@ -520,6 +580,36 @@
                     "target": "com.amazonaws.inspector2#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID for the AMI.</p>"
+                    }
+                },
+                "cloudProvider": {
+                    "target": "com.amazonaws.inspector2#Provider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud service provider associated with this Amazon Machine Image (AMI) aggregation. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS</code> – Findings from Amazon Web Services resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AZURE</code> – Findings from Microsoft Azure resources.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudPartition": {
+                    "target": "com.amazonaws.inspector2#ProviderPartition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud infrastructure partition associated with this AMI aggregation. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aws</code> – Amazon Web Services commercial Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-cn</code> – Amazon Web Services China Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AzureCloud</code> – Azure commercial Regions.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudRegion": {
+                    "target": "com.amazonaws.inspector2#ProviderRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud Region associated with this AMI aggregation. The value format depends on the cloud provider:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>\n            </li>\n            <li>\n               <p>An Azure region, such as <code>eastus</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudOrgId": {
+                    "target": "com.amazonaws.inspector2#ProviderOrgId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud organization ID for the AMI aggregation.</p>"
+                    }
+                },
+                "cloudAccountId": {
+                    "target": "com.amazonaws.inspector2#ProviderAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud account ID for the AMI aggregation.</p>"
                     }
                 },
                 "severityCounts": {
@@ -820,6 +910,72 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents which scan types are automatically enabled for new members of your Amazon Inspector\n         organization.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#AwsConfigConnectorArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^arn:([^:]+):config:([^:]+):([^:]+):connector/([^/]+)/([^/]+)/([^/:\\s]+)$"
+            }
+        },
+        "com.amazonaws.inspector2#AwsConfigConnectorArnComparison": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#AwsConfigConnectorArnFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#AwsConfigConnectorArnComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator for the Amazon Web Services Config connector ARN filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#AwsConfigConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Config connector ARN value to filter by.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that matches connectors by the ARN of the associated Amazon Web Services Config connector.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#AwsConfigConnectorArnFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#AwsConfigConnectorArnFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.inspector2#AwsConfigConnectorArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#AwsConfigConnectorArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.inspector2#AwsEc2InstanceDetails": {
@@ -1271,6 +1427,142 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> A summary of information about the Amazon Web Services Lambda function.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#AzureProviderDetailCreate": {
+            "type": "structure",
+            "members": {
+                "awsConfigConnectorArn": {
+                    "target": "com.amazonaws.inspector2#AwsConfigConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services Config connector to associate with this connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scopeConfiguration": {
+                    "target": "com.amazonaws.inspector2#AzureScopeConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope configuration that defines which Azure resources to scan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "azureRegions": {
+                    "target": "com.amazonaws.inspector2#AzureRegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure regions to scan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "autoInstallVMScanner": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": true,
+                        "smithy.api#documentation": "<p>Specifies whether to automatically install the VM scanner on connected Azure resources. Defaults to <code>true</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Azure-specific configuration details for creating a connector, including the Amazon Web Services Config connector association, scan scope, and regions to scan.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#AzureProviderDetailUpdate": {
+            "type": "structure",
+            "members": {
+                "azureRegions": {
+                    "target": "com.amazonaws.inspector2#AzureRegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated Azure regions to scan.</p>"
+                    }
+                },
+                "scopeConfiguration": {
+                    "target": "com.amazonaws.inspector2#AzureScopeConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated scope configuration that defines which Azure resources to scan.</p>"
+                    }
+                },
+                "autoInstallVMScanner": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to automatically install the VM scanner on connected Azure resources.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Azure-specific configuration details for updating a connector, including the scan scope and regions to scan.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#AzureRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.inspector2#AzureRegionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#AzureRegion"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.inspector2#AzureScopeConfiguration": {
+            "type": "structure",
+            "members": {
+                "vmScanning": {
+                    "target": "com.amazonaws.inspector2#ScopeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope configuration for VM scanning.</p>"
+                    }
+                },
+                "containerImageScanning": {
+                    "target": "com.amazonaws.inspector2#ScopeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope configuration for container image scanning.</p>"
+                    }
+                },
+                "serverlessScanning": {
+                    "target": "com.amazonaws.inspector2#ScopeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope configuration for serverless scanning.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The scope of Azure resources that Amazon Inspector scans, defined separately for VM, container image, and serverless scanning. Returned as part of a connector's configuration.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#AzureScopeConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "vmScanning": {
+                    "target": "com.amazonaws.inspector2#ScopeConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope configuration input for VM scanning.</p>"
+                    }
+                },
+                "containerImageScanning": {
+                    "target": "com.amazonaws.inspector2#ScopeConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope configuration input for container image scanning.</p>"
+                    }
+                },
+                "serverlessScanning": {
+                    "target": "com.amazonaws.inspector2#ScopeConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope configuration input for serverless scanning.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The scope of Azure resources to scan, defined separately for VM, container image, and serverless scanning. Provide this when you create or update an Azure connector.</p>"
             }
         },
         "com.amazonaws.inspector2#BadRequestException": {
@@ -3505,6 +3797,47 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#CloudProvider": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "AWS",
+                        "value": "AWS"
+                    },
+                    {
+                        "name": "AZURE",
+                        "value": "AZURE"
+                    },
+                    {
+                        "name": "NOT_APPLICABLE",
+                        "value": "NOT_APPLICABLE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#CloudSecurityGroupIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#NonEmptyString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CloudSubnetIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#NonEmptyString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 16
+                }
+            }
+        },
         "com.amazonaws.inspector2#ClusterDetails": {
             "type": "structure",
             "members": {
@@ -3551,7 +3884,7 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The resource Id to be used in the filter criteria.</p>",
-                        "smithy.api#pattern": "^arn:.*:ecr:.*:\\d{12}:repository\\/(?:[a-z0-9]+(?:[._-][a-z0-9]+)*\\/)*[a-z0-9]+(?:[._-][a-z0-9]+)*(\\/sha256:[a-z0-9]{64})?$",
+                        "smithy.api#pattern": "^arn:.*:ecr:.*:\\d{12}:repository\\/[a-zA-Z0-9._\\/-]+(\\/sha256:[a-z0-9]{64})?$",
                         "smithy.api#required": {}
                     }
                 }
@@ -4445,6 +4778,847 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.inspector2#Connector": {
+            "type": "structure",
+            "members": {
+                "connectorArn": {
+                    "target": "com.amazonaws.inspector2#ConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.inspector2#ConnectorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connector.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.inspector2#ConnectorDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the connector.</p>"
+                    }
+                },
+                "provider": {
+                    "target": "com.amazonaws.inspector2#ConnectorCloudProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider for the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "enablementStatus": {
+                    "target": "com.amazonaws.inspector2#EnablementStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enablement status of the connector, which indicates whether the connector is active and scanning resources.</p>"
+                    }
+                },
+                "enablementStatusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the current enablement status of the connector.</p>"
+                    }
+                },
+                "health": {
+                    "target": "com.amazonaws.inspector2#ConnectorHealth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The health of the connector, which indicates whether Amazon Inspector can reach and scan the connected resources.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the connector was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the connector was last updated.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "azureRegions": {
+                    "target": "com.amazonaws.inspector2#AzureRegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure regions configured for the connector.</p>"
+                    }
+                },
+                "awsConfigConnectorArn": {
+                    "target": "com.amazonaws.inspector2#AwsConfigConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services Config connector associated with this connector.</p>"
+                    }
+                },
+                "scopeConfiguration": {
+                    "target": "com.amazonaws.inspector2#AzureScopeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure scope configuration for the connector.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.inspector2#ConnectorTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the connector.</p>"
+                    }
+                },
+                "autoInstallVMScanner": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the VM scanner is automatically installed on connected resources.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a connector that links an external cloud provider to Amazon Inspector for vulnerability scanning.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)*:inspector2:[a-z0-9-]+:[0-9]{12}:connector/([a-f0-9-]+|aws-service-connector/.+/[a-f0-9-]+)$"
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorArnComparison": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorArnFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#ConnectorArnComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator for the connector ARN filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#ConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connector ARN value to filter by.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that matches connectors by connector ARN.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorArnFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#ConnectorArnFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#ConnectorArn"
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorCloudProvider": {
+            "type": "enum",
+            "members": {
+                "AZURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZURE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorContainerImageScanConfiguration": {
+            "type": "structure",
+            "members": {
+                "pushDuration": {
+                    "target": "com.amazonaws.inspector2#ContainerImageRescanDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time after a container image is pushed to a repository during which Amazon Inspector continues to rescan the image for vulnerabilities. Valid values are <code>LIFETIME</code>, <code>DAYS_3</code>, <code>DAYS_7</code>, <code>DAYS_14</code>, <code>DAYS_30</code>, <code>DAYS_60</code>, <code>DAYS_90</code>, and <code>DAYS_180</code>.</p>"
+                    }
+                },
+                "pullDuration": {
+                    "target": "com.amazonaws.inspector2#ContainerImagePullDateRescanDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time after a container image is last pulled from a repository during which Amazon Inspector continues to rescan the image for vulnerabilities. Valid values are <code>DAYS_3</code>, <code>DAYS_7</code>, <code>DAYS_14</code>, <code>DAYS_30</code>, <code>DAYS_60</code>, <code>DAYS_90</code>, and <code>DAYS_180</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container image scanning settings for a connector, including how long pushed and pulled images continue to be rescanned for vulnerabilities.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[^\\p{C}]*$"
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorFilterCriteria": {
+            "type": "structure",
+            "members": {
+                "connectorArns": {
+                    "target": "com.amazonaws.inspector2#ConnectorArnFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by connector ARNs.</p>"
+                    }
+                },
+                "accounts": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by Amazon Web Services account IDs.</p>"
+                    }
+                },
+                "awsConfigConnectorArns": {
+                    "target": "com.amazonaws.inspector2#AwsConfigConnectorArnFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by Amazon Web Services Config connector ARNs.</p>"
+                    }
+                },
+                "connectorType": {
+                    "target": "com.amazonaws.inspector2#ConnectorTypeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by connector type.</p>"
+                    }
+                },
+                "provider": {
+                    "target": "com.amazonaws.inspector2#ProviderFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by cloud provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the filter criteria for narrowing the results returned by a <code>ListConnectors</code> request. You can filter by connector ARN, Amazon Web Services account ID, Amazon Web Services Config connector ARN, connector type, or cloud provider.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorHealth": {
+            "type": "structure",
+            "members": {
+                "connectorStatus": {
+                    "target": "com.amazonaws.inspector2#ConnectorHealthStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The health status of the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastCheckedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the connector health was last checked.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message providing additional details about the connector health status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The health and connectivity status of a connector, including the last time the status was checked and any diagnostic message. Returned as part of the <code>Connector</code> structure.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorHealthStatus": {
+            "type": "enum",
+            "members": {
+                "CONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTED"
+                    }
+                },
+                "DEGRADED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEGRADED"
+                    }
+                },
+                "FAILED_TO_CONNECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_TO_CONNECT"
+                    }
+                },
+                "PENDING_AUTHORIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_AUTHORIZATION"
+                    }
+                },
+                "PENDING_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_CONFIGURATION"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#Connector"
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{N}_-]+$"
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorScanConfiguration": {
+            "type": "structure",
+            "members": {
+                "containerImageScanning": {
+                    "target": "com.amazonaws.inspector2#ConnectorContainerImageScanConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container image scanning configuration, including push and pull duration settings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The scan settings that Amazon Inspector applies to resources discovered through a connector.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorScanConfigurationItem": {
+            "type": "structure",
+            "members": {
+                "awsConfigConnectorArn": {
+                    "target": "com.amazonaws.inspector2#AwsConfigConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services Config connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectorArns": {
+                    "target": "com.amazonaws.inspector2#ConnectorArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of connector ARNs associated with this Amazon Web Services Config connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scanConfiguration": {
+                    "target": "com.amazonaws.inspector2#ConnectorScanConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan configuration settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a scan configuration and the connectors it applies to. Returned in the results of a <code>ListConnectorScanConfigurations</code> request.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorScanConfigurationItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#ConnectorScanConfigurationItem"
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorTagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorTagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.inspector2#ConnectorTagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.inspector2#ConnectorTagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorTagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorType": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_MANAGED"
+                    }
+                },
+                "SERVICE_LINKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_LINKED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorTypeComparison": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorTypeFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#ConnectorTypeComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator for the connector type filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#ConnectorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connector type value to filter by.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that matches connectors by connector type.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ConnectorTypeFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#ConnectorTypeFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ContainerImageAggregation": {
+            "type": "structure",
+            "members": {
+                "resourceIds": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource IDs to aggregate findings for.</p>"
+                    }
+                },
+                "imageDigests": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image digests to aggregate findings for.</p>"
+                    }
+                },
+                "repositories": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image repositories to aggregate findings for.</p>"
+                    }
+                },
+                "registries": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image registries to aggregate findings for.</p>"
+                    }
+                },
+                "architectures": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image architectures to aggregate findings for.</p>"
+                    }
+                },
+                "imageTags": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image tags to aggregate findings for.</p>"
+                    }
+                },
+                "cloudProviders": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud providers to aggregate findings for. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS</code> – Findings from Amazon Web Services resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AZURE</code> – Findings from Microsoft Azure resources.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudPartitions": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud partitions to aggregate findings for. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aws</code> – Amazon Web Services commercial Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-cn</code> – Amazon Web Services China Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AzureCloud</code> – Azure commercial Regions.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudRegions": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud regions to aggregate findings for. The value format depends on the cloud provider:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>\n            </li>\n            <li>\n               <p>An Azure region, such as <code>eastus</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudOrgIds": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud organization IDs to aggregate findings for.</p>"
+                    }
+                },
+                "cloudAccountIds": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud account IDs to aggregate findings for.</p>"
+                    }
+                },
+                "lastInUseAt": {
+                    "target": "com.amazonaws.inspector2#DateFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last in-use timestamps to aggregate findings for.</p>"
+                    }
+                },
+                "inUseCount": {
+                    "target": "com.amazonaws.inspector2#NumberFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The in-use counts to aggregate findings for.</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.inspector2#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order to sort results by. Valid values are <code>ASC</code> and <code>DESC</code>.</p>"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.inspector2#ContainerImageSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to sort results by. Specify a field name from the aggregation response, such as <code>CRITICAL</code>, <code>HIGH</code>, or <code>ALL</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An aggregation of information about container images.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ContainerImageAggregationResponse": {
+            "type": "structure",
+            "members": {
+                "resourceId": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource ID for the container image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cloudProvider": {
+                    "target": "com.amazonaws.inspector2#Provider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud service provider associated with this container image aggregation. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS</code> – Findings from Amazon Web Services resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AZURE</code> – Findings from Microsoft Azure resources.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudAccountId": {
+                    "target": "com.amazonaws.inspector2#ProviderAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud account ID for the container image aggregation.</p>"
+                    }
+                },
+                "cloudPartition": {
+                    "target": "com.amazonaws.inspector2#ProviderPartition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud infrastructure partition associated with this container image aggregation. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aws</code> – Amazon Web Services commercial Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-cn</code> – Amazon Web Services China Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AzureCloud</code> – Azure commercial Regions.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudRegion": {
+                    "target": "com.amazonaws.inspector2#ProviderRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud Region associated with this container image aggregation. The value format depends on the cloud provider:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>\n            </li>\n            <li>\n               <p>An Azure region, such as <code>eastus</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudOrgId": {
+                    "target": "com.amazonaws.inspector2#ProviderOrgId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud organization ID for the container image aggregation.</p>"
+                    }
+                },
+                "imageDigest": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image digest for the container image.</p>"
+                    }
+                },
+                "repository": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository for the container image.</p>"
+                    }
+                },
+                "registry": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry for the container image.</p>"
+                    }
+                },
+                "architecture": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The architecture of the container image.</p>"
+                    }
+                },
+                "imageTags": {
+                    "target": "com.amazonaws.inspector2#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image tags attached to the container image.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID associated with the container image.</p>"
+                    }
+                },
+                "severityCounts": {
+                    "target": "com.amazonaws.inspector2#SeverityCounts"
+                },
+                "lastInUseAt": {
+                    "target": "com.amazonaws.inspector2#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the container image was in use.</p>"
+                    }
+                },
+                "inUseCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of times the container image is in use.</p>"
+                    }
+                },
+                "exploitAvailableActiveFindingsCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of active findings with an exploit available for the container image.</p>"
+                    }
+                },
+                "fixAvailableActiveFindingsCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of active findings with a fix available for the container image.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A response that contains the results of a container image aggregation.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ContainerImageMetadata": {
+            "type": "structure",
+            "members": {
+                "imageTags": {
+                    "target": "com.amazonaws.inspector2#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags attached to the container image.</p>"
+                    }
+                },
+                "imagePulledAt": {
+                    "target": "com.amazonaws.inspector2#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the container image was pulled.</p>"
+                    }
+                },
+                "lastInUseAt": {
+                    "target": "com.amazonaws.inspector2#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the container image was in use.</p>"
+                    }
+                },
+                "inUseCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of times the container image is in use.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about a container image associated with a covered resource.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ContainerImagePullDateRescanDuration": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DAYS_3",
+                        "name": "DAYS_3"
+                    },
+                    {
+                        "value": "DAYS_7",
+                        "name": "DAYS_7"
+                    },
+                    {
+                        "value": "DAYS_14",
+                        "name": "DAYS_14"
+                    },
+                    {
+                        "value": "DAYS_30",
+                        "name": "DAYS_30"
+                    },
+                    {
+                        "value": "DAYS_60",
+                        "name": "DAYS_60"
+                    },
+                    {
+                        "value": "DAYS_90",
+                        "name": "DAYS_90"
+                    },
+                    {
+                        "value": "DAYS_180",
+                        "name": "DAYS_180"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#ContainerImageRescanDuration": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LIFETIME",
+                        "name": "LIFETIME"
+                    },
+                    {
+                        "value": "DAYS_3",
+                        "name": "DAYS_3"
+                    },
+                    {
+                        "value": "DAYS_7",
+                        "name": "DAYS_7"
+                    },
+                    {
+                        "value": "DAYS_30",
+                        "name": "DAYS_30"
+                    },
+                    {
+                        "value": "DAYS_180",
+                        "name": "DAYS_180"
+                    },
+                    {
+                        "value": "DAYS_14",
+                        "name": "DAYS_14"
+                    },
+                    {
+                        "value": "DAYS_60",
+                        "name": "DAYS_60"
+                    },
+                    {
+                        "value": "DAYS_90",
+                        "name": "DAYS_90"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#ContainerImageSortBy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CRITICAL",
+                        "name": "CRITICAL"
+                    },
+                    {
+                        "value": "HIGH",
+                        "name": "HIGH"
+                    },
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#ContainerRegistryMetadata": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the container registry.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about a container registry associated with a covered resource.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ContainerRepositoryMetadata": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the container repository.</p>"
+                    }
+                },
+                "scanFrequency": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan frequency for the container repository.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about a container repository associated with a covered resource.</p>"
+            }
+        },
         "com.amazonaws.inspector2#ContinuousIntegrationScanConfiguration": {
             "type": "structure",
             "members": {
@@ -4682,6 +5856,72 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Filter criteria for code repositories based on the ID of the last scanned commit.</p>"
                     }
+                },
+                "cloudProvider": {
+                    "target": "com.amazonaws.inspector2#CoverageStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider to filter coverage results by.</p>"
+                    }
+                },
+                "cloudProviderAccountId": {
+                    "target": "com.amazonaws.inspector2#CoverageStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider account ID to filter coverage results by.</p>"
+                    }
+                },
+                "cloudProviderRegion": {
+                    "target": "com.amazonaws.inspector2#CoverageStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider region to filter coverage results by.</p>"
+                    }
+                },
+                "cloudVmInstanceTags": {
+                    "target": "com.amazonaws.inspector2#CoverageMapFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud VM instance tags to filter coverage results by.</p>"
+                    }
+                },
+                "cloudContainerImageTags": {
+                    "target": "com.amazonaws.inspector2#CoverageStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud container image tags to filter coverage results by.</p>"
+                    }
+                },
+                "cloudContainerRepositoryName": {
+                    "target": "com.amazonaws.inspector2#CoverageStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud container repository name to filter coverage results by.</p>"
+                    }
+                },
+                "cloudContainerRegistryName": {
+                    "target": "com.amazonaws.inspector2#CoverageStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud container registry name to filter coverage results by.</p>"
+                    }
+                },
+                "cloudServerlessFunctionName": {
+                    "target": "com.amazonaws.inspector2#CoverageStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud serverless function name to filter coverage results by.</p>"
+                    }
+                },
+                "cloudServerlessFunctionRuntime": {
+                    "target": "com.amazonaws.inspector2#CoverageStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud serverless function runtime to filter coverage results by.</p>"
+                    }
+                },
+                "cloudServerlessFunctionTags": {
+                    "target": "com.amazonaws.inspector2#CoverageMapFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud serverless function tags to filter coverage results by.</p>"
+                    }
+                },
+                "cloudProviderOrgId": {
+                    "target": "com.amazonaws.inspector2#CoverageStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider organization ID to filter coverage results by.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4794,6 +6034,26 @@
                     {
                         "value": "CODE_REPOSITORY",
                         "name": "CODE_REPOSITORY"
+                    },
+                    {
+                        "value": "Microsoft.Compute/virtualMachines",
+                        "name": "MICROSOFT_COMPUTE_VIRTUAL_MACHINES"
+                    },
+                    {
+                        "value": "Microsoft.ContainerRegistry/registry/containerImage",
+                        "name": "MICROSOFT_CONTAINER_REGISTRY_REGISTRY_CONTAINER_IMAGE"
+                    },
+                    {
+                        "value": "Microsoft.ContainerRegistry/registry/containerRepository",
+                        "name": "MICROSOFT_CONTAINER_REGISTRY_REGISTRY_CONTAINER_REPOSITORY"
+                    },
+                    {
+                        "value": "Microsoft.Web/sites",
+                        "name": "MICROSOFT_WEB_SITES"
+                    },
+                    {
+                        "value": "Microsoft.ContainerRegistry/registries",
+                        "name": "MICROSOFT_CONTAINER_REGISTRY_REGISTRIES"
                     }
                 ]
             }
@@ -4909,6 +6169,36 @@
                     "target": "com.amazonaws.inspector2#ScanMode",
                     "traits": {
                         "smithy.api#documentation": "<p>The scan method that is applied to the instance.</p>"
+                    }
+                },
+                "provider": {
+                    "target": "com.amazonaws.inspector2#Provider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider of the covered resource.</p>"
+                    }
+                },
+                "providerAccountId": {
+                    "target": "com.amazonaws.inspector2#ProviderAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider account ID of the covered resource.</p>"
+                    }
+                },
+                "providerOrgId": {
+                    "target": "com.amazonaws.inspector2#ProviderOrgId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider organization ID of the covered resource.</p>"
+                    }
+                },
+                "providerRegion": {
+                    "target": "com.amazonaws.inspector2#ProviderRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider region of the covered resource.</p>"
+                    }
+                },
+                "providerPartition": {
+                    "target": "com.amazonaws.inspector2#ProviderPartition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider partition of the covered resource.</p>"
                     }
                 }
             },
@@ -5245,6 +6535,140 @@
                     "target": "com.amazonaws.inspector2#ScanConfigurationArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created scan configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.inspector2#CreateConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#CreateConnectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#CreateConnectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a connector that links an external cloud provider to Amazon Inspector for vulnerability scanning.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Create an Azure customer-managed connector for VM scanning at SUBSCRIPTION scope",
+                        "input": {
+                            "name": "my-azure-connector",
+                            "description": "Azure subscription scanner",
+                            "provider": "AZURE",
+                            "providerDetail": {
+                                "azure": {
+                                    "awsConfigConnectorArn": "arn:aws:config:us-east-1:123456789012:connector/azure/a7bc5463-04ce-4b52-901e-f26f7292a4a7/2fbed4bd-5b95-4947-a751-8defc76ecdae",
+                                    "scopeConfiguration": {
+                                        "vmScanning": {
+                                            "scopeType": "SUBSCRIPTION",
+                                            "scopeValues": [
+                                                "552802f5-1492-4184-bbae-7291c9939b16"
+                                            ]
+                                        }
+                                    },
+                                    "azureRegions": [
+                                        "eastus"
+                                    ],
+                                    "autoInstallVMScanner": true
+                                }
+                            },
+                            "tags": {
+                                "env": "prod",
+                                "owner": "security-team"
+                            }
+                        },
+                        "output": {
+                            "connectorArn": "arn:aws:inspector2:us-east-1:123456789012:connector/6ccf8549-b52b-57ca-bf52-a2266da3c53a"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/connector/create"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CreateConnectorRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request but does not return an error.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.inspector2#ConnectorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "provider": {
+                    "target": "com.amazonaws.inspector2#ConnectorCloudProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider for the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.inspector2#ConnectorDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the connector.</p>"
+                    }
+                },
+                "providerDetail": {
+                    "target": "com.amazonaws.inspector2#ProviderDetailCreate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider-specific configuration details for the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.inspector2#ConnectorTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the connector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#CreateConnectorResponse": {
+            "type": "structure",
+            "members": {
+                "connectorArn": {
+                    "target": "com.amazonaws.inspector2#ConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created connector.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6144,6 +7568,75 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.inspector2#DeleteConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#DeleteConnectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#DeleteConnectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a connector from your account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Delete a customer-managed connector",
+                        "input": {
+                            "connectorArn": "arn:aws:inspector2:us-east-1:123456789012:connector/6ccf8549-b52b-57ca-bf52-a2266da3c53a"
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/connector/delete"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.inspector2#DeleteConnectorRequest": {
+            "type": "structure",
+            "members": {
+                "connectorArn": {
+                    "target": "com.amazonaws.inspector2#ConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#DeleteConnectorResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.inspector2#DeleteFilter": {
             "type": "operation",
             "input": {
@@ -6913,6 +8406,14 @@
                     {
                         "value": "DAYS_180",
                         "name": "DAYS_180"
+                    },
+                    {
+                        "value": "DAYS_3",
+                        "name": "DAYS_3"
+                    },
+                    {
+                        "value": "DAYS_7",
+                        "name": "DAYS_7"
                     }
                 ]
             }
@@ -6979,6 +8480,14 @@
                     {
                         "value": "DAYS_90",
                         "name": "DAYS_90"
+                    },
+                    {
+                        "value": "DAYS_3",
+                        "name": "DAYS_3"
+                    },
+                    {
+                        "value": "DAYS_7",
+                        "name": "DAYS_7"
                     }
                 ]
             }
@@ -7212,6 +8721,59 @@
                     "target": "com.amazonaws.inspector2#FailedAccountList",
                     "traits": {
                         "smithy.api#documentation": "<p>Information on any accounts for which Amazon Inspector scans could not be enabled. Details are\n         provided for each account.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#EnablementStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "PENDING_ENABLEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_ENABLEMENT"
+                    }
+                },
+                "FAILED_TO_ENABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_TO_ENABLE"
+                    }
+                },
+                "PENDING_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_UPDATE"
+                    }
+                },
+                "FAILED_TO_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_TO_UPDATE"
+                    }
+                },
+                "PENDING_DELETION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_DELETION"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                },
+                "FAILED_TO_DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_TO_DELETE"
                     }
                 }
             }
@@ -7993,6 +9555,120 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Filter criteria for findings based on the repository provider type (such as GitHub,\n         GitLab, etc.).</p>"
                     }
+                },
+                "cloudProvider": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for the cloud provider.</p>"
+                    }
+                },
+                "cloudProviderRegion": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for the cloud provider region.</p>"
+                    }
+                },
+                "cloudProviderAccountId": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for the cloud provider account ID.</p>"
+                    }
+                },
+                "cloudProviderOrgId": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for the cloud provider organization ID.</p>"
+                    }
+                },
+                "cloudVmImageReference": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for the image reference of a VM instance.</p>"
+                    }
+                },
+                "cloudVmNetworkId": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for the network ID of a VM instance.</p>"
+                    }
+                },
+                "cloudVmSubnetIds": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for the subnet IDs of a VM instance.</p>"
+                    }
+                },
+                "cloudImageRepositoryName": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for the repository name of a container image.</p>"
+                    }
+                },
+                "cloudImageRegistry": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for the registry of a container image.</p>"
+                    }
+                },
+                "cloudImageDigest": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for the digest of a container image.</p>"
+                    }
+                },
+                "cloudImageTags": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for the tags of a container image.</p>"
+                    }
+                },
+                "cloudImagePushedAt": {
+                    "target": "com.amazonaws.inspector2#DateFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for when a container image was pushed.</p>"
+                    }
+                },
+                "cloudImageArchitecture": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for the architecture of a container image.</p>"
+                    }
+                },
+                "cloudImageLastInUseAt": {
+                    "target": "com.amazonaws.inspector2#DateFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for the last time a container image was in use.</p>"
+                    }
+                },
+                "cloudImageInUseCount": {
+                    "target": "com.amazonaws.inspector2#NumberFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for the in-use count of a container image.</p>"
+                    }
+                },
+                "cloudServerlessFunctionName": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for the name of a serverless function.</p>"
+                    }
+                },
+                "cloudServerlessFunctionRuntime": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for the runtime of a serverless function.</p>"
+                    }
+                },
+                "cloudServerlessFunctionLastModifiedAt": {
+                    "target": "com.amazonaws.inspector2#DateFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for when a serverless function was last modified.</p>"
+                    }
+                },
+                "cloudServerlessFunctionExecutionRole": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter criteria for the execution role of a serverless function.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8466,6 +10142,36 @@
                     "traits": {
                         "smithy.api#documentation": "<p> Details about the number of fixes. </p>"
                     }
+                },
+                "cloudProvider": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud service provider associated with this finding type aggregation. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS</code> – Findings from Amazon Web Services resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AZURE</code> – Findings from Microsoft Azure resources.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudAccountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud account ID for the finding type aggregation.</p>"
+                    }
+                },
+                "cloudOrgId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud organization ID for the finding type aggregation.</p>"
+                    }
+                },
+                "cloudRegion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud Region associated with this finding type aggregation. The value format depends on the cloud provider:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>\n            </li>\n            <li>\n               <p>An Azure region, such as <code>eastus</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudPartition": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud infrastructure partition associated with this finding type aggregation. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aws</code> – Amazon Web Services commercial Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-cn</code> – Amazon Web Services China Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AzureCloud</code> – Azure commercial Regions.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -8571,6 +10277,12 @@
                         "smithy.api#documentation": "<p>The order to sort results by.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "cloudProvider": {
+                    "target": "com.amazonaws.inspector2#CloudProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider associated with the free trial information.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8671,6 +10383,18 @@
                     {
                         "name": "CODE_REPOSITORY",
                         "value": "CODE_REPOSITORY"
+                    },
+                    {
+                        "name": "VM",
+                        "value": "VM"
+                    },
+                    {
+                        "name": "CONTAINER_IMAGE",
+                        "value": "CONTAINER_IMAGE"
+                    },
+                    {
+                        "name": "SERVERLESS_FUNCTION",
+                        "value": "SERVERLESS_FUNCTION"
                     }
                 ]
             }
@@ -9391,6 +11115,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.inspector2#InternalServerException"
                 },
                 {
@@ -9398,10 +11125,13 @@
                 },
                 {
                     "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves setting configurations for Inspector scans.</p>",
+                "smithy.api#documentation": "<p>Retrieves setting configurations for Amazon Inspector scans. If you specify an\n         <code>accountId</code>, this operation returns the scan configuration for that member\n         account. You must be the delegated administrator for the specified member account.\n         If you do not specify an <code>accountId</code>, this operation returns your own\n         scan configuration.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -9411,7 +11141,14 @@
         },
         "com.amazonaws.inspector2#GetConfigurationRequest": {
             "type": "structure",
-            "members": {}
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.inspector2#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 12-digit Amazon Web Services account ID of the member account whose scan configuration you want\n         to retrieve. When specified, you must be the delegated administrator for this\n         member account. If not specified, the operation returns your own\n         configuration.</p>"
+                    }
+                }
+            }
         },
         "com.amazonaws.inspector2#GetConfigurationResponse": {
             "type": "structure",
@@ -9924,8 +11661,95 @@
                     {
                         "value": "ECR_REPOSITORY_NAME",
                         "name": "ECR_REPOSITORY_NAME"
+                    },
+                    {
+                        "value": "PROVIDER",
+                        "name": "PROVIDER"
+                    },
+                    {
+                        "value": "PROVIDER_ACCOUNT_ID",
+                        "name": "PROVIDER_ACCOUNT_ID"
+                    },
+                    {
+                        "value": "PROVIDER_REGION",
+                        "name": "PROVIDER_REGION"
+                    },
+                    {
+                        "value": "PROVIDER_ORG_ID",
+                        "name": "PROVIDER_ORG_ID"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.inspector2#Image": {
+            "type": "structure",
+            "members": {
+                "repositoryName": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the repository the container image resides in.</p>"
+                    }
+                },
+                "registry": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registry for the container image.</p>"
+                    }
+                },
+                "imageTags": {
+                    "target": "com.amazonaws.inspector2#ImageTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image tags attached to the container image.</p>"
+                    }
+                },
+                "imageDigest": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image digest of the container image.</p>"
+                    }
+                },
+                "pushedAt": {
+                    "target": "com.amazonaws.inspector2#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the container image was pushed.</p>"
+                    }
+                },
+                "architecture": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The architecture of the container image.</p>"
+                    }
+                },
+                "author": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The author of the container image.</p>"
+                    }
+                },
+                "inUseCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of times the container image is in use.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "lastInUseAt": {
+                    "target": "com.amazonaws.inspector2#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the container image was in use.</p>"
+                    }
+                },
+                "platform": {
+                    "target": "com.amazonaws.inspector2#Platform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform of the container image.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a container image involved in a finding.</p>"
             }
         },
         "com.amazonaws.inspector2#ImageHash": {
@@ -9957,6 +11781,36 @@
                     "target": "com.amazonaws.inspector2#StringFilterList",
                     "traits": {
                         "smithy.api#documentation": "<p>The hashes associated with the layers.</p>"
+                    }
+                },
+                "cloudProviders": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud providers to aggregate findings for. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS</code> – Findings from Amazon Web Services resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AZURE</code> – Findings from Microsoft Azure resources.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudAccountIds": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud account IDs to aggregate findings for.</p>"
+                    }
+                },
+                "cloudOrgIds": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud organization IDs to aggregate findings for.</p>"
+                    }
+                },
+                "cloudRegions": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud regions to aggregate findings for. The value format depends on the cloud provider:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>\n            </li>\n            <li>\n               <p>An Azure region, such as <code>eastus</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudPartitions": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud partitions to aggregate findings for. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aws</code> – Amazon Web Services commercial Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-cn</code> – Amazon Web Services China Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AzureCloud</code> – Azure commercial Regions.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "sortOrder": {
@@ -10007,6 +11861,36 @@
                         "smithy.api#required": {}
                     }
                 },
+                "cloudProvider": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud service provider associated with this image layer aggregation. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS</code> – Findings from Amazon Web Services resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AZURE</code> – Findings from Microsoft Azure resources.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudAccountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud account ID for the image layer aggregation.</p>"
+                    }
+                },
+                "cloudOrgId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud organization ID for the image layer aggregation.</p>"
+                    }
+                },
+                "cloudRegion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud Region associated with this image layer aggregation. The value format depends on the cloud provider:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>\n            </li>\n            <li>\n               <p>An Azure region, such as <code>eastus</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudPartition": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud infrastructure partition associated with this image layer aggregation. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aws</code> – Amazon Web Services commercial Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-cn</code> – Amazon Web Services China Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AzureCloud</code> – Azure commercial Regions.</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "severityCounts": {
                     "target": "com.amazonaws.inspector2#SeverityCounts",
                     "traits": {
@@ -10041,6 +11925,18 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.inspector2#NonEmptyString"
+            }
+        },
+        "com.amazonaws.inspector2#InheritanceMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The inheritance behavior for a scan-type configuration. Used with\n         <code>UpdateConfigurationInheritance</code> to reset a member account's configuration to\n         inherit from the delegated administrator. The only valid value is\n         <code>INHERIT_FROM_ADMIN</code>, which resets the member account's configuration so that it\n         inherits scan settings from the delegated administrator.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "INHERIT_FROM_ADMIN",
+                        "name": "INHERIT_FROM_ADMIN"
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector2#Inspector2": {
@@ -10090,6 +11986,9 @@
                     "target": "com.amazonaws.inspector2#CreateCodeSecurityScanConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.inspector2#CreateConnector"
+                },
+                {
                     "target": "com.amazonaws.inspector2#CreateFilter"
                 },
                 {
@@ -10106,6 +12005,9 @@
                 },
                 {
                     "target": "com.amazonaws.inspector2#DeleteCodeSecurityScanConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#DeleteConnector"
                 },
                 {
                     "target": "com.amazonaws.inspector2#DeleteFilter"
@@ -10192,6 +12094,12 @@
                     "target": "com.amazonaws.inspector2#ListCodeSecurityScanConfigurations"
                 },
                 {
+                    "target": "com.amazonaws.inspector2#ListConnectors"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ListConnectorScanConfigurations"
+                },
+                {
                     "target": "com.amazonaws.inspector2#ListCoverage"
                 },
                 {
@@ -10256,6 +12164,12 @@
                 },
                 {
                     "target": "com.amazonaws.inspector2#UpdateConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#UpdateConnector"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#UpdateConnectorScanConfiguration"
                 },
                 {
                     "target": "com.amazonaws.inspector2#UpdateEc2DeepInspectionConfiguration"
@@ -12777,6 +14691,367 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.inspector2#ListConnectorScanConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#ListConnectorScanConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#ListConnectorScanConfigurationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists scan configurations for Amazon Web Services Config connectors. Results are paginated. Use the <code>nextToken</code> parameter to retrieve the next page of results.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List scan configurations for a specific AWS Config connector",
+                        "input": {
+                            "awsConfigConnectorArns": [
+                                "arn:aws:config:us-east-1:123456789012:connector/azure/a7bc5463-04ce-4b52-901e-f26f7292a4a7/2fbed4bd-5b95-4947-a751-8defc76ecdae"
+                            ],
+                            "maxResults": 10
+                        },
+                        "output": {
+                            "scanConfigurations": [
+                                {
+                                    "awsConfigConnectorArn": "arn:aws:config:us-east-1:123456789012:connector/azure/a7bc5463-04ce-4b52-901e-f26f7292a4a7/2fbed4bd-5b95-4947-a751-8defc76ecdae",
+                                    "connectorArns": [
+                                        "arn:aws:inspector2:us-east-1:123456789012:connector/6ccf8549-b52b-57ca-bf52-a2266da3c53a"
+                                    ],
+                                    "scanConfiguration": {
+                                        "containerImageScanning": {
+                                            "pushDuration": "DAYS_30",
+                                            "pullDuration": "DAYS_14"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/connectorscanconfigurations/list"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "scanConfigurations"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.inspector2#ListConnectorScanConfigurationsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ListConnectorScanConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "awsConfigConnectorArns": {
+                    "target": "com.amazonaws.inspector2#AwsConfigConnectorArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Amazon Web Services Config connector ARNs to filter results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.inspector2#ListConnectorScanConfigurationsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. Valid range is 1 to 50. To retrieve the remaining results, make another request with the <code>nextToken</code> value returned from this request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#ConnectorNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to use for paginating results. Set this value to null for the first request. For subsequent calls, use the <code>nextToken</code> value returned from the previous request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#ListConnectorScanConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "scanConfigurations": {
+                    "target": "com.amazonaws.inspector2#ConnectorScanConfigurationItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of scan configuration items.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#ConnectorNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token. If this value is not null, there are additional results available. Use this token in the <code>nextToken</code> parameter of a subsequent request to retrieve the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.inspector2#ListConnectors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#ListConnectorsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#ListConnectorsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists connectors in your account. Results are paginated. Use the <code>nextToken</code> parameter to retrieve the next page of results.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List all Azure customer-managed connectors",
+                        "input": {
+                            "maxResults": 10,
+                            "filterCriteria": {
+                                "provider": [
+                                    {
+                                        "comparison": "EQUALS",
+                                        "value": "AZURE"
+                                    }
+                                ],
+                                "connectorType": [
+                                    {
+                                        "comparison": "EQUALS",
+                                        "value": "CUSTOMER_MANAGED"
+                                    }
+                                ]
+                            }
+                        },
+                        "output": {
+                            "items": [
+                                {
+                                    "connectorArn": "arn:aws:inspector2:us-east-1:123456789012:connector/6ccf8549-b52b-57ca-bf52-a2266da3c53a",
+                                    "name": "my-azure-connector",
+                                    "description": "Azure subscription scanner",
+                                    "provider": "AZURE",
+                                    "enablementStatus": "ENABLED",
+                                    "health": {
+                                        "connectorStatus": "CONNECTED",
+                                        "lastCheckedAt": "2026-04-20T21:57:06.400Z"
+                                    },
+                                    "createdAt": "2026-04-20T21:00:00.000Z",
+                                    "updatedAt": "2026-04-20T21:57:06.400Z",
+                                    "azureRegions": [
+                                        "eastus"
+                                    ],
+                                    "awsConfigConnectorArn": "arn:aws:config:us-east-1:123456789012:connector/azure/a7bc5463-04ce-4b52-901e-f26f7292a4a7/2fbed4bd-5b95-4947-a751-8defc76ecdae",
+                                    "scopeConfiguration": {
+                                        "vmScanning": {
+                                            "scopeType": "SUBSCRIPTION",
+                                            "scopeValues": [
+                                                "552802f5-1492-4184-bbae-7291c9939b16"
+                                            ],
+                                            "state": "ACTIVE"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/connector/list"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "ConnectorEnabled": {
+                        "documentation": "Wait until a connector reaches the ENABLED state, whether after CreateConnector or UpdateConnector. Caller MUST filter ListConnectors by the specific connector ARN so the matchers apply only to the target connector. Success when all returned items have enablementStatus == ENABLED. Failure when any item is in FAILED_TO_ENABLE or FAILED_TO_UPDATE.",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "items[].enablementStatus",
+                                        "expected": "ENABLED",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "items[].enablementStatus",
+                                        "expected": "FAILED_TO_ENABLE",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "items[].enablementStatus",
+                                        "expected": "FAILED_TO_UPDATE",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 30,
+                        "maxDelay": 120
+                    },
+                    "ConnectorDeleted": {
+                        "documentation": "Wait until a connector is no longer returned by ListConnectors. Caller MUST filter ListConnectors by the specific connector ARN; success is reached when the filtered result returns zero items. Failure when the deletion terminally fails (FAILED_TO_DELETE).",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "length(items) == `0`",
+                                        "expected": "true",
+                                        "comparator": "booleanEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "items[].enablementStatus",
+                                        "expected": "FAILED_TO_DELETE",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 30,
+                        "maxDelay": 120
+                    },
+                    "ConnectorConnected": {
+                        "documentation": "Wait until a connector reaches the CONNECTED health status, typically after CreateConnector or UpdateConnector + ConnectorEnabled. Caller MUST filter ListConnectors by the specific connector ARN so the matchers apply only to the target connector. Success when all returned items have health.connectorStatus == CONNECTED. Failure when any item is in health.connectorStatus == FAILED_TO_CONNECT or enablementStatus == FAILED_TO_ENABLE.",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "items[].health.connectorStatus",
+                                        "expected": "CONNECTED",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "items[].health.connectorStatus",
+                                        "expected": "FAILED_TO_CONNECT",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "items[].enablementStatus",
+                                        "expected": "FAILED_TO_ENABLE",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 30,
+                        "maxDelay": 120
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ListConnectorsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the <code>nextToken</code> value returned from this request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#ConnectorNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to use for paginating results. Set this value to null for the first request. For subsequent calls, use the <code>nextToken</code> value returned from the previous request.</p>"
+                    }
+                },
+                "filterCriteria": {
+                    "target": "com.amazonaws.inspector2#ConnectorFilterCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter criteria to apply to the list of connectors.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#ListConnectorsResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.inspector2#ConnectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of connectors.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.inspector2#ConnectorNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token. If this value is not null, there are additional results available. Use this token in the <code>nextToken</code> parameter of a subsequent request to retrieve the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.inspector2#ListCoverage": {
             "type": "operation",
             "input": {
@@ -14285,7 +16560,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "^(?:/(?:\\.[-\\w]+|[-\\w]+(?:\\.[-\\w]+)?))+/?$"
+                "smithy.api#pattern": "^(?:(?:/(?:\\.[-\\w]+|[-\\w]+(?:[. ][-\\w]+)*))+/?|[A-Za-z]:\\\\(?:[-\\w]+(?:[. ][-\\w]+)*\\\\)*[-\\w]+(?:[. ][-\\w]+)*)$"
             }
         },
         "com.amazonaws.inspector2#PathList": {
@@ -14565,6 +16840,133 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#Provider": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWS",
+                        "name": "AWS"
+                    },
+                    {
+                        "value": "AZURE",
+                        "name": "AZURE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#ProviderAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^(\\d{12}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$"
+            }
+        },
+        "com.amazonaws.inspector2#ProviderComparison": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ProviderDetailCreate": {
+            "type": "union",
+            "members": {
+                "azure": {
+                    "target": "com.amazonaws.inspector2#AzureProviderDetailCreate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure-specific details for creating a connector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The provider-specific configuration details for creating a connector.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ProviderDetailUpdate": {
+            "type": "union",
+            "members": {
+                "azure": {
+                    "target": "com.amazonaws.inspector2#AzureProviderDetailUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure-specific details for updating a connector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The provider-specific configuration details for updating a connector.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ProviderFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#ProviderComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator for the provider filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#ConnectorCloudProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider value to filter by.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that matches connectors by cloud provider.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ProviderFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#ProviderFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ProviderOrgId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^(o-[a-z0-9]{10,32}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$"
+            }
+        },
+        "com.amazonaws.inspector2#ProviderPartition": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^(aws(-[a-z]+)*|Azure[A-Za-z]+)$"
+            }
+        },
+        "com.amazonaws.inspector2#ProviderRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^([a-z]{2}(-[a-z]+)+-\\d+|[a-z][a-z0-9]+)$"
+            }
+        },
         "com.amazonaws.inspector2#Reason": {
             "type": "string",
             "traits": {
@@ -14800,6 +17202,36 @@
                         "smithy.api#documentation": "<p>The ID of the Amazon Web Services account associated with the findings.</p>"
                     }
                 },
+                "cloudProvider": {
+                    "target": "com.amazonaws.inspector2#Provider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud service provider associated with this repository aggregation. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS</code> – Findings from Amazon Web Services resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AZURE</code> – Findings from Microsoft Azure resources.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudPartition": {
+                    "target": "com.amazonaws.inspector2#ProviderPartition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud infrastructure partition associated with this repository aggregation. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aws</code> – Amazon Web Services commercial Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-cn</code> – Amazon Web Services China Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AzureCloud</code> – Azure commercial Regions.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudRegion": {
+                    "target": "com.amazonaws.inspector2#ProviderRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud Region associated with this repository aggregation. The value format depends on the cloud provider:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>\n            </li>\n            <li>\n               <p>An Azure region, such as <code>eastus</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudOrgId": {
+                    "target": "com.amazonaws.inspector2#ProviderOrgId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud organization ID for the repository aggregation.</p>"
+                    }
+                },
+                "cloudAccountId": {
+                    "target": "com.amazonaws.inspector2#ProviderAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud account ID for the repository aggregation.</p>"
+                    }
+                },
                 "severityCounts": {
                     "target": "com.amazonaws.inspector2#SeverityCounts",
                     "traits": {
@@ -14944,6 +17376,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains details about the resource involved in a finding.</p>"
                     }
+                },
+                "provider": {
+                    "target": "com.amazonaws.inspector2#Provider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider of the resource.</p>"
+                    }
+                },
+                "providerAccountId": {
+                    "target": "com.amazonaws.inspector2#ProviderAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider account ID of the resource.</p>"
+                    }
+                },
+                "providerOrgId": {
+                    "target": "com.amazonaws.inspector2#ProviderOrgId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider organization ID of the resource.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14975,6 +17425,24 @@
                     "target": "com.amazonaws.inspector2#CodeRepositoryDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains details about a code repository resource associated with a finding.</p>"
+                    }
+                },
+                "vm": {
+                    "target": "com.amazonaws.inspector2#Vm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details about a VM instance involved in the finding.</p>"
+                    }
+                },
+                "image": {
+                    "target": "com.amazonaws.inspector2#Image",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details about a container image involved in the finding.</p>"
+                    }
+                },
+                "serverlessFunction": {
+                    "target": "com.amazonaws.inspector2#ServerlessFunction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details about a serverless function involved in the finding.</p>"
                     }
                 }
             },
@@ -15043,9 +17511,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 10,
-                    "max": 341
+                    "max": 1024
                 },
-                "smithy.api#pattern": "(^arn:.*:ecr:.*:\\d{12}:repository\\/(?:[a-z0-9]+(?:[._-][a-z0-9]+)*\\/)*[a-z0-9]+(?:[._-][a-z0-9]+)*(\\/sha256:[a-z0-9]{64})?$)|(^i-([a-z0-9]{8}|[a-z0-9]{17}|\\\\*)$|(^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$)|(^arn:(aws[a-zA-Z-]*)?:inspector2:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:codesecurity-integration\\/[a-f0-9-]{36}\\/project-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$))"
+                "smithy.api#pattern": "(^arn:.*:ecr:.*:\\d{12}:repository\\/[a-zA-Z0-9._\\/-]+(\\/sha256:[a-z0-9]{64})?$)|(^i-([a-z0-9]{8}|[a-z0-9]{17}|\\\\*)$|(^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$)|(^arn:(aws[a-zA-Z-]*)?:inspector2:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:codesecurity-integration\\/[a-f0-9-]{36}\\/project-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$))|(^\\/subscriptions\\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\\/resourcegroups\\/[a-z0-9_\\-\\.()]+\\/providers\\/(microsoft\\.compute\\/virtualmachines\\/[a-z0-9_\\-]+|microsoft\\.web\\/sites\\/[a-z0-9_\\-]+|microsoft\\.containerregistry\\/registries\\/[a-z0-9_\\-]+(\\/repositories\\/[a-z0-9_\\-\\/]+\\/images?\\/sha256:[a-f0-9]{64})?)$)"
             }
         },
         "com.amazonaws.inspector2#ResourceIdFilterList": {
@@ -15170,6 +17638,36 @@
                     "target": "com.amazonaws.inspector2#CodeRepositoryMetadata",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains metadata about scan coverage for a code repository resource.</p>"
+                    }
+                },
+                "vmInstance": {
+                    "target": "com.amazonaws.inspector2#VmInstanceMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VM instance metadata associated with a covered resource.</p>"
+                    }
+                },
+                "containerImage": {
+                    "target": "com.amazonaws.inspector2#ContainerImageMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container image metadata associated with a covered resource.</p>"
+                    }
+                },
+                "containerRepository": {
+                    "target": "com.amazonaws.inspector2#ContainerRepositoryMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container repository metadata associated with a covered resource.</p>"
+                    }
+                },
+                "containerRegistry": {
+                    "target": "com.amazonaws.inspector2#ContainerRegistryMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container registry metadata associated with a covered resource.</p>"
+                    }
+                },
+                "serverlessFunction": {
+                    "target": "com.amazonaws.inspector2#ServerlessFunctionMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The serverless function metadata associated with a covered resource.</p>"
                     }
                 }
             },
@@ -15374,6 +17872,18 @@
                     {
                         "value": "CODE_REPOSITORY",
                         "name": "CODE_REPOSITORY"
+                    },
+                    {
+                        "value": "Microsoft.Compute/virtualMachines",
+                        "name": "MICROSOFT_COMPUTE_VIRTUAL_MACHINES"
+                    },
+                    {
+                        "value": "Microsoft.ContainerRegistry/registry/containerImage",
+                        "name": "MICROSOFT_CONTAINER_REGISTRY_REGISTRY_CONTAINER_IMAGE"
+                    },
+                    {
+                        "value": "Microsoft.Web/sites",
+                        "name": "MICROSOFT_WEB_SITES"
                     }
                 ]
             }
@@ -15520,6 +18030,18 @@
                     {
                         "value": "NODEJS_24_X",
                         "name": "NODEJS_24_X"
+                    },
+                    {
+                        "value": "NODEJS_22_X",
+                        "name": "NODEJS_22_X"
+                    },
+                    {
+                        "value": "JAVA_21",
+                        "name": "JAVA_21"
+                    },
+                    {
+                        "value": "JAVA_25",
+                        "name": "JAVA_25"
                     }
                 ]
             }
@@ -15571,6 +18093,10 @@
                     {
                         "value": "EC2_INSPECTOR_AGENT_BASED",
                         "name": "EC2_INSPECTOR_AGENT_BASED"
+                    },
+                    {
+                        "value": "VM_INSPECTOR_AGENT_BASED",
+                        "name": "VM_INSPECTOR_AGENT_BASED"
                     }
                 ]
             }
@@ -15751,6 +18277,14 @@
                     {
                         "value": "UNSUPPORTED_CODE_ARTIFACTS",
                         "name": "UNSUPPORTED_CODE_ARTIFACTS"
+                    },
+                    {
+                        "value": "RESOURCE_UNMANAGED",
+                        "name": "RESOURCE_UNMANAGED"
+                    },
+                    {
+                        "value": "RESOURCE_STOPPED",
+                        "name": "RESOURCE_STOPPED"
                     }
                 ]
             }
@@ -15806,6 +18340,60 @@
                 "smithy.api#documentation": "<p>A schedule.</p>"
             }
         },
+        "com.amazonaws.inspector2#ScopeConfiguration": {
+            "type": "structure",
+            "members": {
+                "scopeType": {
+                    "target": "com.amazonaws.inspector2#ScopeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of scope. Valid values are <code>TENANT</code>, which scans all resources in the Azure tenant, and <code>SUBSCRIPTION</code>, which scans only the resources in the specified Azure subscriptions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scopeValues": {
+                    "target": "com.amazonaws.inspector2#ScopeValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of scope values. For subscription-level scope, these are Azure subscription IDs.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.inspector2#ScopeState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the scope configuration.</p>"
+                    }
+                },
+                "stateReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current state of the scope configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The scope of resources that Amazon Inspector scans for a single scanning type, including the scope level, the targeted resources, and the current state.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ScopeConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "scopeType": {
+                    "target": "com.amazonaws.inspector2#ScopeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of scope. Valid values are <code>TENANT</code>, which scans all resources in the Azure tenant, and <code>SUBSCRIPTION</code>, which scans only the resources in the specified Azure subscriptions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scopeValues": {
+                    "target": "com.amazonaws.inspector2#ScopeValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of scope values. For subscription-level scope, these are Azure subscription IDs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The scope of resources to scan for a single scanning type. Provide this as part of an <code>AzureScopeConfigurationInput</code> when you create or update a connector.</p>"
+            }
+        },
         "com.amazonaws.inspector2#ScopeSettings": {
             "type": "structure",
             "members": {
@@ -15818,6 +18406,73 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Defines the scope of repositories to be included in code security scans.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ScopeState": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ScopeType": {
+            "type": "enum",
+            "members": {
+                "TENANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TENANT"
+                    }
+                },
+                "SUBSCRIPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBSCRIPTION"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ScopeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            }
+        },
+        "com.amazonaws.inspector2#ScopeValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#ScopeValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.inspector2#SearchVulnerabilities": {
@@ -16095,6 +18750,307 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.inspector2#ServerlessFunction": {
+            "type": "structure",
+            "members": {
+                "serverlessFunctionName": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the serverless function.</p>"
+                    }
+                },
+                "runtime": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime of the serverless function.</p>"
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the serverless function.</p>"
+                    }
+                },
+                "codeDigest": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code digest of the serverless function.</p>"
+                    }
+                },
+                "lastModifiedAt": {
+                    "target": "com.amazonaws.inspector2#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the serverless function was last modified.</p>"
+                    }
+                },
+                "networkId": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network ID associated with the serverless function.</p>"
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.inspector2#CloudSubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subnet IDs associated with the serverless function.</p>"
+                    }
+                },
+                "securityGroupIds": {
+                    "target": "com.amazonaws.inspector2#CloudSecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security group IDs associated with the serverless function.</p>"
+                    }
+                },
+                "executionRole": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution role of the serverless function.</p>"
+                    }
+                },
+                "packageType": {
+                    "target": "com.amazonaws.inspector2#PackageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package type of the serverless function.</p>"
+                    }
+                },
+                "architectures": {
+                    "target": "com.amazonaws.inspector2#ArchitectureList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The architectures of the serverless function.</p>"
+                    }
+                },
+                "layers": {
+                    "target": "com.amazonaws.inspector2#ServerlessFunctionLayerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The layers of the serverless function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a serverless function involved in a finding.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ServerlessFunctionAggregation": {
+            "type": "structure",
+            "members": {
+                "resourceIds": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource IDs to aggregate findings for.</p>"
+                    }
+                },
+                "functionNames": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The function names to aggregate findings for.</p>"
+                    }
+                },
+                "runtimes": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtimes to aggregate findings for.</p>"
+                    }
+                },
+                "functionTags": {
+                    "target": "com.amazonaws.inspector2#MapFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The function tags to aggregate findings for.</p>"
+                    }
+                },
+                "cloudProviders": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud providers to aggregate findings for. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS</code> – Findings from Amazon Web Services resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AZURE</code> – Findings from Microsoft Azure resources.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudPartitions": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud partitions to aggregate findings for. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aws</code> – Amazon Web Services commercial Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-cn</code> – Amazon Web Services China Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AzureCloud</code> – Azure commercial Regions.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudRegions": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud regions to aggregate findings for. The value format depends on the cloud provider:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>\n            </li>\n            <li>\n               <p>An Azure region, such as <code>eastus</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudOrgIds": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud organization IDs to aggregate findings for.</p>"
+                    }
+                },
+                "cloudAccountIds": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud account IDs to aggregate findings for.</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.inspector2#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order to sort results by. Valid values are <code>ASC</code> and <code>DESC</code>.</p>"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.inspector2#ServerlessFunctionSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to sort results by. Specify a field name from the aggregation response, such as <code>CRITICAL</code>, <code>HIGH</code>, or <code>ALL</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An aggregation of information about serverless functions.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ServerlessFunctionAggregationResponse": {
+            "type": "structure",
+            "members": {
+                "resourceId": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource ID for the serverless function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cloudProvider": {
+                    "target": "com.amazonaws.inspector2#Provider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud service provider associated with this serverless function aggregation. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS</code> – Findings from Amazon Web Services resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AZURE</code> – Findings from Microsoft Azure resources.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudAccountId": {
+                    "target": "com.amazonaws.inspector2#ProviderAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud account ID for the serverless function aggregation.</p>"
+                    }
+                },
+                "cloudPartition": {
+                    "target": "com.amazonaws.inspector2#ProviderPartition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud infrastructure partition associated with this serverless function aggregation. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aws</code> – Amazon Web Services commercial Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-cn</code> – Amazon Web Services China Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AzureCloud</code> – Azure commercial Regions.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudRegion": {
+                    "target": "com.amazonaws.inspector2#ProviderRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud Region associated with this serverless function aggregation. The value format depends on the cloud provider:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>\n            </li>\n            <li>\n               <p>An Azure region, such as <code>eastus</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudOrgId": {
+                    "target": "com.amazonaws.inspector2#ProviderOrgId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud organization ID for the serverless function aggregation.</p>"
+                    }
+                },
+                "functionName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the serverless function.</p>"
+                    }
+                },
+                "runtime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime of the serverless function.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.inspector2#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags attached to the serverless function.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID associated with the serverless function.</p>"
+                    }
+                },
+                "severityCounts": {
+                    "target": "com.amazonaws.inspector2#SeverityCounts"
+                },
+                "lastModifiedAt": {
+                    "target": "com.amazonaws.inspector2#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the serverless function was last modified.</p>"
+                    }
+                },
+                "exploitAvailableActiveFindingsCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of active findings with an exploit available for the serverless function.</p>"
+                    }
+                },
+                "fixAvailableActiveFindingsCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of active findings with a fix available for the serverless function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A response that contains the results of a serverless function aggregation.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ServerlessFunctionLayerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#ServerlessFunctionLayerUrn"
+            }
+        },
+        "com.amazonaws.inspector2#ServerlessFunctionLayerUrn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+$"
+            }
+        },
+        "com.amazonaws.inspector2#ServerlessFunctionMetadata": {
+            "type": "structure",
+            "members": {
+                "serverlessFunctionName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the serverless function.</p>"
+                    }
+                },
+                "runtime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime of the serverless function.</p>"
+                    }
+                },
+                "functionTags": {
+                    "target": "com.amazonaws.inspector2#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the serverless function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about a serverless function associated with a covered resource.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ServerlessFunctionSortBy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CRITICAL",
+                        "name": "CRITICAL"
+                    },
+                    {
+                        "value": "HIGH",
+                        "name": "HIGH"
+                    },
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector2#Service": {
@@ -17337,6 +20293,12 @@
                         "smithy.api#documentation": "<p>The resource type to aggregate on.</p>"
                     }
                 },
+                "findingType": {
+                    "target": "com.amazonaws.inspector2#AggregationFindingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of finding to aggregate on.</p>"
+                    }
+                },
                 "sortOrder": {
                     "target": "com.amazonaws.inspector2#SortOrder",
                     "traits": {
@@ -17347,12 +20309,6 @@
                     "target": "com.amazonaws.inspector2#TitleSortBy",
                     "traits": {
                         "smithy.api#documentation": "<p>The value to sort results by.</p>"
-                    }
-                },
-                "findingType": {
-                    "target": "com.amazonaws.inspector2#AggregationFindingType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The type of finding to aggregate on.</p>"
                     }
                 }
             },
@@ -17835,7 +20791,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates setting configurations for your Amazon Inspector account. When you use this API as an Amazon Inspector\n         delegated administrator this updates the setting for all accounts you manage. Member\n         accounts in an organization cannot update this setting.</p>",
+                "smithy.api#documentation": "<p>Updates the scan configuration for your Amazon Inspector account. If you don't specify an\n         <code>accountId</code>, this operation updates the delegated administrator's configuration\n         and propagates it to member accounts that have not been individually configured. If you\n         specify an <code>accountId</code>, this operation updates that member account's\n         configuration. Only the delegated administrator can specify an <code>accountId</code>;\n         member accounts cannot call this operation.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -17843,9 +20799,35 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#UpdateConfigurationInheritance": {
+            "type": "structure",
+            "members": {
+                "ec2Configuration": {
+                    "target": "com.amazonaws.inspector2#InheritanceMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inheritance mode for Amazon EC2 scan configuration. Set to\n         <code>INHERIT_FROM_ADMIN</code> to reset the member account's Amazon EC2 scan configuration to\n         inherit from the delegated administrator. If omitted, the member account's existing Amazon EC2\n         scan configuration is not changed.</p>"
+                    }
+                },
+                "ecrConfiguration": {
+                    "target": "com.amazonaws.inspector2#InheritanceMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inheritance mode for Amazon ECR scan configuration. Set to\n         <code>INHERIT_FROM_ADMIN</code> to reset the member account's Amazon ECR scan configuration to\n         inherit from the delegated administrator. If omitted, the member account's existing Amazon ECR\n         scan configuration is not changed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The per-scan-type inheritance reset settings for the <code>UpdateConfiguration</code>\n         operation. Each member is independently optional. Including a member in this structure\n         resets that scan type's configuration to inherit from the delegated administrator.</p>"
+            }
+        },
         "com.amazonaws.inspector2#UpdateConfigurationRequest": {
             "type": "structure",
             "members": {
+                "accountId": {
+                    "target": "com.amazonaws.inspector2#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 12-digit Amazon Web Services account ID of the member account whose scan configuration you want\n         to update. When specified, you must be the delegated administrator for this member\n         account. If not specified, the operation updates your own configuration and\n         propagates changes to any member accounts that have not been individually configured.</p>"
+                    }
+                },
                 "ecrConfiguration": {
                     "target": "com.amazonaws.inspector2#EcrConfiguration",
                     "traits": {
@@ -17857,12 +20839,198 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies how the Amazon EC2 automated scan will be updated for your environment.</p>"
                     }
+                },
+                "updateConfigurationInheritance": {
+                    "target": "com.amazonaws.inspector2#UpdateConfigurationInheritance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which scan-type configurations to reset to the delegated administrator's\n         inherited values for the targeted member account. Each member of this structure is\n         independently optional. When specified, <code>ec2Configuration</code> and\n         <code>ecrConfiguration</code> must be absent, and <code>accountId</code> must also be\n         present. Only <code>INHERIT_FROM_ADMIN</code> is valid for each member. If not specified,\n         the operation uses the <code>ec2Configuration</code> and <code>ecrConfiguration</code>\n         parameters instead.</p>"
+                    }
                 }
             }
         },
         "com.amazonaws.inspector2#UpdateConfigurationResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.inspector2#UpdateConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#UpdateConnectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#UpdateConnectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the description or provider-specific configuration details of an existing connector.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Expand the Azure regions covered by a connector",
+                        "input": {
+                            "connectorArn": "arn:aws:inspector2:us-east-1:123456789012:connector/6ccf8549-b52b-57ca-bf52-a2266da3c53a",
+                            "providerDetail": {
+                                "azure": {
+                                    "azureRegions": [
+                                        "eastus",
+                                        "westus"
+                                    ]
+                                }
+                            }
+                        },
+                        "output": {
+                            "connectorArn": "arn:aws:inspector2:us-east-1:123456789012:connector/6ccf8549-b52b-57ca-bf52-a2266da3c53a"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/connector/update"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.inspector2#UpdateConnectorRequest": {
+            "type": "structure",
+            "members": {
+                "connectorArn": {
+                    "target": "com.amazonaws.inspector2#ConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.inspector2#ConnectorDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated description of the connector.</p>"
+                    }
+                },
+                "providerDetail": {
+                    "target": "com.amazonaws.inspector2#ProviderDetailUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated provider-specific configuration details for the connector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#UpdateConnectorResponse": {
+            "type": "structure",
+            "members": {
+                "connectorArn": {
+                    "target": "com.amazonaws.inspector2#ConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated connector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.inspector2#UpdateConnectorScanConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#UpdateConnectorScanConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#UpdateConnectorScanConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates scan configuration settings for resources associated with an Amazon Web Services Config connector.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Set 30-day push and 14-day pull rescan durations for an Azure container registry connector",
+                        "input": {
+                            "awsConfigConnectorArn": "arn:aws:config:us-east-1:123456789012:connector/azure/a7bc5463-04ce-4b52-901e-f26f7292a4a7/2fbed4bd-5b95-4947-a751-8defc76ecdae",
+                            "scanConfiguration": {
+                                "containerImageScanning": {
+                                    "pushDuration": "DAYS_30",
+                                    "pullDuration": "DAYS_14"
+                                }
+                            }
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/connectorscanconfiguration/update"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.inspector2#UpdateConnectorScanConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "awsConfigConnectorArn": {
+                    "target": "com.amazonaws.inspector2#AwsConfigConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services Config connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scanConfiguration": {
+                    "target": "com.amazonaws.inspector2#ConnectorScanConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan configuration settings to apply.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#UpdateConnectorScanConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.inspector2#UpdateEc2DeepInspectionConfiguration": {
             "type": "operation",
@@ -18299,6 +21467,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The currency type used when calculating usage data.</p>"
                     }
+                },
+                "cloudProvider": {
+                    "target": "com.amazonaws.inspector2#CloudProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider associated with the usage information.</p>"
+                    }
                 }
             },
             "traits": {
@@ -18394,6 +21568,22 @@
                     {
                         "name": "EC2_AGENTLESS_INSTANCE_HOURS",
                         "value": "EC2_AGENTLESS_INSTANCE_HOURS"
+                    },
+                    {
+                        "name": "AZURE_CONTAINER_IMAGE_INITIAL_SCAN",
+                        "value": "AZURE_CONTAINER_IMAGE_INITIAL_SCAN"
+                    },
+                    {
+                        "name": "AZURE_CONTAINER_IMAGE_RESCAN",
+                        "value": "AZURE_CONTAINER_IMAGE_RESCAN"
+                    },
+                    {
+                        "name": "AZURE_VM_AGENT_BASED_INSTANCE_HOURS",
+                        "value": "AZURE_VM_AGENT_BASED_INSTANCE_HOURS"
+                    },
+                    {
+                        "name": "AZURE_SERVERLESS_FUNCTION_HOURS",
+                        "value": "AZURE_SERVERLESS_FUNCTION_HOURS"
                     }
                 ]
             }
@@ -18555,6 +21745,332 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^\\$LATEST|[0-9]+$"
+            }
+        },
+        "com.amazonaws.inspector2#Vm": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the VM instance.</p>"
+                    }
+                },
+                "vmName": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the VM instance.</p>"
+                    }
+                },
+                "vmImageReference": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image reference of the VM instance.</p>"
+                    }
+                },
+                "ipV4Addresses": {
+                    "target": "com.amazonaws.inspector2#IpV4AddressList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 addresses of the VM instance.</p>"
+                    }
+                },
+                "ipV6Addresses": {
+                    "target": "com.amazonaws.inspector2#IpV6AddressList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 addresses of the VM instance.</p>"
+                    }
+                },
+                "networkId": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network ID associated with the VM instance.</p>"
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.inspector2#CloudSubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subnet IDs of the VM instance.</p>"
+                    }
+                },
+                "securityGroupIds": {
+                    "target": "com.amazonaws.inspector2#CloudSecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security group IDs associated with the VM instance.</p>"
+                    }
+                },
+                "launchedAt": {
+                    "target": "com.amazonaws.inspector2#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the VM instance was launched.</p>"
+                    }
+                },
+                "platform": {
+                    "target": "com.amazonaws.inspector2#Platform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform of the VM instance.</p>"
+                    }
+                },
+                "executionRole": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution role of the VM instance.</p>"
+                    }
+                },
+                "keyName": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key name associated with the VM instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a VM instance involved in a finding.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#VmInstanceAggregation": {
+            "type": "structure",
+            "members": {
+                "resourceIds": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource IDs to aggregate findings for.</p>"
+                    }
+                },
+                "operatingSystems": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating systems to aggregate findings for.</p>"
+                    }
+                },
+                "instanceTags": {
+                    "target": "com.amazonaws.inspector2#MapFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance tags to aggregate findings for.</p>"
+                    }
+                },
+                "vmImageReferences": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VM image references to aggregate findings for.</p>"
+                    }
+                },
+                "cloudProviders": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud providers to aggregate findings for. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS</code> – Findings from Amazon Web Services resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AZURE</code> – Findings from Microsoft Azure resources.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudPartitions": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud partitions to aggregate findings for. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aws</code> – Amazon Web Services commercial Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-cn</code> – Amazon Web Services China Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AzureCloud</code> – Azure commercial Regions.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudRegions": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud regions to aggregate findings for. The value format depends on the cloud provider:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>\n            </li>\n            <li>\n               <p>An Azure region, such as <code>eastus</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudOrgIds": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud organization IDs to aggregate findings for.</p>"
+                    }
+                },
+                "cloudAccountIds": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud account IDs to aggregate findings for.</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.inspector2#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order to sort results by. Valid values are <code>ASC</code> and <code>DESC</code>.</p>"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.inspector2#VmInstanceSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to sort results by. Specify a field name from the aggregation response, such as <code>CRITICAL</code>, <code>HIGH</code>, <code>ALL</code>, or <code>NETWORK_FINDINGS</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An aggregation of information about VM instances.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#VmInstanceAggregationResponse": {
+            "type": "structure",
+            "members": {
+                "resourceId": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource ID for the VM instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cloudProvider": {
+                    "target": "com.amazonaws.inspector2#Provider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud service provider associated with this VM instance aggregation. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS</code> – Findings from Amazon Web Services resources.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AZURE</code> – Findings from Microsoft Azure resources.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudAccountId": {
+                    "target": "com.amazonaws.inspector2#ProviderAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud account ID for the VM instance aggregation.</p>"
+                    }
+                },
+                "cloudPartition": {
+                    "target": "com.amazonaws.inspector2#ProviderPartition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud infrastructure partition associated with this VM instance aggregation. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aws</code> – Amazon Web Services commercial Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-cn</code> – Amazon Web Services China Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>aws-us-gov</code> – Amazon Web Services GovCloud (US) Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AzureCloud</code> – Azure commercial Regions.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudRegion": {
+                    "target": "com.amazonaws.inspector2#ProviderRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud Region associated with this VM instance aggregation. The value format depends on the cloud provider:</p>\n         <ul>\n            <li>\n               <p>An Amazon Web Services Region, such as <code>us-east-1</code>.</p>\n            </li>\n            <li>\n               <p>An Azure region, such as <code>eastus</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "cloudOrgId": {
+                    "target": "com.amazonaws.inspector2#ProviderOrgId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud organization ID for the VM instance aggregation.</p>"
+                    }
+                },
+                "vmImageReference": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VM image reference for the VM instance.</p>"
+                    }
+                },
+                "operatingSystem": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system of the VM instance.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.inspector2#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags attached to the VM instance.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID associated with the VM instance.</p>"
+                    }
+                },
+                "severityCounts": {
+                    "target": "com.amazonaws.inspector2#SeverityCounts"
+                },
+                "networkFindings": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of network findings for the VM instance. This field applies only to Amazon Web Services resources.</p>"
+                    }
+                },
+                "exploitAvailableActiveFindingsCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of active findings with an exploit available for the VM instance.</p>"
+                    }
+                },
+                "fixAvailableActiveFindingsCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of active findings with a fix available for the VM instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A response that contains the results of a VM instance aggregation.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#VmInstanceMetadata": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.inspector2#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the VM instance.</p>"
+                    }
+                },
+                "platform": {
+                    "target": "com.amazonaws.inspector2#VmPlatform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform of the VM instance.</p>"
+                    }
+                },
+                "inventoryHash": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inventory hash of the VM instance.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 256
+                        }
+                    }
+                },
+                "vmImageReference": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image reference of the VM instance.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about a virtual machine (VM) instance associated with a covered resource.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#VmInstanceSortBy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CRITICAL",
+                        "name": "CRITICAL"
+                    },
+                    {
+                        "value": "HIGH",
+                        "name": "HIGH"
+                    },
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    },
+                    {
+                        "value": "NETWORK_FINDINGS",
+                        "name": "NETWORK_FINDINGS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#VmPlatform": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "WINDOWS",
+                        "name": "WINDOWS"
+                    },
+                    {
+                        "value": "LINUX",
+                        "name": "LINUX"
+                    },
+                    {
+                        "value": "UNKNOWN",
+                        "name": "UNKNOWN"
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector2#VpcId": {

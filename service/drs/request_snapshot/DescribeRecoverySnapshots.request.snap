@@ -1,0 +1,5 @@
+POST /DescribeRecoverySnapshots
+
+Content-Type: application/json
+
+{"filters":{"fromDateTime":"__FromDateTime__","toDateTime":"__ToDateTime__"},"maxResults":1,"nextToken":"__NextToken__","order":"ASC","sourceServerID":"__SourceServerID__"}

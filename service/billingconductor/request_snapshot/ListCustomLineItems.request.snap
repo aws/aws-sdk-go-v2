@@ -1,0 +1,5 @@
+POST /list-custom-line-items
+
+Content-Type: application/json
+
+{"BillingPeriod":"__BillingPeriod__","Filters":{"AccountIds":["__Member__","__Member__"],"Arns":["__Member__","__Member__"],"BillingGroups":["__Member__","__Member__"],"Names":["__Member__","__Member__"]},"MaxResults":1,"NextToken":"__NextToken__"}

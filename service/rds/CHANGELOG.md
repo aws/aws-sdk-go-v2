@@ -1,3 +1,24 @@
+# v1.122.0 (2026-07-17)
+
+* **Feature**: Adds the AssociatedRoles parameter to CreateDBCluster, RestoreDBClusterFromSnapshot, RestoreDBClusterToPointInTime, and RestoreDBClusterFromS3, letting customers associate IAM roles with an Aurora DB cluster at create or restore time instead of calling AddRoleToDBCluster afterward.
+
+# v1.121.0 (2026-07-15)
+
+* **Feature**: Adds support for modifying EngineLifecycleSupport on DB instances and DB clusters through ModifyDBInstance and ModifyDBCluster.
+
+# v1.120.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.120.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.119.5 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.119.4 (2026-06-29)
 
 * No change notes available for this release.

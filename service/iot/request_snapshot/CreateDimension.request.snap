@@ -1,0 +1,5 @@
+POST /dimensions/__Name__
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","stringValues":["__Member__","__Member__"],"tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"type":"TOPIC_FILTER"}

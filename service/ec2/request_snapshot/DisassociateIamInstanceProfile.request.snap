@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DisassociateIamInstanceProfile&AssociationId=__AssociationId__&Version=2016-11-15

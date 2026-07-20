@@ -30,7 +30,8 @@ func (c *Client) GetEstimatedCarbonEmissions(ctx context.Context, params *GetEst
 
 type GetEstimatedCarbonEmissionsInput struct {
 
-	// The date range for fetching estimated carbon emissions.
+	//  The date range for fetching estimated carbon emissions. The range must include
+	// the start date of a month for that month's data to be included in the response.
 	//
 	// This member is required.
 	TimePeriod *types.TimePeriod
@@ -39,10 +40,18 @@ type GetEstimatedCarbonEmissionsInput struct {
 	// TOTAL_LBM_CARBON_EMISSIONS and TOTAL_MBM_CARBON_EMISSIONS emissions types.
 	EmissionsTypes []types.EmissionsType
 
-	// The criteria for filtering estimated carbon emissions.
+	//  The criteria for filtering estimated carbon emissions. To determine which
+	// dimensions are available to be filtered by, you can first call GetEstimatedCarbonEmissionsDimensionValues
 	FilterBy *types.FilterExpression
 
-	// The time granularity for the results. If absent, uses MONTHLY time granularity.
+	//  The time granularity for the results. If absent, uses MONTHLY time
+	// granularity. The smallest supported granularity for carbon emissions is MONTHLY
+	// .
+	//
+	// If requesting partial time periods, data will be returned based on the smallest
+	// supported granularity. For example, requesting 2025-04-01T00:00:00Z to
+	// 2026-04-01T00:00:00Z with YEARLY_CALENDAR granularity will return the last 9
+	// months for 2025 and the first 3 months of 2026.
 	Granularity types.TimeGranularity
 
 	// Configuration for fiscal year calculations when using YEARLY_FISCAL or
@@ -52,7 +61,7 @@ type GetEstimatedCarbonEmissionsInput struct {
 	// The dimensions available for grouping estimated carbon emissions.
 	GroupBy []types.Dimension
 
-	// The maximum number of results to return in a single call. Default is 40.
+	// The maximum number of results to return in a single call. Default is 1000.
 	MaxResults *int32
 
 	// The pagination token specifying which page of results to return in the
@@ -140,7 +149,7 @@ func (c *Client) addOperationGetEstimatedCarbonEmissionsMiddlewares(stack *middl
 // GetEstimatedCarbonEmissionsPaginatorOptions is the paginator options for
 // GetEstimatedCarbonEmissions
 type GetEstimatedCarbonEmissionsPaginatorOptions struct {
-	// The maximum number of results to return in a single call. Default is 40.
+	// The maximum number of results to return in a single call. Default is 1000.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

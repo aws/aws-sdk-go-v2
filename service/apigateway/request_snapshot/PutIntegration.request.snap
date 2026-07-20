@@ -1,0 +1,6 @@
+PUT /restapis/__RestApiId__/resources/__ResourceId__/methods/__HttpMethod__/integration
+
+Accept: application/json
+Content-Type: application/json
+
+{"cacheKeyParameters":["__Member__","__Member__"],"cacheNamespace":"__CacheNamespace__","connectionId":"__ConnectionId__","connectionType":"INTERNET","contentHandling":"CONVERT_TO_BINARY","credentials":"__Credentials__","httpMethod":"__IntegrationHttpMethod__","integrationTarget":"__IntegrationTarget__","passthroughBehavior":"__PassthroughBehavior__","requestParameters":{"key0":"__Value__"},"requestTemplates":{"key0":"__Value__"},"responseTransferMode":"BUFFERED","timeoutInMillis":1,"tlsConfig":{"insecureSkipVerification":true},"type":"HTTP","uri":"__Uri__"}

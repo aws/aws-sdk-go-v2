@@ -11485,6 +11485,11 @@ func awsRestjson1_deserializeDocumentElasticsearchDomainConfig(v **types.Elastic
 				return err
 			}
 
+		case "EngineMode":
+			if err := awsRestjson1_deserializeDocumentEngineModeStatus(&sv.EngineMode, value); err != nil {
+				return err
+			}
+
 		case "LogPublishingOptions":
 			if err := awsRestjson1_deserializeDocumentLogPublishingOptionsStatus(&sv.LogPublishingOptions, value); err != nil {
 				return err
@@ -11502,6 +11507,11 @@ func awsRestjson1_deserializeDocumentElasticsearchDomainConfig(v **types.Elastic
 
 		case "SnapshotOptions":
 			if err := awsRestjson1_deserializeDocumentSnapshotOptionsStatus(&sv.SnapshotOptions, value); err != nil {
+				return err
+			}
+
+		case "UseCase":
+			if err := awsRestjson1_deserializeDocumentUseCaseStatus(&sv.UseCase, value); err != nil {
 				return err
 			}
 
@@ -11682,6 +11692,15 @@ func awsRestjson1_deserializeDocumentElasticsearchDomainStatus(v **types.Elastic
 				return err
 			}
 
+		case "EngineMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DomainEngineMode to be of type string, got %T instead", value)
+				}
+				sv.EngineMode = types.DomainEngineMode(jtv)
+			}
+
 		case "LogPublishingOptions":
 			if err := awsRestjson1_deserializeDocumentLogPublishingOptions(&sv.LogPublishingOptions, value); err != nil {
 				return err
@@ -11723,6 +11742,15 @@ func awsRestjson1_deserializeDocumentElasticsearchDomainStatus(v **types.Elastic
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.UpgradeProcessing = ptr.Bool(jtv)
+			}
+
+		case "UseCase":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DomainUseCase to be of type string, got %T instead", value)
+				}
+				sv.UseCase = types.DomainUseCase(jtv)
 			}
 
 		case "VPCOptions":
@@ -12013,6 +12041,51 @@ func awsRestjson1_deserializeDocumentEndpointsMap(v *map[string]string, value in
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEngineModeStatus(v **types.EngineModeStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EngineModeStatus
+	if *v == nil {
+		sv = &types.EngineModeStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Options":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DomainEngineMode to be of type string, got %T instead", value)
+				}
+				sv.Options = types.DomainEngineMode(jtv)
+			}
+
+		case "Status":
+			if err := awsRestjson1_deserializeDocumentOptionStatus(&sv.Status, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -14969,6 +15042,51 @@ func awsRestjson1_deserializeDocumentUpgradeStepsList(v *[]types.UpgradeStepItem
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUseCaseStatus(v **types.UseCaseStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UseCaseStatus
+	if *v == nil {
+		sv = &types.UseCaseStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Options":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DomainUseCase to be of type string, got %T instead", value)
+				}
+				sv.Options = types.DomainUseCase(jtv)
+			}
+
+		case "Status":
+			if err := awsRestjson1_deserializeDocumentOptionStatus(&sv.Status, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

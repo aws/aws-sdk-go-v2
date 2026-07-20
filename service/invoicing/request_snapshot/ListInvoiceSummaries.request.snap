@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Invoicing.ListInvoiceSummaries
+
+{"Filter":{"BillingPeriod":{"Month":1,"Year":1},"InvoicingEntity":"__InvoicingEntity__","ReceiverRole":"SELLER","TimeInterval":{"EndDate":946684800,"StartDate":946684800}},"MaxResults":1,"NextToken":"__NextToken__","Selector":{"ResourceType":"ACCOUNT_ID","Value":"__Value__"}}

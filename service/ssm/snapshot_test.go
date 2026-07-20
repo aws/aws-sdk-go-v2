@@ -146,6 +146,18 @@ func TestCheckSnapshot_CreateAssociationBatch(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateCloudConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCloudConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCloudConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDocument(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDocument(context.Background(), nil, func(o *Options) {
@@ -235,6 +247,18 @@ func TestCheckSnapshot_DeleteAssociation(t *testing.T) {
 	_, err := svc.DeleteAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCloudConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCloudConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCloudConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -854,6 +878,18 @@ func TestCheckSnapshot_GetCalendarState(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCloudConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCloudConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCloudConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCommandInvocation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCommandInvocation(context.Background(), nil, func(o *Options) {
@@ -1171,6 +1207,18 @@ func TestCheckSnapshot_ListAssociationVersions(t *testing.T) {
 	_, err := svc.ListAssociationVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListAssociationVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCloudConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCloudConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCloudConnectors")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1670,6 +1718,18 @@ func TestCheckSnapshot_UpdateAssociationStatus(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateCloudConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCloudConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCloudConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateDocument(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDocument(context.Background(), nil, func(o *Options) {
@@ -1813,6 +1873,18 @@ func TestCheckSnapshot_UpdateServiceSetting(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_ValidateCloudConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ValidateCloudConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ValidateCloudConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AddTagsToResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AddTagsToResource(context.Background(), nil, func(o *Options) {
@@ -1890,6 +1962,18 @@ func TestUpdateSnapshot_CreateAssociationBatch(t *testing.T) {
 	_, err := svc.CreateAssociationBatch(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateAssociationBatch")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCloudConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCloudConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCloudConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1986,6 +2070,18 @@ func TestUpdateSnapshot_DeleteAssociation(t *testing.T) {
 	_, err := svc.DeleteAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCloudConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCloudConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCloudConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2605,6 +2701,18 @@ func TestUpdateSnapshot_GetCalendarState(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetCloudConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCloudConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCloudConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCommandInvocation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCommandInvocation(context.Background(), nil, func(o *Options) {
@@ -2922,6 +3030,18 @@ func TestUpdateSnapshot_ListAssociationVersions(t *testing.T) {
 	_, err := svc.ListAssociationVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAssociationVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCloudConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCloudConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCloudConnectors")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3421,6 +3541,18 @@ func TestUpdateSnapshot_UpdateAssociationStatus(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateCloudConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCloudConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCloudConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateDocument(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDocument(context.Background(), nil, func(o *Options) {
@@ -3558,6 +3690,18 @@ func TestUpdateSnapshot_UpdateServiceSetting(t *testing.T) {
 	_, err := svc.UpdateServiceSetting(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateServiceSetting")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ValidateCloudConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ValidateCloudConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ValidateCloudConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

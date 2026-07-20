@@ -1,0 +1,5 @@
+POST /contact/start-streaming
+
+Content-Type: application/json
+
+{"ChatStreamingConfiguration":{"StreamingEndpointArn":"__StreamingEndpointArn__"},"ClientToken":"__ClientToken__","ContactId":"__ContactId__","InstanceId":"__InstanceId__"}

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -47,6 +49,66 @@ type Entitlement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Entitlement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Entitlement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Entitlement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerAWSAccountId != nil {
+		s.WriteString(schemas.Entitlement_CustomerAWSAccountId, *v.CustomerAWSAccountId)
+	}
+	if v.CustomerIdentifier != nil {
+		s.WriteString(schemas.Entitlement_CustomerIdentifier, *v.CustomerIdentifier)
+	}
+	if v.Dimension != nil {
+		s.WriteString(schemas.Entitlement_Dimension, *v.Dimension)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.Entitlement_ExpirationDate, *v.ExpirationDate)
+	}
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.Entitlement_LicenseArn, *v.LicenseArn)
+	}
+	if v.ProductCode != nil {
+		s.WriteString(schemas.Entitlement_ProductCode, *v.ProductCode)
+	}
+	if v.Value != nil {
+		s.WriteStruct(schemas.Entitlement_Value)
+		v.Value.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Entitlement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Entitlement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Entitlement_CustomerAWSAccountId:
+			v.CustomerAWSAccountId = new(string)
+			return d.ReadString(schemas.Entitlement_CustomerAWSAccountId, v.CustomerAWSAccountId)
+		case schemas.Entitlement_CustomerIdentifier:
+			v.CustomerIdentifier = new(string)
+			return d.ReadString(schemas.Entitlement_CustomerIdentifier, v.CustomerIdentifier)
+		case schemas.Entitlement_Dimension:
+			v.Dimension = new(string)
+			return d.ReadString(schemas.Entitlement_Dimension, v.Dimension)
+		case schemas.Entitlement_ExpirationDate:
+			v.ExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.Entitlement_ExpirationDate, v.ExpirationDate)
+		case schemas.Entitlement_LicenseArn:
+			v.LicenseArn = new(string)
+			return d.ReadString(schemas.Entitlement_LicenseArn, v.LicenseArn)
+		case schemas.Entitlement_ProductCode:
+			v.ProductCode = new(string)
+			return d.ReadString(schemas.Entitlement_ProductCode, v.ProductCode)
+		case schemas.Entitlement_Value:
+			v.Value = &EntitlementValue{}
+			return v.Value.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The EntitlementValue represents the amount of capacity that the customer is
 // entitled to for the product.
 type EntitlementValue struct {
@@ -68,6 +130,46 @@ type EntitlementValue struct {
 	StringValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EntitlementValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntitlementValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntitlementValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BooleanValue != nil {
+		s.WriteBool(schemas.EntitlementValue_BooleanValue, *v.BooleanValue)
+	}
+	if v.DoubleValue != nil {
+		s.WriteFloat64(schemas.EntitlementValue_DoubleValue, *v.DoubleValue)
+	}
+	if v.IntegerValue != nil {
+		s.WriteInt32(schemas.EntitlementValue_IntegerValue, *v.IntegerValue)
+	}
+	if v.StringValue != nil {
+		s.WriteString(schemas.EntitlementValue_StringValue, *v.StringValue)
+	}
+}
+func (v *EntitlementValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntitlementValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntitlementValue_BooleanValue:
+			v.BooleanValue = new(bool)
+			return d.ReadBool(schemas.EntitlementValue_BooleanValue, v.BooleanValue)
+		case schemas.EntitlementValue_DoubleValue:
+			v.DoubleValue = new(float64)
+			return d.ReadFloat64(schemas.EntitlementValue_DoubleValue, v.DoubleValue)
+		case schemas.EntitlementValue_IntegerValue:
+			v.IntegerValue = new(int32)
+			return d.ReadInt32(schemas.EntitlementValue_IntegerValue, v.IntegerValue)
+		case schemas.EntitlementValue_StringValue:
+			v.StringValue = new(string)
+			return d.ReadString(schemas.EntitlementValue_StringValue, v.StringValue)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -1,0 +1,5 @@
+POST /update-slack-channel-configuration
+
+Content-Type: application/json
+
+{"ChatConfigurationArn":"__ChatConfigurationArn__","GuardrailPolicyArns":["__Member__","__Member__"],"IamRoleArn":"__IamRoleArn__","LoggingLevel":"__LoggingLevel__","SlackChannelId":"__SlackChannelId__","SlackChannelName":"__SlackChannelName__","SnsTopicArns":["__Member__","__Member__"],"UserAuthorizationRequired":true}

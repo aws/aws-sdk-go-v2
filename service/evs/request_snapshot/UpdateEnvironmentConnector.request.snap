@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonElasticVMwareService.UpdateEnvironmentConnector
+
+{"applianceFqdn":"__ApplianceFqdn__","clientToken":"__ClientToken__","connectorId":"__ConnectorId__","environmentId":"__EnvironmentId__","secretIdentifier":"__SecretIdentifier__"}

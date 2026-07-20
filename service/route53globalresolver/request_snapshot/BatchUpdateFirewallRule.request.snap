@@ -1,0 +1,5 @@
+POST /firewall-rules/batch-update
+
+Content-Type: application/json
+
+{"firewallRules":[{"action":"ALLOW","blockOverrideDnsType":"CNAME","blockOverrideDomain":"__BlockOverrideDomain__","blockOverrideTtl":1,"blockResponse":"NODATA","confidenceThreshold":"LOW","description":"__Description__","dnsAdvancedProtection":"DGA","firewallRuleId":"__FirewallRuleId__","name":"__Name__","priority":1},{"action":"ALLOW","blockOverrideDnsType":"CNAME","blockOverrideDomain":"__BlockOverrideDomain__","blockOverrideTtl":1,"blockResponse":"NODATA","confidenceThreshold":"LOW","description":"__Description__","dnsAdvancedProtection":"DGA","firewallRuleId":"__FirewallRuleId__","name":"__Name__","priority":1}]}

@@ -1,0 +1,5 @@
+POST /migrationworkflow/
+
+Content-Type: application/json
+
+{"applicationConfigurationId":"__ApplicationConfigurationId__","description":"__Description__","inputParameters":{"key0":{"integerValue":1}},"name":"__Name__","stepTargets":["__Member__","__Member__"],"tags":{"key0":"__Value__"},"templateId":"__TemplateId__"}

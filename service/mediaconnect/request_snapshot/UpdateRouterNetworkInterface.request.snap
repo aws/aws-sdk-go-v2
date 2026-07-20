@@ -1,0 +1,5 @@
+PUT /v1/routerNetworkInterface/__Arn__
+
+Content-Type: application/json
+
+{"configuration":{"public":{"allowRules":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}]}},"name":"__Name__"}

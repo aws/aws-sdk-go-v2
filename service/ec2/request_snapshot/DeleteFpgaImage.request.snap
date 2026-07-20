@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteFpgaImage&DryRun=true&FpgaImageId=__FpgaImageId__&Version=2016-11-15

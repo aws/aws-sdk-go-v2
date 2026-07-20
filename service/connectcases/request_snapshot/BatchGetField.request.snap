@@ -1,0 +1,5 @@
+POST /domains/__DomainId__/fields-batch
+
+Content-Type: application/json
+
+{"fields":[{"id":"__Id__"},{"id":"__Id__"}]}

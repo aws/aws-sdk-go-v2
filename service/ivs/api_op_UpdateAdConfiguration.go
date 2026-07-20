@@ -42,6 +42,9 @@ type UpdateAdConfigurationInput struct {
 	// Ad configuration name. The value does not need to be unique.
 	Name *string
 
+	// Configuration for the post-roll ad break to use for this ad configuration.
+	PostRollConfiguration *types.PostRollConfiguration
+
 	noSmithyDocumentSerde
 }
 

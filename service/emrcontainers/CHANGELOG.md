@@ -1,3 +1,20 @@
+# v1.43.0 (2026-07-14)
+
+* **Feature**: Introduced 5 new fields across 3 APIs as part of Spark Connect server launch for EMR on EKS. The fields added are sessionIdleTimeoutInMinutes, sessionEnabled, endpointToken, authProxyUrl and encryptionKeyArn.
+
+# v1.42.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.42.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.41.8 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.7 (2026-06-29)
 
 * No change notes available for this release.

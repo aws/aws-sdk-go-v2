@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/notebook-imports
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","name":"__Name__","owningProjectIdentifier":"__OwningProjectIdentifier__","sourceLocation":{"s3":"__SourceLocationMemberS3__"}}

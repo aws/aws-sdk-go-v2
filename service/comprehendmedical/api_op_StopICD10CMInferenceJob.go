@@ -4,6 +4,8 @@ package comprehendmedical
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,6 +36,18 @@ type StopICD10CMInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopICD10CMInferenceJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopICD10CMInferenceJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopICD10CMInferenceJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopICD10CMInferenceJobRequest_JobId, *v.JobId)
+	}
+}
+
 type StopICD10CMInferenceJobOutput struct {
 
 	// The identifier generated for the job. To get the status of job, use this
@@ -46,13 +60,32 @@ type StopICD10CMInferenceJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopICD10CMInferenceJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopICD10CMInferenceJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopICD10CMInferenceJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopICD10CMInferenceJobResponse_JobId, *v.JobId)
+	}
+}
+func (v *StopICD10CMInferenceJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopICD10CMInferenceJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopICD10CMInferenceJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StopICD10CMInferenceJobResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopICD10CMInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStopICD10CMInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopICD10CMInferenceJob, schemas.StopICD10CMInferenceJobRequest, schemas.StopICD10CMInferenceJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStopICD10CMInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopICD10CMInferenceJob, schemas.StopICD10CMInferenceJobRequest, schemas.StopICD10CMInferenceJobResponse), output: &StopICD10CMInferenceJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

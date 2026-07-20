@@ -4,6 +4,8 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type CancelClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.CancelClusterRequest_ClusterId, *v.ClusterId)
+	}
+}
+
 type CancelClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type CancelClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCancelCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelCluster, schemas.CancelClusterRequest, schemas.CancelClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCancelCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelCluster, schemas.CancelClusterRequest, schemas.CancelClusterResult), output: &CancelClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

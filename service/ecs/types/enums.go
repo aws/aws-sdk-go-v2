@@ -2217,8 +2217,8 @@ const (
 	// Amazon ECS uses the integer provided in value directly as the failure threshold.
 	ThresholdTypeCount ThresholdType = "COUNT"
 	// Amazon ECS calculates the failure threshold by multiplying value by the latest
-	// service desired count, then clamps the result to a minimum of 3 and a maximum
-	// of 200 . This is the default threshold type.
+	// service desired count, then clamping the result to a minimum of 3 and a maximum
+	// of 200 . This is the default threshold type, with a default value of 50 .
 	ThresholdTypeBoundedPercent ThresholdType = "BOUNDED_PERCENT"
 	// Amazon ECS calculates the failure threshold by multiplying value by the latest
 	// service desired count, without applying the 3 -to- 200 bounds. Use this when

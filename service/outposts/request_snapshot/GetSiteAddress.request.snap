@@ -1,0 +1,3 @@
+GET /sites/__SiteId__/address?AddressType=SHIPPING_ADDRESS
+
+

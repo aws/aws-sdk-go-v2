@@ -1,0 +1,5 @@
+PUT /channel-flows/__ChannelFlowArn__
+
+Content-Type: application/json
+
+{"Name":"__Name__","Processors":[{"Configuration":{"Lambda":{"InvocationType":"ASYNC","ResourceArn":"__ResourceArn__"}},"ExecutionOrder":1,"FallbackAction":"CONTINUE","Name":"__Name__"},{"Configuration":{"Lambda":{"InvocationType":"ASYNC","ResourceArn":"__ResourceArn__"}},"ExecutionOrder":1,"FallbackAction":"CONTINUE","Name":"__Name__"}]}

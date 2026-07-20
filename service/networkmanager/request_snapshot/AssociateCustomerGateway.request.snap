@@ -1,0 +1,5 @@
+POST /global-networks/__GlobalNetworkId__/customer-gateway-associations
+
+Content-Type: application/json
+
+{"CustomerGatewayArn":"__CustomerGatewayArn__","DeviceId":"__DeviceId__","LinkId":"__LinkId__"}

@@ -1,0 +1,5 @@
+POST /cluster-snapshot/__SnapshotArn__/restore
+
+Content-Type: application/json
+
+{"clusterName":"__ClusterName__","kmsKeyId":"__KmsKeyId__","shardCapacity":1,"shardInstanceCount":1,"subnetIds":["__Member__","__Member__"],"tags":{"key0":"__Value__"},"vpcSecurityGroupIds":["__Member__","__Member__"]}

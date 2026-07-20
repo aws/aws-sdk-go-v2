@@ -29,6 +29,10 @@ import (
 // cluster is restored, you need to modify the DB cluster to update
 // MasterUserAuthenticationType to iam-db-auth .
 //
+// You can use the AssociatedRoles parameter to associate one or more Amazon Web
+// Services Identity and Access Management (IAM) roles with an Aurora DB cluster
+// when you restore it to a point in time.
+//
 // For Aurora, this operation only restores the DB cluster, not the DB instances
 // for that DB cluster. You must invoke the CreateDBInstance operation to create
 // DB instances for the restored DB cluster, specifying the identifier of the
@@ -75,6 +79,15 @@ type RestoreDBClusterToPointInTimeInput struct {
 	//
 	// This member is required.
 	DBClusterIdentifier *string
+
+	// A list of Amazon Web Services Identity and Access Management (IAM) roles to
+	// associate with the DB cluster when it's restored to a point in time. Each role
+	// grants the DB cluster permission to access other Amazon Web Services on your
+	// behalf. For each role, specify a role ARN and, optionally, the feature name
+	// (such as s3Import , s3Export , or Lambda ).
+	//
+	// Valid for Cluster Type: Aurora DB clusters only
+	AssociatedRoles []types.DBClusterAssociatedRole
 
 	// The target backtrack window, in seconds. To disable backtracking, set this
 	// value to 0.
@@ -241,7 +254,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// Valid for Cluster Type: Aurora PostgreSQL clusters
 	EnableVPCNetworking *bool
 
-	// The life cycle type for this DB cluster.
+	// The lifecycle type for this DB cluster.
 	//
 	// By default, this value is set to open-source-rds-extended-support , which
 	// enrolls your DB cluster into Amazon RDS Extended Support. At the end of standard

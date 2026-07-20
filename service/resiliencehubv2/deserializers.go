@@ -8868,6 +8868,15 @@ func awsRestjson1_deserializeDocumentAchievability(v **types.Achievability, valu
 				sv.AvailabilitySlo = types.AchievabilityStatus(jtv)
 			}
 
+		case "dataRecoveryTimeBetweenBackups":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AchievabilityStatus to be of type string, got %T instead", value)
+				}
+				sv.DataRecoveryTimeBetweenBackups = types.AchievabilityStatus(jtv)
+			}
+
 		case "multiAzRtoRpo":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9814,6 +9823,28 @@ func awsRestjson1_deserializeDocumentDependencyDiscoveryConfig(v **types.Depende
 
 	for key, value := range shape {
 		switch key {
+		case "eligibleResourceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EligibleResourceCount = ptr.Int32(int32(i64))
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14499,6 +14530,24 @@ func awsRestjson1_deserializeDocumentServiceTopologyEdgeSummary(v **types.Servic
 
 	for key, value := range shape {
 		switch key {
+		case "destinationAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsAccountId to be of type string, got %T instead", value)
+				}
+				sv.DestinationAccount = ptr.String(jtv)
+			}
+
+		case "destinationRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsRegion to be of type string, got %T instead", value)
+				}
+				sv.DestinationRegion = ptr.String(jtv)
+			}
+
 		case "destinationResourceIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14511,6 +14560,24 @@ func awsRestjson1_deserializeDocumentServiceTopologyEdgeSummary(v **types.Servic
 		case "properties":
 			if err := awsRestjson1_deserializeDocumentEdgePropertyList(&sv.Properties, value); err != nil {
 				return err
+			}
+
+		case "sourceAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsAccountId to be of type string, got %T instead", value)
+				}
+				sv.SourceAccount = ptr.String(jtv)
+			}
+
+		case "sourceRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsRegion to be of type string, got %T instead", value)
+				}
+				sv.SourceRegion = ptr.String(jtv)
 			}
 
 		case "sourceResourceIdentifier":

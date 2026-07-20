@@ -41,6 +41,14 @@ type RestoreFromSnapshotInput struct {
 	// namespace's admin credentials secret.
 	AdminPasswordSecretKmsKeyId *string
 
+	// If true , maintain existing data sharing, zero-ETL and S3 event integrations
+	// when restoring. Otherwise, integrations will not be maintained after the restore
+	// operation. Integrations are only maintained when restored to the same serverless
+	// namespace.
+	//
+	// Default: true
+	MaintainIntegration *bool
+
 	// If true , Amazon Redshift uses Secrets Manager to manage the restored snapshot's
 	// admin credentials. If MmanageAdminPassword is false or not set, Amazon Redshift
 	// uses the admin credentials that the namespace or cluster had at the time the

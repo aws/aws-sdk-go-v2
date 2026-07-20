@@ -1,0 +1,5 @@
+POST /PutTaxExemption
+
+Content-Type: application/json
+
+{"accountIds":["__Member__","__Member__"],"authority":{"country":"__Country__","state":"__State__"},"exemptionCertificate":{"documentFile":"YmxvYg==","documentName":"__DocumentName__"},"exemptionType":"__ExemptionType__"}

@@ -7,6 +7,36 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
 )
 
+func ExampleCreateDataTransformationProfileSource_outputUsage() {
+	var union types.CreateDataTransformationProfileSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CreateDataTransformationProfileSourceMemberExistingVersionedProfileId:
+		_ = v.Value // Value is types.ExistingVersionedProfileSource
+
+	case *types.CreateDataTransformationProfileSourceMemberProfileMapping:
+		_ = v.Value // Value is types.ProfileMappingSource
+
+	case *types.CreateDataTransformationProfileSourceMemberSampleData:
+		_ = v.Value // Value is types.SampleDataSource
+
+	case *types.CreateDataTransformationProfileSourceMemberStarterProfile:
+		_ = v.Value // Value is types.StarterProfileSource
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ExistingVersionedProfileSource
+var _ *types.ProfileMappingSource
+var _ *types.StarterProfileSource
+var _ *types.SampleDataSource
+
 func ExampleInputDataConfig_outputUsage() {
 	var union types.InputDataConfig
 	// type switches can be used to check the union value

@@ -78,6 +78,9 @@ type DescribeChangeSetOutput struct {
 	// The start time when the change set was created, in UTC.
 	CreationTime *time.Time
 
+	// The deployment configuration specified when the change set was created.
+	DeploymentConfig *types.DeploymentConfig
+
 	// The deployment mode specified when the change set was created. Valid value is
 	// REVERT_DRIFT . Only present for drift-aware change sets.
 	DeploymentMode types.DeploymentMode

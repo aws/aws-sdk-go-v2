@@ -1,0 +1,5 @@
+POST /tracking/v0/trackers/__TrackerName__/consumers
+
+Content-Type: application/json
+
+{"ConsumerArn":"__ConsumerArn__"}

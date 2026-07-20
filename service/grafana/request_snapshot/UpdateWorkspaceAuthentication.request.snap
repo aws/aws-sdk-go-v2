@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceId__/authentication
+
+Content-Type: application/json
+
+{"authenticationProviders":["AWS_SSO","AWS_SSO"],"samlConfiguration":{"allowedOrganizations":["__Member__","__Member__"],"assertionAttributes":{"email":"__Email__","groups":"__Groups__","login":"__Login__","name":"__Name__","org":"__Org__","role":"__Role__"},"idpMetadata":{"url":"__IdpMetadataMemberUrl__"},"loginValidityDuration":1,"roleValues":{"admin":["__Member__","__Member__"],"editor":["__Member__","__Member__"]}}}

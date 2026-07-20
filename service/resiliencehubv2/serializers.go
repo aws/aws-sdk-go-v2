@@ -2438,6 +2438,16 @@ func awsRestjson1_serializeOpHttpBindingsListFailureModeAssessmentsInput(v *List
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AssessmentStatuses != nil {
+		for i := range v.AssessmentStatuses {
+			encoder.AddQuery("assessmentStatuses").String(string(v.AssessmentStatuses[i]))
+		}
+	}
+
+	if v.EndedBefore != nil {
+		encoder.SetQuery("endedBefore").String(smithytime.FormatDateTime(*v.EndedBefore))
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
@@ -2448,6 +2458,18 @@ func awsRestjson1_serializeOpHttpBindingsListFailureModeAssessmentsInput(v *List
 
 	if v.ServiceArn != nil {
 		encoder.SetQuery("serviceArn").String(*v.ServiceArn)
+	}
+
+	if len(v.SortBy) > 0 {
+		encoder.SetQuery("sortBy").String(string(v.SortBy))
+	}
+
+	if len(v.SortOrder) > 0 {
+		encoder.SetQuery("sortOrder").String(string(v.SortOrder))
+	}
+
+	if v.StartedAfter != nil {
+		encoder.SetQuery("startedAfter").String(smithytime.FormatDateTime(*v.StartedAfter))
 	}
 
 	return nil
@@ -2828,12 +2850,22 @@ func awsRestjson1_serializeOpHttpBindingsListResourcesInput(v *ListResourcesInpu
 		encoder.SetQuery("awsRegion").String(*v.AwsRegion)
 	}
 
+	if v.Billable != nil {
+		encoder.SetQuery("billable").Boolean(*v.Billable)
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.ResourceTypes != nil {
+		for i := range v.ResourceTypes {
+			encoder.AddQuery("resourceTypes").String(v.ResourceTypes[i])
+		}
 	}
 
 	if v.ServiceArn != nil {

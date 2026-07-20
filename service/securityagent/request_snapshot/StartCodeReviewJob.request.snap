@@ -1,0 +1,5 @@
+POST /StartCodeReviewJob
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","codeReviewId":"__CodeReviewId__","diffSource":{"s3Uri":"__DiffSourceMemberS3Uri__"}}

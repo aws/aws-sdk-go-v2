@@ -1,3 +1,20 @@
+# v1.58.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.58.0 (2026-07-08)
+
+* **Feature**: Default session downlink transmission parameters have been added to the existing Multicast Group APIs. Explicit transmission parameters are no longer required when starting a multicast session during the FUOTA procedure.
+
+# v1.57.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.56.10 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.9 (2026-06-29)
 
 * No change notes available for this release.

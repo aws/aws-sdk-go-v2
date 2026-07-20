@@ -259,6 +259,18 @@ type DakCertificateMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// The default session parameters for the multicast group.
+type DefaultSessionParametersMulticast struct {
+
+	// Downlink data rate.
+	DlDr *int32
+
+	// Downlink frequency.
+	DlFreq *int32
+
+	noSmithyDocumentSerde
+}
+
 // Describes a destination.
 type Destinations struct {
 
@@ -1030,6 +1042,9 @@ type LoRaWANListDevice struct {
 // The LoRaWAN information that is to be used with the multicast group.
 type LoRaWANMulticast struct {
 
+	// The default session parameters for the multicast group.
+	DefaultSessionParameters *DefaultSessionParametersMulticast
+
 	// DlClass for LoRaWAM, valid values are ClassB and ClassC.
 	DlClass DlClass
 
@@ -1047,6 +1062,9 @@ type LoRaWANMulticast struct {
 // The LoRaWAN information that is to be returned from getting multicast group
 // information.
 type LoRaWANMulticastGet struct {
+
+	// The default session parameters for the multicast group.
+	DefaultSessionParameters *DefaultSessionParametersMulticast
 
 	// DlClass for LoRaWAM, valid values are ClassB and ClassC.
 	DlClass DlClass

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListDevices
+
+{"DeviceFleetName":"__DeviceFleetName__","LatestHeartbeatAfter":946684800,"MaxResults":1,"ModelName":"__ModelName__","NextToken":"__NextToken__"}

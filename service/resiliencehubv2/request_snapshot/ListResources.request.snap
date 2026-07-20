@@ -1,0 +1,3 @@
+GET /v2/list-resources?awsRegion=__AwsRegion__&billable=true&maxResults=1&nextToken=__NextToken__&resourceTypes=__Member__&resourceTypes=__Member__&serviceArn=__ServiceArn__&serviceFunctionId=__ServiceFunctionId__
+
+

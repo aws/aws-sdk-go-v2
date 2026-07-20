@@ -4,7 +4,9 @@ package comprehendmedical
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,26 @@ type ListICD10CMInferenceJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListICD10CMInferenceJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListICD10CMInferenceJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListICD10CMInferenceJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListICD10CMInferenceJobsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListICD10CMInferenceJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListICD10CMInferenceJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListICD10CMInferenceJobsOutput struct {
 
 	// A list containing the properties of each job that is returned.
@@ -55,13 +77,35 @@ type ListICD10CMInferenceJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListICD10CMInferenceJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListICD10CMInferenceJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListICD10CMInferenceJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComprehendMedicalAsyncJobPropertiesList(s, schemas.ListICD10CMInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList, v.ComprehendMedicalAsyncJobPropertiesList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListICD10CMInferenceJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListICD10CMInferenceJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListICD10CMInferenceJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListICD10CMInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList:
+			return deserializeComprehendMedicalAsyncJobPropertiesList(d, schemas.ListICD10CMInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList, &v.ComprehendMedicalAsyncJobPropertiesList)
+		case schemas.ListICD10CMInferenceJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListICD10CMInferenceJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListICD10CMInferenceJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListICD10CMInferenceJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListICD10CMInferenceJobs, schemas.ListICD10CMInferenceJobsRequest, schemas.ListICD10CMInferenceJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListICD10CMInferenceJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListICD10CMInferenceJobs, schemas.ListICD10CMInferenceJobsRequest, schemas.ListICD10CMInferenceJobsResponse), output: &ListICD10CMInferenceJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,7 @@
+POST /snapshots/completion/__SnapshotId__
+
+X-Amz-Changedblockscount: 1
+X-Amz-Checksum: __Checksum__
+X-Amz-Checksum-Aggregation-Method: LINEAR
+X-Amz-Checksum-Algorithm: SHA256
+

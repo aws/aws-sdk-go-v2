@@ -1,0 +1,3 @@
+GET /v2/email/contact-lists/__ContactListName__/contacts/__EmailAddress__
+
+

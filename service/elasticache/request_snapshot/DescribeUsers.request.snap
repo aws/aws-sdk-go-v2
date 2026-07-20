@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeUsers&Engine=__Engine__&Filters.member.1.Name=__Name__&Filters.member.1.Values.member.1=__Member__&Filters.member.1.Values.member.2=__Member__&Filters.member.2.Name=__Name__&Filters.member.2.Values.member.1=__Member__&Filters.member.2.Values.member.2=__Member__&Marker=__Marker__&MaxRecords=1&UserId=__UserId__&Version=2015-02-02

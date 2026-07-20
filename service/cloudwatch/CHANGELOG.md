@@ -1,3 +1,24 @@
+# v1.63.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.63.0 (2026-07-10)
+
+* **Feature**: CloudWatch now assigns a unique identifier to each anomaly detector. PutAnomalyDetector and DescribeAnomalyDetectors return this AnomalyDetectorId, which you can use to describe or delete a specific anomaly detector directly.
+
+# v1.62.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.61.1 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.61.0 (2026-06-30)
+
+* **Feature**: Customers can configure alarms with wall-clock-aligned evaluation windows instead of sliding windows, with optional timezone support for daily or weekly periods
+
 # v1.60.0 (2026-06-29)
 
 * **Feature**: This release adds the API (PutLogAlarm) to manage a new CloudWatch resource, Log Based Alarms. Log Based Alarms allows customers to alarm directly on CloudWatch Logs query results.

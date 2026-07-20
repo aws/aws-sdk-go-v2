@@ -242,6 +242,225 @@ func awsRestjson1_serializeOpDocumentGetEstimatedCarbonEmissionsDimensionValuesI
 	return nil
 }
 
+type awsRestjson1_serializeOpGetEstimatedWaterAllocation struct {
+}
+
+func (*awsRestjson1_serializeOpGetEstimatedWaterAllocation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetEstimatedWaterAllocation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetEstimatedWaterAllocationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/estimated-water-allocation")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetEstimatedWaterAllocationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetEstimatedWaterAllocationInput(v *GetEstimatedWaterAllocationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetEstimatedWaterAllocationInput(v *GetEstimatedWaterAllocationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllocationTypes != nil {
+		ok := object.Key("AllocationTypes")
+		if err := awsRestjson1_serializeDocumentWaterAllocationTypeList(v.AllocationTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FilterBy != nil {
+		ok := object.Key("FilterBy")
+		if err := awsRestjson1_serializeDocumentFilterExpression(v.FilterBy, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Granularity) > 0 {
+		ok := object.Key("Granularity")
+		ok.String(string(v.Granularity))
+	}
+
+	if v.GroupBy != nil {
+		ok := object.Key("GroupBy")
+		if err := awsRestjson1_serializeDocumentDimensionList(v.GroupBy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.TimePeriod != nil {
+		ok := object.Key("TimePeriod")
+		if err := awsRestjson1_serializeDocumentTimePeriod(v.TimePeriod, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetEstimatedWaterAllocationDimensionValues struct {
+}
+
+func (*awsRestjson1_serializeOpGetEstimatedWaterAllocationDimensionValues) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetEstimatedWaterAllocationDimensionValues) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetEstimatedWaterAllocationDimensionValuesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/estimated-water-allocation-dimension-values")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetEstimatedWaterAllocationDimensionValuesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetEstimatedWaterAllocationDimensionValuesInput(v *GetEstimatedWaterAllocationDimensionValuesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetEstimatedWaterAllocationDimensionValuesInput(v *GetEstimatedWaterAllocationDimensionValuesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Dimensions != nil {
+		ok := object.Key("Dimensions")
+		if err := awsRestjson1_serializeDocumentDimensionList(v.Dimensions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.TimePeriod != nil {
+		ok := object.Key("TimePeriod")
+		if err := awsRestjson1_serializeDocumentTimePeriod(v.TimePeriod, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDimensionList(v []types.Dimension, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -331,5 +550,16 @@ func awsRestjson1_serializeDocumentTimePeriod(v *types.TimePeriod, value smithyj
 		ok.String(smithytime.FormatDateTime(*v.Start))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWaterAllocationTypeList(v []types.WaterAllocationType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }

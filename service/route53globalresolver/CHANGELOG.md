@@ -1,3 +1,20 @@
+# v1.5.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.5.0 (2026-07-07)
+
+* **Feature**: Adds ListSharedDNSViews operation to list all DNS Views shared with caller using AWS Resource Access Manager. Also updates ListHostedZoneAssociations operation so that resource ARN param is optional, allowing caller to list all HostedZoneAssociations in account.
+
+# v1.4.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.3.9 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.8 (2026-06-29)
 
 * No change notes available for this release.

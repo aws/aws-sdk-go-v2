@@ -1,0 +1,5 @@
+POST /cells
+
+Content-Type: application/json
+
+{"cellName":"__CellName__","cells":["__Member__","__Member__"],"tags":{"key0":"__Value__"}}

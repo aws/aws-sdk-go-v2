@@ -1,0 +1,5 @@
+PUT /serviceSettings
+
+Content-Type: application/json
+
+{"ExplorerEnablingRoleArn":"__ExplorerEnablingRoleArn__"}

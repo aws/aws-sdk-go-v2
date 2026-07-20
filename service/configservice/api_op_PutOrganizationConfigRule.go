@@ -113,6 +113,10 @@ type PutOrganizationConfigRuleInput struct {
 	// periodic.
 	OrganizationManagedRuleMetadata *types.OrganizationManagedRuleMetadata
 
+	// The tags for the organization Config rule. Each tag consists of a key and an
+	// optional value, both of which you define.
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

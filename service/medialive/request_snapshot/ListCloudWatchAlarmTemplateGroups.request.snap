@@ -1,0 +1,3 @@
+GET /prod/cloudwatch-alarm-template-groups?maxResults=1&nextToken=__NextToken__&scope=__Scope__&signalMapIdentifier=__SignalMapIdentifier__
+
+

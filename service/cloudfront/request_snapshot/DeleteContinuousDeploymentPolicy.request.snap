@@ -1,0 +1,4 @@
+DELETE /2020-05-31/continuous-deployment-policy/__Id__
+
+If-Match: __IfMatch__
+

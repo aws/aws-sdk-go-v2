@@ -1,0 +1,5 @@
+POST /unsubscribe
+
+Content-Type: application/json
+
+{"Arn":"__Arn__","TargetAddress":"__TargetAddress__"}

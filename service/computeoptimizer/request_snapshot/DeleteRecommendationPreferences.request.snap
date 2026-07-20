@@ -1,0 +1,7 @@
+POST /service/ComputeOptimizerService/operation/DeleteRecommendationPreferences
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+£lresourceTypekEc2Instanceescope¢dnamelOrganizationevaluei__Value__xrecommendationPreferenceNames‚xEnhancedInfrastructureMetricsxEnhancedInfrastructureMetrics

@@ -1244,6 +1244,15 @@ type RuleTransform struct {
 // address of the proxy not the IP address of the client.
 type SourceIpConditionConfig struct {
 
+	// The IP address type for Network Load Balancers.
+	//
+	// The valid values are:
+	//
+	//   - ipv4 – IPv4 addresses only.
+	//
+	//   - ipv6 – IPv6 addresses only.
+	IpAddressType SourceIpAddressTypeEnum
+
 	// The source IP addresses, in CIDR format. You can use both IPv4 and IPv6
 	// addresses. Wildcards are not supported.
 	//

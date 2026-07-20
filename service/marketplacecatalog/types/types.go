@@ -1362,6 +1362,9 @@ type ResaleAuthorizationFilters struct {
 	// Allows filtering on the ResellerLegalName of a ResaleAuthorization.
 	ResellerLegalName *ResaleAuthorizationResellerLegalNameFilter
 
+	// Allows filtering on the ResellerRole of a ResaleAuthorization.
+	ResellerRole *ResaleAuthorizationResellerRoleFilter
+
 	// Allows filtering on the Status of a ResaleAuthorization.
 	Status *ResaleAuthorizationStatusFilter
 
@@ -1494,6 +1497,15 @@ type ResaleAuthorizationResellerLegalNameFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Allows filtering on the ResellerRole of a ResaleAuthorization.
+type ResaleAuthorizationResellerRoleFilter struct {
+
+	// Allows filtering on the ResellerRole of a ResaleAuthorization with list input.
+	ValueList []ResaleAuthorizationResellerRoleString
+
+	noSmithyDocumentSerde
+}
+
 // Allows to sort ResaleAuthorization.
 type ResaleAuthorizationSort struct {
 
@@ -1547,6 +1559,9 @@ type ResaleAuthorizationSummary struct {
 
 	// The reseller legal name of the ResaleAuthorization
 	ResellerLegalName *string
+
+	// The reseller role of the ResaleAuthorization.
+	ResellerRole ResaleAuthorizationResellerRoleString
 
 	// The status of the ResaleAuthorization.
 	Status ResaleAuthorizationStatusString

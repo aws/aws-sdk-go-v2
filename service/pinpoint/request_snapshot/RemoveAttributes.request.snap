@@ -1,0 +1,5 @@
+PUT /v1/apps/__ApplicationId__/attributes/__AttributeType__
+
+Content-Type: application/json
+
+{"Blacklist":["__Member__","__Member__"]}

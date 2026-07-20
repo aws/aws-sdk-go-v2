@@ -90,6 +90,26 @@ func (m *validateOpCreateStreamGroup) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateStreamSessionAdminShell struct {
+}
+
+func (*validateOpCreateStreamSessionAdminShell) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateStreamSessionAdminShell) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateStreamSessionAdminShellInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateStreamSessionAdminShellInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateStreamSessionConnection struct {
 }
 
@@ -446,6 +466,10 @@ func addOpCreateStreamGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateStreamGroup{}, middleware.After)
 }
 
+func addOpCreateStreamSessionAdminShellValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateStreamSessionAdminShell{}, middleware.After)
+}
+
 func addOpCreateStreamSessionConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateStreamSessionConnection{}, middleware.After)
 }
@@ -670,6 +694,24 @@ func validateOpCreateStreamGroupInput(v *CreateStreamGroupInput) error {
 		if err := validateLocationConfigurations(v.LocationConfigurations); err != nil {
 			invalidParams.AddNested("LocationConfigurations", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateStreamSessionAdminShellInput(v *CreateStreamSessionAdminShellInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateStreamSessionAdminShellInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.StreamSessionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamSessionIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

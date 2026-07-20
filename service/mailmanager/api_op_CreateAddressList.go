@@ -58,11 +58,11 @@ type CreateAddressListOutput struct {
 }
 
 func (c *Client) addOperationCreateAddressListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateAddressList{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateAddressList{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateAddressList{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateAddressList{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -86,6 +86,9 @@ func (c *Client) addOperationCreateAddressListMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

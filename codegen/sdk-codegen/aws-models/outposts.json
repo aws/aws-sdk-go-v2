@@ -119,7 +119,7 @@
                 "ContactPhoneNumber": {
                     "target": "com.amazonaws.outposts#ContactPhoneNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The phone number of the contact.</p>",
+                        "smithy.api#documentation": "<p>The phone number of the contact, including the country code (for example,\n      <code>+12065550100</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1257,7 +1257,7 @@
                     "min": 1,
                     "max": 20
                 },
-                "smithy.api#pattern": "^[\\S ]+$"
+                "smithy.api#pattern": "^\\+[1-9][0-9]{1,18}$"
             }
         },
         "com.amazonaws.outposts#CountryCode": {

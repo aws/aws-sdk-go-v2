@@ -62,11 +62,47 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_CreateComplianceInquiry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateComplianceInquiry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateComplianceInquiry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ExportComplianceInquiry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ExportComplianceInquiry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ExportComplianceInquiry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAccountSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAccountSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetComplianceInquiryMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetComplianceInquiryMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetComplianceInquiryMetadata")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -110,6 +146,30 @@ func TestCheckSnapshot_GetTermForReport(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListComplianceInquiries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListComplianceInquiries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListComplianceInquiries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListComplianceInquiryQueries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListComplianceInquiryQueries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListComplianceInquiryQueries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListCustomerAgreements(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCustomerAgreements(context.Background(), nil, func(o *Options) {
@@ -146,6 +206,18 @@ func TestCheckSnapshot_ListReportVersions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutAccountSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutAccountSettings(context.Background(), nil, func(o *Options) {
@@ -157,11 +229,71 @@ func TestCheckSnapshot_PutAccountSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_TagResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UntagResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+func TestUpdateSnapshot_CreateComplianceInquiry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateComplianceInquiry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateComplianceInquiry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ExportComplianceInquiry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ExportComplianceInquiry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ExportComplianceInquiry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAccountSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAccountSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetComplianceInquiryMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetComplianceInquiryMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetComplianceInquiryMetadata")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -205,6 +337,30 @@ func TestUpdateSnapshot_GetTermForReport(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListComplianceInquiries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListComplianceInquiries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListComplianceInquiries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListComplianceInquiryQueries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListComplianceInquiryQueries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListComplianceInquiryQueries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListCustomerAgreements(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCustomerAgreements(context.Background(), nil, func(o *Options) {
@@ -241,11 +397,47 @@ func TestUpdateSnapshot_ListReportVersions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_PutAccountSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutAccountSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TagResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UntagResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UntagResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

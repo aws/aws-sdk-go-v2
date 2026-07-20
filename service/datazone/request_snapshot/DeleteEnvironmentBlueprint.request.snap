@@ -1,0 +1,3 @@
+DELETE /v2/domains/__DomainIdentifier__/environment-blueprints/__Identifier__
+
+

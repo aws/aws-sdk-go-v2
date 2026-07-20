@@ -1,0 +1,5 @@
+PATCH /approval-teams/__Arn__
+
+Content-Type: application/json
+
+{"ApprovalStrategy":{"MofN":{"MinApprovalsRequired":1}},"Approvers":[{"PrimaryIdentityId":"__PrimaryIdentityId__","PrimaryIdentitySourceArn":"__PrimaryIdentitySourceArn__"},{"PrimaryIdentityId":"__PrimaryIdentityId__","PrimaryIdentitySourceArn":"__PrimaryIdentitySourceArn__"}],"Description":"__Description__","UpdateActions":["SYNCHRONIZE_MFA_DEVICES","SYNCHRONIZE_MFA_DEVICES"]}

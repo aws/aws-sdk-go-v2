@@ -32,6 +32,11 @@ func (c *Client) DeleteAnomalyDetector(ctx context.Context, params *DeleteAnomal
 
 type DeleteAnomalyDetectorInput struct {
 
+	// Specifies the unique identifier of the anomaly detector to delete. If you
+	// specify this parameter, you do not need to specify a metric to identify the
+	// detector.
+	AnomalyDetectorId *string
+
 	// The metric dimensions associated with the anomaly detection model to delete.
 	//
 	// Deprecated: Use SingleMetricAnomalyDetector.

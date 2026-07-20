@@ -206,6 +206,22 @@
         "com.amazonaws.bedrockagentcorecontrol#AdditionalModelRequestFields": {
             "type": "document"
         },
+        "com.amazonaws.bedrockagentcorecontrol#AdvertisedScopeMappingType": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#AllowedScopeType"
+            },
+            "value": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#AllowedScopeType"
+            },
+            "traits": {
+                "smithy.api#documentation": "Maps an originalScope (from allowedScopes) to an advertisedScope\nexposed in WWW-Authenticate / Protected Resource Metadata.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#AgentCardDefinition": {
             "type": "structure",
             "members": {
@@ -3727,6 +3743,12 @@
                         "smithy.api#documentation": "<p>The identifier for the connector integration (for example, <code>bedrock-knowledge-bases</code>).</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "version": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConnectorVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the connector to use (for example, <code>1.1.0</code>). If you don't specify a version, the service uses the latest available version.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3758,6 +3780,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for a connector integration target. Connectors provide pre-built integrations with Amazon Web Services services and third-party tools.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ConnectorVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#ConsolidationConfiguration": {
@@ -8236,6 +8268,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#AllowedScopesType",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of scopes that are allowed to access the token.</p>"
+                    }
+                },
+                "advertisedScopeMapping": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AdvertisedScopeMappingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map that associates each scope in <code>allowedScopes</code> with a corresponding advertised scope value. The advertised scope appears in OAuth protected resource metadata and <code>WWW-Authenticate</code> response headers. Use this parameter when the scope that clients request from your identity provider differs from the scope in the validated token. Each key is a scope from <code>allowedScopes</code> that the service uses for token validation. Each value is the corresponding scope that the service advertises to clients. Scopes without a mapping entry appear unchanged to clients.</p>"
                     }
                 },
                 "customClaims": {
@@ -18218,7 +18256,7 @@
         "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:([^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:harness/[a-zA-Z][a-zA-Z0-9_]{0,39}-[a-zA-Z0-9]{10}/endpoint/[a-zA-Z][a-zA-Z0-9_]{0,47}$"
+                "smithy.api#pattern": "^arn:([^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:harness/[a-zA-Z][a-zA-Z0-9_]{0,39}-[a-zA-Z0-9]{10}/harness-endpoint/[a-zA-Z][a-zA-Z0-9_]{0,47}$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#HarnessEndpointDescription": {
@@ -18413,6 +18451,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#TopK",
                     "traits": {
                         "smithy.api#documentation": "<p>The topK set when calling the model.</p>"
+                    }
+                },
+                "additionalParams": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provider-specific parameters passed through to the Gemini model provider unchanged.</p>"
                     }
                 }
             },
@@ -18884,7 +18928,8 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 8
+                    "min": 8,
+                    "max": 16383
                 },
                 "smithy.api#pattern": "^https://[^#@]+$"
             }
@@ -18893,7 +18938,8 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1
+                    "min": 1,
+                    "max": 4096
                 }
             }
         },
@@ -18916,7 +18962,8 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 5
+                    "min": 5,
+                    "max": 16383
                 },
                 "smithy.api#pattern": "^s3://"
             }
@@ -24213,7 +24260,7 @@
                 "managedByResourceArn": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#Arn",
                     "traits": {
-                        "smithy.api#documentation": "ARN of the resource managing this memory (e.g. a harness). When set, strategy\nmodifications and deletion are only allowed through the managing resource."
+                        "smithy.api#documentation": "<p>ARN of the resource managing this memory (e.g. a harness). When set, strategy modifications and deletion are only allowed through the managing resource.</p>"
                     }
                 }
             },
@@ -24555,7 +24602,7 @@
                 "managedByResourceArn": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#Arn",
                     "traits": {
-                        "smithy.api#documentation": "ARN of the resource managing this memory (e.g. a harness). Null if not managed."
+                        "smithy.api#documentation": "<p>ARN of the resource managing this memory (e.g. a harness). Null if not managed.</p>"
                     }
                 }
             },
@@ -26012,7 +26059,7 @@
                 "protocolType": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PassthroughProtocolType",
                     "traits": {
-                        "smithy.api#documentation": "The application protocol the passthrough target implements. Required for passthrough targets.",
+                        "smithy.api#documentation": "<p>The application protocol that the passthrough target implements. This value is required for passthrough targets:</p> <ul> <li> <p> <code>MCP</code> - The Model Context Protocol.</p> </li> <li> <p> <code>A2A</code> - The Agent-to-Agent protocol.</p> </li> <li> <p> <code>INFERENCE</code> - The protocol for routing requests to a large language model (LLM) provider.</p> </li> <li> <p> <code>CUSTOM</code> - A custom application protocol.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -34468,6 +34515,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"

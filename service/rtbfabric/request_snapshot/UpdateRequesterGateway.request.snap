@@ -1,0 +1,5 @@
+POST /requester-gateway/__GatewayId__/update
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__"}

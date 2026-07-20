@@ -1,0 +1,3 @@
+PUT /portals/__PortalArn__/ipAccessSettings?ipAccessSettingsArn=__IpAccessSettingsArn__
+
+

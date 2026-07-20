@@ -5,7 +5,9 @@ package snowball
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,21 @@ type DescribeAddressesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAddressesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAddressesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAddressesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeAddressesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAddressesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeAddressesOutput struct {
 
 	// The Snow device shipping addresses that were created for this account.
@@ -57,13 +74,35 @@ type DescribeAddressesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAddressesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAddressesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAddressesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAddressList(s, schemas.DescribeAddressesResult_Addresses, v.Addresses)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAddressesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAddressesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAddressesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAddressesResult_Addresses:
+			return deserializeAddressList(d, schemas.DescribeAddressesResult_Addresses, &v.Addresses)
+		case schemas.DescribeAddressesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAddressesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeAddresses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAddresses, schemas.DescribeAddressesRequest, schemas.DescribeAddressesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeAddresses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAddresses, schemas.DescribeAddressesRequest, schemas.DescribeAddressesResult), output: &DescribeAddressesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

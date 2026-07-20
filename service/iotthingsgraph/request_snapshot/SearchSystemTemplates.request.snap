@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: IotThingsGraphFrontEndService.SearchSystemTemplates
+
+{"filters":[{"name":"FLOW_TEMPLATE_ID","value":["__Member__","__Member__"]},{"name":"FLOW_TEMPLATE_ID","value":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__"}

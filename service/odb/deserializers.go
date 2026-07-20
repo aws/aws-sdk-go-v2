@@ -8449,6 +8449,91 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentAdminPasswordSourceConfiguration(v *types.AdminPasswordSourceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.AdminPasswordSourceConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "customerManagedAwsSecret":
+			var mv types.CustomerManagedAwsSecretConfiguration
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentCustomerManagedAwsSecretConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AdminPasswordSourceConfigurationMemberCustomerManagedAwsSecret{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentAdminPasswordSourceSummary(v **types.AdminPasswordSourceSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdminPasswordSourceSummary
+	if *v == nil {
+		sv = &types.AdminPasswordSourceSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "adminPasswordSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdminPasswordSource to be of type string, got %T instead", value)
+				}
+				sv.AdminPasswordSource = types.AdminPasswordSource(jtv)
+			}
+
+		case "adminPasswordSourceConfiguration":
+			if err := awsAwsjson10_deserializeDocumentAdminPasswordSourceConfiguration(&sv.AdminPasswordSourceConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentAutonomousDatabase(v **types.AutonomousDatabase, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8503,6 +8588,11 @@ func awsAwsjson10_deserializeDocumentAutonomousDatabase(v **types.AutonomousData
 					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "adminPasswordSourceSummary":
+			if err := awsAwsjson10_deserializeDocumentAdminPasswordSourceSummary(&sv.AdminPasswordSourceSummary, value); err != nil {
+				return err
 			}
 
 		case "allocatedStorageSizeInTBs":
@@ -10577,6 +10667,11 @@ func awsAwsjson10_deserializeDocumentAutonomousDatabaseSummary(v **types.Autonom
 				}
 			}
 
+		case "adminPasswordSourceSummary":
+			if err := awsAwsjson10_deserializeDocumentAdminPasswordSourceSummary(&sv.AdminPasswordSourceSummary, value); err != nil {
+				return err
+			}
+
 		case "allocatedStorageSizeInTBs":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11812,6 +11907,11 @@ func awsAwsjson10_deserializeDocumentAutonomousDatabaseWalletDetails(v **types.A
 
 	for key, value := range shape {
 		switch key {
+		case "passwordSourceSummary":
+			if err := awsAwsjson10_deserializeDocumentWalletPasswordSourceSummary(&sv.PasswordSourceSummary, value); err != nil {
+				return err
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16282,6 +16382,64 @@ func awsAwsjson10_deserializeDocumentCustomerContacts(v *[]types.CustomerContact
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentCustomerManagedAwsSecretConfiguration(v **types.CustomerManagedAwsSecretConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomerManagedAwsSecretConfiguration
+	if *v == nil {
+		sv = &types.CustomerManagedAwsSecretConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "externalIdType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExternalIdType to be of type string, got %T instead", value)
+				}
+				sv.ExternalIdType = types.ExternalIdType(jtv)
+			}
+
+		case "iamRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.IamRoleArn = ptr.String(jtv)
+			}
+
+		case "secretId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretIdOrArn to be of type string, got %T instead", value)
+				}
+				sv.SecretId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentDatabaseConnectionStringMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19670,6 +19828,24 @@ func awsAwsjson10_deserializeDocumentOciIamRole(v **types.OciIamRole, value inte
 				sv.IamRoleArn = ptr.String(jtv)
 			}
 
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OciIamRoleStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.OciIamRoleStatus(jtv)
+			}
+
+		case "statusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StatusReason = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -21779,6 +21955,91 @@ func awsAwsjson10_deserializeDocumentValidationExceptionFieldList(v *[]types.Val
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentWalletPasswordSourceConfiguration(v *types.WalletPasswordSourceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.WalletPasswordSourceConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "customerManagedAwsSecret":
+			var mv types.CustomerManagedAwsSecretConfiguration
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentCustomerManagedAwsSecretConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.WalletPasswordSourceConfigurationMemberCustomerManagedAwsSecret{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentWalletPasswordSourceSummary(v **types.WalletPasswordSourceSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WalletPasswordSourceSummary
+	if *v == nil {
+		sv = &types.WalletPasswordSourceSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "passwordSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WalletPasswordSource to be of type string, got %T instead", value)
+				}
+				sv.PasswordSource = types.WalletPasswordSource(jtv)
+			}
+
+		case "passwordSourceConfiguration":
+			if err := awsAwsjson10_deserializeDocumentWalletPasswordSourceConfiguration(&sv.PasswordSourceConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

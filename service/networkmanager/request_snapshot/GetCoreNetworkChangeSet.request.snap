@@ -1,0 +1,3 @@
+GET /core-networks/__CoreNetworkId__/core-network-change-sets/1?maxResults=1&nextToken=__NextToken__
+
+

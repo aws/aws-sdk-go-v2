@@ -1178,6 +1178,10 @@ type ConnectorSource struct {
 	// This member is required.
 	ConnectorId *string
 
+	// The version of the connector to use (for example, 1.1.0 ). If you don't specify
+	// a version, the service uses the latest available version.
+	Version *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1649,6 +1653,16 @@ type CustomJWTAuthorizerConfiguration struct {
 	//
 	// This member is required.
 	DiscoveryUrl *string
+
+	// A map that associates each scope in allowedScopes with a corresponding
+	// advertised scope value. The advertised scope appears in OAuth protected resource
+	// metadata and WWW-Authenticate response headers. Use this parameter when the
+	// scope that clients request from your identity provider differs from the scope in
+	// the validated token. Each key is a scope from allowedScopes that the service
+	// uses for token validation. Each value is the corresponding scope that the
+	// service advertises to clients. Scopes without a mapping entry appear unchanged
+	// to clients.
+	AdvertisedScopeMapping map[string]string
 
 	// Represents individual audience values that are validated in the incoming JWT
 	// token validation process.
@@ -3311,6 +3325,10 @@ type HarnessGeminiModelConfig struct {
 	//
 	// This member is required.
 	ModelId *string
+
+	// Provider-specific parameters passed through to the Gemini model provider
+	// unchanged.
+	AdditionalParams document.Interface
 
 	// The maximum number of tokens to allow in the generated response per model call.
 	MaxTokens *int32
@@ -5732,8 +5750,17 @@ type PassthroughTargetConfiguration struct {
 	// This member is required.
 	Endpoint *string
 
-	// The application protocol the passthrough target implements. Required for
-	// passthrough targets.
+	// The application protocol that the passthrough target implements. This value is
+	// required for passthrough targets:
+	//
+	//   - MCP - The Model Context Protocol.
+	//
+	//   - A2A - The Agent-to-Agent protocol.
+	//
+	//   - INFERENCE - The protocol for routing requests to a large language model
+	//   (LLM) provider.
+	//
+	//   - CUSTOM - A custom application protocol.
 	//
 	// This member is required.
 	ProtocolType PassthroughProtocolType

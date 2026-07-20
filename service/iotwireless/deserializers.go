@@ -17381,6 +17381,63 @@ func awsRestjson1_deserializeDocumentDakCertificateMetadataList(v *[]types.DakCe
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDefaultSessionParametersMulticast(v **types.DefaultSessionParametersMulticast, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DefaultSessionParametersMulticast
+	if *v == nil {
+		sv = &types.DefaultSessionParametersMulticast{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DlDr":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DlDr to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DlDr = ptr.Int32(int32(i64))
+			}
+
+		case "DlFreq":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DlFreq to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DlFreq = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDestinationList(v *[]types.Destinations, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20243,6 +20300,11 @@ func awsRestjson1_deserializeDocumentLoRaWANMulticastGet(v **types.LoRaWANMultic
 
 	for key, value := range shape {
 		switch key {
+		case "DefaultSessionParameters":
+			if err := awsRestjson1_deserializeDocumentDefaultSessionParametersMulticast(&sv.DefaultSessionParameters, value); err != nil {
+				return err
+			}
+
 		case "DlClass":
 			if value != nil {
 				jtv, ok := value.(string)

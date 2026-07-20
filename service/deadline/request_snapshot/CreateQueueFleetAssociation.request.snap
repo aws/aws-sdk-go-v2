@@ -1,0 +1,5 @@
+PUT /2023-10-12/farms/__FarmId__/queue-fleet-associations
+
+Content-Type: application/json
+
+{"fleetId":"__FleetId__","queueId":"__QueueId__"}

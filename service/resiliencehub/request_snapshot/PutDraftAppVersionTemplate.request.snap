@@ -1,0 +1,5 @@
+POST /put-draft-app-version-template
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__","appTemplateBody":"__AppTemplateBody__"}

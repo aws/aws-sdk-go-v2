@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SSMContacts.ListRotationOverrides
+
+{"EndTime":946684800,"MaxResults":1,"NextToken":"__NextToken__","RotationId":"__RotationId__","StartTime":946684800}

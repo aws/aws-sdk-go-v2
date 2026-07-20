@@ -242,6 +242,10 @@ type CapacityProvider struct {
 	// provider.
 	PropagateTags *PropagateTags
 
+	// The telemetry configuration for the capacity provider, including logging
+	// settings.
+	TelemetryConfig *CapacityProviderTelemetryConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -253,6 +257,23 @@ type CapacityProviderConfig struct {
 	//
 	// This member is required.
 	LambdaManagedInstancesCapacityProviderConfig *LambdaManagedInstancesCapacityProviderConfig
+
+	noSmithyDocumentSerde
+}
+
+// The capacity provider's Amazon CloudWatch Logs configuration settings.
+type CapacityProviderLoggingConfig struct {
+
+	// The name of the Amazon CloudWatch log group the capacity provider sends logs
+	// to. By default, Lambda capacity providers send logs to a default log group named
+	// /aws/lambda/capacity-provider/<capacity provider name> . To use a different log
+	// group, enter an existing log group or enter a new log group name.
+	LogGroup *string
+
+	// Set this property to filter the system logs for your capacity provider that
+	// Lambda sends to CloudWatch. Lambda only sends system logs at the selected level
+	// of detail and lower, where DEBUG is the highest level and WARN is the lowest.
+	SystemLogLevel SystemLogLevel
 
 	noSmithyDocumentSerde
 }
@@ -285,6 +306,15 @@ type CapacityProviderScalingConfig struct {
 	// A list of scaling policies that define how the capacity provider scales compute
 	// instances based on metrics and thresholds.
 	ScalingPolicies []TargetTrackingScalingPolicy
+
+	noSmithyDocumentSerde
+}
+
+// Configuration that specifies the telemetry collection for the capacity provider.
+type CapacityProviderTelemetryConfig struct {
+
+	// The capacity provider's Amazon CloudWatch Logs configuration settings.
+	LoggingConfig *CapacityProviderLoggingConfig
 
 	noSmithyDocumentSerde
 }
@@ -623,8 +653,10 @@ type DocumentDBEventSourceConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration settings for [durable functions], including execution timeout and retention period
-// for execution history.
+// Configuration settings for [durable functions], including execution timeout, retention period for
+// execution history, and an optional ARN of the Key Management Service (KMS)
+// customer managed key that is used to encrypt your durable execution's payload
+// data, including input, output, and error payloads.
 //
 // [durable functions]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
 type DurableConfig struct {
@@ -633,6 +665,11 @@ type DurableConfig struct {
 	// out. This timeout applies to the entire durable execution, not individual
 	// function invocations.
 	ExecutionTimeout *int32
+
+	// The ARN of the Key Management Service (KMS) customer managed key that is used
+	// to encrypt your durable execution's payload data, including input, output, and
+	// error payloads.
+	KMSKeyArn *string
 
 	// The number of days to retain execution history after a durable execution
 	// completes. After this period, execution history is no longer available through
@@ -1117,6 +1154,11 @@ type Execution struct {
 	//
 	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
 	EndTimestamp *time.Time
+
+	// The ARN of the Key Management Service (KMS) customer managed key that is used
+	// to encrypt your durable execution's payload data, including input, output, and
+	// error payloads.
+	KMSKeyArn *string
 
 	noSmithyDocumentSerde
 }

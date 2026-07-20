@@ -1,0 +1,3 @@
+GET /revocations?certificateHashes=__Member__&certificateHashes=__Member__&jobArn=__JobArn__&platformId=__PlatformId__&profileVersionArn=__ProfileVersionArn__&signatureTimestamp=2000-01-01T00%3A00%3A00Z
+
+

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteIntegration&IntegrationIdentifier=__IntegrationIdentifier__&Version=2014-10-31

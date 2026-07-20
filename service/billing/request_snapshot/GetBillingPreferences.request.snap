@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.GetBillingPreferences
+
+{"features":["RI_SHARING","RI_SHARING"],"filters":[{"name":"PREFERENCE_KEY","value":["__Member__","__Member__"]},{"name":"PREFERENCE_KEY","value":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__"}

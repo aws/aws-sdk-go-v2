@@ -4250,6 +4250,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Parameters to derive session key for a Visa payment cardfor ARQC verification.</p>"
                     }
+                },
+                "UnionPay": {
+                    "target": "com.amazonaws.paymentcryptographydata#SessionKeyUnionPay",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters to derive session key for a UnionPay payment card for Authorization Request Cryptogram (ARQC) generation and verification.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4287,6 +4293,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "VISA"
+                    }
+                },
+                "UNION_PAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNION_PAY"
                     }
                 }
             }
@@ -4403,6 +4415,35 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Parameters to derive session key for Mastercard payment card for ARQC verification.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptographydata#SessionKeyUnionPay": {
+            "type": "structure",
+            "members": {
+                "PrimaryAccountNumber": {
+                    "target": "com.amazonaws.paymentcryptographydata#PrimaryAccountNumberType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Primary Account Number (PAN) of the cardholder. A PAN is a unique identifier for a payment credit or debit card and associates the card to a specific account holder.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PanSequenceNumber": {
+                    "target": "com.amazonaws.paymentcryptographydata#NumberLengthEquals2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A number that identifies and differentiates payment cards with the same Primary Account Number (PAN). If not used, enter <code>00</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationTransactionCounter": {
+                    "target": "com.amazonaws.paymentcryptographydata#HexLengthEquals4",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transaction counter that the terminal provides during transaction processing. This value is in hexadecimal format. For example, enter a decimal counter of 109 as <code>006D</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameters to derive session key for a UnionPay payment card for Authorization Request Cryptogram (ARQC) generation and verification.</p>"
             }
         },
         "com.amazonaws.paymentcryptographydata#SessionKeyVisa": {

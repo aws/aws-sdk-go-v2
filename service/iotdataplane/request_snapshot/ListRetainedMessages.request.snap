@@ -1,0 +1,3 @@
+GET /retainedMessage?maxResults=1&nextToken=__NextToken__
+
+

@@ -1,0 +1,5 @@
+POST /dns-views/__GlobalResolverId__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","dnssecValidation":"ENABLED","ednsClientSubnet":"ENABLED","firewallRulesFailOpen":"ENABLED","name":"__Name__","tags":{"key0":"__Value__"}}

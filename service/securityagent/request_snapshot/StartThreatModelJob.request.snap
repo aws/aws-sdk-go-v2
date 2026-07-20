@@ -1,0 +1,5 @@
+POST /StartThreatModelJob
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","threatModelId":"__ThreatModelId__"}

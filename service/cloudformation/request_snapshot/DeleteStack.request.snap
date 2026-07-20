@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteStack&ClientRequestToken=__ClientRequestToken__&DeletionMode=STANDARD&DeploymentConfig.DisableRollback=true&DeploymentConfig.Mode=STANDARD&RetainResources.member.1=__Member__&RetainResources.member.2=__Member__&RoleARN=__RoleARN__&StackName=__StackName__&Version=2010-05-15

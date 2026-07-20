@@ -1,0 +1,5 @@
+PUT /v1/email/account/sending
+
+Content-Type: application/json
+
+{"SendingEnabled":true}

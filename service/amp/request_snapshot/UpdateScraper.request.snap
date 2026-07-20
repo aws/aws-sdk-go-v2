@@ -1,0 +1,5 @@
+PUT /scrapers/__ScraperId__
+
+Content-Type: application/json
+
+{"alias":"__Alias__","clientToken":"__ClientToken__","destination":{"ampConfiguration":{"workspaceArn":"__WorkspaceArn__"}},"roleConfiguration":{"sourceRoleArn":"__SourceRoleArn__","targetRoleArn":"__TargetRoleArn__"},"scrapeConfiguration":{"configurationBlob":"YmxvYg=="}}

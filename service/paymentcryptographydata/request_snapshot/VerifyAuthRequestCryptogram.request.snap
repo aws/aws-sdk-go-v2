@@ -1,0 +1,5 @@
+POST /cryptogram/verify
+
+Content-Type: application/json
+
+{"AuthRequestCryptogram":"__AuthRequestCryptogram__","AuthResponseAttributes":{"ArpcMethod1":{"AuthResponseCode":"__AuthResponseCode__"}},"KeyIdentifier":"__KeyIdentifier__","MajorKeyDerivationMode":"EMV_OPTION_A","SessionKeyDerivationAttributes":{"EmvCommon":{"ApplicationTransactionCounter":"__ApplicationTransactionCounter__","PanSequenceNumber":"__PanSequenceNumber__","PrimaryAccountNumber":"__PrimaryAccountNumber__"}},"TransactionData":"__TransactionData__"}

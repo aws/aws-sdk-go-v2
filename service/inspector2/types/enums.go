@@ -48,10 +48,13 @@ type AggregationResourceType string
 
 // Enum values for AggregationResourceType
 const (
-	AggregationResourceTypeAwsEc2Instance       AggregationResourceType = "AWS_EC2_INSTANCE"
-	AggregationResourceTypeAwsEcrContainerImage AggregationResourceType = "AWS_ECR_CONTAINER_IMAGE"
-	AggregationResourceTypeAwsLambdaFunction    AggregationResourceType = "AWS_LAMBDA_FUNCTION"
-	AggregationResourceTypeCodeRepository       AggregationResourceType = "CODE_REPOSITORY"
+	AggregationResourceTypeAwsEc2Instance                                   AggregationResourceType = "AWS_EC2_INSTANCE"
+	AggregationResourceTypeAwsEcrContainerImage                             AggregationResourceType = "AWS_ECR_CONTAINER_IMAGE"
+	AggregationResourceTypeAwsLambdaFunction                                AggregationResourceType = "AWS_LAMBDA_FUNCTION"
+	AggregationResourceTypeCodeRepository                                   AggregationResourceType = "CODE_REPOSITORY"
+	AggregationResourceTypeMicrosoftComputeVirtualMachines                  AggregationResourceType = "Microsoft.Compute/virtualMachines"
+	AggregationResourceTypeMicrosoftContainerRegistryRegistryContainerImage AggregationResourceType = "Microsoft.ContainerRegistry/registry/containerImage"
+	AggregationResourceTypeMicrosoftWebSites                                AggregationResourceType = "Microsoft.Web/sites"
 )
 
 // Values returns all known values for AggregationResourceType. Note that this can
@@ -64,6 +67,9 @@ func (AggregationResourceType) Values() []AggregationResourceType {
 		"AWS_ECR_CONTAINER_IMAGE",
 		"AWS_LAMBDA_FUNCTION",
 		"CODE_REPOSITORY",
+		"Microsoft.Compute/virtualMachines",
+		"Microsoft.ContainerRegistry/registry/containerImage",
+		"Microsoft.Web/sites",
 	}
 }
 
@@ -71,18 +77,21 @@ type AggregationType string
 
 // Enum values for AggregationType
 const (
-	AggregationTypeFindingType       AggregationType = "FINDING_TYPE"
-	AggregationTypePackage           AggregationType = "PACKAGE"
-	AggregationTypeTitle             AggregationType = "TITLE"
-	AggregationTypeRepository        AggregationType = "REPOSITORY"
-	AggregationTypeAmi               AggregationType = "AMI"
-	AggregationTypeAwsEc2Instance    AggregationType = "AWS_EC2_INSTANCE"
-	AggregationTypeAwsEcrContainer   AggregationType = "AWS_ECR_CONTAINER"
-	AggregationTypeImageLayer        AggregationType = "IMAGE_LAYER"
-	AggregationTypeAccount           AggregationType = "ACCOUNT"
-	AggregationTypeAwsLambdaFunction AggregationType = "AWS_LAMBDA_FUNCTION"
-	AggregationTypeLambdaLayer       AggregationType = "LAMBDA_LAYER"
-	AggregationTypeCodeRepository    AggregationType = "CODE_REPOSITORY"
+	AggregationTypeFindingType        AggregationType = "FINDING_TYPE"
+	AggregationTypePackage            AggregationType = "PACKAGE"
+	AggregationTypeTitle              AggregationType = "TITLE"
+	AggregationTypeRepository         AggregationType = "REPOSITORY"
+	AggregationTypeAmi                AggregationType = "AMI"
+	AggregationTypeAwsEc2Instance     AggregationType = "AWS_EC2_INSTANCE"
+	AggregationTypeAwsEcrContainer    AggregationType = "AWS_ECR_CONTAINER"
+	AggregationTypeImageLayer         AggregationType = "IMAGE_LAYER"
+	AggregationTypeAccount            AggregationType = "ACCOUNT"
+	AggregationTypeAwsLambdaFunction  AggregationType = "AWS_LAMBDA_FUNCTION"
+	AggregationTypeLambdaLayer        AggregationType = "LAMBDA_LAYER"
+	AggregationTypeCodeRepository     AggregationType = "CODE_REPOSITORY"
+	AggregationTypeVmInstance         AggregationType = "VM_INSTANCE"
+	AggregationTypeContainerImage     AggregationType = "CONTAINER_IMAGE"
+	AggregationTypeServerlessFunction AggregationType = "SERVERLESS_FUNCTION"
 )
 
 // Values returns all known values for AggregationType. Note that this can be
@@ -103,6 +112,9 @@ func (AggregationType) Values() []AggregationType {
 		"AWS_LAMBDA_FUNCTION",
 		"LAMBDA_LAYER",
 		"CODE_REPOSITORY",
+		"VM_INSTANCE",
+		"CONTAINER_IMAGE",
+		"SERVERLESS_FUNCTION",
 	}
 }
 
@@ -172,6 +184,24 @@ func (AssociationResultStatusCode) Values() []AssociationResultStatusCode {
 		"INVALID_INPUT",
 		"RESOURCE_NOT_FOUND",
 		"QUOTA_EXCEEDED",
+	}
+}
+
+type AwsConfigConnectorArnComparison string
+
+// Enum values for AwsConfigConnectorArnComparison
+const (
+	AwsConfigConnectorArnComparisonEquals AwsConfigConnectorArnComparison = "EQUALS"
+)
+
+// Values returns all known values for AwsConfigConnectorArnComparison. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AwsConfigConnectorArnComparison) Values() []AwsConfigConnectorArnComparison {
+	return []AwsConfigConnectorArnComparison{
+		"EQUALS",
 	}
 }
 
@@ -608,6 +638,27 @@ func (CisTargetStatusReason) Values() []CisTargetStatusReason {
 	}
 }
 
+type CloudProvider string
+
+// Enum values for CloudProvider
+const (
+	CloudProviderAws           CloudProvider = "AWS"
+	CloudProviderAzure         CloudProvider = "AZURE"
+	CloudProviderNotApplicable CloudProvider = "NOT_APPLICABLE"
+)
+
+// Values returns all known values for CloudProvider. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CloudProvider) Values() []CloudProvider {
+	return []CloudProvider{
+		"AWS",
+		"AZURE",
+		"NOT_APPLICABLE",
+	}
+}
+
 type CodeRepositoryProviderType string
 
 // Enum values for CodeRepositoryProviderType
@@ -713,6 +764,186 @@ func (ConfigurationLevel) Values() []ConfigurationLevel {
 	}
 }
 
+type ConnectorArnComparison string
+
+// Enum values for ConnectorArnComparison
+const (
+	ConnectorArnComparisonEquals ConnectorArnComparison = "EQUALS"
+)
+
+// Values returns all known values for ConnectorArnComparison. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorArnComparison) Values() []ConnectorArnComparison {
+	return []ConnectorArnComparison{
+		"EQUALS",
+	}
+}
+
+type ConnectorCloudProvider string
+
+// Enum values for ConnectorCloudProvider
+const (
+	ConnectorCloudProviderAzure ConnectorCloudProvider = "AZURE"
+)
+
+// Values returns all known values for ConnectorCloudProvider. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorCloudProvider) Values() []ConnectorCloudProvider {
+	return []ConnectorCloudProvider{
+		"AZURE",
+	}
+}
+
+type ConnectorHealthStatus string
+
+// Enum values for ConnectorHealthStatus
+const (
+	ConnectorHealthStatusConnected            ConnectorHealthStatus = "CONNECTED"
+	ConnectorHealthStatusDegraded             ConnectorHealthStatus = "DEGRADED"
+	ConnectorHealthStatusFailedToConnect      ConnectorHealthStatus = "FAILED_TO_CONNECT"
+	ConnectorHealthStatusPendingAuthorization ConnectorHealthStatus = "PENDING_AUTHORIZATION"
+	ConnectorHealthStatusPendingConfiguration ConnectorHealthStatus = "PENDING_CONFIGURATION"
+	ConnectorHealthStatusUnknown              ConnectorHealthStatus = "UNKNOWN"
+)
+
+// Values returns all known values for ConnectorHealthStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorHealthStatus) Values() []ConnectorHealthStatus {
+	return []ConnectorHealthStatus{
+		"CONNECTED",
+		"DEGRADED",
+		"FAILED_TO_CONNECT",
+		"PENDING_AUTHORIZATION",
+		"PENDING_CONFIGURATION",
+		"UNKNOWN",
+	}
+}
+
+type ConnectorType string
+
+// Enum values for ConnectorType
+const (
+	ConnectorTypeCustomerManaged ConnectorType = "CUSTOMER_MANAGED"
+	ConnectorTypeServiceLinked   ConnectorType = "SERVICE_LINKED"
+)
+
+// Values returns all known values for ConnectorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorType) Values() []ConnectorType {
+	return []ConnectorType{
+		"CUSTOMER_MANAGED",
+		"SERVICE_LINKED",
+	}
+}
+
+type ConnectorTypeComparison string
+
+// Enum values for ConnectorTypeComparison
+const (
+	ConnectorTypeComparisonEquals ConnectorTypeComparison = "EQUALS"
+)
+
+// Values returns all known values for ConnectorTypeComparison. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorTypeComparison) Values() []ConnectorTypeComparison {
+	return []ConnectorTypeComparison{
+		"EQUALS",
+	}
+}
+
+type ContainerImagePullDateRescanDuration string
+
+// Enum values for ContainerImagePullDateRescanDuration
+const (
+	ContainerImagePullDateRescanDurationDays3   ContainerImagePullDateRescanDuration = "DAYS_3"
+	ContainerImagePullDateRescanDurationDays7   ContainerImagePullDateRescanDuration = "DAYS_7"
+	ContainerImagePullDateRescanDurationDays14  ContainerImagePullDateRescanDuration = "DAYS_14"
+	ContainerImagePullDateRescanDurationDays30  ContainerImagePullDateRescanDuration = "DAYS_30"
+	ContainerImagePullDateRescanDurationDays60  ContainerImagePullDateRescanDuration = "DAYS_60"
+	ContainerImagePullDateRescanDurationDays90  ContainerImagePullDateRescanDuration = "DAYS_90"
+	ContainerImagePullDateRescanDurationDays180 ContainerImagePullDateRescanDuration = "DAYS_180"
+)
+
+// Values returns all known values for ContainerImagePullDateRescanDuration. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerImagePullDateRescanDuration) Values() []ContainerImagePullDateRescanDuration {
+	return []ContainerImagePullDateRescanDuration{
+		"DAYS_3",
+		"DAYS_7",
+		"DAYS_14",
+		"DAYS_30",
+		"DAYS_60",
+		"DAYS_90",
+		"DAYS_180",
+	}
+}
+
+type ContainerImageRescanDuration string
+
+// Enum values for ContainerImageRescanDuration
+const (
+	ContainerImageRescanDurationLifetime ContainerImageRescanDuration = "LIFETIME"
+	ContainerImageRescanDurationDays3    ContainerImageRescanDuration = "DAYS_3"
+	ContainerImageRescanDurationDays7    ContainerImageRescanDuration = "DAYS_7"
+	ContainerImageRescanDurationDays30   ContainerImageRescanDuration = "DAYS_30"
+	ContainerImageRescanDurationDays180  ContainerImageRescanDuration = "DAYS_180"
+	ContainerImageRescanDurationDays14   ContainerImageRescanDuration = "DAYS_14"
+	ContainerImageRescanDurationDays60   ContainerImageRescanDuration = "DAYS_60"
+	ContainerImageRescanDurationDays90   ContainerImageRescanDuration = "DAYS_90"
+)
+
+// Values returns all known values for ContainerImageRescanDuration. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerImageRescanDuration) Values() []ContainerImageRescanDuration {
+	return []ContainerImageRescanDuration{
+		"LIFETIME",
+		"DAYS_3",
+		"DAYS_7",
+		"DAYS_30",
+		"DAYS_180",
+		"DAYS_14",
+		"DAYS_60",
+		"DAYS_90",
+	}
+}
+
+type ContainerImageSortBy string
+
+// Enum values for ContainerImageSortBy
+const (
+	ContainerImageSortByCritical ContainerImageSortBy = "CRITICAL"
+	ContainerImageSortByHigh     ContainerImageSortBy = "HIGH"
+	ContainerImageSortByAll      ContainerImageSortBy = "ALL"
+)
+
+// Values returns all known values for ContainerImageSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerImageSortBy) Values() []ContainerImageSortBy {
+	return []ContainerImageSortBy{
+		"CRITICAL",
+		"HIGH",
+		"ALL",
+	}
+}
+
 type ContinuousIntegrationScanEvent string
 
 // Enum values for ContinuousIntegrationScanEvent
@@ -754,11 +985,16 @@ type CoverageResourceType string
 
 // Enum values for CoverageResourceType
 const (
-	CoverageResourceTypeAwsEc2Instance       CoverageResourceType = "AWS_EC2_INSTANCE"
-	CoverageResourceTypeAwsEcrContainerImage CoverageResourceType = "AWS_ECR_CONTAINER_IMAGE"
-	CoverageResourceTypeAwsEcrRepository     CoverageResourceType = "AWS_ECR_REPOSITORY"
-	CoverageResourceTypeAwsLambdaFunction    CoverageResourceType = "AWS_LAMBDA_FUNCTION"
-	CoverageResourceTypeCodeRepository       CoverageResourceType = "CODE_REPOSITORY"
+	CoverageResourceTypeAwsEc2Instance                                        CoverageResourceType = "AWS_EC2_INSTANCE"
+	CoverageResourceTypeAwsEcrContainerImage                                  CoverageResourceType = "AWS_ECR_CONTAINER_IMAGE"
+	CoverageResourceTypeAwsEcrRepository                                      CoverageResourceType = "AWS_ECR_REPOSITORY"
+	CoverageResourceTypeAwsLambdaFunction                                     CoverageResourceType = "AWS_LAMBDA_FUNCTION"
+	CoverageResourceTypeCodeRepository                                        CoverageResourceType = "CODE_REPOSITORY"
+	CoverageResourceTypeMicrosoftComputeVirtualMachines                       CoverageResourceType = "Microsoft.Compute/virtualMachines"
+	CoverageResourceTypeMicrosoftContainerRegistryRegistryContainerImage      CoverageResourceType = "Microsoft.ContainerRegistry/registry/containerImage"
+	CoverageResourceTypeMicrosoftContainerRegistryRegistryContainerRepository CoverageResourceType = "Microsoft.ContainerRegistry/registry/containerRepository"
+	CoverageResourceTypeMicrosoftWebSites                                     CoverageResourceType = "Microsoft.Web/sites"
+	CoverageResourceTypeMicrosoftContainerRegistryRegistries                  CoverageResourceType = "Microsoft.ContainerRegistry/registries"
 )
 
 // Values returns all known values for CoverageResourceType. Note that this can be
@@ -772,6 +1008,11 @@ func (CoverageResourceType) Values() []CoverageResourceType {
 		"AWS_ECR_REPOSITORY",
 		"AWS_LAMBDA_FUNCTION",
 		"CODE_REPOSITORY",
+		"Microsoft.Compute/virtualMachines",
+		"Microsoft.ContainerRegistry/registry/containerImage",
+		"Microsoft.ContainerRegistry/registry/containerRepository",
+		"Microsoft.Web/sites",
+		"Microsoft.ContainerRegistry/registries",
 	}
 }
 
@@ -975,6 +1216,8 @@ const (
 	EcrPullDateRescanDurationDays60  EcrPullDateRescanDuration = "DAYS_60"
 	EcrPullDateRescanDurationDays90  EcrPullDateRescanDuration = "DAYS_90"
 	EcrPullDateRescanDurationDays180 EcrPullDateRescanDuration = "DAYS_180"
+	EcrPullDateRescanDurationDays3   EcrPullDateRescanDuration = "DAYS_3"
+	EcrPullDateRescanDurationDays7   EcrPullDateRescanDuration = "DAYS_7"
 )
 
 // Values returns all known values for EcrPullDateRescanDuration. Note that this
@@ -988,6 +1231,8 @@ func (EcrPullDateRescanDuration) Values() []EcrPullDateRescanDuration {
 		"DAYS_60",
 		"DAYS_90",
 		"DAYS_180",
+		"DAYS_3",
+		"DAYS_7",
 	}
 }
 
@@ -1020,6 +1265,8 @@ const (
 	EcrRescanDurationDays14   EcrRescanDuration = "DAYS_14"
 	EcrRescanDurationDays60   EcrRescanDuration = "DAYS_60"
 	EcrRescanDurationDays90   EcrRescanDuration = "DAYS_90"
+	EcrRescanDurationDays3    EcrRescanDuration = "DAYS_3"
+	EcrRescanDurationDays7    EcrRescanDuration = "DAYS_7"
 )
 
 // Values returns all known values for EcrRescanDuration. Note that this can be
@@ -1034,6 +1281,8 @@ func (EcrRescanDuration) Values() []EcrRescanDuration {
 		"DAYS_14",
 		"DAYS_60",
 		"DAYS_90",
+		"DAYS_3",
+		"DAYS_7",
 	}
 }
 
@@ -1076,6 +1325,37 @@ func (EcrScanFrequency) Values() []EcrScanFrequency {
 		"MANUAL",
 		"SCAN_ON_PUSH",
 		"CONTINUOUS_SCAN",
+	}
+}
+
+type EnablementStatus string
+
+// Enum values for EnablementStatus
+const (
+	EnablementStatusEnabled           EnablementStatus = "ENABLED"
+	EnablementStatusPendingEnablement EnablementStatus = "PENDING_ENABLEMENT"
+	EnablementStatusFailedToEnable    EnablementStatus = "FAILED_TO_ENABLE"
+	EnablementStatusPendingUpdate     EnablementStatus = "PENDING_UPDATE"
+	EnablementStatusFailedToUpdate    EnablementStatus = "FAILED_TO_UPDATE"
+	EnablementStatusPendingDeletion   EnablementStatus = "PENDING_DELETION"
+	EnablementStatusDeleted           EnablementStatus = "DELETED"
+	EnablementStatusFailedToDelete    EnablementStatus = "FAILED_TO_DELETE"
+)
+
+// Values returns all known values for EnablementStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnablementStatus) Values() []EnablementStatus {
+	return []EnablementStatus{
+		"ENABLED",
+		"PENDING_ENABLEMENT",
+		"FAILED_TO_ENABLE",
+		"PENDING_UPDATE",
+		"FAILED_TO_UPDATE",
+		"PENDING_DELETION",
+		"DELETED",
+		"FAILED_TO_DELETE",
 	}
 }
 
@@ -1338,11 +1618,14 @@ type FreeTrialType string
 
 // Enum values for FreeTrialType
 const (
-	FreeTrialTypeEc2            FreeTrialType = "EC2"
-	FreeTrialTypeEcr            FreeTrialType = "ECR"
-	FreeTrialTypeLambda         FreeTrialType = "LAMBDA"
-	FreeTrialTypeLambdaCode     FreeTrialType = "LAMBDA_CODE"
-	FreeTrialTypeCodeRepository FreeTrialType = "CODE_REPOSITORY"
+	FreeTrialTypeEc2                FreeTrialType = "EC2"
+	FreeTrialTypeEcr                FreeTrialType = "ECR"
+	FreeTrialTypeLambda             FreeTrialType = "LAMBDA"
+	FreeTrialTypeLambdaCode         FreeTrialType = "LAMBDA_CODE"
+	FreeTrialTypeCodeRepository     FreeTrialType = "CODE_REPOSITORY"
+	FreeTrialTypeVm                 FreeTrialType = "VM"
+	FreeTrialTypeContainerImage     FreeTrialType = "CONTAINER_IMAGE"
+	FreeTrialTypeServerlessFunction FreeTrialType = "SERVERLESS_FUNCTION"
 )
 
 // Values returns all known values for FreeTrialType. Note that this can be
@@ -1356,6 +1639,9 @@ func (FreeTrialType) Values() []FreeTrialType {
 		"LAMBDA",
 		"LAMBDA_CODE",
 		"CODE_REPOSITORY",
+		"VM",
+		"CONTAINER_IMAGE",
+		"SERVERLESS_FUNCTION",
 	}
 }
 
@@ -1368,6 +1654,10 @@ const (
 	GroupKeyAccountId         GroupKey = "ACCOUNT_ID"
 	GroupKeyResourceType      GroupKey = "RESOURCE_TYPE"
 	GroupKeyEcrRepositoryName GroupKey = "ECR_REPOSITORY_NAME"
+	GroupKeyProvider          GroupKey = "PROVIDER"
+	GroupKeyProviderAccountId GroupKey = "PROVIDER_ACCOUNT_ID"
+	GroupKeyProviderRegion    GroupKey = "PROVIDER_REGION"
+	GroupKeyProviderOrgId     GroupKey = "PROVIDER_ORG_ID"
 )
 
 // Values returns all known values for GroupKey. Note that this can be expanded in
@@ -1381,6 +1671,10 @@ func (GroupKey) Values() []GroupKey {
 		"ACCOUNT_ID",
 		"RESOURCE_TYPE",
 		"ECR_REPOSITORY_NAME",
+		"PROVIDER",
+		"PROVIDER_ACCOUNT_ID",
+		"PROVIDER_REGION",
+		"PROVIDER_ORG_ID",
 	}
 }
 
@@ -1402,6 +1696,23 @@ func (ImageLayerSortBy) Values() []ImageLayerSortBy {
 		"CRITICAL",
 		"HIGH",
 		"ALL",
+	}
+}
+
+type InheritanceMode string
+
+// Enum values for InheritanceMode
+const (
+	InheritanceModeInheritFromAdmin InheritanceMode = "INHERIT_FROM_ADMIN"
+)
+
+// Values returns all known values for InheritanceMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InheritanceMode) Values() []InheritanceMode {
+	return []InheritanceMode{
+		"INHERIT_FROM_ADMIN",
 	}
 }
 
@@ -1721,6 +2032,42 @@ func (ProjectSelectionScope) Values() []ProjectSelectionScope {
 	}
 }
 
+type Provider string
+
+// Enum values for Provider
+const (
+	ProviderAws   Provider = "AWS"
+	ProviderAzure Provider = "AZURE"
+)
+
+// Values returns all known values for Provider. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Provider) Values() []Provider {
+	return []Provider{
+		"AWS",
+		"AZURE",
+	}
+}
+
+type ProviderComparison string
+
+// Enum values for ProviderComparison
+const (
+	ProviderComparisonEquals ProviderComparison = "EQUALS"
+)
+
+// Values returns all known values for ProviderComparison. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProviderComparison) Values() []ProviderComparison {
+	return []ProviderComparison{
+		"EQUALS",
+	}
+}
+
 type RelationshipStatus string
 
 // Enum values for RelationshipStatus
@@ -1894,11 +2241,14 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeAwsEc2Instance       ResourceType = "AWS_EC2_INSTANCE"
-	ResourceTypeAwsEcrContainerImage ResourceType = "AWS_ECR_CONTAINER_IMAGE"
-	ResourceTypeAwsEcrRepository     ResourceType = "AWS_ECR_REPOSITORY"
-	ResourceTypeAwsLambdaFunction    ResourceType = "AWS_LAMBDA_FUNCTION"
-	ResourceTypeCodeRepository       ResourceType = "CODE_REPOSITORY"
+	ResourceTypeAwsEc2Instance                                   ResourceType = "AWS_EC2_INSTANCE"
+	ResourceTypeAwsEcrContainerImage                             ResourceType = "AWS_ECR_CONTAINER_IMAGE"
+	ResourceTypeAwsEcrRepository                                 ResourceType = "AWS_ECR_REPOSITORY"
+	ResourceTypeAwsLambdaFunction                                ResourceType = "AWS_LAMBDA_FUNCTION"
+	ResourceTypeCodeRepository                                   ResourceType = "CODE_REPOSITORY"
+	ResourceTypeMicrosoftComputeVirtualMachines                  ResourceType = "Microsoft.Compute/virtualMachines"
+	ResourceTypeMicrosoftContainerRegistryRegistryContainerImage ResourceType = "Microsoft.ContainerRegistry/registry/containerImage"
+	ResourceTypeMicrosoftWebSites                                ResourceType = "Microsoft.Web/sites"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -1912,6 +2262,9 @@ func (ResourceType) Values() []ResourceType {
 		"AWS_ECR_REPOSITORY",
 		"AWS_LAMBDA_FUNCTION",
 		"CODE_REPOSITORY",
+		"Microsoft.Compute/virtualMachines",
+		"Microsoft.ContainerRegistry/registry/containerImage",
+		"Microsoft.Web/sites",
 	}
 }
 
@@ -1963,6 +2316,9 @@ const (
 	RuntimeRuby32       Runtime = "RUBY_3_2"
 	RuntimeDotnet10     Runtime = "DOTNET_10"
 	RuntimeNodejs24X    Runtime = "NODEJS_24_X"
+	RuntimeNodejs22X    Runtime = "NODEJS_22_X"
+	RuntimeJava21       Runtime = "JAVA_21"
+	RuntimeJava25       Runtime = "JAVA_25"
 )
 
 // Values returns all known values for Runtime. Note that this can be expanded in
@@ -1994,6 +2350,9 @@ func (Runtime) Values() []Runtime {
 		"RUBY_3_2",
 		"DOTNET_10",
 		"NODEJS_24_X",
+		"NODEJS_22_X",
+		"JAVA_21",
+		"JAVA_25",
 	}
 }
 
@@ -2023,6 +2382,7 @@ const (
 	ScanModeEc2SsmAgentBased       ScanMode = "EC2_SSM_AGENT_BASED"
 	ScanModeEc2Agentless           ScanMode = "EC2_AGENTLESS"
 	ScanModeEc2InspectorAgentBased ScanMode = "EC2_INSPECTOR_AGENT_BASED"
+	ScanModeVmInspectorAgentBased  ScanMode = "VM_INSPECTOR_AGENT_BASED"
 )
 
 // Values returns all known values for ScanMode. Note that this can be expanded in
@@ -2034,6 +2394,7 @@ func (ScanMode) Values() []ScanMode {
 		"EC2_SSM_AGENT_BASED",
 		"EC2_AGENTLESS",
 		"EC2_INSPECTOR_AGENT_BASED",
+		"VM_INSPECTOR_AGENT_BASED",
 	}
 }
 
@@ -2094,6 +2455,8 @@ const (
 	ScanStatusReasonScanInProgress                               ScanStatusReason = "SCAN_IN_PROGRESS"
 	ScanStatusReasonImageArchived                                ScanStatusReason = "IMAGE_ARCHIVED"
 	ScanStatusReasonUnsupportedCodeArtifacts                     ScanStatusReason = "UNSUPPORTED_CODE_ARTIFACTS"
+	ScanStatusReasonResourceUnmanaged                            ScanStatusReason = "RESOURCE_UNMANAGED"
+	ScanStatusReasonResourceStopped                              ScanStatusReason = "RESOURCE_STOPPED"
 )
 
 // Values returns all known values for ScanStatusReason. Note that this can be
@@ -2136,6 +2499,8 @@ func (ScanStatusReason) Values() []ScanStatusReason {
 		"SCAN_IN_PROGRESS",
 		"IMAGE_ARCHIVED",
 		"UNSUPPORTED_CODE_ARTIFACTS",
+		"RESOURCE_UNMANAGED",
+		"RESOURCE_STOPPED",
 	}
 }
 
@@ -2157,6 +2522,69 @@ func (ScanType) Values() []ScanType {
 		"NETWORK",
 		"PACKAGE",
 		"CODE",
+	}
+}
+
+type ScopeState string
+
+// Enum values for ScopeState
+const (
+	ScopeStateActive   ScopeState = "ACTIVE"
+	ScopeStatePending  ScopeState = "PENDING"
+	ScopeStateError    ScopeState = "ERROR"
+	ScopeStateDisabled ScopeState = "DISABLED"
+)
+
+// Values returns all known values for ScopeState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScopeState) Values() []ScopeState {
+	return []ScopeState{
+		"ACTIVE",
+		"PENDING",
+		"ERROR",
+		"DISABLED",
+	}
+}
+
+type ScopeType string
+
+// Enum values for ScopeType
+const (
+	ScopeTypeTenant       ScopeType = "TENANT"
+	ScopeTypeSubscription ScopeType = "SUBSCRIPTION"
+)
+
+// Values returns all known values for ScopeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScopeType) Values() []ScopeType {
+	return []ScopeType{
+		"TENANT",
+		"SUBSCRIPTION",
+	}
+}
+
+type ServerlessFunctionSortBy string
+
+// Enum values for ServerlessFunctionSortBy
+const (
+	ServerlessFunctionSortByCritical ServerlessFunctionSortBy = "CRITICAL"
+	ServerlessFunctionSortByHigh     ServerlessFunctionSortBy = "HIGH"
+	ServerlessFunctionSortByAll      ServerlessFunctionSortBy = "ALL"
+)
+
+// Values returns all known values for ServerlessFunctionSortBy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServerlessFunctionSortBy) Values() []ServerlessFunctionSortBy {
+	return []ServerlessFunctionSortBy{
+		"CRITICAL",
+		"HIGH",
+		"ALL",
 	}
 }
 
@@ -2389,15 +2817,19 @@ type UsageType string
 
 // Enum values for UsageType
 const (
-	UsageTypeEc2InstanceHours          UsageType = "EC2_INSTANCE_HOURS"
-	UsageTypeEcrInitialScan            UsageType = "ECR_INITIAL_SCAN"
-	UsageTypeEcrRescan                 UsageType = "ECR_RESCAN"
-	UsageTypeLambdaFunctionHours       UsageType = "LAMBDA_FUNCTION_HOURS"
-	UsageTypeLambdaFunctionCodeHours   UsageType = "LAMBDA_FUNCTION_CODE_HOURS"
-	UsageTypeCodeRepositorySast        UsageType = "CODE_REPOSITORY_SAST"
-	UsageTypeCodeRepositoryIac         UsageType = "CODE_REPOSITORY_IAC"
-	UsageTypeCodeRepositorySca         UsageType = "CODE_REPOSITORY_SCA"
-	UsageTypeEc2AgentlessInstanceHours UsageType = "EC2_AGENTLESS_INSTANCE_HOURS"
+	UsageTypeEc2InstanceHours               UsageType = "EC2_INSTANCE_HOURS"
+	UsageTypeEcrInitialScan                 UsageType = "ECR_INITIAL_SCAN"
+	UsageTypeEcrRescan                      UsageType = "ECR_RESCAN"
+	UsageTypeLambdaFunctionHours            UsageType = "LAMBDA_FUNCTION_HOURS"
+	UsageTypeLambdaFunctionCodeHours        UsageType = "LAMBDA_FUNCTION_CODE_HOURS"
+	UsageTypeCodeRepositorySast             UsageType = "CODE_REPOSITORY_SAST"
+	UsageTypeCodeRepositoryIac              UsageType = "CODE_REPOSITORY_IAC"
+	UsageTypeCodeRepositorySca              UsageType = "CODE_REPOSITORY_SCA"
+	UsageTypeEc2AgentlessInstanceHours      UsageType = "EC2_AGENTLESS_INSTANCE_HOURS"
+	UsageTypeAzureContainerImageInitialScan UsageType = "AZURE_CONTAINER_IMAGE_INITIAL_SCAN"
+	UsageTypeAzureContainerImageRescan      UsageType = "AZURE_CONTAINER_IMAGE_RESCAN"
+	UsageTypeAzureVmAgentBasedInstanceHours UsageType = "AZURE_VM_AGENT_BASED_INSTANCE_HOURS"
+	UsageTypeAzureServerlessFunctionHours   UsageType = "AZURE_SERVERLESS_FUNCTION_HOURS"
 )
 
 // Values returns all known values for UsageType. Note that this can be expanded
@@ -2415,6 +2847,10 @@ func (UsageType) Values() []UsageType {
 		"CODE_REPOSITORY_IAC",
 		"CODE_REPOSITORY_SCA",
 		"EC2_AGENTLESS_INSTANCE_HOURS",
+		"AZURE_CONTAINER_IMAGE_INITIAL_SCAN",
+		"AZURE_CONTAINER_IMAGE_RESCAN",
+		"AZURE_VM_AGENT_BASED_INSTANCE_HOURS",
+		"AZURE_SERVERLESS_FUNCTION_HOURS",
 	}
 }
 
@@ -2436,6 +2872,50 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"CANNOT_PARSE",
 		"FIELD_VALIDATION_FAILED",
 		"OTHER",
+	}
+}
+
+type VmInstanceSortBy string
+
+// Enum values for VmInstanceSortBy
+const (
+	VmInstanceSortByCritical        VmInstanceSortBy = "CRITICAL"
+	VmInstanceSortByHigh            VmInstanceSortBy = "HIGH"
+	VmInstanceSortByAll             VmInstanceSortBy = "ALL"
+	VmInstanceSortByNetworkFindings VmInstanceSortBy = "NETWORK_FINDINGS"
+)
+
+// Values returns all known values for VmInstanceSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VmInstanceSortBy) Values() []VmInstanceSortBy {
+	return []VmInstanceSortBy{
+		"CRITICAL",
+		"HIGH",
+		"ALL",
+		"NETWORK_FINDINGS",
+	}
+}
+
+type VmPlatform string
+
+// Enum values for VmPlatform
+const (
+	VmPlatformWindows VmPlatform = "WINDOWS"
+	VmPlatformLinux   VmPlatform = "LINUX"
+	VmPlatformUnknown VmPlatform = "UNKNOWN"
+)
+
+// Values returns all known values for VmPlatform. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VmPlatform) Values() []VmPlatform {
+	return []VmPlatform{
+		"WINDOWS",
+		"LINUX",
+		"UNKNOWN",
 	}
 }
 

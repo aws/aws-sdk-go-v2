@@ -1,0 +1,6 @@
+POST /participant/complete-attachment-upload
+
+Content-Type: application/json
+X-Amz-Bearer: __ConnectionToken__
+
+{"AttachmentIds":["__Member__","__Member__"],"ClientToken":"__ClientToken__"}

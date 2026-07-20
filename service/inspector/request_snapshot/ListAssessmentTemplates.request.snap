@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: InspectorService.ListAssessmentTemplates
+
+{"assessmentTargetArns":["__Member__","__Member__"],"filter":{"durationRange":{"maxSeconds":1,"minSeconds":1},"namePattern":"__NamePattern__","rulesPackageArns":["__Member__","__Member__"]},"maxResults":1,"nextToken":"__NextToken__"}

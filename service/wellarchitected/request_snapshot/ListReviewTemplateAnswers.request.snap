@@ -1,0 +1,3 @@
+GET /reviewTemplates/__TemplateArn__/lensReviews/__LensAlias__/answers?MaxResults=1&NextToken=__NextToken__&PillarId=__PillarId__
+
+

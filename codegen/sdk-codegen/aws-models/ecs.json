@@ -8174,13 +8174,13 @@
                 "resetOnHealthyTask": {
                     "target": "com.amazonaws.ecs#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines whether the deployment circuit breaker resets its failure count when a task reaches a healthy state. When set to <code>true</code>, a healthy task resets the failure count to <code>0</code>; when <code>false</code>, it doesn't.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the deployment circuit breaker resets its failure count when a task reaches a healthy state. When set to <code>true</code>, a task that reaches a healthy state resets the failure count to <code>0</code>. When set to <code>false</code>, Amazon ECS does not reset the failure count. The default is <code>true</code>.</p>"
                     }
                 },
                 "thresholdConfiguration": {
                     "target": "com.amazonaws.ecs#ThresholdConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The threshold configuration that controls when the deployment circuit breaker triggers. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ThresholdConfiguration.html\">ThresholdConfiguration</a>.</p>"
+                        "smithy.api#documentation": "<p>The threshold configuration that controls when the deployment circuit breaker triggers. The <code>type</code> and <code>value</code> together determine how many task failures are tolerated before the circuit breaker activates.</p>"
                     }
                 }
             },
@@ -18713,6 +18713,20 @@
                 "smithy.api#documentation": "<p>Information about the platform for the Amazon ECS service or task.</p> <p>For more information about <code>RuntimePlatform</code>, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#runtime-platform\">RuntimePlatform</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
+        "com.amazonaws.ecs#RuntimePlatformOverride": {
+            "type": "structure",
+            "members": {
+                "cpuArchitecture": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CPU architecture that tasks in this service revision run on. This value might differ from the architecture declared in the task definition—for example, when Amazon ECS detects an architecture mismatch during an Amazon ECS Express deployment and runs tasks on a different architecture. You can't set this value.</p> <p>Valid values:</p> <ul> <li> <p> <code>X86_64</code> - The x86 64-bit architecture.</p> </li> <li> <p> <code>ARM64</code> - The 64-bit ARM architecture.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The runtime platform that Amazon ECS applies to a service revision. This value overrides the runtime platform specified in the task definition. You can't set this value.</p>"
+            }
+        },
         "com.amazonaws.ecs#S3FilesVolumeConfiguration": {
             "type": "structure",
             "members": {
@@ -20250,6 +20264,12 @@
                         "smithy.api#documentation": "<p>The resources created and managed by Amazon ECS when you create an Express service for Amazon ECS.</p>"
                     }
                 },
+                "overrides": {
+                    "target": "com.amazonaws.ecs#ServiceRevisionOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective runtime overrides that Amazon ECS applies to this service revision. This value is present only when Amazon ECS detects a difference between the task definition and the actual runtime configuration.</p>"
+                    }
+                },
                 "monitoring": {
                     "target": "com.amazonaws.ecs#MonitoringConfiguration",
                     "traits": {
@@ -20285,6 +20305,20 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ecs#ServiceRevisionLoadBalancer"
+            }
+        },
+        "com.amazonaws.ecs#ServiceRevisionOverrides": {
+            "type": "structure",
+            "members": {
+                "runtimePlatform": {
+                    "target": "com.amazonaws.ecs#RuntimePlatformOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime platform override that Amazon ECS automatically applies to the service revision. You can't set this value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the runtime overrides that Amazon ECS automatically applies to a service revision when the effective runtime configuration differs from the task definition. This value is read-only.</p>"
             }
         },
         "com.amazonaws.ecs#ServiceRevisionResource": {
@@ -22799,7 +22833,7 @@
                 "type": {
                     "target": "com.amazonaws.ecs#ThresholdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines how <code>value</code> is used to calculate the failure threshold. For the percentage types (<code>BOUNDED_PERCENT</code> and <code>UNBOUNDED_PERCENT</code>), <code>value</code> is multiplied by the latest service desired count; for <code>COUNT</code>, <code>value</code> is used directly. The default is <code>BOUNDED_PERCENT</code>.</p>",
+                        "smithy.api#documentation": "<p>Determines how Amazon ECS uses <code>value</code> to calculate the failure threshold. For the percentage types (<code>BOUNDED_PERCENT</code> and <code>UNBOUNDED_PERCENT</code>), Amazon ECS multiplies <code>value</code> by the latest service desired count. For <code>COUNT</code>, Amazon ECS uses <code>value</code> directly as the threshold. The default is <code>BOUNDED_PERCENT</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -22807,7 +22841,7 @@
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The integer used to calculate the failure threshold. When <code>type</code> is <code>COUNT</code>, this is the failure threshold itself. When <code>type</code> is a percentage type, this is the percentage that Amazon ECS multiplies by the latest service desired count to calculate the failure threshold.</p>",
+                        "smithy.api#documentation": "<p>Specifies the integer that Amazon ECS uses to calculate the failure threshold. When <code>type</code> is <code>COUNT</code>, this value is the failure threshold itself. When <code>type</code> is a percentage type, Amazon ECS multiplies this value by the latest service desired count to produce the failure threshold. The default is <code>50</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -22829,7 +22863,7 @@
                 "BOUNDED_PERCENT": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon ECS calculates the failure threshold by multiplying <code>value</code> by the latest service desired count, then clamps the result to a minimum of <code>3</code> and a maximum of <code>200</code>. This is the default threshold type.</p>",
+                        "smithy.api#documentation": "<p>Amazon ECS calculates the failure threshold by multiplying <code>value</code> by the latest service desired count, then clamping the result to a minimum of <code>3</code> and a maximum of <code>200</code>. This is the default threshold type, with a default <code>value</code> of <code>50</code>.</p>",
                         "smithy.api#enumValue": "BOUNDED_PERCENT"
                     }
                 },
@@ -22842,7 +22876,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Determines how the deployment circuit breaker calculates the task failure threshold from the threshold <code>value</code>.</p>"
+                "smithy.api#documentation": "<p>Determines how the deployment circuit breaker calculates the number of task failures tolerated before it triggers, based on the configured <code>value</code>.</p>"
             }
         },
         "com.amazonaws.ecs#TimeoutConfiguration": {

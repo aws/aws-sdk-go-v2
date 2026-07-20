@@ -1,0 +1,3 @@
+GET /kx/environments/__EnvironmentId__/databases/__DatabaseName__/dataviews/__DataviewName__
+
+

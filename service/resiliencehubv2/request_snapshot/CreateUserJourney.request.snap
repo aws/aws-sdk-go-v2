@@ -1,0 +1,5 @@
+POST /v2/create-user-journey
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","name":"__Name__","policyArn":"__PolicyArn__","systemArn":"__SystemArn__"}

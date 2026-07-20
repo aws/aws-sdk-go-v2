@@ -1,0 +1,5 @@
+POST /v1/package?domain=__Domain__&domain-owner=__DomainOwner__&format=npm&namespace=__Namespace__&package=__Package__&repository=__Repository__
+
+Content-Type: application/json
+
+{"restrictions":{"publish":"ALLOW","upstream":"ALLOW"}}

@@ -1,0 +1,5 @@
+POST /scan/sbom
+
+Content-Type: application/json
+
+{"outputFormat":"CYCLONE_DX_1_5"}

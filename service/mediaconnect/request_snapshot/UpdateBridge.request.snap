@@ -1,0 +1,5 @@
+PUT /v1/bridges/__BridgeArn__
+
+Content-Type: application/json
+
+{"egressGatewayBridge":{"maxBitrate":1},"ingressGatewayBridge":{"maxBitrate":1,"maxOutputs":1},"sourceFailoverConfig":{"failoverMode":"MERGE","recoveryWindow":1,"sourcePriority":{"primarySource":"__PrimarySource__"},"state":"ENABLED"}}

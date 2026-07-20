@@ -2358,6 +2358,11 @@ func awsRestjson1_deserializeOpDocumentGetManagedEndpointSessionCredentialsOutpu
 				return err
 			}
 
+		case "endpointCredentials":
+			if err := awsRestjson1_deserializeDocumentCredentials(&sv.EndpointCredentials, value); err != nil {
+				return err
+			}
+
 		case "expiresAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4412,7 +4417,7 @@ func awsRestjson1_deserializeDocumentEksInfo(v **types.EksInfo, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ResourceNameString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected NodeLabelString to be of type string, got %T instead", value)
 				}
 				sv.NodeLabel = ptr.String(jtv)
 			}
@@ -4531,6 +4536,15 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 					return fmt.Errorf("expected EndpointArn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "authProxyUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UriString to be of type string, got %T instead", value)
+				}
+				sv.AuthProxyUrl = ptr.String(jtv)
 			}
 
 		case "certificateArn":
@@ -5829,6 +5843,15 @@ func awsRestjson1_deserializeDocumentS3MonitoringConfiguration(v **types.S3Monit
 
 	for key, value := range shape {
 		switch key {
+		case "encryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyArn = ptr.String(jtv)
+			}
+
 		case "logUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6523,6 +6546,15 @@ func awsRestjson1_deserializeDocumentVirtualCluster(v **types.VirtualCluster, va
 					return fmt.Errorf("expected ResourceIdString to be of type string, got %T instead", value)
 				}
 				sv.SecurityConfigurationId = ptr.String(jtv)
+			}
+
+		case "sessionEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.SessionEnabled = ptr.Bool(jtv)
 			}
 
 		case "state":

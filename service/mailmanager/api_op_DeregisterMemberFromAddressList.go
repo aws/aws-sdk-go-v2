@@ -47,11 +47,11 @@ type DeregisterMemberFromAddressListOutput struct {
 }
 
 func (c *Client) addOperationDeregisterMemberFromAddressListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeregisterMemberFromAddressList{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeregisterMemberFromAddressList{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeregisterMemberFromAddressList{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeregisterMemberFromAddressList{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -75,6 +75,9 @@ func (c *Client) addOperationDeregisterMemberFromAddressListMiddlewares(stack *m
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

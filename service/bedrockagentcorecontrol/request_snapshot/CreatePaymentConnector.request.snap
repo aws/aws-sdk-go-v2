@@ -1,0 +1,5 @@
+POST /payments/managers/__PaymentManagerId__/connectors
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","credentialProviderConfigurations":[{"coinbaseCDP":{"credentialProviderArn":"__CredentialProviderArn__"}},{"coinbaseCDP":{"credentialProviderArn":"__CredentialProviderArn__"}}],"description":"__Description__","name":"__Name__","type":"CoinbaseCDP"}

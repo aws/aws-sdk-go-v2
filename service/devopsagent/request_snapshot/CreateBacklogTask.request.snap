@@ -1,0 +1,5 @@
+POST /backlog/agent-space/__AgentSpaceId__/tasks
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","priority":"CRITICAL","reference":{"associationId":"__AssociationId__","referenceId":"__ReferenceId__","referenceUrl":"__ReferenceUrl__","system":"__System__","title":"__Title__"},"taskType":"INVESTIGATION","title":"__Title__"}

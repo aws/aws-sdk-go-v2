@@ -186,6 +186,9 @@
                     "target": "com.amazonaws.eks#AssociateIdentityProviderConfig"
                 },
                 {
+                    "target": "com.amazonaws.eks#CancelUpdate"
+                },
+                {
                     "target": "com.amazonaws.eks#CreateAccessEntry"
                 },
                 {
@@ -2849,6 +2852,137 @@
         "com.amazonaws.eks#BoxedInteger": {
             "type": "integer"
         },
+        "com.amazonaws.eks#CancelUpdate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#CancelUpdateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#CancelUpdateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels an in-progress update to an Amazon EKS cluster on a best-effort basis. Cancellation\n            is only performed if the update can be cancelled. Currently, this is supported for\n            <code>VersionRollback</code> update types on EKS Auto Mode clusters when nodes are\n            rolling back.</p>\n         <p>A successful cancellation stops the node rollback. After cancellation, nodes converge\n            to the current cluster version honoring configured disruption controls. If the control\n            plane rollback has already begun, the cancellation request fails.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/clusters/{name}/updates/{updateId}/cancel-update",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#CancelUpdateRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon EKS cluster associated with the update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "updateId": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the update to cancel.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure\nthe idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.eks#CancelUpdateResponse": {
+            "type": "structure",
+            "members": {
+                "update": {
+                    "target": "com.amazonaws.eks#Update",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full description of the specified update.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.eks#Cancellation": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.eks#CancellationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the cancellation. Valid values are <code>InProgress</code>,\n            <code>Failed</code>, and <code>Successful</code>.</p>"
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message providing additional details about the cancellation, such as the reason for\n            the cancellation or failure details.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the latest cancellation of an update to an Amazon EKS cluster.</p>"
+            }
+        },
+        "com.amazonaws.eks#CancellationStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Successful"
+                    }
+                }
+            }
+        },
         "com.amazonaws.eks#Capability": {
             "type": "structure",
             "members": {
@@ -3198,6 +3332,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MISCONFIGURATION"
+                    }
+                },
+                "ROLLBACK_READINESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK_READINESS"
                     }
                 }
             }
@@ -11582,6 +11722,20 @@
                 }
             }
         },
+        "com.amazonaws.eks#RollbackConfig": {
+            "type": "structure",
+            "members": {
+                "timeoutMinutes": {
+                    "target": "com.amazonaws.eks#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The length of time in minutes to wait before cancelling the update. Timeout is a\n            minimum-bound property, meaning the timeout occurs no sooner than the time you specify,\n            but can occur shortly thereafter. This value can be between 120 (2 hours) and 10080\n            (7 days). Default: <code>720</code> (12 hours) if not specified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The rollback configuration for the cluster version rollback.</p>"
+            }
+        },
         "com.amazonaws.eks#ServerException": {
             "type": "structure",
             "members": {
@@ -12122,6 +12276,12 @@
                     "target": "com.amazonaws.eks#ErrorDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Any errors associated with a <code>Failed</code> update.</p>"
+                    }
+                },
+                "cancellation": {
+                    "target": "com.amazonaws.eks#Cancellation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest cancellation information for the update. This field is present only if any\n            cancellation is attempted for the update.</p>"
                     }
                 }
             },
@@ -12674,7 +12834,13 @@
                     "target": "com.amazonaws.eks#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Set this value to <code>true</code> to override upgrade-blocking readiness checks when\n            updating a cluster.</p>"
+                        "smithy.api#documentation": "<p>Set this value to <code>true</code> to override upgrade-blocking or rollback-blocking readiness checks when\n            updating a cluster.</p>"
+                    }
+                },
+                "rollbackConfig": {
+                    "target": "com.amazonaws.eks#RollbackConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rollback configuration for the cluster version rollback.</p>"
                     }
                 }
             },
@@ -13635,6 +13801,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ControlPlaneEgressUpdate"
+                    }
+                },
+                "VERSION_ROLLBACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VersionRollback"
                     }
                 }
             }

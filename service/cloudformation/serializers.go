@@ -6352,6 +6352,23 @@ func awsAwsquery_serializeDocumentCapabilities(v []types.Capability, value query
 	return nil
 }
 
+func awsAwsquery_serializeDocumentDeploymentConfig(v *types.DeploymentConfig, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DisableRollback != nil {
+		objectKey := object.Key("DisableRollback")
+		objectKey.Boolean(*v.DisableRollback)
+	}
+
+	if len(v.Mode) > 0 {
+		objectKey := object.Key("Mode")
+		objectKey.String(string(v.Mode))
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentDeploymentTargets(v *types.DeploymentTargets, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -7280,6 +7297,13 @@ func awsAwsquery_serializeOpDocumentCreateChangeSetInput(v *CreateChangeSetInput
 		objectKey.String(*v.ClientToken)
 	}
 
+	if v.DeploymentConfig != nil {
+		objectKey := object.Key("DeploymentConfig")
+		if err := awsAwsquery_serializeDocumentDeploymentConfig(v.DeploymentConfig, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if len(v.DeploymentMode) > 0 {
 		objectKey := object.Key("DeploymentMode")
 		objectKey.String(string(v.DeploymentMode))
@@ -7288,6 +7312,11 @@ func awsAwsquery_serializeOpDocumentCreateChangeSetInput(v *CreateChangeSetInput
 	if v.Description != nil {
 		objectKey := object.Key("Description")
 		objectKey.String(*v.Description)
+	}
+
+	if v.DisableValidation != nil {
+		objectKey := object.Key("DisableValidation")
+		objectKey.Boolean(*v.DisableValidation)
 	}
 
 	if v.ImportExistingResources != nil {
@@ -7422,9 +7451,21 @@ func awsAwsquery_serializeOpDocumentCreateStackInput(v *CreateStackInput, value 
 		objectKey.String(*v.ClientRequestToken)
 	}
 
+	if v.DeploymentConfig != nil {
+		objectKey := object.Key("DeploymentConfig")
+		if err := awsAwsquery_serializeDocumentDeploymentConfig(v.DeploymentConfig, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.DisableRollback != nil {
 		objectKey := object.Key("DisableRollback")
 		objectKey.Boolean(*v.DisableRollback)
+	}
+
+	if v.DisableValidation != nil {
+		objectKey := object.Key("DisableValidation")
+		objectKey.Boolean(*v.DisableValidation)
 	}
 
 	if v.EnableTerminationProtection != nil {
@@ -7765,6 +7806,13 @@ func awsAwsquery_serializeOpDocumentDeleteStackInput(v *DeleteStackInput, value 
 	if len(v.DeletionMode) > 0 {
 		objectKey := object.Key("DeletionMode")
 		objectKey.String(string(v.DeletionMode))
+	}
+
+	if v.DeploymentConfig != nil {
+		objectKey := object.Key("DeploymentConfig")
+		if err := awsAwsquery_serializeDocumentDeploymentConfig(v.DeploymentConfig, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.RetainResources != nil {
@@ -9298,6 +9346,13 @@ func awsAwsquery_serializeOpDocumentRollbackStackInput(v *RollbackStackInput, va
 		objectKey.String(*v.ClientRequestToken)
 	}
 
+	if v.DeploymentConfig != nil {
+		objectKey := object.Key("DeploymentConfig")
+		if err := awsAwsquery_serializeDocumentDeploymentConfig(v.DeploymentConfig, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.RetainExceptOnCreate != nil {
 		objectKey := object.Key("RetainExceptOnCreate")
 		objectKey.Boolean(*v.RetainExceptOnCreate)
@@ -9556,9 +9611,21 @@ func awsAwsquery_serializeOpDocumentUpdateStackInput(v *UpdateStackInput, value 
 		objectKey.String(*v.ClientRequestToken)
 	}
 
+	if v.DeploymentConfig != nil {
+		objectKey := object.Key("DeploymentConfig")
+		if err := awsAwsquery_serializeDocumentDeploymentConfig(v.DeploymentConfig, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.DisableRollback != nil {
 		objectKey := object.Key("DisableRollback")
 		objectKey.Boolean(*v.DisableRollback)
+	}
+
+	if v.DisableValidation != nil {
+		objectKey := object.Key("DisableValidation")
+		objectKey.Boolean(*v.DisableValidation)
 	}
 
 	if v.NotificationARNs != nil {

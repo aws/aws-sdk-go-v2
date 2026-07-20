@@ -1,0 +1,5 @@
+POST /UpdateGroup
+
+Content-Type: application/json
+
+{"FilterExpression":"__FilterExpression__","GroupARN":"__GroupARN__","GroupName":"__GroupName__","InsightsConfiguration":{"InsightsEnabled":true,"NotificationsEnabled":true}}

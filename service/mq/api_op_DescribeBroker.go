@@ -142,6 +142,9 @@ type DescribeBrokerOutput struct {
 	// The list of pending security groups to authorize connections to brokers.
 	PendingSecurityGroups []string
 
+	// The pending storage size in GB, to be applied on the next broker restart.
+	PendingStorageSize *int32
+
 	// Enables connections from applications outside of the VPC that hosts the
 	// broker's subnets.
 	PubliclyAccessible *bool
@@ -149,6 +152,9 @@ type DescribeBrokerOutput struct {
 	// The list of rules (1 minimum, 125 maximum) that authorize connections to
 	// brokers.
 	SecurityGroups []string
+
+	// The broker's storage size in GB.
+	StorageSize *int32
 
 	// The broker's storage type.
 	StorageType types.BrokerStorageType

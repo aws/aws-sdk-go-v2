@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceId__/alias
+
+Content-Type: application/json
+
+{"alias":"__Alias__","clientToken":"__ClientToken__"}

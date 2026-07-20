@@ -187,7 +187,7 @@
                     "min": 0,
                     "max": 255
                 },
-                "smithy.api#pattern": "^(us(-gov)?|ap|ca|cn|eu|eusc|sa|af|me|il)-([a-z]{2}-)?(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9][a-z]$"
+                "smithy.api#pattern": "^(us(-gov)?|ap|ca|cn|eu|eusc|sa|af|me|mx|il)-([a-z]{2}-)?(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9][a-z]$"
             }
         },
         "com.amazonaws.drs#AwsRegion": {
@@ -197,7 +197,7 @@
                     "min": 0,
                     "max": 255
                 },
-                "smithy.api#pattern": "^(us(-gov)?|ap|ca|cn|eu|eusc|sa|af|me|il)-([a-z]{2}-)?(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9]$"
+                "smithy.api#pattern": "^(us(-gov)?|ap|ca|cn|eu|eusc|sa|af|me|mx|il)-([a-z]{2}-)?(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9]$"
             }
         },
         "com.amazonaws.drs#BoundedString": {
@@ -495,6 +495,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>"
+                    }
+                },
+                "recoveryMode": {
+                    "target": "com.amazonaws.drs#RecoveryMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Recovery mode.</p>"
                     }
                 }
             }
@@ -5080,6 +5086,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Launch into existing instance properties.</p>"
                     }
+                },
+                "recoveryMode": {
+                    "target": "com.amazonaws.drs#RecoveryMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Recovery mode.</p>"
+                    }
                 }
             }
         },
@@ -5150,6 +5162,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>"
+                    }
+                },
+                "recoveryMode": {
+                    "target": "com.amazonaws.drs#RecoveryMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Recovery mode.</p>"
                     }
                 }
             },
@@ -5787,8 +5805,8 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 10
+                    "min": 3,
+                    "max": 3
                 }
             }
         },
@@ -6874,6 +6892,22 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object representing the Source Network recovery Lifecycle.</p>"
+            }
+        },
+        "com.amazonaws.drs#RecoveryMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Recovery mode to use during launch. <code>FAST</code> skips conversion to reduce recovery time. <code>OPTIMAL</code> runs full conversion for maximum compatibility.</p>",
+                "smithy.api#enum": [
+                    {
+                        "name": "FAST",
+                        "value": "FAST"
+                    },
+                    {
+                        "name": "OPTIMAL",
+                        "value": "OPTIMAL"
+                    }
+                ]
             }
         },
         "com.amazonaws.drs#RecoveryResult": {
@@ -9316,6 +9350,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Launch into existing instance properties.</p>"
                     }
+                },
+                "recoveryMode": {
+                    "target": "com.amazonaws.drs#RecoveryMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Recovery mode.</p>"
+                    }
                 }
             }
         },
@@ -9412,6 +9452,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>"
+                    }
+                },
+                "recoveryMode": {
+                    "target": "com.amazonaws.drs#RecoveryMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Recovery mode.</p>"
                     }
                 }
             }

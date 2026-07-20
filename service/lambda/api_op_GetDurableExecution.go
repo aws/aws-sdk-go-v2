@@ -37,6 +37,11 @@ type GetDurableExecutionInput struct {
 	// This member is required.
 	DurableExecutionArn *string
 
+	// Specifies whether to include execution data such as input payload, result, and
+	// error information in the response. Set to false for a more compact response
+	// that includes only execution metadata. The default value is set to true .
+	IncludeExecutionData *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -73,6 +78,12 @@ type GetDurableExecutionOutput struct {
 	// This member is required.
 	Status types.ExecutionStatus
 
+	// Configuration settings for the durable execution, including execution timeout,
+	// retention period for execution history, and an optional ARN of the Key
+	// Management Service (KMS) customer managed key that is used to encrypt your
+	// durable execution's payload data, including input, output, and error payloads.
+	DurableConfig *types.DurableConfig
+
 	// The date and time when the durable execution ended, in Unix timestamp format.
 	// This field is only present if the execution has completed (status is SUCCEEDED ,
 	// FAILED , TIMED_OUT , or STOPPED ).
@@ -82,6 +93,10 @@ type GetDurableExecutionOutput struct {
 	// when the execution status is FAILED , TIMED_OUT , or STOPPED . The combined size
 	// of all error fields is limited to 256 KB.
 	Error *types.ErrorObject
+
+	// Indicates whether execution data is included in this response. Returns false
+	// when IncludeExecutionData is set to false in the request.
+	ExecutionDataIncluded *bool
 
 	// The JSON input payload that was provided when the durable execution was
 	// started. For asynchronous invocations, this is limited to 256 KB. For

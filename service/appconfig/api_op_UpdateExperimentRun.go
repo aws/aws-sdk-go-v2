@@ -45,7 +45,7 @@ type UpdateExperimentRunInput struct {
 	// This member is required.
 	Run *int32
 
-	// Updated deployment parameters.
+	// The updated deployment parameters for the experiment run.
 	DeploymentParameters *types.DeploymentParameters
 
 	// An updated description for the experiment run.
@@ -55,7 +55,8 @@ type UpdateExperimentRunInput struct {
 	// setting.
 	ExposurePercentage *float32
 
-	// Updated treatment assignment overrides.
+	// The updated treatment assignment overrides that assign specific entity IDs to
+	// treatments, bypassing random assignment.
 	TreatmentOverrides types.TreatmentOverrides
 
 	noSmithyDocumentSerde

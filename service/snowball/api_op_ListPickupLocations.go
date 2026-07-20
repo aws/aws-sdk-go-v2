@@ -5,7 +5,9 @@ package snowball
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,21 @@ type ListPickupLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPickupLocationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPickupLocationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPickupLocationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPickupLocationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPickupLocationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPickupLocationsOutput struct {
 
 	// Information about the address of pickup locations.
@@ -55,13 +72,35 @@ type ListPickupLocationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPickupLocationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPickupLocationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPickupLocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAddressList(s, schemas.ListPickupLocationsResult_Addresses, v.Addresses)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPickupLocationsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListPickupLocationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPickupLocationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPickupLocationsResult_Addresses:
+			return deserializeAddressList(d, schemas.ListPickupLocationsResult_Addresses, &v.Addresses)
+		case schemas.ListPickupLocationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPickupLocationsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPickupLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListPickupLocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPickupLocations, schemas.ListPickupLocationsRequest, schemas.ListPickupLocationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListPickupLocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPickupLocations, schemas.ListPickupLocationsRequest, schemas.ListPickupLocationsResult), output: &ListPickupLocationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

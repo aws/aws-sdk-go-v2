@@ -9902,6 +9902,15 @@ func awsRestjson1_deserializeOpDocumentGetRecommenderOutput(v **GetRecommenderOu
 
 	for key, value := range shape {
 		switch key {
+		case "ActiveRecommenderVersionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommenderVersionName to be of type string, got %T instead", value)
+				}
+				sv.ActiveRecommenderVersionName = ptr.String(jtv)
+			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -22847,6 +22856,134 @@ func awsRestjson1_deserializeDocumentDimensionList(v *[]types.Dimension, value i
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDiversityColumn(v **types.DiversityColumn, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DiversityColumn
+	if *v == nil {
+		sv = &types.DiversityColumn{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CapType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DiversityCapType to be of type string, got %T instead", value)
+				}
+				sv.CapType = types.DiversityCapType(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected text to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Target":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DiversityTargetExpression to be of type string, got %T instead", value)
+				}
+				sv.Target = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDiversityColumnsList(v *[]types.DiversityColumn, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DiversityColumn
+	if *v == nil {
+		cv = []types.DiversityColumn{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DiversityColumn
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentDiversityColumn(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDiversityConfig(v **types.DiversityConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DiversityConfig
+	if *v == nil {
+		sv = &types.DiversityConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DiversityColumns":
+			if err := awsRestjson1_deserializeDocumentDiversityColumnsList(&sv.DiversityColumns, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDomainList(v *[]types.ListDomainItem, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -28794,6 +28931,11 @@ func awsRestjson1_deserializeDocumentRecommenderConfig(v **types.RecommenderConf
 
 	for key, value := range shape {
 		switch key {
+		case "DiversityConfig":
+			if err := awsRestjson1_deserializeDocumentDiversityConfig(&sv.DiversityConfig, value); err != nil {
+				return err
+			}
+
 		case "EventsConfig":
 			if err := awsRestjson1_deserializeDocumentEventsConfig(&sv.EventsConfig, value); err != nil {
 				return err
@@ -29521,6 +29663,15 @@ func awsRestjson1_deserializeDocumentRecommenderUpdate(v **types.RecommenderUpda
 		case "RecommenderConfig":
 			if err := awsRestjson1_deserializeDocumentRecommenderConfig(&sv.RecommenderConfig, value); err != nil {
 				return err
+			}
+
+		case "RecommenderVersionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommenderVersionName to be of type string, got %T instead", value)
+				}
+				sv.RecommenderVersionName = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -30487,6 +30638,15 @@ func awsRestjson1_deserializeDocumentTrainingMetrics(v **types.TrainingMetrics, 
 		case "Metrics":
 			if err := awsRestjson1_deserializeDocumentMetrics(&sv.Metrics, value); err != nil {
 				return err
+			}
+
+		case "RecommenderVersionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommenderVersionName to be of type string, got %T instead", value)
+				}
+				sv.RecommenderVersionName = ptr.String(jtv)
 			}
 
 		case "Time":

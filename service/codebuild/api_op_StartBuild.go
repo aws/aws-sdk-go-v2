@@ -125,6 +125,10 @@ type StartBuildInput struct {
 	// CodeBuild build project.
 	GitSubmodulesConfigOverride *types.GitSubmodulesConfig
 
+	// The host operating system kernel for this build that overrides the one
+	// specified in the build project.
+	HostKernelOverride types.HostKernel
+
 	// A unique, case sensitive identifier you provide to ensure the idempotency of
 	// the StartBuild request. The token is included in the StartBuild request and is
 	// valid for 5 minutes. If you repeat the StartBuild request with the same token,

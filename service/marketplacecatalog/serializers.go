@@ -2908,6 +2908,13 @@ func awsRestjson1_serializeDocumentResaleAuthorizationFilters(v *types.ResaleAut
 		}
 	}
 
+	if v.ResellerRole != nil {
+		ok := object.Key("ResellerRole")
+		if err := awsRestjson1_serializeDocumentResaleAuthorizationResellerRoleFilter(v.ResellerRole, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Status != nil {
 		ok := object.Key("Status")
 		if err := awsRestjson1_serializeDocumentResaleAuthorizationStatusFilter(v.Status, ok); err != nil {
@@ -3180,6 +3187,31 @@ func awsRestjson1_serializeDocumentResaleAuthorizationResellerLegalNameFilterVal
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResaleAuthorizationResellerRoleFilter(v *types.ResaleAuthorizationResellerRoleFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ValueList != nil {
+		ok := object.Key("ValueList")
+		if err := awsRestjson1_serializeDocumentResaleAuthorizationResellerRoleFilterValueList(v.ValueList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResaleAuthorizationResellerRoleFilterValueList(v []types.ResaleAuthorizationResellerRoleString, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }

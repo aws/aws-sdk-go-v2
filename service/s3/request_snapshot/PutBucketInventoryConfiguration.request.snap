@@ -1,0 +1,6 @@
+PUT /?id=__Id__&inventory=
+
+Content-Type: application/xml
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+
+<InventoryConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Destination><S3BucketDestination><AccountId>__AccountId__</AccountId><Bucket>__Bucket__</Bucket><Encryption><SSE-KMS><KeyId>__KeyId__</KeyId></SSE-KMS><SSE-S3></SSE-S3></Encryption><Format>CSV</Format><Prefix>__Prefix__</Prefix></S3BucketDestination></Destination><Filter><Prefix>__Prefix__</Prefix></Filter><Id>__Id__</Id><IncludedObjectVersions>All</IncludedObjectVersions><IsEnabled>true</IsEnabled><OptionalFields><Field>Size</Field><Field>Size</Field></OptionalFields><Schedule><Frequency>Daily</Frequency></Schedule></InventoryConfiguration>

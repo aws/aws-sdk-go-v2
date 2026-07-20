@@ -1,0 +1,3 @@
+GET /v2/domains/__DomainIdentifier__/notebooks?maxResults=1&nextToken=__NextToken__&owningProjectIdentifier=__OwningProjectIdentifier__&sortBy=CREATED_AT&sortOrder=ASCENDING&status=ACTIVE
+
+

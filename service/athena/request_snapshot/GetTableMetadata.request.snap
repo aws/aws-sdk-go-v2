@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.GetTableMetadata
+
+{"CatalogName":"__CatalogName__","DatabaseName":"__DatabaseName__","TableName":"__TableName__","WorkGroup":"__WorkGroup__"}

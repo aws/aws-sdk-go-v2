@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateLoadBalancer&CustomerOwnedIpv4Pool=__CustomerOwnedIpv4Pool__&EnablePrefixForIpv6SourceNat=on&IpAddressType=ipv4&IpamPools.Ipv4IpamPoolId=__Ipv4IpamPoolId__&Name=__Name__&Scheme=internet-facing&SecurityGroups.member.1=__Member__&SecurityGroups.member.2=__Member__&SubnetMappings.member.1.AllocationId=__AllocationId__&SubnetMappings.member.1.IPv6Address=__IPv6Address__&SubnetMappings.member.1.PrivateIPv4Address=__PrivateIPv4Address__&SubnetMappings.member.1.SourceNatIpv6Prefix=__SourceNatIpv6Prefix__&SubnetMappings.member.1.SubnetId=__SubnetId__&SubnetMappings.member.2.AllocationId=__AllocationId__&SubnetMappings.member.2.IPv6Address=__IPv6Address__&SubnetMappings.member.2.PrivateIPv4Address=__PrivateIPv4Address__&SubnetMappings.member.2.SourceNatIpv6Prefix=__SourceNatIpv6Prefix__&SubnetMappings.member.2.SubnetId=__SubnetId__&Subnets.member.1=__Member__&Subnets.member.2=__Member__&Tags.member.1.Key=__Key__&Tags.member.1.Value=__Value__&Tags.member.2.Key=__Key__&Tags.member.2.Value=__Value__&Type=application&Version=2015-12-01

@@ -13453,6 +13453,16 @@ loop:
 			uv = &types.HarnessContentBlockDeltaMemberToolResult{Value: mv}
 			break loop
 
+		case "toolResultMetadata":
+			var mv types.HarnessToolResultMetadataBlockDelta
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentHarnessToolResultMetadataBlockDelta(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.HarnessContentBlockDeltaMemberToolResultMetadata{Value: mv}
+			break loop
+
 		case "toolUse":
 			var mv types.HarnessToolUseBlockDelta
 			destAddr := &mv
@@ -14116,6 +14126,46 @@ func awsRestjson1_deserializeDocumentHarnessToolResultBlockStart(v **types.Harne
 					return fmt.Errorf("expected HarnessToolUseId to be of type string, got %T instead", value)
 				}
 				sv.ToolUseId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHarnessToolResultMetadataBlockDelta(v **types.HarnessToolResultMetadataBlockDelta, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HarnessToolResultMetadataBlockDelta
+	if *v == nil {
+		sv = &types.HarnessToolResultMetadataBlockDelta{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "metadata":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveText to be of type string, got %T instead", value)
+				}
+				sv.Metadata = ptr.String(jtv)
 			}
 
 		default:

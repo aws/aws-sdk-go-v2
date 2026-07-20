@@ -1,0 +1,6 @@
+POST /apps.install
+
+Content-Type: application/json
+Instance-Id: __InstanceId__
+
+{"appId":"__AppId__"}

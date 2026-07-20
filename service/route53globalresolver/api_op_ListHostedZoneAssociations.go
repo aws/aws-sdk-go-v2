@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all hosted zone associations for a Route 53 Global Resolver resource with
-// pagination support.
+// Lists hosted zone associations with pagination support. Specify a DNS view
+// through the resourceArn parameter to list the hosted zone associations for that
+// DNS view, or omit it to list all hosted zone associations in your Amazon Web
+// Services account.
 //
 // Route 53 Global Resolver is a global service that supports resolvers in
 // multiple Amazon Web Services Regions but you must specify the US East (Ohio)
@@ -35,17 +37,17 @@ func (c *Client) ListHostedZoneAssociations(ctx context.Context, params *ListHos
 
 type ListHostedZoneAssociationsInput struct {
 
-	// Amazon Resource Name (ARN) of the DNS view.
-	//
-	// This member is required.
-	ResourceArn *string
-
 	// The maximum number of results to retrieve in a single call.
 	MaxResults *int32
 
 	// A pagination token used for large sets of results that can't be returned in a
 	// single response.
 	NextToken *string
+
+	// The Amazon Resource Name (ARN) of the DNS view to list hosted zone associations
+	// for. This parameter is optional; if you omit it, all hosted zone associations in
+	// your Amazon Web Services account are returned.
+	ResourceArn *string
 
 	noSmithyDocumentSerde
 }
@@ -100,9 +102,6 @@ func (c *Client) addOperationListHostedZoneAssociationsMiddlewares(stack *middle
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpListHostedZoneAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "ListHostedZoneAssociations"), middleware.Before); err != nil {

@@ -9,11 +9,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a set of hours of operations with another hours of operation. Refer
-// to Administrator Guide [here]for more information on inheriting overrides from parent
-// hours of operation(s).
+// Associates a set of hours of operations with another hours of operation. For
+// more information about inheriting overrides from parent hours of operation, see [Hours of operation overrides]
+// in the Administrator Guide.
 //
-// [here]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+// [Hours of operation overrides]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
 func (c *Client) AssociateHoursOfOperations(ctx context.Context, params *AssociateHoursOfOperationsInput, optFns ...func(*Options)) (*AssociateHoursOfOperationsOutput, error) {
 	if params == nil {
 		params = &AssociateHoursOfOperationsInput{}

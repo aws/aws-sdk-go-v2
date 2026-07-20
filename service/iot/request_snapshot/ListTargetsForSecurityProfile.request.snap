@@ -1,0 +1,3 @@
+GET /security-profiles/__SecurityProfileName__/targets?maxResults=1&nextToken=__NextToken__
+
+

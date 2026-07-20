@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.PutThirdPartyServiceLinkedConfigurationRecorder
+
+{"ConnectorArn":"__ConnectorArn__","ScopeConfiguration":{"allRegions":true,"includedRegions":["__Member__","__Member__"],"scopeType":"__ScopeType__","scopeValues":["__Member__","__Member__"]},"ServicePrincipal":"__ServicePrincipal__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

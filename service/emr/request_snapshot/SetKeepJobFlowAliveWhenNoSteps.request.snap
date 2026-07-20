@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ElasticMapReduce.SetKeepJobFlowAliveWhenNoSteps
+
+{"JobFlowIds":["__Member__","__Member__"],"KeepJobFlowAliveWhenNoSteps":true}

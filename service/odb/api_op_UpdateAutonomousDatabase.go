@@ -36,6 +36,14 @@ type UpdateAutonomousDatabaseInput struct {
 	// The new password for the ADMIN user of the Autonomous Database.
 	AdminPassword *string
 
+	// The source of the admin password for the Autonomous Database. When set to
+	// CUSTOMER_MANAGED_AWS_SECRET , the admin password is retrieved from an Amazon Web
+	// Services Secrets Manager secret.
+	AdminPasswordSource types.AdminPasswordSource
+
+	// The configuration of the admin password source for the Autonomous Database.
+	AdminPasswordSourceConfiguration types.AdminPasswordSourceConfigurationInput
+
 	// The list of IP addresses that are allowed to access the Autonomous Database.
 	AllowlistedIps []string
 

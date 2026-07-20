@@ -10,6 +10,13 @@ import (
 )
 
 // Updates the specified proxy session details, such as voice or SMS capabilities.
+//
+// End of support notice: On April 7, 2026, AWS will end support for Amazon Chime
+// SDK proxy sessions.
+//
+// Deprecated: End of support notice: On April 7, 2026, AWS ended support for
+// Amazon Chime SDK proxy sessions. For more information, refer to
+// https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_UpdateProxySession.html
 func (c *Client) UpdateProxySession(ctx context.Context, params *UpdateProxySessionInput, optFns ...func(*Options)) (*UpdateProxySessionOutput, error) {
 	if params == nil {
 		params = &UpdateProxySessionInput{}

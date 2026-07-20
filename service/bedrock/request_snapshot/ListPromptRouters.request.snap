@@ -1,0 +1,3 @@
+GET /prompt-routers?maxResults=1&nextToken=__NextToken__&type=custom
+
+

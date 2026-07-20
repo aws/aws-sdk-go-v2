@@ -1,0 +1,5 @@
+POST /put-portfolio-preferences
+
+Content-Type: application/json
+
+{"applicationMode":"ALL","applicationPreferences":{"managementPreference":{"awsManagedResources":{"targetDestination":["None specified","None specified"]}}},"databasePreferences":{"databaseManagementPreference":"AWS-managed","databaseMigrationPreference":{"heterogeneous":{"targetDatabaseEngine":["None specified","None specified"]}}},"prioritizeBusinessGoals":{"businessGoals":{"licenseCostReduction":1,"modernizeInfrastructureWithCloudNativeTechnologies":1,"reduceOperationalOverheadWithManagedServices":1,"speedOfMigration":1}}}

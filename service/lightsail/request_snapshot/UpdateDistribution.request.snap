@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.UpdateDistribution
+
+{"cacheBehaviors":[{"behavior":"dont-cache","path":"__Path__"},{"behavior":"dont-cache","path":"__Path__"}],"cacheBehaviorSettings":{"allowedHTTPMethods":"__AllowedHTTPMethods__","cachedHTTPMethods":"__CachedHTTPMethods__","defaultTTL":1,"forwardedCookies":{"cookiesAllowList":["__Member__","__Member__"],"option":"none"},"forwardedHeaders":{"headersAllowList":["Accept","Accept"],"option":"none"},"forwardedQueryStrings":{"option":true,"queryStringsAllowList":["__Member__","__Member__"]},"maximumTTL":1,"minimumTTL":1},"certificateName":"__CertificateName__","defaultCacheBehavior":{"behavior":"dont-cache"},"distributionName":"__DistributionName__","isEnabled":true,"origin":{"ipAddressType":"ipv4","name":"__Name__","protocolPolicy":"http-only","regionName":"us-east-1","responseTimeout":1},"useDefaultCertificate":true,"viewerMinimumTlsProtocolVersion":"TLSv1.1_2016"}

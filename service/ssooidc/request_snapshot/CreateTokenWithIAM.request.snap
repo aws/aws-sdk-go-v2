@@ -1,0 +1,5 @@
+POST /token?aws_iam=t
+
+Content-Type: application/json
+
+{"assertion":"__Assertion__","clientId":"__ClientId__","code":"__Code__","codeVerifier":"__CodeVerifier__","grantType":"__GrantType__","redirectUri":"__RedirectUri__","refreshToken":"__RefreshToken__","requestedTokenType":"__RequestedTokenType__","scope":["__Member__","__Member__"],"subjectToken":"__SubjectToken__","subjectTokenType":"__SubjectTokenType__"}

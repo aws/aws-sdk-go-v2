@@ -1,0 +1,3 @@
+GET /v2/email/contact-lists?NextToken=__NextToken__&PageSize=1
+
+

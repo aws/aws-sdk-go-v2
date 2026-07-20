@@ -1,0 +1,5 @@
+POST /v2/update-failure-mode-finding
+
+Content-Type: application/json
+
+{"comment":"__Comment__","findingId":"__FindingId__","serviceArn":"__ServiceArn__","status":"OPEN"}

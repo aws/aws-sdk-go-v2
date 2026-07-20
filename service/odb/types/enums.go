@@ -21,6 +21,25 @@ func (Access) Values() []Access {
 	}
 }
 
+type AdminPasswordSource string
+
+// Enum values for AdminPasswordSource
+const (
+	AdminPasswordSourceCustomerManagedAwsSecret AdminPasswordSource = "CUSTOMER_MANAGED_AWS_SECRET"
+	AdminPasswordSourceApiRequestParameter      AdminPasswordSource = "API_REQUEST_PARAMETER"
+)
+
+// Values returns all known values for AdminPasswordSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AdminPasswordSource) Values() []AdminPasswordSource {
+	return []AdminPasswordSource{
+		"CUSTOMER_MANAGED_AWS_SECRET",
+		"API_REQUEST_PARAMETER",
+	}
+}
+
 type AutonomousDatabaseBackupStatus string
 
 // Enum values for AutonomousDatabaseBackupStatus
@@ -758,7 +777,8 @@ type OciAwsIntegration string
 
 // Enum values for OciAwsIntegration
 const (
-	OciAwsIntegrationKmsTde OciAwsIntegration = "KmsTde"
+	OciAwsIntegrationKmsTde         OciAwsIntegration = "KmsTde"
+	OciAwsIntegrationSecretsManager OciAwsIntegration = "SecretsManager"
 )
 
 // Values returns all known values for OciAwsIntegration. Note that this can be
@@ -768,6 +788,32 @@ const (
 func (OciAwsIntegration) Values() []OciAwsIntegration {
 	return []OciAwsIntegration{
 		"KmsTde",
+		"SecretsManager",
+	}
+}
+
+type OciIamRoleStatus string
+
+// Enum values for OciIamRoleStatus
+const (
+	OciIamRoleStatusProvisioning    OciIamRoleStatus = "PROVISIONING"
+	OciIamRoleStatusAvailable       OciIamRoleStatus = "AVAILABLE"
+	OciIamRoleStatusProvisionFailed OciIamRoleStatus = "PROVISION_FAILED"
+	OciIamRoleStatusTerminating     OciIamRoleStatus = "TERMINATING"
+	OciIamRoleStatusTerminateFailed OciIamRoleStatus = "TERMINATE_FAILED"
+)
+
+// Values returns all known values for OciIamRoleStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OciIamRoleStatus) Values() []OciIamRoleStatus {
+	return []OciIamRoleStatus{
+		"PROVISIONING",
+		"AVAILABLE",
+		"PROVISION_FAILED",
+		"TERMINATING",
+		"TERMINATE_FAILED",
 	}
 }
 
@@ -1130,6 +1176,25 @@ const (
 func (VpcEndpointType) Values() []VpcEndpointType {
 	return []VpcEndpointType{
 		"SERVICENETWORK",
+	}
+}
+
+type WalletPasswordSource string
+
+// Enum values for WalletPasswordSource
+const (
+	WalletPasswordSourceCustomerManagedAwsSecret WalletPasswordSource = "CUSTOMER_MANAGED_AWS_SECRET"
+	WalletPasswordSourceApiRequestParameter      WalletPasswordSource = "API_REQUEST_PARAMETER"
+)
+
+// Values returns all known values for WalletPasswordSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WalletPasswordSource) Values() []WalletPasswordSource {
+	return []WalletPasswordSource{
+		"CUSTOMER_MANAGED_AWS_SECRET",
+		"API_REQUEST_PARAMETER",
 	}
 }
 

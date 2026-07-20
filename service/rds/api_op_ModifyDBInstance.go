@@ -477,6 +477,24 @@ type ModifyDBInstanceInput struct {
 	//   --db-parameter-group-name and a new option group with --option-group-name .
 	Engine *string
 
+	// The lifecycle type for this DB instance.
+	//
+	// This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon
+	// Aurora DB instances, the engine lifecycle support is managed by the DB cluster.
+	//
+	// You can use this setting to enroll your DB instance into Amazon RDS Extended
+	// Support or to opt out. With RDS Extended Support, you can run the selected major
+	// engine version on your DB instance past the end of standard support for that
+	// engine version. For more information, see [Amazon RDS Extended Support with Amazon RDS]in the Amazon RDS User Guide.
+	//
+	// Valid Values: open-source-rds-extended-support |
+	// open-source-rds-extended-support-disabled
+	//
+	// This setting doesn't apply to RDS Custom DB instances.
+	//
+	// [Amazon RDS Extended Support with Amazon RDS]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+	EngineLifecycleSupport *string
+
 	// The version number of the database engine to upgrade to. Changing this
 	// parameter results in an outage and the change is applied during the next
 	// maintenance window unless the ApplyImmediately parameter is enabled for this

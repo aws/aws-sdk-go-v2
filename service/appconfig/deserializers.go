@@ -8611,6 +8611,9 @@ func awsRestjson1_deserializeOpErrorStopExperimentRun(response *smithyhttp.Respo
 	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 

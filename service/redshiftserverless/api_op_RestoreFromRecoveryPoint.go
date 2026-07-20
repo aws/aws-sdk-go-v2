@@ -42,6 +42,14 @@ type RestoreFromRecoveryPointInput struct {
 	// This member is required.
 	WorkgroupName *string
 
+	// If true , maintain existing data sharing, zero-ETL and S3 event integrations
+	// when restoring. Otherwise, integrations will not be maintained after the restore
+	// operation. Integrations are only maintained when restored to the same serverless
+	// namespace.
+	//
+	// Default: true
+	MaintainIntegration *bool
+
 	noSmithyDocumentSerde
 }
 

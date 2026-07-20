@@ -1,0 +1,3 @@
+DELETE /flows/__FlowIdentifier__/versions/__FlowVersion__/?skipResourceInUseCheck=true
+
+

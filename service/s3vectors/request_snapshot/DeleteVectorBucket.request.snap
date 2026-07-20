@@ -1,0 +1,5 @@
+POST /DeleteVectorBucket
+
+Content-Type: application/json
+
+{"vectorBucketArn":"__VectorBucketArn__","vectorBucketName":"__VectorBucketName__"}

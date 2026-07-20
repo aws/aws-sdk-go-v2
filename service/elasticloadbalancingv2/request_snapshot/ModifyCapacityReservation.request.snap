@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyCapacityReservation&LoadBalancerArn=__LoadBalancerArn__&MinimumLoadBalancerCapacity.CapacityUnits=1&ResetCapacityReservation=true&Version=2015-12-01

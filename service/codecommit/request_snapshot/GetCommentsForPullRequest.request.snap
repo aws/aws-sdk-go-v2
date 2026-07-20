@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.GetCommentsForPullRequest
+
+{"afterCommitId":"__AfterCommitId__","beforeCommitId":"__BeforeCommitId__","maxResults":1,"nextToken":"__NextToken__","pullRequestId":"__PullRequestId__","repositoryName":"__RepositoryName__"}

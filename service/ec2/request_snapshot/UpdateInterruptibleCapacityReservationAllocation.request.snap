@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=UpdateInterruptibleCapacityReservationAllocation&CapacityReservationId=__CapacityReservationId__&DryRun=true&TargetInstanceCount=1&Version=2016-11-15

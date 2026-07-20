@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.CreateImageBuilder
+
+{"AccessEndpoints":[{"EndpointType":"STREAMING","VpceId":"__VpceId__"},{"EndpointType":"STREAMING","VpceId":"__VpceId__"}],"AppstreamAgentVersion":"__AppstreamAgentVersion__","Description":"__Description__","DisableIMDSV1":true,"DisplayName":"__DisplayName__","DomainJoinInfo":{"DirectoryName":"__DirectoryName__","OrganizationalUnitDistinguishedName":"__OrganizationalUnitDistinguishedName__"},"EnableDefaultInternetAccess":true,"IamRoleArn":"__IamRoleArn__","ImageArn":"__ImageArn__","ImageName":"__ImageName__","InstanceType":"__InstanceType__","Name":"__Name__","RootVolumeConfig":{"VolumeSizeInGb":1},"SoftwaresToInstall":["__Member__","__Member__"],"SoftwaresToUninstall":["__Member__","__Member__"],"Tags":{"key0":"__Value__"},"VpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"]}}

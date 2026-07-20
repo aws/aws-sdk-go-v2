@@ -3412,6 +3412,20 @@ func awsRestjson1_serializeOpDocumentPutPlaybackConfigurationInput(v *PutPlaybac
 		ok.String(*v.AdDecisionServerUrl)
 	}
 
+	if v.AdsPersonalizationConcurrency != nil {
+		ok := object.Key("AdsPersonalizationConcurrency")
+		if err := awsRestjson1_serializeDocumentAdsPersonalizationConcurrency(v.AdsPersonalizationConcurrency, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AdsPersonalizationTimeouts != nil {
+		ok := object.Key("AdsPersonalizationTimeouts")
+		if err := awsRestjson1_serializeDocumentAdsPersonalizationTimeouts(v.AdsPersonalizationTimeouts, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AvailSuppression != nil {
 		ok := object.Key("AvailSuppression")
 		if err := awsRestjson1_serializeDocumentAvailSuppression(v.AvailSuppression, ok); err != nil {
@@ -4672,6 +4686,55 @@ func awsRestjson1_serializeDocumentAdsInteractionLog(v *types.AdsInteractionLog,
 		if err := awsRestjson1_serializeDocument__adsInteractionPublishOptInEventTypesList(v.PublishOptInEventTypes, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAdsPersonalizationConcurrency(v *types.AdsPersonalizationConcurrency, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableVodVastParallelization != nil {
+		ok := object.Key("EnableVodVastParallelization")
+		ok.Boolean(*v.EnableVodVastParallelization)
+	}
+
+	if v.MaxConcurrentAdsRequests != nil {
+		ok := object.Key("MaxConcurrentAdsRequests")
+		ok.Integer(*v.MaxConcurrentAdsRequests)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAdsPersonalizationTimeouts(v *types.AdsPersonalizationTimeouts, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdsRequestTimeoutMilliseconds != nil {
+		ok := object.Key("AdsRequestTimeoutMilliseconds")
+		ok.Integer(*v.AdsRequestTimeoutMilliseconds)
+	}
+
+	if v.LiveMaximumAdsPersonalizationTimeMilliseconds != nil {
+		ok := object.Key("LiveMaximumAdsPersonalizationTimeMilliseconds")
+		ok.Integer(*v.LiveMaximumAdsPersonalizationTimeMilliseconds)
+	}
+
+	if v.PrefetchAdsRequestTimeoutMilliseconds != nil {
+		ok := object.Key("PrefetchAdsRequestTimeoutMilliseconds")
+		ok.Integer(*v.PrefetchAdsRequestTimeoutMilliseconds)
+	}
+
+	if v.PrefetchMaximumAdsPersonalizationTimeMilliseconds != nil {
+		ok := object.Key("PrefetchMaximumAdsPersonalizationTimeMilliseconds")
+		ok.Integer(*v.PrefetchMaximumAdsPersonalizationTimeMilliseconds)
+	}
+
+	if v.VodMaximumAdsPersonalizationTimeMilliseconds != nil {
+		ok := object.Key("VodMaximumAdsPersonalizationTimeMilliseconds")
+		ok.Integer(*v.VodMaximumAdsPersonalizationTimeMilliseconds)
 	}
 
 	return nil

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Invoicing.CreateInvoiceUnit
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","InvoiceReceiver":"__InvoiceReceiver__","Name":"__Name__","ResourceTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Rule":{"BillSourceAccounts":["__Member__","__Member__"],"LinkedAccounts":["__Member__","__Member__"]},"TaxInheritanceDisabled":true}

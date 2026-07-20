@@ -1,0 +1,4 @@
+PUT /amazonclouddirectory/2017-01-11/schema
+
+X-Amz-Data-Partition: __SchemaArn__
+

@@ -1,0 +1,5 @@
+POST /v2/email/tenants/get
+
+Content-Type: application/json
+
+{"TenantName":"__TenantName__"}

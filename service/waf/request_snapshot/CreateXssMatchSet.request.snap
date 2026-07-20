@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20150824.CreateXssMatchSet
+
+{"ChangeToken":"__ChangeToken__","Name":"__Name__"}

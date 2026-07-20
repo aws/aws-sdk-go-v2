@@ -5,7 +5,9 @@ package comprehendmedical
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,40 @@ type StartICD10CMInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartICD10CMInferenceJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartICD10CMInferenceJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartICD10CMInferenceJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartICD10CMInferenceJobRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartICD10CMInferenceJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.StartICD10CMInferenceJobRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartICD10CMInferenceJobRequest_JobName, *v.JobName)
+	}
+	if v.KMSKey != nil {
+		s.WriteString(schemas.StartICD10CMInferenceJobRequest_KMSKey, *v.KMSKey)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartICD10CMInferenceJobRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.StartICD10CMInferenceJobRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartICD10CMInferenceJobOutput struct {
 
 	// The identifier generated for the job. To get the status of a job, use this
@@ -80,13 +116,32 @@ type StartICD10CMInferenceJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartICD10CMInferenceJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartICD10CMInferenceJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartICD10CMInferenceJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartICD10CMInferenceJobResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartICD10CMInferenceJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartICD10CMInferenceJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartICD10CMInferenceJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartICD10CMInferenceJobResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartICD10CMInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartICD10CMInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartICD10CMInferenceJob, schemas.StartICD10CMInferenceJobRequest, schemas.StartICD10CMInferenceJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartICD10CMInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartICD10CMInferenceJob, schemas.StartICD10CMInferenceJobRequest, schemas.StartICD10CMInferenceJobResponse), output: &StartICD10CMInferenceJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,6 @@
+POST /runtime.updateQAppSession
+
+Content-Type: application/json
+Instance-Id: __InstanceId__
+
+{"sessionId":"__SessionId__","values":[{"cardId":"__CardId__","submissionMutation":{"mutationType":"edit","submissionId":"__SubmissionId__"},"value":"__Value__"},{"cardId":"__CardId__","submissionMutation":{"mutationType":"edit","submissionId":"__SubmissionId__"},"value":"__Value__"}]}

@@ -1,0 +1,3 @@
+GET /resourceendpointassociations?maxResults=1&nextToken=__NextToken__&resourceConfigurationIdentifier=__ResourceConfigurationIdentifier__&resourceEndpointAssociationIdentifier=__ResourceEndpointAssociationIdentifier__&vpcEndpointId=__VpcEndpointId__&vpcEndpointOwner=__VpcEndpointOwner__
+
+

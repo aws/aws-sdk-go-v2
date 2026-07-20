@@ -1,0 +1,5 @@
+POST /Groups/CreateGroup?DirectoryId=__DirectoryId__
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","GroupScope":"DomainLocal","GroupType":"Distribution","OtherAttributes":{"key0":{"S":"__AttributeValueMemberS__"}},"SAMAccountName":"__SAMAccountName__"}

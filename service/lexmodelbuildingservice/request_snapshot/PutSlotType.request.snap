@@ -1,0 +1,5 @@
+PUT /slottypes/__Name__/versions/$LATEST
+
+Content-Type: application/json
+
+{"checksum":"__Checksum__","createVersion":true,"description":"__Description__","enumerationValues":[{"synonyms":["__Member__","__Member__"],"value":"__Value__"},{"synonyms":["__Member__","__Member__"],"value":"__Value__"}],"parentSlotTypeSignature":"__ParentSlotTypeSignature__","slotTypeConfigurations":[{"regexConfiguration":{"pattern":"__Pattern__"}},{"regexConfiguration":{"pattern":"__Pattern__"}}],"valueSelectionStrategy":"ORIGINAL_VALUE"}

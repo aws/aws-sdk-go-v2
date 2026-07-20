@@ -1,0 +1,3 @@
+GET /portals?maxResults=1&nextToken=__NextToken__
+
+

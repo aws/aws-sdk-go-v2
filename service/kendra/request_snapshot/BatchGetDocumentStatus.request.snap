@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.BatchGetDocumentStatus
+
+{"DocumentInfoList":[{"Attributes":[{"Key":"__Key__","Value":{"DateValue":946684800,"LongValue":1,"StringListValue":["__Member__","__Member__"],"StringValue":"__StringValue__"}},{"Key":"__Key__","Value":{"DateValue":946684800,"LongValue":1,"StringListValue":["__Member__","__Member__"],"StringValue":"__StringValue__"}}],"DocumentId":"__DocumentId__"},{"Attributes":[{"Key":"__Key__","Value":{"DateValue":946684800,"LongValue":1,"StringListValue":["__Member__","__Member__"],"StringValue":"__StringValue__"}},{"Key":"__Key__","Value":{"DateValue":946684800,"LongValue":1,"StringListValue":["__Member__","__Member__"],"StringValue":"__StringValue__"}}],"DocumentId":"__DocumentId__"}],"IndexId":"__IndexId__"}

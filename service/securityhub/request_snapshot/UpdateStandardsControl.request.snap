@@ -1,0 +1,5 @@
+PATCH /standards/control/__StandardsControlArn__
+
+Content-Type: application/json
+
+{"ControlStatus":"ENABLED","DisabledReason":"__DisabledReason__"}

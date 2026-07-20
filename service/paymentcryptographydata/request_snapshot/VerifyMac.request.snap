@@ -1,0 +1,5 @@
+POST /mac/verify
+
+Content-Type: application/json
+
+{"KeyIdentifier":"__KeyIdentifier__","Mac":"__Mac__","MacLength":1,"MessageData":"__MessageData__","VerificationAttributes":{"Algorithm":"ISO9797_ALGORITHM1"}}

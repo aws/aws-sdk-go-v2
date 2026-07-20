@@ -1,0 +1,5 @@
+PUT /quick-connects/__InstanceId__
+
+Content-Type: application/json
+
+{"Description":"__Description__","Name":"__Name__","QuickConnectConfig":{"FlowConfig":{"ContactFlowId":"__ContactFlowId__"},"PhoneConfig":{"PhoneNumber":"__PhoneNumber__"},"QueueConfig":{"ContactFlowId":"__ContactFlowId__","QueueId":"__QueueId__"},"QuickConnectType":"USER","UserConfig":{"ContactFlowId":"__ContactFlowId__","UserId":"__UserId__"}},"Tags":{"key0":"__Value__"}}

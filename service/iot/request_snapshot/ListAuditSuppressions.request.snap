@@ -1,0 +1,5 @@
+POST /audit/suppressions/list
+
+Content-Type: application/json
+
+{"ascendingOrder":true,"checkName":"__CheckName__","maxResults":1,"nextToken":"__NextToken__","resourceIdentifier":{"account":"__Account__","caCertificateId":"__CaCertificateId__","clientId":"__ClientId__","cognitoIdentityPoolId":"__CognitoIdentityPoolId__","deviceCertificateArn":"__DeviceCertificateArn__","deviceCertificateId":"__DeviceCertificateId__","iamRoleArn":"__IamRoleArn__","issuerCertificateIdentifier":{"issuerCertificateSerialNumber":"__IssuerCertificateSerialNumber__","issuerCertificateSubject":"__IssuerCertificateSubject__","issuerId":"__IssuerId__"},"policyVersionIdentifier":{"policyName":"__PolicyName__","policyVersionId":"__PolicyVersionId__"},"roleAliasArn":"__RoleAliasArn__"}}

@@ -1,0 +1,5 @@
+POST /investigations/startInvestigation
+
+Content-Type: application/json
+
+{"EntityArn":"__EntityArn__","GraphArn":"__GraphArn__","ScopeEndTime":"2000-01-01T00:00:00Z","ScopeStartTime":"2000-01-01T00:00:00Z"}

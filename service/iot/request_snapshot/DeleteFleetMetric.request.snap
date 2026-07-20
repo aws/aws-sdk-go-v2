@@ -1,0 +1,3 @@
+DELETE /fleet-metric/__MetricName__?expectedVersion=1
+
+

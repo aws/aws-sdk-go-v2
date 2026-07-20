@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=GetAccountAuthorizationDetails&Filter.member.1=User&Filter.member.2=User&Marker=__Marker__&MaxItems=1&Version=2010-05-08

@@ -215,6 +215,25 @@ func (BatchUpdateFindingsV2UnprocessedFindingErrorCode) Values() []BatchUpdateFi
 	}
 }
 
+type CloudProviderName string
+
+// Enum values for CloudProviderName
+const (
+	CloudProviderNameAzure CloudProviderName = "Azure"
+	CloudProviderNameAws   CloudProviderName = "AWS"
+)
+
+// Values returns all known values for CloudProviderName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CloudProviderName) Values() []CloudProviderName {
+	return []CloudProviderName{
+		"Azure",
+		"AWS",
+	}
+}
+
 type ComplianceStatus string
 
 // Enum values for ComplianceStatus
@@ -304,6 +323,7 @@ type ConnectorProviderName string
 const (
 	ConnectorProviderNameJiraCloud  ConnectorProviderName = "JIRA_CLOUD"
 	ConnectorProviderNameServicenow ConnectorProviderName = "SERVICENOW"
+	ConnectorProviderNameAzure      ConnectorProviderName = "AZURE"
 )
 
 // Values returns all known values for ConnectorProviderName. Note that this can
@@ -314,6 +334,7 @@ func (ConnectorProviderName) Values() []ConnectorProviderName {
 	return []ConnectorProviderName{
 		"JIRA_CLOUD",
 		"SERVICENOW",
+		"AZURE",
 	}
 }
 
@@ -322,9 +343,11 @@ type ConnectorStatus string
 // Enum values for ConnectorStatus
 const (
 	ConnectorStatusConnected            ConnectorStatus = "CONNECTED"
+	ConnectorStatusDegraded             ConnectorStatus = "DEGRADED"
 	ConnectorStatusFailedToConnect      ConnectorStatus = "FAILED_TO_CONNECT"
-	ConnectorStatusPendingConfiguration ConnectorStatus = "PENDING_CONFIGURATION"
 	ConnectorStatusPendingAuthorization ConnectorStatus = "PENDING_AUTHORIZATION"
+	ConnectorStatusPendingConfiguration ConnectorStatus = "PENDING_CONFIGURATION"
+	ConnectorStatusUnknown              ConnectorStatus = "UNKNOWN"
 )
 
 // Values returns all known values for ConnectorStatus. Note that this can be
@@ -334,9 +357,11 @@ const (
 func (ConnectorStatus) Values() []ConnectorStatus {
 	return []ConnectorStatus{
 		"CONNECTED",
+		"DEGRADED",
 		"FAILED_TO_CONNECT",
-		"PENDING_CONFIGURATION",
 		"PENDING_AUTHORIZATION",
+		"PENDING_CONFIGURATION",
+		"UNKNOWN",
 	}
 }
 
@@ -378,6 +403,69 @@ func (ControlStatus) Values() []ControlStatus {
 	}
 }
 
+type CspmConnectorProviderName string
+
+// Enum values for CspmConnectorProviderName
+const (
+	CspmConnectorProviderNameAzure CspmConnectorProviderName = "AZURE"
+)
+
+// Values returns all known values for CspmConnectorProviderName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CspmConnectorProviderName) Values() []CspmConnectorProviderName {
+	return []CspmConnectorProviderName{
+		"AZURE",
+	}
+}
+
+type CspmConnectorStatus string
+
+// Enum values for CspmConnectorStatus
+const (
+	CspmConnectorStatusConnected       CspmConnectorStatus = "CONNECTED"
+	CspmConnectorStatusDegraded        CspmConnectorStatus = "DEGRADED"
+	CspmConnectorStatusFailedToConnect CspmConnectorStatus = "FAILED_TO_CONNECT"
+	CspmConnectorStatusUnknown         CspmConnectorStatus = "UNKNOWN"
+)
+
+// Values returns all known values for CspmConnectorStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CspmConnectorStatus) Values() []CspmConnectorStatus {
+	return []CspmConnectorStatus{
+		"CONNECTED",
+		"DEGRADED",
+		"FAILED_TO_CONNECT",
+		"UNKNOWN",
+	}
+}
+
+type CspmEnablementStatus string
+
+// Enum values for CspmEnablementStatus
+const (
+	CspmEnablementStatusEnabled           CspmEnablementStatus = "ENABLED"
+	CspmEnablementStatusPendingEnablement CspmEnablementStatus = "PENDING_ENABLEMENT"
+	CspmEnablementStatusPendingUpdate     CspmEnablementStatus = "PENDING_UPDATE"
+	CspmEnablementStatusPendingDeletion   CspmEnablementStatus = "PENDING_DELETION"
+)
+
+// Values returns all known values for CspmEnablementStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CspmEnablementStatus) Values() []CspmEnablementStatus {
+	return []CspmEnablementStatus{
+		"ENABLED",
+		"PENDING_ENABLEMENT",
+		"PENDING_UPDATE",
+		"PENDING_DELETION",
+	}
+}
+
 type DateRangeComparison string
 
 // Enum values for DateRangeComparison
@@ -414,6 +502,90 @@ func (DateRangeUnit) Values() []DateRangeUnit {
 	}
 }
 
+type DiscoveryType string
+
+// Enum values for DiscoveryType
+const (
+	DiscoveryTypeManaged    DiscoveryType = "Managed"
+	DiscoveryTypeSelfHosted DiscoveryType = "SelfHosted"
+)
+
+// Values returns all known values for DiscoveryType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DiscoveryType) Values() []DiscoveryType {
+	return []DiscoveryType{
+		"Managed",
+		"SelfHosted",
+	}
+}
+
+type EnablementStatus string
+
+// Enum values for EnablementStatus
+const (
+	EnablementStatusEnabled           EnablementStatus = "ENABLED"
+	EnablementStatusPendingEnablement EnablementStatus = "PENDING_ENABLEMENT"
+	EnablementStatusFailedToEnable    EnablementStatus = "FAILED_TO_ENABLE"
+	EnablementStatusPendingUpdate     EnablementStatus = "PENDING_UPDATE"
+	EnablementStatusFailedToUpdate    EnablementStatus = "FAILED_TO_UPDATE"
+	EnablementStatusPendingDeletion   EnablementStatus = "PENDING_DELETION"
+	EnablementStatusFailedToDelete    EnablementStatus = "FAILED_TO_DELETE"
+)
+
+// Values returns all known values for EnablementStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnablementStatus) Values() []EnablementStatus {
+	return []EnablementStatus{
+		"ENABLED",
+		"PENDING_ENABLEMENT",
+		"FAILED_TO_ENABLE",
+		"PENDING_UPDATE",
+		"FAILED_TO_UPDATE",
+		"PENDING_DELETION",
+		"FAILED_TO_DELETE",
+	}
+}
+
+type FeatureName string
+
+// Enum values for FeatureName
+const (
+	FeatureNameNetworkScanning FeatureName = "NETWORK_SCANNING"
+)
+
+// Values returns all known values for FeatureName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FeatureName) Values() []FeatureName {
+	return []FeatureName{
+		"NETWORK_SCANNING",
+	}
+}
+
+type FeatureStatus string
+
+// Enum values for FeatureStatus
+const (
+	FeatureStatusEnabled  FeatureStatus = "ENABLED"
+	FeatureStatusDisabled FeatureStatus = "DISABLED"
+)
+
+// Values returns all known values for FeatureStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FeatureStatus) Values() []FeatureStatus {
+	return []FeatureStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type FindingHistoryUpdateSourceType string
 
 // Enum values for FindingHistoryUpdateSourceType
@@ -438,16 +610,20 @@ type FindingsTrendsStringField string
 
 // Enum values for FindingsTrendsStringField
 const (
-	FindingsTrendsStringFieldAccountId           FindingsTrendsStringField = "account_id"
-	FindingsTrendsStringFieldRegion              FindingsTrendsStringField = "region"
-	FindingsTrendsStringFieldFindingType         FindingsTrendsStringField = "finding_types"
-	FindingsTrendsStringFieldFindingStatus       FindingsTrendsStringField = "finding_status"
-	FindingsTrendsStringFieldCveId               FindingsTrendsStringField = "finding_cve_ids"
-	FindingsTrendsStringFieldComplianceStatus    FindingsTrendsStringField = "finding_compliance_status"
-	FindingsTrendsStringFieldComplianceControl   FindingsTrendsStringField = "finding_control_id"
-	FindingsTrendsStringFieldFindingClass        FindingsTrendsStringField = "finding_class_name"
-	FindingsTrendsStringFieldProviderName        FindingsTrendsStringField = "finding_provider"
-	FindingsTrendsStringFieldFindingActivityName FindingsTrendsStringField = "finding_activity_name"
+	FindingsTrendsStringFieldAccountId                    FindingsTrendsStringField = "account_id"
+	FindingsTrendsStringFieldRegion                       FindingsTrendsStringField = "region"
+	FindingsTrendsStringFieldFindingType                  FindingsTrendsStringField = "finding_types"
+	FindingsTrendsStringFieldFindingStatus                FindingsTrendsStringField = "finding_status"
+	FindingsTrendsStringFieldCveId                        FindingsTrendsStringField = "finding_cve_ids"
+	FindingsTrendsStringFieldComplianceStatus             FindingsTrendsStringField = "finding_compliance_status"
+	FindingsTrendsStringFieldComplianceControl            FindingsTrendsStringField = "finding_control_id"
+	FindingsTrendsStringFieldFindingClass                 FindingsTrendsStringField = "finding_class_name"
+	FindingsTrendsStringFieldProviderName                 FindingsTrendsStringField = "finding_provider"
+	FindingsTrendsStringFieldFindingActivityName          FindingsTrendsStringField = "finding_activity_name"
+	FindingsTrendsStringFieldResourceCloudProviders       FindingsTrendsStringField = "resource_cloud_providers"
+	FindingsTrendsStringFieldResourceRegions              FindingsTrendsStringField = "resource_regions"
+	FindingsTrendsStringFieldResourceOwnerIds             FindingsTrendsStringField = "resource_owner_ids"
+	FindingsTrendsStringFieldResourceOwnerOrganizationIds FindingsTrendsStringField = "resource_owner_organization_ids"
 )
 
 // Values returns all known values for FindingsTrendsStringField. Note that this
@@ -466,6 +642,10 @@ func (FindingsTrendsStringField) Values() []FindingsTrendsStringField {
 		"finding_class_name",
 		"finding_provider",
 		"finding_activity_name",
+		"resource_cloud_providers",
+		"resource_regions",
+		"resource_owner_ids",
+		"resource_owner_organization_ids",
 	}
 }
 
@@ -507,6 +687,13 @@ const (
 	GroupByFieldMetadataProductName                    GroupByField = "metadata.product.name"
 	GroupByFieldMetadataProductUid                     GroupByField = "metadata.product.uid"
 	GroupByFieldResourcesType                          GroupByField = "resources.type"
+	GroupByFieldResourcesCloudPartition                GroupByField = "resources.cloud_partition"
+	GroupByFieldResourcesName                          GroupByField = "resources.name"
+	GroupByFieldResourcesOwnerAccountUid               GroupByField = "resources.owner.account.uid"
+	GroupByFieldResourcesOwnerOrgUid                   GroupByField = "resources.owner.org.uid"
+	GroupByFieldResourcesOwnerAccountName              GroupByField = "resources.owner.account.name"
+	GroupByFieldResourcesProvider                      GroupByField = "resources.provider"
+	GroupByFieldResourcesRegion                        GroupByField = "resources.region"
 	GroupByFieldResourcesUid                           GroupByField = "resources.uid"
 	GroupByFieldSeverity                               GroupByField = "severity"
 	GroupByFieldStatus                                 GroupByField = "status"
@@ -539,6 +726,13 @@ func (GroupByField) Values() []GroupByField {
 		"metadata.product.name",
 		"metadata.product.uid",
 		"resources.type",
+		"resources.cloud_partition",
+		"resources.name",
+		"resources.owner.account.uid",
+		"resources.owner.org.uid",
+		"resources.owner.account.name",
+		"resources.provider",
+		"resources.region",
 		"resources.uid",
 		"severity",
 		"status",
@@ -550,6 +744,35 @@ func (GroupByField) Values() []GroupByField {
 		"cloud.account.name",
 		"vendor_attributes.severity",
 		"metadata.product.vendor_name",
+	}
+}
+
+type HealthIssueCode string
+
+// Enum values for HealthIssueCode
+const (
+	HealthIssueCodeAuthenticationFailure      HealthIssueCode = "AUTHENTICATION_FAILURE"
+	HealthIssueCodeStreamAuthorizationFailure HealthIssueCode = "STREAM_AUTHORIZATION_FAILURE"
+	HealthIssueCodeDiscoveryFailure           HealthIssueCode = "DISCOVERY_FAILURE"
+	HealthIssueCodeStreamLimitExceeded        HealthIssueCode = "STREAM_LIMIT_EXCEEDED"
+	HealthIssueCodeStreamDisconnected         HealthIssueCode = "STREAM_DISCONNECTED"
+	HealthIssueCodeRecordingFailure           HealthIssueCode = "RECORDING_FAILURE"
+	HealthIssueCodeNoHealthData               HealthIssueCode = "NO_HEALTH_DATA"
+)
+
+// Values returns all known values for HealthIssueCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HealthIssueCode) Values() []HealthIssueCode {
+	return []HealthIssueCode{
+		"AUTHENTICATION_FAILURE",
+		"STREAM_AUTHORIZATION_FAILURE",
+		"DISCOVERY_FAILURE",
+		"STREAM_LIMIT_EXCEEDED",
+		"STREAM_DISCONNECTED",
+		"RECORDING_FAILURE",
+		"NO_HEALTH_DATA",
 	}
 }
 
@@ -869,6 +1092,11 @@ const (
 	OcsfStringFieldRemediationDesc                                        OcsfStringField = "remediation.desc"
 	OcsfStringFieldRemediationReferences                                  OcsfStringField = "remediation.references"
 	OcsfStringFieldResourcesCloudPartition                                OcsfStringField = "resources.cloud_partition"
+	OcsfStringFieldResourcesName                                          OcsfStringField = "resources.name"
+	OcsfStringFieldResourcesOwnerAccountUid                               OcsfStringField = "resources.owner.account.uid"
+	OcsfStringFieldResourcesOwnerOrgUid                                   OcsfStringField = "resources.owner.org.uid"
+	OcsfStringFieldResourcesOwnerAccountName                              OcsfStringField = "resources.owner.account.name"
+	OcsfStringFieldResourcesProvider                                      OcsfStringField = "resources.provider"
 	OcsfStringFieldResourcesRegion                                        OcsfStringField = "resources.region"
 	OcsfStringFieldResourcesType                                          OcsfStringField = "resources.type"
 	OcsfStringFieldResourcesUid                                           OcsfStringField = "resources.uid"
@@ -948,6 +1176,11 @@ func (OcsfStringField) Values() []OcsfStringField {
 		"remediation.desc",
 		"remediation.references",
 		"resources.cloud_partition",
+		"resources.name",
+		"resources.owner.account.uid",
+		"resources.owner.org.uid",
+		"resources.owner.account.name",
+		"resources.provider",
 		"resources.region",
 		"resources.type",
 		"resources.uid",
@@ -1062,9 +1295,12 @@ type Partition string
 
 // Enum values for Partition
 const (
-	PartitionAws      Partition = "aws"
-	PartitionAwsCn    Partition = "aws-cn"
-	PartitionAwsUsGov Partition = "aws-us-gov"
+	PartitionAws        Partition = "aws"
+	PartitionAwsCn      Partition = "aws-cn"
+	PartitionAwsUsGov   Partition = "aws-us-gov"
+	PartitionAwsUsIso   Partition = "aws-us-iso"
+	PartitionAwsUsIsoB  Partition = "aws-us-iso-b"
+	PartitionAzureCloud Partition = "AzureCloud"
 )
 
 // Values returns all known values for Partition. Note that this can be expanded
@@ -1076,6 +1312,9 @@ func (Partition) Values() []Partition {
 		"aws",
 		"aws-cn",
 		"aws-us-gov",
+		"aws-us-iso",
+		"aws-us-iso-b",
+		"AzureCloud",
 	}
 }
 
@@ -1159,14 +1398,15 @@ type ResourceCategory string
 
 // Enum values for ResourceCategory
 const (
-	ResourceCategoryCompute  ResourceCategory = "Compute"
-	ResourceCategoryDatabase ResourceCategory = "Database"
-	ResourceCategoryStorage  ResourceCategory = "Storage"
-	ResourceCategoryCode     ResourceCategory = "Code"
-	ResourceCategoryAiMl     ResourceCategory = "AI/ML"
-	ResourceCategoryIdentity ResourceCategory = "Identity"
-	ResourceCategoryNetwork  ResourceCategory = "Network"
-	ResourceCategoryOther    ResourceCategory = "Other"
+	ResourceCategoryCompute   ResourceCategory = "Compute"
+	ResourceCategoryDatabase  ResourceCategory = "Database"
+	ResourceCategoryStorage   ResourceCategory = "Storage"
+	ResourceCategoryCode      ResourceCategory = "Code"
+	ResourceCategoryAiMl      ResourceCategory = "AI/ML"
+	ResourceCategoryIdentity  ResourceCategory = "Identity"
+	ResourceCategoryNetwork   ResourceCategory = "Network"
+	ResourceCategoryMessaging ResourceCategory = "Messaging"
+	ResourceCategoryOther     ResourceCategory = "Other"
 )
 
 // Values returns all known values for ResourceCategory. Note that this can be
@@ -1182,6 +1422,7 @@ func (ResourceCategory) Values() []ResourceCategory {
 		"AI/ML",
 		"Identity",
 		"Network",
+		"Messaging",
 		"Other",
 	}
 }
@@ -1190,12 +1431,22 @@ type ResourceGroupByField string
 
 // Enum values for ResourceGroupByField
 const (
-	ResourceGroupByFieldAccountId        ResourceGroupByField = "AccountId"
-	ResourceGroupByFieldRegion           ResourceGroupByField = "Region"
-	ResourceGroupByFieldResourceCategory ResourceGroupByField = "ResourceCategory"
-	ResourceGroupByFieldResourceType     ResourceGroupByField = "ResourceType"
-	ResourceGroupByFieldResourceName     ResourceGroupByField = "ResourceName"
-	ResourceGroupByFieldFindingType      ResourceGroupByField = "FindingsSummary.FindingType"
+	ResourceGroupByFieldAccountId              ResourceGroupByField = "AccountId"
+	ResourceGroupByFieldAccountName            ResourceGroupByField = "AccountName"
+	ResourceGroupByFieldRegion                 ResourceGroupByField = "Region"
+	ResourceGroupByFieldResourceProvider       ResourceGroupByField = "ResourceProvider"
+	ResourceGroupByFieldResourceOwnerAccountId ResourceGroupByField = "ResourceOwnerAccountId"
+	ResourceGroupByFieldResourceOwnerOrgId     ResourceGroupByField = "ResourceOwnerOrgId"
+	ResourceGroupByFieldResourceCloudPartition ResourceGroupByField = "ResourceCloudPartition"
+	ResourceGroupByFieldResourceRegion         ResourceGroupByField = "ResourceRegion"
+	ResourceGroupByFieldResourceCategory       ResourceGroupByField = "ResourceCategory"
+	ResourceGroupByFieldResourceType           ResourceGroupByField = "ResourceType"
+	ResourceGroupByFieldResourceName           ResourceGroupByField = "ResourceName"
+	ResourceGroupByFieldFindingType            ResourceGroupByField = "FindingsSummary.FindingType"
+	ResourceGroupByFieldResourceSubCategory    ResourceGroupByField = "ResourceSubCategory"
+	ResourceGroupByFieldDiscoveryType          ResourceGroupByField = "DiscoveryType"
+	ResourceGroupByFieldHostResourceType       ResourceGroupByField = "ResourceInfo.AIDetails.HostResourceType"
+	ResourceGroupByFieldCanonicalId            ResourceGroupByField = "ResourceInfo.AIDetails.CanonicalId"
 )
 
 // Values returns all known values for ResourceGroupByField. Note that this can be
@@ -1205,11 +1456,21 @@ const (
 func (ResourceGroupByField) Values() []ResourceGroupByField {
 	return []ResourceGroupByField{
 		"AccountId",
+		"AccountName",
 		"Region",
+		"ResourceProvider",
+		"ResourceOwnerAccountId",
+		"ResourceOwnerOrgId",
+		"ResourceCloudPartition",
+		"ResourceRegion",
 		"ResourceCategory",
 		"ResourceType",
 		"ResourceName",
 		"FindingsSummary.FindingType",
+		"ResourceSubCategory",
+		"DiscoveryType",
+		"ResourceInfo.AIDetails.HostResourceType",
+		"ResourceInfo.AIDetails.CanonicalId",
 	}
 }
 
@@ -1253,15 +1514,23 @@ type ResourcesNumberField string
 
 // Enum values for ResourcesNumberField
 const (
-	ResourcesNumberFieldTotalFindings         ResourcesNumberField = "FindingsSummary.TotalFindings"
-	ResourcesNumberFieldSeverityOther         ResourcesNumberField = "FindingsSummary.Severities.Other"
-	ResourcesNumberFieldSeverityFatal         ResourcesNumberField = "FindingsSummary.Severities.Fatal"
-	ResourcesNumberFieldSeverityCritical      ResourcesNumberField = "FindingsSummary.Severities.Critical"
-	ResourcesNumberFieldSeverityHigh          ResourcesNumberField = "FindingsSummary.Severities.High"
-	ResourcesNumberFieldSeverityMedium        ResourcesNumberField = "FindingsSummary.Severities.Medium"
-	ResourcesNumberFieldSeverityLow           ResourcesNumberField = "FindingsSummary.Severities.Low"
-	ResourcesNumberFieldSeverityInformational ResourcesNumberField = "FindingsSummary.Severities.Informational"
-	ResourcesNumberFieldSeverityUnknown       ResourcesNumberField = "FindingsSummary.Severities.Unknown"
+	ResourcesNumberFieldTotalFindings                                  ResourcesNumberField = "FindingsSummary.TotalFindings"
+	ResourcesNumberFieldSeverityOther                                  ResourcesNumberField = "FindingsSummary.Severities.Other"
+	ResourcesNumberFieldSeverityFatal                                  ResourcesNumberField = "FindingsSummary.Severities.Fatal"
+	ResourcesNumberFieldSeverityCritical                               ResourcesNumberField = "FindingsSummary.Severities.Critical"
+	ResourcesNumberFieldSeverityHigh                                   ResourcesNumberField = "FindingsSummary.Severities.High"
+	ResourcesNumberFieldSeverityMedium                                 ResourcesNumberField = "FindingsSummary.Severities.Medium"
+	ResourcesNumberFieldSeverityLow                                    ResourcesNumberField = "FindingsSummary.Severities.Low"
+	ResourcesNumberFieldSeverityInformational                          ResourcesNumberField = "FindingsSummary.Severities.Informational"
+	ResourcesNumberFieldSeverityUnknown                                ResourcesNumberField = "FindingsSummary.Severities.Unknown"
+	ResourcesNumberFieldSelfHostedAiModelResourceCount                 ResourcesNumberField = "ResourceInfo.AIDetails.SelfHostedAIModelResourceCount"
+	ResourcesNumberFieldSelfHostedAiAgentResourceCount                 ResourcesNumberField = "ResourceInfo.AIDetails.SelfHostedAIAgentResourceCount"
+	ResourcesNumberFieldSelfHostedAiModelServingResourceCount          ResourcesNumberField = "ResourceInfo.AIDetails.SelfHostedAIModelServingResourceCount"
+	ResourcesNumberFieldSelfHostedAiExternalEndpointResourceCount      ResourcesNumberField = "ResourceInfo.AIDetails.SelfHostedAIExternalEndpointResourceCount"
+	ResourcesNumberFieldSelfHostedAiDevelopmentResourceCount           ResourcesNumberField = "ResourceInfo.AIDetails.SelfHostedAIDevelopmentResourceCount"
+	ResourcesNumberFieldSelfHostedAiAgentFrameworkResourceCount        ResourcesNumberField = "ResourceInfo.AIDetails.SelfHostedAIAgentFrameworkResourceCount"
+	ResourcesNumberFieldSelfHostedAiAgentToolsAndIdentityResourceCount ResourcesNumberField = "ResourceInfo.AIDetails.SelfHostedAIAgentToolsAndIdentityResourceCount"
+	ResourcesNumberFieldSelfHostedTotalAiResourceCount                 ResourcesNumberField = "ResourceInfo.AIDetails.SelfHostedTotalAIResourceCount"
 )
 
 // Values returns all known values for ResourcesNumberField. Note that this can be
@@ -1279,6 +1548,14 @@ func (ResourcesNumberField) Values() []ResourcesNumberField {
 		"FindingsSummary.Severities.Low",
 		"FindingsSummary.Severities.Informational",
 		"FindingsSummary.Severities.Unknown",
+		"ResourceInfo.AIDetails.SelfHostedAIModelResourceCount",
+		"ResourceInfo.AIDetails.SelfHostedAIAgentResourceCount",
+		"ResourceInfo.AIDetails.SelfHostedAIModelServingResourceCount",
+		"ResourceInfo.AIDetails.SelfHostedAIExternalEndpointResourceCount",
+		"ResourceInfo.AIDetails.SelfHostedAIDevelopmentResourceCount",
+		"ResourceInfo.AIDetails.SelfHostedAIAgentFrameworkResourceCount",
+		"ResourceInfo.AIDetails.SelfHostedAIAgentToolsAndIdentityResourceCount",
+		"ResourceInfo.AIDetails.SelfHostedTotalAIResourceCount",
 	}
 }
 
@@ -1286,15 +1563,26 @@ type ResourcesStringField string
 
 // Enum values for ResourcesStringField
 const (
-	ResourcesStringFieldResourceGuid     ResourcesStringField = "ResourceGuid"
-	ResourcesStringFieldResourceId       ResourcesStringField = "ResourceId"
-	ResourcesStringFieldAccountId        ResourcesStringField = "AccountId"
-	ResourcesStringFieldRegion           ResourcesStringField = "Region"
-	ResourcesStringFieldResourceCategory ResourcesStringField = "ResourceCategory"
-	ResourcesStringFieldResourceType     ResourcesStringField = "ResourceType"
-	ResourcesStringFieldResourceName     ResourcesStringField = "ResourceName"
-	ResourcesStringFieldFindingType      ResourcesStringField = "FindingsSummary.FindingType"
-	ResourcesStringFieldProductName      ResourcesStringField = "FindingsSummary.ProductName"
+	ResourcesStringFieldResourceGuid           ResourcesStringField = "ResourceGuid"
+	ResourcesStringFieldResourceId             ResourcesStringField = "ResourceId"
+	ResourcesStringFieldAccountId              ResourcesStringField = "AccountId"
+	ResourcesStringFieldAccountName            ResourcesStringField = "AccountName"
+	ResourcesStringFieldRegion                 ResourcesStringField = "Region"
+	ResourcesStringFieldResourceProvider       ResourcesStringField = "ResourceProvider"
+	ResourcesStringFieldResourceOwnerAccountId ResourcesStringField = "ResourceOwnerAccountId"
+	ResourcesStringFieldResourceOwnerOrgId     ResourcesStringField = "ResourceOwnerOrgId"
+	ResourcesStringFieldResourceCloudPartition ResourcesStringField = "ResourceCloudPartition"
+	ResourcesStringFieldResourceRegion         ResourcesStringField = "ResourceRegion"
+	ResourcesStringFieldResourceCategory       ResourcesStringField = "ResourceCategory"
+	ResourcesStringFieldResourceType           ResourcesStringField = "ResourceType"
+	ResourcesStringFieldResourceName           ResourcesStringField = "ResourceName"
+	ResourcesStringFieldFindingType            ResourcesStringField = "FindingsSummary.FindingType"
+	ResourcesStringFieldProductName            ResourcesStringField = "FindingsSummary.ProductName"
+	ResourcesStringFieldResourceSubCategory    ResourcesStringField = "ResourceSubCategory"
+	ResourcesStringFieldDiscoveryType          ResourcesStringField = "DiscoveryType"
+	ResourcesStringFieldHostResourceGuid       ResourcesStringField = "ResourceInfo.AIDetails.HostResourceGuid"
+	ResourcesStringFieldHostResourceType       ResourcesStringField = "ResourceInfo.AIDetails.HostResourceType"
+	ResourcesStringFieldCanonicalId            ResourcesStringField = "ResourceInfo.AIDetails.CanonicalId"
 )
 
 // Values returns all known values for ResourcesStringField. Note that this can be
@@ -1306,12 +1594,23 @@ func (ResourcesStringField) Values() []ResourcesStringField {
 		"ResourceGuid",
 		"ResourceId",
 		"AccountId",
+		"AccountName",
 		"Region",
+		"ResourceProvider",
+		"ResourceOwnerAccountId",
+		"ResourceOwnerOrgId",
+		"ResourceCloudPartition",
+		"ResourceRegion",
 		"ResourceCategory",
 		"ResourceType",
 		"ResourceName",
 		"FindingsSummary.FindingType",
 		"FindingsSummary.ProductName",
+		"ResourceSubCategory",
+		"DiscoveryType",
+		"ResourceInfo.AIDetails.HostResourceGuid",
+		"ResourceInfo.AIDetails.HostResourceType",
+		"ResourceInfo.AIDetails.CanonicalId",
 	}
 }
 
@@ -1319,10 +1618,14 @@ type ResourcesTrendsStringField string
 
 // Enum values for ResourcesTrendsStringField
 const (
-	ResourcesTrendsStringFieldAccountId        ResourcesTrendsStringField = "account_id"
-	ResourcesTrendsStringFieldRegion           ResourcesTrendsStringField = "region"
-	ResourcesTrendsStringFieldResourceType     ResourcesTrendsStringField = "resource_type"
-	ResourcesTrendsStringFieldResourceCategory ResourcesTrendsStringField = "resource_category"
+	ResourcesTrendsStringFieldAccountId                   ResourcesTrendsStringField = "account_id"
+	ResourcesTrendsStringFieldRegion                      ResourcesTrendsStringField = "region"
+	ResourcesTrendsStringFieldResourceType                ResourcesTrendsStringField = "resource_type"
+	ResourcesTrendsStringFieldResourceCategory            ResourcesTrendsStringField = "resource_category"
+	ResourcesTrendsStringFieldResourceCloudProvider       ResourcesTrendsStringField = "resource_cloud_provider"
+	ResourcesTrendsStringFieldResourceRegion              ResourcesTrendsStringField = "resource_region"
+	ResourcesTrendsStringFieldResourceOwnerId             ResourcesTrendsStringField = "resource_owner_id"
+	ResourcesTrendsStringFieldResourceOwnerOrganizationId ResourcesTrendsStringField = "resource_owner_organization_id"
 )
 
 // Values returns all known values for ResourcesTrendsStringField. Note that this
@@ -1335,6 +1638,47 @@ func (ResourcesTrendsStringField) Values() []ResourcesTrendsStringField {
 		"region",
 		"resource_type",
 		"resource_category",
+		"resource_cloud_provider",
+		"resource_region",
+		"resource_owner_id",
+		"resource_owner_organization_id",
+	}
+}
+
+type ResourceSubCategory string
+
+// Enum values for ResourceSubCategory
+const (
+	ResourceSubCategoryModel                    ResourceSubCategory = "Model"
+	ResourceSubCategoryModelServing             ResourceSubCategory = "ModelServing"
+	ResourceSubCategoryAgent                    ResourceSubCategory = "Agent"
+	ResourceSubCategoryAgentFramework           ResourceSubCategory = "AgentFramework"
+	ResourceSubCategoryAgentToolsAndIdentity    ResourceSubCategory = "AgentToolsAndIdentity"
+	ResourceSubCategorySafetyAndGuardrail       ResourceSubCategory = "SafetyAndGuardrail"
+	ResourceSubCategoryKnowledgeAndData         ResourceSubCategory = "KnowledgeAndData"
+	ResourceSubCategoryOrchestrationAndPipeline ResourceSubCategory = "OrchestrationAndPipeline"
+	ResourceSubCategoryExternalEndpoint         ResourceSubCategory = "ExternalEndpoint"
+	ResourceSubCategoryDevelopment              ResourceSubCategory = "Development"
+	ResourceSubCategoryOther                    ResourceSubCategory = "Other"
+)
+
+// Values returns all known values for ResourceSubCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceSubCategory) Values() []ResourceSubCategory {
+	return []ResourceSubCategory{
+		"Model",
+		"ModelServing",
+		"Agent",
+		"AgentFramework",
+		"AgentToolsAndIdentity",
+		"SafetyAndGuardrail",
+		"KnowledgeAndData",
+		"OrchestrationAndPipeline",
+		"ExternalEndpoint",
+		"Development",
+		"Other",
 	}
 }
 
@@ -1376,6 +1720,25 @@ func (RuleStatusV2) Values() []RuleStatusV2 {
 	}
 }
 
+type ScopeType string
+
+// Enum values for ScopeType
+const (
+	ScopeTypeTenant       ScopeType = "TENANT"
+	ScopeTypeSubscription ScopeType = "SUBSCRIPTION"
+)
+
+// Values returns all known values for ScopeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScopeType) Values() []ScopeType {
+	return []ScopeType{
+		"TENANT",
+		"SUBSCRIPTION",
+	}
+}
+
 type SecurityControlProperty string
 
 // Enum values for SecurityControlProperty
@@ -1390,6 +1753,25 @@ const (
 func (SecurityControlProperty) Values() []SecurityControlProperty {
 	return []SecurityControlProperty{
 		"Parameters",
+	}
+}
+
+type SecurityControlsProvider string
+
+// Enum values for SecurityControlsProvider
+const (
+	SecurityControlsProviderAws   SecurityControlsProvider = "AWS"
+	SecurityControlsProviderAzure SecurityControlsProvider = "Azure"
+)
+
+// Values returns all known values for SecurityControlsProvider. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityControlsProvider) Values() []SecurityControlsProvider {
+	return []SecurityControlsProvider{
+		"AWS",
+		"Azure",
 	}
 }
 
@@ -1498,6 +1880,25 @@ func (StandardsControlsUpdatable) Values() []StandardsControlsUpdatable {
 	}
 }
 
+type StandardsProvider string
+
+// Enum values for StandardsProvider
+const (
+	StandardsProviderAws   StandardsProvider = "AWS"
+	StandardsProviderAzure StandardsProvider = "Azure"
+)
+
+// Values returns all known values for StandardsProvider. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StandardsProvider) Values() []StandardsProvider {
+	return []StandardsProvider{
+		"AWS",
+		"Azure",
+	}
+}
+
 type StandardsStatus string
 
 // Enum values for StandardsStatus
@@ -1529,6 +1930,7 @@ type StatusReasonCode string
 const (
 	StatusReasonCodeNoAvailableConfigurationRecorder   StatusReasonCode = "NO_AVAILABLE_CONFIGURATION_RECORDER"
 	StatusReasonCodeMaximumNumberOfConfigRulesExceeded StatusReasonCode = "MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED"
+	StatusReasonCodeNoAvailableMulticloudConnector     StatusReasonCode = "NO_AVAILABLE_MULTICLOUD_CONNECTOR"
 	StatusReasonCodeInternalError                      StatusReasonCode = "INTERNAL_ERROR"
 )
 
@@ -1540,6 +1942,7 @@ func (StatusReasonCode) Values() []StatusReasonCode {
 	return []StatusReasonCode{
 		"NO_AVAILABLE_CONFIGURATION_RECORDER",
 		"MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED",
+		"NO_AVAILABLE_MULTICLOUD_CONNECTOR",
 		"INTERNAL_ERROR",
 	}
 }

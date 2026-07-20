@@ -97,6 +97,35 @@ type XmlTimestampsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlTimestampsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlTimestampsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlTimestampsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateTime != nil {
+		s.WriteTime(schemas.XmlTimestampsResponse_dateTime, *v.DateTime)
+	}
+	if v.DateTimeOnTarget != nil {
+		s.WriteTime(schemas.XmlTimestampsResponse_dateTimeOnTarget, *v.DateTimeOnTarget)
+	}
+	if v.EpochSeconds != nil {
+		s.WriteTime(schemas.XmlTimestampsResponse_epochSeconds, *v.EpochSeconds)
+	}
+	if v.EpochSecondsOnTarget != nil {
+		s.WriteTime(schemas.XmlTimestampsResponse_epochSecondsOnTarget, *v.EpochSecondsOnTarget)
+	}
+	if v.HttpDate != nil {
+		s.WriteTime(schemas.XmlTimestampsResponse_httpDate, *v.HttpDate)
+	}
+	if v.HttpDateOnTarget != nil {
+		s.WriteTime(schemas.XmlTimestampsResponse_httpDateOnTarget, *v.HttpDateOnTarget)
+	}
+	if v.Normal != nil {
+		s.WriteTime(schemas.XmlTimestampsResponse_normal, *v.Normal)
+	}
+}
 func (v *XmlTimestampsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlTimestampsResponse, func(s *smithy.Schema) error {
 		switch s {

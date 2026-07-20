@@ -1,0 +1,6 @@
+POST /api/v1/folders
+
+Authentication: __AuthenticationToken__
+Content-Type: application/json
+
+{"Name":"__Name__","ParentFolderId":"__ParentFolderId__"}

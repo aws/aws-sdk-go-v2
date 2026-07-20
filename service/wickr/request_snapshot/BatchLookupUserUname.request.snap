@@ -1,0 +1,6 @@
+POST /networks/__NetworkId__/users/uname-lookup
+
+Content-Type: application/json
+X-Client-Token: __ClientToken__
+
+{"unames":["__Member__","__Member__"]}

@@ -1,0 +1,5 @@
+POST /hours-of-operations/__InstanceId__/__HoursOfOperationId__/associate-hours
+
+Content-Type: application/json
+
+{"ParentHoursOfOperationConfigs":[{"HoursOfOperationId":"__HoursOfOperationId__"},{"HoursOfOperationId":"__HoursOfOperationId__"}]}

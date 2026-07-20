@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSMPCommerceService_v20200301.BatchCreateBillingAdjustmentRequest
+
+{"billingAdjustmentRequestEntries":[{"adjustmentAmount":"__AdjustmentAmount__","adjustmentReasonCode":"INCORRECT_TERMS_ACCEPTED","agreementId":"__AgreementId__","clientToken":"__ClientToken__","currencyCode":"__CurrencyCode__","description":"__Description__","originalInvoiceId":"__OriginalInvoiceId__"},{"adjustmentAmount":"__AdjustmentAmount__","adjustmentReasonCode":"INCORRECT_TERMS_ACCEPTED","agreementId":"__AgreementId__","clientToken":"__ClientToken__","currencyCode":"__CurrencyCode__","description":"__Description__","originalInvoiceId":"__OriginalInvoiceId__"}]}

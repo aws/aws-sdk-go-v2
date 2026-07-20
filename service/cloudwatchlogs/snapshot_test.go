@@ -914,6 +914,18 @@ func TestCheckSnapshot_GetScheduledQueryHistory(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetStorageTierPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetStorageTierPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetStorageTierPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTransformer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTransformer(context.Background(), nil, func(o *Options) {
@@ -1243,6 +1255,18 @@ func TestCheckSnapshot_PutRetentionPolicy(t *testing.T) {
 	_, err := svc.PutRetentionPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutRetentionPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutStorageTierPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutStorageTierPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutStorageTierPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2305,6 +2329,18 @@ func TestUpdateSnapshot_GetScheduledQueryHistory(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetStorageTierPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetStorageTierPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetStorageTierPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetTransformer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTransformer(context.Background(), nil, func(o *Options) {
@@ -2634,6 +2670,18 @@ func TestUpdateSnapshot_PutRetentionPolicy(t *testing.T) {
 	_, err := svc.PutRetentionPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutRetentionPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutStorageTierPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutStorageTierPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutStorageTierPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

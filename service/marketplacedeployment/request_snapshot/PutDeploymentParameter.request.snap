@@ -1,0 +1,5 @@
+POST /catalogs/__Catalog__/products/__ProductId__/deployment-parameters
+
+Content-Type: application/json
+
+{"agreementId":"__AgreementId__","clientToken":"__ClientToken__","deploymentParameter":{"name":"__Name__","secretString":"__SecretString__"},"expirationDate":"2000-01-01T00:00:00Z","tags":{"key0":"__Value__"}}

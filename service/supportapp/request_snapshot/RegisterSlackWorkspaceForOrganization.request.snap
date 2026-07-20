@@ -1,0 +1,5 @@
+POST /control/register-slack-workspace-for-organization
+
+Content-Type: application/json
+
+{"teamId":"__TeamId__"}

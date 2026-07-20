@@ -1,0 +1,3 @@
+GET /greengrass/definition/connectors/__ConnectorDefinitionId__/versions/__ConnectorDefinitionVersionId__?NextToken=__NextToken__
+
+

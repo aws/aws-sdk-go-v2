@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=TerminateInstanceInAutoScalingGroup&InstanceId=__InstanceId__&ShouldDecrementDesiredCapacity=true&Version=2011-01-01

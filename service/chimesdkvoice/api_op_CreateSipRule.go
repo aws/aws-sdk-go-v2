@@ -36,6 +36,12 @@ type CreateSipRuleInput struct {
 	// This member is required.
 	Name *string
 
+	// List of SIP media applications, with priority and AWS Region. Only one SIP
+	// application per AWS Region can be used.
+	//
+	// This member is required.
+	TargetApplications []types.SipRuleTargetApplication
+
 	// The type of trigger assigned to the SIP rule in TriggerValue , currently
 	// RequestUriHostname or ToPhoneNumber .
 	//
@@ -55,10 +61,6 @@ type CreateSipRuleInput struct {
 	// Disables or enables a SIP rule. You must disable SIP rules before you can
 	// delete them.
 	Disabled *bool
-
-	// List of SIP media applications, with priority and AWS Region. Only one SIP
-	// application per AWS Region can be used.
-	TargetApplications []types.SipRuleTargetApplication
 
 	noSmithyDocumentSerde
 }

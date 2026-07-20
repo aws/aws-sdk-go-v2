@@ -1,0 +1,5 @@
+POST /audit/report-plans
+
+Content-Type: application/json
+
+{"IdempotencyToken":"__IdempotencyToken__","ReportDeliveryChannel":{"Formats":["__Member__","__Member__"],"S3BucketName":"__S3BucketName__","S3KeyPrefix":"__S3KeyPrefix__"},"ReportPlanDescription":"__ReportPlanDescription__","ReportPlanName":"__ReportPlanName__","ReportPlanTags":{"key0":"__Value__"},"ReportSetting":{"Accounts":["__Member__","__Member__"],"FrameworkArns":["__Member__","__Member__"],"NumberOfFrameworks":1,"OrganizationUnits":["__Member__","__Member__"],"Regions":["__Member__","__Member__"],"ReportTemplate":"__ReportTemplate__"}}

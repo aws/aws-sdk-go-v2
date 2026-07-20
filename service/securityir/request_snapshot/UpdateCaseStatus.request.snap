@@ -1,0 +1,5 @@
+POST /v1/cases/__CaseId__/update-case-status
+
+Content-Type: application/json
+
+{"caseStatus":"Submitted"}

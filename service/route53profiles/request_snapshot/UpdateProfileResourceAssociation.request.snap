@@ -1,0 +1,5 @@
+PATCH /profileresourceassociation/__ProfileResourceAssociationId__
+
+Content-Type: application/json
+
+{"Name":"__Name__","ResourceProperties":"__ResourceProperties__"}

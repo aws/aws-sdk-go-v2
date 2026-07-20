@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.UpdateConnector
+
+{"AccessRole":"__AccessRole__","As2Config":{"AsyncMdnConfig":{"ServerIds":["__Member__","__Member__"],"Url":"__Url__"},"BasicAuthSecretId":"__BasicAuthSecretId__","Compression":"ZLIB","EncryptionAlgorithm":"AES128_CBC","LocalProfileId":"__LocalProfileId__","MdnResponse":"SYNC","MdnSigningAlgorithm":"SHA256","MessageSubject":"__MessageSubject__","PartnerProfileId":"__PartnerProfileId__","PreserveContentType":"ENABLED","SigningAlgorithm":"SHA256"},"ConnectorId":"__ConnectorId__","EgressConfig":{"VpcLattice":{"PortNumber":1,"ResourceConfigurationArn":"__ResourceConfigurationArn__"}},"IpAddressType":"IPV4","LoggingRole":"__LoggingRole__","SecurityPolicyName":"__SecurityPolicyName__","SftpConfig":{"MaxConcurrentConnections":1,"TrustedHostKeys":["__Member__","__Member__"],"UserSecretId":"__UserSecretId__"},"Url":"__Url__"}

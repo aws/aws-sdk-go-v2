@@ -1,0 +1,5 @@
+PUT /safetyrule
+
+Content-Type: application/json
+
+{"AssertionRuleUpdate":{"Name":"__Name__","SafetyRuleArn":"__SafetyRuleArn__","WaitPeriodMs":1},"GatingRuleUpdate":{"Name":"__Name__","SafetyRuleArn":"__SafetyRuleArn__","WaitPeriodMs":1}}

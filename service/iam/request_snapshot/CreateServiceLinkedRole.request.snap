@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+AWSServiceName=__AWSServiceName__&Action=CreateServiceLinkedRole&CustomSuffix=__CustomSuffix__&Description=__Description__&Version=2010-05-08

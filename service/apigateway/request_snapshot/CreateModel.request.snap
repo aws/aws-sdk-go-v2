@@ -1,0 +1,6 @@
+POST /restapis/__RestApiId__/models
+
+Accept: application/json
+Content-Type: application/json
+
+{"contentType":"__ContentType__","description":"__Description__","name":"__Name__","schema":"__Schema__"}

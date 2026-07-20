@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/app-migrations
+
+Content-Type: application/json
+
+{"applicationId":"__ApplicationId__","clientToken":"__ClientToken__","migrationOptions":{"conflictResolution":"__ConflictResolution__","exportOptions":{"includeReferencesDeep":true,"objects":[{"id":"__Id__","type":"__Type__"},{"id":"__Id__","type":"__Type__"}],"types":["__Member__","__Member__"]},"source":{"datasourceArn":"__DatasourceArn__"},"workspace":{"createWorkspace":true,"name":"__Name__","type":"__Type__","workspaceId":"__WorkspaceId__"}}}

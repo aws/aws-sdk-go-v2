@@ -809,6 +809,25 @@ func (RecoveryInstanceDataReplicationState) Values() []RecoveryInstanceDataRepli
 	}
 }
 
+type RecoveryMode string
+
+// Enum values for RecoveryMode
+const (
+	RecoveryModeFast    RecoveryMode = "FAST"
+	RecoveryModeOptimal RecoveryMode = "OPTIMAL"
+)
+
+// Values returns all known values for RecoveryMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecoveryMode) Values() []RecoveryMode {
+	return []RecoveryMode{
+		"FAST",
+		"OPTIMAL",
+	}
+}
+
 type RecoveryResult string
 
 // Enum values for RecoveryResult

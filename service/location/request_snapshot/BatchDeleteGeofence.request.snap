@@ -1,0 +1,5 @@
+POST /geofencing/v0/collections/__CollectionName__/delete-geofences
+
+Content-Type: application/json
+
+{"GeofenceIds":["__Member__","__Member__"]}

@@ -4,6 +4,7 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +53,10 @@ type RollbackStackInput struct {
 
 	// A unique identifier for this RollbackStack request.
 	ClientRequestToken *string
+
+	// The deployment configuration for this stack operation, including the deployment
+	// mode.
+	DeploymentConfig *types.DeploymentConfig
 
 	// When set to true , newly created resources are deleted when the operation rolls
 	// back. This includes newly created resources marked with a deletion policy of

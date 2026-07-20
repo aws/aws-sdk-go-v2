@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateDevices
+
+{"DeviceFleetName":"__DeviceFleetName__","Devices":[{"Description":"__Description__","DeviceName":"__DeviceName__","IotThingName":"__IotThingName__"},{"Description":"__Description__","DeviceName":"__DeviceName__","IotThingName":"__IotThingName__"}]}

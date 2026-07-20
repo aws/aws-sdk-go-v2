@@ -1,0 +1,5 @@
+PUT /v1/spaces/__SpaceName__/projects/__ProjectName__/devEnvironments
+
+Content-Type: application/json
+
+{"alias":"__Alias__","clientToken":"__ClientToken__","ides":[{"name":"__Name__","runtime":"__Runtime__"},{"name":"__Name__","runtime":"__Runtime__"}],"inactivityTimeoutMinutes":1,"instanceType":"dev.standard1.small","persistentStorage":{"sizeInGiB":1},"repositories":[{"branchName":"__BranchName__","repositoryName":"__RepositoryName__"},{"branchName":"__BranchName__","repositoryName":"__RepositoryName__"}],"vpcConnectionName":"__VpcConnectionName__"}

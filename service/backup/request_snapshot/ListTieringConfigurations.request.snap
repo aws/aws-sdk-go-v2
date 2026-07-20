@@ -1,0 +1,3 @@
+GET /tiering-configurations?maxResults=1&nextToken=__NextToken__
+
+

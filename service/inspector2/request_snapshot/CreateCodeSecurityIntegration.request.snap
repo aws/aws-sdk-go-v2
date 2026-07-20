@@ -1,0 +1,5 @@
+POST /codesecurity/integration/create
+
+Content-Type: application/json
+
+{"details":{"gitlabSelfManaged":{"accessToken":"__AccessToken__","instanceUrl":"__InstanceUrl__"}},"name":"__Name__","tags":{"key0":"__Value__"},"type":"GITLAB_SELF_MANAGED"}

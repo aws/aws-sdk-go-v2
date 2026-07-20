@@ -617,6 +617,13 @@ func awsRestjson1_serializeOpDocumentCreateCapacityProviderInput(v *CreateCapaci
 		}
 	}
 
+	if v.TelemetryConfig != nil {
+		ok := object.Key("TelemetryConfig")
+		if err := awsRestjson1_serializeDocumentCapacityProviderTelemetryConfig(v.TelemetryConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.VpcConfig != nil {
 		ok := object.Key("VpcConfig")
 		if err := awsRestjson1_serializeDocumentCapacityProviderVpcConfig(v.VpcConfig, ok); err != nil {
@@ -2494,6 +2501,10 @@ func awsRestjson1_serializeOpHttpBindingsGetDurableExecutionInput(v *GetDurableE
 		if err := encoder.SetURI("DurableExecutionArn").String(*v.DurableExecutionArn); err != nil {
 			return err
 		}
+	}
+
+	if v.IncludeExecutionData != nil {
+		encoder.SetQuery("IncludeExecutionData").Boolean(*v.IncludeExecutionData)
 	}
 
 	return nil
@@ -7119,6 +7130,13 @@ func awsRestjson1_serializeOpDocumentUpdateCapacityProviderInput(v *UpdateCapaci
 		}
 	}
 
+	if v.TelemetryConfig != nil {
+		ok := object.Key("TelemetryConfig")
+		if err := awsRestjson1_serializeDocumentCapacityProviderTelemetryConfig(v.TelemetryConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -8165,6 +8183,23 @@ func awsRestjson1_serializeDocumentCapacityProviderConfig(v *types.CapacityProvi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCapacityProviderLoggingConfig(v *types.CapacityProviderLoggingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LogGroup != nil {
+		ok := object.Key("LogGroup")
+		ok.String(*v.LogGroup)
+	}
+
+	if len(v.SystemLogLevel) > 0 {
+		ok := object.Key("SystemLogLevel")
+		ok.String(string(v.SystemLogLevel))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCapacityProviderPermissionsConfig(v *types.CapacityProviderPermissionsConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8233,6 +8268,20 @@ func awsRestjson1_serializeDocumentCapacityProviderSubnetIds(v []string, value s
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCapacityProviderTelemetryConfig(v *types.CapacityProviderTelemetryConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LoggingConfig != nil {
+		ok := object.Key("LoggingConfig")
+		if err := awsRestjson1_serializeDocumentCapacityProviderLoggingConfig(v.LoggingConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -8427,6 +8476,11 @@ func awsRestjson1_serializeDocumentDurableConfig(v *types.DurableConfig, value s
 	if v.ExecutionTimeout != nil {
 		ok := object.Key("ExecutionTimeout")
 		ok.Integer(*v.ExecutionTimeout)
+	}
+
+	if v.KMSKeyArn != nil {
+		ok := object.Key("KMSKeyArn")
+		ok.String(*v.KMSKeyArn)
 	}
 
 	if v.RetentionPeriodInDays != nil {

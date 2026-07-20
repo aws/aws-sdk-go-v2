@@ -1,0 +1,5 @@
+POST /assets
+
+Content-Type: application/json
+
+{"assetDescription":"__AssetDescription__","assetExternalId":"__AssetExternalId__","assetId":"__AssetId__","assetModelId":"__AssetModelId__","assetName":"__AssetName__","clientToken":"__ClientToken__","tags":{"key0":"__Value__"}}

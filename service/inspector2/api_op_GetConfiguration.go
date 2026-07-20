@@ -9,7 +9,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves setting configurations for Inspector scans.
+// Retrieves setting configurations for Amazon Inspector scans. If you specify an
+// accountId , this operation returns the scan configuration for that member
+// account. You must be the delegated administrator for the specified member
+// account. If you do not specify an accountId , this operation returns your own
+// scan configuration.
 func (c *Client) GetConfiguration(ctx context.Context, params *GetConfigurationInput, optFns ...func(*Options)) (*GetConfigurationOutput, error) {
 	if params == nil {
 		params = &GetConfigurationInput{}
@@ -26,6 +30,13 @@ func (c *Client) GetConfiguration(ctx context.Context, params *GetConfigurationI
 }
 
 type GetConfigurationInput struct {
+
+	// The 12-digit Amazon Web Services account ID of the member account whose scan
+	// configuration you want to retrieve. When specified, you must be the delegated
+	// administrator for this member account. If not specified, the operation returns
+	// your own configuration.
+	AccountId *string
+
 	noSmithyDocumentSerde
 }
 

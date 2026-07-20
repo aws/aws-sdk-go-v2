@@ -108,6 +108,10 @@ type CreateDomainInput struct {
 	// Key-value pairs to enable encryption at rest.
 	EncryptionAtRestOptions *types.EncryptionAtRestOptions
 
+	// The engine mode for the domain. For valid values and requirements, see
+	// EngineMode .
+	EngineMode types.EngineMode
+
 	// String of format Elasticsearch_X.Y or OpenSearch_X.Y to specify the engine
 	// version for the OpenSearch Service domain. For example, OpenSearch_1.0 or
 	// Elasticsearch_7.9 . For more information, see [Creating and managing Amazon OpenSearch Service domains].
@@ -147,6 +151,9 @@ type CreateDomainInput struct {
 
 	// List of tags to add to the domain upon creation.
 	TagList []types.Tag
+
+	// The primary use case for the domain. For valid values, see DomainUseCase .
+	UseCase types.DomainUseCase
 
 	// Container for the values required to configure VPC access domains. If you don't
 	// specify these values, OpenSearch Service creates the domain with a public

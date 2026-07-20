@@ -1,0 +1,5 @@
+POST /GetServiceView
+
+Content-Type: application/json
+
+{"ServiceViewArn":"__ServiceViewArn__"}

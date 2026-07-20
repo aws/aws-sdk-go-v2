@@ -49,6 +49,14 @@ type NoInputAndOutputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NoInputAndOutputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NoInputAndOutputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NoInputAndOutputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
 func (v *NoInputAndOutputOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NoInputAndOutputOutput, func(s *smithy.Schema) error {
 		switch s {

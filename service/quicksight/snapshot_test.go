@@ -314,6 +314,18 @@ func TestCheckSnapshot_CreateIngestion(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateKnowledgeBase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateKnowledgeBase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateNamespace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateNamespace(context.Background(), nil, func(o *Options) {
@@ -2966,6 +2978,18 @@ func TestCheckSnapshot_UpdateKeyRegistration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateKnowledgeBase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateKnowledgeBase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateKnowledgeBasePermissions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateKnowledgeBasePermissions(context.Background(), nil, func(o *Options) {
@@ -3510,6 +3534,18 @@ func TestUpdateSnapshot_CreateIngestion(t *testing.T) {
 	_, err := svc.CreateIngestion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateIngestion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateKnowledgeBase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateKnowledgeBase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateKnowledgeBase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6162,6 +6198,18 @@ func TestUpdateSnapshot_UpdateKeyRegistration(t *testing.T) {
 	_, err := svc.UpdateKeyRegistration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateKeyRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateKnowledgeBase(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateKnowledgeBase(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateKnowledgeBase")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -95,11 +95,12 @@ type CreateFleetInput struct {
 	// information, see [Tag your resources].
 	//
 	// If the fleet type is instant , specify a resource type of fleet to tag the
-	// fleet or instance to tag the instances at launch.
+	// fleet, instance to tag the instances at launch, volume to tag the volumes at
+	// launch, or network-interface to tag the network interfaces at launch.
 	//
 	// If the fleet type is maintain or request , specify a resource type of fleet to
-	// tag the fleet. You cannot specify a resource type of instance . To tag instances
-	// at launch, specify the tags in a [launch template].
+	// tag the fleet. You cannot specify a resource type of instance , volume , or
+	// network-interface . To tag instances at launch, specify the tags in a [launch template].
 	//
 	// [launch template]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template
 	// [Tag your resources]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources

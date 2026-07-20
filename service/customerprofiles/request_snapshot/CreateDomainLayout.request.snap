@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/layouts/__LayoutDefinitionName__
+
+Content-Type: application/json
+
+{"Description":"__Description__","DisplayName":"__DisplayName__","IsDefault":true,"Layout":"__Layout__","LayoutType":"PROFILE_EXPLORER","Tags":{"key0":"__Value__"}}

@@ -909,6 +909,33 @@ func (e *ScopeDoesNotExistException) ErrorCode() string {
 }
 func (e *ScopeDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request exceeded your account's service quota. To increase your limit, use
+// or submit a Service Quotas increase request.
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This exception is thrown when the software token time-based one-time password
 // (TOTP) multi-factor authentication (MFA) isn't activated for the user pool.
 type SoftwareTokenMFANotFoundException struct {

@@ -56,11 +56,11 @@ type UpdateRelayOutput struct {
 }
 
 func (c *Client) addOperationUpdateRelayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateRelay{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateRelay{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateRelay{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateRelay{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -84,6 +84,9 @@ func (c *Client) addOperationUpdateRelayMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

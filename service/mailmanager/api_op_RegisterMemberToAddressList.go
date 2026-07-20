@@ -47,11 +47,11 @@ type RegisterMemberToAddressListOutput struct {
 }
 
 func (c *Client) addOperationRegisterMemberToAddressListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRegisterMemberToAddressList{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpRegisterMemberToAddressList{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRegisterMemberToAddressList{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpRegisterMemberToAddressList{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -75,6 +75,9 @@ func (c *Client) addOperationRegisterMemberToAddressListMiddlewares(stack *middl
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

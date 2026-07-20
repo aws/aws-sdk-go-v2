@@ -26,6 +26,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The position in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
                     }
+                },
+                "Type": {
+                    "target": "com.amazonaws.geoplaces#AccessPointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of access point, indicating its intended use. Only applies to results of type place.</p>"
+                    }
+                },
+                "Primary": {
+                    "target": "com.amazonaws.geoplaces#SensitiveBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>true</code> for the primary access position when the place has more than one access point.</p>"
+                    }
+                },
+                "Label": {
+                    "target": "com.amazonaws.geoplaces#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short textual description of the access point, such as <code>\"North Entrance\"</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -41,6 +59,53 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.geoplaces#AccessPointType": {
+            "type": "enum",
+            "members": {
+                "DELIVERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Delivery"
+                    }
+                },
+                "EMERGENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Emergency"
+                    }
+                },
+                "ENTRANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Entrance"
+                    }
+                },
+                "LOADING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Loading"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Other"
+                    }
+                },
+                "PARKING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Parking"
+                    }
+                },
+                "TAXI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Taxi"
+                    }
                 }
             }
         },
@@ -383,6 +448,98 @@
                 "smithy.api#documentation": "<p>How to pronounce the various components of the address or place.</p>"
             }
         },
+        "com.amazonaws.geoplaces#AddressTranslationComponent": {
+            "type": "enum",
+            "members": {
+                "DISTRICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "District"
+                    }
+                },
+                "LOCALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Locality"
+                    }
+                },
+                "REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Region"
+                    }
+                },
+                "SUB_REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SubRegion"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.geoplaces#AddressTranslationComponentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.geoplaces#AddressTranslationComponent"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.geoplaces#AdminNames": {
+            "type": "structure",
+            "members": {
+                "Names": {
+                    "target": "com.amazonaws.geoplaces#TranslationNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of translation names for the administrative address component, including name variants and translations in available languages.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Preference": {
+                    "target": "com.amazonaws.geoplaces#AdminNamesPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the preference level of the administrative name. Valid values are <code>Primary</code> and <code>Alternative</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The official administrative names for an address component, returned when <code>AddressNamesMode</code> is set to <code>Administrative</code>.</p>"
+            }
+        },
+        "com.amazonaws.geoplaces#AdminNamesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.geoplaces#AdminNames"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.geoplaces#AdminNamesPreference": {
+            "type": "enum",
+            "members": {
+                "ALTERNATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Alternative"
+                    }
+                },
+                "PRIMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Primary"
+                    }
+                }
+            }
+        },
         "com.amazonaws.geoplaces#ApiKey": {
             "type": "string",
             "traits": {
@@ -419,7 +576,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p> <code>Autocomplete</code> completes potential places and addresses as the user types, based on the partial input. The API enhances the efficiency and accuracy of address by completing query based on a few entered keystrokes. It helps you by completing partial queries with valid address completion. Also, the API supports the filtering of results based on geographic location, country, or specific place types, and can be tailored using optional parameters like language and political views.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/autocomplete.html\">Autocomplete</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p> <code>Autocomplete</code> completes potential places and addresses as the user types, based on the partial input. The API enhances the efficiency and accuracy of address by completing query based on a few entered keystrokes. It helps you by completing partial queries with valid address completion. Also, the API supports the filtering of results based on geographic location, country, or specific place types, and can be tailored using optional parameters like language and political views. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/autocomplete.html\">Autocomplete</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/v2/autocomplete",
                     "method": "POST"
@@ -443,14 +600,14 @@
             }
         },
         "com.amazonaws.geoplaces#AutocompleteAdditionalFeature": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "CORE",
-                        "value": "Core"
+            "type": "enum",
+            "members": {
+                "CORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Core"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.geoplaces#AutocompleteAdditionalFeatureList": {
@@ -588,18 +745,56 @@
             }
         },
         "com.amazonaws.geoplaces#AutocompleteFilterPlaceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "LOCALITY",
-                        "value": "Locality"
-                    },
-                    {
-                        "name": "POSTAL_CODE",
-                        "value": "PostalCode"
+            "type": "enum",
+            "members": {
+                "LOCALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Locality"
                     }
-                ]
+                },
+                "POSTAL_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PostalCode"
+                    }
+                },
+                "STREET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Street"
+                    }
+                },
+                "INTERSECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Intersection"
+                    }
+                },
+                "POINT_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PointAddress"
+                    }
+                },
+                "INTERPOLATED_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InterpolatedAddress"
+                    }
+                },
+                "COUNTRY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Country"
+                    }
+                },
+                "REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Region"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#AutocompleteFilterPlaceTypeList": {
@@ -610,7 +805,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 2
+                    "max": 8
                 },
                 "smithy.api#uniqueItems": {}
             }
@@ -636,15 +831,15 @@
             }
         },
         "com.amazonaws.geoplaces#AutocompleteIntendedUse": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "SINGLE_USE",
-                        "value": "SingleUse",
-                        "documentation": "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users."
+            "type": "enum",
+            "members": {
+                "SINGLE_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users.",
+                        "smithy.api#enumValue": "SingleUse"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.geoplaces#AutocompleteRequest": {
@@ -687,7 +882,7 @@
                 "PostalCodeMode": {
                     "target": "com.amazonaws.geoplaces#PostalCodeMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>PostalCodeMode</code> affects how postal code results are returned. If a postal code spans multiple localities and this value is empty, partial district or locality information may be returned under a single postal code result entry. If it's populated with the value <code>EnumerateSpannedLocalities</code>, all cities in that postal code are returned.</p>"
+                        "smithy.api#documentation": "<p>The <code>PostalCodeMode</code> affects how postal code results are returned. If a postal code spans multiple localities and this value is empty, partial district or locality information may be returned under a single postal code result entry. If it's populated with the value <code>EnumerateSpannedLocalities</code>, all cities in that postal code are returned. If it's populated with the value <code>EnumerateSpannedDistricts</code>, all combinations of the postal code with the corresponding district and city names are returned.</p>"
                     }
                 },
                 "AdditionalFeatures": {
@@ -699,7 +894,7 @@
                 "Language": {
                     "target": "com.amazonaws.geoplaces#LanguageTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>"
                     }
                 },
                 "PoliticalView": {
@@ -796,7 +991,7 @@
                 "Language": {
                     "target": "com.amazonaws.geoplaces#LanguageTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>"
                     }
                 },
                 "PoliticalView": {
@@ -809,6 +1004,12 @@
                     "target": "com.amazonaws.geoplaces#AutocompleteHighlights",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the starting and ending index of the place in the text query that match the found title. </p>"
+                    }
+                },
+                "EstimatedPointAddress": {
+                    "target": "com.amazonaws.geoplaces#SensitiveBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, indicates that the coordinates of the position and access points of the point address are estimated.</p>"
                     }
                 }
             },
@@ -1137,6 +1338,54 @@
                 "smithy.api#documentation": "<p>Indicates the starting and ending index of the country in the text query that match the found title. </p>"
             }
         },
+        "com.amazonaws.geoplaces#CrossReference": {
+            "type": "structure",
+            "members": {
+                "Source": {
+                    "target": "com.amazonaws.geoplaces#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the third-party data supplier (for example, <code>Yelp</code> or <code>TripAdvisor</code>).</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourcePlaceId": {
+                    "target": "com.amazonaws.geoplaces#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The place identifier assigned by the third-party supplier.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceCategories": {
+                    "target": "com.amazonaws.geoplaces#CategoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of place category identifiers this supplier reference relates to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reference to a third-party supplier's identifier for a place, enabling correlation of places across external systems.</p>"
+            }
+        },
+        "com.amazonaws.geoplaces#CrossReferenceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.geoplaces#CrossReference"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.geoplaces#DistanceMeters": {
             "type": "long",
             "traits": {
@@ -1312,7 +1561,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p> <code>Geocode</code> converts a textual address or place into geographic coordinates. You can obtain geographic coordinates, address component, and other related information. It supports flexible queries, including free-form text or structured queries with components like street names, postal codes, and regions. The Geocode API can also provide additional features such as time zone information and the inclusion of political views.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/geocode.html\">Geocode</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p> <code>Geocode</code> converts a textual address or place into geographic coordinates. You can obtain geographic coordinates, address component, and other related information. It supports flexible queries, including free-form text or structured queries with components like street names, postal codes, and regions. The Geocode API can also provide additional features such as time zone information and the inclusion of political views. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/geocode.html\">Geocode</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/v2/geocode",
                     "method": "POST"
@@ -1336,26 +1585,32 @@
             }
         },
         "com.amazonaws.geoplaces#GeocodeAdditionalFeature": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "TIME_ZONE",
-                        "value": "TimeZone"
-                    },
-                    {
-                        "name": "ACCESS",
-                        "value": "Access"
-                    },
-                    {
-                        "name": "SECONDARY_ADDRESSES",
-                        "value": "SecondaryAddresses"
-                    },
-                    {
-                        "name": "INTERSECTIONS",
-                        "value": "Intersections"
+            "type": "enum",
+            "members": {
+                "TIME_ZONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TimeZone"
                     }
-                ]
+                },
+                "ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Access"
+                    }
+                },
+                "SECONDARY_ADDRESSES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecondaryAddresses"
+                    }
+                },
+                "INTERSECTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Intersections"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#GeocodeAdditionalFeatureList": {
@@ -1369,6 +1624,23 @@
                     "max": 4
                 },
                 "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.geoplaces#GeocodeAddressNamesMode": {
+            "type": "enum",
+            "members": {
+                "MATCHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Matched"
+                    }
+                },
+                "ADMINISTRATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Administrative"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#GeocodeFilter": {
@@ -1392,34 +1664,70 @@
             }
         },
         "com.amazonaws.geoplaces#GeocodeFilterPlaceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "LOCALITY",
-                        "value": "Locality"
-                    },
-                    {
-                        "name": "POSTAL_CODE",
-                        "value": "PostalCode"
-                    },
-                    {
-                        "name": "INTERSECTION",
-                        "value": "Intersection"
-                    },
-                    {
-                        "name": "STREET",
-                        "value": "Street"
-                    },
-                    {
-                        "name": "POINT_ADDRESS",
-                        "value": "PointAddress"
-                    },
-                    {
-                        "name": "INTERPOLATED_ADDRESS",
-                        "value": "InterpolatedAddress"
+            "type": "enum",
+            "members": {
+                "LOCALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Locality"
                     }
-                ],
+                },
+                "POSTAL_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PostalCode"
+                    }
+                },
+                "INTERSECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Intersection"
+                    }
+                },
+                "STREET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Street"
+                    }
+                },
+                "POINT_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PointAddress"
+                    }
+                },
+                "INTERPOLATED_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InterpolatedAddress"
+                    }
+                },
+                "SECONDARY_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecondaryAddress"
+                    }
+                },
+                "POINT_OF_INTEREST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PointOfInterest"
+                    }
+                },
+                "COUNTRY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Country"
+                    }
+                },
+                "REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Region"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#sensitive": {}
             }
         },
@@ -1431,26 +1739,28 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 6
+                    "max": 10
                 },
                 "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.geoplaces#GeocodeIntendedUse": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "SINGLE_USE",
-                        "value": "SingleUse",
-                        "documentation": "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users."
-                    },
-                    {
-                        "name": "STORAGE",
-                        "value": "Storage",
-                        "documentation": "Indicates that results of the operation may be stored locally."
+            "type": "enum",
+            "members": {
+                "SINGLE_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users.",
+                        "smithy.api#enumValue": "SingleUse"
                     }
-                ]
+                },
+                "STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates that results of the operation may be stored locally.",
+                        "smithy.api#enumValue": "Storage"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#GeocodeParsedQuery": {
@@ -1552,6 +1862,12 @@
                     "target": "com.amazonaws.geoplaces#ParsedQuerySecondaryAddressComponentList",
                     "traits": {
                         "smithy.api#documentation": "<p>Parsed secondary address components from the provided query text.</p> <note> <p>Coverage for <code>ParsedQuery.Address.SecondaryAddressComponents</code> is available in the following countries:</p> <p>AUS, AUT, BRA, CAN, ESP, FRA, GBR, HKG, IDN, IND, NZL, TUR, TWN, USA</p> </note>"
+                    }
+                },
+                "OtherComponents": {
+                    "target": "com.amazonaws.geoplaces#ParsedQueryComponentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information extracted from the query that does not correspond to standard address components.</p>"
                     }
                 }
             },
@@ -1703,7 +2019,7 @@
                 "Language": {
                     "target": "com.amazonaws.geoplaces#LanguageTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>"
                     }
                 },
                 "PoliticalView": {
@@ -1723,6 +2039,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>",
                         "smithy.api#httpQuery": "key"
+                    }
+                },
+                "PostalCodeMode": {
+                    "target": "com.amazonaws.geoplaces#PostalCodeMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>PostalCodeMode</code> affects how postal code results are returned. If a postal code spans multiple localities and this value is empty, partial district or locality information may be returned under a single postal code result entry. If it's populated with the value <code>EnumerateSpannedLocalities</code>, all cities in that postal code are returned. If it's populated with the value <code>EnumerateSpannedDistricts</code>, all combinations of the postal code with the corresponding district and city names are returned.</p>"
+                    }
+                },
+                "AddressTranslations": {
+                    "target": "com.amazonaws.geoplaces#AddressTranslationComponentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which address components to include translations for. Translations include all name variants and alternative names for the requested fields in all available languages. Valid values are <code>District</code>, <code>Locality</code>, <code>Region</code>, and <code>SubRegion</code>.</p>"
+                    }
+                },
+                "AddressNamesMode": {
+                    "target": "com.amazonaws.geoplaces#GeocodeAddressNamesMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how address names are returned. If not set, the service returns normalized (official) names by default. When set to <code>Matched</code>, address names in the response are based on the input query rather than official names. When set to <code>Administrative</code>, the service returns the official administrative names for address components. <code>Administrative</code> currently applies only to addresses in the United States.</p>"
                     }
                 }
             },
@@ -1880,6 +2214,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>All secondary addresses that are associated with a main address. A secondary address is one that includes secondary designators, such as a Suite or Unit Number, Building, or Floor information.</p> <note> <p>Coverage for this functionality is available in the following countries: AUS, CAN, NZL, USA, PRI.</p> </note>"
                     }
+                },
+                "Translations": {
+                    "target": "com.amazonaws.geoplaces#TranslationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All name translations and alternative names for the requested address fields in all available languages.</p>"
+                    }
+                },
+                "EstimatedPointAddress": {
+                    "target": "com.amazonaws.geoplaces#SensitiveBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, indicates that the coordinates of the position and access points of the point address are estimated.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1931,30 +2277,44 @@
             }
         },
         "com.amazonaws.geoplaces#GetPlaceAdditionalFeature": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "TIME_ZONE",
-                        "value": "TimeZone"
-                    },
-                    {
-                        "name": "PHONEMES",
-                        "value": "Phonemes"
-                    },
-                    {
-                        "name": "ACCESS",
-                        "value": "Access"
-                    },
-                    {
-                        "name": "CONTACT",
-                        "value": "Contact"
-                    },
-                    {
-                        "name": "SECONDARY_ADDRESSES",
-                        "value": "SecondaryAddresses"
+            "type": "enum",
+            "members": {
+                "TIME_ZONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TimeZone"
                     }
-                ]
+                },
+                "PHONEMES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Phonemes"
+                    }
+                },
+                "ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Access"
+                    }
+                },
+                "CONTACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Contact"
+                    }
+                },
+                "SECONDARY_ADDRESSES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecondaryAddresses"
+                    }
+                },
+                "CROSS_REFERENCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CrossReferences"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#GetPlaceAdditionalFeatureList": {
@@ -1965,26 +2325,39 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 5
+                    "max": 6
                 },
                 "smithy.api#uniqueItems": {}
             }
         },
-        "com.amazonaws.geoplaces#GetPlaceIntendedUse": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "SINGLE_USE",
-                        "value": "SingleUse",
-                        "documentation": "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users."
-                    },
-                    {
-                        "name": "STORAGE",
-                        "value": "Storage",
-                        "documentation": "Indicates that results of the operation may be stored locally."
+        "com.amazonaws.geoplaces#GetPlaceAddressNamesMode": {
+            "type": "enum",
+            "members": {
+                "ADMINISTRATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Administrative"
                     }
-                ]
+                }
+            }
+        },
+        "com.amazonaws.geoplaces#GetPlaceIntendedUse": {
+            "type": "enum",
+            "members": {
+                "SINGLE_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users.",
+                        "smithy.api#enumValue": "SingleUse"
+                    }
+                },
+                "STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates that results of the operation may be stored locally.",
+                        "smithy.api#enumValue": "Storage"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#GetPlaceRequest": {
@@ -2011,7 +2384,7 @@
                 "Language": {
                     "target": "com.amazonaws.geoplaces#LanguageTag",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>",
+                        "smithy.api#documentation": "<p> A list of <a href=\"https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>",
                         "smithy.api#httpQuery": "language"
                     }
                 },
@@ -2034,6 +2407,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.</p>",
                         "smithy.api#httpQuery": "key"
+                    }
+                },
+                "AddressNamesMode": {
+                    "target": "com.amazonaws.geoplaces#GetPlaceAddressNamesMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how address names are returned. When set to <code>Administrative</code>, the service returns the official administrative names for address components. <code>Administrative</code> currently applies only to addresses in the United States.</p>",
+                        "smithy.api#httpQuery": "address-names-mode"
                     }
                 }
             },
@@ -2181,6 +2561,24 @@
                     "target": "com.amazonaws.geoplaces#RelatedPlaceList",
                     "traits": {
                         "smithy.api#documentation": "<p> All secondary addresses that are associated with a main address. A secondary address is one that includes secondary designators, such as a Suite or Unit Number, Building, or Floor information. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p> <note> <p>Coverage for this functionality is available in the following countries: AUS, CAN, NZL, USA, PRI.</p> </note>"
+                    }
+                },
+                "PlaceAttributes": {
+                    "target": "com.amazonaws.geoplaces#PlaceAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of place attributes for the result, such as whether the business offers drive-through service.</p>"
+                    }
+                },
+                "EstimatedPointAddress": {
+                    "target": "com.amazonaws.geoplaces#SensitiveBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, indicates that the coordinates of the position and access points of the point address are estimated.</p>"
+                    }
+                },
+                "CrossReferences": {
+                    "target": "com.amazonaws.geoplaces#CrossReferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of supplier references available for this place. Requires the <code>CrossReferences</code> additional feature to be enabled.</p>"
                     }
                 }
             },
@@ -2703,7 +3101,7 @@
                 "Language": {
                     "target": "com.amazonaws.geoplaces#LanguageTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>"
                     }
                 },
                 "Preferred": {
@@ -2729,75 +3127,133 @@
                 }
             }
         },
-        "com.amazonaws.geoplaces#PlaceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "COUNTRY",
-                        "value": "Country"
-                    },
-                    {
-                        "name": "REGION",
-                        "value": "Region"
-                    },
-                    {
-                        "name": "SUB_REGION",
-                        "value": "SubRegion"
-                    },
-                    {
-                        "name": "LOCALITY",
-                        "value": "Locality"
-                    },
-                    {
-                        "name": "DISTRICT",
-                        "value": "District"
-                    },
-                    {
-                        "name": "SUB_DISTRICT",
-                        "value": "SubDistrict"
-                    },
-                    {
-                        "name": "POSTAL_CODE",
-                        "value": "PostalCode"
-                    },
-                    {
-                        "name": "BLOCK",
-                        "value": "Block"
-                    },
-                    {
-                        "name": "SUB_BLOCK",
-                        "value": "SubBlock"
-                    },
-                    {
-                        "name": "INTERSECTION",
-                        "value": "Intersection"
-                    },
-                    {
-                        "name": "STREET",
-                        "value": "Street"
-                    },
-                    {
-                        "name": "POINT_OF_INTEREST",
-                        "value": "PointOfInterest"
-                    },
-                    {
-                        "name": "POINT_ADDRESS",
-                        "value": "PointAddress"
-                    },
-                    {
-                        "name": "INTERPOLATED_ADDRESS",
-                        "value": "InterpolatedAddress"
-                    },
-                    {
-                        "name": "SECONDARY_ADDRESS",
-                        "value": "SecondaryAddress"
-                    },
-                    {
-                        "name": "INFERRED_SECONDARY_ADDRESS",
-                        "value": "InferredSecondaryAddress"
+        "com.amazonaws.geoplaces#PlaceAttribute": {
+            "type": "enum",
+            "members": {
+                "DRIVE_THROUGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DriveThrough"
                     }
-                ],
+                }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.geoplaces#PlaceAttributeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.geoplaces#PlaceAttribute"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.geoplaces#PlaceType": {
+            "type": "enum",
+            "members": {
+                "COUNTRY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Country"
+                    }
+                },
+                "REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Region"
+                    }
+                },
+                "SUB_REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SubRegion"
+                    }
+                },
+                "LOCALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Locality"
+                    }
+                },
+                "DISTRICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "District"
+                    }
+                },
+                "SUB_DISTRICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SubDistrict"
+                    }
+                },
+                "POSTAL_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PostalCode"
+                    }
+                },
+                "BLOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Block"
+                    }
+                },
+                "SUB_BLOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SubBlock"
+                    }
+                },
+                "INTERSECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Intersection"
+                    }
+                },
+                "STREET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Street"
+                    }
+                },
+                "POINT_OF_INTEREST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PointOfInterest"
+                    }
+                },
+                "POINT_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PointAddress"
+                    }
+                },
+                "INTERPOLATED_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InterpolatedAddress"
+                    }
+                },
+                "SECONDARY_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecondaryAddress"
+                    }
+                },
+                "INFERRED_SECONDARY_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InferredSecondaryAddress"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#sensitive": {}
             }
         },
@@ -2870,7 +3326,7 @@
                         "content-type"
                     ]
                 },
-                "smithy.api#documentation": "<p> The Places API enables powerful location search and geocoding capabilities for your applications, offering global coverage with rich, detailed information. Key features include: </p> <ul> <li> <p>Forward and reverse geocoding for addresses and coordinates</p> </li> <li> <p>Comprehensive place searches with detailed information, including:</p> <ul> <li> <p>Business names and addresses</p> </li> <li> <p>Contact information</p> </li> <li> <p>Hours of operation</p> </li> <li> <p>POI (Points of Interest) categories</p> </li> <li> <p>Food types for restaurants</p> </li> <li> <p>Chain affiliation for relevant businesses</p> </li> </ul> </li> <li> <p>Global data coverage with a wide range of POI categories</p> </li> <li> <p>Regular data updates to ensure accuracy and relevance</p> </li> </ul>",
+                "smithy.api#documentation": "<p> The Places API enables powerful location search and geocoding capabilities for your applications, offering global coverage with rich, detailed information. Key features include: </p> <ul> <li> <p>Forward and reverse geocoding for addresses and coordinates. See <a href=\"https://docs.aws.amazon.com/location/latest/APIReference/API_geoplaces_Geocode.html\">Geocode</a> and <a href=\"https://docs.aws.amazon.com/location/latest/APIReference/API_geoplaces_ReverseGeocode.html\">ReverseGeocode</a>.</p> </li> <li> <p>Comprehensive place searches with detailed information. See <a href=\"https://docs.aws.amazon.com/location/latest/APIReference/API_geoplaces_SearchText.html\">SearchText</a>, <a href=\"https://docs.aws.amazon.com/location/latest/APIReference/API_geoplaces_SearchNearby.html\">SearchNearby</a>, and <a href=\"https://docs.aws.amazon.com/location/latest/APIReference/API_geoplaces_GetPlace.html\">GetPlace</a>. Place information you can find include:</p> <ul> <li> <p>Business names and addresses</p> </li> <li> <p>Contact information</p> </li> <li> <p>Hours of operation</p> </li> <li> <p>Points of Interest (POI) categories</p> </li> <li> <p>Food types for restaurants</p> </li> <li> <p>Chain affiliation for relevant businesses</p> </li> </ul> </li> <li> <p>Address and place completion as users type, enhancing input efficiency by completing partial queries with valid addresses. See <a href=\"https://docs.aws.amazon.com/location/latest/APIReference/API_geoplaces_Autocomplete.html\">Autocomplete</a>.</p> </li> <li> <p>Intelligent place and query recommendation based on user's input or context, returning relevant places, points of interest, query terms, or search categories. See <a href=\"https://docs.aws.amazon.com/location/latest/APIReference/API_geoplaces_Suggest.html\">Suggest</a>.</p> </li> <li> <p>Global data coverage with a wide range of POI categories.</p> </li> <li> <p>Regular data updates to ensure accuracy and relevance.</p> </li> <li> <p>Bulk address validation for verifying and standardizing large volumes of addresses in a single operation using <a href=\"https://docs.aws.amazon.com/location/latest/APIReference/Welcome.html#Welcome_Amazon_Location_Service_Jobs\">Amazon Location Service Jobs</a>.</p> </li> </ul>",
                 "smithy.api#title": "Amazon Location Service Places V2",
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
@@ -4163,14 +4619,16 @@
             }
         },
         "com.amazonaws.geoplaces#PostalAuthority": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "USPS",
-                        "value": "Usps"
+            "type": "enum",
+            "members": {
+                "USPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Usps"
                     }
-                ],
+                }
+            },
+            "traits": {
                 "smithy.api#sensitive": {}
             }
         },
@@ -4229,33 +4687,45 @@
             }
         },
         "com.amazonaws.geoplaces#PostalCodeMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "MERGE_ALL_SPANNED_LOCALITIES",
-                        "value": "MergeAllSpannedLocalities"
-                    },
-                    {
-                        "name": "ENUMERATE_SPANNED_LOCALITIES",
-                        "value": "EnumerateSpannedLocalities"
+            "type": "enum",
+            "members": {
+                "MERGE_ALL_SPANNED_LOCALITIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MergeAllSpannedLocalities"
                     }
-                ]
+                },
+                "ENUMERATE_SPANNED_LOCALITIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EnumerateSpannedLocalities"
+                    }
+                },
+                "ENUMERATE_SPANNED_DISTRICTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EnumerateSpannedDistricts"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#PostalCodeType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "USPS_ZIP",
-                        "value": "UspsZip"
-                    },
-                    {
-                        "name": "USPS_ZIP_PLUS_4",
-                        "value": "UspsZipPlus4"
+            "type": "enum",
+            "members": {
+                "USPS_ZIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UspsZip"
                     }
-                ],
+                },
+                "USPS_ZIP_PLUS_4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UspsZipPlus4"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#sensitive": {}
             }
         },
@@ -4348,49 +4818,63 @@
             }
         },
         "com.amazonaws.geoplaces#QueryType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "CATEGORY",
-                        "value": "Category"
-                    },
-                    {
-                        "name": "BUSINESS_CHAIN",
-                        "value": "BusinessChain"
+            "type": "enum",
+            "members": {
+                "CATEGORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Category"
                     }
-                ]
+                },
+                "BUSINESS_CHAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BusinessChain"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#RecordTypeCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "FIRM",
-                        "value": "Firm"
-                    },
-                    {
-                        "name": "GENERAL",
-                        "value": "General"
-                    },
-                    {
-                        "name": "HIGH_RISE",
-                        "value": "HighRise"
-                    },
-                    {
-                        "name": "POST_OFFICE_BOX",
-                        "value": "PostOfficeBox"
-                    },
-                    {
-                        "name": "RURAL",
-                        "value": "Rural"
-                    },
-                    {
-                        "name": "STREET",
-                        "value": "Street"
+            "type": "enum",
+            "members": {
+                "FIRM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Firm"
                     }
-                ],
+                },
+                "GENERAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "General"
+                    }
+                },
+                "HIGH_RISE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HighRise"
+                    }
+                },
+                "POST_OFFICE_BOX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PostOfficeBox"
+                    }
+                },
+                "RURAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Rural"
+                    }
+                },
+                "STREET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Street"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#sensitive": {}
             }
         },
@@ -4556,22 +5040,26 @@
             }
         },
         "com.amazonaws.geoplaces#ReverseGeocodeAdditionalFeature": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "TIME_ZONE",
-                        "value": "TimeZone"
-                    },
-                    {
-                        "name": "ACCESS",
-                        "value": "Access"
-                    },
-                    {
-                        "name": "INTERSECTIONS",
-                        "value": "Intersections"
+            "type": "enum",
+            "members": {
+                "TIME_ZONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TimeZone"
                     }
-                ]
+                },
+                "ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Access"
+                    }
+                },
+                "INTERSECTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Intersections"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#ReverseGeocodeAdditionalFeatureList": {
@@ -4585,6 +5073,17 @@
                     "max": 3
                 },
                 "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.geoplaces#ReverseGeocodeAddressNamesMode": {
+            "type": "enum",
+            "members": {
+                "ADMINISTRATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Administrative"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#ReverseGeocodeFilter": {
@@ -4602,30 +5101,50 @@
             }
         },
         "com.amazonaws.geoplaces#ReverseGeocodeFilterPlaceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "LOCALITY",
-                        "value": "Locality"
-                    },
-                    {
-                        "name": "INTERSECTION",
-                        "value": "Intersection"
-                    },
-                    {
-                        "name": "STREET",
-                        "value": "Street"
-                    },
-                    {
-                        "name": "POINT_ADDRESS",
-                        "value": "PointAddress"
-                    },
-                    {
-                        "name": "INTERPOLATED_ADDRESS",
-                        "value": "InterpolatedAddress"
+            "type": "enum",
+            "members": {
+                "LOCALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Locality"
                     }
-                ]
+                },
+                "INTERSECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Intersection"
+                    }
+                },
+                "STREET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Street"
+                    }
+                },
+                "POINT_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PointAddress"
+                    }
+                },
+                "INTERPOLATED_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InterpolatedAddress"
+                    }
+                },
+                "SECONDARY_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecondaryAddress"
+                    }
+                },
+                "POINT_OF_INTEREST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PointOfInterest"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#ReverseGeocodeFilterPlaceTypeList": {
@@ -4636,26 +5155,28 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 5
+                    "max": 7
                 },
                 "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.geoplaces#ReverseGeocodeIntendedUse": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "SINGLE_USE",
-                        "value": "SingleUse",
-                        "documentation": "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users."
-                    },
-                    {
-                        "name": "STORAGE",
-                        "value": "Storage",
-                        "documentation": "Indicates that results of the operation may be stored locally."
+            "type": "enum",
+            "members": {
+                "SINGLE_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users.",
+                        "smithy.api#enumValue": "SingleUse"
                     }
-                ]
+                },
+                "STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates that results of the operation may be stored locally.",
+                        "smithy.api#enumValue": "Storage"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#ReverseGeocodeRequest": {
@@ -4705,7 +5226,7 @@
                 "Language": {
                     "target": "com.amazonaws.geoplaces#LanguageTag",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>"
+                        "smithy.api#documentation": "<p> A list of <a href=\"https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>"
                     }
                 },
                 "PoliticalView": {
@@ -4732,6 +5253,12 @@
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The heading in degrees from true north in a navigation context. The heading is measured as the angle clockwise from the North direction.</p> <p>Example: North is <code>0</code> degrees, East is <code>90</code> degrees, South is <code>180</code> degrees, and West is <code>270</code> degrees.</p>"
+                    }
+                },
+                "AddressNamesMode": {
+                    "target": "com.amazonaws.geoplaces#ReverseGeocodeAddressNamesMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how address names are returned. When set to <code>Administrative</code>, the service returns the official administrative names for address components. <code>Administrative</code> currently applies only to addresses in the United States.</p>"
                     }
                 }
             },
@@ -4865,6 +5392,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p> All Intersections that are near the provided address. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
+                },
+                "MainAddress": {
+                    "target": "com.amazonaws.geoplaces#RelatedPlace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The main address corresponding to a place of type Secondary Address.</p>"
+                    }
+                },
+                "EstimatedPointAddress": {
+                    "target": "com.amazonaws.geoplaces#SensitiveBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, indicates that the coordinates of the position and access points of the point address are estimated.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4907,7 +5446,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p> <code>SearchNearby</code> queries for points of interest within a radius from a central coordinates, returning place results with optional filters such as categories, business chains, food types and more. The API returns details such as a place name, address, phone, category, food type, contact, opening hours. Also, the API can return phonemes, time zones and more based on requested parameters.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/search-nearby.html\">Search Nearby</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p> <code>SearchNearby</code> queries for points of interest within a radius from a central coordinates, returning place results with optional filters such as categories, business chains, food types and more. The API returns details such as a place name, address, phone, category, food type, contact, opening hours. Also, the API can return phonemes, time zones and more based on requested parameters. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/search-nearby.html\">Search Nearby</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/v2/search-nearby",
                     "method": "POST"
@@ -4934,26 +5473,38 @@
             }
         },
         "com.amazonaws.geoplaces#SearchNearbyAdditionalFeature": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "TIME_ZONE",
-                        "value": "TimeZone"
-                    },
-                    {
-                        "name": "PHONEMES",
-                        "value": "Phonemes"
-                    },
-                    {
-                        "name": "ACCESS",
-                        "value": "Access"
-                    },
-                    {
-                        "name": "CONTACT",
-                        "value": "Contact"
+            "type": "enum",
+            "members": {
+                "TIME_ZONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TimeZone"
                     }
-                ]
+                },
+                "PHONEMES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Phonemes"
+                    }
+                },
+                "ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Access"
+                    }
+                },
+                "CONTACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Contact"
+                    }
+                },
+                "CROSS_REFERENCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CrossReferences"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#SearchNearbyAdditionalFeatureList": {
@@ -4964,7 +5515,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 4
+                    "max": 5
                 },
                 "smithy.api#uniqueItems": {}
             }
@@ -5026,20 +5577,22 @@
             }
         },
         "com.amazonaws.geoplaces#SearchNearbyIntendedUse": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "SINGLE_USE",
-                        "value": "SingleUse",
-                        "documentation": "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users."
-                    },
-                    {
-                        "name": "STORAGE",
-                        "value": "Storage",
-                        "documentation": "Indicates that results of the operation may be stored locally."
+            "type": "enum",
+            "members": {
+                "SINGLE_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users.",
+                        "smithy.api#enumValue": "SingleUse"
                     }
-                ]
+                },
+                "STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates that results of the operation may be stored locally.",
+                        "smithy.api#enumValue": "Storage"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#SearchNearbyRequest": {
@@ -5089,7 +5642,7 @@
                 "Language": {
                     "target": "com.amazonaws.geoplaces#LanguageTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>"
                     }
                 },
                 "PoliticalView": {
@@ -5272,6 +5825,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>How the various components of the result's address are pronounced in various languages.</p>"
                     }
+                },
+                "PlaceAttributes": {
+                    "target": "com.amazonaws.geoplaces#PlaceAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of place attributes for the result, such as whether the business offers drive-through service.</p>"
+                    }
+                },
+                "CrossReferences": {
+                    "target": "com.amazonaws.geoplaces#CrossReferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of supplier references available for this place. Requires the <code>CrossReferences</code> additional feature to be enabled.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5342,26 +5907,38 @@
             }
         },
         "com.amazonaws.geoplaces#SearchTextAdditionalFeature": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "TIME_ZONE",
-                        "value": "TimeZone"
-                    },
-                    {
-                        "name": "PHONEMES",
-                        "value": "Phonemes"
-                    },
-                    {
-                        "name": "ACCESS",
-                        "value": "Access"
-                    },
-                    {
-                        "name": "CONTACT",
-                        "value": "Contact"
+            "type": "enum",
+            "members": {
+                "TIME_ZONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TimeZone"
                     }
-                ]
+                },
+                "PHONEMES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Phonemes"
+                    }
+                },
+                "ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Access"
+                    }
+                },
+                "CONTACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Contact"
+                    }
+                },
+                "CROSS_REFERENCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CrossReferences"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#SearchTextAdditionalFeatureList": {
@@ -5372,7 +5949,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 4
+                    "max": 5
                 },
                 "smithy.api#uniqueItems": {}
             }
@@ -5401,20 +5978,22 @@
             }
         },
         "com.amazonaws.geoplaces#SearchTextIntendedUse": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "SINGLE_USE",
-                        "value": "SingleUse",
-                        "documentation": "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users."
-                    },
-                    {
-                        "name": "STORAGE",
-                        "value": "Storage",
-                        "documentation": "Indicates that results of the operation may be stored locally."
+            "type": "enum",
+            "members": {
+                "SINGLE_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users.",
+                        "smithy.api#enumValue": "SingleUse"
                     }
-                ]
+                },
+                "STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates that results of the operation may be stored locally.",
+                        "smithy.api#enumValue": "Storage"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#SearchTextRequest": {
@@ -5472,7 +6051,7 @@
                 "Language": {
                     "target": "com.amazonaws.geoplaces#LanguageTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>"
                     }
                 },
                 "PoliticalView": {
@@ -5491,6 +6070,12 @@
                     "target": "com.amazonaws.geoplaces#Token",
                     "traits": {
                         "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. </p>"
+                    }
+                },
+                "TravelMode": {
+                    "target": "com.amazonaws.geoplaces#SearchTextTravelMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the mode of mobility used by the end user. This is used to improve the relevance of search results. Valid values are <code>Car</code>, <code>Scooter</code>, and <code>Truck</code>.</p>"
                     }
                 },
                 "Key": {
@@ -5623,7 +6208,7 @@
                 "OpeningHours": {
                     "target": "com.amazonaws.geoplaces#OpeningHoursList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of opening hours objects.</p>"
+                        "smithy.api#documentation": "<p> List of opening hours objects. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "AccessPoints": {
@@ -5655,6 +6240,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>How the various components of the result's address are pronounced in various languages.</p>"
                     }
+                },
+                "PlaceAttributes": {
+                    "target": "com.amazonaws.geoplaces#PlaceAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of place attributes for the result, such as whether the business offers drive-through service.</p>"
+                    }
+                },
+                "CrossReferences": {
+                    "target": "com.amazonaws.geoplaces#CrossReferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of supplier references available for this place. Requires the <code>CrossReferences</code> additional feature to be enabled.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5670,6 +6267,29 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.geoplaces#SearchTextTravelMode": {
+            "type": "enum",
+            "members": {
+                "CAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Car"
+                    }
+                },
+                "SCOOTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Scooter"
+                    }
+                },
+                "TRUCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Truck"
+                    }
                 }
             }
         },
@@ -5815,7 +6435,7 @@
                 "Language": {
                     "target": "com.amazonaws.geoplaces#LanguageTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>A <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>"
+                        "smithy.api#documentation": "<p>A <a href=\"https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>"
                     }
                 }
             },
@@ -5935,26 +6555,38 @@
             }
         },
         "com.amazonaws.geoplaces#SuggestAdditionalFeature": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "CORE",
-                        "value": "Core"
-                    },
-                    {
-                        "name": "TIME_ZONE",
-                        "value": "TimeZone"
-                    },
-                    {
-                        "name": "PHONEMES",
-                        "value": "Phonemes"
-                    },
-                    {
-                        "name": "ACCESS",
-                        "value": "Access"
+            "type": "enum",
+            "members": {
+                "CORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Core"
                     }
-                ]
+                },
+                "TIME_ZONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TimeZone"
+                    }
+                },
+                "PHONEMES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Phonemes"
+                    }
+                },
+                "ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Access"
+                    }
+                },
+                "CROSS_REFERENCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CrossReferences"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#SuggestAdditionalFeatureList": {
@@ -5965,7 +6597,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 4
+                    "max": 5
                 },
                 "smithy.api#uniqueItems": {}
             }
@@ -6028,15 +6660,15 @@
             }
         },
         "com.amazonaws.geoplaces#SuggestIntendedUse": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "SINGLE_USE",
-                        "value": "SingleUse",
-                        "documentation": "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users."
+            "type": "enum",
+            "members": {
+                "SINGLE_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users.",
+                        "smithy.api#enumValue": "SingleUse"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.geoplaces#SuggestPlaceResult": {
@@ -6130,6 +6762,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p> How the various components of the result's address are pronounced in various languages. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
+                },
+                "PlaceAttributes": {
+                    "target": "com.amazonaws.geoplaces#PlaceAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of place attributes for the result, such as whether the business offers drive-through service.</p>"
+                    }
+                },
+                "CrossReferences": {
+                    "target": "com.amazonaws.geoplaces#CrossReferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of supplier references available for this place. Requires the <code>CrossReferences</code> additional feature to be enabled.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6217,7 +6861,7 @@
                 "Language": {
                     "target": "com.amazonaws.geoplaces#LanguageTag",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>"
+                        "smithy.api#documentation": "<p> A list of <a href=\"https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>"
                     }
                 },
                 "PoliticalView": {
@@ -6230,6 +6874,12 @@
                     "target": "com.amazonaws.geoplaces#SuggestIntendedUse",
                     "traits": {
                         "smithy.api#documentation": "<p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). Currently, <code>Suggest</code> does not support storage of results. </p>"
+                    }
+                },
+                "TravelMode": {
+                    "target": "com.amazonaws.geoplaces#SuggestTravelMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the mode of mobility used by the end user. This is used to improve the relevance of search results. Valid values are <code>Car</code>, <code>Scooter</code>, and <code>Truck</code>.</p>"
                     }
                 },
                 "Key": {
@@ -6326,18 +6976,43 @@
             }
         },
         "com.amazonaws.geoplaces#SuggestResultItemType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "PLACE",
-                        "value": "Place"
-                    },
-                    {
-                        "name": "QUERY",
-                        "value": "Query"
+            "type": "enum",
+            "members": {
+                "PLACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Place"
                     }
-                ]
+                },
+                "QUERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Query"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.geoplaces#SuggestTravelMode": {
+            "type": "enum",
+            "members": {
+                "CAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Car"
+                    }
+                },
+                "SCOOTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Scooter"
+                    }
+                },
+                "TRUCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Truck"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#ThrottlingException": {
@@ -6406,19 +7081,149 @@
                 }
             }
         },
-        "com.amazonaws.geoplaces#TypePlacement": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "BEFORE_BASE_NAME",
-                        "value": "BeforeBaseName"
-                    },
-                    {
-                        "name": "AFTER_BASE_NAME",
-                        "value": "AfterBaseName"
+        "com.amazonaws.geoplaces#TranslationDetails": {
+            "type": "structure",
+            "members": {
+                "Locality": {
+                    "target": "com.amazonaws.geoplaces#AdminNamesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of administrative names and translations for the locality address component.</p>"
                     }
-                ]
+                },
+                "Region": {
+                    "target": "com.amazonaws.geoplaces#AdminNamesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of administrative names and translations for the region address component.</p>"
+                    }
+                },
+                "District": {
+                    "target": "com.amazonaws.geoplaces#AdminNamesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of administrative names and translations for the district address component.</p>"
+                    }
+                },
+                "SubRegion": {
+                    "target": "com.amazonaws.geoplaces#AdminNamesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of administrative names and translations for the sub-region address component.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Translation details for the address, including alternative names and translations in available languages.</p>"
+            }
+        },
+        "com.amazonaws.geoplaces#TranslationName": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.geoplaces#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The translated or alternative name value.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 200
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Language": {
+                    "target": "com.amazonaws.geoplaces#LanguageTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <a href=\"https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry\">BCP 47</a> compliant language code for the translation name.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.geoplaces#TranslationNameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of translation name. Valid values are <code>Abbreviation</code>, <code>AreaCode</code>, <code>BaseName</code>, <code>Exonym</code>, <code>Shortened</code>, and <code>Synonym</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Primary": {
+                    "target": "com.amazonaws.geoplaces#SensitiveBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, indicates this is the primary name variant for the given language.</p>"
+                    }
+                },
+                "Transliterated": {
+                    "target": "com.amazonaws.geoplaces#SensitiveBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, indicates this name is a transliterated version rather than a native script translation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A translation or alternative name for an address component.</p>"
+            }
+        },
+        "com.amazonaws.geoplaces#TranslationNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.geoplaces#TranslationName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.geoplaces#TranslationNameType": {
+            "type": "enum",
+            "members": {
+                "ABBREVIATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Abbreviation"
+                    }
+                },
+                "AREA_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AreaCode"
+                    }
+                },
+                "BASE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BaseName"
+                    }
+                },
+                "EXONYM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Exonym"
+                    }
+                },
+                "SHORTENED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Shortened"
+                    }
+                },
+                "SYNONYM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Synonym"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.geoplaces#TypePlacement": {
+            "type": "enum",
+            "members": {
+                "BEFORE_BASE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BeforeBaseName"
+                    }
+                },
+                "AFTER_BASE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AfterBaseName"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#TypeSeparator": {
@@ -6523,59 +7328,73 @@
             }
         },
         "com.amazonaws.geoplaces#ValidationExceptionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "UNKNOWN_OPERATION",
-                        "value": "UnknownOperation",
-                        "documentation": "No such operation is supported."
-                    },
-                    {
-                        "name": "MISSING",
-                        "value": "Missing",
-                        "documentation": "The required input is missing."
-                    },
-                    {
-                        "name": "CANNOT_PARSE",
-                        "value": "CannotParse",
-                        "documentation": "    The input cannot be parsed. For example a required JSON document, ARN identifier,\n    date value, or numeric field cannot be parsed.\n"
-                    },
-                    {
-                        "name": "FIELD_VALIDATION_FAILED",
-                        "value": "FieldValidationFailed",
-                        "documentation": "    The input is present and parsable, but it is otherwise invalid. For example, a\n    required numeric argument is outside the allowed range.\n"
-                    },
-                    {
-                        "name": "OTHER",
-                        "value": "Other",
-                        "documentation": "The input is invalid but no more specific reason is applicable."
-                    },
-                    {
-                        "name": "UNKNOWN_FIELD",
-                        "value": "UnknownField",
-                        "documentation": "No such field is supported."
+            "type": "enum",
+            "members": {
+                "UNKNOWN_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "No such operation is supported.",
+                        "smithy.api#enumValue": "UnknownOperation"
                     }
-                ]
+                },
+                "MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The required input is missing.",
+                        "smithy.api#enumValue": "Missing"
+                    }
+                },
+                "CANNOT_PARSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CannotParse"
+                    }
+                },
+                "FIELD_VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FieldValidationFailed"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The input is invalid but no more specific reason is applicable.",
+                        "smithy.api#enumValue": "Other"
+                    }
+                },
+                "UNKNOWN_FIELD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "No such field is supported.",
+                        "smithy.api#enumValue": "UnknownField"
+                    }
+                }
             }
         },
         "com.amazonaws.geoplaces#ZipClassificationCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "MILITARY",
-                        "value": "Military"
-                    },
-                    {
-                        "name": "POST_OFFICE_BOXES",
-                        "value": "PostOfficeBoxes"
-                    },
-                    {
-                        "name": "UNIQUE",
-                        "value": "Unique"
+            "type": "enum",
+            "members": {
+                "MILITARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Military"
                     }
-                ],
+                },
+                "POST_OFFICE_BOXES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PostOfficeBoxes"
+                    }
+                },
+                "UNIQUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unique"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#sensitive": {}
             }
         }

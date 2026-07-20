@@ -1,0 +1,3 @@
+GET /v1/voices?Engine=standard&IncludeAdditionalLanguageCodes=true&LanguageCode=arb&NextToken=__NextToken__
+
+

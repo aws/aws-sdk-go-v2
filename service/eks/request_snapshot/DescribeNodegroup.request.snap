@@ -1,0 +1,3 @@
+GET /clusters/__ClusterName__/node-groups/__NodegroupName__
+
+

@@ -1,0 +1,3 @@
+GET /timeseries/describe?alias=__Alias__&assetId=__AssetId__&propertyId=__PropertyId__
+
+

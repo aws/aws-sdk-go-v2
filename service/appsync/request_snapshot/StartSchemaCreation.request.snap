@@ -1,0 +1,5 @@
+POST /v1/apis/__ApiId__/schemacreation
+
+Content-Type: application/json
+
+{"definition":"YmxvYg=="}

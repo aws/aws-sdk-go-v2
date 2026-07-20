@@ -1,0 +1,3 @@
+GET /networks/__NetworkId__/guest-users/blocklist?admin=__Admin__&maxResults=1&nextToken=__NextToken__&sortDirection=ASC&sortFields=__SortFields__&username=__Username__
+
+

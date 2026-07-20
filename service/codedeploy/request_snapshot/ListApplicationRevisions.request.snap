@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeDeploy_20141006.ListApplicationRevisions
+
+{"applicationName":"__ApplicationName__","deployed":"include","nextToken":"__NextToken__","s3Bucket":"__S3Bucket__","s3KeyPrefix":"__S3KeyPrefix__","sortBy":"registerTime","sortOrder":"ascending"}

@@ -2670,6 +2670,19 @@ func serializeCBOR_AnomalyDetectorExcludedTimeRanges(v []types.Range) (smithycbo
 	return vl, nil
 }
 
+func serializeCBOR_AnomalyDetectorIds(v []string) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_String(v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
+	}
+	return vl, nil
+}
+
 func serializeCBOR_AnomalyDetectorType(v types.AnomalyDetectorType) (smithycbor.Value, error) {
 	return smithycbor.String(string(v)), nil
 }
@@ -2867,6 +2880,27 @@ func serializeCBOR_EvaluationCriteria(v types.EvaluationCriteria) (smithycbor.Va
 			return nil, err
 		}
 		vm["PromQLCriteria"] = ser
+	default:
+		return nil, fmt.Errorf("unknown variant type %T", v)
+	}
+	return vm, nil
+}
+
+func serializeCBOR_EvaluationWindow(v types.EvaluationWindow) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	switch uv := v.(type) {
+	case *types.EvaluationWindowMemberWallClockWindow:
+		ser, err := serializeCBOR_WallClockWindow(&uv.Value)
+		if err != nil {
+			return nil, err
+		}
+		vm["WallClockWindow"] = ser
+	case *types.EvaluationWindowMemberSlidingWindow:
+		ser, err := serializeCBOR_SlidingWindow(&uv.Value)
+		if err != nil {
+			return nil, err
+		}
+		vm["SlidingWindow"] = ser
 	default:
 		return nil, fmt.Errorf("unknown variant type %T", v)
 	}
@@ -3573,6 +3607,12 @@ func serializeCBOR_SingleMetricAnomalyDetector(v *types.SingleMetricAnomalyDetec
 	return vm, nil
 }
 
+func serializeCBOR_SlidingWindow(v *types.SlidingWindow) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+
+	return vm, nil
+}
+
 func serializeCBOR_StandardUnit(v types.StandardUnit) (smithycbor.Value, error) {
 	return smithycbor.String(string(v)), nil
 }
@@ -3689,6 +3729,18 @@ func serializeCBOR_Values(v []float64) (smithycbor.Value, error) {
 	return vl, nil
 }
 
+func serializeCBOR_WallClockWindow(v *types.WallClockWindow) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.Timezone != nil {
+		ser, err := serializeCBOR_String(*v.Timezone)
+		if err != nil {
+			return nil, err
+		}
+		vm["Timezone"] = ser
+	}
+	return vm, nil
+}
+
 func serializeCBOR_Bool(v bool) (smithycbor.Value, error) {
 	return smithycbor.Bool(v), nil
 }
@@ -3767,6 +3819,13 @@ func serializeCBOR_DeleteAlarmsInput(v *DeleteAlarmsInput) (smithycbor.Value, er
 
 func serializeCBOR_DeleteAnomalyDetectorInput(v *DeleteAnomalyDetectorInput) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
+	if v.AnomalyDetectorId != nil {
+		ser, err := serializeCBOR_String(*v.AnomalyDetectorId)
+		if err != nil {
+			return nil, err
+		}
+		vm["AnomalyDetectorId"] = ser
+	}
 	if v.Namespace != nil {
 		ser, err := serializeCBOR_String(*v.Namespace)
 		if err != nil {
@@ -4059,6 +4118,13 @@ func serializeCBOR_DescribeAlarmsInput(v *DescribeAlarmsInput) (smithycbor.Value
 
 func serializeCBOR_DescribeAnomalyDetectorsInput(v *DescribeAnomalyDetectorsInput) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
+	if v.AnomalyDetectorIds != nil {
+		ser, err := serializeCBOR_AnomalyDetectorIds(v.AnomalyDetectorIds)
+		if err != nil {
+			return nil, err
+		}
+		vm["AnomalyDetectorIds"] = ser
+	}
 	if v.NextToken != nil {
 		ser, err := serializeCBOR_String(*v.NextToken)
 		if err != nil {
@@ -5135,6 +5201,13 @@ func serializeCBOR_PutMetricAlarmInput(v *PutMetricAlarmInput) (smithycbor.Value
 			return nil, err
 		}
 		vm["ThresholdMetricId"] = ser
+	}
+	if v.EvaluationWindow != nil {
+		ser, err := serializeCBOR_EvaluationWindow(v.EvaluationWindow)
+		if err != nil {
+			return nil, err
+		}
+		vm["EvaluationWindow"] = ser
 	}
 	if v.EvaluationCriteria != nil {
 		ser, err := serializeCBOR_EvaluationCriteria(v.EvaluationCriteria)

@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/dashboards/__DashboardId__/permissions
+
+Content-Type: application/json
+
+{"GrantLinkPermissions":[{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"},{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"}],"GrantPermissions":[{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"},{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"}],"RevokeLinkPermissions":[{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"},{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"}],"RevokePermissions":[{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"},{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"}]}

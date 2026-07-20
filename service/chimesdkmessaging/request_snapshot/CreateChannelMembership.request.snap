@@ -1,0 +1,6 @@
+POST /channels/__ChannelArn__/memberships
+
+Content-Type: application/json
+X-Amz-Chime-Bearer: __ChimeBearer__
+
+{"MemberArn":"__MemberArn__","SubChannelId":"__SubChannelId__","Type":"DEFAULT"}

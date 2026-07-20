@@ -2100,7 +2100,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a multi-region endpoint (global-endpoint).</p>\n         <p>The primary region is going to be the AWS-Region where the operation is executed.\n            The secondary region has to be provided in request's parameters.\n            From the data flow standpoint there is no difference between primary\n            and secondary regions - sending traffic will be split equally between the two.\n            The primary region is the region where the resource has been created and where it can be managed.\n        </p>",
+                "smithy.api#documentation": "<p>Creates a multi-region endpoint (global-endpoint).</p>\n         <p>The primary region is going to be the AWS-Region where the operation is executed.\n            The secondary region has to be provided in request's parameters.\n            From the data flow standpoint there is no difference between primary\n            and secondary regions - sending traffic is divided between the two.\n            The primary region is the region where the resource has been created and where it can be managed.\n        </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v2/email/multi-region-endpoints",
@@ -4943,6 +4943,12 @@
                     "target": "com.amazonaws.sesv2#VdmAttributes",
                     "traits": {
                         "smithy.api#documentation": "<p>The VDM attributes that apply to your Amazon SES account.</p>"
+                    }
+                },
+                "PricingAttributes": {
+                    "target": "com.amazonaws.sesv2#PricingAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing attributes that apply to your Amazon SES account, including the currently active\n            pricing plan and any scheduled change.</p>"
                     }
                 }
             },
@@ -9934,6 +9940,58 @@
                 "smithy.api#documentation": "<p>The name of a dedicated IP pool.</p>"
             }
         },
+        "com.amazonaws.sesv2#PricingAttributes": {
+            "type": "structure",
+            "members": {
+                "CurrentPlan": {
+                    "target": "com.amazonaws.sesv2#PricingPlan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing plan that is currently active on your Amazon SES account.</p>"
+                    }
+                },
+                "NextPlan": {
+                    "target": "com.amazonaws.sesv2#PricingPlan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing plan that will become active at the start of the next billing cycle, if a\n            scheduled change has been requested. This field is empty when no scheduled change is\n            pending.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The pricing attributes that apply to your Amazon SES account, including the currently active\n            pricing plan and any scheduled change for the next billing cycle.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#PricingPlan": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "ESSENTIALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ESSENTIALS"
+                    }
+                },
+                "PRO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRO"
+                    }
+                },
+                "ENTERPRISE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENTERPRISE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies an Amazon SES pricing plan. See\n            <code>PutAccountPricingAttributesRequest$Plan</code> for the list of supported values and\n            their meanings.</p>"
+            }
+        },
         "com.amazonaws.sesv2#PrimaryNameServer": {
             "type": "string"
         },
@@ -10080,6 +10138,58 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sesv2#PutAccountPricingAttributes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#PutAccountPricingAttributesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#PutAccountPricingAttributesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Set the pricing plan for your Amazon SES account. Use this operation to choose a billing plan\n            that packages multiple Amazon SES features at a single rate.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v2/email/account/pricing-attributes",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#PutAccountPricingAttributesRequest": {
+            "type": "structure",
+            "members": {
+                "Plan": {
+                    "target": "com.amazonaws.sesv2#PricingPlan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing plan to apply to your Amazon SES account. Can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NONE</code> – No pricing plan is applied; billing follows per-feature\n                    pricing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ESSENTIALS</code> – Baseline Amazon SES capabilities and select premium\n                    features.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PRO</code> – Includes everything in <code>ESSENTIALS</code>, plus\n                    additional premium features for growing senders.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENTERPRISE</code> – Includes everything in <code>PRO</code>, plus\n                    features intended for large-scale senders.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request to set the pricing plan for your Amazon SES account.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#PutAccountPricingAttributesResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error response if the request\n            fails.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -12751,6 +12861,9 @@
                     "target": "com.amazonaws.sesv2#PutAccountDetails"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#PutAccountPricingAttributes"
+                },
+                {
                     "target": "com.amazonaws.sesv2#PutAccountSendingAttributes"
                 },
                 {
@@ -13654,550 +13767,551 @@
                     ]
                 },
                 "smithy.rules#endpointTests": {
+                    "version": "1.0",
                     "testCases": [
                         {
                             "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.af-south-1.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "af-south-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.af-south-1.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.ap-northeast-1.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "ap-northeast-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.ap-northeast-1.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.ap-northeast-2.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "ap-northeast-2",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.ap-northeast-2.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.ap-northeast-3.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "ap-northeast-3",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.ap-northeast-3.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.ap-south-1.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "ap-south-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.ap-south-1.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.ap-southeast-1.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "ap-southeast-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.ap-southeast-1.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.ap-southeast-2.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "ap-southeast-2",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.ap-southeast-2.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.ca-central-1.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "ca-central-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.ca-central-1.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.eu-central-1.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "eu-central-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.eu-central-1.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.eu-north-1.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "eu-north-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.eu-north-1.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.eu-south-1.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "eu-south-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.eu-south-1.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.eu-west-1.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "eu-west-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.eu-west-1.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.eu-west-2.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "eu-west-2",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.eu-west-2.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.eu-west-3.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "eu-west-3",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.eu-west-3.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.me-south-1.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "me-south-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.me-south-1.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.sa-east-1.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "sa-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.sa-east-1.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            },
                             "expect": {
                                 "endpoint": {
                                     "url": "https://email.us-east-1.amazonaws.com"
                                 }
-                            },
-                            "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
                             }
                         },
                         {
                             "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            },
                             "expect": {
                                 "endpoint": {
                                     "url": "https://email-fips.us-east-1.amazonaws.com"
                                 }
-                            },
-                            "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
                             }
                         },
                         {
                             "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.us-east-2.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "us-east-2",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.us-east-2.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.us-west-1.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "us-west-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.us-west-1.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            },
                             "expect": {
                                 "endpoint": {
                                     "url": "https://email.us-west-2.amazonaws.com"
                                 }
-                            },
-                            "params": {
-                                "Region": "us-west-2",
-                                "UseFIPS": false,
-                                "UseDualStack": false
                             }
                         },
                         {
                             "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email-fips.us-west-2.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "us-west-2",
                                 "UseFIPS": true,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email-fips.us-west-2.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            },
                             "expect": {
                                 "endpoint": {
                                     "url": "https://email-fips.us-east-1.api.aws"
                                 }
-                            },
-                            "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
                             }
                         },
                         {
                             "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            },
                             "expect": {
                                 "endpoint": {
                                     "url": "https://email.us-east-1.api.aws"
                                 }
-                            },
-                            "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
                             "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            },
                             "expect": {
                                 "endpoint": {
                                     "url": "https://email-fips.cn-north-1.api.amazonwebservices.com.cn"
                                 }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
                             }
                         },
                         {
                             "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            },
                             "expect": {
                                 "endpoint": {
                                     "url": "https://email-fips.cn-north-1.amazonaws.com.cn"
                                 }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
                             }
                         },
                         {
                             "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            },
                             "expect": {
                                 "endpoint": {
                                     "url": "https://email.cn-north-1.api.amazonwebservices.com.cn"
                                 }
-                            },
-                            "params": {
-                                "Region": "cn-north-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
                             "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.cn-north-1.amazonaws.com.cn"
-                                }
-                            },
                             "params": {
                                 "Region": "cn-north-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.cn-north-1.amazonaws.com.cn"
+                                }
                             }
                         },
                         {
                             "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            },
                             "expect": {
                                 "endpoint": {
                                     "url": "https://email.us-gov-west-1.amazonaws.com"
                                 }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": false,
-                                "UseDualStack": false
                             }
                         },
                         {
                             "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email-fips.us-gov-west-1.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "us-gov-west-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email-fips.us-gov-west-1.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            },
                             "expect": {
                                 "endpoint": {
                                     "url": "https://email-fips.us-gov-east-1.api.aws"
                                 }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
                             }
                         },
                         {
                             "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            },
                             "expect": {
                                 "endpoint": {
                                     "url": "https://email-fips.us-gov-east-1.amazonaws.com"
                                 }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
                             }
                         },
                         {
                             "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.us-gov-east-1.api.aws"
-                                }
-                            },
                             "params": {
                                 "Region": "us-gov-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": true
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.us-gov-east-1.api.aws"
+                                }
                             }
                         },
                         {
                             "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.us-gov-east-1.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "Region": "us-gov-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.us-gov-east-1.amazonaws.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            },
                             "expect": {
                                 "endpoint": {
                                     "url": "https://email-fips.us-iso-east-1.c2s.ic.gov"
                                 }
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
                             }
                         },
                         {
                             "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.us-iso-east-1.c2s.ic.gov"
-                                }
-                            },
                             "params": {
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.us-iso-east-1.c2s.ic.gov"
+                                }
                             }
                         },
                         {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            },
                             "expect": {
                                 "endpoint": {
                                     "url": "https://email-fips.us-isob-east-1.sc2s.sgov.gov"
                                 }
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
                             }
                         },
                         {
                             "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://email.us-isob-east-1.sc2s.sgov.gov"
-                                }
-                            },
                             "params": {
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.us-isob-east-1.sc2s.sgov.gov"
+                                }
                             }
                         },
                         {
                             "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://example.com"
-                                }
-                            },
                             "params": {
                                 "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false,
                                 "Endpoint": "https://example.com"
-                            }
-                        },
-                        {
-                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            },
                             "expect": {
                                 "endpoint": {
                                     "url": "https://example.com"
                                 }
-                            },
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
                             "params": {
                                 "UseFIPS": false,
                                 "UseDualStack": false,
                                 "Endpoint": "https://example.com"
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
                             }
                         },
                         {
                             "documentation": "For custom endpoint with fips enabled and dualstack disabled",
-                            "expect": {
-                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-                            },
                             "params": {
                                 "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false,
                                 "Endpoint": "https://example.com"
+                            },
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             }
                         },
                         {
                             "documentation": "For custom endpoint with fips disabled and dualstack enabled",
-                            "expect": {
-                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-                            },
                             "params": {
                                 "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            },
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             }
                         },
                         {
@@ -14208,33 +14322,15 @@
                         },
                         {
                             "documentation": "Valid EndpointId with dualstack and FIPS disabled. i.e, IPv4 Only stack with no FIPS",
-                            "expect": {
-                                "endpoint": {
-                                    "properties": {
-                                        "authSchemes": [
-                                            {
-                                                "signingName": "ses",
-                                                "name": "sigv4a",
-                                                "signingRegionSet": [
-                                                    "*"
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    "url": "https://abc123.456def.endpoints.email.amazonaws.com"
-                                }
-                            },
                             "params": {
                                 "EndpointId": "abc123.456def",
                                 "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1"
-                            }
-                        },
-                        {
-                            "documentation": "Valid EndpointId with dualstack enabled",
+                            },
                             "expect": {
                                 "endpoint": {
+                                    "url": "https://abc123.456def.endpoints.email.amazonaws.com",
                                     "properties": {
                                         "authSchemes": [
                                             {
@@ -14245,79 +14341,21 @@
                                                 ]
                                             }
                                         ]
-                                    },
-                                    "url": "https://abc123.456def.endpoints.email.global.api.aws"
+                                    }
                                 }
-                            },
+                            }
+                        },
+                        {
+                            "documentation": "Valid EndpointId with dualstack enabled",
                             "params": {
                                 "EndpointId": "abc123.456def",
                                 "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Region": "us-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "Valid EndpointId with FIPS set, dualstack disabled",
-                            "expect": {
-                                "error": "Invalid Configuration: FIPS is not supported with multi-region endpoints"
                             },
-                            "params": {
-                                "EndpointId": "abc123.456def",
-                                "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "Valid EndpointId with both dualstack and FIPS enabled",
-                            "expect": {
-                                "error": "Invalid Configuration: FIPS is not supported with multi-region endpoints"
-                            },
-                            "params": {
-                                "EndpointId": "abc123.456def",
-                                "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2"
-                            }
-                        },
-                        {
-                            "documentation": "Regular regional request, without EndpointId",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://email.eu-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseDualStack": false,
-                                "Region": "eu-west-1"
-                            }
-                        },
-                        {
-                            "documentation": "Invalid EndpointId (Invalid chars / format)",
-                            "expect": {
-                                "error": "EndpointId must be a valid host label"
-                            },
-                            "params": {
-                                "EndpointId": "badactor.com?foo=bar",
-                                "UseDualStack": false,
-                                "Region": "eu-west-2"
-                            }
-                        },
-                        {
-                            "documentation": "Invalid EndpointId (Empty)",
-                            "expect": {
-                                "error": "EndpointId must be a valid host label"
-                            },
-                            "params": {
-                                "EndpointId": "",
-                                "UseDualStack": false,
-                                "Region": "ap-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "Valid EndpointId with custom sdk endpoint",
-                            "expect": {
-                                "endpoint": {
+                                    "url": "https://abc123.456def.endpoints.email.global.api.aws",
                                     "properties": {
                                         "authSchemes": [
                                             {
@@ -14328,32 +14366,107 @@
                                                 ]
                                             }
                                         ]
-                                    },
-                                    "url": "https://example.com"
+                                    }
                                 }
+                            }
+                        },
+                        {
+                            "documentation": "Valid EndpointId with FIPS set, dualstack disabled",
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1"
                             },
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS is not supported with multi-region endpoints"
+                            }
+                        },
+                        {
+                            "documentation": "Valid EndpointId with both dualstack and FIPS enabled",
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2"
+                            },
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS is not supported with multi-region endpoints"
+                            }
+                        },
+                        {
+                            "documentation": "Regular regional request, without EndpointId",
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://email.eu-west-1.amazonaws.com"
+                                }
+                            }
+                        },
+                        {
+                            "documentation": "Invalid EndpointId (Invalid chars / format)",
+                            "params": {
+                                "EndpointId": "badactor.com?foo=bar",
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
+                            },
+                            "expect": {
+                                "error": "EndpointId must be a valid host label"
+                            }
+                        },
+                        {
+                            "documentation": "Invalid EndpointId (Empty)",
+                            "params": {
+                                "EndpointId": "",
+                                "UseDualStack": false,
+                                "Region": "ap-south-1"
+                            },
+                            "expect": {
+                                "error": "EndpointId must be a valid host label"
+                            }
+                        },
+                        {
+                            "documentation": "Valid EndpointId with custom sdk endpoint",
                             "params": {
                                 "EndpointId": "abc123.456def",
                                 "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com",
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingName": "ses",
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
                             }
                         },
                         {
                             "documentation": "Valid EndpointId with custom sdk endpoint with FIPS enabled",
-                            "expect": {
-                                "error": "Invalid Configuration: FIPS is not supported with multi-region endpoints"
-                            },
                             "params": {
                                 "EndpointId": "abc123.456def",
                                 "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            },
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS is not supported with multi-region endpoints"
                             }
                         }
-                    ],
-                    "version": "1.0"
+                    ]
                 }
             }
         },

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftServerless.UpdateLakehouseConfiguration
+
+{"catalogName":"__CatalogName__","dryRun":true,"lakehouseIdcApplicationArn":"__LakehouseIdcApplicationArn__","lakehouseIdcRegistration":"Associate","lakehouseRegistration":"Register","namespaceName":"__NamespaceName__"}

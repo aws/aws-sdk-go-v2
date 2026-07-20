@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_Regional_20161128.ListResourcesForWebACL
+
+{"ResourceType":"APPLICATION_LOAD_BALANCER","WebACLId":"__WebACLId__"}

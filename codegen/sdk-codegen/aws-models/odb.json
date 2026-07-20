@@ -86,6 +86,74 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.odb#AdminPasswordSource": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER_MANAGED_AWS_SECRET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_MANAGED_AWS_SECRET"
+                    }
+                },
+                "API_REQUEST_PARAMETER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "API_REQUEST_PARAMETER"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of the admin password for an Autonomous Database.</p>"
+            }
+        },
+        "com.amazonaws.odb#AdminPasswordSourceConfiguration": {
+            "type": "union",
+            "members": {
+                "customerManagedAwsSecret": {
+                    "target": "com.amazonaws.odb#CustomerManagedAwsSecretConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a customer-managed Amazon Web Services Secrets Manager secret used as the admin password source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of the admin password source. This is a union, so only one of the following members can be specified.</p>"
+            }
+        },
+        "com.amazonaws.odb#AdminPasswordSourceConfigurationInput": {
+            "type": "union",
+            "members": {
+                "customerManagedAwsSecret": {
+                    "target": "com.amazonaws.odb#CustomerManagedAwsSecretConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for using a customer-managed Amazon Web Services Secrets Manager secret as the admin password source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input configuration for the admin password source. This is a union, so only one of the following members can be specified.</p>"
+            }
+        },
+        "com.amazonaws.odb#AdminPasswordSourceSummary": {
+            "type": "structure",
+            "members": {
+                "adminPasswordSource": {
+                    "target": "com.amazonaws.odb#AdminPasswordSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the admin password for the Autonomous Database.</p>"
+                    }
+                },
+                "adminPasswordSourceConfiguration": {
+                    "target": "com.amazonaws.odb#AdminPasswordSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the admin password source for the Autonomous Database.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the admin password source configuration for an Autonomous Database.</p>"
+            }
+        },
         "com.amazonaws.odb#Arn": {
             "type": "string",
             "traits": {
@@ -821,6 +889,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the Autonomous Database was restored after deletion.</p>",
                         "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "adminPasswordSourceSummary": {
+                    "target": "com.amazonaws.odb#AdminPasswordSourceSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary of the admin password source configuration for the Autonomous Database.</p>"
                     }
                 }
             },
@@ -2174,6 +2248,12 @@
                         "smithy.api#documentation": "<p>The date and time when the Autonomous Database was restored after deletion.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
+                },
+                "adminPasswordSourceSummary": {
+                    "target": "com.amazonaws.odb#AdminPasswordSourceSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary of the admin password source configuration for the Autonomous Database.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2226,6 +2306,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the Autonomous Database wallet was last rotated.</p>",
                         "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "passwordSourceSummary": {
+                    "target": "com.amazonaws.odb#WalletPasswordSourceSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary of the password source configuration for the Autonomous Database wallet.</p>"
                     }
                 }
             },
@@ -4839,6 +4925,18 @@
                         "smithy.api#documentation": "<p>The configuration of the encryption key to use for the Autonomous Database.</p>"
                     }
                 },
+                "adminPasswordSource": {
+                    "target": "com.amazonaws.odb#AdminPasswordSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the admin password for the Autonomous Database. When set to <code>CUSTOMER_MANAGED_AWS_SECRET</code>, the admin password is retrieved from an Amazon Web Services Secrets Manager secret.</p>"
+                    }
+                },
+                "adminPasswordSourceConfiguration": {
+                    "target": "com.amazonaws.odb#AdminPasswordSourceConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the admin password source for the Autonomous Database.</p>"
+                    }
+                },
                 "clientToken": {
                     "target": "com.amazonaws.odb#GeneralInputString",
                     "traits": {
@@ -4951,8 +5049,19 @@
                         "smithy.api#documentation": "<p>The password to encrypt the keys inside the wallet.</p>",
                         "smithy.api#length": {
                             "min": 8
-                        },
-                        "smithy.api#required": {}
+                        }
+                    }
+                },
+                "passwordSource": {
+                    "target": "com.amazonaws.odb#WalletPasswordSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the password for encrypting the wallet. When set to <code>CUSTOMER_MANAGED_AWS_SECRET</code>, the password is retrieved from an Amazon Web Services Secrets Manager secret.</p>"
+                    }
+                },
+                "passwordSourceConfiguration": {
+                    "target": "com.amazonaws.odb#WalletPasswordSourceConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the password source for the Autonomous Database wallet.</p>"
                     }
                 },
                 "clientToken": {
@@ -6086,6 +6195,58 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.odb#CustomerContact"
+            }
+        },
+        "com.amazonaws.odb#CustomerManagedAwsSecretConfiguration": {
+            "type": "structure",
+            "members": {
+                "iamRoleArn": {
+                    "target": "com.amazonaws.odb#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that OCI assumes to retrieve the secret value.</p>"
+                    }
+                },
+                "secretId": {
+                    "target": "com.amazonaws.odb#SecretIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier or ARN of the Amazon Web Services Secrets Manager secret that contains the password.</p>"
+                    }
+                },
+                "externalIdType": {
+                    "target": "com.amazonaws.odb#ExternalIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Oracle Cloud Identifier (OCID) used as the external ID when assuming the IAM role.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of a customer-managed Amazon Web Services Secrets Manager secret used to supply a password.</p>"
+            }
+        },
+        "com.amazonaws.odb#CustomerManagedAwsSecretConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "secretId": {
+                    "target": "com.amazonaws.odb#SecretIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier or ARN of the Amazon Web Services Secrets Manager secret that contains the password.</p>"
+                    }
+                },
+                "iamRoleArn": {
+                    "target": "com.amazonaws.odb#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that OCI assumes to retrieve the secret value.</p>"
+                    }
+                },
+                "externalIdType": {
+                    "target": "com.amazonaws.odb#ExternalIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Oracle Cloud Identifier (OCID) used as the external ID when assuming the IAM role.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input configuration for a customer-managed Amazon Web Services Secrets Manager secret used to supply a password.</p>"
             }
         },
         "com.amazonaws.odb#DataCollectionOptions": {
@@ -8234,22 +8395,6 @@
                 }
             }
         },
-        "com.amazonaws.odb#ExascaleVmClusterResource": {
-            "type": "resource",
-            "identifiers": {
-                "exascaleVmClusterId": {
-                    "target": "com.amazonaws.odb#ResourceIdOrArn"
-                }
-            },
-            "traits": {
-                "aws.iam#conditionKeys": [
-                    "aws:ResourceTag/${TagKey}"
-                ],
-                "aws.iam#iamResource": {
-                    "name": "exascale-vm-cluster"
-                }
-            }
-        },
         "com.amazonaws.odb#ExternalIdType": {
             "type": "enum",
             "members": {
@@ -9317,6 +9462,12 @@
                     "traits": {
                         "smithy.api#default": true,
                         "smithy.api#documentation": "<p>The Oracle Cloud Infrastructure (OCI) identity domain configuration for service initialization.</p>"
+                    }
+                },
+                "autonomousDatabaseOciAwsSecretsManagerIntegration": {
+                    "target": "com.amazonaws.odb#Access",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable or disable the OCI service-account role for Amazon Web Services Secrets Manager integration with Autonomous Database.</p>"
                     }
                 }
             },
@@ -11179,12 +11330,6 @@
                         "ids": {
                             "exadbVmClusterId": "resourceArn"
                         }
-                    },
-                    {
-                        "resource": "com.amazonaws.odb#ExascaleVmClusterResource",
-                        "ids": {
-                            "exascaleVmClusterId": "resourceArn"
-                        }
                     }
                 ]
             }
@@ -11590,6 +11735,12 @@
                     "traits": {
                         "smithy.api#enumValue": "KmsTde"
                     }
+                },
+                "SecretsManager": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecretsManager"
+                    }
                 }
             }
         },
@@ -11667,6 +11818,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services integration configuration settings for the Amazon Web Services Identity and Access Management (IAM) service role.</p>"
                     }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#OciIamRoleStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current lifecycle status of the IAM service role.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the current status of the IAM service role, if applicable.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11682,6 +11845,44 @@
                 "smithy.api#length": {
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.odb#OciIamRoleStatus": {
+            "type": "enum",
+            "members": {
+                "PROVISIONING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROVISIONING"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "PROVISION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROVISION_FAILED"
+                    }
+                },
+                "TERMINATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATING"
+                    }
+                },
+                "TERMINATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATE_FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The lifecycle status of an Amazon Web Services Identity and Access Management (IAM) service role used for Autonomous Database integration with Oracle Cloud Infrastructure (OCI).</p>"
             }
         },
         "com.amazonaws.odb#OciIdentityDomain": {
@@ -11876,9 +12077,6 @@
                 },
                 {
                     "target": "com.amazonaws.odb#ExascaleDbStorageVaultResource"
-                },
-                {
-                    "target": "com.amazonaws.odb#ExascaleVmClusterResource"
                 },
                 {
                     "target": "com.amazonaws.odb#OdbNetworkResource"
@@ -14166,6 +14364,16 @@
                 "target": "com.amazonaws.odb#ScheduledOperationDetails"
             }
         },
+        "com.amazonaws.odb#SecretIdOrArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The identifier or Amazon Resource Name (ARN) of an Amazon Web Services Secrets Manager secret.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
         "com.amazonaws.odb#SensitiveString": {
             "type": "string",
             "traits": {
@@ -15128,12 +15336,6 @@
                         "ids": {
                             "exadbVmClusterId": "resourceArn"
                         }
-                    },
-                    {
-                        "resource": "com.amazonaws.odb#ExascaleVmClusterResource",
-                        "ids": {
-                            "exascaleVmClusterId": "resourceArn"
-                        }
                     }
                 ]
             }
@@ -15294,12 +15496,6 @@
                         "resource": "com.amazonaws.odb#ExadbVmClusterResource",
                         "ids": {
                             "exadbVmClusterId": "resourceArn"
-                        }
-                    },
-                    {
-                        "resource": "com.amazonaws.odb#ExascaleVmClusterResource",
-                        "ids": {
-                            "exascaleVmClusterId": "resourceArn"
                         }
                     }
                 ]
@@ -15743,6 +15939,18 @@
                     "target": "com.amazonaws.odb#EncryptionKeyConfigurationInput",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of the encryption key to use for the Autonomous Database.</p>"
+                    }
+                },
+                "adminPasswordSource": {
+                    "target": "com.amazonaws.odb#AdminPasswordSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the admin password for the Autonomous Database. When set to <code>CUSTOMER_MANAGED_AWS_SECRET</code>, the admin password is retrieved from an Amazon Web Services Secrets Manager secret.</p>"
+                    }
+                },
+                "adminPasswordSourceConfiguration": {
+                    "target": "com.amazonaws.odb#AdminPasswordSourceConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the admin password source for the Autonomous Database.</p>"
                     }
                 }
             },
@@ -16214,6 +16422,74 @@
                         "smithy.api#enumValue": "SERVICENETWORK"
                     }
                 }
+            }
+        },
+        "com.amazonaws.odb#WalletPasswordSource": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER_MANAGED_AWS_SECRET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_MANAGED_AWS_SECRET"
+                    }
+                },
+                "API_REQUEST_PARAMETER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "API_REQUEST_PARAMETER"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of the password for an Autonomous Database wallet.</p>"
+            }
+        },
+        "com.amazonaws.odb#WalletPasswordSourceConfiguration": {
+            "type": "union",
+            "members": {
+                "customerManagedAwsSecret": {
+                    "target": "com.amazonaws.odb#CustomerManagedAwsSecretConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a customer-managed Amazon Web Services Secrets Manager secret used as the wallet password source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of the wallet password source. This is a union, so only one of the following members can be specified.</p>"
+            }
+        },
+        "com.amazonaws.odb#WalletPasswordSourceConfigurationInput": {
+            "type": "union",
+            "members": {
+                "customerManagedAwsSecret": {
+                    "target": "com.amazonaws.odb#CustomerManagedAwsSecretConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for using a customer-managed Amazon Web Services Secrets Manager secret as the wallet password source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input configuration for the wallet password source. This is a union, so only one of the following members can be specified.</p>"
+            }
+        },
+        "com.amazonaws.odb#WalletPasswordSourceSummary": {
+            "type": "structure",
+            "members": {
+                "passwordSource": {
+                    "target": "com.amazonaws.odb#WalletPasswordSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the password for the Autonomous Database wallet.</p>"
+                    }
+                },
+                "passwordSourceConfiguration": {
+                    "target": "com.amazonaws.odb#WalletPasswordSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the password source for the Autonomous Database wallet.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the password source configuration for an Autonomous Database wallet.</p>"
             }
         },
         "com.amazonaws.odb#WalletType": {

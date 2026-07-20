@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.GetRelationalDatabaseLogEvents
+
+{"endTime":946684800,"logStreamName":"__LogStreamName__","pageToken":"__PageToken__","relationalDatabaseName":"__RelationalDatabaseName__","startFromHead":true,"startTime":946684800}

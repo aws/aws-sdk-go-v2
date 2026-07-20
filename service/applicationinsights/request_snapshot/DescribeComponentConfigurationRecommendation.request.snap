@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: EC2WindowsBarleyService.DescribeComponentConfigurationRecommendation
+
+{"ComponentName":"__ComponentName__","RecommendationType":"INFRA_ONLY","ResourceGroupName":"__ResourceGroupName__","Tier":"CUSTOM","WorkloadName":"__WorkloadName__"}

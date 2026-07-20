@@ -1,0 +1,5 @@
+POST /recommendations
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","kmsKeyArn":"__KmsKeyArn__","name":"__Name__","recommendationConfig":{"systemPromptRecommendationConfig":{"agentTraces":{"sessionSpans":[,]},"evaluationConfig":{"evaluators":[{"evaluatorArn":"__EvaluatorArn__"},{"evaluatorArn":"__EvaluatorArn__"}]},"systemPrompt":{"text":"__SystemPromptConfigMemberText__"}}},"tags":{"key0":"__Value__"},"type":"SYSTEM_PROMPT_RECOMMENDATION"}

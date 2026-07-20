@@ -6,8 +6,8 @@ type Dimension string
 
 // Enum values for Dimension
 const (
-	// The account ID whose Amazon Web Services usage resulted in the estimated carbon
-	// emissions.
+	// The account ID whose Amazon Web Services usage is associated with the estimated
+	// environmental impact data.
 	DimensionUsageAccountId Dimension = "USAGE_ACCOUNT_ID"
 	// The geographical area containing data center clusters where Amazon Web Services
 	// services are hosted.
@@ -92,18 +92,20 @@ type TimeGranularity string
 
 // Enum values for TimeGranularity
 const (
-	// Emissions aggregated over calendar year periods (January-December).
+	// Environmental impact data aggregated over calendar year periods
+	// (January-December).
 	TimeGranularityYearlyCalendar TimeGranularity = "YEARLY_CALENDAR"
-	// Emissions aggregated over fiscal year periods starting from the month specified
-	// in GranularityConfiguration.FiscalYearStartMonth.
-	TimeGranularityYearlyFiscal TimeGranularity = "YEARLY_FISCAL"
-	// Emissions aggregated over calendar quarter periods (Q1: Jan-Mar, Q2: Apr-Jun,
-	// Q3: Jul-Sep, Q4: Oct-Dec).
-	TimeGranularityQuarterlyCalendar TimeGranularity = "QUARTERLY_CALENDAR"
-	// Emissions aggregated over fiscal quarter periods based on the fiscal year start
+	// Environmental impact data aggregated over fiscal year periods starting from the
 	// month specified in GranularityConfiguration.FiscalYearStartMonth.
+	TimeGranularityYearlyFiscal TimeGranularity = "YEARLY_FISCAL"
+	// Environmental impact data aggregated over calendar quarter periods (Q1:
+	// Jan-Mar, Q2: Apr-Jun, Q3: Jul-Sep, Q4: Oct-Dec).
+	TimeGranularityQuarterlyCalendar TimeGranularity = "QUARTERLY_CALENDAR"
+	// Environmental impact data aggregated over fiscal quarter periods based on the
+	// fiscal year start month specified in
+	// GranularityConfiguration.FiscalYearStartMonth.
 	TimeGranularityQuarterlyFiscal TimeGranularity = "QUARTERLY_FISCAL"
-	// Emissions aggregated by calendar month.
+	// Environmental impact data aggregated by calendar month.
 	TimeGranularityMonthly TimeGranularity = "MONTHLY"
 )
 
@@ -118,5 +120,42 @@ func (TimeGranularity) Values() []TimeGranularity {
 		"QUARTERLY_CALENDAR",
 		"QUARTERLY_FISCAL",
 		"MONTHLY",
+	}
+}
+
+type WaterAllocationType string
+
+// Enum values for WaterAllocationType
+const (
+	// Total water drawn from surface water, groundwater, seawater, or a third party
+	// associated with Amazon Web Services account usage.
+	WaterAllocationTypeTotalWaterWithdrawals WaterAllocationType = "TOTAL_WATER_WITHDRAWALS"
+)
+
+// Values returns all known values for WaterAllocationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WaterAllocationType) Values() []WaterAllocationType {
+	return []WaterAllocationType{
+		"TOTAL_WATER_WITHDRAWALS",
+	}
+}
+
+type WaterAllocationUnit string
+
+// Enum values for WaterAllocationUnit
+const (
+	// Cubic meters of water.
+	WaterAllocationUnitCubicMeters WaterAllocationUnit = "m3"
+)
+
+// Values returns all known values for WaterAllocationUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WaterAllocationUnit) Values() []WaterAllocationUnit {
+	return []WaterAllocationUnit{
+		"m3",
 	}
 }

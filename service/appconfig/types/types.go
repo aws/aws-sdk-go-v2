@@ -281,7 +281,7 @@ type DeploymentEvent struct {
 	noSmithyDocumentSerde
 }
 
-// Optional deployment parameters for an experiment run, including extension
+// The deployment parameters for an experiment run, including dynamic extension
 // parameters and tags.
 type DeploymentParameters struct {
 
@@ -595,7 +595,7 @@ type ExtensionSummary struct {
 // state and attribute values.
 type FlagValue struct {
 
-	// Whether the feature flag is enabled for this treatment.
+	// Specifies whether the feature flag is enabled for this treatment.
 	//
 	// This member is required.
 	Enabled bool
@@ -787,10 +787,10 @@ type Validator struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration settings for vended metrics.
+// The configuration settings for vended metrics in your AppConfig account.
 type VendedMetricsSettings struct {
 
-	// Whether vended metrics are enabled for the account.
+	// Specifies whether vended metrics are enabled for the account.
 	Enabled *bool
 
 	noSmithyDocumentSerde

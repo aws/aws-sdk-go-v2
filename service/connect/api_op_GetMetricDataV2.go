@@ -86,19 +86,20 @@ type GetMetricDataV2Input struct {
 	// AGENT_HIERARCHY_LEVEL_TWO | AGENT_HIERARCHY_LEVEL_THREE |
 	// AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE |
 	// ANSWERING_MACHINE_DETECTION_STATUS | BOT_ALIAS | BOT_ID | BOT_INTENT_NAME |
-	// BOT_LOCALE | BOT_VERSION | CAMPAIGN | CAMPAIGN_DELIVERY_EVENT_TYPE |
-	// CAMPAIGN_EXCLUDED_EVENT_TYPE | CASE_STATUS | CASE_TEMPLATE_ARN | CHANNEL |
-	// contact/segmentAttributes/connect:Subtype |
-	// contact/segmentAttributes/connect:ValidationTestType | DISCONNECT_REASON |
-	// EVALUATION_FORM | EVALUATION_QUESTION | EVALUATION_SECTION | EVALUATION_SOURCE
-	// | EVALUATOR_ID | FEATURE | FLOW_ACTION_ID | FLOW_TYPE | FLOWS_MODULE_RESOURCE_ID
-	// | FLOWS_NEXT_RESOURCE_ID | FLOWS_NEXT_RESOURCE_QUEUE_ID | FLOWS_OUTCOME_TYPE |
-	// FLOWS_RESOURCE_ID | FORM_VERSION | INITIATING_FLOW | INITIATION_METHOD |
+	// BOT_LOCALE | BOT_VERSION | BROWSER_NAME | CAMPAIGN |
+	// CAMPAIGN_DELIVERY_EVENT_TYPE | CAMPAIGN_EXCLUDED_EVENT_TYPE | CASE_STATUS |
+	// CASE_TEMPLATE_ARN | CHANNEL | contact/segmentAttributes/connect:Subtype |
+	// contact/segmentAttributes/connect:ValidationTestType | DEVICE_MODEL |
+	// DEVICE_TYPE | DISCONNECT_REASON | EVALUATION_FORM | EVALUATION_QUESTION |
+	// EVALUATION_SECTION | EVALUATION_SOURCE | EVALUATOR_ID | FEATURE | FLOW_ACTION_ID
+	// | FLOW_TYPE | FLOWS_MODULE_RESOURCE_ID | FLOWS_NEXT_RESOURCE_ID |
+	// FLOWS_NEXT_RESOURCE_QUEUE_ID | FLOWS_OUTCOME_TYPE | FLOWS_RESOURCE_ID |
+	// FORM_VERSION | INITIATING_FLOW | INITIATION_METHOD |
 	// INVOKING_RESOURCE_PUBLISHED_TIMESTAMP | INVOKING_RESOURCE_TYPE |
 	// KNOWLEDGE_BASE_NAME | PARENT_FLOWS_RESOURCE_ID | Q_CONNECT_ENABLED | QUEUE |
 	// RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION |
 	// SESSION_ID | TEST_CASE | TEST_CASE_EXECUTION_FAILURE_REASON |
-	// TEST_CASE_EXECUTION_RESULT | TEST_CASE_EXECUTION_STATE
+	// TEST_CASE_EXECUTION_RESULT | TEST_CASE_EXECUTION_STATE | WEB_NOTIFICATION_TYPE
 	//
 	// The following filter keys correspond to Connect Customer resources and are used
 	// for authorizing requests. A GetMetricDataV2 request requires at least one of
@@ -942,13 +943,15 @@ type GetMetricDataV2Input struct {
 	// UI name: [Campaign contacts abandoned after X rate]
 	//
 	// CAMPAIGN_INTERACTIONS This metric is available only for outbound campaigns
-	// using the email delivery mode.
+	// using the email, WhatsApp, and web notification delivery modes.
 	//
 	// Unit: Count
 	//
 	// Valid metric filter key: CAMPAIGN_INTERACTION_EVENT_TYPE
 	//
-	// Valid groupings and filters: Campaign
+	// Valid groupings and filters: Browser Name, Campaign, Channel,
+	// contact/segmentAttributes/connect:Subtype, Device Model, Device Type, Web
+	// Notification Type
 	//
 	// UI name: [Campaign interactions]
 	//
@@ -1145,17 +1148,17 @@ type GetMetricDataV2Input struct {
 	// Valid metric filter key: ANSWERING_MACHINE_DETECTION_STATUS ,
 	// CAMPAIGN_DELIVERY_EVENT_TYPE , DISCONNECT_REASON
 	//
-	// Valid groupings and filters: Agent, Answering Machine Detection Status,
-	// Campaign, Campaign Delivery EventType, Channel,
-	// contact/segmentAttributes/connect:Subtype, Disconnect Reason, Queue, Routing
-	// Profile
+	// Valid groupings and filters: Agent, Answering Machine Detection Status, Browser
+	// Name, Campaign, Campaign Delivery EventType, Channel,
+	// contact/segmentAttributes/connect:Subtype, Device Model, Device Type, Disconnect
+	// Reason, Queue, Routing Profile, Web Notification Type
 	//
 	// UI name: [Delivery attempts]
 	//
-	// Campaign Delivery EventType filter and grouping are only available for SMS and
-	// Email campaign delivery modes. Agent, Queue, Routing Profile, Answering Machine
-	// Detection Status and Disconnect Reason are only available for agent assisted
-	// voice and automated voice delivery modes.
+	// Campaign Delivery EventType filter and grouping are only available for SMS,
+	// Email, WhatsApp, and web notification campaign delivery modes. Agent, Queue,
+	// Routing Profile, Answering Machine Detection Status and Disconnect Reason are
+	// only available for agent assisted voice and automated voice delivery modes.
 	//
 	// DELIVERY_ATTEMPT_DISPOSITION_RATE This metric is available only for outbound
 	// campaigns. Dispositions for the agent assisted voice and automated voice
@@ -1166,16 +1169,17 @@ type GetMetricDataV2Input struct {
 	// Valid metric filter key: ANSWERING_MACHINE_DETECTION_STATUS ,
 	// CAMPAIGN_DELIVERY_EVENT_TYPE , DISCONNECT_REASON
 	//
-	// Valid groupings and filters: Agent, Answering Machine Detection Status,
-	// Campaign, Channel, contact/segmentAttributes/connect:Subtype, Disconnect Reason,
-	// Queue, Routing Profile
+	// Valid groupings and filters: Agent, Answering Machine Detection Status, Browser
+	// Name, Campaign, Channel, contact/segmentAttributes/connect:Subtype, Device
+	// Model, Device Type, Disconnect Reason, Queue, Routing Profile, Web Notification
+	// Type
 	//
 	// UI name: [Delivery attempt disposition rate]
 	//
-	// Campaign Delivery Event Type filter and grouping are only available for SMS and
-	// Email campaign delivery modes. Agent, Queue, Routing Profile, Answering Machine
-	// Detection Status and Disconnect Reason are only available for agent assisted
-	// voice and automated voice delivery modes.
+	// Campaign Delivery Event Type filter and grouping are only available for SMS,
+	// Email, WhatsApp, and web notification campaign delivery modes. Agent, Queue,
+	// Routing Profile, Answering Machine Detection Status and Disconnect Reason are
+	// only available for agent assisted voice and automated voice delivery modes.
 	//
 	// EVALUATIONS_PERFORMED Unit: Count
 	//
@@ -1731,9 +1735,10 @@ type GetMetricDataV2Input struct {
 	// AGENT_HIERARCHY_LEVEL_TWO | AGENT_HIERARCHY_LEVEL_THREE |
 	// AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE |
 	// ANSWERING_MACHINE_DETECTION_STATUS | BOT_ID | BOT_ALIAS | BOT_VERSION |
-	// BOT_LOCALE | BOT_INTENT_NAME | CAMPAIGN | CAMPAIGN_DELIVERY_EVENT_TYPE |
-	// CAMPAIGN_EXCLUDED_EVENT_TYPE | CAMPAIGN_EXECUTION_TIMESTAMP | CASE_TEMPLATE_ARN
-	// | CASE_STATUS | CHANNEL | contact/segmentAttributes/connect:Subtype |
+	// BOT_LOCALE | BOT_INTENT_NAME | BROWSER_NAME | CAMPAIGN |
+	// CAMPAIGN_DELIVERY_EVENT_TYPE | CAMPAIGN_EXCLUDED_EVENT_TYPE |
+	// CAMPAIGN_EXECUTION_TIMESTAMP | CASE_TEMPLATE_ARN | CASE_STATUS | CHANNEL |
+	// contact/segmentAttributes/connect:Subtype | DEVICE_MODEL | DEVICE_TYPE |
 	// DISCONNECT_REASON | EVALUATION_FORM | EVALUATION_SECTION | EVALUATION_QUESTION
 	// | EVALUATION_SOURCE | EVALUATOR_ID | FLOWS_RESOURCE_ID |
 	// FLOWS_MODULE_RESOURCE_ID | FLOW_ACTION_ID | FLOW_TYPE | FLOWS_OUTCOME_TYPE |
@@ -1742,7 +1747,7 @@ type GetMetricDataV2Input struct {
 	// PARENT_FLOWS_RESOURCE_ID | Q_CONNECT_ENABLED | QUEUE |
 	// RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION |
 	// SESSION_ID | TEST_CASE | TEST_CASE_EXECUTION_FAILURE_REASON |
-	// TEST_CASE_INVOCATION_METHOD
+	// TEST_CASE_INVOCATION_METHOD | WEB_NOTIFICATION_TYPE
 	//
 	// AI_AGENT_NAME_VERSION , AI_PROMPT_NAME_VERSION , and KNOWLEDGE_ARTICLE_NAME are
 	// valid groupings but not valid filters.

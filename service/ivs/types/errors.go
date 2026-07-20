@@ -7,6 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// User does not have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
 
@@ -42,6 +43,7 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The stream is offline for the given channel ARN.
 type ChannelNotBroadcasting struct {
 	Message *string
 
@@ -77,6 +79,7 @@ func (e *ChannelNotBroadcasting) ErrorCode() string {
 }
 func (e *ChannelNotBroadcasting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Updating or deleting a resource can cause an inconsistent state.
 type ConflictException struct {
 	Message *string
 
@@ -112,6 +115,7 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Unexpected error during processing of request.
 type InternalServerException struct {
 	Message *string
 
@@ -147,6 +151,7 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// Your account is pending verification.
 type PendingVerification struct {
 	Message *string
 
@@ -182,6 +187,7 @@ func (e *PendingVerification) ErrorCode() string {
 }
 func (e *PendingVerification) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Request references a resource which does not exist.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -217,6 +223,7 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Request would cause a service quota to be exceeded.
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -252,6 +259,7 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The service is temporarily unavailable.
 type ServiceUnavailable struct {
 	Message *string
 
@@ -287,6 +295,7 @@ func (e *ServiceUnavailable) ErrorCode() string {
 }
 func (e *ServiceUnavailable) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The stream is temporarily unavailable.
 type StreamUnavailable struct {
 	Message *string
 
@@ -322,6 +331,7 @@ func (e *StreamUnavailable) ErrorCode() string {
 }
 func (e *StreamUnavailable) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// Request was denied due to request throttling.
 type ThrottlingException struct {
 	Message *string
 
@@ -357,6 +367,8 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The input fails to satisfy the constraints specified by an Amazon Web Services
+// service.
 type ValidationException struct {
 	Message *string
 

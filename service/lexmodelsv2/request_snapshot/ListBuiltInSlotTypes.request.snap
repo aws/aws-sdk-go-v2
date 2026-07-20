@@ -1,0 +1,5 @@
+POST /builtins/locales/__LocaleId__/slottypes
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","sortBy":{"attribute":"SlotTypeSignature","order":"Ascending"}}

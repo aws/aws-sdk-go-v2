@@ -1,0 +1,5 @@
+POST /v1/createserviceenvironment
+
+Content-Type: application/json
+
+{"capacityLimits":[{"capacityUnit":"__CapacityUnit__","maxCapacity":1},{"capacityUnit":"__CapacityUnit__","maxCapacity":1}],"serviceEnvironmentName":"__ServiceEnvironmentName__","serviceEnvironmentType":"SAGEMAKER_TRAINING","state":"ENABLED","tags":{"key0":"__Value__"}}

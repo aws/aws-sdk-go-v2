@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.PutAttachment
+
+{"AssetIdentifier":"__AssetIdentifier__","AttachmentName":"__AttachmentName__","ClientToken":"__ClientToken__","Content":"__Content__","FormTypeId":"__FormTypeId__","ItemIdentifier":"__ItemIdentifier__","IterableFormName":"__IterableFormName__"}

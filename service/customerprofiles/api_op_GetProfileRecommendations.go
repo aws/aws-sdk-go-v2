@@ -52,6 +52,11 @@ type GetProfileRecommendationsInput struct {
 	// recommendations.
 	Context map[string]string
 
+	// Runtime diversity configuration for this request. Enables diversity-aware
+	// recommendations and optionally supplies values for placeholder-based diversity
+	// caps configured on the recommender.
+	DiversityConfig *types.RecommendationDiversityConfig
+
 	// The maximum number of recommendations to return. The default value is 10.
 	MaxResults *int32
 

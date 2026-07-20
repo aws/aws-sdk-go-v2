@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateLoadBalancerPolicy&LoadBalancerName=__LoadBalancerName__&PolicyAttributes.member.1.AttributeName=__AttributeName__&PolicyAttributes.member.1.AttributeValue=__AttributeValue__&PolicyAttributes.member.2.AttributeName=__AttributeName__&PolicyAttributes.member.2.AttributeValue=__AttributeValue__&PolicyName=__PolicyName__&PolicyTypeName=__PolicyTypeName__&Version=2012-06-01

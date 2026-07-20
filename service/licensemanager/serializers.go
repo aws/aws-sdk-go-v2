@@ -5315,6 +5315,11 @@ func awsAwsjson11_serializeOpDocumentCreateLicenseVersionInput(v *CreateLicenseV
 		ok.String(*v.ProductName)
 	}
 
+	if v.ResetUsage {
+		ok := object.Key("ResetUsage")
+		ok.Boolean(v.ResetUsage)
+	}
+
 	if v.SourceVersion != nil {
 		ok := object.Key("SourceVersion")
 		ok.String(*v.SourceVersion)

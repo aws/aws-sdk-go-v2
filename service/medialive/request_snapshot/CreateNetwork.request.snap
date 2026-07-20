@@ -1,0 +1,5 @@
+POST /prod/networks
+
+Content-Type: application/json
+
+{"ipPools":[{"cidr":"__Cidr__"},{"cidr":"__Cidr__"}],"name":"__Name__","requestId":"__RequestId__","routes":[{"cidr":"__Cidr__","gateway":"__Gateway__"},{"cidr":"__Cidr__","gateway":"__Gateway__"}],"tags":{"key0":"__Value__"}}

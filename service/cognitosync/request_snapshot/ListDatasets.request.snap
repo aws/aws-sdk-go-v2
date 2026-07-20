@@ -1,0 +1,3 @@
+GET /identitypools/__IdentityPoolId__/identities/__IdentityId__/datasets?maxResults=1&nextToken=__NextToken__
+
+

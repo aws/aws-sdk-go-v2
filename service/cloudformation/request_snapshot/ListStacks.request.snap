@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ListStacks&NextToken=__NextToken__&StackStatusFilter.member.1=CREATE_IN_PROGRESS&StackStatusFilter.member.2=CREATE_IN_PROGRESS&Version=2010-05-15

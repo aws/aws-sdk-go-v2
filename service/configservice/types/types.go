@@ -339,6 +339,22 @@ type AggregatorFilterServicePrincipal struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration details for connecting to Microsoft Azure.
+type AzureConnectorConfiguration struct {
+
+	// The Azure client identifier.
+	//
+	// This member is required.
+	ClientIdentifier *string
+
+	// The Azure tenant identifier.
+	//
+	// This member is required.
+	TenantIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
 // The detailed configurations of a specified resource.
 type BaseConfigurationItem struct {
 
@@ -1010,6 +1026,10 @@ type ConfigurationRecorder struct {
 	// The Amazon Resource Name (ARN) of the specified configuration recorder.
 	Arn *string
 
+	// The Amazon Resource Name (ARN) of the connector that specifies the connection
+	// between a third-party cloud service provider and Config.
+	ConnectorArn *string
+
 	// The name of the configuration recorder.
 	//
 	// For customer managed configuration recorders, Config automatically assigns the
@@ -1119,6 +1139,10 @@ type ConfigurationRecorder struct {
 	// [IAM policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
 	RoleARN *string
 
+	// Specifies the scope of resources to record from the third-party cloud service
+	// provider connected through the connector.
+	ScopeConfiguration *ScopeConfiguration
+
 	// For service-linked configuration recorders, specifies the linked Amazon Web
 	// Services service for the configuration recorder.
 	ServicePrincipal *string
@@ -1189,7 +1213,7 @@ type ConfigurationRecorderStatus struct {
 }
 
 // A summary of a configuration recorder, including the arn , name ,
-// servicePrincipal , and recordingScope .
+// servicePrincipal , recordingScope , and provider .
 type ConfigurationRecorderSummary struct {
 
 	// The Amazon Resource Name (ARN) of the configuration recorder.
@@ -1209,6 +1233,11 @@ type ConfigurationRecorderSummary struct {
 	//
 	// This member is required.
 	RecordingScope RecordingScope
+
+	// For service-linked configuration recorders that record resources from a
+	// third-party cloud service provider, indicates the cloud service provider.
+	// Currently, AZURE is supported.
+	Provider Provider
 
 	// For service-linked configuration recorders, indicates which Amazon Web Services
 	// service the configuration recorder is linked to.
@@ -1476,6 +1505,87 @@ type ConformancePackStatusDetail struct {
 
 	// Last time when conformation pack creation and update was successful.
 	LastUpdateCompletedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The details of the connector, including the connector configuration and
+// connector ARN.
+type Connector struct {
+
+	// The Amazon Resource Name (ARN) of the connector.
+	//
+	// This member is required.
+	Arn *string
+
+	// The provider-specific configuration for connecting to the third-party cloud
+	// service provider.
+	//
+	// This member is required.
+	ConnectorConfiguration *ConnectorConfiguration
+
+	// The date and time that the connector was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The name of the connector.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The provider-specific configuration for connecting to the third-party cloud
+// service provider. You must specify exactly one provider configuration.
+type ConnectorConfiguration struct {
+
+	// The configuration for an Azure connector.
+	Azure *AzureConnectorConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Filters connectors based on the connector provider.
+type ConnectorFilter struct {
+
+	// The name of the filter. Currently, only provider is supported.
+	FilterName ConnectorFilterName
+
+	// The value of the filter. For provider , valid values include: AZURE .
+	FilterValues []string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a connector.
+type ConnectorSummary struct {
+
+	// The Amazon Resource Name (ARN) of the connector.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time that the connector was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The name of the connector.
+	//
+	// This member is required.
+	Name *string
+
+	// The third-party cloud service provider. Currently, AZURE is supported.
+	//
+	// This member is required.
+	Provider Provider
+
+	// The Azure tenant identifier for the connector.
+	//
+	// This member is required.
+	TenantIdentifier *string
 
 	noSmithyDocumentSerde
 }
@@ -3343,6 +3453,33 @@ type Scope struct {
 	// to trigger an evaluation for the rule. If you specify a value for TagValue , you
 	// must also specify a value for TagKey .
 	TagValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the scope of resources to record from a third-party cloud service
+// provider.
+type ScopeConfiguration struct {
+
+	// Specifies whether to record resources from all supported regions for the
+	// third-party cloud service provider.
+	//
+	// This member is required.
+	AllRegions bool
+
+	// The type of scope for the third-party cloud resources. Valid values include
+	// tenant and subscription .
+	//
+	// This member is required.
+	ScopeType *string
+
+	// The list of regions from the third-party cloud service provider to include when
+	// recording resources. Used when allRegions is set to false .
+	IncludedRegions []string
+
+	// The list of specific scope values for the third-party cloud resources. For
+	// example, a list of Azure subscriptions or management groups.
+	ScopeValues []string
 
 	noSmithyDocumentSerde
 }

@@ -1,0 +1,6 @@
+POST /participant/cancel-authentication
+
+Content-Type: application/json
+X-Amz-Bearer: __ConnectionToken__
+
+{"SessionId":"__SessionId__"}

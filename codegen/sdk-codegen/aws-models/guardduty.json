@@ -1073,6 +1073,117 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.guardduty#BedrockGuardrail": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Bedrock guardrail.</p>",
+                        "smithy.api#jsonName": "arn",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 2048
+                        },
+                        "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+$"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Bedrock guardrail.</p>",
+                        "smithy.api#jsonName": "version",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 8
+                        },
+                        "smithy.api#pattern": "^(([1-9][0-9]{0,7})|(DRAFT)|(ENFORCED))$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a Bedrock guardrail associated with a finding.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#BedrockGuardrailDetails": {
+            "type": "structure",
+            "members": {
+                "GuardrailArn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Use guardrails list instead",
+                            "since": "2026-07-13"
+                        },
+                        "smithy.api#documentation": "<p>The ARN of the Bedrock guardrail. This field is deprecated. Use the <code>guardrails</code> list instead.</p>",
+                        "smithy.api#jsonName": "guardrailArn",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 2048
+                        },
+                        "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+$"
+                    }
+                },
+                "GuardrailVersion": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Use guardrails list instead",
+                            "since": "2026-07-13"
+                        },
+                        "smithy.api#documentation": "<p>The version of the Bedrock guardrail. This field is deprecated. Use the <code>guardrails</code> list instead.</p>",
+                        "smithy.api#jsonName": "guardrailVersion",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 8
+                        },
+                        "smithy.api#pattern": "^(([1-9][0-9]{0,7})|(DRAFT))$"
+                    }
+                },
+                "Guardrails": {
+                    "target": "com.amazonaws.guardduty#BedrockGuardrails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Bedrock guardrails associated with the finding.</p>",
+                        "smithy.api#jsonName": "guardrails"
+                    }
+                },
+                "GuardrailAction": {
+                    "target": "com.amazonaws.guardduty#GuardrailAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the guardrail intervened or not.</p>",
+                        "smithy.api#jsonName": "guardrailAction"
+                    }
+                },
+                "GuardrailSource": {
+                    "target": "com.amazonaws.guardduty#GuardrailSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the guardrail was applied on the input or output of the model invocation.</p>",
+                        "smithy.api#jsonName": "guardrailSource"
+                    }
+                },
+                "ContentPolicyFilters": {
+                    "target": "com.amazonaws.guardduty#ContentPolicyFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of content policy filters that matched during the guardrail evaluation.</p>",
+                        "smithy.api#jsonName": "contentPolicyFilters"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the Bedrock guardrail that was involved in a finding.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#BedrockGuardrails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#BedrockGuardrail"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.guardduty#Behavior": {
             "type": "map",
             "key": {
@@ -1468,6 +1579,35 @@
                 }
             }
         },
+        "com.amazonaws.guardduty#ConfidenceLevel": {
+            "type": "enum",
+            "members": {
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIUM"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.guardduty#ConflictException": {
             "type": "structure",
             "members": {
@@ -1623,6 +1763,110 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.guardduty#Container"
+            }
+        },
+        "com.amazonaws.guardduty#ContentPolicyFilter": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.guardduty#ContentPolicyFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of content that was filtered by the guardrail.</p>",
+                        "smithy.api#jsonName": "type"
+                    }
+                },
+                "Confidence": {
+                    "target": "com.amazonaws.guardduty#ConfidenceLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence level that the content matched the filter.</p>",
+                        "smithy.api#jsonName": "confidence"
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.guardduty#ContentPolicyFilterAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action taken by the guardrail filter.</p>",
+                        "smithy.api#jsonName": "action"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a content policy filter that matched during a guardrail evaluation.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ContentPolicyFilterAction": {
+            "type": "enum",
+            "members": {
+                "BLOCKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLOCKED"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#ContentPolicyFilterType": {
+            "type": "enum",
+            "members": {
+                "PROMPT_ATTACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROMPT_ATTACK"
+                    }
+                },
+                "JAILBREAK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JAILBREAK"
+                    }
+                },
+                "HATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HATE"
+                    }
+                },
+                "INSULTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSULTS"
+                    }
+                },
+                "SEXUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEXUAL"
+                    }
+                },
+                "VIOLENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIOLENCE"
+                    }
+                },
+                "MISCONDUCT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISCONDUCT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#ContentPolicyFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#ContentPolicyFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.guardduty#ContinuousScanDetails": {
@@ -4827,6 +5071,18 @@
                     "traits": {
                         "smithy.api#enumValue": "RUNTIME_MONITORING"
                     }
+                },
+                "AI_PROTECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_PROTECTION"
+                    }
+                },
+                "AI_ANALYST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_ANALYST"
+                    }
                 }
             }
         },
@@ -4968,6 +5224,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RUNTIME_MONITORING"
+                    }
+                },
+                "AI_PROTECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_PROTECTION"
+                    }
+                },
+                "AI_ANALYST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_ANALYST"
                     }
                 }
             }
@@ -6896,6 +7164,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FARGATE_RUNTIME_MONITORING"
+                    }
+                },
+                "AI_PROTECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_PROTECTION"
                     }
                 }
             }
@@ -10423,6 +10697,40 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:[A-Za-z_.-]{1,20}:guardduty:[A-Za-z0-9_/.-]{0,63}:\\d+:detector/[A-Za-z0-9_/.-]{32,264}$"
+            }
+        },
+        "com.amazonaws.guardduty#GuardrailAction": {
+            "type": "enum",
+            "members": {
+                "GUARDRAIL_INTERVENED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GUARDRAIL_INTERVENED"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#GuardrailSource": {
+            "type": "enum",
+            "members": {
+                "INPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INPUT"
+                    }
+                },
+                "OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTPUT"
+                    }
+                }
             }
         },
         "com.amazonaws.guardduty#HighestSeverityThreatDetails": {
@@ -14596,6 +14904,31 @@
                 }
             }
         },
+        "com.amazonaws.guardduty#ModelDetail": {
+            "type": "structure",
+            "members": {
+                "ModelId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the AI model.</p>",
+                        "smithy.api#jsonName": "modelId",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2048
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the AI model involved in a finding.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ModelDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#ModelDetail"
+            }
+        },
         "com.amazonaws.guardduty#Name": {
             "type": "string",
             "traits": {
@@ -14962,6 +15295,12 @@
                 }
             }
         },
+        "com.amazonaws.guardduty#ObservationNumbers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#Long"
+            }
+        },
         "com.amazonaws.guardduty#ObservationTexts": {
             "type": "list",
             "member": {
@@ -14976,6 +15315,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The text that was unusual.</p>",
                         "smithy.api#jsonName": "text"
+                    }
+                },
+                "Number": {
+                    "target": "com.amazonaws.guardduty#ObservationNumbers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numeric values that were unusual.</p>",
+                        "smithy.api#jsonName": "number"
                     }
                 }
             },
@@ -15043,6 +15389,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RUNTIME_MONITORING"
+                    }
+                },
+                "AI_PROTECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_PROTECTION"
                     }
                 }
             }
@@ -15969,6 +16321,18 @@
                     "traits": {
                         "smithy.api#enumValue": "RARE"
                     }
+                },
+                "COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COUNT"
+                    }
+                },
+                "AVERAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVERAGE"
+                    }
                 }
             }
         },
@@ -15979,6 +16343,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FREQUENCY"
+                    }
+                },
+                "VOLUME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOLUME"
                     }
                 }
             }
@@ -16344,6 +16714,12 @@
                         "smithy.api#documentation": "<p>The name of the backup vault containing the recovery point.</p>",
                         "smithy.api#jsonName": "backupVaultName"
                     }
+                },
+                "ContinuousScanDetails": {
+                    "target": "com.amazonaws.guardduty#ScanConfigurationContinuousScanDetails",
+                    "traits": {
+                        "smithy.api#jsonName": "continuousScanDetails"
+                    }
                 }
             },
             "traits": {
@@ -16568,6 +16944,20 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains details about the backup recovery point that was scanned.</p>",
                         "smithy.api#jsonName": "recoveryPointDetails"
+                    }
+                },
+                "BedrockGuardrailDetails": {
+                    "target": "com.amazonaws.guardduty#BedrockGuardrailDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the Bedrock guardrail that was involved in a finding.</p>",
+                        "smithy.api#jsonName": "bedrockGuardrailDetails"
+                    }
+                },
+                "ModelDetails": {
+                    "target": "com.amazonaws.guardduty#ModelDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the AI models involved in a finding.</p>",
+                        "smithy.api#jsonName": "modelDetails"
                     }
                 }
             },
@@ -21190,6 +21580,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RDS_DBI_PROTECTION_SERVERLESS"
+                    }
+                },
+                "AI_PROTECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_PROTECTION"
                     }
                 }
             }

@@ -1,0 +1,5 @@
+POST /data-tables/__InstanceId__/__DataTableId__/values/describe
+
+Content-Type: application/json
+
+{"Values":[{"AttributeName":"__AttributeName__","PrimaryValues":[{"AttributeName":"__AttributeName__","Value":"__Value__"},{"AttributeName":"__AttributeName__","Value":"__Value__"}]},{"AttributeName":"__AttributeName__","PrimaryValues":[{"AttributeName":"__AttributeName__","Value":"__Value__"},{"AttributeName":"__AttributeName__","Value":"__Value__"}]}]}

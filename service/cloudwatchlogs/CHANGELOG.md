@@ -1,3 +1,17 @@
+# v1.79.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.79.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+* **Feature**: Added PutStorageTierPolicy and GetStorageTierPolicy APIs to Amazon CloudWatch Logs. Customers can now configure account-level Intelligent Tiering to automatically optimize log storage costs by moving infrequently accessed data to lower-cost storage tiers.
+
+# v1.78.2 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.78.1 (2026-06-29)
 
 * No change notes available for this release.

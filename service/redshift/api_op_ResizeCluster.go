@@ -22,9 +22,13 @@ import (
 //
 //   - dc2.8xlarge
 //
+//   - rg.large
+//
 //   - rg.xlarge
 //
 //   - rg.4xlarge
+//
+//   - rg.12xlarge
 //
 //   - ra3.large
 //

@@ -1,0 +1,5 @@
+POST /2015-03-31/functions/__FunctionName__/aliases
+
+Content-Type: application/json
+
+{"Description":"__Description__","FunctionVersion":"__FunctionVersion__","Name":"__Name__","RoutingConfig":{"AdditionalVersionWeights":{"key0":1}}}

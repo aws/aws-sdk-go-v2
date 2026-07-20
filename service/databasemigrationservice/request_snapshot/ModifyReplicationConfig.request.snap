@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.ModifyReplicationConfig
+
+{"ComputeConfig":{"AvailabilityZone":"__AvailabilityZone__","DnsNameServers":"__DnsNameServers__","KmsKeyId":"__KmsKeyId__","MaxCapacityUnits":1,"MinCapacityUnits":1,"MultiAZ":true,"PreferredMaintenanceWindow":"__PreferredMaintenanceWindow__","ReplicationSubnetGroupId":"__ReplicationSubnetGroupId__","VpcSecurityGroupIds":["__Member__","__Member__"]},"ReplicationConfigArn":"__ReplicationConfigArn__","ReplicationConfigIdentifier":"__ReplicationConfigIdentifier__","ReplicationSettings":"__ReplicationSettings__","ReplicationType":"full-load","SourceEndpointArn":"__SourceEndpointArn__","SupplementalSettings":"__SupplementalSettings__","TableMappings":"__TableMappings__","TargetEndpointArn":"__TargetEndpointArn__"}

@@ -1,0 +1,5 @@
+POST /2020-05-31/trust-store
+
+Content-Type: application/xml
+
+<CreateTrustStoreRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><CaCertificatesBundleSource><CaCertificatesBundleS3Location><Bucket>__Bucket__</Bucket><Key>__Key__</Key><Region>__Region__</Region><Version>__Version__</Version></CaCertificatesBundleS3Location></CaCertificatesBundleSource><Name>__Name__</Name><Tags><Items><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Items></Tags><UseClientCertificateOCSPEndpoint>true</UseClientCertificateOCSPEndpoint></CreateTrustStoreRequest>

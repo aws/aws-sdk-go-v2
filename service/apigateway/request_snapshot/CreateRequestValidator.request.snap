@@ -1,0 +1,6 @@
+POST /restapis/__RestApiId__/requestvalidators
+
+Accept: application/json
+Content-Type: application/json
+
+{"name":"__Name__","validateRequestBody":true,"validateRequestParameters":true}

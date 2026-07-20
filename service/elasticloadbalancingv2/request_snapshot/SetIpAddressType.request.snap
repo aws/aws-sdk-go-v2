@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=SetIpAddressType&IpAddressType=ipv4&LoadBalancerArn=__LoadBalancerArn__&Version=2015-12-01

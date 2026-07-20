@@ -1,0 +1,4 @@
+DELETE /applications/__ApplicationId__/environments/__EnvironmentId__
+
+X-Amzn-Deletion-Protection-Check: ACCOUNT_DEFAULT
+

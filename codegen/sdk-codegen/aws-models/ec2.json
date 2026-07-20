@@ -1037,6 +1037,184 @@
                 "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
+        "com.amazonaws.ec2#AccountVpcEncryptionControl": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.ec2#AccountVpcEncryptionControlState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "State",
+                        "smithy.api#documentation": "<p>The current state of the account-level VPC Encryption Control configuration.</p>",
+                        "smithy.api#xmlName": "state"
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.ec2#AccountVpcEncryptionControlMode",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Mode",
+                        "smithy.api#documentation": "<p>The encryption mode for the account-level VPC Encryption Control configuration.</p>",
+                        "smithy.api#xmlName": "mode"
+                    }
+                },
+                "Exclusions": {
+                    "target": "com.amazonaws.ec2#AccountVpcEncryptionControlExclusions",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Exclusions",
+                        "smithy.api#documentation": "<p>Information about the traffic exclusions for the account-level VPC Encryption Control configuration.</p>",
+                        "smithy.api#xmlName": "exclusions"
+                    }
+                },
+                "ManagedBy": {
+                    "target": "com.amazonaws.ec2#ManagedBy",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ManagedBy",
+                        "smithy.api#documentation": "<p>The entity that manages the account-level VPC Encryption Control configuration.</p>",
+                        "smithy.api#xmlName": "managedBy"
+                    }
+                },
+                "LastUpdateTimestamp": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "LastUpdateTimestamp",
+                        "smithy.api#documentation": "<p>The date and time when the account-level VPC Encryption Control configuration was last updated.</p>",
+                        "smithy.api#xmlName": "lastUpdateTimestamp"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the account-level VPC Encryption Control configuration, including its mode, state, and exclusions.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html\">Enforce VPC encryption in transit</a> in the <i>Amazon VPC User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#AccountVpcEncryptionControlExclusions": {
+            "type": "structure",
+            "members": {
+                "InternetGateway": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InternetGateway",
+                        "smithy.api#documentation": "<p>The exclusion configuration for internet gateway resource.</p>",
+                        "smithy.api#xmlName": "internetGateway"
+                    }
+                },
+                "EgressOnlyInternetGateway": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EgressOnlyInternetGateway",
+                        "smithy.api#documentation": "<p>The exclusion configuration for egress-only internet gateway resource.</p>",
+                        "smithy.api#xmlName": "egressOnlyInternetGateway"
+                    }
+                },
+                "NatGateway": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NatGateway",
+                        "smithy.api#documentation": "<p>The exclusion configuration for NAT gateway resource.</p>",
+                        "smithy.api#xmlName": "natGateway"
+                    }
+                },
+                "VirtualPrivateGateway": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "VirtualPrivateGateway",
+                        "smithy.api#documentation": "<p>The exclusion configuration for virtual private gateway resource.</p>",
+                        "smithy.api#xmlName": "virtualPrivateGateway"
+                    }
+                },
+                "VpcPeering": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "VpcPeering",
+                        "smithy.api#documentation": "<p>The exclusion configuration for VPC peering connection resource.</p>",
+                        "smithy.api#xmlName": "vpcPeering"
+                    }
+                },
+                "Lambda": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Lambda",
+                        "smithy.api#documentation": "<p>The exclusion configuration for Lambda service.</p>",
+                        "smithy.api#xmlName": "lambda"
+                    }
+                },
+                "VpcLattice": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "VpcLattice",
+                        "smithy.api#documentation": "<p>The exclusion configuration for VPC Lattice service.</p>",
+                        "smithy.api#xmlName": "vpcLattice"
+                    }
+                },
+                "ElasticFileSystem": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ElasticFileSystem",
+                        "smithy.api#documentation": "<p>The exclusion configuration for Elastic File System service.</p>",
+                        "smithy.api#xmlName": "elasticFileSystem"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the exclusion configurations for the various resource types in the account-level VPC Encryption Control configuration.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html\">Enforce VPC encryption in transit</a> in the <i>Amazon VPC User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#AccountVpcEncryptionControlMode": {
+            "type": "enum",
+            "members": {
+                "unmanaged": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unmanaged"
+                    }
+                },
+                "attempt_monitor": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "attempt-monitor"
+                    }
+                },
+                "attempt_enforce": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "attempt-enforce"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#AccountVpcEncryptionControlState": {
+            "type": "enum",
+            "members": {
+                "default_state": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "default-state"
+                    }
+                },
+                "transitions_in_progress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "transitions-in-progress"
+                    }
+                },
+                "transitions_partially_successful": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "transitions-partially-successful"
+                    }
+                },
+                "transitions_successful": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "transitions-successful"
+                    }
+                },
+                "transitions_failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "transitions-failed"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#ActiveInstance": {
             "type": "structure",
             "members": {
@@ -2027,6 +2205,12 @@
                         "smithy.api#documentation": "<p>The ID of the Availability Zone.</p>"
                     }
                 },
+                "CpuOptions": {
+                    "target": "com.amazonaws.ec2#HostCpuOptionsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CPU configuration options to apply to the Dedicated Host.</p>"
+                    }
+                },
                 "AutoPlacement": {
                     "target": "com.amazonaws.ec2#AutoPlacement",
                     "traits": {
@@ -2249,6 +2433,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "pending"
+                    }
+                },
+                "configuring": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "configuring"
                     }
                 }
             }
@@ -3286,6 +3476,9 @@
                     "target": "com.amazonaws.ec2#DescribeAccountAttributes"
                 },
                 {
+                    "target": "com.amazonaws.ec2#DescribeAccountVpcEncryptionControl"
+                },
+                {
                     "target": "com.amazonaws.ec2#DescribeAddresses"
                 },
                 {
@@ -4306,6 +4499,9 @@
                     "target": "com.amazonaws.ec2#LockSnapshot"
                 },
                 {
+                    "target": "com.amazonaws.ec2#ModifyAccountVpcEncryptionControl"
+                },
+                {
                     "target": "com.amazonaws.ec2#ModifyAddressAttribute"
                 },
                 {
@@ -4514,6 +4710,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyVpcEndpointConnectionNotification"
+                },
+                {
+                    "target": "com.amazonaws.ec2#ModifyVpcEndpointPayerResponsibility"
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyVpcEndpointServiceConfiguration"
@@ -6049,6 +6248,23 @@
                         }
                     ],
                     "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.ec2#AmdSevSnp": {
+            "type": "enum",
+            "members": {
+                "enabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabled"
+                    }
+                },
+                "disabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
                 }
             }
         },
@@ -11424,7 +11640,7 @@
                 "target": "com.amazonaws.ec2#CancelCapacityReservationResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Cancels the specified Capacity Reservation, releases the reserved capacity, and\n\t\t\tchanges the Capacity Reservation's state to <code>cancelled</code>.</p>\n         <p>You can cancel a Capacity Reservation that is in the following states:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>assessing</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>scheduled</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>active</code> and there is no commitment duration or the commitment\n\t\t\t\t\tduration has elapsed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>active</code> during the commitment duration, if you provide a\n\t\t\t\t\tcancellation quote ID and accept the cancellation charges. Use\n\t\t\t\t\t<code>CreateCapacityReservationCancellationQuote</code> to generate a quote.\n\t\t\t\t\tThe Capacity Reservation transitions to <code>cancelling</code> while charges\n\t\t\t\t\tare applied.</p>\n            </li>\n         </ul>\n         <note>\n            <p>You can't modify or cancel a Capacity Block. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-blocks.html\">Capacity Blocks for ML</a>.</p>\n         </note>\n         <p>If a future-dated Capacity Reservation enters the <code>delayed</code> state, the\n\t\t\tcommitment duration is waived, and you can cancel it as soon as it enters the\n\t\t\t\t<code>active</code> state.</p>\n         <p>Instances running in the reserved capacity continue running until you stop them.\n\t\t\tStopped instances that target the Capacity Reservation can no longer launch. Modify\n\t\t\tthese instances to either target a different Capacity Reservation, launch On-Demand\n\t\t\tInstance capacity, or run in any open Capacity Reservation that has matching attributes\n\t\t\tand sufficient capacity.</p>"
+                "smithy.api#documentation": "<p>Cancels the specified Capacity Reservation, releases the reserved capacity, and\n\t\t\tchanges the Capacity Reservation's state to <code>cancelled</code>.</p>\n         <p>You can cancel a Capacity Reservation that is in the following states:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>assessing</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>scheduled</code> — requires a cancellation quote. Use\n\t\t\t\t\t<code>CreateCapacityReservationCancellationQuote</code> to generate a quote,\n\t\t\t\t\tthen pass the quote ID with <code>ApplyCancellationCharges</code> set to\n\t\t\t\t\t<code>commitment-wind-down</code>. The cancellation charge depends on how\n\t\t\t\t\tclose the reservation is to its start date.</p>\n            </li>\n            <li>\n               <p>\n                  <code>active</code> and there is no commitment duration or the commitment\n\t\t\t\t\tduration has elapsed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>active</code> during the commitment duration — requires a\n\t\t\t\t\tcancellation quote. Use\n\t\t\t\t\t<code>CreateCapacityReservationCancellationQuote</code> to generate a quote,\n\t\t\t\t\tthen pass the quote ID with <code>ApplyCancellationCharges</code> set to\n\t\t\t\t\t<code>commitment-wind-down</code>. The Capacity Reservation transitions to\n\t\t\t\t\t<code>cancelling</code> while charges are applied.</p>\n            </li>\n            <li>\n               <p>\n                  <code>delayed</code> — the commitment duration is waived, so no\n\t\t\t\t\tcancellation charge applies.</p>\n            </li>\n         </ul>\n         <note>\n            <p>You can't modify or cancel a Capacity Block. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-blocks.html\">Capacity Blocks for ML</a>.</p>\n         </note>\n         <p>Instances running in the reserved capacity continue running until you stop them.\n\t\t\tStopped instances that target the Capacity Reservation can no longer launch. Modify\n\t\t\tthese instances to either target a different Capacity Reservation, launch On-Demand\n\t\t\tInstance capacity, or run in any open Capacity Reservation that has matching attributes\n\t\t\tand sufficient capacity.</p>"
             }
         },
         "com.amazonaws.ec2#CancelCapacityReservationFleetError": {
@@ -19323,6 +19539,30 @@
                         "smithy.api#documentation": "<p>The value is <code>windows</code> for Windows instances in an EC2 Fleet. Otherwise, the value is\n         blank.</p>",
                         "smithy.api#xmlName": "platform"
                     }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.ec2#AvailabilityZoneId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZoneId",
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone in which the instance was launched. For example,\n            <code>use2-az1</code>.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>",
+                        "smithy.api#xmlName": "availabilityZoneId"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.ec2#AvailabilityZoneName",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZone",
+                        "smithy.api#documentation": "<p>The name of the Availability Zone in which the instance was launched. For example,\n            <code>us-east-2a</code>.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>",
+                        "smithy.api#xmlName": "availabilityZone"
+                    }
+                },
+                "SubnetId": {
+                    "target": "com.amazonaws.ec2#SubnetId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SubnetId",
+                        "smithy.api#documentation": "<p>The ID of the subnet in which the instance was launched.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>",
+                        "smithy.api#xmlName": "subnetId"
+                    }
                 }
             },
             "traits": {
@@ -19427,7 +19667,7 @@
                 "TagSpecifications": {
                     "target": "com.amazonaws.ec2#TagSpecificationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-value pair for tagging the EC2 Fleet request on creation. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources\">Tag your resources</a>.</p>\n         <p>If the fleet type is <code>instant</code>, specify a resource type of <code>fleet</code> \n         to tag the fleet or <code>instance</code> to tag the instances at launch.</p>\n         <p>If the fleet type is <code>maintain</code> or <code>request</code>, specify a resource\n         type of <code>fleet</code> to tag the fleet. You cannot specify a resource type of\n            <code>instance</code>. To tag instances at launch, specify the tags in a <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template\">launch template</a>.</p>",
+                        "smithy.api#documentation": "<p>The key-value pair for tagging the EC2 Fleet request on creation. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources\">Tag your resources</a>.</p>\n         <p>If the fleet type is <code>instant</code>, specify a resource type of <code>fleet</code> \n         to tag the fleet, <code>instance</code> to tag the instances at launch,\n         <code>volume</code> to tag the volumes at launch, or <code>network-interface</code> to\n         tag the network interfaces at launch.</p>\n         <p>If the fleet type is <code>maintain</code> or <code>request</code>, specify a resource\n         type of <code>fleet</code> to tag the fleet. You cannot specify a resource type of\n            <code>instance</code>, <code>volume</code>, or <code>network-interface</code>. To tag instances at launch, specify the tags in a <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template\">launch template</a>.</p>",
                         "smithy.api#xmlName": "TagSpecification"
                     }
                 },
@@ -22769,7 +23009,7 @@
                 "target": "com.amazonaws.ec2#CreatePlacementGroupResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a placement group in which to launch instances. The strategy of the placement\n            group determines how the instances are organized within the group. </p>\n         <p>A <code>cluster</code> placement group is a logical grouping of instances within a\n            single Availability Zone that benefit from low network latency, high network throughput.\n            A <code>spread</code> placement group places instances on distinct hardware. A\n                <code>partition</code> placement group places groups of instances in different\n            partitions, where instances in one partition do not share the same hardware with\n            instances in another partition. A <code>precision-time</code> placement group places\n            instances on supported hardware with direct access to high-precision time sources in\n            AWS infrastructure.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement groups</a> in the\n                <i>Amazon EC2 User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a placement group in which to launch instances. The strategy of the placement\n            group determines how the instances are organized within the group. </p>\n         <p>A <code>cluster</code> placement group is a logical grouping of instances within a\n            single Availability Zone that benefit from low network latency, high network throughput.\n            A <code>spread</code> placement group places instances on distinct hardware. A\n                <code>partition</code> placement group places groups of instances in different\n            partitions, where instances in one partition do not share the same hardware with\n            instances in another partition. A <code>precision-time</code> placement group places\n            instances on supported hardware with direct access to high-precision time sources in\n            Amazon Web Services infrastructure.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement groups</a> in the\n                <i>Amazon EC2 User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To create a placement group",
@@ -22932,7 +23172,7 @@
                 "target": "com.amazonaws.ec2#CreateReplaceRootVolumeTaskResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Replaces the EBS-backed root volume for a <code>running</code> instance with a new \n      volume that is restored to the original root volume's launch state, that is restored to a \n      specific snapshot taken from the original root volume, or that is restored from an AMI \n      that has the same key characteristics as that of the instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/replace-root.html\">Replace a root volume</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Replaces the EBS-backed root volume for a <code>running</code> instance with a new \n      volume that is restored to the original root volume's launch state, that is restored to a \n      specific snapshot taken from the original root volume, that is restored from an AMI \n      that has the same key characteristics as that of the instance, or that is replaced by \n      a specified volume.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/replace-root.html\">Replace a root volume</a> in the <i>Amazon EC2 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateReplaceRootVolumeTaskRequest": {
@@ -22949,7 +23189,7 @@
                 "SnapshotId": {
                     "target": "com.amazonaws.ec2#SnapshotId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the snapshot from which to restore the replacement root volume. The \n      specified snapshot must be a snapshot that you previously created from the original \n      root volume.</p>\n         <p>If you want to restore the replacement root volume to the initial launch state, \n      or if you want to restore the replacement root volume from an AMI, omit this \n      parameter.</p>"
+                        "smithy.api#documentation": "<p>The ID of the snapshot from which to restore the replacement root volume. The \n      specified snapshot must be a snapshot that you previously created from the original \n      root volume.</p>\n         <p>If you want to restore the replacement root volume to the initial launch state, \n      if you want to restore the replacement root volume from an AMI, or if you want to \n      replace the root volume with a specified volume, omit this parameter.</p>"
                     }
                 },
                 "ClientToken": {
@@ -22975,7 +23215,7 @@
                 "ImageId": {
                     "target": "com.amazonaws.ec2#ImageId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AMI to use to restore the root volume. The specified AMI must have the \n      same product code, billing information, architecture type, and virtualization type as \n      that of the instance.</p>\n         <p>If you want to restore the replacement volume from a specific snapshot, or if you want \n      to restore it to its launch state, omit this parameter.</p>"
+                        "smithy.api#documentation": "<p>The ID of the AMI to use to restore the root volume. The specified AMI must have the \n      same product code, billing information, architecture type, and virtualization type as \n      that of the instance.</p>\n         <p>If you want to restore the replacement volume from a specific snapshot, if you want \n      to restore it to its launch state, or if you want to replace the root volume with a \n      specified volume, omit this parameter.</p>"
                     }
                 },
                 "DeleteReplacedRootVolume": {
@@ -22988,6 +23228,12 @@
                     "target": "com.amazonaws.ec2#Long",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate), in MiB/s, at which to download \n      the snapshot blocks from Amazon S3 to the replacement root volume. This is also known as \n      <i>volume initialization</i>. Specifying a volume initialization rate ensures that \n      the volume is initialized at a predictable and consistent rate after creation.</p>\n         <p>Omit this parameter if:</p>\n         <ul>\n            <li>\n               <p>You want to create the volume using fast snapshot restore. You must specify a snapshot \n          that is enabled for fast snapshot restore. In this case, the volume is fully initialized at \n          creation.</p>\n               <note>\n                  <p>If you specify a snapshot that is enabled for fast snapshot restore and a volume initialization rate, \n            the volume will be initialized at the specified rate instead of fast snapshot restore.</p>\n               </note>\n            </li>\n            <li>\n               <p>You want to create a volume that is initialized at the default rate.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html\">\n      Initialize Amazon EBS volumes</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         <p>Valid range: 100 - 300 MiB/s</p>"
+                    }
+                },
+                "VolumeId": {
+                    "target": "com.amazonaws.ec2#VolumeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the volume to use as the replacement root volume. The specified volume must \n      be in the same Availability Zone as the instance, must be in the <code>available</code>\n      state, and must not be attached to an instance. If the original root volume is encrypted,\n      the specified volume must also be encrypted.</p>\n         <p>If you want to restore the replacement root volume from a specific snapshot, an AMI, \n      or to its launch state, omit this parameter.</p>"
                     }
                 }
             },
@@ -34572,6 +34818,48 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#DescribeAccountVpcEncryptionControl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeAccountVpcEncryptionControlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeAccountVpcEncryptionControlResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the account-level VPC Encryption Control configuration for your account. VPC Encryption Control enables you to enforce encryption for all data in transit within and between VPCs to meet compliance requirements.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html\">Enforce VPC encryption in transit</a> in the <i>Amazon VPC User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DescribeAccountVpcEncryptionControlRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeAccountVpcEncryptionControlResult": {
+            "type": "structure",
+            "members": {
+                "AccountVpcEncryptionControl": {
+                    "target": "com.amazonaws.ec2#AccountVpcEncryptionControl",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AccountVpcEncryptionControl",
+                        "smithy.api#documentation": "<p>Information about the account-level VPC Encryption Control configuration.</p>",
+                        "smithy.api#xmlName": "accountVpcEncryptionControl"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#DescribeAddressTransfers": {
             "type": "operation",
             "input": {
@@ -39807,7 +40095,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>architecture</code> - The image architecture (<code>i386</code> |\n            <code>x86_64</code> | <code>arm64</code> | <code>x86_64_mac</code> |\n            <code>arm64_mac</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates\n          whether the Amazon EBS volume is deleted on instance termination.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.device-name</code> - The device name specified in the block\n          device mapping (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the Amazon EBS\n          volume.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.volume-size</code> - The volume size of the Amazon EBS volume, in\n          GiB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.volume-type</code> - The volume type of the Amazon EBS volume\n            (<code>io1</code> | <code>io2</code> | <code>gp2</code> | <code>gp3</code> | <code>sc1\n          </code>| <code>st1</code> | <code>standard</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.encrypted</code> - A Boolean that indicates whether the Amazon EBS\n          volume is encrypted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>creation-date</code> - The time when the image was created, in the ISO 8601\n          format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example,\n            <code>2021-09-29T11:04:43.305Z</code>. You can use a wildcard (<code>*</code>), for\n          example, <code>2021-09-29T*</code>, which matches an entire day.</p>\n            </li>\n            <li>\n               <p>\n                  <code>description</code> - The description of the image (provided during image\n          creation).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ena-support</code> - A Boolean that indicates whether enhanced networking with\n          ENA is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>free-tier-eligible</code> - A Boolean that indicates whether this image can be\n          used under the Amazon Web Services Free Tier  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor type (<code>ovm</code> |\n          <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-allowed</code> - A Boolean that indicates whether the image meets the\n          criteria specified for Allowed AMIs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-id</code> - The ID of the image.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> |\n            <code>ramdisk</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>is-public</code> - A Boolean that indicates whether the image is public.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kernel-id</code> - The kernel ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>manifest-location</code> - The location of the image manifest.</p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code> - The name of the AMI (provided during image creation).</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-alias</code> - The owner alias (<code>amazon</code> |\n            <code>aws-backup-vault</code> | <code>aws-marketplace</code>). The valid aliases are\n          defined in an Amazon-maintained list. This is not the Amazon Web Services account alias\n          that can be set using the IAM console. We recommend that you use the <b>Owner</b> request parameter instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The Amazon Web Services account ID of the owner. We recommend\n          that you use the <b>Owner</b> request parameter instead of this\n          filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code> - The platform. The only supported value is\n          <code>windows</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code</code> - The product code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code.type</code> - The type of the product code\n          (<code>marketplace</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ramdisk-id</code> - The RAM disk ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>root-device-name</code> - The device name of the root device volume (for example,\n            <code>/dev/sda1</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> |\n            <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>source-image-id</code> - The ID of the source AMI from which the AMI was\n          created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>source-image-region</code> - The Region of the source AMI.</p>\n            </li>\n            <li>\n               <p>\n                  <code>source-instance-id</code> - The ID of the instance that the AMI was created from\n          if the AMI was created using CreateImage. This filter is applicable only if the AMI was\n          created using <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html\">CreateImage</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The state of the image (<code>available</code> | <code>pending</code>\n          | <code>failed</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>state-reason-code</code> - The reason code for the state change.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state-reason-message</code> - The message for the state change.</p>\n            </li>\n            <li>\n               <p>\n                  <code>sriov-net-support</code> - A value of <code>simple</code> indicates that\n          enhanced networking with the Intel 82599 VF interface is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:<key></code> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> |\n            <code>hvm</code>).</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>architecture</code> - The image architecture (<code>i386</code> |\n            <code>x86_64</code> | <code>arm64</code> | <code>x86_64_mac</code> |\n            <code>arm64_mac</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates\n          whether the Amazon EBS volume is deleted on instance termination.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.device-name</code> - The device name specified in the block\n          device mapping (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the Amazon EBS\n          volume.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.volume-size</code> - The volume size of the Amazon EBS volume, in\n          GiB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.volume-type</code> - The volume type of the Amazon EBS volume\n            (<code>io1</code> | <code>io2</code> | <code>gp2</code> | <code>gp3</code> | <code>sc1\n          </code>| <code>st1</code> | <code>standard</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.encrypted</code> - A Boolean that indicates whether the Amazon EBS\n          volume is encrypted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>creation-date</code> - The time when the image was created, in the ISO 8601\n          format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example,\n            <code>2021-09-29T11:04:43.305Z</code>. You can use a wildcard (<code>*</code>), for\n          example, <code>2021-09-29T*</code>, which matches an entire day.</p>\n            </li>\n            <li>\n               <p>\n                  <code>description</code> - The description of the image (provided during image\n          creation).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ena-support</code> - A Boolean that indicates whether enhanced networking with\n          ENA is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>free-tier-eligible</code> - A Boolean that indicates whether this image can be\n          used under the Amazon Web Services Free Tier  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor type (<code>ovm</code> |\n          <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-allowed</code> - A Boolean that indicates whether the image meets the\n          criteria specified for Allowed AMIs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-id</code> - The ID of the image.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-watermark.source-image-creation-time</code> - The creation date of the\n          source AMI, in the ISO 8601 format in the UTC time zone\n            (<code>\n                     <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>.<i>ssssss</i>+<i>HH</i>:<i>MM</i>\n                  </code>).\n          You can use a wildcard (<code>*</code>), for example, <code>2021-09-29T*</code>, which\n          matches an entire day.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-watermark.source-image-id</code> - The ID of the AMI to which the\n          watermark was originally attached.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-watermark.source-image-region</code> - The Region where the watermark\n          was originally attached.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-watermark.watermark-creation-time</code> - The date and time the\n          watermark was attached to the AMI, in the ISO 8601 format in the UTC time zone\n            (<code>\n                     <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>.<i>ssssss</i>+<i>HH</i>:<i>MM</i>\n                  </code>).\n          You can use a wildcard (<code>*</code>), for example, <code>2021-09-29T*</code>, which\n          matches an entire day.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-watermark.watermark-key</code> - The watermark identifier, in\n            <code>accountId:watermarkName</code> format (for example,\n            <code>123456789012:approvedAmi</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> |\n            <code>ramdisk</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>is-public</code> - A Boolean that indicates whether the image is public.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kernel-id</code> - The kernel ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>manifest-location</code> - The location of the image manifest.</p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code> - The name of the AMI (provided during image creation).</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-alias</code> - The owner alias (<code>amazon</code> |\n            <code>aws-backup-vault</code> | <code>aws-marketplace</code>). The valid aliases are\n          defined in an Amazon-maintained list. This is not the Amazon Web Services account alias\n          that can be set using the IAM console. We recommend that you use the <b>Owner</b> request parameter instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The Amazon Web Services account ID of the owner. We recommend\n          that you use the <b>Owner</b> request parameter instead of this\n          filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code> - The platform. The only supported value is\n          <code>windows</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code</code> - The product code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code.type</code> - The type of the product code\n          (<code>marketplace</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>public-ssm-parameter-name</code> - The name of a public Systems Manager\n          parameter associated with the AMI. The parameter must be in a trusted Amazon Web Services namespace\n          under <code>aws/service/</code>. Returns all AMIs that have ever been associated with\n          the parameter, including previous versions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ramdisk-id</code> - The RAM disk ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>root-device-name</code> - The device name of the root device volume (for example,\n            <code>/dev/sda1</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> |\n            <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>source-image-id</code> - The ID of the source AMI from which the AMI was\n          created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>source-image-region</code> - The Region of the source AMI.</p>\n            </li>\n            <li>\n               <p>\n                  <code>source-instance-id</code> - The ID of the instance that the AMI was created from\n          if the AMI was created using CreateImage. This filter is applicable only if the AMI was\n          created using <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html\">CreateImage</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The state of the image (<code>available</code> | <code>pending</code>\n          | <code>failed</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>state-reason-code</code> - The reason code for the state change.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state-reason-message</code> - The message for the state change.</p>\n            </li>\n            <li>\n               <p>\n                  <code>sriov-net-support</code> - A value of <code>simple</code> indicates that\n          enhanced networking with the Intel 82599 VF interface is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:<key></code> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> |\n            <code>hvm</code>).</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 }
@@ -51784,6 +52072,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results (up to a limit of 500) to be returned in a paginated\n      request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>"
                     }
+                },
+                "IncludeManagedResources": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to include managed resources in the output. If this parameter is set to <code>true</code>, the output includes resources that are managed by Amazon Web Services services, even if managed resource visibility is set to hidden.</p>"
+                    }
                 }
             },
             "traits": {
@@ -62722,6 +63016,43 @@
                 }
             }
         },
+        "com.amazonaws.ec2#FleetHttpTokensState": {
+            "type": "enum",
+            "members": {
+                "OPTIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "optional"
+                    }
+                },
+                "REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "required"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#FleetIamInstanceProfileSpecificationRequest": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the instance profile.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the instance profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an IAM instance profile. Supported only for fleets of type\n         <code>instant</code>.</p>"
+            }
+        },
         "com.amazonaws.ec2#FleetId": {
             "type": "string"
         },
@@ -62740,6 +63071,49 @@
                         "smithy.api#enumValue": "open"
                     }
                 }
+            }
+        },
+        "com.amazonaws.ec2#FleetInstanceMetadataEndpointState": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabled"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#FleetInstanceMetadataOptionsRequest": {
+            "type": "structure",
+            "members": {
+                "HttpTokens": {
+                    "target": "com.amazonaws.ec2#FleetHttpTokensState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether IMDSv2 is required.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>optional</code> - IMDSv2 is optional, which means that you can use either\n               IMDSv2 or IMDSv1.</p>\n            </li>\n            <li>\n               <p>\n                  <code>required</code> - IMDSv2 is required, which means that IMDSv1 is\n               disabled, and you must use IMDSv2.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "HttpPutResponseHopLimit": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired HTTP PUT response hop limit for instance metadata requests. The larger the\n         number, the further instance metadata requests can travel.</p>\n         <p>Default: <code>1</code>\n         </p>\n         <p>Possible values: Integers from 1 to 64</p>"
+                    }
+                },
+                "HttpEndpoint": {
+                    "target": "com.amazonaws.ec2#FleetInstanceMetadataEndpointState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables or disables the HTTP metadata endpoint on your instances.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>enabled</code> - The HTTP metadata endpoint is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disabled</code> - The HTTP metadata endpoint is disabled.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the metadata options for the instances. Supported only for fleets of type\n         <code>instant</code>.</p>"
             }
         },
         "com.amazonaws.ec2#FleetLaunchTemplateConfig": {
@@ -62969,11 +63343,29 @@
                         "smithy.api#documentation": "<p>The location where the instance launched, if applicable.</p>"
                     }
                 },
+                "KeyName": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the key pair to use for the instances.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 key pairs</a>\n         in the <i>Amazon EC2 User Guide</i>.</p>"
+                    }
+                },
                 "BlockDeviceMappings": {
                     "target": "com.amazonaws.ec2#FleetBlockDeviceMappingRequestList",
                     "traits": {
                         "smithy.api#documentation": "<p>The block device mappings, which define the EBS volumes and instance store volumes to\n         attach to the instance at launch.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html\">Block device mappings\n            for volumes on Amazon EC2 instances</a> in the <i>Amazon EC2 User\n         Guide</i>.</p>",
                         "smithy.api#xmlName": "BlockDeviceMapping"
+                    }
+                },
+                "IamInstanceProfile": {
+                    "target": "com.amazonaws.ec2#FleetIamInstanceProfileSpecificationRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM instance profile to associate with the instances.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html\">IAM roles for Amazon EC2</a>\n         in the <i>Amazon EC2 User Guide</i>.</p>"
+                    }
+                },
+                "MetadataOptions": {
+                    "target": "com.amazonaws.ec2#FleetInstanceMetadataOptionsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata options for the instances.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html\">Configure the\n            instance metadata service</a> in the <i>Amazon EC2 User Guide</i>.</p>"
                     }
                 },
                 "InstanceRequirements": {
@@ -63050,6 +63442,12 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The launch template version number, <code>$Latest</code>, or <code>$Default</code>. You must specify a value, otherwise the request fails.</p>\n         <p>If the value is <code>$Latest</code>, Amazon EC2 uses the latest version of the launch template.</p>\n         <p>If the value is <code>$Default</code>, Amazon EC2 uses the default version of the launch template.</p>"
+                    }
+                },
+                "LaunchTemplateSpecificationUserData": {
+                    "target": "com.amazonaws.ec2#SensitiveUserData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base64-encoded user data for instances launched by the fleet. User data is limited\n         to 16 KB, in raw form, before it is base64-encoded.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>"
                     }
                 }
             },
@@ -70119,10 +70517,48 @@
                         "smithy.api#documentation": "<p>The ID of the Outpost hardware asset on which the Dedicated Host is allocated.</p>",
                         "smithy.api#xmlName": "assetId"
                     }
+                },
+                "CpuOptions": {
+                    "target": "com.amazonaws.ec2#HostCpuOptions",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CpuOptions",
+                        "smithy.api#documentation": "<p>The CPU options for the Dedicated Host, including AMD Secure Encrypted Virtualization-Secure Nested Paging (AMD SEV-SNP) settings.</p>",
+                        "smithy.api#xmlName": "cpuOptions"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the properties of the Dedicated Host.</p>"
+            }
+        },
+        "com.amazonaws.ec2#HostCpuOptions": {
+            "type": "structure",
+            "members": {
+                "AmdSevSnp": {
+                    "target": "com.amazonaws.ec2#AmdSevSnp",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AmdSevSnp",
+                        "smithy.api#documentation": "<p>Specifies whether AMD Secure Encrypted Virtualization-Secure Nested Paging (AMD SEV-SNP) is enabled or disabled for the Dedicated Host. If you don't specify a value, AMD SEV-SNP is <code>disabled</code>.</p>",
+                        "smithy.api#xmlName": "amdSevSnp"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the CPU options for a Dedicated Host, including AMD Secure Encrypted Virtualization-Secure Nested Paging (AMD SEV-SNP) settings.</p>"
+            }
+        },
+        "com.amazonaws.ec2#HostCpuOptionsRequest": {
+            "type": "structure",
+            "members": {
+                "AmdSevSnp": {
+                    "target": "com.amazonaws.ec2#AmdSevSnp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether AMD Secure Encrypted Virtualization-Secure Nested Paging (AMD SEV-SNP) is enabled or disabled for the Dedicated Host. If you don't specify a value, AMD SEV-SNP is <code>disabled</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the CPU configuration options for a Dedicated Host allocation request. Options include AMD Secure Encrypted Virtualization-Secure Nested Paging (AMD SEV-SNP) settings.</p>"
             }
         },
         "com.amazonaws.ec2#HostInstance": {
@@ -71039,6 +71475,14 @@
                         "aws.protocols#ec2QueryName": "FreeTierEligible",
                         "smithy.api#documentation": "<p>Indicates whether the image is eligible for Amazon Web Services Free Tier.</p>\n         <ul>\n            <li>\n               <p>If <code>true</code>, the AMI is eligible for Free Tier and can be used to launch\n          instances under the Free Tier limits.</p>\n            </li>\n            <li>\n               <p>If <code>false</code>, the AMI is not eligible for Free Tier.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "freeTierEligible"
+                    }
+                },
+                "PublicSsmParameterName": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PublicSsmParameterName",
+                        "smithy.api#documentation": "<p>The name of the public Systems Manager parameter that resolves to this AMI, under the\n      <code>aws/service/</code> namespace.</p>",
+                        "smithy.api#xmlName": "publicSsmParameterName"
                     }
                 },
                 "ImageWatermarks": {
@@ -85221,6 +85665,1164 @@
                     "traits": {
                         "smithy.api#enumValue": "hpc8a.96xlarge"
                     }
+                },
+                "c8in_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8in.large"
+                    }
+                },
+                "c8in_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8in.xlarge"
+                    }
+                },
+                "c8in_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8in.2xlarge"
+                    }
+                },
+                "c8in_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8in.4xlarge"
+                    }
+                },
+                "c8in_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8in.8xlarge"
+                    }
+                },
+                "c8in_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8in.12xlarge"
+                    }
+                },
+                "c8in_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8in.16xlarge"
+                    }
+                },
+                "c8in_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8in.24xlarge"
+                    }
+                },
+                "c8in_32xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8in.32xlarge"
+                    }
+                },
+                "c8in_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8in.48xlarge"
+                    }
+                },
+                "c8in_96xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8in.96xlarge"
+                    }
+                },
+                "c8in_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8in.metal-48xl"
+                    }
+                },
+                "c8in_metal_96xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8in.metal-96xl"
+                    }
+                },
+                "c8ib_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ib.large"
+                    }
+                },
+                "c8ib_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ib.xlarge"
+                    }
+                },
+                "c8ib_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ib.2xlarge"
+                    }
+                },
+                "c8ib_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ib.4xlarge"
+                    }
+                },
+                "c8ib_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ib.8xlarge"
+                    }
+                },
+                "c8ib_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ib.12xlarge"
+                    }
+                },
+                "c8ib_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ib.16xlarge"
+                    }
+                },
+                "c8ib_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ib.24xlarge"
+                    }
+                },
+                "c8ib_32xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ib.32xlarge"
+                    }
+                },
+                "c8ib_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ib.48xlarge"
+                    }
+                },
+                "c8ib_96xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ib.96xlarge"
+                    }
+                },
+                "c8ib_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ib.metal-48xl"
+                    }
+                },
+                "c8ib_metal_96xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ib.metal-96xl"
+                    }
+                },
+                "r8in_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8in.large"
+                    }
+                },
+                "r8in_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8in.xlarge"
+                    }
+                },
+                "r8in_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8in.2xlarge"
+                    }
+                },
+                "r8in_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8in.4xlarge"
+                    }
+                },
+                "r8in_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8in.8xlarge"
+                    }
+                },
+                "r8in_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8in.12xlarge"
+                    }
+                },
+                "r8in_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8in.16xlarge"
+                    }
+                },
+                "r8in_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8in.24xlarge"
+                    }
+                },
+                "r8in_32xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8in.32xlarge"
+                    }
+                },
+                "r8in_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8in.48xlarge"
+                    }
+                },
+                "r8in_96xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8in.96xlarge"
+                    }
+                },
+                "r8ib_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8ib.large"
+                    }
+                },
+                "r8ib_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8ib.xlarge"
+                    }
+                },
+                "r8ib_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8ib.2xlarge"
+                    }
+                },
+                "r8ib_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8ib.4xlarge"
+                    }
+                },
+                "r8ib_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8ib.8xlarge"
+                    }
+                },
+                "r8ib_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8ib.12xlarge"
+                    }
+                },
+                "r8ib_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8ib.16xlarge"
+                    }
+                },
+                "r8ib_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8ib.24xlarge"
+                    }
+                },
+                "r8ib_32xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8ib.32xlarge"
+                    }
+                },
+                "r8ib_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8ib.48xlarge"
+                    }
+                },
+                "r8ib_96xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8ib.96xlarge"
+                    }
+                },
+                "m8in_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8in.large"
+                    }
+                },
+                "m8in_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8in.xlarge"
+                    }
+                },
+                "m8in_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8in.2xlarge"
+                    }
+                },
+                "m8in_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8in.4xlarge"
+                    }
+                },
+                "m8in_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8in.8xlarge"
+                    }
+                },
+                "m8in_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8in.12xlarge"
+                    }
+                },
+                "m8in_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8in.16xlarge"
+                    }
+                },
+                "m8in_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8in.24xlarge"
+                    }
+                },
+                "m8in_32xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8in.32xlarge"
+                    }
+                },
+                "m8in_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8in.48xlarge"
+                    }
+                },
+                "m8in_96xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8in.96xlarge"
+                    }
+                },
+                "m8ib_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ib.large"
+                    }
+                },
+                "m8ib_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ib.xlarge"
+                    }
+                },
+                "m8ib_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ib.2xlarge"
+                    }
+                },
+                "m8ib_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ib.4xlarge"
+                    }
+                },
+                "m8ib_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ib.8xlarge"
+                    }
+                },
+                "m8ib_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ib.12xlarge"
+                    }
+                },
+                "m8ib_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ib.16xlarge"
+                    }
+                },
+                "m8ib_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ib.24xlarge"
+                    }
+                },
+                "m8ib_32xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ib.32xlarge"
+                    }
+                },
+                "m8ib_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ib.48xlarge"
+                    }
+                },
+                "m8ib_96xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ib.96xlarge"
+                    }
+                },
+                "m8ine_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ine.large"
+                    }
+                },
+                "m8ine_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ine.xlarge"
+                    }
+                },
+                "m8ine_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ine.2xlarge"
+                    }
+                },
+                "m8ine_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ine.4xlarge"
+                    }
+                },
+                "m8ine_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ine.8xlarge"
+                    }
+                },
+                "m8ine_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ine.12xlarge"
+                    }
+                },
+                "c8ine_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ine.large"
+                    }
+                },
+                "c8ine_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ine.xlarge"
+                    }
+                },
+                "c8ine_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ine.2xlarge"
+                    }
+                },
+                "c8ine_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ine.4xlarge"
+                    }
+                },
+                "c8ine_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ine.8xlarge"
+                    }
+                },
+                "c8ine_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c8ine.12xlarge"
+                    }
+                },
+                "m8idn_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idn.large"
+                    }
+                },
+                "m8idn_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idn.xlarge"
+                    }
+                },
+                "m8idn_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idn.2xlarge"
+                    }
+                },
+                "m8idn_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idn.4xlarge"
+                    }
+                },
+                "m8idn_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idn.8xlarge"
+                    }
+                },
+                "m8idn_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idn.12xlarge"
+                    }
+                },
+                "m8idn_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idn.16xlarge"
+                    }
+                },
+                "m8idn_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idn.24xlarge"
+                    }
+                },
+                "m8idn_32xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idn.32xlarge"
+                    }
+                },
+                "m8idn_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idn.48xlarge"
+                    }
+                },
+                "m8idn_96xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idn.96xlarge"
+                    }
+                },
+                "r8idn_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idn.large"
+                    }
+                },
+                "r8idn_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idn.xlarge"
+                    }
+                },
+                "r8idn_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idn.2xlarge"
+                    }
+                },
+                "r8idn_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idn.4xlarge"
+                    }
+                },
+                "r8idn_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idn.8xlarge"
+                    }
+                },
+                "r8idn_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idn.12xlarge"
+                    }
+                },
+                "r8idn_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idn.16xlarge"
+                    }
+                },
+                "r8idn_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idn.24xlarge"
+                    }
+                },
+                "r8idn_32xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idn.32xlarge"
+                    }
+                },
+                "r8idn_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idn.48xlarge"
+                    }
+                },
+                "r8idn_96xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idn.96xlarge"
+                    }
+                },
+                "m8idb_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idb.large"
+                    }
+                },
+                "m8idb_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idb.xlarge"
+                    }
+                },
+                "m8idb_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idb.2xlarge"
+                    }
+                },
+                "m8idb_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idb.4xlarge"
+                    }
+                },
+                "m8idb_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idb.8xlarge"
+                    }
+                },
+                "m8idb_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idb.12xlarge"
+                    }
+                },
+                "m8idb_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idb.16xlarge"
+                    }
+                },
+                "m8idb_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idb.24xlarge"
+                    }
+                },
+                "m8idb_32xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idb.32xlarge"
+                    }
+                },
+                "m8idb_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idb.48xlarge"
+                    }
+                },
+                "m8idb_96xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idb.96xlarge"
+                    }
+                },
+                "r8idb_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idb.large"
+                    }
+                },
+                "r8idb_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idb.xlarge"
+                    }
+                },
+                "r8idb_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idb.2xlarge"
+                    }
+                },
+                "r8idb_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idb.4xlarge"
+                    }
+                },
+                "r8idb_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idb.8xlarge"
+                    }
+                },
+                "r8idb_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idb.12xlarge"
+                    }
+                },
+                "r8idb_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idb.16xlarge"
+                    }
+                },
+                "r8idb_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idb.24xlarge"
+                    }
+                },
+                "r8idb_32xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idb.32xlarge"
+                    }
+                },
+                "r8idb_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idb.48xlarge"
+                    }
+                },
+                "r8idb_96xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idb.96xlarge"
+                    }
+                },
+                "mac_m3ultra_metal": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mac-m3ultra.metal"
+                    }
+                },
+                "m9g_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9g.large"
+                    }
+                },
+                "m9g_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9g.xlarge"
+                    }
+                },
+                "m9g_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9g.2xlarge"
+                    }
+                },
+                "m9g_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9g.4xlarge"
+                    }
+                },
+                "m9g_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9g.8xlarge"
+                    }
+                },
+                "m9g_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9g.12xlarge"
+                    }
+                },
+                "m9g_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9g.16xlarge"
+                    }
+                },
+                "m9g_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9g.24xlarge"
+                    }
+                },
+                "m9g_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9g.48xlarge"
+                    }
+                },
+                "m9g_metal_24xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9g.metal-24xl"
+                    }
+                },
+                "m9g_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9g.metal-48xl"
+                    }
+                },
+                "m9gd_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9gd.large"
+                    }
+                },
+                "m9gd_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9gd.xlarge"
+                    }
+                },
+                "m9gd_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9gd.2xlarge"
+                    }
+                },
+                "m9gd_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9gd.4xlarge"
+                    }
+                },
+                "m9gd_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9gd.8xlarge"
+                    }
+                },
+                "m9gd_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9gd.12xlarge"
+                    }
+                },
+                "m9gd_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9gd.16xlarge"
+                    }
+                },
+                "m9gd_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9gd.24xlarge"
+                    }
+                },
+                "m9gd_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9gd.48xlarge"
+                    }
+                },
+                "m9gd_metal_24xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9gd.metal-24xl"
+                    }
+                },
+                "m9gd_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9gd.metal-48xl"
+                    }
+                },
+                "r8in_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8in.metal-48xl"
+                    }
+                },
+                "r8in_metal_96xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8in.metal-96xl"
+                    }
+                },
+                "r8ib_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8ib.metal-48xl"
+                    }
+                },
+                "r8ib_metal_96xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8ib.metal-96xl"
+                    }
+                },
+                "r8idn_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idn.metal-48xl"
+                    }
+                },
+                "r8idn_metal_96xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idn.metal-96xl"
+                    }
+                },
+                "r8idb_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idb.metal-48xl"
+                    }
+                },
+                "r8idb_metal_96xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8idb.metal-96xl"
+                    }
+                },
+                "m8in_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8in.metal-48xl"
+                    }
+                },
+                "m8in_metal_96xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8in.metal-96xl"
+                    }
+                },
+                "m8ib_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ib.metal-48xl"
+                    }
+                },
+                "m8ib_metal_96xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8ib.metal-96xl"
+                    }
+                },
+                "m8idn_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idn.metal-48xl"
+                    }
+                },
+                "m8idn_metal_96xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idn.metal-96xl"
+                    }
+                },
+                "m8idb_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idb.metal-48xl"
+                    }
+                },
+                "m8idb_metal_96xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8idb.metal-96xl"
+                    }
+                },
+                "g7_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g7.2xlarge"
+                    }
+                },
+                "g7_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g7.4xlarge"
+                    }
+                },
+                "g7_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g7.8xlarge"
+                    }
+                },
+                "g7_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g7.12xlarge"
+                    }
+                },
+                "g7_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g7.24xlarge"
+                    }
+                },
+                "g7_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g7.48xlarge"
+                    }
+                },
+                "c9g_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9g.medium"
+                    }
+                },
+                "c9g_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9g.large"
+                    }
+                },
+                "c9g_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9g.xlarge"
+                    }
+                },
+                "c9g_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9g.2xlarge"
+                    }
+                },
+                "c9g_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9g.4xlarge"
+                    }
+                },
+                "c9g_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9g.8xlarge"
+                    }
+                },
+                "c9g_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9g.12xlarge"
+                    }
+                },
+                "c9g_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9g.16xlarge"
+                    }
+                },
+                "c9g_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9g.24xlarge"
+                    }
+                },
+                "c9g_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9g.48xlarge"
+                    }
+                },
+                "c9g_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9g.metal-48xl"
+                    }
+                },
+                "c9gd_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9gd.medium"
+                    }
+                },
+                "c9gd_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9gd.large"
+                    }
+                },
+                "c9gd_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9gd.xlarge"
+                    }
+                },
+                "c9gd_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9gd.2xlarge"
+                    }
+                },
+                "c9gd_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9gd.4xlarge"
+                    }
+                },
+                "c9gd_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9gd.8xlarge"
+                    }
+                },
+                "c9gd_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9gd.12xlarge"
+                    }
+                },
+                "c9gd_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9gd.16xlarge"
+                    }
+                },
+                "c9gd_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9gd.24xlarge"
+                    }
+                },
+                "c9gd_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9gd.48xlarge"
+                    }
+                },
+                "c9gd_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "c9gd.metal-48xl"
+                    }
                 }
             }
         },
@@ -96204,6 +97806,102 @@
         "com.amazonaws.ec2#MillisecondDateTime": {
             "type": "timestamp"
         },
+        "com.amazonaws.ec2#ModifyAccountVpcEncryptionControl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifyAccountVpcEncryptionControlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifyAccountVpcEncryptionControlResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the account-level VPC Encryption Control configuration. This sets the encryption control mode and resource exclusions that apply to the VPCs in your account. VPC Encryption Control enables you to enforce encryption for all data in transit within and between VPCs to meet compliance requirements.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html\">Enforce VPC encryption in transit</a> in the <i>Amazon VPC User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyAccountVpcEncryptionControlRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.ec2#AccountVpcEncryptionControlMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption mode for the account encryption control configuration.</p>"
+                    }
+                },
+                "InternetGateway": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to exclude internet gateway resource from account-level encryption enforcement.</p>"
+                    }
+                },
+                "EgressOnlyInternetGateway": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to exclude egress-only internet gateway resource from account-level encryption enforcement.</p>"
+                    }
+                },
+                "NatGateway": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to exclude NAT gateway resource from account-level encryption enforcement.</p>"
+                    }
+                },
+                "VirtualPrivateGateway": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to exclude virtual private gateway resource from account-level encryption enforcement.</p>"
+                    }
+                },
+                "VpcPeering": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to exclude VPC peering connection resource from account-level encryption enforcement.</p>"
+                    }
+                },
+                "Lambda": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to exclude Lambda service from account-level encryption enforcement.</p>"
+                    }
+                },
+                "VpcLattice": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to exclude VPC Lattice service from account-level encryption enforcement.</p>"
+                    }
+                },
+                "ElasticFileSystem": {
+                    "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to exclude Elastic File System service from account-level encryption enforcement.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#ModifyAccountVpcEncryptionControlResult": {
+            "type": "structure",
+            "members": {
+                "AccountVpcEncryptionControl": {
+                    "target": "com.amazonaws.ec2#AccountVpcEncryptionControl",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AccountVpcEncryptionControl",
+                        "smithy.api#documentation": "<p>Information about the account-level VPC Encryption Control configuration.</p>",
+                        "smithy.api#xmlName": "accountVpcEncryptionControl"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#ModifyAddressAttribute": {
             "type": "operation",
             "input": {
@@ -102003,6 +103701,86 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#ModifyVpcEndpointPayerResponsibility": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifyVpcEndpointPayerResponsibilityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifyVpcEndpointPayerResponsibilityResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the billing account for VPC endpoint usage/charges.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyVpcEndpointPayerResponsibilityRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "ServiceId": {
+                    "target": "com.amazonaws.ec2#VpcEndpointServiceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the VPC endpoint service.</p>"
+                    }
+                },
+                "VpcEndpointId": {
+                    "target": "com.amazonaws.ec2#VpcEndpointId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the VPC endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PayerResponsibility": {
+                    "target": "com.amazonaws.ec2#PayerResponsibilityType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Web Services account to which the usage of VPC endpoint is charged.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Scope": {
+                    "target": "com.amazonaws.ec2#PayerResponsibilityScope",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The scope of usage/charges for which the billing account is being modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#ModifyVpcEndpointPayerResponsibilityResult": {
+            "type": "structure",
+            "members": {
+                "VpcEndpointId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "VpcEndpointId",
+                        "smithy.api#documentation": "<p>The ID of the VPC endpoint.</p>",
+                        "smithy.api#xmlName": "vpcEndpointId"
+                    }
+                },
+                "PayerResponsibilities": {
+                    "target": "com.amazonaws.ec2#PayerResponsibilitySet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PayerResponsibilitySet",
+                        "smithy.api#documentation": "<p>The payer responsibility settings for the VPC endpoint.</p>",
+                        "smithy.api#xmlName": "payerResponsibilitySet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#ModifyVpcEndpointRequest": {
             "type": "structure",
             "members": {
@@ -107056,6 +108834,67 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ServiceOwner"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#PayerResponsibilityEntry": {
+            "type": "structure",
+            "members": {
+                "Scope": {
+                    "target": "com.amazonaws.ec2#PayerResponsibilityScope",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Scope",
+                        "smithy.api#documentation": "<p>The scope of usage/charges.</p>",
+                        "smithy.api#xmlName": "scope"
+                    }
+                },
+                "PayerResponsibilityType": {
+                    "target": "com.amazonaws.ec2#PayerResponsibilityType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PayerResponsibilityType",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account to which the usage is charged.</p>",
+                        "smithy.api#xmlName": "payerResponsibilityType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a payer responsibility setting for a VPC endpoint.</p>"
+            }
+        },
+        "com.amazonaws.ec2#PayerResponsibilityScope": {
+            "type": "enum",
+            "members": {
+                "VpcEndpointCharges": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "vpc-endpoint-charges"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#PayerResponsibilitySet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#PayerResponsibilityEntry",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#PayerResponsibilityType": {
+            "type": "enum",
+            "members": {
+                "VpcEndpointAccount": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "vpc-endpoint-account"
+                    }
+                },
+                "VpcEndpointServiceAccount": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "vpc-endpoint-service-account"
                     }
                 }
             }
@@ -134852,6 +136691,14 @@
                         "smithy.api#documentation": "<p>The modification completion or failure time.</p>",
                         "smithy.api#xmlName": "endTime"
                     }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.ec2#OperatorResponse",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Operator",
+                        "smithy.api#documentation": "<p>The service provider that manages the resource.</p>",
+                        "smithy.api#xmlName": "operator"
+                    }
                 }
             },
             "traits": {
@@ -136688,6 +138535,14 @@
                         "smithy.api#documentation": "<p>The Region where the service is hosted.</p>",
                         "smithy.api#xmlName": "serviceRegion"
                     }
+                },
+                "PayerResponsibilities": {
+                    "target": "com.amazonaws.ec2#PayerResponsibilitySet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PayerResponsibilitySet",
+                        "smithy.api#documentation": "<p>The payer responsibility settings for the endpoint.</p>",
+                        "smithy.api#xmlName": "payerResponsibilitySet"
+                    }
                 }
             },
             "traits": {
@@ -136904,6 +138759,14 @@
                         "aws.protocols#ec2QueryName": "VpcEndpointRegion",
                         "smithy.api#documentation": "<p>The Region of the endpoint.</p>",
                         "smithy.api#xmlName": "vpcEndpointRegion"
+                    }
+                },
+                "PayerResponsibilities": {
+                    "target": "com.amazonaws.ec2#PayerResponsibilitySet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PayerResponsibilitySet",
+                        "smithy.api#documentation": "<p>The payer responsibility settings for the endpoint.</p>",
+                        "smithy.api#xmlName": "payerResponsibilitySet"
                     }
                 }
             },

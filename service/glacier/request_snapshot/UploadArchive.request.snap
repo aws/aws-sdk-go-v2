@@ -1,0 +1,7 @@
+POST /__AccountId__/vaults/__VaultName__/archives
+
+Content-Type: application/octet-stream
+X-Amz-Archive-Description: __ArchiveDescription__
+X-Amz-Glacier-Version: 2012-06-01
+X-Amz-Sha256-Tree-Hash: __Checksum__
+

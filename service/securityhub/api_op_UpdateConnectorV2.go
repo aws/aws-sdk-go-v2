@@ -42,6 +42,13 @@ type UpdateConnectorV2Input struct {
 }
 
 type UpdateConnectorV2Output struct {
+
+	// The status of the connector after the update.
+	ConnectorStatus types.ConnectorStatus
+
+	// The enablement status of the connector after the update.
+	EnablementStatus types.EnablementStatus
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

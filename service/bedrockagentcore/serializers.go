@@ -3205,6 +3205,16 @@ func awsRestjson1_serializeOpHttpBindingsInvokeAgentRuntimeInput(v *InvokeAgentR
 		encoder.SetHeader(locationName).String(*v.ContentType)
 	}
 
+	if v.McpMethod != nil {
+		locationName := "Mcp-Method"
+		encoder.SetHeader(locationName).String(*v.McpMethod)
+	}
+
+	if v.McpName != nil {
+		locationName := "Mcp-Name"
+		encoder.SetHeader(locationName).String(*v.McpName)
+	}
+
 	if v.McpProtocolVersion != nil {
 		locationName := "Mcp-Protocol-Version"
 		encoder.SetHeader(locationName).String(*v.McpProtocolVersion)
@@ -3672,6 +3682,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeHarnessInput(v *InvokeHarnessInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.Baggage != nil {
+		locationName := "Baggage"
+		encoder.SetHeader(locationName).String(*v.Baggage)
+	}
+
 	if v.HarnessArn != nil {
 		encoder.SetQuery("harnessArn").String(*v.HarnessArn)
 	}
@@ -3688,6 +3703,21 @@ func awsRestjson1_serializeOpHttpBindingsInvokeHarnessInput(v *InvokeHarnessInpu
 	if v.RuntimeUserId != nil {
 		locationName := "X-Amzn-Bedrock-Agentcore-Runtime-User-Id"
 		encoder.SetHeader(locationName).String(*v.RuntimeUserId)
+	}
+
+	if v.TraceId != nil {
+		locationName := "X-Amzn-Trace-Id"
+		encoder.SetHeader(locationName).String(*v.TraceId)
+	}
+
+	if v.TraceParent != nil {
+		locationName := "Traceparent"
+		encoder.SetHeader(locationName).String(*v.TraceParent)
+	}
+
+	if v.TraceState != nil {
+		locationName := "Tracestate"
+		encoder.SetHeader(locationName).String(*v.TraceState)
 	}
 
 	return nil
@@ -8028,6 +8058,13 @@ func awsRestjson1_serializeDocumentHarnessGatewayOutboundAuth(v types.HarnessGat
 func awsRestjson1_serializeDocumentHarnessGeminiModelConfig(v *types.HarnessGeminiModelConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AdditionalParams != nil {
+		ok := object.Key("additionalParams")
+		if err := awsRestjson1_serializeDocumentDocument(v.AdditionalParams, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ApiKeyArn != nil {
 		ok := object.Key("apiKeyArn")

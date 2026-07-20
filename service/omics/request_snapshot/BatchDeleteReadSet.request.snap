@@ -1,0 +1,5 @@
+POST /sequencestore/__SequenceStoreId__/readset/batch/delete
+
+Content-Type: application/json
+
+{"ids":["__Member__","__Member__"]}

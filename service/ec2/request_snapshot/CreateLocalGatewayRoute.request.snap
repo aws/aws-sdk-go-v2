@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateLocalGatewayRoute&DestinationCidrBlock=__DestinationCidrBlock__&DestinationPrefixListId=__DestinationPrefixListId__&DryRun=true&LocalGatewayRouteTableId=__LocalGatewayRouteTableId__&LocalGatewayVirtualInterfaceGroupId=__LocalGatewayVirtualInterfaceGroupId__&NetworkInterfaceId=__NetworkInterfaceId__&Version=2016-11-15

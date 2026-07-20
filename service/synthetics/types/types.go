@@ -17,6 +17,12 @@ type AddReplicaLocationInput struct {
 	// This member is required.
 	Location *string
 
+	// The Amazon Resource Name (ARN) of the customer-managed AWS Key Management
+	// Service (AWS KMS) key used to encrypt the canary replica's AWS Lambda function
+	// environment variables at rest. If you don't specify a value, the service uses an
+	// AWS-managed key.
+	KmsKeyArn *string
+
 	// The VPC configuration to use for the canary replica in this location. If not
 	// specified, the replica runs without VPC connectivity.
 	VpcConfig *VpcConfigInput
@@ -136,6 +142,12 @@ type Canary struct {
 
 	// The unique ID of this canary.
 	Id *string
+
+	// The Amazon Resource Name (ARN) of the customer-managed AWS Key Management
+	// Service (AWS KMS) key used to encrypt the canary's AWS Lambda function
+	// environment variables at rest. If you don't specify a value, the service uses an
+	// AWS-managed key.
+	KmsKeyArn *string
 
 	// If this canary is part of a multi-location configuration, this structure
 	// contains information about the canary's location type, primary location, and

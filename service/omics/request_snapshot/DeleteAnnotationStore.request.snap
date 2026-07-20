@@ -1,0 +1,3 @@
+DELETE /annotationStore/__Name__?force=true
+
+

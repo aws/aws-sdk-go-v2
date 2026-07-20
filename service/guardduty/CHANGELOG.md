@@ -1,3 +1,24 @@
+# v1.83.1 (2026-07-17)
+
+* No change notes available for this release.
+
+# v1.83.0 (2026-07-13)
+
+* **Feature**: GuardDuty AI Protection is now publicly available. Findings include Bedrock guardrail details, model details, observation numbers, and continuous scan details. GuardrailArn and GuardrailVersion are deprecated in favor of the guardrails list.
+
+# v1.82.0 (2026-07-09)
+
+* **Feature**: Adding "AI Analyst" enum value for detector
+
+# v1.81.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.80.2 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.80.1 (2026-06-29)
 
 * No change notes available for this release.

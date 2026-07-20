@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/search/action-connectors?max-results=1&next-token=__NextToken__
+
+Content-Type: application/json
+
+{"Filters":[{"Name":"ACTION_CONNECTOR_NAME","Operator":"StringEquals","Value":"__Value__"},{"Name":"ACTION_CONNECTOR_NAME","Operator":"StringEquals","Value":"__Value__"}]}

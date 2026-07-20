@@ -1,0 +1,3 @@
+GET /voice-connectors/__VoiceConnectorId__/proxy-sessions?max-results=1&next-token=__NextToken__&status=Open
+
+

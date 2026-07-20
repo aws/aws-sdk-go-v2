@@ -63,6 +63,9 @@ type GetLaunchConfigurationOutput struct {
 	// Whether we want to activate post-launch actions for the Source Server.
 	PostLaunchEnabled *bool
 
+	// Recovery mode.
+	RecoveryMode types.RecoveryMode
+
 	// The ID of the Source Server for this launch configuration.
 	SourceServerID *string
 

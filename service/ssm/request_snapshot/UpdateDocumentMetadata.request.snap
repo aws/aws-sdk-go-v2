@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.UpdateDocumentMetadata
+
+{"DocumentReviews":{"Action":"SendForReview","Comment":[{"Content":"__Content__","Type":"Comment"},{"Content":"__Content__","Type":"Comment"}]},"DocumentVersion":"__DocumentVersion__","Name":"__Name__"}

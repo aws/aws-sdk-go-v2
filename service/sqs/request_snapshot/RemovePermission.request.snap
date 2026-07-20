@@ -1,0 +1,7 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonSQS.RemovePermission
+X-Amzn-Query-Mode: true
+
+{"Label":"__Label__","QueueUrl":"__QueueUrl__"}

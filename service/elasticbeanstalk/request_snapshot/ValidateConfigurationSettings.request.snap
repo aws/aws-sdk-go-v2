@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ValidateConfigurationSettings&ApplicationName=__ApplicationName__&EnvironmentName=__EnvironmentName__&OptionSettings.member.1.Namespace=__Namespace__&OptionSettings.member.1.OptionName=__OptionName__&OptionSettings.member.1.ResourceName=__ResourceName__&OptionSettings.member.1.Value=__Value__&OptionSettings.member.2.Namespace=__Namespace__&OptionSettings.member.2.OptionName=__OptionName__&OptionSettings.member.2.ResourceName=__ResourceName__&OptionSettings.member.2.Value=__Value__&TemplateName=__TemplateName__&Version=2010-12-01

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=EnableAllowedImagesSettings&AllowedImagesSettingsState=enabled&DryRun=true&Version=2016-11-15

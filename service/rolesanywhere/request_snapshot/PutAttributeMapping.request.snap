@@ -1,0 +1,5 @@
+PUT /profiles/__ProfileId__/mappings
+
+Content-Type: application/json
+
+{"certificateField":"x509Subject","mappingRules":[{"specifier":"__Specifier__"},{"specifier":"__Specifier__"}]}

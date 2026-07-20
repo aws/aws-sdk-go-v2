@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/group-profiles
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","groupIdentifier":"__GroupIdentifier__","rolePrincipalArn":"__RolePrincipalArn__"}

@@ -11977,6 +11977,20 @@ func awsAwsjson11_deserializeDocumentInstanceMetadata(v **types.InstanceMetadata
 				sv.OwnerAccountId = ptr.String(jtv)
 			}
 
+		case "PrimaryRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RegionName to be of type string, got %T instead", value)
+				}
+				sv.PrimaryRegion = ptr.String(jtv)
+			}
+
+		case "Regions":
+			if err := awsAwsjson11_deserializeDocumentRegionMetadataList(&sv.Regions, value); err != nil {
+				return err
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)

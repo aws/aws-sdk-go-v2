@@ -1,0 +1,5 @@
+POST /DescribeRecoveryInstances
+
+Content-Type: application/json
+
+{"filters":{"recoveryInstanceIDs":["__Member__","__Member__"],"sourceServerIDs":["__Member__","__Member__"]},"maxResults":1,"nextToken":"__NextToken__"}

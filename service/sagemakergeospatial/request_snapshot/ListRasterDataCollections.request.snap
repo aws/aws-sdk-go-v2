@@ -1,0 +1,3 @@
+GET /raster-data-collections?MaxResults=1&NextToken=__NextToken__
+
+

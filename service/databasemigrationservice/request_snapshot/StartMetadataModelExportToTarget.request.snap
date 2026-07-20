@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.StartMetadataModelExportToTarget
+
+{"MigrationProjectIdentifier":"__MigrationProjectIdentifier__","OverwriteExtensionPack":true,"SelectionRules":"__SelectionRules__"}

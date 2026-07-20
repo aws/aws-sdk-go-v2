@@ -4,7 +4,9 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,24 @@ type CreateLongTermPricingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLongTermPricingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLongTermPricingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLongTermPricingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsLongTermPricingAutoRenew != nil {
+		s.WriteBool(schemas.CreateLongTermPricingRequest_IsLongTermPricingAutoRenew, *v.IsLongTermPricingAutoRenew)
+	}
+	if v.LongTermPricingType != "" {
+		s.WriteString(schemas.CreateLongTermPricingRequest_LongTermPricingType, string(v.LongTermPricingType))
+	}
+	if v.SnowballType != "" {
+		s.WriteString(schemas.CreateLongTermPricingRequest_SnowballType, string(v.SnowballType))
+	}
+}
+
 type CreateLongTermPricingOutput struct {
 
 	// The ID of the long-term pricing type for the device.
@@ -58,13 +78,32 @@ type CreateLongTermPricingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLongTermPricingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLongTermPricingResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLongTermPricingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LongTermPricingId != nil {
+		s.WriteString(schemas.CreateLongTermPricingResult_LongTermPricingId, *v.LongTermPricingId)
+	}
+}
+func (v *CreateLongTermPricingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLongTermPricingResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLongTermPricingResult_LongTermPricingId:
+			v.LongTermPricingId = new(string)
+			return d.ReadString(schemas.CreateLongTermPricingResult_LongTermPricingId, v.LongTermPricingId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLongTermPricingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateLongTermPricing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLongTermPricing, schemas.CreateLongTermPricingRequest, schemas.CreateLongTermPricingResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateLongTermPricing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLongTermPricing, schemas.CreateLongTermPricingRequest, schemas.CreateLongTermPricingResult), output: &CreateLongTermPricingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,5 @@
+POST /routing-profiles/__InstanceId__/__RoutingProfileId__/agent-availability-timer
+
+Content-Type: application/json
+
+{"AgentAvailabilityTimer":"TIME_SINCE_LAST_ACTIVITY"}

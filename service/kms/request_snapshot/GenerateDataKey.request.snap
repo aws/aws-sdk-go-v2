@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TrentService.GenerateDataKey
+
+{"DryRun":true,"EncryptionContext":{"key0":"__Value__"},"GrantTokens":["__Member__","__Member__"],"KeyId":"__KeyId__","KeySpec":"AES_256","NumberOfBytes":1,"Recipient":{"AttestationDocument":"YmxvYg==","KeyEncryptionAlgorithm":"RSAES_OAEP_SHA_256"}}

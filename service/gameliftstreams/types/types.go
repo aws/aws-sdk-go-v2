@@ -662,6 +662,11 @@ type StreamSessionSummary struct {
 	// The data transfer protocol in use with the stream session.
 	Protocol Protocol
 
+	// The ARN of the AWS Identity and Access Management (IAM) role that Amazon
+	// GameLift Streams assumes on behalf of your application during the stream
+	// session.
+	RoleArn *string
+
 	// The current status of the stream session resource.
 	//
 	//   - ACTIVATING : The stream session is starting and preparing to stream.

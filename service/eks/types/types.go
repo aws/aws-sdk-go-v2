@@ -512,6 +512,21 @@ type BlockStorage struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the latest cancellation of an update to an Amazon
+// EKS cluster.
+type Cancellation struct {
+
+	// A message providing additional details about the cancellation, such as the
+	// reason for the cancellation or failure details.
+	Reason *string
+
+	// The current status of the cancellation. Valid values are InProgress , Failed ,
+	// and Successful .
+	Status CancellationStatus
+
+	noSmithyDocumentSerde
+}
+
 // An object representing a managed capability in an Amazon EKS cluster. This
 // includes all configuration, status, and health information for the capability.
 type Capability struct {
@@ -2610,6 +2625,18 @@ type RemotePodNetwork struct {
 	noSmithyDocumentSerde
 }
 
+// The rollback configuration for the cluster version rollback.
+type RollbackConfig struct {
+
+	// The length of time in minutes to wait before cancelling the update. Timeout is
+	// a minimum-bound property, meaning the timeout occurs no sooner than the time you
+	// specify, but can occur shortly thereafter. This value can be between 120 (2
+	// hours) and 10080 (7 days). Default: 720 (12 hours) if not specified.
+	TimeoutMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
 // An IAM Identity CenterIAM; Identity Center identity (user or group) that can be
 // assigned permissions in a capability.
 type SsoIdentity struct {
@@ -2670,6 +2697,10 @@ type Taint struct {
 
 // An object representing an asynchronous update.
 type Update struct {
+
+	// The latest cancellation information for the update. This field is present only
+	// if any cancellation is attempted for the update.
+	Cancellation *Cancellation
 
 	// The Unix epoch timestamp at object creation.
 	CreatedAt *time.Time

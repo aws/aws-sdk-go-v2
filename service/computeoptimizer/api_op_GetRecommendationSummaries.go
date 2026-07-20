@@ -5,7 +5,9 @@ package computeoptimizer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,6 +72,22 @@ type GetRecommendationSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommendationSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommendationSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommendationSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.GetRecommendationSummariesRequest_accountIds, v.AccountIds)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetRecommendationSummariesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRecommendationSummariesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetRecommendationSummariesOutput struct {
 
 	// The token to use to advance to the next page of recommendation summaries.
@@ -87,13 +105,35 @@ type GetRecommendationSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommendationSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommendationSummariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommendationSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRecommendationSummariesResponse_nextToken, *v.NextToken)
+	}
+	serializeRecommendationSummaries(s, schemas.GetRecommendationSummariesResponse_recommendationSummaries, v.RecommendationSummaries)
+}
+func (v *GetRecommendationSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecommendationSummariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecommendationSummariesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetRecommendationSummariesResponse_nextToken, v.NextToken)
+		case schemas.GetRecommendationSummariesResponse_recommendationSummaries:
+			return deserializeRecommendationSummaries(d, schemas.GetRecommendationSummariesResponse_recommendationSummaries, &v.RecommendationSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRecommendationSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetRecommendationSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendationSummaries, schemas.GetRecommendationSummariesRequest, schemas.GetRecommendationSummariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetRecommendationSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendationSummaries, schemas.GetRecommendationSummariesRequest, schemas.GetRecommendationSummariesResponse), output: &GetRecommendationSummariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

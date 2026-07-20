@@ -950,6 +950,18 @@ func TestCheckSnapshot_GetLogDeliveryConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetProvisionedLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProvisionedLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetProvisionedLimit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetSigningCertificate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSigningCertificate(context.Background(), nil, func(o *Options) {
@@ -1459,6 +1471,18 @@ func TestCheckSnapshot_UpdateManagedLoginBranding(t *testing.T) {
 	_, err := svc.UpdateManagedLoginBranding(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateManagedLoginBranding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateProvisionedLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProvisionedLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateProvisionedLimit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2461,6 +2485,18 @@ func TestUpdateSnapshot_GetLogDeliveryConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetProvisionedLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProvisionedLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetProvisionedLimit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetSigningCertificate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSigningCertificate(context.Background(), nil, func(o *Options) {
@@ -2970,6 +3006,18 @@ func TestUpdateSnapshot_UpdateManagedLoginBranding(t *testing.T) {
 	_, err := svc.UpdateManagedLoginBranding(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateManagedLoginBranding")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateProvisionedLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProvisionedLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateProvisionedLimit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

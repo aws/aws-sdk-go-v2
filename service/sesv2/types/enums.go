@@ -766,6 +766,29 @@ func (MetricNamespace) Values() []MetricNamespace {
 	}
 }
 
+type PricingPlan string
+
+// Enum values for PricingPlan
+const (
+	PricingPlanNone       PricingPlan = "NONE"
+	PricingPlanEssentials PricingPlan = "ESSENTIALS"
+	PricingPlanPro        PricingPlan = "PRO"
+	PricingPlanEnterprise PricingPlan = "ENTERPRISE"
+)
+
+// Values returns all known values for PricingPlan. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PricingPlan) Values() []PricingPlan {
+	return []PricingPlan{
+		"NONE",
+		"ESSENTIALS",
+		"PRO",
+		"ENTERPRISE",
+	}
+}
+
 type QueryErrorCode string
 
 // Enum values for QueryErrorCode

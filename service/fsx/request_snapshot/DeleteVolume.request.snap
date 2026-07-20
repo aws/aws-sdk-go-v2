@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.DeleteVolume
+
+{"ClientRequestToken":"__ClientRequestToken__","OntapConfiguration":{"BypassSnaplockEnterpriseRetention":true,"FinalBackupTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"SkipFinalBackup":true},"OpenZFSConfiguration":{"Options":["DELETE_CHILD_VOLUMES_AND_SNAPSHOTS","DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"]},"VolumeId":"__VolumeId__"}

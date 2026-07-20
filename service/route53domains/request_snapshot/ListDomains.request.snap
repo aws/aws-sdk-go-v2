@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Domains_v20140515.ListDomains
+
+{"FilterConditions":[{"Name":"DomainName","Operator":"LE","Values":["__Member__","__Member__"]},{"Name":"DomainName","Operator":"LE","Values":["__Member__","__Member__"]}],"Marker":"__Marker__","MaxItems":1,"SortCondition":{"Name":"DomainName","SortOrder":"ASC"}}

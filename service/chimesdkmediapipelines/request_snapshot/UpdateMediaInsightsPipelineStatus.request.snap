@@ -1,0 +1,5 @@
+PUT /media-insights-pipeline-status/__Identifier__
+
+Content-Type: application/json
+
+{"UpdateStatus":"Pause"}

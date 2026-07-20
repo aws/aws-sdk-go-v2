@@ -1,0 +1,5 @@
+PUT /app-instance-users/__AppInstanceUserArn__/endpoints/__EndpointId__
+
+Content-Type: application/json
+
+{"AllowMessages":"ALL","Name":"__Name__"}

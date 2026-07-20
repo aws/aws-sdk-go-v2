@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SWBExternalService.UpdateInstanceAccessControlAttributeConfiguration
+
+{"InstanceAccessControlAttributeConfiguration":{"AccessControlAttributes":[{"Key":"__Key__","Value":{"Source":["__Member__","__Member__"]}},{"Key":"__Key__","Value":{"Source":["__Member__","__Member__"]}}]},"InstanceArn":"__InstanceArn__"}

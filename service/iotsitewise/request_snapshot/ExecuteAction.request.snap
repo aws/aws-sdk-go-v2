@@ -1,0 +1,5 @@
+POST /actions
+
+Content-Type: application/json
+
+{"actionDefinitionId":"__ActionDefinitionId__","actionPayload":{"stringValue":"__StringValue__"},"clientToken":"__ClientToken__","resolveTo":{"assetId":"__AssetId__"},"targetResource":{"assetId":"__AssetId__","computationModelId":"__ComputationModelId__"}}

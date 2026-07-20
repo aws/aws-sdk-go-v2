@@ -97,6 +97,7 @@ type AccountState struct {
 //	AggregationRequestMemberAmiAggregation
 //	AggregationRequestMemberAwsEcrContainerAggregation
 //	AggregationRequestMemberCodeRepositoryAggregation
+//	AggregationRequestMemberContainerImageAggregation
 //	AggregationRequestMemberEc2InstanceAggregation
 //	AggregationRequestMemberFindingTypeAggregation
 //	AggregationRequestMemberImageLayerAggregation
@@ -104,7 +105,9 @@ type AccountState struct {
 //	AggregationRequestMemberLambdaLayerAggregation
 //	AggregationRequestMemberPackageAggregation
 //	AggregationRequestMemberRepositoryAggregation
+//	AggregationRequestMemberServerlessFunctionAggregation
 //	AggregationRequestMemberTitleAggregation
+//	AggregationRequestMemberVmInstanceAggregation
 type AggregationRequest interface {
 	isAggregationRequest()
 }
@@ -148,6 +151,16 @@ type AggregationRequestMemberCodeRepositoryAggregation struct {
 }
 
 func (*AggregationRequestMemberCodeRepositoryAggregation) isAggregationRequest() {}
+
+// An object that contains details about an aggregation request based on container
+// images.
+type AggregationRequestMemberContainerImageAggregation struct {
+	Value ContainerImageAggregation
+
+	noSmithyDocumentSerde
+}
+
+func (*AggregationRequestMemberContainerImageAggregation) isAggregationRequest() {}
 
 // An object that contains details about an aggregation request based on Amazon
 // EC2 instances.
@@ -218,6 +231,16 @@ type AggregationRequestMemberRepositoryAggregation struct {
 
 func (*AggregationRequestMemberRepositoryAggregation) isAggregationRequest() {}
 
+// An object that contains details about an aggregation request based on
+// serverless functions.
+type AggregationRequestMemberServerlessFunctionAggregation struct {
+	Value ServerlessFunctionAggregation
+
+	noSmithyDocumentSerde
+}
+
+func (*AggregationRequestMemberServerlessFunctionAggregation) isAggregationRequest() {}
+
 // An object that contains details about an aggregation request based on finding
 // title.
 type AggregationRequestMemberTitleAggregation struct {
@@ -228,6 +251,16 @@ type AggregationRequestMemberTitleAggregation struct {
 
 func (*AggregationRequestMemberTitleAggregation) isAggregationRequest() {}
 
+// An object that contains details about an aggregation request based on virtual
+// machine (VM) instances.
+type AggregationRequestMemberVmInstanceAggregation struct {
+	Value VmInstanceAggregation
+
+	noSmithyDocumentSerde
+}
+
+func (*AggregationRequestMemberVmInstanceAggregation) isAggregationRequest() {}
+
 // A structure that contains details about the results of an aggregation type.
 //
 // The following types satisfy this interface:
@@ -236,6 +269,7 @@ func (*AggregationRequestMemberTitleAggregation) isAggregationRequest() {}
 //	AggregationResponseMemberAmiAggregation
 //	AggregationResponseMemberAwsEcrContainerAggregation
 //	AggregationResponseMemberCodeRepositoryAggregation
+//	AggregationResponseMemberContainerImageAggregation
 //	AggregationResponseMemberEc2InstanceAggregation
 //	AggregationResponseMemberFindingTypeAggregation
 //	AggregationResponseMemberImageLayerAggregation
@@ -243,7 +277,9 @@ func (*AggregationRequestMemberTitleAggregation) isAggregationRequest() {}
 //	AggregationResponseMemberLambdaLayerAggregation
 //	AggregationResponseMemberPackageAggregation
 //	AggregationResponseMemberRepositoryAggregation
+//	AggregationResponseMemberServerlessFunctionAggregation
 //	AggregationResponseMemberTitleAggregation
+//	AggregationResponseMemberVmInstanceAggregation
 type AggregationResponse interface {
 	isAggregationResponse()
 }
@@ -287,6 +323,16 @@ type AggregationResponseMemberCodeRepositoryAggregation struct {
 }
 
 func (*AggregationResponseMemberCodeRepositoryAggregation) isAggregationResponse() {}
+
+// An object that contains details about an aggregation response based on
+// container images.
+type AggregationResponseMemberContainerImageAggregation struct {
+	Value ContainerImageAggregationResponse
+
+	noSmithyDocumentSerde
+}
+
+func (*AggregationResponseMemberContainerImageAggregation) isAggregationResponse() {}
 
 // An object that contains details about an aggregation response based on Amazon
 // EC2 instances.
@@ -356,6 +402,16 @@ type AggregationResponseMemberRepositoryAggregation struct {
 
 func (*AggregationResponseMemberRepositoryAggregation) isAggregationResponse() {}
 
+// An object that contains details about an aggregation response based on
+// serverless functions.
+type AggregationResponseMemberServerlessFunctionAggregation struct {
+	Value ServerlessFunctionAggregationResponse
+
+	noSmithyDocumentSerde
+}
+
+func (*AggregationResponseMemberServerlessFunctionAggregation) isAggregationResponse() {}
+
 // An object that contains details about an aggregation response based on finding
 // title.
 type AggregationResponseMemberTitleAggregation struct {
@@ -365,6 +421,16 @@ type AggregationResponseMemberTitleAggregation struct {
 }
 
 func (*AggregationResponseMemberTitleAggregation) isAggregationResponse() {}
+
+// An object that contains details about an aggregation response based on VM
+// instances.
+type AggregationResponseMemberVmInstanceAggregation struct {
+	Value VmInstanceAggregationResponse
+
+	noSmithyDocumentSerde
+}
+
+func (*AggregationResponseMemberVmInstanceAggregation) isAggregationResponse() {}
 
 // The details that define an aggregation based on Amazon machine images (AMIs).
 type AmiAggregation struct {
@@ -394,6 +460,40 @@ type AmiAggregationResponse struct {
 
 	// The IDs of Amazon EC2 instances using this AMI.
 	AffectedInstances *int64
+
+	// The cloud account ID for the AMI aggregation.
+	CloudAccountId *string
+
+	// The cloud organization ID for the AMI aggregation.
+	CloudOrgId *string
+
+	// The cloud infrastructure partition associated with this AMI aggregation. Valid
+	// values:
+	//
+	//   - aws – Amazon Web Services commercial Regions.
+	//
+	//   - aws-cn – Amazon Web Services China Regions.
+	//
+	//   - aws-us-gov – Amazon Web Services GovCloud (US) Regions.
+	//
+	//   - AzureCloud – Azure commercial Regions.
+	CloudPartition *string
+
+	// The cloud service provider associated with this Amazon Machine Image (AMI)
+	// aggregation. Valid values:
+	//
+	//   - AWS – Findings from Amazon Web Services resources.
+	//
+	//   - AZURE – Findings from Microsoft Azure resources.
+	CloudProvider Provider
+
+	// The cloud Region associated with this AMI aggregation. The value format depends
+	// on the cloud provider:
+	//
+	//   - An Amazon Web Services Region, such as us-east-1 .
+	//
+	//   - An Azure region, such as eastus .
+	CloudRegion *string
 
 	// An object that contains the count of matched findings per severity.
 	SeverityCounts *SeverityCounts
@@ -466,6 +566,23 @@ type AutoEnable struct {
 	// Represents whether Lambda code scans are automatically enabled for new members
 	// of your Amazon Inspector organization.
 	LambdaCode *bool
+
+	noSmithyDocumentSerde
+}
+
+// A filter that matches connectors by the ARN of the associated Amazon Web
+// Services Config connector.
+type AwsConfigConnectorArnFilter struct {
+
+	// The comparison operator for the Amazon Web Services Config connector ARN filter.
+	//
+	// This member is required.
+	Comparison AwsConfigConnectorArnComparison
+
+	// The Amazon Web Services Config connector ARN value to filter by.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -716,6 +833,85 @@ type AwsLambdaFunctionDetails struct {
 
 	// The Amazon Web Services Lambda function's networking configuration.
 	VpcConfig *LambdaVpcConfig
+
+	noSmithyDocumentSerde
+}
+
+// The Azure-specific configuration details for creating a connector, including
+// the Amazon Web Services Config connector association, scan scope, and regions to
+// scan.
+type AzureProviderDetailCreate struct {
+
+	// The ARN of the Amazon Web Services Config connector to associate with this
+	// connector.
+	//
+	// This member is required.
+	AwsConfigConnectorArn *string
+
+	// The Azure regions to scan.
+	//
+	// This member is required.
+	AzureRegions []string
+
+	// The scope configuration that defines which Azure resources to scan.
+	//
+	// This member is required.
+	ScopeConfiguration *AzureScopeConfigurationInput
+
+	// Specifies whether to automatically install the VM scanner on connected Azure
+	// resources. Defaults to true .
+	AutoInstallVMScanner *bool
+
+	noSmithyDocumentSerde
+}
+
+// The Azure-specific configuration details for updating a connector, including
+// the scan scope and regions to scan.
+type AzureProviderDetailUpdate struct {
+
+	// Specifies whether to automatically install the VM scanner on connected Azure
+	// resources.
+	AutoInstallVMScanner *bool
+
+	// The updated Azure regions to scan.
+	AzureRegions []string
+
+	// The updated scope configuration that defines which Azure resources to scan.
+	ScopeConfiguration *AzureScopeConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+// The scope of Azure resources that Amazon Inspector scans, defined separately
+// for VM, container image, and serverless scanning. Returned as part of a
+// connector's configuration.
+type AzureScopeConfiguration struct {
+
+	// The scope configuration for container image scanning.
+	ContainerImageScanning *ScopeConfiguration
+
+	// The scope configuration for serverless scanning.
+	ServerlessScanning *ScopeConfiguration
+
+	// The scope configuration for VM scanning.
+	VmScanning *ScopeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The scope of Azure resources to scan, defined separately for VM, container
+// image, and serverless scanning. Provide this when you create or update an Azure
+// connector.
+type AzureScopeConfigurationInput struct {
+
+	// The scope configuration input for container image scanning.
+	ContainerImageScanning *ScopeConfigurationInput
+
+	// The scope configuration input for serverless scanning.
+	ServerlessScanning *ScopeConfigurationInput
+
+	// The scope configuration input for VM scanning.
+	VmScanning *ScopeConfigurationInput
 
 	noSmithyDocumentSerde
 }
@@ -1647,6 +1843,384 @@ type ComputePlatform struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a connector that links an external cloud provider to Amazon Inspector
+// for vulnerability scanning.
+type Connector struct {
+
+	// The Amazon Resource Name (ARN) of the connector.
+	//
+	// This member is required.
+	ConnectorArn *string
+
+	// The date and time when the connector was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The cloud provider for the connector.
+	//
+	// This member is required.
+	Provider ConnectorCloudProvider
+
+	// The date and time when the connector was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// Specifies whether the VM scanner is automatically installed on connected
+	// resources.
+	AutoInstallVMScanner *bool
+
+	// The ARN of the Amazon Web Services Config connector associated with this
+	// connector.
+	AwsConfigConnectorArn *string
+
+	// The Azure regions configured for the connector.
+	AzureRegions []string
+
+	// A description of the connector.
+	Description *string
+
+	// The enablement status of the connector, which indicates whether the connector
+	// is active and scanning resources.
+	EnablementStatus EnablementStatus
+
+	// Additional information about the current enablement status of the connector.
+	EnablementStatusReason *string
+
+	// The health of the connector, which indicates whether Amazon Inspector can reach
+	// and scan the connected resources.
+	Health *ConnectorHealth
+
+	// The name of the connector.
+	Name *string
+
+	// The Azure scope configuration for the connector.
+	ScopeConfiguration *AzureScopeConfiguration
+
+	// The tags associated with the connector.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A filter that matches connectors by connector ARN.
+type ConnectorArnFilter struct {
+
+	// The comparison operator for the connector ARN filter.
+	//
+	// This member is required.
+	Comparison ConnectorArnComparison
+
+	// The connector ARN value to filter by.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The container image scanning settings for a connector, including how long
+// pushed and pulled images continue to be rescanned for vulnerabilities.
+type ConnectorContainerImageScanConfiguration struct {
+
+	// The amount of time after a container image is last pulled from a repository
+	// during which Amazon Inspector continues to rescan the image for vulnerabilities.
+	// Valid values are DAYS_3 , DAYS_7 , DAYS_14 , DAYS_30 , DAYS_60 , DAYS_90 , and
+	// DAYS_180 .
+	PullDuration ContainerImagePullDateRescanDuration
+
+	// The amount of time after a container image is pushed to a repository during
+	// which Amazon Inspector continues to rescan the image for vulnerabilities. Valid
+	// values are LIFETIME , DAYS_3 , DAYS_7 , DAYS_14 , DAYS_30 , DAYS_60 , DAYS_90 ,
+	// and DAYS_180 .
+	PushDuration ContainerImageRescanDuration
+
+	noSmithyDocumentSerde
+}
+
+// Contains the filter criteria for narrowing the results returned by a
+// ListConnectors request. You can filter by connector ARN, Amazon Web Services
+// account ID, Amazon Web Services Config connector ARN, connector type, or cloud
+// provider.
+type ConnectorFilterCriteria struct {
+
+	// Filter by Amazon Web Services account IDs.
+	Accounts []StringFilter
+
+	// Filter by Amazon Web Services Config connector ARNs.
+	AwsConfigConnectorArns []AwsConfigConnectorArnFilter
+
+	// Filter by connector ARNs.
+	ConnectorArns []ConnectorArnFilter
+
+	// Filter by connector type.
+	ConnectorType []ConnectorTypeFilter
+
+	// Filter by cloud provider.
+	Provider []ProviderFilter
+
+	noSmithyDocumentSerde
+}
+
+// The health and connectivity status of a connector, including the last time the
+// status was checked and any diagnostic message. Returned as part of the Connector
+// structure.
+type ConnectorHealth struct {
+
+	// The health status of the connector.
+	//
+	// This member is required.
+	ConnectorStatus ConnectorHealthStatus
+
+	// The date and time when the connector health was last checked.
+	//
+	// This member is required.
+	LastCheckedAt *time.Time
+
+	// A message providing additional details about the connector health status.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The scan settings that Amazon Inspector applies to resources discovered through
+// a connector.
+type ConnectorScanConfiguration struct {
+
+	// The container image scanning configuration, including push and pull duration
+	// settings.
+	ContainerImageScanning *ConnectorContainerImageScanConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Represents a scan configuration and the connectors it applies to. Returned in
+// the results of a ListConnectorScanConfigurations request.
+type ConnectorScanConfigurationItem struct {
+
+	// The ARN of the Amazon Web Services Config connector.
+	//
+	// This member is required.
+	AwsConfigConnectorArn *string
+
+	// The list of connector ARNs associated with this Amazon Web Services Config
+	// connector.
+	//
+	// This member is required.
+	ConnectorArns []string
+
+	// The scan configuration settings.
+	//
+	// This member is required.
+	ScanConfiguration *ConnectorScanConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A filter that matches connectors by connector type.
+type ConnectorTypeFilter struct {
+
+	// The comparison operator for the connector type filter.
+	//
+	// This member is required.
+	Comparison ConnectorTypeComparison
+
+	// The connector type value to filter by.
+	//
+	// This member is required.
+	Value ConnectorType
+
+	noSmithyDocumentSerde
+}
+
+// An aggregation of information about container images.
+type ContainerImageAggregation struct {
+
+	// The image architectures to aggregate findings for.
+	Architectures []StringFilter
+
+	// The cloud account IDs to aggregate findings for.
+	CloudAccountIds []StringFilter
+
+	// The cloud organization IDs to aggregate findings for.
+	CloudOrgIds []StringFilter
+
+	// The cloud partitions to aggregate findings for. Valid values:
+	//
+	//   - aws – Amazon Web Services commercial Regions.
+	//
+	//   - aws-cn – Amazon Web Services China Regions.
+	//
+	//   - aws-us-gov – Amazon Web Services GovCloud (US) Regions.
+	//
+	//   - AzureCloud – Azure commercial Regions.
+	CloudPartitions []StringFilter
+
+	// The cloud providers to aggregate findings for. Valid values:
+	//
+	//   - AWS – Findings from Amazon Web Services resources.
+	//
+	//   - AZURE – Findings from Microsoft Azure resources.
+	CloudProviders []StringFilter
+
+	// The cloud regions to aggregate findings for. The value format depends on the
+	// cloud provider:
+	//
+	//   - An Amazon Web Services Region, such as us-east-1 .
+	//
+	//   - An Azure region, such as eastus .
+	CloudRegions []StringFilter
+
+	// The image digests to aggregate findings for.
+	ImageDigests []StringFilter
+
+	// The image tags to aggregate findings for.
+	ImageTags []StringFilter
+
+	// The in-use counts to aggregate findings for.
+	InUseCount []NumberFilter
+
+	// The last in-use timestamps to aggregate findings for.
+	LastInUseAt []DateFilter
+
+	// The image registries to aggregate findings for.
+	Registries []StringFilter
+
+	// The image repositories to aggregate findings for.
+	Repositories []StringFilter
+
+	// The resource IDs to aggregate findings for.
+	ResourceIds []StringFilter
+
+	// The value to sort results by. Specify a field name from the aggregation
+	// response, such as CRITICAL , HIGH , or ALL .
+	SortBy ContainerImageSortBy
+
+	// The order to sort results by. Valid values are ASC and DESC .
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// A response that contains the results of a container image aggregation.
+type ContainerImageAggregationResponse struct {
+
+	// The resource ID for the container image.
+	//
+	// This member is required.
+	ResourceId *string
+
+	// The account ID associated with the container image.
+	AccountId *string
+
+	// The architecture of the container image.
+	Architecture *string
+
+	// The cloud account ID for the container image aggregation.
+	CloudAccountId *string
+
+	// The cloud organization ID for the container image aggregation.
+	CloudOrgId *string
+
+	// The cloud infrastructure partition associated with this container image
+	// aggregation. Valid values:
+	//
+	//   - aws – Amazon Web Services commercial Regions.
+	//
+	//   - aws-cn – Amazon Web Services China Regions.
+	//
+	//   - aws-us-gov – Amazon Web Services GovCloud (US) Regions.
+	//
+	//   - AzureCloud – Azure commercial Regions.
+	CloudPartition *string
+
+	// The cloud service provider associated with this container image aggregation.
+	// Valid values:
+	//
+	//   - AWS – Findings from Amazon Web Services resources.
+	//
+	//   - AZURE – Findings from Microsoft Azure resources.
+	CloudProvider Provider
+
+	// The cloud Region associated with this container image aggregation. The value
+	// format depends on the cloud provider:
+	//
+	//   - An Amazon Web Services Region, such as us-east-1 .
+	//
+	//   - An Azure region, such as eastus .
+	CloudRegion *string
+
+	// The number of active findings with an exploit available for the container image.
+	ExploitAvailableActiveFindingsCount *int64
+
+	// The number of active findings with a fix available for the container image.
+	FixAvailableActiveFindingsCount *int64
+
+	// The image digest for the container image.
+	ImageDigest *string
+
+	// The image tags attached to the container image.
+	ImageTags []string
+
+	// The number of times the container image is in use.
+	InUseCount *int64
+
+	// The last time the container image was in use.
+	LastInUseAt *time.Time
+
+	// The registry for the container image.
+	Registry *string
+
+	// The repository for the container image.
+	Repository *string
+
+	// An object that contains the counts of aggregated finding per severity.
+	SeverityCounts *SeverityCounts
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata about a container image associated with a covered resource.
+type ContainerImageMetadata struct {
+
+	// The date and time the container image was pulled.
+	ImagePulledAt *time.Time
+
+	// The tags attached to the container image.
+	ImageTags []string
+
+	// The number of times the container image is in use.
+	InUseCount *int64
+
+	// The last time the container image was in use.
+	LastInUseAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata about a container registry associated with a covered resource.
+type ContainerRegistryMetadata struct {
+
+	// The name of the container registry.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata about a container repository associated with a covered
+// resource.
+type ContainerRepositoryMetadata struct {
+
+	// The name of the container repository.
+	Name *string
+
+	// The scan frequency for the container repository.
+	ScanFrequency *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration settings for continuous integration scans that run automatically
 // when code changes are made.
 type ContinuousIntegrationScanConfiguration struct {
@@ -1689,6 +2263,39 @@ type CoverageFilterCriteria struct {
 
 	// An array of Amazon Web Services account IDs to return coverage statistics for.
 	AccountId []CoverageStringFilter
+
+	// The cloud container image tags to filter coverage results by.
+	CloudContainerImageTags []CoverageStringFilter
+
+	// The cloud container registry name to filter coverage results by.
+	CloudContainerRegistryName []CoverageStringFilter
+
+	// The cloud container repository name to filter coverage results by.
+	CloudContainerRepositoryName []CoverageStringFilter
+
+	// The cloud provider to filter coverage results by.
+	CloudProvider []CoverageStringFilter
+
+	// The cloud provider account ID to filter coverage results by.
+	CloudProviderAccountId []CoverageStringFilter
+
+	// The cloud provider organization ID to filter coverage results by.
+	CloudProviderOrgId []CoverageStringFilter
+
+	// The cloud provider region to filter coverage results by.
+	CloudProviderRegion []CoverageStringFilter
+
+	// The cloud serverless function name to filter coverage results by.
+	CloudServerlessFunctionName []CoverageStringFilter
+
+	// The cloud serverless function runtime to filter coverage results by.
+	CloudServerlessFunctionRuntime []CoverageStringFilter
+
+	// The cloud serverless function tags to filter coverage results by.
+	CloudServerlessFunctionTags []CoverageMapFilter
+
+	// The cloud VM instance tags to filter coverage results by.
+	CloudVmInstanceTags []CoverageMapFilter
 
 	// Filter criteria for code repositories based on project name.
 	CodeRepositoryProjectName []CoverageStringFilter
@@ -1837,6 +2444,21 @@ type CoveredResource struct {
 
 	// The date and time the resource was last checked for vulnerabilities.
 	LastScannedAt *time.Time
+
+	// The cloud provider of the covered resource.
+	Provider Provider
+
+	// The cloud provider account ID of the covered resource.
+	ProviderAccountId *string
+
+	// The cloud provider organization ID of the covered resource.
+	ProviderOrgId *string
+
+	// The cloud provider partition of the covered resource.
+	ProviderPartition *string
+
+	// The cloud provider region of the covered resource.
+	ProviderRegion *string
 
 	// An object that contains details about the metadata.
 	ResourceMetadata *ResourceScanMetadata
@@ -2481,6 +3103,63 @@ type FilterCriteria struct {
 	// Details of the Amazon Web Services account IDs used to filter findings.
 	AwsAccountId []StringFilter
 
+	// Filter criteria for the architecture of a container image.
+	CloudImageArchitecture []StringFilter
+
+	// Filter criteria for the digest of a container image.
+	CloudImageDigest []StringFilter
+
+	// Filter criteria for the in-use count of a container image.
+	CloudImageInUseCount []NumberFilter
+
+	// Filter criteria for the last time a container image was in use.
+	CloudImageLastInUseAt []DateFilter
+
+	// Filter criteria for when a container image was pushed.
+	CloudImagePushedAt []DateFilter
+
+	// Filter criteria for the registry of a container image.
+	CloudImageRegistry []StringFilter
+
+	// Filter criteria for the repository name of a container image.
+	CloudImageRepositoryName []StringFilter
+
+	// Filter criteria for the tags of a container image.
+	CloudImageTags []StringFilter
+
+	// Filter criteria for the cloud provider.
+	CloudProvider []StringFilter
+
+	// Filter criteria for the cloud provider account ID.
+	CloudProviderAccountId []StringFilter
+
+	// Filter criteria for the cloud provider organization ID.
+	CloudProviderOrgId []StringFilter
+
+	// Filter criteria for the cloud provider region.
+	CloudProviderRegion []StringFilter
+
+	// Filter criteria for the execution role of a serverless function.
+	CloudServerlessFunctionExecutionRole []StringFilter
+
+	// Filter criteria for when a serverless function was last modified.
+	CloudServerlessFunctionLastModifiedAt []DateFilter
+
+	// Filter criteria for the name of a serverless function.
+	CloudServerlessFunctionName []StringFilter
+
+	// Filter criteria for the runtime of a serverless function.
+	CloudServerlessFunctionRuntime []StringFilter
+
+	// Filter criteria for the image reference of a VM instance.
+	CloudVmImageReference []StringFilter
+
+	// Filter criteria for the network ID of a VM instance.
+	CloudVmNetworkId []StringFilter
+
+	// Filter criteria for the subnet IDs of a VM instance.
+	CloudVmSubnetIds []StringFilter
+
 	// Filter criteria for findings based on the project name in a code repository.
 	CodeRepositoryProjectName []StringFilter
 
@@ -2832,6 +3511,40 @@ type FindingTypeAggregationResponse struct {
 	// The ID of the Amazon Web Services account associated with the findings.
 	AccountId *string
 
+	// The cloud account ID for the finding type aggregation.
+	CloudAccountId *string
+
+	// The cloud organization ID for the finding type aggregation.
+	CloudOrgId *string
+
+	// The cloud infrastructure partition associated with this finding type
+	// aggregation. Valid values:
+	//
+	//   - aws – Amazon Web Services commercial Regions.
+	//
+	//   - aws-cn – Amazon Web Services China Regions.
+	//
+	//   - aws-us-gov – Amazon Web Services GovCloud (US) Regions.
+	//
+	//   - AzureCloud – Azure commercial Regions.
+	CloudPartition *string
+
+	// The cloud service provider associated with this finding type aggregation. Valid
+	// values:
+	//
+	//   - AWS – Findings from Amazon Web Services resources.
+	//
+	//   - AZURE – Findings from Microsoft Azure resources.
+	CloudProvider *string
+
+	// The cloud Region associated with this finding type aggregation. The value
+	// format depends on the cloud provider:
+	//
+	//   - An Amazon Web Services Region, such as us-east-1 .
+	//
+	//   - An Azure region, such as eastus .
+	CloudRegion *string
+
 	// The number of findings that have an exploit available.
 	ExploitAvailableCount *int64
 
@@ -2885,6 +3598,9 @@ type FreeTrialInfo struct {
 	// This member is required.
 	Type FreeTrialType
 
+	// The cloud provider associated with the free trial information.
+	CloudProvider CloudProvider
+
 	noSmithyDocumentSerde
 }
 
@@ -2910,8 +3626,76 @@ type FreeTrialInfoError struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about a container image involved in a finding.
+type Image struct {
+
+	// The architecture of the container image.
+	Architecture *string
+
+	// The author of the container image.
+	Author *string
+
+	// The image digest of the container image.
+	ImageDigest *string
+
+	// The image tags attached to the container image.
+	ImageTags []string
+
+	// The number of times the container image is in use.
+	InUseCount *int64
+
+	// The last time the container image was in use.
+	LastInUseAt *time.Time
+
+	// The platform of the container image.
+	Platform *string
+
+	// The date and time the container image was pushed.
+	PushedAt *time.Time
+
+	// The registry for the container image.
+	Registry *string
+
+	// The name of the repository the container image resides in.
+	RepositoryName *string
+
+	noSmithyDocumentSerde
+}
+
 // The details that define an aggregation based on container image layers.
 type ImageLayerAggregation struct {
+
+	// The cloud account IDs to aggregate findings for.
+	CloudAccountIds []StringFilter
+
+	// The cloud organization IDs to aggregate findings for.
+	CloudOrgIds []StringFilter
+
+	// The cloud partitions to aggregate findings for. Valid values:
+	//
+	//   - aws – Amazon Web Services commercial Regions.
+	//
+	//   - aws-cn – Amazon Web Services China Regions.
+	//
+	//   - aws-us-gov – Amazon Web Services GovCloud (US) Regions.
+	//
+	//   - AzureCloud – Azure commercial Regions.
+	CloudPartitions []StringFilter
+
+	// The cloud providers to aggregate findings for. Valid values:
+	//
+	//   - AWS – Findings from Amazon Web Services resources.
+	//
+	//   - AZURE – Findings from Microsoft Azure resources.
+	CloudProviders []StringFilter
+
+	// The cloud regions to aggregate findings for. The value format depends on the
+	// cloud provider:
+	//
+	//   - An Amazon Web Services Region, such as us-east-1 .
+	//
+	//   - An Azure region, such as eastus .
+	CloudRegions []StringFilter
 
 	// The hashes associated with the layers.
 	LayerHashes []StringFilter
@@ -2954,6 +3738,40 @@ type ImageLayerAggregationResponse struct {
 	//
 	// This member is required.
 	ResourceId *string
+
+	// The cloud account ID for the image layer aggregation.
+	CloudAccountId *string
+
+	// The cloud organization ID for the image layer aggregation.
+	CloudOrgId *string
+
+	// The cloud infrastructure partition associated with this image layer
+	// aggregation. Valid values:
+	//
+	//   - aws – Amazon Web Services commercial Regions.
+	//
+	//   - aws-cn – Amazon Web Services China Regions.
+	//
+	//   - aws-us-gov – Amazon Web Services GovCloud (US) Regions.
+	//
+	//   - AzureCloud – Azure commercial Regions.
+	CloudPartition *string
+
+	// The cloud service provider associated with this image layer aggregation. Valid
+	// values:
+	//
+	//   - AWS – Findings from Amazon Web Services resources.
+	//
+	//   - AZURE – Findings from Microsoft Azure resources.
+	CloudProvider *string
+
+	// The cloud Region associated with this image layer aggregation. The value format
+	// depends on the cloud provider:
+	//
+	//   - An Amazon Web Services Region, such as us-east-1 .
+	//
+	//   - An Azure region, such as eastus .
+	CloudRegion *string
 
 	// An object that represents the count of matched findings per severity.
 	SeverityCounts *SeverityCounts
@@ -3521,6 +4339,58 @@ type ProjectPeriodicScanConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The provider-specific configuration details for creating a connector.
+//
+// The following types satisfy this interface:
+//
+//	ProviderDetailCreateMemberAzure
+type ProviderDetailCreate interface {
+	isProviderDetailCreate()
+}
+
+// The Azure-specific details for creating a connector.
+type ProviderDetailCreateMemberAzure struct {
+	Value AzureProviderDetailCreate
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderDetailCreateMemberAzure) isProviderDetailCreate() {}
+
+// The provider-specific configuration details for updating a connector.
+//
+// The following types satisfy this interface:
+//
+//	ProviderDetailUpdateMemberAzure
+type ProviderDetailUpdate interface {
+	isProviderDetailUpdate()
+}
+
+// The Azure-specific details for updating a connector.
+type ProviderDetailUpdateMemberAzure struct {
+	Value AzureProviderDetailUpdate
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderDetailUpdateMemberAzure) isProviderDetailUpdate() {}
+
+// A filter that matches connectors by cloud provider.
+type ProviderFilter struct {
+
+	// The comparison operator for the provider filter.
+	//
+	// This member is required.
+	Comparison ProviderComparison
+
+	// The cloud provider value to filter by.
+	//
+	// This member is required.
+	Value ConnectorCloudProvider
+
+	noSmithyDocumentSerde
+}
+
 // Details about the recommended course of action to remediate the finding.
 type Recommendation struct {
 
@@ -3573,6 +4443,40 @@ type RepositoryAggregationResponse struct {
 	// The number of container images impacted by the findings.
 	AffectedImages *int64
 
+	// The cloud account ID for the repository aggregation.
+	CloudAccountId *string
+
+	// The cloud organization ID for the repository aggregation.
+	CloudOrgId *string
+
+	// The cloud infrastructure partition associated with this repository aggregation.
+	// Valid values:
+	//
+	//   - aws – Amazon Web Services commercial Regions.
+	//
+	//   - aws-cn – Amazon Web Services China Regions.
+	//
+	//   - aws-us-gov – Amazon Web Services GovCloud (US) Regions.
+	//
+	//   - AzureCloud – Azure commercial Regions.
+	CloudPartition *string
+
+	// The cloud service provider associated with this repository aggregation. Valid
+	// values:
+	//
+	//   - AWS – Findings from Amazon Web Services resources.
+	//
+	//   - AZURE – Findings from Microsoft Azure resources.
+	CloudProvider Provider
+
+	// The cloud Region associated with this repository aggregation. The value format
+	// depends on the cloud provider:
+	//
+	//   - An Amazon Web Services Region, such as us-east-1 .
+	//
+	//   - An Azure region, such as eastus .
+	CloudRegion *string
+
 	// An object that represent the count of matched findings per severity.
 	SeverityCounts *SeverityCounts
 
@@ -3597,6 +4501,15 @@ type Resource struct {
 
 	// The partition of the resource.
 	Partition *string
+
+	// The cloud provider of the resource.
+	Provider Provider
+
+	// The cloud provider account ID of the resource.
+	ProviderAccountId *string
+
+	// The cloud provider organization ID of the resource.
+	ProviderOrgId *string
 
 	// The Amazon Web Services Region the impacted resource is located in.
 	Region *string
@@ -3624,6 +4537,16 @@ type ResourceDetails struct {
 
 	// Contains details about a code repository resource associated with a finding.
 	CodeRepository *CodeRepositoryDetails
+
+	// An object that contains details about a container image involved in the finding.
+	Image *Image
+
+	// An object that contains details about a serverless function involved in the
+	// finding.
+	ServerlessFunction *ServerlessFunction
+
+	// An object that contains details about a VM instance involved in the finding.
+	Vm *Vm
 
 	noSmithyDocumentSerde
 }
@@ -3683,6 +4606,15 @@ type ResourceScanMetadata struct {
 	// Contains metadata about scan coverage for a code repository resource.
 	CodeRepository *CodeRepositoryMetadata
 
+	// The container image metadata associated with a covered resource.
+	ContainerImage *ContainerImageMetadata
+
+	// The container registry metadata associated with a covered resource.
+	ContainerRegistry *ContainerRegistryMetadata
+
+	// The container repository metadata associated with a covered resource.
+	ContainerRepository *ContainerRepositoryMetadata
+
 	// An object that contains metadata details for an Amazon EC2 instance.
 	Ec2 *Ec2Metadata
 
@@ -3697,6 +4629,12 @@ type ResourceScanMetadata struct {
 	// An object that contains metadata details for an Amazon Web Services Lambda
 	// function.
 	LambdaFunction *LambdaFunctionMetadata
+
+	// The serverless function metadata associated with a covered resource.
+	ServerlessFunction *ServerlessFunctionMetadata
+
+	// The VM instance metadata associated with a covered resource.
+	VmInstance *VmInstanceMetadata
 
 	noSmithyDocumentSerde
 }
@@ -3945,6 +4883,48 @@ type ScheduleMemberWeekly struct {
 
 func (*ScheduleMemberWeekly) isSchedule() {}
 
+// The scope of resources that Amazon Inspector scans for a single scanning type,
+// including the scope level, the targeted resources, and the current state.
+type ScopeConfiguration struct {
+
+	// The type of scope. Valid values are TENANT , which scans all resources in the
+	// Azure tenant, and SUBSCRIPTION , which scans only the resources in the specified
+	// Azure subscriptions.
+	//
+	// This member is required.
+	ScopeType ScopeType
+
+	// The list of scope values. For subscription-level scope, these are Azure
+	// subscription IDs.
+	ScopeValues []string
+
+	// The current state of the scope configuration.
+	State ScopeState
+
+	// The reason for the current state of the scope configuration.
+	StateReason *string
+
+	noSmithyDocumentSerde
+}
+
+// The scope of resources to scan for a single scanning type. Provide this as part
+// of an AzureScopeConfigurationInput when you create or update a connector.
+type ScopeConfigurationInput struct {
+
+	// The type of scope. Valid values are TENANT , which scans all resources in the
+	// Azure tenant, and SUBSCRIPTION , which scans only the resources in the specified
+	// Azure subscriptions.
+	//
+	// This member is required.
+	ScopeType ScopeType
+
+	// The list of scope values. For subscription-level scope, these are Azure
+	// subscription IDs.
+	ScopeValues []string
+
+	noSmithyDocumentSerde
+}
+
 // Defines the scope of repositories to be included in code security scans.
 type ScopeSettings struct {
 
@@ -3963,6 +4943,191 @@ type SearchVulnerabilitiesFilterCriteria struct {
 	//
 	// This member is required.
 	VulnerabilityIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a serverless function involved in a finding.
+type ServerlessFunction struct {
+
+	// The architectures of the serverless function.
+	Architectures []Architecture
+
+	// The code digest of the serverless function.
+	CodeDigest *string
+
+	// The execution role of the serverless function.
+	ExecutionRole *string
+
+	// The date and time the serverless function was last modified.
+	LastModifiedAt *time.Time
+
+	// The layers of the serverless function.
+	Layers []string
+
+	// The network ID associated with the serverless function.
+	NetworkId *string
+
+	// The package type of the serverless function.
+	PackageType PackageType
+
+	// The runtime of the serverless function.
+	Runtime *string
+
+	// The security group IDs associated with the serverless function.
+	SecurityGroupIds []string
+
+	// The name of the serverless function.
+	ServerlessFunctionName *string
+
+	// The subnet IDs associated with the serverless function.
+	SubnetIds []string
+
+	// The version of the serverless function.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// An aggregation of information about serverless functions.
+type ServerlessFunctionAggregation struct {
+
+	// The cloud account IDs to aggregate findings for.
+	CloudAccountIds []StringFilter
+
+	// The cloud organization IDs to aggregate findings for.
+	CloudOrgIds []StringFilter
+
+	// The cloud partitions to aggregate findings for. Valid values:
+	//
+	//   - aws – Amazon Web Services commercial Regions.
+	//
+	//   - aws-cn – Amazon Web Services China Regions.
+	//
+	//   - aws-us-gov – Amazon Web Services GovCloud (US) Regions.
+	//
+	//   - AzureCloud – Azure commercial Regions.
+	CloudPartitions []StringFilter
+
+	// The cloud providers to aggregate findings for. Valid values:
+	//
+	//   - AWS – Findings from Amazon Web Services resources.
+	//
+	//   - AZURE – Findings from Microsoft Azure resources.
+	CloudProviders []StringFilter
+
+	// The cloud regions to aggregate findings for. The value format depends on the
+	// cloud provider:
+	//
+	//   - An Amazon Web Services Region, such as us-east-1 .
+	//
+	//   - An Azure region, such as eastus .
+	CloudRegions []StringFilter
+
+	// The function names to aggregate findings for.
+	FunctionNames []StringFilter
+
+	// The function tags to aggregate findings for.
+	FunctionTags []MapFilter
+
+	// The resource IDs to aggregate findings for.
+	ResourceIds []StringFilter
+
+	// The runtimes to aggregate findings for.
+	Runtimes []StringFilter
+
+	// The value to sort results by. Specify a field name from the aggregation
+	// response, such as CRITICAL , HIGH , or ALL .
+	SortBy ServerlessFunctionSortBy
+
+	// The order to sort results by. Valid values are ASC and DESC .
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// A response that contains the results of a serverless function aggregation.
+type ServerlessFunctionAggregationResponse struct {
+
+	// The resource ID for the serverless function.
+	//
+	// This member is required.
+	ResourceId *string
+
+	// The account ID associated with the serverless function.
+	AccountId *string
+
+	// The cloud account ID for the serverless function aggregation.
+	CloudAccountId *string
+
+	// The cloud organization ID for the serverless function aggregation.
+	CloudOrgId *string
+
+	// The cloud infrastructure partition associated with this serverless function
+	// aggregation. Valid values:
+	//
+	//   - aws – Amazon Web Services commercial Regions.
+	//
+	//   - aws-cn – Amazon Web Services China Regions.
+	//
+	//   - aws-us-gov – Amazon Web Services GovCloud (US) Regions.
+	//
+	//   - AzureCloud – Azure commercial Regions.
+	CloudPartition *string
+
+	// The cloud service provider associated with this serverless function
+	// aggregation. Valid values:
+	//
+	//   - AWS – Findings from Amazon Web Services resources.
+	//
+	//   - AZURE – Findings from Microsoft Azure resources.
+	CloudProvider Provider
+
+	// The cloud Region associated with this serverless function aggregation. The
+	// value format depends on the cloud provider:
+	//
+	//   - An Amazon Web Services Region, such as us-east-1 .
+	//
+	//   - An Azure region, such as eastus .
+	CloudRegion *string
+
+	// The number of active findings with an exploit available for the serverless
+	// function.
+	ExploitAvailableActiveFindingsCount *int64
+
+	// The number of active findings with a fix available for the serverless function.
+	FixAvailableActiveFindingsCount *int64
+
+	// The name of the serverless function.
+	FunctionName *string
+
+	// The date and time the serverless function was last modified.
+	LastModifiedAt *time.Time
+
+	// The runtime of the serverless function.
+	Runtime *string
+
+	// An object that contains the counts of aggregated finding per severity.
+	SeverityCounts *SeverityCounts
+
+	// The tags attached to the serverless function.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata about a serverless function associated with a covered
+// resource.
+type ServerlessFunctionMetadata struct {
+
+	// The tags associated with the serverless function.
+	FunctionTags map[string]string
+
+	// The runtime of the serverless function.
+	Runtime *string
+
+	// The name of the serverless function.
+	ServerlessFunctionName *string
 
 	noSmithyDocumentSerde
 }
@@ -4262,6 +5427,27 @@ type UpdateCisTargets struct {
 	noSmithyDocumentSerde
 }
 
+// The per-scan-type inheritance reset settings for the UpdateConfiguration
+// operation. Each member is independently optional. Including a member in this
+// structure resets that scan type's configuration to inherit from the delegated
+// administrator.
+type UpdateConfigurationInheritance struct {
+
+	// The inheritance mode for Amazon EC2 scan configuration. Set to
+	// INHERIT_FROM_ADMIN to reset the member account's Amazon EC2 scan configuration
+	// to inherit from the delegated administrator. If omitted, the member account's
+	// existing Amazon EC2 scan configuration is not changed.
+	Ec2Configuration InheritanceMode
+
+	// The inheritance mode for Amazon ECR scan configuration. Set to
+	// INHERIT_FROM_ADMIN to reset the member account's Amazon ECR scan configuration
+	// to inherit from the delegated administrator. If omitted, the member account's
+	// existing Amazon ECR scan configuration is not changed.
+	EcrConfiguration InheritanceMode
+
+	noSmithyDocumentSerde
+}
+
 // Contains details required to update an integration with GitHub.
 type UpdateGitHubIntegrationDetail struct {
 
@@ -4323,6 +5509,9 @@ func (*UpdateIntegrationDetailsMemberGitlabSelfManaged) isUpdateIntegrationDetai
 // Contains usage information about the cost of Amazon Inspector operation.
 type Usage struct {
 
+	// The cloud provider associated with the usage information.
+	CloudProvider CloudProvider
+
 	// The currency type used when calculating usage data.
 	Currency Currency
 
@@ -4362,6 +5551,194 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a VM instance involved in a finding.
+type Vm struct {
+
+	// The execution role of the VM instance.
+	ExecutionRole *string
+
+	// The IPv4 addresses of the VM instance.
+	IpV4Addresses []string
+
+	// The IPv6 addresses of the VM instance.
+	IpV6Addresses []string
+
+	// The key name associated with the VM instance.
+	KeyName *string
+
+	// The date and time the VM instance was launched.
+	LaunchedAt *time.Time
+
+	// The network ID associated with the VM instance.
+	NetworkId *string
+
+	// The platform of the VM instance.
+	Platform *string
+
+	// The security group IDs associated with the VM instance.
+	SecurityGroupIds []string
+
+	// The subnet IDs of the VM instance.
+	SubnetIds []string
+
+	// The type of the VM instance.
+	Type *string
+
+	// The image reference of the VM instance.
+	VmImageReference *string
+
+	// The name of the VM instance.
+	VmName *string
+
+	noSmithyDocumentSerde
+}
+
+// An aggregation of information about VM instances.
+type VmInstanceAggregation struct {
+
+	// The cloud account IDs to aggregate findings for.
+	CloudAccountIds []StringFilter
+
+	// The cloud organization IDs to aggregate findings for.
+	CloudOrgIds []StringFilter
+
+	// The cloud partitions to aggregate findings for. Valid values:
+	//
+	//   - aws – Amazon Web Services commercial Regions.
+	//
+	//   - aws-cn – Amazon Web Services China Regions.
+	//
+	//   - aws-us-gov – Amazon Web Services GovCloud (US) Regions.
+	//
+	//   - AzureCloud – Azure commercial Regions.
+	CloudPartitions []StringFilter
+
+	// The cloud providers to aggregate findings for. Valid values:
+	//
+	//   - AWS – Findings from Amazon Web Services resources.
+	//
+	//   - AZURE – Findings from Microsoft Azure resources.
+	CloudProviders []StringFilter
+
+	// The cloud regions to aggregate findings for. The value format depends on the
+	// cloud provider:
+	//
+	//   - An Amazon Web Services Region, such as us-east-1 .
+	//
+	//   - An Azure region, such as eastus .
+	CloudRegions []StringFilter
+
+	// The instance tags to aggregate findings for.
+	InstanceTags []MapFilter
+
+	// The operating systems to aggregate findings for.
+	OperatingSystems []StringFilter
+
+	// The resource IDs to aggregate findings for.
+	ResourceIds []StringFilter
+
+	// The value to sort results by. Specify a field name from the aggregation
+	// response, such as CRITICAL , HIGH , ALL , or NETWORK_FINDINGS .
+	SortBy VmInstanceSortBy
+
+	// The order to sort results by. Valid values are ASC and DESC .
+	SortOrder SortOrder
+
+	// The VM image references to aggregate findings for.
+	VmImageReferences []StringFilter
+
+	noSmithyDocumentSerde
+}
+
+// A response that contains the results of a VM instance aggregation.
+type VmInstanceAggregationResponse struct {
+
+	// The resource ID for the VM instance.
+	//
+	// This member is required.
+	ResourceId *string
+
+	// The account ID associated with the VM instance.
+	AccountId *string
+
+	// The cloud account ID for the VM instance aggregation.
+	CloudAccountId *string
+
+	// The cloud organization ID for the VM instance aggregation.
+	CloudOrgId *string
+
+	// The cloud infrastructure partition associated with this VM instance
+	// aggregation. Valid values:
+	//
+	//   - aws – Amazon Web Services commercial Regions.
+	//
+	//   - aws-cn – Amazon Web Services China Regions.
+	//
+	//   - aws-us-gov – Amazon Web Services GovCloud (US) Regions.
+	//
+	//   - AzureCloud – Azure commercial Regions.
+	CloudPartition *string
+
+	// The cloud service provider associated with this VM instance aggregation. Valid
+	// values:
+	//
+	//   - AWS – Findings from Amazon Web Services resources.
+	//
+	//   - AZURE – Findings from Microsoft Azure resources.
+	CloudProvider Provider
+
+	// The cloud Region associated with this VM instance aggregation. The value format
+	// depends on the cloud provider:
+	//
+	//   - An Amazon Web Services Region, such as us-east-1 .
+	//
+	//   - An Azure region, such as eastus .
+	CloudRegion *string
+
+	// The number of active findings with an exploit available for the VM instance.
+	ExploitAvailableActiveFindingsCount *int64
+
+	// The number of active findings with a fix available for the VM instance.
+	FixAvailableActiveFindingsCount *int64
+
+	// The number of network findings for the VM instance. This field applies only to
+	// Amazon Web Services resources.
+	NetworkFindings *int64
+
+	// The operating system of the VM instance.
+	OperatingSystem *string
+
+	// An object that contains the counts of aggregated finding per severity.
+	SeverityCounts *SeverityCounts
+
+	// The tags attached to the VM instance.
+	Tags map[string]string
+
+	// The VM image reference for the VM instance.
+	VmImageReference *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata about a virtual machine (VM) instance associated with a
+// covered resource.
+type VmInstanceMetadata struct {
+
+	// The inventory hash of the VM instance.
+	InventoryHash *string
+
+	// The platform of the VM instance.
+	Platform VmPlatform
+
+	// The tags associated with the VM instance.
+	Tags map[string]string
+
+	// The image reference of the VM instance.
+	VmImageReference *string
 
 	noSmithyDocumentSerde
 }
@@ -4526,5 +5903,7 @@ func (*UnknownUnionMember) isAggregationResponse()      {}
 func (*UnknownUnionMember) isClusterMetadata()          {}
 func (*UnknownUnionMember) isCodeSecurityResource()     {}
 func (*UnknownUnionMember) isCreateIntegrationDetail()  {}
+func (*UnknownUnionMember) isProviderDetailCreate()     {}
+func (*UnknownUnionMember) isProviderDetailUpdate()     {}
 func (*UnknownUnionMember) isSchedule()                 {}
 func (*UnknownUnionMember) isUpdateIntegrationDetails() {}

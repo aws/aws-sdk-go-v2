@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=AttachNetworkInterface&DeviceIndex=1&DryRun=true&EnaQueueCount=1&EnaSrdSpecification.EnaSrdEnabled=true&EnaSrdSpecification.EnaSrdUdpSpecification.EnaSrdUdpEnabled=true&InstanceId=__InstanceId__&NetworkCardIndex=1&NetworkInterfaceId=__NetworkInterfaceId__&Version=2016-11-15

@@ -4,7 +4,9 @@ package computeoptimizer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -103,6 +105,29 @@ type ExportECSServiceRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportECSServiceRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportECSServiceRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportECSServiceRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.ExportECSServiceRecommendationsRequest_accountIds, v.AccountIds)
+	serializeExportableECSServiceFields(s, schemas.ExportECSServiceRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	if v.FileFormat != "" {
+		s.WriteString(schemas.ExportECSServiceRecommendationsRequest_fileFormat, string(v.FileFormat))
+	}
+	serializeECSServiceRecommendationFilters(s, schemas.ExportECSServiceRecommendationsRequest_filters, v.Filters)
+	if v.IncludeMemberAccounts != false {
+		s.WriteBool(schemas.ExportECSServiceRecommendationsRequest_includeMemberAccounts, v.IncludeMemberAccounts)
+	}
+	if v.S3DestinationConfig != nil {
+		s.WriteStruct(schemas.ExportECSServiceRecommendationsRequest_s3DestinationConfig)
+		v.S3DestinationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ExportECSServiceRecommendationsOutput struct {
 
 	//  The identification number of the export job.
@@ -121,13 +146,40 @@ type ExportECSServiceRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportECSServiceRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportECSServiceRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportECSServiceRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.ExportECSServiceRecommendationsResponse_jobId, *v.JobId)
+	}
+	if v.S3Destination != nil {
+		s.WriteStruct(schemas.ExportECSServiceRecommendationsResponse_s3Destination)
+		v.S3Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExportECSServiceRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportECSServiceRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportECSServiceRecommendationsResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.ExportECSServiceRecommendationsResponse_jobId, v.JobId)
+		case schemas.ExportECSServiceRecommendationsResponse_s3Destination:
+			v.S3Destination = &types.S3Destination{}
+			return v.S3Destination.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportECSServiceRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpExportECSServiceRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportECSServiceRecommendations, schemas.ExportECSServiceRecommendationsRequest, schemas.ExportECSServiceRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpExportECSServiceRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportECSServiceRecommendations, schemas.ExportECSServiceRecommendationsRequest, schemas.ExportECSServiceRecommendationsResponse), output: &ExportECSServiceRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

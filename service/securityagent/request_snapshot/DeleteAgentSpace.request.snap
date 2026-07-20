@@ -1,0 +1,5 @@
+POST /DeleteAgentSpace
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__"}

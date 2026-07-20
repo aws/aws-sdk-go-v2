@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.UpdateThesaurus
+
+{"Description":"__Description__","Id":"__Id__","IndexId":"__IndexId__","Name":"__Name__","RoleArn":"__RoleArn__","SourceS3Path":{"Bucket":"__Bucket__","Key":"__Key__"}}

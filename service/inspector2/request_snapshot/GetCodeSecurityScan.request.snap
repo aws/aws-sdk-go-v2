@@ -1,0 +1,5 @@
+POST /codesecurity/scan/get
+
+Content-Type: application/json
+
+{"resource":{"projectId":"__CodeSecurityResourceMemberProjectId__"},"scanId":"__ScanId__"}

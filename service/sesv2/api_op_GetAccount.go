@@ -59,6 +59,10 @@ type GetAccountOutput struct {
 	//   resumed.
 	EnforcementStatus *string
 
+	// The pricing attributes that apply to your Amazon SES account, including the
+	// currently active pricing plan and any scheduled change.
+	PricingAttributes *types.PricingAttributes
+
 	// Indicates whether or not your account has production access in the current
 	// Amazon Web Services Region.
 	//

@@ -9,10 +9,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates setting configurations for your Amazon Inspector account. When you use
-// this API as an Amazon Inspector delegated administrator this updates the setting
-// for all accounts you manage. Member accounts in an organization cannot update
-// this setting.
+// Updates the scan configuration for your Amazon Inspector account. If you don't
+// specify an accountId , this operation updates the delegated administrator's
+// configuration and propagates it to member accounts that have not been
+// individually configured. If you specify an accountId , this operation updates
+// that member account's configuration. Only the delegated administrator can
+// specify an accountId ; member accounts cannot call this operation.
 func (c *Client) UpdateConfiguration(ctx context.Context, params *UpdateConfigurationInput, optFns ...func(*Options)) (*UpdateConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateConfigurationInput{}
@@ -30,12 +32,27 @@ func (c *Client) UpdateConfiguration(ctx context.Context, params *UpdateConfigur
 
 type UpdateConfigurationInput struct {
 
+	// The 12-digit Amazon Web Services account ID of the member account whose scan
+	// configuration you want to update. When specified, you must be the delegated
+	// administrator for this member account. If not specified, the operation updates
+	// your own configuration and propagates changes to any member accounts that have
+	// not been individually configured.
+	AccountId *string
+
 	// Specifies how the Amazon EC2 automated scan will be updated for your
 	// environment.
 	Ec2Configuration *types.Ec2Configuration
 
 	// Specifies how the ECR automated re-scan will be updated for your environment.
 	EcrConfiguration *types.EcrConfiguration
+
+	// Specifies which scan-type configurations to reset to the delegated
+	// administrator's inherited values for the targeted member account. Each member of
+	// this structure is independently optional. When specified, ec2Configuration and
+	// ecrConfiguration must be absent, and accountId must also be present. Only
+	// INHERIT_FROM_ADMIN is valid for each member. If not specified, the operation
+	// uses the ec2Configuration and ecrConfiguration parameters instead.
+	UpdateConfigurationInheritance *types.UpdateConfigurationInheritance
 
 	noSmithyDocumentSerde
 }

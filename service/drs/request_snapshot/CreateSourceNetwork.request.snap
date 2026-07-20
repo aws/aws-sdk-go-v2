@@ -1,0 +1,5 @@
+POST /CreateSourceNetwork
+
+Content-Type: application/json
+
+{"originAccountID":"__OriginAccountID__","originRegion":"__OriginRegion__","tags":{"key0":"__Value__"},"vpcID":"__VpcID__"}

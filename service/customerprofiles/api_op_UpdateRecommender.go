@@ -45,6 +45,10 @@ type UpdateRecommenderInput struct {
 	// parameters and settings that define its behavior.
 	RecommenderConfig *types.RecommenderConfig
 
+	// The name of a specific recommender version to activate as part of this update
+	// (for example, to roll back to a previously trained version).
+	RecommenderVersionName *string
+
 	noSmithyDocumentSerde
 }
 

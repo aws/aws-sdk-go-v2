@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=RestoreDBClusterFromSnapshot&AvailabilityZones.AvailabilityZone.1=__Member__&AvailabilityZones.AvailabilityZone.2=__Member__&DBClusterIdentifier=__DBClusterIdentifier__&DBClusterParameterGroupName=__DBClusterParameterGroupName__&DBSubnetGroupName=__DBSubnetGroupName__&DeletionProtection=true&EnableCloudwatchLogsExports.member.1=__Member__&EnableCloudwatchLogsExports.member.2=__Member__&Engine=__Engine__&EngineVersion=__EngineVersion__&KmsKeyId=__KmsKeyId__&NetworkType=__NetworkType__&Port=1&ServerlessV2ScalingConfiguration.MaxCapacity=1&ServerlessV2ScalingConfiguration.MinCapacity=1&SnapshotIdentifier=__SnapshotIdentifier__&StorageType=__StorageType__&Tags.Tag.1.Key=__Key__&Tags.Tag.1.Value=__Value__&Tags.Tag.2.Key=__Key__&Tags.Tag.2.Value=__Value__&Version=2014-10-31&VpcSecurityGroupIds.VpcSecurityGroupId.1=__Member__&VpcSecurityGroupIds.VpcSecurityGroupId.2=__Member__

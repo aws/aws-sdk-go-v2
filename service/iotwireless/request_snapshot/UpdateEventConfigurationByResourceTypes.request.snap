@@ -1,0 +1,5 @@
+PATCH /event-configurations-resource-types
+
+Content-Type: application/json
+
+{"ConnectionStatus":{"LoRaWAN":{"WirelessGatewayEventTopic":"Enabled"}},"DeviceRegistrationState":{"Sidewalk":{"WirelessDeviceEventTopic":"Enabled"}},"Join":{"LoRaWAN":{"WirelessDeviceEventTopic":"Enabled"}},"MessageDeliveryStatus":{"Sidewalk":{"WirelessDeviceEventTopic":"Enabled"}},"Proximity":{"Sidewalk":{"WirelessDeviceEventTopic":"Enabled"}}}

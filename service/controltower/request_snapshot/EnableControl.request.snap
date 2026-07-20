@@ -1,0 +1,5 @@
+POST /enable-control
+
+Content-Type: application/json
+
+{"controlIdentifier":"__ControlIdentifier__","parameters":[{"key":"__Key__"},{"key":"__Key__"}],"tags":{"key0":"__Value__"},"targetIdentifier":"__TargetIdentifier__"}

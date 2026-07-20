@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.ListAccountSettings
+
+{"effectiveSettings":true,"maxResults":1,"name":"serviceLongArnFormat","nextToken":"__NextToken__","principalArn":"__PrincipalArn__","value":"__Value__"}

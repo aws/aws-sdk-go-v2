@@ -1,0 +1,3 @@
+GET /workflow/__WorkflowId__/workflowstepgroups/__StepGroupId__/workflowsteps?maxResults=1&nextToken=__NextToken__
+
+

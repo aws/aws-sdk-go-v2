@@ -1,0 +1,5 @@
+POST /GetResourceExplorerSetup
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","TaskId":"__TaskId__"}

@@ -1,0 +1,3 @@
+GET /quantum-task/__QuantumTaskArn__?additionalAttributeNames=QueueInfo&additionalAttributeNames=QueueInfo
+
+

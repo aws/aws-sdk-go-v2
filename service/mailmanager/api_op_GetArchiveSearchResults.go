@@ -49,11 +49,11 @@ type GetArchiveSearchResultsOutput struct {
 }
 
 func (c *Client) addOperationGetArchiveSearchResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetArchiveSearchResults{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetArchiveSearchResults{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetArchiveSearchResults{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetArchiveSearchResults{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -77,6 +77,9 @@ func (c *Client) addOperationGetArchiveSearchResultsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PerformanceInsightsv20180227.CreatePerformanceAnalysisReport
+
+{"EndTime":946684800,"Identifier":"__Identifier__","ServiceType":"RDS","StartTime":946684800,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

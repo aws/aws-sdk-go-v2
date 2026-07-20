@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.PutComplianceItems
+
+{"ComplianceType":"__ComplianceType__","ExecutionSummary":{"ExecutionId":"__ExecutionId__","ExecutionTime":946684800,"ExecutionType":"__ExecutionType__"},"ItemContentHash":"__ItemContentHash__","Items":[{"Details":{"key0":"__Value__"},"Id":"__Id__","Severity":"CRITICAL","Status":"COMPLIANT","Title":"__Title__"},{"Details":{"key0":"__Value__"},"Id":"__Id__","Severity":"CRITICAL","Status":"COMPLIANT","Title":"__Title__"}],"ResourceId":"__ResourceId__","ResourceType":"__ResourceType__","UploadType":"COMPLETE"}

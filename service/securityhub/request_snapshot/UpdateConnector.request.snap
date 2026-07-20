@@ -1,0 +1,5 @@
+PATCH /connectors/__ConnectorId__
+
+Content-Type: application/json
+
+{"Description":"__Description__","Provider":{"Azure":{"AzureRegions":["__Member__","__Member__"],"ScopeConfiguration":{"ScopeType":"TENANT","ScopeValues":["__Member__","__Member__"]}}}}

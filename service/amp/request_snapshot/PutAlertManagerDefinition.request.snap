@@ -1,0 +1,5 @@
+PUT /workspaces/__WorkspaceId__/alertmanager/definition
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","data":"YmxvYg=="}

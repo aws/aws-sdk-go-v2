@@ -1149,6 +1149,9 @@ type DomainConfig struct {
 	// Key-value pairs to enable encryption at rest.
 	EncryptionAtRestOptions *EncryptionAtRestOptionsStatus
 
+	// The engine mode configured for the domain.
+	EngineMode *EngineModeStatus
+
 	// The OpenSearch or Elasticsearch version that the domain is running.
 	EngineVersion *VersionStatus
 
@@ -1180,6 +1183,9 @@ type DomainConfig struct {
 
 	// Software update options for the domain.
 	SoftwareUpdateOptions *SoftwareUpdateOptionsStatus
+
+	// The use case configured for the domain.
+	UseCase *UseCaseStatus
 
 	// The current VPC options for the domain and the status of any updates to their
 	// configuration.
@@ -1468,6 +1474,9 @@ type DomainStatus struct {
 	//   'vpcv2':'vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.aos.us-east-1.on.aws'
 	Endpoints map[string]string
 
+	// The engine mode for the domain.
+	EngineMode EngineMode
+
 	// Version of OpenSearch or Elasticsearch that the domain is running, in the
 	// format Elasticsearch_X.Y or OpenSearch_X.Y .
 	EngineVersion *string
@@ -1510,6 +1519,9 @@ type DomainStatus struct {
 	// Elasticsearch. True if OpenSearch Service is in the process of a version
 	// upgrade. False if the configuration is active.
 	UpgradeProcessing *bool
+
+	// The primary use case for the domain.
+	UseCase DomainUseCase
 
 	// The VPC configuration for the domain.
 	VPCOptions *VPCDerivedInfo
@@ -1656,6 +1668,22 @@ type EncryptionAtRestOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
+// The status of the engine mode for the domain.
+type EngineModeStatus struct {
+
+	// The engine mode configured for the domain.
+	//
+	// This member is required.
+	Options EngineMode
+
+	// The current status of the engine mode for the domain.
+	//
+	// This member is required.
+	Status *OptionStatus
+
+	noSmithyDocumentSerde
+}
+
 // Information about the active domain environment.
 type EnvironmentInfo struct {
 
@@ -1673,6 +1701,24 @@ type ErrorDetails struct {
 
 	// The type of error that occurred.
 	ErrorType *string
+
+	noSmithyDocumentSerde
+}
+
+// Options to filter the scope of saved objects to export during a migration.
+type ExportOptions struct {
+
+	// Specifies whether to include all objects referenced by the exported objects,
+	// recursively.
+	IncludeReferencesDeep *bool
+
+	// A list of specific saved objects to include in the migration, identified by
+	// type and ID.
+	Objects []SavedObjectIdentifier
+
+	// A list of saved object types to include in the migration. Valid values include
+	// dashboard , visualization , index-pattern , search , and query .
+	Types []string
 
 	noSmithyDocumentSerde
 }
@@ -1943,6 +1989,23 @@ type InsightEntity struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the entity for which to submit insight feedback. An entity represents
+// an Amazon OpenSearch Service domain.
+type InsightFeedbackEntity struct {
+
+	// The type of the entity. Possible values are DomainName .
+	//
+	// This member is required.
+	Type InsightFeedbackEntityType
+
+	// The value of the entity, such as a domain name.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a field in the detailed view of an insight, returned by the
 // DescribeInsightDetails operation.
 type InsightField struct {
@@ -2172,6 +2235,110 @@ type MasterUserOptions struct {
 	// Password for the master user. Only specify if InternalUserDatabaseEnabled is
 	// true .
 	MasterUserPassword *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains error details for a migration that failed or completed with errors.
+type MigrationError struct {
+
+	// The error code identifying the type of failure.
+	Code *string
+
+	// A human-readable description of the error.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration options for a saved objects migration job.
+type MigrationOptions struct {
+
+	// The data source from which to export saved objects.
+	//
+	// This member is required.
+	Source *MigrationSource
+
+	// The target workspace configuration for importing saved objects. You can specify
+	// an existing workspace or request creation of a new workspace.
+	//
+	// This member is required.
+	Workspace *MigrationWorkspace
+
+	// The strategy for resolving conflicts when saved objects already exist in the
+	// target workspace. Valid values are CREATE_NEW_COPIES , which creates new objects
+	// with unique IDs, and overwrite , which replaces existing objects.
+	ConflictResolution *string
+
+	// Options to filter the scope of saved objects to export from the source.
+	ExportOptions *ExportOptions
+
+	noSmithyDocumentSerde
+}
+
+// The source configuration for a migration, specifying the data source from which
+// to export saved objects.
+type MigrationSource struct {
+
+	// The Amazon Resource Name (ARN) of the data source to migrate saved objects from.
+	//
+	// This member is required.
+	DatasourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a migration job, including its status and progress.
+type MigrationSummary struct {
+
+	// The unique identifier of the OpenSearch application associated with the
+	// migration.
+	ApplicationId *string
+
+	// The date and time when the migration job was created.
+	CreatedAt *time.Time
+
+	// Error details if the migration failed or completed with errors.
+	Error *MigrationError
+
+	// The number of saved objects exported from the source data source.
+	ExportedCount int32
+
+	// The number of saved objects successfully imported into the target workspace.
+	ImportedCount int32
+
+	// The unique identifier of the migration job.
+	MigrationId *string
+
+	// The source configuration for the migration.
+	Source *MigrationSource
+
+	// The current status of the migration job.
+	Status *string
+
+	// The date and time when the migration job was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The target workspace configuration for a migration. You can specify an existing
+// workspace by ID or request creation of a new workspace.
+type MigrationWorkspace struct {
+
+	// Specifies whether to create a new workspace as the migration target. If true ,
+	// you must also specify name .
+	CreateWorkspace *bool
+
+	// The name of the new workspace to create. Required when createWorkspace is true .
+	Name *string
+
+	// The type of the new workspace to create.
+	Type *string
+
+	// The unique identifier of an existing workspace to use as the migration target.
+	// Specify either this parameter or createWorkspace .
+	WorkspaceId *string
 
 	noSmithyDocumentSerde
 }
@@ -2839,6 +3006,23 @@ type SAMLOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+// Identifies a specific saved object by its type and unique identifier.
+type SavedObjectIdentifier struct {
+
+	// The unique identifier of the saved object.
+	//
+	// This member is required.
+	Id *string
+
+	// The type of the saved object, such as dashboard , visualization , index-pattern
+	// , search , or query .
+	//
+	// This member is required.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a scheduled configuration change for an OpenSearch Service
 // domain. This actions can be a [service software update]or a [blue/green Auto-Tune enhancement].
 //
@@ -3159,6 +3343,22 @@ type UpgradeStepItem struct {
 	//
 	//   - Failed
 	UpgradeStepStatus UpgradeStatus
+
+	noSmithyDocumentSerde
+}
+
+// The status of the use case for the domain.
+type UseCaseStatus struct {
+
+	// The use case configured for the domain.
+	//
+	// This member is required.
+	Options DomainUseCase
+
+	// The current status of the use case for the domain.
+	//
+	// This member is required.
+	Status *OptionStatus
 
 	noSmithyDocumentSerde
 }

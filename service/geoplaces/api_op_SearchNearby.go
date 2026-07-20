@@ -13,10 +13,12 @@ import (
 // coordinates, returning place results with optional filters such as categories,
 // business chains, food types and more. The API returns details such as a place
 // name, address, phone, category, food type, contact, opening hours. Also, the API
-// can return phonemes, time zones and more based on requested parameters.
+// can return phonemes, time zones and more based on requested parameters. Not
+// supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
 //
 // For more information, see [Search Nearby] in the Amazon Location Service Developer Guide.
 //
+// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 // [Search Nearby]: https://docs.aws.amazon.com/location/latest/developerguide/search-nearby.html
 func (c *Client) SearchNearby(ctx context.Context, params *SearchNearbyInput, optFns ...func(*Options)) (*SearchNearbyOutput, error) {
 	if params == nil {
@@ -71,7 +73,7 @@ type SearchNearbyInput struct {
 	// is no data for the result in the requested language, data will be returned in
 	// the default language for the entry.
 	//
-	// [BCP 47]: https://en.wikipedia.org/wiki/IETF_language_tag
+	// [BCP 47]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
 	Language *string
 
 	// An optional limit for the number of results returned in a single call.

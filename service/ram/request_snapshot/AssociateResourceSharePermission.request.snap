@@ -1,0 +1,5 @@
+POST /associateresourcesharepermission
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","permissionArn":"__PermissionArn__","permissionVersion":1,"replace":true,"resourceShareArn":"__ResourceShareArn__"}

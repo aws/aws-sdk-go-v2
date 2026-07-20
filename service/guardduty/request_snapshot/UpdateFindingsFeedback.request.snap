@@ -1,0 +1,5 @@
+POST /detector/__DetectorId__/findings/feedback
+
+Content-Type: application/json
+
+{"comments":"__Comments__","feedback":"USEFUL","findingIds":["__Member__","__Member__"]}

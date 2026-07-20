@@ -1,0 +1,3 @@
+GET /hosted-zone-associations?max_results=1&next_token=__NextToken__&resourceArn=__ResourceArn__
+
+

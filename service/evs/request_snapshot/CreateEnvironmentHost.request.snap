@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonElasticVMwareService.CreateEnvironmentHost
+
+{"clientToken":"__ClientToken__","environmentId":"__EnvironmentId__","esxVersion":"__EsxVersion__","host":{"dedicatedHostId":"__DedicatedHostId__","hostName":"__HostName__","instanceType":"i4i.metal","keyName":"__KeyName__","placementGroupId":"__PlacementGroupId__"}}

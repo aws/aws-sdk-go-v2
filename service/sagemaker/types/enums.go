@@ -2328,6 +2328,38 @@ const (
 	ClusterInstanceTypeMlG7e24xlarge      ClusterInstanceType = "ml.g7e.24xlarge"
 	ClusterInstanceTypeMlG7e48xlarge      ClusterInstanceType = "ml.g7e.48xlarge"
 	ClusterInstanceTypeMlP6B30048xlarge   ClusterInstanceType = "ml.p6-b300.48xlarge"
+	ClusterInstanceTypeMlG4dnXlarge       ClusterInstanceType = "ml.g4dn.xlarge"
+	ClusterInstanceTypeMlG4dn2xlarge      ClusterInstanceType = "ml.g4dn.2xlarge"
+	ClusterInstanceTypeMlG4dn4xlarge      ClusterInstanceType = "ml.g4dn.4xlarge"
+	ClusterInstanceTypeMlG4dn8xlarge      ClusterInstanceType = "ml.g4dn.8xlarge"
+	ClusterInstanceTypeMlG4dn12xlarge     ClusterInstanceType = "ml.g4dn.12xlarge"
+	ClusterInstanceTypeMlG4dn16xlarge     ClusterInstanceType = "ml.g4dn.16xlarge"
+	ClusterInstanceTypeMlC6gMedium        ClusterInstanceType = "ml.c6g.medium"
+	ClusterInstanceTypeMlC6gLarge         ClusterInstanceType = "ml.c6g.large"
+	ClusterInstanceTypeMlC6gXlarge        ClusterInstanceType = "ml.c6g.xlarge"
+	ClusterInstanceTypeMlC6g2xlarge       ClusterInstanceType = "ml.c6g.2xlarge"
+	ClusterInstanceTypeMlC6g4xlarge       ClusterInstanceType = "ml.c6g.4xlarge"
+	ClusterInstanceTypeMlC6g8xlarge       ClusterInstanceType = "ml.c6g.8xlarge"
+	ClusterInstanceTypeMlC6g12xlarge      ClusterInstanceType = "ml.c6g.12xlarge"
+	ClusterInstanceTypeMlC6g16xlarge      ClusterInstanceType = "ml.c6g.16xlarge"
+	ClusterInstanceTypeMlC7gMedium        ClusterInstanceType = "ml.c7g.medium"
+	ClusterInstanceTypeMlC7gLarge         ClusterInstanceType = "ml.c7g.large"
+	ClusterInstanceTypeMlC7gXlarge        ClusterInstanceType = "ml.c7g.xlarge"
+	ClusterInstanceTypeMlC7g2xlarge       ClusterInstanceType = "ml.c7g.2xlarge"
+	ClusterInstanceTypeMlC7g4xlarge       ClusterInstanceType = "ml.c7g.4xlarge"
+	ClusterInstanceTypeMlC7g8xlarge       ClusterInstanceType = "ml.c7g.8xlarge"
+	ClusterInstanceTypeMlC7g12xlarge      ClusterInstanceType = "ml.c7g.12xlarge"
+	ClusterInstanceTypeMlC7g16xlarge      ClusterInstanceType = "ml.c7g.16xlarge"
+	ClusterInstanceTypeMlC8gMedium        ClusterInstanceType = "ml.c8g.medium"
+	ClusterInstanceTypeMlC8gLarge         ClusterInstanceType = "ml.c8g.large"
+	ClusterInstanceTypeMlC8gXlarge        ClusterInstanceType = "ml.c8g.xlarge"
+	ClusterInstanceTypeMlC8g2xlarge       ClusterInstanceType = "ml.c8g.2xlarge"
+	ClusterInstanceTypeMlC8g4xlarge       ClusterInstanceType = "ml.c8g.4xlarge"
+	ClusterInstanceTypeMlC8g8xlarge       ClusterInstanceType = "ml.c8g.8xlarge"
+	ClusterInstanceTypeMlC8g12xlarge      ClusterInstanceType = "ml.c8g.12xlarge"
+	ClusterInstanceTypeMlC8g16xlarge      ClusterInstanceType = "ml.c8g.16xlarge"
+	ClusterInstanceTypeMlC8g24xlarge      ClusterInstanceType = "ml.c8g.24xlarge"
+	ClusterInstanceTypeMlC8g48xlarge      ClusterInstanceType = "ml.c8g.48xlarge"
 )
 
 // Values returns all known values for ClusterInstanceType. Note that this can be
@@ -2459,6 +2491,38 @@ func (ClusterInstanceType) Values() []ClusterInstanceType {
 		"ml.g7e.24xlarge",
 		"ml.g7e.48xlarge",
 		"ml.p6-b300.48xlarge",
+		"ml.g4dn.xlarge",
+		"ml.g4dn.2xlarge",
+		"ml.g4dn.4xlarge",
+		"ml.g4dn.8xlarge",
+		"ml.g4dn.12xlarge",
+		"ml.g4dn.16xlarge",
+		"ml.c6g.medium",
+		"ml.c6g.large",
+		"ml.c6g.xlarge",
+		"ml.c6g.2xlarge",
+		"ml.c6g.4xlarge",
+		"ml.c6g.8xlarge",
+		"ml.c6g.12xlarge",
+		"ml.c6g.16xlarge",
+		"ml.c7g.medium",
+		"ml.c7g.large",
+		"ml.c7g.xlarge",
+		"ml.c7g.2xlarge",
+		"ml.c7g.4xlarge",
+		"ml.c7g.8xlarge",
+		"ml.c7g.12xlarge",
+		"ml.c7g.16xlarge",
+		"ml.c8g.medium",
+		"ml.c8g.large",
+		"ml.c8g.xlarge",
+		"ml.c8g.2xlarge",
+		"ml.c8g.4xlarge",
+		"ml.c8g.8xlarge",
+		"ml.c8g.12xlarge",
+		"ml.c8g.16xlarge",
+		"ml.c8g.24xlarge",
+		"ml.c8g.48xlarge",
 	}
 }
 
@@ -7433,6 +7497,12 @@ const (
 	ProductionVariantInstanceTypeMlG7e12xlarge      ProductionVariantInstanceType = "ml.g7e.12xlarge"
 	ProductionVariantInstanceTypeMlG7e24xlarge      ProductionVariantInstanceType = "ml.g7e.24xlarge"
 	ProductionVariantInstanceTypeMlG7e48xlarge      ProductionVariantInstanceType = "ml.g7e.48xlarge"
+	ProductionVariantInstanceTypeMlG72xlarge        ProductionVariantInstanceType = "ml.g7.2xlarge"
+	ProductionVariantInstanceTypeMlG74xlarge        ProductionVariantInstanceType = "ml.g7.4xlarge"
+	ProductionVariantInstanceTypeMlG78xlarge        ProductionVariantInstanceType = "ml.g7.8xlarge"
+	ProductionVariantInstanceTypeMlG712xlarge       ProductionVariantInstanceType = "ml.g7.12xlarge"
+	ProductionVariantInstanceTypeMlG724xlarge       ProductionVariantInstanceType = "ml.g7.24xlarge"
+	ProductionVariantInstanceTypeMlG748xlarge       ProductionVariantInstanceType = "ml.g7.48xlarge"
 	ProductionVariantInstanceTypeMlP4d24xlarge      ProductionVariantInstanceType = "ml.p4d.24xlarge"
 	ProductionVariantInstanceTypeMlC7gLarge         ProductionVariantInstanceType = "ml.c7g.large"
 	ProductionVariantInstanceTypeMlC7gXlarge        ProductionVariantInstanceType = "ml.c7g.xlarge"
@@ -7713,6 +7783,12 @@ func (ProductionVariantInstanceType) Values() []ProductionVariantInstanceType {
 		"ml.g7e.12xlarge",
 		"ml.g7e.24xlarge",
 		"ml.g7e.48xlarge",
+		"ml.g7.2xlarge",
+		"ml.g7.4xlarge",
+		"ml.g7.8xlarge",
+		"ml.g7.12xlarge",
+		"ml.g7.24xlarge",
+		"ml.g7.48xlarge",
 		"ml.p4d.24xlarge",
 		"ml.c7g.large",
 		"ml.c7g.xlarge",

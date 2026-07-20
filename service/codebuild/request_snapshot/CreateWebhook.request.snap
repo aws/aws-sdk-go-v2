@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeBuild_20161006.CreateWebhook
+
+{"branchFilter":"__BranchFilter__","buildType":"BUILD","filterGroups":[[{"excludeMatchedPattern":true,"pattern":"__Pattern__","type":"EVENT"},{"excludeMatchedPattern":true,"pattern":"__Pattern__","type":"EVENT"}],[{"excludeMatchedPattern":true,"pattern":"__Pattern__","type":"EVENT"},{"excludeMatchedPattern":true,"pattern":"__Pattern__","type":"EVENT"}]],"manualCreation":true,"projectName":"__ProjectName__","pullRequestBuildPolicy":{"approverRoles":["GITHUB_READ","GITHUB_READ"],"requiresCommentApproval":"DISABLED"},"scopeConfiguration":{"domain":"__Domain__","name":"__Name__","scope":"GITHUB_ORGANIZATION"}}

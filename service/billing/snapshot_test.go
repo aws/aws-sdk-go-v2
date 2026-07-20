@@ -110,11 +110,47 @@ func TestCheckSnapshot_DisassociateSourceViews(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetBillingPreferences(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetBillingPreferences(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetBillingPreferences")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetBillingView(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetBillingView(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetBillingView")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCreditAllocationHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCreditAllocationHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCreditAllocationHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCredits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCredits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCredits")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -170,6 +206,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RedeemCredits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RedeemCredits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RedeemCredits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -187,6 +235,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateBillingPreferences(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateBillingPreferences(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateBillingPreferences")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -253,11 +313,47 @@ func TestUpdateSnapshot_DisassociateSourceViews(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetBillingPreferences(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetBillingPreferences(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetBillingPreferences")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetBillingView(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetBillingView(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetBillingView")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCreditAllocationHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCreditAllocationHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCreditAllocationHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCredits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCredits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCredits")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -313,6 +409,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_RedeemCredits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RedeemCredits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RedeemCredits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -330,6 +438,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateBillingPreferences(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateBillingPreferences(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateBillingPreferences")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

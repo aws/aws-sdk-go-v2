@@ -1,0 +1,5 @@
+POST /v2/tags/__Arn__
+
+Content-Type: application/json
+
+{"tags":{"key0":"__Value__"}}

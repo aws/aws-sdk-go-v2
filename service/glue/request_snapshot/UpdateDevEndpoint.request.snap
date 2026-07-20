@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.UpdateDevEndpoint
+
+{"AddArguments":{"key0":"__Value__"},"AddPublicKeys":["__Member__","__Member__"],"CustomLibraries":{"ExtraJarsS3Path":"__ExtraJarsS3Path__","ExtraPythonLibsS3Path":"__ExtraPythonLibsS3Path__"},"DeleteArguments":["__Member__","__Member__"],"DeletePublicKeys":["__Member__","__Member__"],"EndpointName":"__EndpointName__","PublicKey":"__PublicKey__","UpdateEtlLibraries":true}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftServerless.UpdateWorkgroup
+
+{"baseCapacity":1,"configParameters":[{"parameterKey":"__ParameterKey__","parameterValue":"__ParameterValue__"},{"parameterKey":"__ParameterKey__","parameterValue":"__ParameterValue__"}],"enhancedVpcRouting":true,"extraComputeForAutomaticOptimization":true,"ipAddressType":"__IpAddressType__","maxCapacity":1,"port":1,"pricePerformanceTarget":{"level":1,"status":"ENABLED"},"publiclyAccessible":true,"securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"],"trackName":"__TrackName__","workgroupName":"__WorkgroupName__"}

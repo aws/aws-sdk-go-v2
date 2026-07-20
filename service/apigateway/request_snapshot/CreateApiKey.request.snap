@@ -1,0 +1,6 @@
+POST /apikeys
+
+Accept: application/json
+Content-Type: application/json
+
+{"customerId":"__CustomerId__","description":"__Description__","enabled":true,"generateDistinctId":true,"name":"__Name__","stageKeys":[{"restApiId":"__RestApiId__","stageName":"__StageName__"},{"restApiId":"__RestApiId__","stageName":"__StageName__"}],"tags":{"key0":"__Value__"},"value":"__Value__"}

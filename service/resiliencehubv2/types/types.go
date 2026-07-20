@@ -14,6 +14,10 @@ type Achievability struct {
 	// The achievability status of the availability SLO target for the service.
 	AvailabilitySlo AchievabilityStatus
 
+	// The achievability status of the data recovery time between backups for the
+	// service.
+	DataRecoveryTimeBetweenBackups AchievabilityStatus
+
 	// The achievability status of the multi-AZ RTO and RPO targets for the service.
 	MultiAzRtoRpo AchievabilityStatus
 
@@ -209,6 +213,13 @@ type DependencyDiscoveryConfig struct {
 	//
 	// This member is required.
 	Status DependencyDiscoveryStatus
+
+	// The count of resources eligible for dependency attribution.
+	EligibleResourceCount *int32
+
+	// A status message for dependency discovery, displayed during the initialization
+	// state.
+	Message *string
 
 	// The timestamp when dependency discovery was last updated.
 	UpdatedAt *time.Time
@@ -1593,8 +1604,20 @@ type ServiceTopologyEdgeSummary struct {
 	// This member is required.
 	SourceResourceIdentifier *string
 
+	// The AWS account ID of the destination resource.
+	DestinationAccount *string
+
+	// The AWS Region of the destination resource.
+	DestinationRegion *string
+
 	// The properties of the topology edge.
 	Properties []EdgePropertySummary
+
+	// The AWS account ID of the source resource.
+	SourceAccount *string
+
+	// The AWS Region of the source resource.
+	SourceRegion *string
 
 	noSmithyDocumentSerde
 }

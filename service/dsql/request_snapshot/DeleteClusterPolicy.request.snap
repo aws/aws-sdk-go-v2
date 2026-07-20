@@ -1,0 +1,3 @@
+DELETE /cluster/__Identifier__/policy?client-token=__ClientToken__&expected-policy-version=__ExpectedPolicyVersion__
+
+

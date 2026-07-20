@@ -1,0 +1,5 @@
+POST /vector-enrichment-jobs/stop
+
+Content-Type: application/json
+
+{"Arn":"__Arn__"}

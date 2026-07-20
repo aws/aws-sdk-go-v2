@@ -1,0 +1,3 @@
+DELETE /environments/__EnvironmentIdentifier__/applications/__ApplicationIdentifier__/routes/__RouteIdentifier__
+
+

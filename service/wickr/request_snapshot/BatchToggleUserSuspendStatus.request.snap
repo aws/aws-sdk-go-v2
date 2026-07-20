@@ -1,0 +1,6 @@
+PATCH /networks/__NetworkId__/users/toggleSuspend?suspend=true
+
+Content-Type: application/json
+X-Client-Token: __ClientToken__
+
+{"userIds":["__Member__","__Member__"]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.CreateLogAnomalyDetector
+
+{"anomalyVisibilityTime":1,"detectorName":"__DetectorName__","evaluationFrequency":"ONE_MIN","filterPattern":"__FilterPattern__","kmsKeyId":"__KmsKeyId__","logGroupArnList":["__Member__","__Member__"],"tags":{"key0":"__Value__"}}

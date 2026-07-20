@@ -1,0 +1,5 @@
+POST /TelemetryRecords
+
+Content-Type: application/json
+
+{"EC2InstanceId":"__EC2InstanceId__","Hostname":"__Hostname__","ResourceARN":"__ResourceARN__","TelemetryRecords":[{"BackendConnectionErrors":{"ConnectionRefusedCount":1,"HTTPCode4XXCount":1,"HTTPCode5XXCount":1,"OtherCount":1,"TimeoutCount":1,"UnknownHostCount":1},"SegmentsReceivedCount":1,"SegmentsRejectedCount":1,"SegmentsSentCount":1,"SegmentsSpilloverCount":1,"Timestamp":946684800},{"BackendConnectionErrors":{"ConnectionRefusedCount":1,"HTTPCode4XXCount":1,"HTTPCode5XXCount":1,"OtherCount":1,"TimeoutCount":1,"UnknownHostCount":1},"SegmentsReceivedCount":1,"SegmentsRejectedCount":1,"SegmentsSentCount":1,"SegmentsSpilloverCount":1,"Timestamp":946684800}]}

@@ -1,0 +1,5 @@
+POST /keys/__IncomingKeyIdentifier__/reencrypt
+
+Content-Type: application/json
+
+{"CipherText":"__CipherText__","IncomingEncryptionAttributes":{"Symmetric":{"InitializationVector":"__InitializationVector__","Mode":"ECB","PaddingType":"PKCS1"}},"IncomingWrappedKey":{"KeyCheckValueAlgorithm":"CMAC","WrappedKeyMaterial":{"Tr31KeyBlock":"__WrappedKeyMaterialMemberTr31KeyBlock__"}},"OutgoingEncryptionAttributes":{"Symmetric":{"InitializationVector":"__InitializationVector__","Mode":"ECB","PaddingType":"PKCS1"}},"OutgoingKeyIdentifier":"__OutgoingKeyIdentifier__","OutgoingWrappedKey":{"KeyCheckValueAlgorithm":"CMAC","WrappedKeyMaterial":{"Tr31KeyBlock":"__WrappedKeyMaterialMemberTr31KeyBlock__"}}}

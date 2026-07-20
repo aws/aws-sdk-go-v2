@@ -1,0 +1,5 @@
+POST /standards/register
+
+Content-Type: application/json
+
+{"StandardsSubscriptionRequests":[{"StandardsArn":"__StandardsArn__","StandardsInput":{"key0":"__Value__"}},{"StandardsArn":"__StandardsArn__","StandardsInput":{"key0":"__Value__"}}]}

@@ -1,0 +1,5 @@
+PUT /position-configurations/__ResourceIdentifier__?resourceType=WirelessDevice
+
+Content-Type: application/json
+
+{"Destination":"__Destination__","Solvers":{"SemtechGnss":{"Fec":"ROSE","Status":"Enabled"}}}

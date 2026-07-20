@@ -94,11 +94,11 @@ type GetIngressPointOutput struct {
 }
 
 func (c *Client) addOperationGetIngressPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetIngressPoint{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetIngressPoint{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetIngressPoint{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetIngressPoint{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -122,6 +122,9 @@ func (c *Client) addOperationGetIngressPointMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

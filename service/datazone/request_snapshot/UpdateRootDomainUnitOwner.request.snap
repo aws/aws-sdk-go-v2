@@ -1,0 +1,5 @@
+PATCH /v2/domains/__DomainIdentifier__/root-domain-unit-owner
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","currentOwner":"__CurrentOwner__","newOwner":"__NewOwner__"}

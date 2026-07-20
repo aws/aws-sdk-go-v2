@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DataPipeline.CreatePipeline
+
+{"description":"__Description__","name":"__Name__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"uniqueId":"__UniqueId__"}

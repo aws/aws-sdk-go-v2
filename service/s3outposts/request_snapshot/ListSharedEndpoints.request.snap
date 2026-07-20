@@ -1,0 +1,3 @@
+GET /S3Outposts/ListSharedEndpoints?maxResults=1&nextToken=__NextToken__&outpostId=__OutpostId__
+
+

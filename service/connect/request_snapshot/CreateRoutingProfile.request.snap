@@ -1,0 +1,5 @@
+PUT /routing-profiles/__InstanceId__
+
+Content-Type: application/json
+
+{"AgentAvailabilityTimer":"TIME_SINCE_LAST_ACTIVITY","DefaultOutboundQueueId":"__DefaultOutboundQueueId__","Description":"__Description__","ManualAssignmentQueueConfigs":[{"QueueReference":{"Channel":"VOICE","QueueId":"__QueueId__"}},{"QueueReference":{"Channel":"VOICE","QueueId":"__QueueId__"}}],"MediaConcurrencies":[{"Channel":"VOICE","Concurrency":1,"CrossChannelBehavior":{"BehaviorType":"ROUTE_CURRENT_CHANNEL_ONLY"}},{"Channel":"VOICE","Concurrency":1,"CrossChannelBehavior":{"BehaviorType":"ROUTE_CURRENT_CHANNEL_ONLY"}}],"Name":"__Name__","QueueConfigs":[{"Delay":1,"Priority":1,"QueueReference":{"Channel":"VOICE","QueueId":"__QueueId__"}},{"Delay":1,"Priority":1,"QueueReference":{"Channel":"VOICE","QueueId":"__QueueId__"}}],"Tags":{"key0":"__Value__"}}

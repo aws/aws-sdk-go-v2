@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.StartSession
+
+{"DocumentName":"__DocumentName__","Parameters":{"key0":["__Member__","__Member__"]},"Reason":"__Reason__","Target":"__Target__"}

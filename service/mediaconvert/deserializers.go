@@ -13318,6 +13318,76 @@ func awsRestjson1_deserializeDocumentDolbyVisionLevel6Metadata(v **types.DolbyVi
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDurationControl(v **types.DurationControl, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DurationControl
+	if *v == nil {
+		sv = &types.DurationControl{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "integerDurationMaximumCompressionDenominator":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IntegerDurationMaximumCompressionDenominator = ptr.Int32(int32(i64))
+			}
+
+		case "integerDurationMaximumCompressionNumerator":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IntegerDurationMaximumCompressionNumerator = ptr.Int32(int32(i64))
+			}
+
+		case "integerDurationTrimThresholdMilliseconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max500 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IntegerDurationTrimThresholdMilliseconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDvbNitSettings(v **types.DvbNitSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15864,6 +15934,15 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 					return fmt.Errorf("expected H264EntropyEncoding to be of type string, got %T instead", value)
 				}
 				sv.EntropyEncoding = types.H264EntropyEncoding(jtv)
+			}
+
+		case "explicitWeightedPrediction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H264ExplicitWeightedPrediction to be of type string, got %T instead", value)
+				}
+				sv.ExplicitWeightedPrediction = types.H264ExplicitWeightedPrediction(jtv)
 			}
 
 		case "fieldEncoding":
@@ -27340,6 +27419,11 @@ func awsRestjson1_deserializeDocumentVideoPreprocessor(v **types.VideoPreprocess
 
 		case "dolbyVision":
 			if err := awsRestjson1_deserializeDocumentDolbyVision(&sv.DolbyVision, value); err != nil {
+				return err
+			}
+
+		case "durationControl":
+			if err := awsRestjson1_deserializeDocumentDurationControl(&sv.DurationControl, value); err != nil {
 				return err
 			}
 

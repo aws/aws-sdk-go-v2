@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteTargetGroup&TargetGroupArn=__TargetGroupArn__&Version=2015-12-01

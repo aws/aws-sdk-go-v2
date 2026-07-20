@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=LockSnapshot&CoolOffPeriod=1&DryRun=true&ExpirationDate=2000-01-01T00%3A00%3A00Z&LockDuration=1&LockMode=compliance&SnapshotId=__SnapshotId__&Version=2016-11-15

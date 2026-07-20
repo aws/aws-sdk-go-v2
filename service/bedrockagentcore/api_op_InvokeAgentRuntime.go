@@ -86,6 +86,20 @@ type InvokeAgentRuntimeInput struct {
 	// JSON data.
 	ContentType *string
 
+	// The MCP method being invoked. For example, tools/call , resources/read , or
+	// prompts/get .
+	McpMethod *string
+
+	// The name of the MCP resource, tool, or prompt being accessed. The value depends
+	// on the method:
+	//
+	//   - tools/call – The tool name.
+	//
+	//   - resources/read – The resource URI.
+	//
+	//   - prompts/get – The prompt name.
+	McpName *string
+
 	// The version of the MCP protocol being used.
 	McpProtocolVersion *string
 

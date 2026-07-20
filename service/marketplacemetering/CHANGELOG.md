@@ -1,3 +1,25 @@
+# v1.38.3 (2026-07-20)
+
+* **Documentation**: For new SaaS product integrations, CustomerIdentifier is not populated in ResolveCustomer responses and is not supported in BatchMeterUsage. Use CustomerAWSAccountId and LicenseArn instead.
+
+# v1.38.2 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.38.1 (2026-07-07)
+
+* **Documentation**: The usage reporting window for the BatchMeterUsage API has been extended from 6 hours to 24 hours. Sellers can now submit usage records for up to 24 hours after a metered event occurs. The existing 6-hour grace period at the end of a billing cycle still applies.
+
+# v1.38.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.37.5 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Documentation**: The usage reporting window for the BatchMeterUsage API has been extended from 6 hours to 24 hours. Sellers can now submit usage records for up to 24 hours after a metered event occurs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.4 (2026-06-29)
 
 * No change notes available for this release.

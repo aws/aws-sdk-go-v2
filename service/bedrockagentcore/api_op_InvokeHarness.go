@@ -53,6 +53,10 @@ type InvokeHarnessInput struct {
 	// overrides the harness default.
 	AllowedTools []string
 
+	// W3C Baggage header for user-defined context propagation. Format:
+	// key1=value1,key2=value2
+	Baggage *string
+
 	// The maximum number of iterations the agent loop can execute. If specified,
 	// overrides the harness default.
 	MaxIterations *int32
@@ -87,6 +91,16 @@ type InvokeHarnessInput struct {
 	// The tools available to the agent for this invocation. If specified, overrides
 	// the harness default.
 	Tools []types.HarnessTool
+
+	// Trace ID for maintaining observability through the operation.
+	TraceId *string
+
+	// W3C trace context parent header containing version, trace ID, parent span ID,
+	// and trace flags.
+	TraceParent *string
+
+	// W3C trace context state header for vendor-specific trace information.
+	TraceState *string
 
 	noSmithyDocumentSerde
 }

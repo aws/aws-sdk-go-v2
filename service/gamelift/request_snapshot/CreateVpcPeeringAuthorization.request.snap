@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/CreateVpcPeeringAuthorization
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢tGameLiftAwsAccountIdx__GameLiftAwsAccountId__iPeerVpcIdm__PeerVpcId__

@@ -1,0 +1,5 @@
+POST /accounts/__AccountId__/bots/__BotId__
+
+Content-Type: application/json
+
+{"Disabled":true}

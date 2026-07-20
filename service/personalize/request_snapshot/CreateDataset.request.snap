@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonPersonalize.CreateDataset
+
+{"datasetGroupArn":"__DatasetGroupArn__","datasetType":"__DatasetType__","name":"__Name__","schemaArn":"__SchemaArn__","tags":[{"tagKey":"__TagKey__","tagValue":"__TagValue__"},{"tagKey":"__TagKey__","tagValue":"__TagValue__"}]}

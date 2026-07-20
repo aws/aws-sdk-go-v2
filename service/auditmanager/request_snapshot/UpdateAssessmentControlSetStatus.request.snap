@@ -1,0 +1,5 @@
+PUT /assessments/__AssessmentId__/controlSets/__ControlSetId__/status
+
+Content-Type: application/json
+
+{"comment":"__Comment__","status":"ACTIVE"}

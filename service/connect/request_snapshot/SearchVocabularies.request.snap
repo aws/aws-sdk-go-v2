@@ -1,0 +1,5 @@
+POST /vocabulary-summary/__InstanceId__
+
+Content-Type: application/json
+
+{"LanguageCode":"ar-AE","MaxResults":1,"NameStartsWith":"__NameStartsWith__","NextToken":"__NextToken__","State":"CREATION_IN_PROGRESS"}

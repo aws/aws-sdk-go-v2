@@ -1,0 +1,5 @@
+POST /list-app-component-compliances
+
+Content-Type: application/json
+
+{"assessmentArn":"__AssessmentArn__","maxResults":1,"nextToken":"__NextToken__"}

@@ -3141,6 +3141,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Current version of the license.</p>"
                     }
+                },
+                "ResetUsage": {
+                    "target": "com.amazonaws.licensemanager#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to reset the license usage for the new license version. If you don't specify a value, the license usage is not reset.</p>"
+                    }
                 }
             },
             "traits": {

@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/folders/__FolderId__/members?max-results=1&next-token=__NextToken__
+
+

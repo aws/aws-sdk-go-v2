@@ -34,6 +34,12 @@ import (
 // configuration provides a cluster with a writer instance and feature specific
 // values set to all other input parameters of this API.
 //
+// You can use the AssociatedRoles parameter to associate one or more Amazon Web
+// Services Identity and Access Management (IAM) roles with an Aurora DB cluster.
+// Each associated role lets the DB cluster access other Amazon Web Services on
+// your behalf, such as Amazon S3 for data import and export, or Amazon Web
+// Services Lambda for invoking functions.
+//
 // [CreateDBInstance]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html
 // [What is Amazon Aurora?]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
 // [Multi-AZ DB cluster deployments]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
@@ -101,6 +107,14 @@ type CreateDBClusterInput struct {
 	//
 	// This setting is required to create a Multi-AZ DB cluster.
 	AllocatedStorage *int32
+
+	// A list of Amazon Web Services Identity and Access Management (IAM) roles to
+	// associate with the DB cluster. Each role grants the DB cluster permission to
+	// access other Amazon Web Services on your behalf. For each role, specify a role
+	// ARN and, optionally, the feature name (such as s3Import , s3Export , or Lambda ).
+	//
+	// Valid for Cluster Type: Aurora DB clusters only
+	AssociatedRoles []types.DBClusterAssociatedRole
 
 	// Specifies whether minor engine upgrades are applied automatically to the DB
 	// cluster during the maintenance window. By default, minor engine upgrades are
@@ -360,7 +374,7 @@ type CreateDBClusterInput struct {
 	// [Using Amazon Performance Insights]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
 	EnablePerformanceInsights *bool
 
-	// The life cycle type for this DB cluster.
+	// The lifecycle type for this DB cluster.
 	//
 	// By default, this value is set to open-source-rds-extended-support , which
 	// enrolls your DB cluster into Amazon RDS Extended Support. At the end of standard

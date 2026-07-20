@@ -1,0 +1,6 @@
+POST /runtime.startQAppSession
+
+Content-Type: application/json
+Instance-Id: __InstanceId__
+
+{"appId":"__AppId__","appVersion":1,"initialValues":[{"cardId":"__CardId__","submissionMutation":{"mutationType":"edit","submissionId":"__SubmissionId__"},"value":"__Value__"},{"cardId":"__CardId__","submissionMutation":{"mutationType":"edit","submissionId":"__SubmissionId__"},"value":"__Value__"}],"sessionId":"__SessionId__","tags":{"key0":"__Value__"}}

@@ -1,0 +1,3 @@
+GET /quick-connects/__InstanceId__?QuickConnectTypes=USER&QuickConnectTypes=USER&maxResults=1&nextToken=__NextToken__
+
+

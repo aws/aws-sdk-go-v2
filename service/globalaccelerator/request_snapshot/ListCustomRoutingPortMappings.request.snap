@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: GlobalAccelerator_V20180706.ListCustomRoutingPortMappings
+
+{"AcceleratorArn":"__AcceleratorArn__","EndpointGroupArn":"__EndpointGroupArn__","MaxResults":1,"NextToken":"__NextToken__"}

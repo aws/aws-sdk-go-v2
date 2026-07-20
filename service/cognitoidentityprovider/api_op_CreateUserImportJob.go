@@ -60,6 +60,12 @@ type CreateUserImportJobInput struct {
 	// This member is required.
 	UserPoolId *string
 
+	// The password hashing algorithm used to generate the hashes in the CSV file for
+	// this import job.
+	//
+	// Valid values: BCRYPT | SCRYPT | ARGON2ID | PBKDF2_SHA256
+	PasswordHashingAlgorithm types.PasswordHashingAlgorithmType
+
 	noSmithyDocumentSerde
 }
 

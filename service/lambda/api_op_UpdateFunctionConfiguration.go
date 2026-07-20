@@ -74,8 +74,12 @@ type UpdateFunctionConfigurationInput struct {
 	// A description of the function.
 	Description *string
 
-	// Configuration settings for durable functions. Allows updating execution timeout
-	// and retention period for functions with durability enabled.
+	// Configuration settings for [durable functions], including execution timeout, retention period for
+	// execution history, and an optional ARN of the Key Management Service (KMS)
+	// customer managed key that is used to encrypt your durable execution's payload
+	// data, including input, output, and error payloads.
+	//
+	// [durable functions]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
 	DurableConfig *types.DurableConfig
 
 	// Environment variables that are accessible from function code during execution.

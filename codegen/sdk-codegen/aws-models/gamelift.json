@@ -176,6 +176,10 @@
         "com.amazonaws.gamelift#AliasIdOrArn": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
                 "smithy.api#pattern": "^alias-\\S+|^arn:.*:alias\\/alias-\\S+$"
             }
         },
@@ -409,6 +413,10 @@
         "com.amazonaws.gamelift#BuildIdOrArn": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
                 "smithy.api#pattern": "^build-\\S+|^arn:.*:build\\/build-\\S+$"
             }
         },
@@ -1085,7 +1093,7 @@
                 "Status": {
                     "target": "com.amazonaws.gamelift#ContainerFleetStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the container fleet.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> -- A new container fleet has been requested.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code> -- A new container fleet resource is being created. </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATED</code> -- A new container fleet resource has been created. No fleet instances\n                    have been deployed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVATING</code> -- New container fleet instances are being deployed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> -- The container fleet has been deployed and is ready to host game\n                    sessions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> -- Updates to the container fleet is being updated. A deployment is in\n                    progress.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The current status of the container fleet.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> -- A new container fleet has been requested.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code> -- A new container fleet resource is being created. </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATED</code> -- A new container fleet resource has been created. No fleet instances\n                    have been deployed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVATING</code> -- New container fleet instances are being deployed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> -- The container fleet has been deployed and is ready to host game\n                    sessions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> -- Updates to the container fleet is being updated. A deployment is in\n                    progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EXPIRED</code> -- The container fleet has been expired. The fleet is scaled down to zero\n                    instances and cannot host new game sessions.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DeploymentDetails": {
@@ -1157,7 +1165,7 @@
                 "Status": {
                     "target": "com.amazonaws.gamelift#ContainerFleetLocationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of fleet activity in the location. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> -- A new container fleet has been requested.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code> -- A new container fleet resource is being created.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATED</code> -- A new container fleet resource has been created. No\n                    fleet instances have been deployed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVATING</code> -- New container fleet instances are being\n                    deployed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> -- The container fleet has been deployed and is ready to\n                    host game sessions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> -- Updates to the container fleet is being updated. A\n                    deployment is in progress.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of fleet activity in the location. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> -- A new container fleet has been requested.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code> -- A new container fleet resource is being created.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATED</code> -- A new container fleet resource has been created. No\n                    fleet instances have been deployed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVATING</code> -- New container fleet instances are being\n                    deployed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> -- The container fleet has been deployed and is ready to\n                    host game sessions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> -- Updates to the container fleet is being updated. A\n                    deployment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EXPIRED</code> -- The container fleet has been expired. The fleet is\n                    scaled down to zero instances and cannot host new game sessions.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PlayerGatewayStatus": {
@@ -1220,6 +1228,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
                     }
                 }
             }
@@ -1290,6 +1304,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
                     }
                 }
             }
@@ -1662,6 +1682,16 @@
                     "min": 1,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.gamelift#ContainerNameQueryFilter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-_]+$"
             }
         },
         "com.amazonaws.gamelift#ContainerOperatingSystem": {
@@ -2967,6 +2997,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -4112,6 +4145,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -4608,6 +4644,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -5062,7 +5101,7 @@
                     }
                 },
                 "ContainerName": {
-                    "target": "com.amazonaws.gamelift#NonZeroAnd128MaxAsciiString",
+                    "target": "com.amazonaws.gamelift#ContainerNameQueryFilter",
                     "traits": {
                         "smithy.api#documentation": "<p>A container name to filter the results. When provided, the operation returns port\n            mappings for the specified container only. If no container with the specified name\n            exists in the container group, the request fails with a\n            <code>NotFoundException</code>.</p>\n         <p>If not provided, the operation returns port mappings for all containers in the container\n            group.</p>"
                     }
@@ -10366,7 +10405,7 @@
                 "EventCode": {
                     "target": "com.amazonaws.gamelift#EventCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of event being logged. </p>\n         <p>\n            <b>Fleet state transition events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>FLEET_CREATED -- A fleet resource was successfully created with a status of\n                        <code>NEW</code>. Event messaging includes the fleet ID.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_DOWNLOADING -- Fleet status changed from <code>NEW</code> to\n                        <code>DOWNLOADING</code>. Amazon GameLift Servers is downloading the compressed build and\n                    running install scripts.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_VALIDATING -- Fleet status changed from <code>DOWNLOADING</code>\n                    to <code>VALIDATING</code>. Amazon GameLift Servers has successfully installed build and is now\n                    validating the build files.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_BUILDING -- Fleet status changed from <code>VALIDATING</code> to\n                        <code>BUILDING</code>. Amazon GameLift Servers has successfully verified the build files and\n                    is now launching a fleet instance.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_ACTIVATING -- Fleet status changed from <code>BUILDING</code> to\n                        <code>ACTIVATING</code>. Amazon GameLift Servers is launching a game server process on the\n                    fleet instance and is testing its connectivity with the Amazon GameLift Servers service.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_ACTIVE -- The fleet's status changed from <code>ACTIVATING</code>\n                    to <code>ACTIVE</code>. The fleet is now ready to host game sessions.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_ERROR -- The Fleet's status changed to <code>ERROR</code>.\n                    Describe the fleet event message for more details.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Fleet creation events (ordered by fleet creation\n                activity):</b>\n         </p>\n         <ul>\n            <li>\n               <p>FLEET_BINARY_DOWNLOAD_FAILED -- The build failed to download to the fleet\n                    instance.</p>\n            </li>\n            <li>\n               <p>FLEET_CREATION_EXTRACTING_BUILD -- The game server build was successfully\n                    downloaded to an instance, and Amazon GameLift Serversis now extracting the build files from the\n                    uploaded build. Failure at this stage prevents a fleet from moving to ACTIVE\n                    status. Logs for this stage display a list of the files that are extracted and\n                    saved on the instance. Access the logs by using the URL in\n                        <i>PreSignedLogUrl</i>.</p>\n            </li>\n            <li>\n               <p>FLEET_CREATION_RUNNING_INSTALLER -- The game server build files were\n                    successfully extracted, and Amazon GameLift Servers is now running the build's install script\n                    (if one is included). Failure in this stage prevents a fleet from moving to\n                    ACTIVE status. Logs for this stage list the installation steps and whether or\n                    not the install completed successfully. Access the logs by using the URL in\n                        <i>PreSignedLogUrl</i>.</p>\n            </li>\n            <li>\n               <p>FLEET_CREATION_COMPLETED_INSTALLER -- The game server build files were\n                    successfully installed and validation of the installation will begin\n                    soon.</p>\n            </li>\n            <li>\n               <p>FLEET_CREATION_FAILED_INSTALLER -- The installed failed while attempting to\n                    install the build files. This event indicates that the failure occurred before\n                    Amazon GameLift Servers could start validation. </p>\n            </li>\n            <li>\n               <p>FLEET_CREATION_VALIDATING_RUNTIME_CONFIG -- The build process was successful,\n                    and the GameLift is now verifying that the game server launch paths, which are\n                    specified in the fleet's runtime configuration, exist. If any listed launch path\n                    exists, Amazon GameLift Servers tries to launch a game server process and waits for the process\n                    to report ready. Failures in this stage prevent a fleet from moving to\n                        <code>ACTIVE</code> status. Logs for this stage list the launch paths in the\n                    runtime configuration and indicate whether each is found. Access the logs by\n                    using the URL in <i>PreSignedLogUrl</i>.</p>\n            </li>\n            <li>\n               <p>FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND -- Validation of the runtime\n                    configuration failed because the executable specified in a launch path does not\n                    exist on the instance.</p>\n            </li>\n            <li>\n               <p>FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE -- Validation of the runtime\n                    configuration failed because the executable specified in a launch path failed to\n                    run on the fleet instance.</p>\n            </li>\n            <li>\n               <p>FLEET_VALIDATION_TIMED_OUT -- Validation of the fleet at the end of creation\n                    timed out. Try fleet creation again.</p>\n            </li>\n            <li>\n               <p>FLEET_ACTIVATION_FAILED -- The fleet failed to successfully complete one of\n                    the steps in the fleet activation process. This event code indicates that the\n                    game build was successfully downloaded to a fleet instance, built, and\n                    validated, but was not able to start a server process. For more information, see\n                        <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation\">Debug Fleet Creation Issues</a>.</p>\n            </li>\n            <li>\n               <p>FLEET_ACTIVATION_FAILED_NO_INSTANCES -- Fleet creation was not able to obtain\n                    any instances based on the input fleet attributes. Try again at a different time\n                    or choose a different combination of fleet attributes such as fleet type,\n                    instance type, etc.</p>\n            </li>\n            <li>\n               <p>FLEET_INITIALIZATION_FAILED -- A generic exception occurred during fleet\n                    creation. Describe the fleet event message for more details.</p>\n            </li>\n         </ul>\n         <p>\n            <b>VPC peering events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>FLEET_VPC_PEERING_SUCCEEDED -- A VPC peering connection has been established\n                    between the VPC for an Amazon GameLift Servers fleet and a VPC in your Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>FLEET_VPC_PEERING_FAILED -- A requested VPC peering connection has failed.\n                    Event details and status information provide additional detail. A common reason\n                    for peering failure is that the two VPCs have overlapping CIDR blocks of IPv4\n                    addresses. To resolve this, change the CIDR block for the VPC in your Amazon Web Services\n                    account. For more information on VPC peering failures, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html\">https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html</a>\n               </p>\n            </li>\n            <li>\n               <p>FLEET_VPC_PEERING_DELETED -- A VPC peering connection has been successfully\n                    deleted.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Spot instance events:</b>\n         </p>\n         <ul>\n            <li>\n               <p> INSTANCE_INTERRUPTED -- A spot instance was interrupted by EC2 with a\n                    two-minute notification.</p>\n            </li>\n            <li>\n               <p>INSTANCE_RECYCLED -- A spot instance was determined to have a high risk \n                    of interruption and is scheduled to be recycled once it has no active \n                    game sessions.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Server process events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>SERVER_PROCESS_INVALID_PATH -- The game server executable or script could not\n                    be found based on the Fleet runtime configuration. Check that the launch path is\n                    correct based on the operating system of the Fleet.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT -- The server process did not call\n                        <code>InitSDK()</code> within the time expected (5 minutes). Check your game\n                    session log to see why <code>InitSDK()</code> was not called in time. This event\n                    is not emitted for managed container fleets and Anywhere fleets unless they're\n                    deployed with the Amazon GameLift Servers Agent.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_PROCESS_READY_TIMEOUT -- The server process did not call\n                        <code>ProcessReady()</code> within the time expected  (5 minutes) after\n                    calling <code>InitSDK()</code>. Check your game session log to see why\n                        <code>ProcessReady()</code> was not called in time.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_CRASHED -- The server process exited without calling\n                        <code>ProcessEnding()</code>. Check your game session log to see why\n                        <code>ProcessEnding()</code> was not called.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_TERMINATED_UNHEALTHY -- The server process did not report a\n                    valid health check for too long and was therefore terminated by GameLift. Check\n                    your game session log to see if the thread became stuck processing a synchronous\n                    task for too long.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_FORCE_TERMINATED -- The server process did not exit cleanly\n                    within the time expected after <code>OnProcessTerminate()</code> was sent. Check\n                    your game session log to see why termination took longer than expected.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_PROCESS_EXIT_TIMEOUT -- The server process did not exit cleanly\n                    within the time expected (30 seconds) after calling\n                    <code>ProcessEnding()</code>. Check your game session log to see why termination\n                    took longer than expected.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Game session events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>GAME_SESSION_ACTIVATION_TIMEOUT -- GameSession failed to activate within the\n                    expected time. Check your game session log to see why\n                        <code>ActivateGameSession()</code> took longer to complete than\n                    expected.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Other fleet events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>FLEET_SCALING_EVENT -- A change was made to the fleet's capacity settings\n                    (desired instances, minimum/maximum scaling limits). Event messaging includes\n                    the new capacity settings.</p>\n            </li>\n            <li>\n               <p>FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED -- A change was made to the\n                    fleet's game session protection policy setting. Event messaging includes both\n                    the old and new policy setting. </p>\n            </li>\n            <li>\n               <p>FLEET_DELETED -- A request to delete a fleet was initiated.</p>\n            </li>\n            <li>\n               <p> GENERIC_EVENT -- An unspecified event has occurred.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of event being logged. </p>\n         <p>\n            <b>Fleet state transition events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>FLEET_CREATED -- A fleet resource was successfully created with a status of\n                        <code>NEW</code>. Event messaging includes the fleet ID.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_DOWNLOADING -- Fleet status changed from <code>NEW</code> to\n                        <code>DOWNLOADING</code>. Amazon GameLift Servers is downloading the compressed build and\n                    running install scripts.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_VALIDATING -- Fleet status changed from <code>DOWNLOADING</code>\n                    to <code>VALIDATING</code>. Amazon GameLift Servers has successfully installed build and is now\n                    validating the build files.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_BUILDING -- Fleet status changed from <code>VALIDATING</code> to\n                        <code>BUILDING</code>. Amazon GameLift Servers has successfully verified the build files and\n                    is now launching a fleet instance.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_ACTIVATING -- Fleet status changed from <code>BUILDING</code> to\n                        <code>ACTIVATING</code>. Amazon GameLift Servers is launching a game server process on the\n                    fleet instance and is testing its connectivity with the Amazon GameLift Servers service.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_ACTIVE -- The fleet's status changed from <code>ACTIVATING</code>\n                    to <code>ACTIVE</code>. The fleet is now ready to host game sessions.</p>\n            </li>\n            <li>\n               <p>FLEET_STATE_ERROR -- The Fleet's status changed to <code>ERROR</code>.\n                    Describe the fleet event message for more details.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Fleet creation events (ordered by fleet creation\n                activity):</b>\n         </p>\n         <ul>\n            <li>\n               <p>FLEET_BINARY_DOWNLOAD_FAILED -- The build failed to download to the fleet\n                    instance.</p>\n            </li>\n            <li>\n               <p>FLEET_CREATION_EXTRACTING_BUILD -- The game server build was successfully\n                    downloaded to an instance, and Amazon GameLift Serversis now extracting the build files from the\n                    uploaded build. Failure at this stage prevents a fleet from moving to ACTIVE\n                    status. Logs for this stage display a list of the files that are extracted and\n                    saved on the instance. Access the logs by using the URL in\n                        <i>PreSignedLogUrl</i>.</p>\n            </li>\n            <li>\n               <p>FLEET_CREATION_RUNNING_INSTALLER -- The game server build files were\n                    successfully extracted, and Amazon GameLift Servers is now running the build's install script\n                    (if one is included). Failure in this stage prevents a fleet from moving to\n                    ACTIVE status. Logs for this stage list the installation steps and whether or\n                    not the install completed successfully. Access the logs by using the URL in\n                        <i>PreSignedLogUrl</i>.</p>\n            </li>\n            <li>\n               <p>FLEET_CREATION_COMPLETED_INSTALLER -- The game server build files were\n                    successfully installed and validation of the installation will begin\n                    soon.</p>\n            </li>\n            <li>\n               <p>FLEET_CREATION_FAILED_INSTALLER -- The installed failed while attempting to\n                    install the build files. This event indicates that the failure occurred before\n                    Amazon GameLift Servers could start validation. </p>\n            </li>\n            <li>\n               <p>FLEET_CREATION_VALIDATING_RUNTIME_CONFIG -- The build process was successful,\n                    and the GameLift is now verifying that the game server launch paths, which are\n                    specified in the fleet's runtime configuration, exist. If any listed launch path\n                    exists, Amazon GameLift Servers tries to launch a game server process and waits for the process\n                    to report ready. Failures in this stage prevent a fleet from moving to\n                        <code>ACTIVE</code> status. Logs for this stage list the launch paths in the\n                    runtime configuration and indicate whether each is found. Access the logs by\n                    using the URL in <i>PreSignedLogUrl</i>.</p>\n            </li>\n            <li>\n               <p>FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND -- Validation of the runtime\n                    configuration failed because the executable specified in a launch path does not\n                    exist on the instance.</p>\n            </li>\n            <li>\n               <p>FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE -- Validation of the runtime\n                    configuration failed because the executable specified in a launch path failed to\n                    run on the fleet instance.</p>\n            </li>\n            <li>\n               <p>FLEET_VALIDATION_TIMED_OUT -- Validation of the fleet at the end of creation\n                    timed out. Try fleet creation again.</p>\n            </li>\n            <li>\n               <p>FLEET_ACTIVATION_FAILED -- The fleet failed to successfully complete one of\n                    the steps in the fleet activation process. This event code indicates that the\n                    game build was successfully downloaded to a fleet instance, built, and\n                    validated, but was not able to start a server process. For more information, see\n                        <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation\">Debug Fleet Creation Issues</a>.</p>\n            </li>\n            <li>\n               <p>FLEET_ACTIVATION_FAILED_NO_INSTANCES -- Fleet creation was not able to obtain\n                    any instances based on the input fleet attributes. Try again at a different time\n                    or choose a different combination of fleet attributes such as fleet type,\n                    instance type, etc.</p>\n            </li>\n            <li>\n               <p>FLEET_INITIALIZATION_FAILED -- A generic exception occurred during fleet\n                    creation. Describe the fleet event message for more details.</p>\n            </li>\n         </ul>\n         <p>\n            <b>VPC peering events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>FLEET_VPC_PEERING_SUCCEEDED -- A VPC peering connection has been established\n                    between the VPC for an Amazon GameLift Servers fleet and a VPC in your Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>FLEET_VPC_PEERING_FAILED -- A requested VPC peering connection has failed.\n                    Event details and status information provide additional detail. A common reason\n                    for peering failure is that the two VPCs have overlapping CIDR blocks of IPv4\n                    addresses. To resolve this, change the CIDR block for the VPC in your Amazon Web Services\n                    account. For more information on VPC peering failures, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html\">https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html</a>\n               </p>\n            </li>\n            <li>\n               <p>FLEET_VPC_PEERING_DELETED -- A VPC peering connection has been successfully\n                    deleted.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Spot instance events:</b>\n         </p>\n         <ul>\n            <li>\n               <p> INSTANCE_INTERRUPTED -- A spot instance was interrupted by EC2 with a\n                    two-minute notification.</p>\n            </li>\n            <li>\n               <p>INSTANCE_RECYCLED -- A spot instance was determined to have a high risk \n                    of interruption and is scheduled to be recycled once it has no active \n                    game sessions.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Server process events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>SERVER_PROCESS_INVALID_PATH -- The game server executable or script could not\n                    be found based on the Fleet runtime configuration. Check that the launch path is\n                    correct based on the operating system of the Fleet.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT -- The server process did not call\n                        <code>InitSDK()</code> within the time expected (5 minutes). Check your game\n                    session log to see why <code>InitSDK()</code> was not called in time. This event\n                    is not emitted for managed container fleets and Anywhere fleets unless they're\n                    deployed with the Amazon GameLift Servers Agent.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_PROCESS_READY_TIMEOUT -- The server process did not call\n                        <code>ProcessReady()</code> within the time expected  (5 minutes) after\n                    calling <code>InitSDK()</code>. Check your game session log to see why\n                        <code>ProcessReady()</code> was not called in time.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_CRASHED -- The server process exited without calling\n                        <code>ProcessEnding()</code>. Check your game session log to see why\n                        <code>ProcessEnding()</code> was not called.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_TERMINATED_UNHEALTHY -- The server process did not report a\n                    valid health check for too long and was therefore terminated by GameLift. Check\n                    your game session log to see if the thread became stuck processing a synchronous\n                    task for too long.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_FORCE_TERMINATED -- The server process did not exit cleanly\n                    within the time expected after <code>OnProcessTerminate()</code> was sent. Check\n                    your game session log to see why termination took longer than expected.</p>\n            </li>\n            <li>\n               <p>SERVER_PROCESS_PROCESS_EXIT_TIMEOUT -- The server process did not exit cleanly\n                    within the time expected (30 seconds) after calling\n                    <code>ProcessEnding()</code>. Check your game session log to see why termination\n                    took longer than expected.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Game session events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>GAME_SESSION_ACTIVATION_TIMEOUT -- GameSession failed to activate within the\n                    expected time. Check your game session log to see why\n                        <code>ActivateGameSession()</code> took longer to complete than\n                    expected.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Other fleet events:</b>\n         </p>\n         <ul>\n            <li>\n               <p>FLEET_SCALING_EVENT -- A change was made to the fleet's capacity settings\n                    (desired instances, minimum/maximum scaling limits). Event messaging includes\n                    the new capacity settings.</p>\n            </li>\n            <li>\n               <p>FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED -- A change was made to the\n                    fleet's game session protection policy setting. Event messaging includes both\n                    the old and new policy setting. </p>\n            </li>\n            <li>\n               <p>FLEET_DELETED -- A request to delete a fleet was initiated.</p>\n            </li>\n            <li>\n               <p>FLEET_EXPIRED -- The fleet has been expired. The fleet is scaled down to zero\n                    instances and can no longer host game sessions.</p>\n            </li>\n            <li>\n               <p> GENERIC_EVENT -- An unspecified event has occurred.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Message": {
@@ -10395,7 +10434,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Log entry describing an event that involves Amazon GameLift Servers resources (such as a fleet). In\n            addition to tracking activity, event codes and messages can provide additional\n            information for troubleshooting and debugging problems.</p>"
+                "smithy.api#documentation": "<p>Log entry describing an event that involves Amazon GameLift Servers resources (such as a fleet). In\n            addition to tracking activity, event codes and messages can provide additional\n            information for troubleshooting and debugging problems.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.gamelift#EventCode": {
@@ -10417,6 +10457,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FLEET_DELETED"
+                    }
+                },
+                "FLEET_EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLEET_EXPIRED"
                     }
                 },
                 "FLEET_SCALING_EVENT": {
@@ -10878,7 +10924,7 @@
                 "Status": {
                     "target": "com.amazonaws.gamelift#FleetStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Current status of the fleet. Possible fleet statuses include the following:</p>\n         <ul>\n            <li>\n               <p>NEW -- A new fleet resource has been defined and Amazon GameLift Servers has started creating the fleet. \n                    Desired instances is set to 1. </p>\n            </li>\n            <li>\n               <p>DOWNLOADING/VALIDATING/BUILDING -- Amazon GameLift Servers is download the game server build,\n                    running install scripts, and then validating the build files. When complete,\n                    Amazon GameLift Servers launches a fleet instance. </p>\n            </li>\n            <li>\n               <p>ACTIVATING -- Amazon GameLift Servers is launching a game server process and testing its\n                    connectivity with the Amazon GameLift Servers service.</p>\n            </li>\n            <li>\n               <p>ACTIVE -- The fleet is now ready to host game sessions.</p>\n            </li>\n            <li>\n               <p>ERROR -- An error occurred when downloading,\n                    validating, building, or activating the fleet.</p>\n            </li>\n            <li>\n               <p>DELETING -- Hosts are responding to a delete fleet request.</p>\n            </li>\n            <li>\n               <p>TERMINATED -- The fleet no longer exists.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Current status of the fleet. Possible fleet statuses include the following:</p>\n         <ul>\n            <li>\n               <p>NEW -- A new fleet resource has been defined and Amazon GameLift Servers has started creating the fleet. \n                    Desired instances is set to 1. </p>\n            </li>\n            <li>\n               <p>DOWNLOADING/VALIDATING/BUILDING -- Amazon GameLift Servers is download the game server build,\n                    running install scripts, and then validating the build files. When complete,\n                    Amazon GameLift Servers launches a fleet instance. </p>\n            </li>\n            <li>\n               <p>ACTIVATING -- Amazon GameLift Servers is launching a game server process and testing its\n                    connectivity with the Amazon GameLift Servers service.</p>\n            </li>\n            <li>\n               <p>ACTIVE -- The fleet is now ready to host game sessions.</p>\n            </li>\n            <li>\n               <p>ERROR -- An error occurred when downloading,\n                    validating, building, or activating the fleet.</p>\n            </li>\n            <li>\n               <p>EXPIRED -- The fleet has been expired. The fleet is scaled down to zero\n                    instances and cannot host new game sessions.</p>\n            </li>\n            <li>\n               <p>DELETING -- Hosts are responding to a delete fleet request.</p>\n            </li>\n            <li>\n               <p>TERMINATED -- The fleet no longer exists.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "BuildId": {
@@ -11252,6 +11298,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NOT_FOUND"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
                     }
                 }
             }
@@ -14909,7 +14961,8 @@
                 }
             },
             "traits": {
-                "smithy.api#output": {}
+                "smithy.api#output": {},
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.gamelift#GetInstanceAccess": {
@@ -15261,6 +15314,10 @@
         "com.amazonaws.gamelift#InstanceId": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
                 "smithy.api#pattern": "^[a-zA-Z0-9\\.-]+$"
             }
         },
@@ -18345,6 +18402,10 @@
         "com.amazonaws.gamelift#PlayerSessionId": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
                 "smithy.api#pattern": "^psess-\\S+$"
             }
         },
@@ -18687,6 +18748,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -19420,6 +19484,10 @@
         "com.amazonaws.gamelift#ScriptIdOrArn": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
                 "smithy.api#pattern": "^script-\\S+|^arn:.*:script\\/script-\\S+$"
             }
         },

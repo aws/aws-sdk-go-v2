@@ -4894,6 +4894,11 @@ func validateConnectionPropertiesInput(v types.ConnectionPropertiesInput) error 
 			invalidParams.AddNested("[s3Properties]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ConnectionPropertiesInputMemberSnowflakeProperties:
+		if err := validateSnowflakePropertiesInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[snowflakeProperties]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ConnectionPropertiesInputMemberVpcProperties:
 		if err := validateVpcPropertiesInput(&uv.Value); err != nil {
 			invalidParams.AddNested("[vpcProperties]", err.(smithy.InvalidParamsError))
@@ -4926,6 +4931,11 @@ func validateConnectionPropertiesPatch(v types.ConnectionPropertiesPatch) error 
 	case *types.ConnectionPropertiesPatchMemberS3Properties:
 		if err := validateS3PropertiesPatch(&uv.Value); err != nil {
 			invalidParams.AddNested("[s3Properties]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ConnectionPropertiesPatchMemberSnowflakeProperties:
+		if err := validateSnowflakePropertiesPatch(&uv.Value); err != nil {
+			invalidParams.AddNested("[snowflakeProperties]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -5559,6 +5569,21 @@ func validateHyperPodPropertiesInput(v *types.HyperPodPropertiesInput) error {
 	}
 }
 
+func validateIdentityMapping(v *types.IdentityMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdentityMapping"}
+	if v.UsernameAttribute == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UsernameAttribute"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInExpression(v *types.InExpression) error {
 	if v == nil {
 		return nil
@@ -5653,6 +5678,21 @@ func validateLikeExpression(v *types.LikeExpression) error {
 	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLineageSyncInput(v *types.LineageSyncInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LineageSyncInput"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6674,6 +6714,50 @@ func validateSearchSort(v *types.SearchSort) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SearchSort"}
 	if v.Attribute == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Attribute"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnowflakePropertiesInput(v *types.SnowflakePropertiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnowflakePropertiesInput"}
+	if v.SnowflakeRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnowflakeRole"))
+	}
+	if v.IdentityMapping == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityMapping"))
+	} else if v.IdentityMapping != nil {
+		if err := validateIdentityMapping(v.IdentityMapping); err != nil {
+			invalidParams.AddNested("IdentityMapping", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LineageSync != nil {
+		if err := validateLineageSyncInput(v.LineageSync); err != nil {
+			invalidParams.AddNested("LineageSync", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnowflakePropertiesPatch(v *types.SnowflakePropertiesPatch) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnowflakePropertiesPatch"}
+	if v.LineageSync != nil {
+		if err := validateLineageSyncInput(v.LineageSync); err != nil {
+			invalidParams.AddNested("LineageSync", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

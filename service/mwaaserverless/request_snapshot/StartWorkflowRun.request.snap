@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonMWAAServerless.StartWorkflowRun
+
+{"ClientToken":"__ClientToken__","OverrideParameters":{"key0":},"WorkflowArn":"__WorkflowArn__","WorkflowVersion":"__WorkflowVersion__"}

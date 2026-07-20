@@ -167,6 +167,25 @@ func (DescribePackagesFilterName) Values() []DescribePackagesFilterName {
 	}
 }
 
+type DomainEngineMode string
+
+// Enum values for DomainEngineMode
+const (
+	DomainEngineModeGeneral   DomainEngineMode = "GENERAL"
+	DomainEngineModeOptimized DomainEngineMode = "OPTIMIZED"
+)
+
+// Values returns all known values for DomainEngineMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DomainEngineMode) Values() []DomainEngineMode {
+	return []DomainEngineMode{
+		"GENERAL",
+		"OPTIMIZED",
+	}
+}
+
 type DomainPackageStatus string
 
 // Enum values for DomainPackageStatus
@@ -218,6 +237,29 @@ func (DomainProcessingStatusType) Values() []DomainProcessingStatusType {
 		"UpdatingServiceSoftware",
 		"Isolated",
 		"Deleting",
+	}
+}
+
+type DomainUseCase string
+
+// Enum values for DomainUseCase
+const (
+	DomainUseCaseSearch        DomainUseCase = "SEARCH"
+	DomainUseCaseVector        DomainUseCase = "VECTOR"
+	DomainUseCaseObservability DomainUseCase = "OBSERVABILITY"
+	DomainUseCaseMixed         DomainUseCase = "MIXED"
+)
+
+// Values returns all known values for DomainUseCase. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DomainUseCase) Values() []DomainUseCase {
+	return []DomainUseCase{
+		"SEARCH",
+		"VECTOR",
+		"OBSERVABILITY",
+		"MIXED",
 	}
 }
 

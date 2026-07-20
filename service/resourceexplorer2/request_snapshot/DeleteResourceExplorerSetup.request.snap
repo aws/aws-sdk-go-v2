@@ -1,0 +1,5 @@
+POST /DeleteResourceExplorerSetup
+
+Content-Type: application/json
+
+{"DeleteInAllRegions":true,"RegionList":["__Member__","__Member__"]}

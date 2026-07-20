@@ -88,6 +88,10 @@ type UpdateElasticsearchDomainConfigInput struct {
 	// Specifies the Encryption At Rest Options.
 	EncryptionAtRestOptions *types.EncryptionAtRestOptions
 
+	// The engine mode for the domain. For valid values and requirements, see
+	// DomainEngineMode .
+	EngineMode types.DomainEngineMode
+
 	// Map of LogType and LogPublishingOption , each containing options to publish a
 	// given type of Elasticsearch log.
 	LogPublishingOptions map[string]types.LogPublishingOption
@@ -98,6 +102,9 @@ type UpdateElasticsearchDomainConfigInput struct {
 	// Option to set the time, in UTC format, for the daily automated snapshot.
 	// Default value is 0 hours.
 	SnapshotOptions *types.SnapshotOptions
+
+	// The primary use case for the domain. For valid values, see DomainUseCase .
+	UseCase types.DomainUseCase
 
 	// Options to specify the subnets and security groups for VPC endpoint. For more
 	// information, see [Creating a VPC]in VPC Endpoints for Amazon Elasticsearch Service Domains

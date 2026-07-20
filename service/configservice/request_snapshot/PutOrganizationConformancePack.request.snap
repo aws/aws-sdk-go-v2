@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.PutOrganizationConformancePack
+
+{"ConformancePackInputParameters":[{"ParameterName":"__ParameterName__","ParameterValue":"__ParameterValue__"},{"ParameterName":"__ParameterName__","ParameterValue":"__ParameterValue__"}],"DeliveryS3Bucket":"__DeliveryS3Bucket__","DeliveryS3KeyPrefix":"__DeliveryS3KeyPrefix__","ExcludedAccounts":["__Member__","__Member__"],"OrganizationConformancePackName":"__OrganizationConformancePackName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TemplateBody":"__TemplateBody__","TemplateS3Uri":"__TemplateS3Uri__"}

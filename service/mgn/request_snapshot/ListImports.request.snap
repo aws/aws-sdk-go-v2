@@ -1,0 +1,5 @@
+POST /ListImports
+
+Content-Type: application/json
+
+{"filters":{"importIDs":["__Member__","__Member__"]},"maxResults":1,"nextToken":"__NextToken__"}

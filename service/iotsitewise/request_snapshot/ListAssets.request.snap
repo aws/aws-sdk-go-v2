@@ -1,0 +1,3 @@
+GET /assets?assetModelId=__AssetModelId__&filter=ALL&maxResults=1&nextToken=__NextToken__
+
+

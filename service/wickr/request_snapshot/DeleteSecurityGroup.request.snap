@@ -1,0 +1,3 @@
+DELETE /networks/__NetworkId__/security-groups/__GroupId__
+
+

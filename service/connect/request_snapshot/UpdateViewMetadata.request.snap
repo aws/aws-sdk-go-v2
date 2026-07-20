@@ -1,0 +1,5 @@
+POST /views/__InstanceId__/__ViewId__/metadata
+
+Content-Type: application/json
+
+{"Description":"__Description__","Name":"__Name__"}

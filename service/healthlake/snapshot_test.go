@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_CreateDataTransformationProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataTransformationProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDataTransformationProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateFHIRDatastore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateFHIRDatastore(context.Background(), nil, func(o *Options) {
@@ -74,11 +86,35 @@ func TestCheckSnapshot_CreateFHIRDatastore(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteDataTransformationProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataTransformationProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDataTransformationProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteFHIRDatastore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteFHIRDatastore(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteFHIRDatastore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeDataTransformationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDataTransformationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeDataTransformationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -115,6 +151,54 @@ func TestCheckSnapshot_DescribeFHIRImportJob(t *testing.T) {
 	_, err := svc.DescribeFHIRImportJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeFHIRImportJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDataTransformationProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataTransformationProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataTransformationProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDataTransformationJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataTransformationJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDataTransformationJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDataTransformationProfiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataTransformationProfiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDataTransformationProfiles")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDataTransformationProfileVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataTransformationProfileVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDataTransformationProfileVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -170,6 +254,30 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PublishDataTransformationProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PublishDataTransformationProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PublishDataTransformationProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartDataTransformationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDataTransformationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartDataTransformationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartFHIRExportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartFHIRExportJob(context.Background(), nil, func(o *Options) {
@@ -218,6 +326,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateDataTransformationProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDataTransformationProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDataTransformationProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateFHIRDatastore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateFHIRDatastore(context.Background(), nil, func(o *Options) {
@@ -229,6 +349,30 @@ func TestCheckSnapshot_UpdateFHIRDatastore(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateProfileWithAgent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProfileWithAgent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateProfileWithAgent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+func TestUpdateSnapshot_CreateDataTransformationProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataTransformationProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDataTransformationProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateFHIRDatastore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateFHIRDatastore(context.Background(), nil, func(o *Options) {
@@ -241,11 +385,35 @@ func TestUpdateSnapshot_CreateFHIRDatastore(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteDataTransformationProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataTransformationProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDataTransformationProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteFHIRDatastore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteFHIRDatastore(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteFHIRDatastore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeDataTransformationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDataTransformationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeDataTransformationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -282,6 +450,54 @@ func TestUpdateSnapshot_DescribeFHIRImportJob(t *testing.T) {
 	_, err := svc.DescribeFHIRImportJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeFHIRImportJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDataTransformationProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataTransformationProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataTransformationProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDataTransformationJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataTransformationJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDataTransformationJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDataTransformationProfiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataTransformationProfiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDataTransformationProfiles")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDataTransformationProfileVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataTransformationProfileVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDataTransformationProfileVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -337,6 +553,30 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PublishDataTransformationProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PublishDataTransformationProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PublishDataTransformationProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartDataTransformationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDataTransformationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartDataTransformationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartFHIRExportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartFHIRExportJob(context.Background(), nil, func(o *Options) {
@@ -385,11 +625,35 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateDataTransformationProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDataTransformationProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDataTransformationProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateFHIRDatastore(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateFHIRDatastore(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateFHIRDatastore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateProfileWithAgent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProfileWithAgent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateProfileWithAgent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

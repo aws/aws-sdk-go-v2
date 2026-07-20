@@ -1,0 +1,5 @@
+POST /enable-baseline
+
+Content-Type: application/json
+
+{"baselineIdentifier":"__BaselineIdentifier__","baselineVersion":"__BaselineVersion__","parameters":[{"key":"__Key__"},{"key":"__Key__"}],"tags":{"key0":"__Value__"},"targetIdentifier":"__TargetIdentifier__"}

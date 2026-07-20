@@ -1,0 +1,5 @@
+POST /AssociateDefaultView
+
+Content-Type: application/json
+
+{"ViewArn":"__ViewArn__"}

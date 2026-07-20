@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDB_20120810.ExportTableToPointInTime
+
+{"ClientToken":"__ClientToken__","ExportFormat":"DYNAMODB_JSON","ExportTime":946684800,"ExportType":"FULL_EXPORT","IncrementalExportSpecification":{"ExportFromTime":946684800,"ExportToTime":946684800,"ExportViewType":"NEW_IMAGE"},"S3Bucket":"__S3Bucket__","S3BucketOwner":"__S3BucketOwner__","S3Prefix":"__S3Prefix__","S3SseAlgorithm":"AES256","S3SseKmsKeyId":"__S3SseKmsKeyId__","TableArn":"__TableArn__"}

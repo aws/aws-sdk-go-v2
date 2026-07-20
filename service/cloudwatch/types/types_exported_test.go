@@ -24,3 +24,25 @@ func ExampleEvaluationCriteria_outputUsage() {
 }
 
 var _ *types.AlarmPromQLCriteria
+
+func ExampleEvaluationWindow_outputUsage() {
+	var union types.EvaluationWindow
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EvaluationWindowMemberSlidingWindow:
+		_ = v.Value // Value is types.SlidingWindow
+
+	case *types.EvaluationWindowMemberWallClockWindow:
+		_ = v.Value // Value is types.WallClockWindow
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.WallClockWindow
+var _ *types.SlidingWindow

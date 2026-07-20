@@ -1,0 +1,5 @@
+POST /campaigns-state
+
+Content-Type: application/json
+
+{"campaignIds":["__Member__","__Member__"]}

@@ -1470,6 +1470,26 @@ func (m *validateOpGetLogDeliveryConfiguration) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetProvisionedLimit struct {
+}
+
+func (*validateOpGetProvisionedLimit) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetProvisionedLimit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetProvisionedLimitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetProvisionedLimitInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSigningCertificate struct {
 }
 
@@ -2330,6 +2350,26 @@ func (m *validateOpUpdateManagedLoginBranding) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateProvisionedLimit struct {
+}
+
+func (*validateOpUpdateProvisionedLimit) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProvisionedLimit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProvisionedLimitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProvisionedLimitInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateResourceServer struct {
 }
 
@@ -2802,6 +2842,10 @@ func addOpGetLogDeliveryConfigurationValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpGetLogDeliveryConfiguration{}, middleware.After)
 }
 
+func addOpGetProvisionedLimitValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetProvisionedLimit{}, middleware.After)
+}
+
 func addOpGetSigningCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSigningCertificate{}, middleware.After)
 }
@@ -2972,6 +3016,10 @@ func addOpUpdateIdentityProviderValidationMiddleware(stack *middleware.Stack) er
 
 func addOpUpdateManagedLoginBrandingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateManagedLoginBranding{}, middleware.After)
+}
+
+func addOpUpdateProvisionedLimitValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProvisionedLimit{}, middleware.After)
 }
 
 func addOpUpdateResourceServerValidationMiddleware(stack *middleware.Stack) error {
@@ -3272,6 +3320,21 @@ func validateCustomSMSLambdaVersionConfigType(v *types.CustomSMSLambdaVersionCon
 	}
 }
 
+func validateEumsSmsConfigurationType(v *types.EumsSmsConfigurationType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EumsSmsConfigurationType"}
+	if v.CallerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CallerArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFailoverType(v *types.FailoverType) error {
 	if v == nil {
 		return nil
@@ -3332,6 +3395,24 @@ func validateLambdaConfigType(v *types.LambdaConfigType) error {
 		if err := validateInboundFederationLambdaType(v.InboundFederation); err != nil {
 			invalidParams.AddNested("InboundFederation", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLimitDefinitionType(v *types.LimitDefinitionType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LimitDefinitionType"}
+	if len(v.LimitClass) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LimitClass"))
+	}
+	if v.Attributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3545,8 +3626,10 @@ func validateSmsConfigurationType(v *types.SmsConfigurationType) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SmsConfigurationType"}
-	if v.SnsCallerArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SnsCallerArn"))
+	if v.EumsSms != nil {
+		if err := validateEumsSmsConfigurationType(v.EumsSms); err != nil {
+			invalidParams.AddNested("EumsSms", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5035,6 +5118,25 @@ func validateOpGetLogDeliveryConfigurationInput(v *GetLogDeliveryConfigurationIn
 	}
 }
 
+func validateOpGetProvisionedLimitInput(v *GetProvisionedLimitInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetProvisionedLimitInput"}
+	if v.LimitDefinition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LimitDefinition"))
+	} else if v.LimitDefinition != nil {
+		if err := validateLimitDefinitionType(v.LimitDefinition); err != nil {
+			invalidParams.AddNested("LimitDefinition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSigningCertificateInput(v *GetSigningCertificateInput) error {
 	if v == nil {
 		return nil
@@ -5771,6 +5873,25 @@ func validateOpUpdateManagedLoginBrandingInput(v *UpdateManagedLoginBrandingInpu
 	if v.Assets != nil {
 		if err := validateAssetListType(v.Assets); err != nil {
 			invalidParams.AddNested("Assets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProvisionedLimitInput(v *UpdateProvisionedLimitInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProvisionedLimitInput"}
+	if v.LimitDefinition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LimitDefinition"))
+	} else if v.LimitDefinition != nil {
+		if err := validateLimitDefinitionType(v.LimitDefinition); err != nil {
+			invalidParams.AddNested("LimitDefinition", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -72,6 +72,9 @@ type CreateConnectorV2Output struct {
 	// The current status of the connectorV2.
 	ConnectorStatus types.ConnectorStatus
 
+	// The enablement status of the connector after creation.
+	EnablementStatus types.EnablementStatus
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

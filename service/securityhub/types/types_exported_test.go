@@ -71,6 +71,60 @@ func ExampleCriteria_outputUsage() {
 
 var _ *types.OcsfFindingFilters
 
+func ExampleCspmProviderConfiguration_outputUsage() {
+	var union types.CspmProviderConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CspmProviderConfigurationMemberAzure:
+		_ = v.Value // Value is types.AzureProviderConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AzureProviderConfiguration
+
+func ExampleCspmProviderDetail_outputUsage() {
+	var union types.CspmProviderDetail
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CspmProviderDetailMemberAzure:
+		_ = v.Value // Value is types.AzureDetail
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AzureDetail
+
+func ExampleCspmProviderUpdateConfiguration_outputUsage() {
+	var union types.CspmProviderUpdateConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CspmProviderUpdateConfigurationMemberAzure:
+		_ = v.Value // Value is types.AzureUpdateConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AzureUpdateConfiguration
+
 func ExampleParameterValue_outputUsage() {
 	var union types.ParameterValue
 	// type switches can be used to check the union value
@@ -137,6 +191,9 @@ func ExampleProviderConfiguration_outputUsage() {
 	var union types.ProviderConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ProviderConfigurationMemberAzure:
+		_ = v.Value // Value is types.AzureProviderConfiguration
+
 	case *types.ProviderConfigurationMemberJiraCloud:
 		_ = v.Value // Value is types.JiraCloudProviderConfiguration
 
@@ -152,6 +209,7 @@ func ExampleProviderConfiguration_outputUsage() {
 	}
 }
 
+var _ *types.AzureProviderConfiguration
 var _ *types.JiraCloudProviderConfiguration
 var _ *types.ServiceNowProviderConfiguration
 
@@ -159,6 +217,9 @@ func ExampleProviderDetail_outputUsage() {
 	var union types.ProviderDetail
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ProviderDetailMemberAzure:
+		_ = v.Value // Value is types.AzureDetail
+
 	case *types.ProviderDetailMemberJiraCloud:
 		_ = v.Value // Value is types.JiraCloudDetail
 
@@ -174,6 +235,7 @@ func ExampleProviderDetail_outputUsage() {
 	}
 }
 
+var _ *types.AzureDetail
 var _ *types.JiraCloudDetail
 var _ *types.ServiceNowDetail
 
@@ -181,6 +243,9 @@ func ExampleProviderUpdateConfiguration_outputUsage() {
 	var union types.ProviderUpdateConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ProviderUpdateConfigurationMemberAzure:
+		_ = v.Value // Value is types.AzureUpdateConfiguration
+
 	case *types.ProviderUpdateConfigurationMemberJiraCloud:
 		_ = v.Value // Value is types.JiraCloudUpdateConfiguration
 
@@ -196,6 +261,7 @@ func ExampleProviderUpdateConfiguration_outputUsage() {
 	}
 }
 
+var _ *types.AzureUpdateConfiguration
 var _ *types.ServiceNowUpdateConfiguration
 var _ *types.JiraCloudUpdateConfiguration
 

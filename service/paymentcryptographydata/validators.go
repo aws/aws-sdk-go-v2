@@ -1474,6 +1474,11 @@ func validateSessionKeyDerivation(v types.SessionKeyDerivation) error {
 			invalidParams.AddNested("[Mastercard]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.SessionKeyDerivationMemberUnionPay:
+		if err := validateSessionKeyUnionPay(&uv.Value); err != nil {
+			invalidParams.AddNested("[UnionPay]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.SessionKeyDerivationMemberVisa:
 		if err := validateSessionKeyVisa(&uv.Value); err != nil {
 			invalidParams.AddNested("[Visa]", err.(smithy.InvalidParamsError))
@@ -1545,6 +1550,27 @@ func validateSessionKeyMastercard(v *types.SessionKeyMastercard) error {
 	}
 	if v.UnpredictableNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UnpredictableNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSessionKeyUnionPay(v *types.SessionKeyUnionPay) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SessionKeyUnionPay"}
+	if v.PrimaryAccountNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryAccountNumber"))
+	}
+	if v.PanSequenceNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PanSequenceNumber"))
+	}
+	if v.ApplicationTransactionCounter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationTransactionCounter"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

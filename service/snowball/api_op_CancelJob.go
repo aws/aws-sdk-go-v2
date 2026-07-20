@@ -4,6 +4,8 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type CancelJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.CancelJobRequest_JobId, *v.JobId)
+	}
+}
+
 type CancelJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type CancelJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelJobResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelJobResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCancelJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelJob, schemas.CancelJobRequest, schemas.CancelJobResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCancelJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelJob, schemas.CancelJobRequest, schemas.CancelJobResult), output: &CancelJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

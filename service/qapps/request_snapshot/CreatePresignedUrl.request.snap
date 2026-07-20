@@ -1,0 +1,6 @@
+POST /apps.createPresignedUrl
+
+Content-Type: application/json
+Instance-Id: __InstanceId__
+
+{"appId":"__AppId__","cardId":"__CardId__","fileContentsSha256":"__FileContentsSha256__","fileName":"__FileName__","scope":"APPLICATION","sessionId":"__SessionId__"}

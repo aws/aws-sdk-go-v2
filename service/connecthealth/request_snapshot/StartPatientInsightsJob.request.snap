@@ -1,0 +1,5 @@
+POST /domain/__DomainId__/patient-insights-job
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","encounterContext":{"encounterReason":"__EncounterReason__"},"inputDataConfig":{"fhirServer":{"fhirEndpoint":"__FhirEndpoint__","oauthToken":"__OauthToken__"},"s3Sources":[{"uri":"__Uri__"},{"uri":"__Uri__"}]},"insightsContext":{"insightsType":"PRE_VISIT"},"outputDataConfig":{"s3OutputPath":"__S3OutputPath__"},"patientContext":{"dateOfBirth":"__DateOfBirth__","patientId":"__PatientId__","pronouns":"HE_HIM"},"userContext":{"role":"CLINICIAN","specialty":"PRIMARY_CARE","userId":"__UserId__"}}

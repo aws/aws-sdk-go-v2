@@ -1,0 +1,5 @@
+PATCH /sol/nsd/v1/ns_descriptors/__NsdInfoId__
+
+Content-Type: application/json
+
+{"nsdOperationalState":"ENABLED"}

@@ -1,0 +1,5 @@
+PATCH /spending-limit/__SpendingLimitArn__/update
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","spendingLimit":"__SpendingLimit__","timePeriod":{"endAt":946684800,"startAt":946684800}}

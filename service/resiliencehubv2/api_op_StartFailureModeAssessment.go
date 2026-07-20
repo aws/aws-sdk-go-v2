@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-// Start a failure mode assessment.
+// Starts a failure mode assessment.
 func (c *Client) StartFailureModeAssessment(ctx context.Context, params *StartFailureModeAssessmentInput, optFns ...func(*Options)) (*StartFailureModeAssessmentOutput, error) {
 	if params == nil {
 		params = &StartFailureModeAssessmentInput{}

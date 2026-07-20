@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.UpdateGroup
+
+{"GroupId":"__GroupId__","HiddenFromGlobalAddressList":true,"OrganizationId":"__OrganizationId__"}

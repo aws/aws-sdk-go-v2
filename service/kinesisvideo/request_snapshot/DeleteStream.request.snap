@@ -1,0 +1,5 @@
+POST /deleteStream
+
+Content-Type: application/json
+
+{"CurrentVersion":"__CurrentVersion__","StreamARN":"__StreamARN__"}

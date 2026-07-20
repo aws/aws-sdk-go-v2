@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.UpdateServicePipeline
+
+{"deploymentType":"NONE","serviceName":"__ServiceName__","spec":"__Spec__","templateMajorVersion":"__TemplateMajorVersion__","templateMinorVersion":"__TemplateMinorVersion__"}

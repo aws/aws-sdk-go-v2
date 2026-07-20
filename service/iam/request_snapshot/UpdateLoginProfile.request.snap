@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=UpdateLoginProfile&Password=__Password__&PasswordResetRequired=true&UserName=__UserName__&Version=2010-05-08

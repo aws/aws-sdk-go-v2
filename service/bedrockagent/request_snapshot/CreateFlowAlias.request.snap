@@ -1,0 +1,5 @@
+POST /flows/__FlowIdentifier__/aliases
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","concurrencyConfiguration":{"maxConcurrency":1,"type":"Automatic"},"description":"__Description__","name":"__Name__","routingConfiguration":[{"flowVersion":"__FlowVersion__"},{"flowVersion":"__FlowVersion__"}],"tags":{"key0":"__Value__"}}

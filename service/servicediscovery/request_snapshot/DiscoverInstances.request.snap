@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53AutoNaming_v20170314.DiscoverInstances
+
+{"HealthStatus":"HEALTHY","MaxResults":1,"NamespaceName":"__NamespaceName__","OptionalParameters":{"key0":"__Value__"},"OwnerAccount":"__OwnerAccount__","QueryParameters":{"key0":"__Value__"},"ServiceName":"__ServiceName__"}

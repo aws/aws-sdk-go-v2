@@ -1,0 +1,5 @@
+PUT /v1/spaces/__SpaceName__/projects/__ProjectName__/devEnvironments/__Id__/start
+
+Content-Type: application/json
+
+{"ides":[{"name":"__Name__","runtime":"__Runtime__"},{"name":"__Name__","runtime":"__Runtime__"}],"inactivityTimeoutMinutes":1,"instanceType":"dev.standard1.small"}

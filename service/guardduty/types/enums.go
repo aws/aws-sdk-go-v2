@@ -109,6 +109,77 @@ func (Confidence) Values() []Confidence {
 	}
 }
 
+type ConfidenceLevel string
+
+// Enum values for ConfidenceLevel
+const (
+	ConfidenceLevelHigh   ConfidenceLevel = "HIGH"
+	ConfidenceLevelMedium ConfidenceLevel = "MEDIUM"
+	ConfidenceLevelLow    ConfidenceLevel = "LOW"
+	ConfidenceLevelNone   ConfidenceLevel = "NONE"
+)
+
+// Values returns all known values for ConfidenceLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfidenceLevel) Values() []ConfidenceLevel {
+	return []ConfidenceLevel{
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+		"NONE",
+	}
+}
+
+type ContentPolicyFilterAction string
+
+// Enum values for ContentPolicyFilterAction
+const (
+	ContentPolicyFilterActionBlocked ContentPolicyFilterAction = "BLOCKED"
+	ContentPolicyFilterActionNone    ContentPolicyFilterAction = "NONE"
+)
+
+// Values returns all known values for ContentPolicyFilterAction. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentPolicyFilterAction) Values() []ContentPolicyFilterAction {
+	return []ContentPolicyFilterAction{
+		"BLOCKED",
+		"NONE",
+	}
+}
+
+type ContentPolicyFilterType string
+
+// Enum values for ContentPolicyFilterType
+const (
+	ContentPolicyFilterTypePromptAttack ContentPolicyFilterType = "PROMPT_ATTACK"
+	ContentPolicyFilterTypeJailbreak    ContentPolicyFilterType = "JAILBREAK"
+	ContentPolicyFilterTypeHate         ContentPolicyFilterType = "HATE"
+	ContentPolicyFilterTypeInsults      ContentPolicyFilterType = "INSULTS"
+	ContentPolicyFilterTypeSexual       ContentPolicyFilterType = "SEXUAL"
+	ContentPolicyFilterTypeViolence     ContentPolicyFilterType = "VIOLENCE"
+	ContentPolicyFilterTypeMisconduct   ContentPolicyFilterType = "MISCONDUCT"
+)
+
+// Values returns all known values for ContentPolicyFilterType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentPolicyFilterType) Values() []ContentPolicyFilterType {
+	return []ContentPolicyFilterType{
+		"PROMPT_ATTACK",
+		"JAILBREAK",
+		"HATE",
+		"INSULTS",
+		"SEXUAL",
+		"VIOLENCE",
+		"MISCONDUCT",
+	}
+}
+
 type CoverageFilterCriterionKey string
 
 // Enum values for CoverageFilterCriterionKey
@@ -339,6 +410,8 @@ const (
 	DetectorFeatureLambdaNetworkLogs    DetectorFeature = "LAMBDA_NETWORK_LOGS"
 	DetectorFeatureEksRuntimeMonitoring DetectorFeature = "EKS_RUNTIME_MONITORING"
 	DetectorFeatureRuntimeMonitoring    DetectorFeature = "RUNTIME_MONITORING"
+	DetectorFeatureAiProtection         DetectorFeature = "AI_PROTECTION"
+	DetectorFeatureAiAnalyst            DetectorFeature = "AI_ANALYST"
 )
 
 // Values returns all known values for DetectorFeature. Note that this can be
@@ -354,6 +427,8 @@ func (DetectorFeature) Values() []DetectorFeature {
 		"LAMBDA_NETWORK_LOGS",
 		"EKS_RUNTIME_MONITORING",
 		"RUNTIME_MONITORING",
+		"AI_PROTECTION",
+		"AI_ANALYST",
 	}
 }
 
@@ -371,6 +446,8 @@ const (
 	DetectorFeatureResultLambdaNetworkLogs    DetectorFeatureResult = "LAMBDA_NETWORK_LOGS"
 	DetectorFeatureResultEksRuntimeMonitoring DetectorFeatureResult = "EKS_RUNTIME_MONITORING"
 	DetectorFeatureResultRuntimeMonitoring    DetectorFeatureResult = "RUNTIME_MONITORING"
+	DetectorFeatureResultAiProtection         DetectorFeatureResult = "AI_PROTECTION"
+	DetectorFeatureResultAiAnalyst            DetectorFeatureResult = "AI_ANALYST"
 )
 
 // Values returns all known values for DetectorFeatureResult. Note that this can
@@ -389,6 +466,8 @@ func (DetectorFeatureResult) Values() []DetectorFeatureResult {
 		"LAMBDA_NETWORK_LOGS",
 		"EKS_RUNTIME_MONITORING",
 		"RUNTIME_MONITORING",
+		"AI_PROTECTION",
+		"AI_ANALYST",
 	}
 }
 
@@ -653,6 +732,7 @@ const (
 	FreeTrialFeatureResultEksRuntimeMonitoring     FreeTrialFeatureResult = "EKS_RUNTIME_MONITORING"
 	FreeTrialFeatureResultEc2RuntimeMonitoring     FreeTrialFeatureResult = "EC2_RUNTIME_MONITORING"
 	FreeTrialFeatureResultFargateRuntimeMonitoring FreeTrialFeatureResult = "FARGATE_RUNTIME_MONITORING"
+	FreeTrialFeatureResultAiProtection             FreeTrialFeatureResult = "AI_PROTECTION"
 )
 
 // Values returns all known values for FreeTrialFeatureResult. Note that this can
@@ -672,6 +752,7 @@ func (FreeTrialFeatureResult) Values() []FreeTrialFeatureResult {
 		"EKS_RUNTIME_MONITORING",
 		"EC2_RUNTIME_MONITORING",
 		"FARGATE_RUNTIME_MONITORING",
+		"AI_PROTECTION",
 	}
 }
 
@@ -697,6 +778,44 @@ func (GroupByType) Values() []GroupByType {
 		"FINDING_TYPE",
 		"RESOURCE",
 		"SEVERITY",
+	}
+}
+
+type GuardrailAction string
+
+// Enum values for GuardrailAction
+const (
+	GuardrailActionGuardrailIntervened GuardrailAction = "GUARDRAIL_INTERVENED"
+	GuardrailActionNone                GuardrailAction = "NONE"
+)
+
+// Values returns all known values for GuardrailAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailAction) Values() []GuardrailAction {
+	return []GuardrailAction{
+		"GUARDRAIL_INTERVENED",
+		"NONE",
+	}
+}
+
+type GuardrailSource string
+
+// Enum values for GuardrailSource
+const (
+	GuardrailSourceInput  GuardrailSource = "INPUT"
+	GuardrailSourceOutput GuardrailSource = "OUTPUT"
+)
+
+// Values returns all known values for GuardrailSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailSource) Values() []GuardrailSource {
+	return []GuardrailSource{
+		"INPUT",
+		"OUTPUT",
 	}
 }
 
@@ -1134,6 +1253,7 @@ const (
 	OrgFeatureLambdaNetworkLogs    OrgFeature = "LAMBDA_NETWORK_LOGS"
 	OrgFeatureEksRuntimeMonitoring OrgFeature = "EKS_RUNTIME_MONITORING"
 	OrgFeatureRuntimeMonitoring    OrgFeature = "RUNTIME_MONITORING"
+	OrgFeatureAiProtection         OrgFeature = "AI_PROTECTION"
 )
 
 // Values returns all known values for OrgFeature. Note that this can be expanded
@@ -1149,6 +1269,7 @@ func (OrgFeature) Values() []OrgFeature {
 		"LAMBDA_NETWORK_LOGS",
 		"EKS_RUNTIME_MONITORING",
 		"RUNTIME_MONITORING",
+		"AI_PROTECTION",
 	}
 }
 
@@ -1203,6 +1324,8 @@ const (
 	ProfileSubtypeInfrequent ProfileSubtype = "INFREQUENT"
 	ProfileSubtypeUnseen     ProfileSubtype = "UNSEEN"
 	ProfileSubtypeRare       ProfileSubtype = "RARE"
+	ProfileSubtypeCount      ProfileSubtype = "COUNT"
+	ProfileSubtypeAverage    ProfileSubtype = "AVERAGE"
 )
 
 // Values returns all known values for ProfileSubtype. Note that this can be
@@ -1215,6 +1338,8 @@ func (ProfileSubtype) Values() []ProfileSubtype {
 		"INFREQUENT",
 		"UNSEEN",
 		"RARE",
+		"COUNT",
+		"AVERAGE",
 	}
 }
 
@@ -1223,6 +1348,7 @@ type ProfileType string
 // Enum values for ProfileType
 const (
 	ProfileTypeFrequency ProfileType = "FREQUENCY"
+	ProfileTypeVolume    ProfileType = "VOLUME"
 )
 
 // Values returns all known values for ProfileType. Note that this can be expanded
@@ -1232,6 +1358,7 @@ const (
 func (ProfileType) Values() []ProfileType {
 	return []ProfileType{
 		"FREQUENCY",
+		"VOLUME",
 	}
 }
 
@@ -1760,6 +1887,7 @@ const (
 	UsageFeatureFargateRuntimeMonitoring    UsageFeature = "FARGATE_RUNTIME_MONITORING"
 	UsageFeatureRdsDbiProtectionProvisioned UsageFeature = "RDS_DBI_PROTECTION_PROVISIONED"
 	UsageFeatureRdsDbiProtectionServerless  UsageFeature = "RDS_DBI_PROTECTION_SERVERLESS"
+	UsageFeatureAiProtection                UsageFeature = "AI_PROTECTION"
 )
 
 // Values returns all known values for UsageFeature. Note that this can be
@@ -1781,6 +1909,7 @@ func (UsageFeature) Values() []UsageFeature {
 		"FARGATE_RUNTIME_MONITORING",
 		"RDS_DBI_PROTECTION_PROVISIONED",
 		"RDS_DBI_PROTECTION_SERVERLESS",
+		"AI_PROTECTION",
 	}
 }
 

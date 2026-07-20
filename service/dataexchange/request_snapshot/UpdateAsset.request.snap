@@ -1,0 +1,5 @@
+PATCH /v1/data-sets/__DataSetId__/revisions/__RevisionId__/assets/__AssetId__
+
+Content-Type: application/json
+
+{"Name":"__Name__"}

@@ -1,0 +1,5 @@
+PUT /instance/__InstanceId__/integration-associations
+
+Content-Type: application/json
+
+{"IntegrationArn":"__IntegrationArn__","IntegrationType":"EVENT","SourceApplicationName":"__SourceApplicationName__","SourceApplicationUrl":"__SourceApplicationUrl__","SourceType":"SALESFORCE","Tags":{"key0":"__Value__"}}

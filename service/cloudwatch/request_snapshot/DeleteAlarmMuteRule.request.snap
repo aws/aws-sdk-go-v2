@@ -1,0 +1,8 @@
+POST /service/GraniteServiceVersion20100801/operation/DeleteAlarmMuteRule
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+X-Amzn-Query-Mode: true
+
+¡qAlarmMuteRuleNameu__AlarmMuteRuleName__

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHawksNestServiceFacade.PutEventType
+
+{"description":"__Description__","entityTypes":["__Member__","__Member__"],"eventIngestion":"ENABLED","eventOrchestration":{"eventBridgeEnabled":true},"eventVariables":["__Member__","__Member__"],"labels":["__Member__","__Member__"],"name":"__Name__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

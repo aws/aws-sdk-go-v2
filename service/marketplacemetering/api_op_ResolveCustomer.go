@@ -14,6 +14,11 @@ import (
 // is resolved through this API to obtain a CustomerIdentifier along with the
 // CustomerAWSAccountId , ProductCode , and LicenseArn .
 //
+// For new SaaS product integrations, the CustomerIdentifier field is not
+// populated in the ResolveCustomer API response. New integrations must use
+// CustomerAWSAccountId and LicenseArn to identify customers. Existing
+// integrations continue to work unchanged.
+//
 // To successfully resolve the token, the API must be called from the account that
 // was used to publish the SaaS application. For an example of using
 // ResolveCustomer , see [ResolveCustomer code example] in the Amazon Web Services Marketplace Seller Guide.
@@ -50,6 +55,9 @@ type ResolveCustomerInput struct {
 	// resolved to obtain a CustomerIdentifier along with the CustomerAWSAccountId ,
 	// ProductCode , and LicenseArn .
 	//
+	// For new SaaS product integrations, the CustomerIdentifier field is not
+	// populated. Use CustomerAWSAccountId and LicenseArn for customer identification.
+	//
 	// This member is required.
 	RegistrationToken *string
 
@@ -67,6 +75,9 @@ type ResolveCustomerOutput struct {
 
 	// The CustomerIdentifier is used to identify an individual customer in your
 	// application.
+	//
+	// For new SaaS product integrations, this field is not populated. Use
+	// CustomerAWSAccountId and LicenseArn to identify customers instead.
 	CustomerIdentifier *string
 
 	// The LicenseArn is a unique identifier for a specific granted license. These are

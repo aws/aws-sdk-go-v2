@@ -1,0 +1,5 @@
+PUT /batch-associate-resources-to-custom-line-item
+
+Content-Type: application/json
+
+{"BillingPeriodRange":{"ExclusiveEndBillingPeriod":"__ExclusiveEndBillingPeriod__","InclusiveStartBillingPeriod":"__InclusiveStartBillingPeriod__"},"ResourceArns":["__Member__","__Member__"],"TargetArn":"__TargetArn__"}

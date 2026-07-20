@@ -1,0 +1,5 @@
+POST /get-enabled-control
+
+Content-Type: application/json
+
+{"enabledControlIdentifier":"__EnabledControlIdentifier__"}

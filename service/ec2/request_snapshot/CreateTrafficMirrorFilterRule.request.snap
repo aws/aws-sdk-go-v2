@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateTrafficMirrorFilterRule&ClientToken=__ClientToken__&Description=__Description__&DestinationCidrBlock=__DestinationCidrBlock__&DestinationPortRange.FromPort=1&DestinationPortRange.ToPort=1&DryRun=true&Protocol=1&RuleAction=accept&RuleNumber=1&SourceCidrBlock=__SourceCidrBlock__&SourcePortRange.FromPort=1&SourcePortRange.ToPort=1&TagSpecification.1.ResourceType=capacity-reservation&TagSpecification.1.Tag.1.Key=__Key__&TagSpecification.1.Tag.1.Value=__Value__&TagSpecification.1.Tag.2.Key=__Key__&TagSpecification.1.Tag.2.Value=__Value__&TagSpecification.2.ResourceType=capacity-reservation&TagSpecification.2.Tag.1.Key=__Key__&TagSpecification.2.Tag.1.Value=__Value__&TagSpecification.2.Tag.2.Key=__Key__&TagSpecification.2.Tag.2.Value=__Value__&TrafficDirection=ingress&TrafficMirrorFilterId=__TrafficMirrorFilterId__&Version=2016-11-15

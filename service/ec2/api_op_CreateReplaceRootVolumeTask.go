@@ -12,8 +12,9 @@ import (
 
 // Replaces the EBS-backed root volume for a running instance with a new volume
 // that is restored to the original root volume's launch state, that is restored to
-// a specific snapshot taken from the original root volume, or that is restored
-// from an AMI that has the same key characteristics as that of the instance.
+// a specific snapshot taken from the original root volume, that is restored from
+// an AMI that has the same key characteristics as that of the instance, or that is
+// replaced by a specified volume.
 //
 // For more information, see [Replace a root volume] in the Amazon EC2 User Guide.
 //
@@ -64,8 +65,9 @@ type CreateReplaceRootVolumeTaskInput struct {
 	// have the same product code, billing information, architecture type, and
 	// virtualization type as that of the instance.
 	//
-	// If you want to restore the replacement volume from a specific snapshot, or if
-	// you want to restore it to its launch state, omit this parameter.
+	// If you want to restore the replacement volume from a specific snapshot, if you
+	// want to restore it to its launch state, or if you want to replace the root
+	// volume with a specified volume, omit this parameter.
 	ImageId *string
 
 	// The ID of the snapshot from which to restore the replacement root volume. The
@@ -73,12 +75,21 @@ type CreateReplaceRootVolumeTaskInput struct {
 	// original root volume.
 	//
 	// If you want to restore the replacement root volume to the initial launch state,
-	// or if you want to restore the replacement root volume from an AMI, omit this
-	// parameter.
+	// if you want to restore the replacement root volume from an AMI, or if you want
+	// to replace the root volume with a specified volume, omit this parameter.
 	SnapshotId *string
 
 	// The tags to apply to the root volume replacement task.
 	TagSpecifications []types.TagSpecification
+
+	// The ID of the volume to use as the replacement root volume. The specified
+	// volume must be in the same Availability Zone as the instance, must be in the
+	// available state, and must not be attached to an instance. If the original root
+	// volume is encrypted, the specified volume must also be encrypted.
+	//
+	// If you want to restore the replacement root volume from a specific snapshot, an
+	// AMI, or to its launch state, omit this parameter.
+	VolumeId *string
 
 	// Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume
 	// initialization rate), in MiB/s, at which to download the snapshot blocks from

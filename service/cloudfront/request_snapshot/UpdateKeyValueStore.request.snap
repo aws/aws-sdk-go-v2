@@ -1,0 +1,6 @@
+PUT /2020-05-31/key-value-store/__Name__
+
+Content-Type: application/xml
+If-Match: __IfMatch__
+
+<UpdateKeyValueStoreRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Comment>__Comment__</Comment></UpdateKeyValueStoreRequest>

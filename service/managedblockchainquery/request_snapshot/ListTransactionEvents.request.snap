@@ -1,0 +1,5 @@
+POST /list-transaction-events
+
+Content-Type: application/json
+
+{"maxResults":1,"network":"ETHEREUM_MAINNET","nextToken":"__NextToken__","transactionHash":"__TransactionHash__","transactionId":"__TransactionId__"}

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+AcceptTermsAndConditions=true&Action=RegisterPublisher&ConnectionArn=__ConnectionArn__&Version=2010-05-15

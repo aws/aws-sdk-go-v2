@@ -53,6 +53,17 @@ type XmlBlobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlBlobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlBlobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlBlobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Data != nil {
+		s.WriteBlob(schemas.XmlBlobsResponse_data, v.Data)
+	}
+}
 func (v *XmlBlobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlBlobsResponse, func(s *smithy.Schema) error {
 		switch s {

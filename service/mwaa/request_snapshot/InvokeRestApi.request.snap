@@ -1,0 +1,5 @@
+POST /restapi/__Name__
+
+Content-Type: application/json
+
+{"Method":"GET","Path":"__Path__"}

@@ -1,0 +1,5 @@
+POST /UpdateIndexingRule
+
+Content-Type: application/json
+
+{"Name":"__Name__","Rule":{"Probabilistic":{"DesiredSamplingPercentage":1}}}

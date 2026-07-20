@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.CreateVolumeFromBackup
+
+{"BackupId":"__BackupId__","ClientRequestToken":"__ClientRequestToken__","Name":"__Name__","OntapConfiguration":{"AggregateConfiguration":{"Aggregates":["__Member__","__Member__"],"ConstituentsPerAggregate":1},"CopyTagsToBackups":true,"JunctionPath":"__JunctionPath__","OntapVolumeType":"RW","SecurityStyle":"UNIX","SizeInBytes":1,"SizeInMegabytes":1,"SnaplockConfiguration":{"AuditLogVolume":true,"AutocommitPeriod":{"Type":"MINUTES","Value":1},"PrivilegedDelete":"DISABLED","RetentionPeriod":{"DefaultRetention":{"Type":"SECONDS","Value":1},"MaximumRetention":{"Type":"SECONDS","Value":1},"MinimumRetention":{"Type":"SECONDS","Value":1}},"SnaplockType":"COMPLIANCE","VolumeAppendModeEnabled":true},"SnapshotPolicy":"__SnapshotPolicy__","StorageEfficiencyEnabled":true,"StorageVirtualMachineId":"__StorageVirtualMachineId__","TieringPolicy":{"CoolingPeriod":1,"Name":"SNAPSHOT_ONLY"},"VolumeStyle":"FLEXVOL"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

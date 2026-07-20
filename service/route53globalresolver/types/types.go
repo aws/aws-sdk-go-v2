@@ -756,6 +756,77 @@ type ManagedFirewallDomainListsItem struct {
 	noSmithyDocumentSerde
 }
 
+// Summary information about a DNS view that has been shared with your Amazon Web
+// Services account through Amazon Web Services RAM.
+type SharedDNSViewSummary struct {
+
+	// The Amazon Resource Name (ARN) of the DNS view.
+	//
+	// This member is required.
+	Arn *string
+
+	// The unique string that identifies the request and ensures idempotency.
+	//
+	// This member is required.
+	ClientToken *string
+
+	// The date and time when the DNS view was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Whether DNSSEC validation is enabled for the DNS view.
+	//
+	// This member is required.
+	DnssecValidation DnsSecValidationType
+
+	// Whether EDNS Client Subnet injection is enabled for the DNS view.
+	//
+	// This member is required.
+	EdnsClientSubnet EdnsClientSubnetType
+
+	// Whether firewall rules fail open when they cannot be evaluated.
+	//
+	// This member is required.
+	FirewallRulesFailOpen FirewallRulesFailOpenType
+
+	// The ID of the global resolver that the DNS view is associated with.
+	//
+	// This member is required.
+	GlobalResolverId *string
+
+	// The unique identifier of the DNS view.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the DNS view.
+	//
+	// This member is required.
+	Name *string
+
+	// The ID of the Amazon Web Services account that owns the DNS view and shared it
+	// with your Amazon Web Services account.
+	//
+	// This member is required.
+	OwnerAccountId *string
+
+	// The current status of the DNS view.
+	//
+	// This member is required.
+	Status ProfileResourceStatus
+
+	// The date and time when the DNS view was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// A description of the DNS view.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a field that failed validation.
 type ValidationExceptionField struct {
 

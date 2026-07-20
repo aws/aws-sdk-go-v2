@@ -1,0 +1,5 @@
+POST /GetIntegration
+
+Content-Type: application/json
+
+{"integrationId":"__IntegrationId__"}

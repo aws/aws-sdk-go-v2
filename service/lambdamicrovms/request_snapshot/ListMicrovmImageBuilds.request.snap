@@ -1,0 +1,3 @@
+GET /2025-09-09/microvm-images/__ImageIdentifier__/versions/__ImageVersion__/builds?architecture=ARM_64&chipset=GRAVITON&chipsetGeneration=__ChipsetGeneration__&maxResults=1&nextToken=__NextToken__
+
+

@@ -1,0 +1,5 @@
+PATCH /networks/__NetworkId__/data-retention-bots
+
+Content-Type: application/json
+
+{"actionType":"ENABLE"}

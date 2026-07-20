@@ -1,0 +1,7 @@
+POST /service/Interconnect/operation/UpdateConnection
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¤jidentifiern__Identifier__kdescriptiono__Description__ibandwidthm__Bandwidth__kclientTokeno__ClientToken__

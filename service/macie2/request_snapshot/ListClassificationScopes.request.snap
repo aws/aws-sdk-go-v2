@@ -1,0 +1,3 @@
+GET /classification-scopes?name=__Name__&nextToken=__NextToken__
+
+

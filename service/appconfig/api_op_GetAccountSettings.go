@@ -40,7 +40,7 @@ type GetAccountSettingsOutput struct {
 	// [GetLatestConfiguration]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html
 	DeletionProtection *types.DeletionProtectionSettings
 
-	// Configuration for vended metrics in the account.
+	// The configuration for vended metrics in the account.
 	VendedMetrics *types.VendedMetricsSettings
 
 	// Metadata pertaining to the operation's result.

@@ -1,0 +1,5 @@
+POST /queues/__InstanceId__/__QueueId__/disassociate-quick-connects
+
+Content-Type: application/json
+
+{"QuickConnectIds":["__Member__","__Member__"]}

@@ -1,0 +1,5 @@
+PUT /mount-targets
+
+Content-Type: application/json
+
+{"fileSystemId":"__FileSystemId__","ipAddressType":"IPV4_ONLY","ipv4Address":"__Ipv4Address__","ipv6Address":"__Ipv6Address__","securityGroups":["__Member__","__Member__"],"subnetId":"__SubnetId__"}

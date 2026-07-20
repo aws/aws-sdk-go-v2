@@ -1,0 +1,5 @@
+POST /BatchGetTargetDomains
+
+Content-Type: application/json
+
+{"targetDomainIds":["__Member__","__Member__"]}

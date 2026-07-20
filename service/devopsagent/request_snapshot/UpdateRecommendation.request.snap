@@ -1,0 +1,5 @@
+PATCH /backlog/agent-space/__AgentSpaceId__/recommendations/__RecommendationId__
+
+Content-Type: application/json
+
+{"additionalContext":"__AdditionalContext__","clientToken":"__ClientToken__","status":"PROPOSED"}

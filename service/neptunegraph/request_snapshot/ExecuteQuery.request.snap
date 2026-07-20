@@ -1,0 +1,6 @@
+POST /queries
+
+Content-Type: application/json
+Graphidentifier: GraphIdentifier-value
+
+{"explain":"STATIC","language":"OPEN_CYPHER","parameters":{"key0":},"planCache":"ENABLED","query":"__QueryString__","queryTimeoutMilliseconds":1}

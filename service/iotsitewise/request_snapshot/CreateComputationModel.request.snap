@@ -1,0 +1,5 @@
+POST /computation-models
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","computationModelConfiguration":{"anomalyDetection":{"inputProperties":"__InputProperties__","resultProperty":"__ResultProperty__"}},"computationModelDataBinding":{"key0":{"assetModelProperty":{"assetModelId":"__AssetModelId__","propertyId":"__PropertyId__"},"assetProperty":{"assetId":"__AssetId__","propertyId":"__PropertyId__"},"list":[{},{}]}},"computationModelDescription":"__ComputationModelDescription__","computationModelName":"__ComputationModelName__","tags":{"key0":"__Value__"}}

@@ -39,6 +39,9 @@ type UpdateCapacityProviderInput struct {
 	// provider.
 	PropagateTags *types.PropagateTags
 
+	// The updated telemetry configuration for the capacity provider.
+	TelemetryConfig *types.CapacityProviderTelemetryConfig
+
 	noSmithyDocumentSerde
 }
 

@@ -1,0 +1,5 @@
+POST /v1/dictionary
+
+Content-Type: application/json
+
+{"entries":"__Entries__","language":"eng","name":"__Name__","tags":{"key0":"__Value__"}}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.ListBillScenarios
+
+{"createdAtFilter":{"afterTimestamp":946684800,"beforeTimestamp":946684800},"expiresAtFilter":{"afterTimestamp":946684800,"beforeTimestamp":946684800},"filters":[{"matchOption":"EQUALS","name":"STATUS","values":["__Member__","__Member__"]},{"matchOption":"EQUALS","name":"STATUS","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__"}

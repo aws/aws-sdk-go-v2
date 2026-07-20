@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateReceiptFilter&Filter.IpFilter.Cidr=__Cidr__&Filter.IpFilter.Policy=Block&Filter.Name=__Name__&Version=2010-12-01

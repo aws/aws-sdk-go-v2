@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSMPMeteringService.BatchMeterUsage
+
+{"ProductCode":"__ProductCode__","UsageRecords":[{"CustomerAWSAccountId":"__CustomerAWSAccountId__","CustomerIdentifier":"__CustomerIdentifier__","Dimension":"__Dimension__","LicenseArn":"__LicenseArn__","Quantity":1,"Timestamp":946684800,"UsageAllocations":[{"AllocatedUsageQuantity":1,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},{"AllocatedUsageQuantity":1,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}]},{"CustomerAWSAccountId":"__CustomerAWSAccountId__","CustomerIdentifier":"__CustomerIdentifier__","Dimension":"__Dimension__","LicenseArn":"__LicenseArn__","Quantity":1,"Timestamp":946684800,"UsageAllocations":[{"AllocatedUsageQuantity":1,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},{"AllocatedUsageQuantity":1,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}]}]}

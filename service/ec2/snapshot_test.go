@@ -3302,6 +3302,18 @@ func TestCheckSnapshot_DescribeAccountAttributes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeAccountVpcEncryptionControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAccountVpcEncryptionControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAccountVpcEncryptionControl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeAddresses(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeAddresses(context.Background(), nil, func(o *Options) {
@@ -7382,6 +7394,18 @@ func TestCheckSnapshot_LockSnapshot(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyAccountVpcEncryptionControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyAccountVpcEncryptionControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyAccountVpcEncryptionControl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyAddressAttribute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyAddressAttribute(context.Background(), nil, func(o *Options) {
@@ -8215,6 +8239,18 @@ func TestCheckSnapshot_ModifyVpcEndpointConnectionNotification(t *testing.T) {
 	_, err := svc.ModifyVpcEndpointConnectionNotification(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyVpcEndpointConnectionNotification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyVpcEndpointPayerResponsibility(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyVpcEndpointPayerResponsibility(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyVpcEndpointPayerResponsibility")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -12529,6 +12565,18 @@ func TestUpdateSnapshot_DescribeAccountAttributes(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeAccountVpcEncryptionControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAccountVpcEncryptionControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAccountVpcEncryptionControl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeAddresses(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeAddresses(context.Background(), nil, func(o *Options) {
@@ -16609,6 +16657,18 @@ func TestUpdateSnapshot_LockSnapshot(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ModifyAccountVpcEncryptionControl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyAccountVpcEncryptionControl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyAccountVpcEncryptionControl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ModifyAddressAttribute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyAddressAttribute(context.Background(), nil, func(o *Options) {
@@ -17442,6 +17502,18 @@ func TestUpdateSnapshot_ModifyVpcEndpointConnectionNotification(t *testing.T) {
 	_, err := svc.ModifyVpcEndpointConnectionNotification(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyVpcEndpointConnectionNotification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyVpcEndpointPayerResponsibility(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyVpcEndpointPayerResponsibility(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyVpcEndpointPayerResponsibility")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

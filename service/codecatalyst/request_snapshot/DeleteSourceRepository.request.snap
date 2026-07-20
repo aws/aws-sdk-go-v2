@@ -1,0 +1,3 @@
+DELETE /v1/spaces/__SpaceName__/projects/__ProjectName__/sourceRepositories/__Name__
+
+

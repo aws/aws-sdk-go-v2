@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -53,6 +54,11 @@ type SearchCertificatesInput struct {
 	SortOrder types.SearchCertificatesSortOrder
 
 	noSmithyDocumentSerde
+}
+
+func (in *SearchCertificatesInput) bindEndpointParams(p *EndpointParameters) {
+
+	p.ServiceType = ptr.String("ACM")
 }
 
 type SearchCertificatesOutput struct {

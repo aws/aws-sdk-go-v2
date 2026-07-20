@@ -23,6 +23,102 @@ type ActiveTimeRange struct {
 	noSmithyDocumentSerde
 }
 
+// A monetary amount with a currency code. Used throughout the Billing API to
+// represent credit balances, allocations, and adjustments.
+type Amount struct {
+
+	// The amount as a decimal string (for example, "743.21" ). Negative values
+	// represent credits that reduce a bill.
+	//
+	// This member is required.
+	CurrencyAmount *string
+
+	// The ISO 4217 currency code for the amount (for example, USD ).
+	//
+	// This member is required.
+	CurrencyCode *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter that narrows the set of preferences returned by GetBillingPreferences .
+type BillingFeatureFilter struct {
+
+	// The filter name. Currently the only supported value is PREFERENCE_KEY .
+	Name BillingFeatureFilterName
+
+	// The filter values to match. For PREFERENCE_KEY , supply 1 to 10 preference key
+	// values to match.
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+// A specific billing period identified by year and month.
+type BillingPeriod struct {
+
+	// The month of the billing period as an integer between 1 and 12.
+	//
+	// This member is required.
+	Month *int32
+
+	// The four-digit year of the billing period.
+	//
+	// This member is required.
+	Year *int32
+
+	noSmithyDocumentSerde
+}
+
+// A single key/value entry used to update a billing preference.
+type BillingPreferenceForKey struct {
+
+	// The preference key. Format depends on the feature being updated.
+	//
+	// This member is required.
+	Key *string
+
+	// The preference value. Valid values: ENABLED or DISABLED .
+	//
+	// This member is required.
+	Value PreferenceValue
+
+	noSmithyDocumentSerde
+}
+
+// A single billing preference entry returned by GetBillingPreferences .
+type BillingPreferenceSummary struct {
+
+	// The feature this preference belongs to.
+	//
+	// This member is required.
+	Feature BillingFeature
+
+	// The preference key. Format depends on the feature.
+	//
+	// This member is required.
+	Key *string
+
+	// The preference value. Valid values: ENABLED or DISABLED .
+	//
+	// This member is required.
+	Value PreferenceValue
+
+	// The associated Amazon Web Services account ID. Populated for account-list keys;
+	// null otherwise.
+	AccountId *string
+
+	// The display name of the account. Populated together with accountId ; null
+	// otherwise.
+	AccountName *string
+
+	// The billing period associated with the preference change. Populated only for
+	// the history features RI_SHARING_HISTORY and CREDIT_SHARING_HISTORY .
+	BillingPeriod *BillingPeriod
+
+	noSmithyDocumentSerde
+}
+
 // The metadata associated to the billing view.
 type BillingViewElement struct {
 
@@ -127,6 +223,138 @@ type CostCategoryValues struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// A single entry in the credit allocation history, representing how a credit was
+// applied to a specific service during a billing month.
+type CreditAllocationHistoryEntry struct {
+
+	// The Amazon Web Services account the credit was applied to.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The Amazon Web Services service the credit was applied to.
+	//
+	// This member is required.
+	AppliedServiceName *string
+
+	// The billing month of the application in YYYY-MM format.
+	//
+	// This member is required.
+	BillingMonth *string
+
+	// The amount of credit applied. Negative values represent credits that reduced
+	// the bill.
+	//
+	// This member is required.
+	CreditAmount *Amount
+
+	// The identifier of the credit that was applied.
+	//
+	// This member is required.
+	CreditId *string
+
+	// true when the entry was applied to an in-flight bill that has not yet been
+	// finalized.
+	//
+	// This member is required.
+	IsEstimatedBill *bool
+
+	// A human-readable description of the credit allocation.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Detailed information about an Amazon Web Services credit, including its
+// identifier, type, monetary amounts, applicable products, sharing configuration,
+// and current enabled status.
+type CreditData struct {
+
+	// The Amazon Web Services account ID that owns the credit.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The unique identifier for the credit.
+	//
+	// This member is required.
+	CreditId *string
+
+	// The type of credit. Examples: Promotion , Refund , TrueUp .
+	//
+	// This member is required.
+	CreditType *string
+
+	// A human-readable description of the credit.
+	//
+	// This member is required.
+	Description *string
+
+	// The initial amount of the credit when it was issued.
+	//
+	// This member is required.
+	InitialAmount *Amount
+
+	// The unused balance of the credit.
+	//
+	// This member is required.
+	RemainingAmount *Amount
+
+	// The date the credit becomes valid, as Unix epoch seconds.
+	//
+	// This member is required.
+	StartDate *time.Time
+
+	// Whether the owning account has account-level credit sharing turned on.
+	AccountHasCreditSharingEnabled *bool
+
+	// The names of Amazon Web Services services this credit applies to.
+	ApplicableProductNames []string
+
+	// When the credit is applied during bill computation. Valid values:
+	// BEFORE_CROSS_SERVICE_DISCOUNTS , AFTER_DISCOUNTS .
+	ApplicationType ApplicationType
+
+	// The Amazon Resource Name (ARN) of the Cost Category controlling the credit's
+	// sharing scope. Present only when creditSharingType is COST_CATEGORY_RULE .
+	CostCategoryArn *string
+
+	// The display configuration for the credit in the Amazon Web Services Billing
+	// console.
+	CreditConsoleVisibility *string
+
+	// The sharing configuration for the credit. Valid values: DEFAULT , DISABLED ,
+	// CUSTOM , COST_CATEGORY_RULE .
+	CreditSharingType CreditSharingType
+
+	// Whether the credit participates in billing runs. Valid values: ENABLED ,
+	// DISABLED .
+	CreditStatus CreditStatus
+
+	// The date the credit expires, as Unix epoch seconds.
+	EndDate *time.Time
+
+	// The estimated remaining balance, including in-flight (open) bills that have not
+	// yet been finalized.
+	EstimatedAmount *Amount
+
+	// The date the credit balance reached zero, as Unix epoch seconds.
+	ExhaustDate *time.Time
+
+	// Restricts which purchase types this credit applies to. When null or omitted,
+	// the credit applies to all purchase types.
+	PurchaseTypeApplications []string
+
+	// The rule name within the Cost Category. Present only when creditSharingType is
+	// COST_CATEGORY_RULE .
+	RuleName *string
+
+	// The Amazon Web Services account IDs entitled to apply this credit.
+	ShareableAccounts []string
 
 	noSmithyDocumentSerde
 }

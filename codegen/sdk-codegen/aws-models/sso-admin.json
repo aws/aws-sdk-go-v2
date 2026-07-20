@@ -4195,6 +4195,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides additional context about the current status of the IAM Identity Center instance. This field is particularly useful when an instance is in a non-ACTIVE state, such as CREATE_FAILED. When an instance creation fails, this field contains information about the cause, which may include issues with KMS key configuration or insufficient permissions. </p>"
                     }
+                },
+                "PrimaryRegion": {
+                    "target": "com.amazonaws.ssoadmin#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary Region where the IAM Identity Center instance was originally enabled. The primary Region cannot be removed.</p>"
+                    }
+                },
+                "Regions": {
+                    "target": "com.amazonaws.ssoadmin#RegionMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Regions enabled in the IAM Identity Center instance, including Regions with ACTIVE, ADDING, or REMOVING status.</p>"
+                    }
                 }
             },
             "traits": {

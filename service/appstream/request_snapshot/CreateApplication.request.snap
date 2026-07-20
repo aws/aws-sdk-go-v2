@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.CreateApplication
+
+{"AppBlockArn":"__AppBlockArn__","Description":"__Description__","DisplayName":"__DisplayName__","IconS3Location":{"S3Bucket":"__S3Bucket__","S3Key":"__S3Key__"},"InstanceFamilies":["__Member__","__Member__"],"LaunchParameters":"__LaunchParameters__","LaunchPath":"__LaunchPath__","Name":"__Name__","Platforms":["WINDOWS","WINDOWS"],"Tags":{"key0":"__Value__"},"WorkingDirectory":"__WorkingDirectory__"}

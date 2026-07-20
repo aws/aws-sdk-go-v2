@@ -1,0 +1,4 @@
+GET /principal-policies?isAscendingOrder=true&marker=__Marker__&pageSize=1
+
+X-Amzn-Iot-Principal: __Principal__
+

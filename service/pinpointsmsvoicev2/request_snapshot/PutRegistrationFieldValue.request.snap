@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.PutRegistrationFieldValue
+
+{"FieldPath":"__FieldPath__","RegistrationAttachmentId":"__RegistrationAttachmentId__","RegistrationId":"__RegistrationId__","SelectChoices":["__Member__","__Member__"],"TextValue":"__TextValue__"}

@@ -10,8 +10,19 @@ import (
 // vehicle.
 type AccessPoint struct {
 
+	// A short textual description of the access point, such as "North Entrance" .
+	Label *string
+
 	// The position in World Geodetic System (WGS 84) format: [longitude, latitude].
 	Position []float64
+
+	// Set to true for the primary access position when the place has more than one
+	// access point.
+	Primary *bool
+
+	// The type of access point, indicating its intended use. Only applies to results
+	// of type place.
+	Type AccessPointType
 
 	noSmithyDocumentSerde
 }
@@ -227,6 +238,23 @@ type AddressComponentPhonemes struct {
 	noSmithyDocumentSerde
 }
 
+// The official administrative names for an address component, returned when
+// AddressNamesMode is set to Administrative .
+type AdminNames struct {
+
+	// A list of translation names for the administrative address component, including
+	// name variants and translations in available languages.
+	//
+	// This member is required.
+	Names []TranslationName
+
+	// Indicates the preference level of the administrative name. Valid values are
+	// Primary and Alternative .
+	Preference AdminNamesPreference
+
+	noSmithyDocumentSerde
+}
+
 // Describes how the parts of the response element matched the input query by
 // returning the sections of the response which matched to input query terms.
 type AutocompleteAddressHighlights struct {
@@ -354,6 +382,10 @@ type AutocompleteResultItem struct {
 	// Useful to evaluate how far away from the original bias position the result is.
 	Distance int64
 
+	// If true , indicates that the coordinates of the position and access points of
+	// the point address are estimated.
+	EstimatedPointAddress *bool
+
 	// Indicates the starting and ending index of the place in the text query that
 	// match the found title.
 	Highlights *AutocompleteHighlights
@@ -362,7 +394,7 @@ type AutocompleteResultItem struct {
 	// is no data for the result in the requested language, data will be returned in
 	// the default language for the entry.
 	//
-	// [BCP 47]: https://en.wikipedia.org/wiki/IETF_language_tag
+	// [BCP 47]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
 	Language *string
 
 	// The alpha-2 or alpha-3 character code for the political view of a country. The
@@ -487,6 +519,26 @@ type CountryHighlights struct {
 	noSmithyDocumentSerde
 }
 
+// A reference to a third-party supplier's identifier for a place, enabling
+// correlation of places across external systems.
+type CrossReference struct {
+
+	// The name of the third-party data supplier (for example, Yelp or TripAdvisor ).
+	//
+	// This member is required.
+	Source *string
+
+	// The place identifier assigned by the third-party supplier.
+	//
+	// This member is required.
+	SourcePlaceId *string
+
+	// The list of place category identifiers this supplier reference relates to.
+	SourceCategories []Category
+
+	noSmithyDocumentSerde
+}
+
 // The Circle that all results must be in.
 type FilterCircle struct {
 
@@ -578,6 +630,10 @@ type GeocodeParsedQueryAddressComponents struct {
 	//
 	// Example: Vancouver .
 	Locality []ParsedQueryComponent
+
+	// Additional information extracted from the query that does not correspond to
+	// standard address components.
+	OtherComponents []ParsedQueryComponent
 
 	// An alphanumeric string included in a postal address to facilitate mail sorting,
 	// such as post code, postcode, or ZIP code, for which the result should possess.
@@ -687,6 +743,10 @@ type GeocodeResultItem struct {
 	// The distance in meters from the QueryPosition.
 	Distance int64
 
+	// If true , indicates that the coordinates of the position and access points of
+	// the point address are estimated.
+	EstimatedPointAddress *bool
+
 	// List of food types offered by this result.
 	FoodTypes []FoodType
 
@@ -731,6 +791,10 @@ type GeocodeResultItem struct {
 
 	// The time zone in which the place is located.
 	TimeZone *TimeZone
+
+	// All name translations and alternative names for the requested address fields in
+	// all available languages.
+	Translations *TranslationDetails
 
 	noSmithyDocumentSerde
 }
@@ -911,7 +975,7 @@ type PhonemeTranscription struct {
 	// is no data for the result in the requested language, data will be returned in
 	// the default language for the entry.
 	//
-	// [BCP 47]: https://en.wikipedia.org/wiki/IETF_language_tag
+	// [BCP 47]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
 	Language *string
 
 	// Boolean which indicates if it the preferred pronunciation.
@@ -1094,6 +1158,10 @@ type ReverseGeocodeResultItem struct {
 	// The distance in meters from the QueryPosition.
 	Distance int64
 
+	// If true , indicates that the coordinates of the position and access points of
+	// the point address are estimated.
+	EstimatedPointAddress *bool
+
 	//  List of food types offered by this result. Not available in ap-southeast-1 and
 	// ap-southeast-5 regions for [GrabMaps] customers.
 	//
@@ -1105,6 +1173,9 @@ type ReverseGeocodeResultItem struct {
 	//
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Intersections []Intersection
+
+	// The main address corresponding to a place of type Secondary Address.
+	MainAddress *RelatedPlace
 
 	// The bounding box enclosing the geometric shape (area or line) that an
 	// individual result covers.
@@ -1214,6 +1285,10 @@ type SearchNearbyResultItem struct {
 	// List of potential contact methods for the result/place.
 	Contacts *Contacts
 
+	// The list of supplier references available for this place. Requires the
+	// CrossReferences additional feature to be enabled.
+	CrossReferences []CrossReference
+
 	// The distance in meters from the QueryPosition.
 	Distance int64
 
@@ -1233,6 +1308,10 @@ type SearchNearbyResultItem struct {
 	// How the various components of the result's address are pronounced in various
 	// languages.
 	Phonemes *PhonemeDetails
+
+	// A list of place attributes for the result, such as whether the business offers
+	// drive-through service.
+	PlaceAttributes []PlaceAttribute
 
 	// The alpha-2 or alpha-3 character code for the political view of a country. The
 	// political view applies to the results of the request to represent unresolved
@@ -1311,6 +1390,10 @@ type SearchTextResultItem struct {
 	// List of potential contact methods for the result/place.
 	Contacts *Contacts
 
+	// The list of supplier references available for this place. Requires the
+	// CrossReferences additional feature to be enabled.
+	CrossReferences []CrossReference
+
 	// The distance in meters from the QueryPosition.
 	Distance int64
 
@@ -1324,12 +1407,19 @@ type SearchTextResultItem struct {
 	// {southern lat}, {eastward lng}, {northern lat}]
 	MapView []float64
 
-	// List of opening hours objects.
+	//  List of opening hours objects. Not available in ap-southeast-1 and
+	// ap-southeast-5 regions for [GrabMaps] customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	OpeningHours []OpeningHours
 
 	// How the various components of the result's address are pronounced in various
 	// languages.
 	Phonemes *PhonemeDetails
+
+	// A list of place attributes for the result, such as whether the business offers
+	// drive-through service.
+	PlaceAttributes []PlaceAttribute
 
 	// The alpha-2 or alpha-3 character code for the political view of a country. The
 	// political view applies to the results of the request to represent unresolved
@@ -1386,7 +1476,7 @@ type StreetComponents struct {
 	// data for the result in the requested language, data will be returned in the
 	// default language for the entry.
 	//
-	// [BCP 47]: https://en.wikipedia.org/wiki/IETF_language_tag
+	// [BCP 47]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
 	Language *string
 
 	// A prefix is a directional identifier that precedes, but is not included in, the
@@ -1523,6 +1613,10 @@ type SuggestPlaceResult struct {
 	// Categories of results that results must belong to.
 	Categories []Category
 
+	// The list of supplier references available for this place. Requires the
+	// CrossReferences additional feature to be enabled.
+	CrossReferences []CrossReference
+
 	// The distance in meters from the QueryPosition.
 	Distance int64
 
@@ -1545,6 +1639,10 @@ type SuggestPlaceResult struct {
 	//
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Phonemes *PhonemeDetails
+
+	// A list of place attributes for the result, such as whether the business offers
+	// drive-through service.
+	PlaceAttributes []PlaceAttribute
 
 	// The PlaceId of the place you wish to receive the information for.
 	PlaceId *string
@@ -1637,6 +1735,58 @@ type TimeZone struct {
 
 	// The offset of the time zone from UTC, in seconds.
 	OffsetSeconds int64
+
+	noSmithyDocumentSerde
+}
+
+// Translation details for the address, including alternative names and
+// translations in available languages.
+type TranslationDetails struct {
+
+	// A list of administrative names and translations for the district address
+	// component.
+	District []AdminNames
+
+	// A list of administrative names and translations for the locality address
+	// component.
+	Locality []AdminNames
+
+	// A list of administrative names and translations for the region address
+	// component.
+	Region []AdminNames
+
+	// A list of administrative names and translations for the sub-region address
+	// component.
+	SubRegion []AdminNames
+
+	noSmithyDocumentSerde
+}
+
+// A translation or alternative name for an address component.
+type TranslationName struct {
+
+	// The type of translation name. Valid values are Abbreviation , AreaCode ,
+	// BaseName , Exonym , Shortened , and Synonym .
+	//
+	// This member is required.
+	Type TranslationNameType
+
+	// The translated or alternative name value.
+	//
+	// This member is required.
+	Value *string
+
+	// A [BCP 47] compliant language code for the translation name.
+	//
+	// [BCP 47]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
+	Language *string
+
+	// If true , indicates this is the primary name variant for the given language.
+	Primary *bool
+
+	// If true , indicates this name is a transliterated version rather than a native
+	// script translation.
+	Transliterated *bool
 
 	noSmithyDocumentSerde
 }

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyVerifiedAccessGroup&ClientToken=__ClientToken__&Description=__Description__&DryRun=true&VerifiedAccessGroupId=__VerifiedAccessGroupId__&VerifiedAccessInstanceId=__VerifiedAccessInstanceId__&Version=2016-11-15

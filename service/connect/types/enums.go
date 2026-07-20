@@ -149,6 +149,29 @@ func (AllowedUserAction) Values() []AllowedUserAction {
 	}
 }
 
+type AnalyticsMode string
+
+// Enum values for AnalyticsMode
+const (
+	AnalyticsModePostContact          AnalyticsMode = "PostContact"
+	AnalyticsModeRealTime             AnalyticsMode = "RealTime"
+	AnalyticsModeContactLens          AnalyticsMode = "ContactLens"
+	AnalyticsModeAutomatedInteraction AnalyticsMode = "AutomatedInteraction"
+)
+
+// Values returns all known values for AnalyticsMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsMode) Values() []AnalyticsMode {
+	return []AnalyticsMode{
+		"PostContact",
+		"RealTime",
+		"ContactLens",
+		"AutomatedInteraction",
+	}
+}
+
 type AnsweringMachineDetectionStatus string
 
 // Enum values for AnsweringMachineDetectionStatus
@@ -298,6 +321,23 @@ func (AttachmentScope) Values() []AttachmentScope {
 	}
 }
 
+type AuthCodeEntityType string
+
+// Enum values for AuthCodeEntityType
+const (
+	AuthCodeEntityTypeCustomerProfile AuthCodeEntityType = "CUSTOMER_PROFILE"
+)
+
+// Values returns all known values for AuthCodeEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthCodeEntityType) Values() []AuthCodeEntityType {
+	return []AuthCodeEntityType{
+		"CUSTOMER_PROFILE",
+	}
+}
+
 type AutoEvaluationStatus string
 
 // Enum values for AutoEvaluationStatus
@@ -316,6 +356,25 @@ func (AutoEvaluationStatus) Values() []AutoEvaluationStatus {
 		"IN_PROGRESS",
 		"FAILED",
 		"SUCCEEDED",
+	}
+}
+
+type Behavior string
+
+// Enum values for Behavior
+const (
+	BehaviorEnable  Behavior = "Enable"
+	BehaviorDisable Behavior = "Disable"
+)
+
+// Values returns all known values for Behavior. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Behavior) Values() []Behavior {
+	return []Behavior{
+		"Enable",
+		"Disable",
 	}
 }
 
@@ -471,6 +530,27 @@ const (
 func (ContactEvaluationAttributeKey) Values() []ContactEvaluationAttributeKey {
 	return []ContactEvaluationAttributeKey{
 		"ContactAgentId",
+	}
+}
+
+type ContactField string
+
+// Enum values for ContactField
+const (
+	ContactFieldCustomerEndpoint          ContactField = "CUSTOMER_ENDPOINT"
+	ContactFieldAdditionalEmailRecipients ContactField = "ADDITIONAL_EMAIL_RECIPIENTS"
+	ContactFieldEmailSubject              ContactField = "EMAIL_SUBJECT"
+)
+
+// Values returns all known values for ContactField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContactField) Values() []ContactField {
+	return []ContactField{
+		"CUSTOMER_ENDPOINT",
+		"ADDITIONAL_EMAIL_RECIPIENTS",
+		"EMAIL_SUBJECT",
 	}
 }
 
@@ -1680,6 +1760,7 @@ const (
 	FileUseCaseTypeEmailMessageRedacted          FileUseCaseType = "EMAIL_MESSAGE_REDACTED"
 	FileUseCaseTypeEmailMessagePlainTextRedacted FileUseCaseType = "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED"
 	FileUseCaseTypeAttachment                    FileUseCaseType = "ATTACHMENT"
+	FileUseCaseTypeVoiceRecording                FileUseCaseType = "VOICE_RECORDING"
 )
 
 // Values returns all known values for FileUseCaseType. Note that this can be
@@ -1694,6 +1775,7 @@ func (FileUseCaseType) Values() []FileUseCaseType {
 		"EMAIL_MESSAGE_REDACTED",
 		"EMAIL_MESSAGE_PLAIN_TEXT_REDACTED",
 		"ATTACHMENT",
+		"VOICE_RECORDING",
 	}
 }
 
@@ -2236,6 +2318,25 @@ func (LocaleCode) Values() []LocaleCode {
 	}
 }
 
+type MaskMode string
+
+// Enum values for MaskMode
+const (
+	MaskModePii        MaskMode = "PII"
+	MaskModeEntityType MaskMode = "EntityType"
+)
+
+// Values returns all known values for MaskMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MaskMode) Values() []MaskMode {
+	return []MaskMode{
+		"PII",
+		"EntityType",
+	}
+}
+
 type MediaStreamType string
 
 // Enum values for MediaStreamType
@@ -2447,6 +2548,25 @@ func (NotificationStatus) Values() []NotificationStatus {
 		"READ",
 		"UNREAD",
 		"HIDDEN",
+	}
+}
+
+type NotificationType string
+
+// Enum values for NotificationType
+const (
+	NotificationTypeWidgetView   NotificationType = "WIDGET_VIEW"
+	NotificationTypeWidgetAction NotificationType = "WIDGET_ACTION"
+)
+
+// Values returns all known values for NotificationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationType) Values() []NotificationType {
+	return []NotificationType{
+		"WIDGET_VIEW",
+		"WIDGET_ACTION",
 	}
 }
 
@@ -3312,6 +3432,27 @@ func (PhoneType) Values() []PhoneType {
 	}
 }
 
+type Policy string
+
+// Enum values for Policy
+const (
+	PolicyNone                Policy = "None"
+	PolicyRedactedOnly        Policy = "RedactedOnly"
+	PolicyRedactedAndOriginal Policy = "RedactedAndOriginal"
+)
+
+// Values returns all known values for Policy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Policy) Values() []Policy {
+	return []Policy{
+		"None",
+		"RedactedOnly",
+		"RedactedAndOriginal",
+	}
+}
+
 type PropertyValidationExceptionReason string
 
 // Enum values for PropertyValidationExceptionReason
@@ -3775,6 +3916,23 @@ func (RoutingCriteriaStepStatus) Values() []RoutingCriteriaStepStatus {
 	}
 }
 
+type RuleCapabilityTier string
+
+// Enum values for RuleCapabilityTier
+const (
+	RuleCapabilityTierGenerativeAI RuleCapabilityTier = "GenerativeAI"
+)
+
+// Values returns all known values for RuleCapabilityTier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleCapabilityTier) Values() []RuleCapabilityTier {
+	return []RuleCapabilityTier{
+		"GenerativeAI",
+	}
+}
+
 type RulePublishStatus string
 
 // Enum values for RulePublishStatus
@@ -4100,6 +4258,27 @@ func (StringComparisonType) Values() []StringComparisonType {
 		"STARTS_WITH",
 		"CONTAINS",
 		"EXACT",
+	}
+}
+
+type SummaryMode string
+
+// Enum values for SummaryMode
+const (
+	SummaryModePostContact          SummaryMode = "PostContact"
+	SummaryModeAutomatedInteraction SummaryMode = "AutomatedInteraction"
+	SummaryModeContactChain         SummaryMode = "ContactChain"
+)
+
+// Values returns all known values for SummaryMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SummaryMode) Values() []SummaryMode {
+	return []SummaryMode{
+		"PostContact",
+		"AutomatedInteraction",
+		"ContactChain",
 	}
 }
 

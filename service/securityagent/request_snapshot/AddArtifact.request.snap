@@ -1,0 +1,5 @@
+POST /AddArtifact
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","artifactContent":"YmxvYg==","artifactType":"TXT","fileName":"__FileName__"}

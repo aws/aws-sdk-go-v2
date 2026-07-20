@@ -1,0 +1,5 @@
+PUT /app/__AppId__/environment/__EnvironmentName__/metadata/features/__FeatureName__
+
+Content-Type: application/json
+
+{"newValue":"__NewValue__"}

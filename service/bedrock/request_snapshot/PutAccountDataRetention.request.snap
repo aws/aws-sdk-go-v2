@@ -1,0 +1,5 @@
+PUT /data-retention
+
+Content-Type: application/json
+
+{"mode":"default"}

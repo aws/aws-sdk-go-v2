@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.UpdateServiceTemplateVersion
+
+{"compatibleEnvironmentTemplates":[{"majorVersion":"__MajorVersion__","templateName":"__TemplateName__"},{"majorVersion":"__MajorVersion__","templateName":"__TemplateName__"}],"description":"__Description__","majorVersion":"__MajorVersion__","minorVersion":"__MinorVersion__","status":"REGISTRATION_IN_PROGRESS","supportedComponentSources":["DIRECTLY_DEFINED","DIRECTLY_DEFINED"],"templateName":"__TemplateName__"}

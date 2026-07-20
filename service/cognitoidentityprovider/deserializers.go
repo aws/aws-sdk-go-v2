@@ -9658,6 +9658,129 @@ func awsAwsjson11_deserializeOpErrorGetLogDeliveryConfiguration(response *smithy
 	}
 }
 
+type awsAwsjson11_deserializeOpGetProvisionedLimit struct {
+}
+
+func (*awsAwsjson11_deserializeOpGetProvisionedLimit) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpGetProvisionedLimit) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetProvisionedLimit(response, &metadata)
+	}
+	output := &GetProvisionedLimitOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGetProvisionedLimitOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorGetProvisionedLimit(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("InternalErrorException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("NotAuthorizedException", errorCode):
+		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpGetSigningCertificate struct {
 }
 
@@ -15406,6 +15529,132 @@ func awsAwsjson11_deserializeOpErrorUpdateManagedLoginBranding(response *smithyh
 	}
 }
 
+type awsAwsjson11_deserializeOpUpdateProvisionedLimit struct {
+}
+
+func (*awsAwsjson11_deserializeOpUpdateProvisionedLimit) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpUpdateProvisionedLimit) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateProvisionedLimit(response, &metadata)
+	}
+	output := &UpdateProvisionedLimitOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentUpdateProvisionedLimitOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorUpdateProvisionedLimit(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("InternalErrorException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("NotAuthorizedException", errorCode):
+		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpUpdateResourceServer struct {
 }
 
@@ -17818,6 +18067,41 @@ func awsAwsjson11_deserializeErrorScopeDoesNotExistException(response *smithyhtt
 
 	output := &types.ScopeDoesNotExistException{}
 	err := awsAwsjson11_deserializeDocumentScopeDoesNotExistException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorServiceQuotaExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.ServiceQuotaExceededException{}
+	err := awsAwsjson11_deserializeDocumentServiceQuotaExceededException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -21112,6 +21396,100 @@ func awsAwsjson11_deserializeDocumentEnableSoftwareTokenMFAException(v **types.E
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentEumsSmsConfigurationType(v **types.EumsSmsConfigurationType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EumsSmsConfigurationType
+	if *v == nil {
+		sv = &types.EumsSmsConfigurationType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CallerArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ArnType to be of type string, got %T instead", value)
+				}
+				sv.CallerArn = ptr.String(jtv)
+			}
+
+		case "ConfigurationSetName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringType to be of type string, got %T instead", value)
+				}
+				sv.ConfigurationSetName = ptr.String(jtv)
+			}
+
+		case "ExternalId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringType to be of type string, got %T instead", value)
+				}
+				sv.ExternalId = ptr.String(jtv)
+			}
+
+		case "InEntityId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringType to be of type string, got %T instead", value)
+				}
+				sv.InEntityId = ptr.String(jtv)
+			}
+
+		case "InTemplateId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringType to be of type string, got %T instead", value)
+				}
+				sv.InTemplateId = ptr.String(jtv)
+			}
+
+		case "OriginationIdentity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringType to be of type string, got %T instead", value)
+				}
+				sv.OriginationIdentity = ptr.String(jtv)
+			}
+
+		case "Region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RegionCodeType to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEventContextDataType(v **types.EventContextDataType, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -22616,6 +22994,51 @@ func awsAwsjson11_deserializeDocumentLambdaConfigType(v **types.LambdaConfigType
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentLimitDefinitionType(v **types.LimitDefinitionType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LimitDefinitionType
+	if *v == nil {
+		sv = &types.LimitDefinitionType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Attributes":
+			if err := awsAwsjson11_deserializeDocumentStringToStringMapType(&sv.Attributes, value); err != nil {
+				return err
+			}
+
+		case "LimitClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LimitClass to be of type string, got %T instead", value)
+				}
+				sv.LimitClass = types.LimitClass(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExceededException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -22645,6 +23068,68 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 					return fmt.Errorf("expected MessageType to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLimitType(v **types.LimitType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LimitType
+	if *v == nil {
+		sv = &types.LimitType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FreeLimitValue":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerType to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FreeLimitValue = int32(i64)
+			}
+
+		case "LimitDefinition":
+			if err := awsAwsjson11_deserializeDocumentLimitDefinitionType(&sv.LimitDefinition, value); err != nil {
+				return err
+			}
+
+		case "ProvisionedLimitValue":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerType to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ProvisionedLimitValue = int32(i64)
 			}
 
 		default:
@@ -24828,6 +25313,46 @@ func awsAwsjson11_deserializeDocumentScopeListType(v *[]string, value interface{
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentServiceQuotaExceededException(v **types.ServiceQuotaExceededException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceQuotaExceededException
+	if *v == nil {
+		sv = &types.ServiceQuotaExceededException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MessageType to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSignInPolicyType(v **types.SignInPolicyType, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -24922,6 +25447,11 @@ func awsAwsjson11_deserializeDocumentSmsConfigurationType(v **types.SmsConfigura
 
 	for key, value := range shape {
 		switch key {
+		case "EumsSms":
+			if err := awsAwsjson11_deserializeDocumentEumsSmsConfigurationType(&sv.EumsSms, value); err != nil {
+				return err
+			}
+
 		case "ExternalId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24935,7 +25465,7 @@ func awsAwsjson11_deserializeDocumentSmsConfigurationType(v **types.SmsConfigura
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ArnType to be of type string, got %T instead", value)
+					return fmt.Errorf("expected OptionalArnType to be of type string, got %T instead", value)
 				}
 				sv.SnsCallerArn = ptr.String(jtv)
 			}
@@ -25129,6 +25659,42 @@ func awsAwsjson11_deserializeDocumentStringAttributeConstraintsType(v **types.St
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentStringToStringMapType(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected StringType to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -26204,6 +26770,15 @@ func awsAwsjson11_deserializeDocumentUserImportJobType(v **types.UserImportJobTy
 					return fmt.Errorf("expected UserImportJobNameType to be of type string, got %T instead", value)
 				}
 				sv.JobName = ptr.String(jtv)
+			}
+
+		case "PasswordHashingAlgorithm":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PasswordHashingAlgorithmType to be of type string, got %T instead", value)
+				}
+				sv.PasswordHashingAlgorithm = types.PasswordHashingAlgorithmType(jtv)
 			}
 
 		case "PreSignedUrl":
@@ -30669,6 +31244,42 @@ func awsAwsjson11_deserializeOpDocumentGetLogDeliveryConfigurationOutput(v **Get
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentGetProvisionedLimitOutput(v **GetProvisionedLimitOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetProvisionedLimitOutput
+	if *v == nil {
+		sv = &GetProvisionedLimitOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Limit":
+			if err := awsAwsjson11_deserializeDocumentLimitType(&sv.Limit, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentGetSigningCertificateOutput(v **GetSigningCertificateOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -32463,6 +33074,42 @@ func awsAwsjson11_deserializeOpDocumentUpdateManagedLoginBrandingOutput(v **Upda
 		switch key {
 		case "ManagedLoginBranding":
 			if err := awsAwsjson11_deserializeDocumentManagedLoginBrandingType(&sv.ManagedLoginBranding, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentUpdateProvisionedLimitOutput(v **UpdateProvisionedLimitOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateProvisionedLimitOutput
+	if *v == nil {
+		sv = &UpdateProvisionedLimitOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Limit":
+			if err := awsAwsjson11_deserializeDocumentLimitType(&sv.Limit, value); err != nil {
 				return err
 			}
 

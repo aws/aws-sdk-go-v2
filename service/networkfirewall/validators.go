@@ -110,6 +110,26 @@ func (m *validateOpAttachRuleGroupsToProxyConfiguration) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateContainerAssociation struct {
+}
+
+func (*validateOpCreateContainerAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateContainerAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateContainerAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateContainerAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateFirewall struct {
 }
 
@@ -770,6 +790,26 @@ func (m *validateOpUpdateAvailabilityZoneChangeProtection) HandleInitialize(ctx 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateContainerAssociation struct {
+}
+
+func (*validateOpUpdateContainerAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateContainerAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateContainerAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateContainerAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFirewallDeleteProtection struct {
 }
 
@@ -1050,6 +1090,10 @@ func addOpAttachRuleGroupsToProxyConfigurationValidationMiddleware(stack *middle
 	return stack.Initialize.Add(&validateOpAttachRuleGroupsToProxyConfiguration{}, middleware.After)
 }
 
+func addOpCreateContainerAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateContainerAssociation{}, middleware.After)
+}
+
 func addOpCreateFirewallValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFirewall{}, middleware.After)
 }
@@ -1182,6 +1226,10 @@ func addOpUpdateAvailabilityZoneChangeProtectionValidationMiddleware(stack *midd
 	return stack.Initialize.Add(&validateOpUpdateAvailabilityZoneChangeProtection{}, middleware.After)
 }
 
+func addOpUpdateContainerAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateContainerAssociation{}, middleware.After)
+}
+
 func addOpUpdateFirewallDeleteProtectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFirewallDeleteProtection{}, middleware.After)
 }
@@ -1305,6 +1353,78 @@ func validateAvailabilityZoneMappings(v []types.AvailabilityZoneMapping) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AvailabilityZoneMappings"}
 	for i := range v {
 		if err := validateAvailabilityZoneMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerAttribute(v *types.ContainerAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerAttribute"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerAttributes(v []types.ContainerAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerAttributes"}
+	for i := range v {
+		if err := validateContainerAttribute(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerMonitoringConfiguration(v *types.ContainerMonitoringConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerMonitoringConfiguration"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.AttributeFilters != nil {
+		if err := validateContainerAttributes(v.AttributeFilters); err != nil {
+			invalidParams.AddNested("AttributeFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerMonitoringConfigurations(v []types.ContainerMonitoringConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerMonitoringConfigurations"}
+	for i := range v {
+		if err := validateContainerMonitoringConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2339,6 +2459,36 @@ func validateOpAttachRuleGroupsToProxyConfigurationInput(v *AttachRuleGroupsToPr
 	}
 }
 
+func validateOpCreateContainerAssociationInput(v *CreateContainerAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateContainerAssociationInput"}
+	if v.ContainerAssociationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerAssociationName"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.ContainerMonitoringConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerMonitoringConfigurations"))
+	} else if v.ContainerMonitoringConfigurations != nil {
+		if err := validateContainerMonitoringConfigurations(v.ContainerMonitoringConfigurations); err != nil {
+			invalidParams.AddNested("ContainerMonitoringConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateFirewallInput(v *CreateFirewallInput) error {
 	if v == nil {
 		return nil
@@ -2983,6 +3133,36 @@ func validateOpUpdateAvailabilityZoneChangeProtectionInput(v *UpdateAvailability
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAvailabilityZoneChangeProtectionInput"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateContainerAssociationInput(v *UpdateContainerAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateContainerAssociationInput"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.ContainerMonitoringConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerMonitoringConfigurations"))
+	} else if v.ContainerMonitoringConfigurations != nil {
+		if err := validateContainerMonitoringConfigurations(v.ContainerMonitoringConfigurations); err != nil {
+			invalidParams.AddNested("ContainerMonitoringConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UpdateToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateToken"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

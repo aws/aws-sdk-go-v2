@@ -1,0 +1,5 @@
+PUT /buckets/__TableBucketARN__/maintenance/icebergUnreferencedFileRemoval
+
+Content-Type: application/json
+
+{"value":{"settings":{"icebergUnreferencedFileRemoval":{"nonCurrentDays":1,"unreferencedDays":1}},"status":"enabled"}}

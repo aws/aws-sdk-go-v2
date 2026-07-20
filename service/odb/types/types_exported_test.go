@@ -7,6 +7,42 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
 )
 
+func ExampleAdminPasswordSourceConfiguration_outputUsage() {
+	var union types.AdminPasswordSourceConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AdminPasswordSourceConfigurationMemberCustomerManagedAwsSecret:
+		_ = v.Value // Value is types.CustomerManagedAwsSecretConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CustomerManagedAwsSecretConfiguration
+
+func ExampleAdminPasswordSourceConfigurationInput_outputUsage() {
+	var union types.AdminPasswordSourceConfigurationInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AdminPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret:
+		_ = v.Value // Value is types.CustomerManagedAwsSecretConfigurationInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CustomerManagedAwsSecretConfigurationInput
+
 func ExampleEncryptionKeyConfiguration_outputUsage() {
 	var union types.EncryptionKeyConfiguration
 	// type switches can be used to check the union value
@@ -88,3 +124,39 @@ var _ *types.RestoreFromBackupConfiguration
 var _ *types.CrossRegionDataGuardConfiguration
 var _ *types.DatabaseCloneConfiguration
 var _ *types.PointInTimeRestoreConfiguration
+
+func ExampleWalletPasswordSourceConfiguration_outputUsage() {
+	var union types.WalletPasswordSourceConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.WalletPasswordSourceConfigurationMemberCustomerManagedAwsSecret:
+		_ = v.Value // Value is types.CustomerManagedAwsSecretConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CustomerManagedAwsSecretConfiguration
+
+func ExampleWalletPasswordSourceConfigurationInput_outputUsage() {
+	var union types.WalletPasswordSourceConfigurationInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.WalletPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret:
+		_ = v.Value // Value is types.CustomerManagedAwsSecretConfigurationInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CustomerManagedAwsSecretConfigurationInput

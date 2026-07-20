@@ -55,6 +55,9 @@ type UpdateLaunchConfigurationTemplateInput struct {
 	// Whether we want to activate post-launch actions.
 	PostLaunchEnabled *bool
 
+	// Recovery mode.
+	RecoveryMode types.RecoveryMode
+
 	// Target instance type right-sizing method.
 	TargetInstanceTypeRightSizingMethod types.TargetInstanceTypeRightSizingMethod
 

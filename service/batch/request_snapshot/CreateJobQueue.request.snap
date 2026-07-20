@@ -1,0 +1,5 @@
+POST /v1/createjobqueue
+
+Content-Type: application/json
+
+{"computeEnvironmentOrder":[{"computeEnvironment":"__ComputeEnvironment__","order":1},{"computeEnvironment":"__ComputeEnvironment__","order":1}],"jobQueueName":"__JobQueueName__","jobQueueType":"EKS","jobStateTimeLimitActions":[{"action":"CANCEL","maxTimeSeconds":1,"reason":"__Reason__","state":"RUNNABLE"},{"action":"CANCEL","maxTimeSeconds":1,"reason":"__Reason__","state":"RUNNABLE"}],"priority":1,"schedulingPolicyArn":"__SchedulingPolicyArn__","serviceEnvironmentOrder":[{"order":1,"serviceEnvironment":"__ServiceEnvironment__"},{"order":1,"serviceEnvironment":"__ServiceEnvironment__"}],"state":"ENABLED","tags":{"key0":"__Value__"}}

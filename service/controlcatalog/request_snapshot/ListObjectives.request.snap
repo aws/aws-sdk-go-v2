@@ -1,0 +1,5 @@
+POST /objectives?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"ObjectiveFilter":{"Domains":[{"Arn":"__Arn__"},{"Arn":"__Arn__"}]}}

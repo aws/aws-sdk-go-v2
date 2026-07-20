@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudTrail_20131101.CreateChannel
+
+{"Destinations":[{"Location":"__Location__","Type":"EVENT_DATA_STORE"},{"Location":"__Location__","Type":"EVENT_DATA_STORE"}],"Name":"__Name__","Source":"__Source__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

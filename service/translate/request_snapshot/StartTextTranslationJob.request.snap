@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSShineFrontendService_20170701.StartTextTranslationJob
+
+{"ClientToken":"__ClientToken__","DataAccessRoleArn":"__DataAccessRoleArn__","InputDataConfig":{"ContentType":"__ContentType__","S3Uri":"__S3Uri__"},"JobName":"__JobName__","OutputDataConfig":{"EncryptionKey":{"Id":"__Id__","Type":"KMS"},"S3Uri":"__S3Uri__"},"ParallelDataNames":["__Member__","__Member__"],"Settings":{"Brevity":"ON","Formality":"FORMAL","Profanity":"MASK"},"SourceLanguageCode":"__SourceLanguageCode__","TargetLanguageCodes":["__Member__","__Member__"],"TerminologyNames":["__Member__","__Member__"]}

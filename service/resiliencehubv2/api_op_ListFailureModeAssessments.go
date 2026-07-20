@@ -37,11 +37,28 @@ type ListFailureModeAssessmentsInput struct {
 	// This member is required.
 	ServiceArn *string
 
+	// Specifies the assessment statuses to include in the results.
+	AssessmentStatuses []types.AssessmentStatus
+
+	// Specifies that only assessments that ended at or before this timestamp appear
+	// in the results.
+	EndedBefore *time.Time
+
 	// Pagination page size.
 	MaxResults *int32
 
 	// Pagination token.
 	NextToken *string
+
+	// The field to use for sorting failure mode assessments.
+	SortBy types.AssessmentSortField
+
+	// The sort order for results.
+	SortOrder types.SortOrder
+
+	// Specifies that only assessments that started at or after this timestamp appear
+	// in the results.
+	StartedAfter *time.Time
 
 	noSmithyDocumentSerde
 }

@@ -1,0 +1,3 @@
+GET /v2/domains/__DomainIdentifier__/subscription-grants?environmentId=__EnvironmentId__&maxResults=1&nextToken=__NextToken__&owningGroupId=__OwningGroupId__&owningIamPrincipalArn=__OwningIamPrincipalArn__&owningProjectId=__OwningProjectId__&owningUserId=__OwningUserId__&sortBy=CREATED_AT&sortOrder=ASCENDING&subscribedListingId=__SubscribedListingId__&subscriptionId=__SubscriptionId__&subscriptionTargetId=__SubscriptionTargetId__
+
+

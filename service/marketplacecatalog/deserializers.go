@@ -3781,6 +3781,15 @@ func awsRestjson1_deserializeDocumentResaleAuthorizationSummary(v **types.Resale
 				sv.ResellerLegalName = ptr.String(jtv)
 			}
 
+		case "ResellerRole":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResaleAuthorizationResellerRoleString to be of type string, got %T instead", value)
+				}
+				sv.ResellerRole = types.ResaleAuthorizationResellerRoleString(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -2,6 +2,143 @@
 
 package types
 
+type AcmeAccountStatus string
+
+// Enum values for AcmeAccountStatus
+const (
+	AcmeAccountStatusValid       AcmeAccountStatus = "VALID"
+	AcmeAccountStatusDeactivated AcmeAccountStatus = "DEACTIVATED"
+	AcmeAccountStatusRevoked     AcmeAccountStatus = "REVOKED"
+)
+
+// Values returns all known values for AcmeAccountStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AcmeAccountStatus) Values() []AcmeAccountStatus {
+	return []AcmeAccountStatus{
+		"VALID",
+		"DEACTIVATED",
+		"REVOKED",
+	}
+}
+
+type AcmeAuthorizationBehavior string
+
+// Enum values for AcmeAuthorizationBehavior
+const (
+	AcmeAuthorizationBehaviorPreApproved AcmeAuthorizationBehavior = "PRE_APPROVED"
+)
+
+// Values returns all known values for AcmeAuthorizationBehavior. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AcmeAuthorizationBehavior) Values() []AcmeAuthorizationBehavior {
+	return []AcmeAuthorizationBehavior{
+		"PRE_APPROVED",
+	}
+}
+
+type AcmeContact string
+
+// Enum values for AcmeContact
+const (
+	AcmeContactRequired    AcmeContact = "REQUIRED"
+	AcmeContactNotRequired AcmeContact = "NOT_REQUIRED"
+)
+
+// Values returns all known values for AcmeContact. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AcmeContact) Values() []AcmeContact {
+	return []AcmeContact{
+		"REQUIRED",
+		"NOT_REQUIRED",
+	}
+}
+
+type AcmeDomainValidationFailureReason string
+
+// Enum values for AcmeDomainValidationFailureReason
+const (
+	AcmeDomainValidationFailureReasonAccessDenied        AcmeDomainValidationFailureReason = "ACCESS_DENIED"
+	AcmeDomainValidationFailureReasonDomainMismatch      AcmeDomainValidationFailureReason = "DOMAIN_MISMATCH"
+	AcmeDomainValidationFailureReasonDomainNotAllowed    AcmeDomainValidationFailureReason = "DOMAIN_NOT_ALLOWED"
+	AcmeDomainValidationFailureReasonEndpointNotActive   AcmeDomainValidationFailureReason = "ENDPOINT_NOT_ACTIVE"
+	AcmeDomainValidationFailureReasonHostedZoneNotFound  AcmeDomainValidationFailureReason = "HOSTED_ZONE_NOT_FOUND"
+	AcmeDomainValidationFailureReasonInternalFailure     AcmeDomainValidationFailureReason = "INTERNAL_FAILURE"
+	AcmeDomainValidationFailureReasonInvalidChangeBatch  AcmeDomainValidationFailureReason = "INVALID_CHANGE_BATCH"
+	AcmeDomainValidationFailureReasonInvalidPublicDomain AcmeDomainValidationFailureReason = "INVALID_PUBLIC_DOMAIN"
+	AcmeDomainValidationFailureReasonTimedOut            AcmeDomainValidationFailureReason = "TIMED_OUT"
+)
+
+// Values returns all known values for AcmeDomainValidationFailureReason. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AcmeDomainValidationFailureReason) Values() []AcmeDomainValidationFailureReason {
+	return []AcmeDomainValidationFailureReason{
+		"ACCESS_DENIED",
+		"DOMAIN_MISMATCH",
+		"DOMAIN_NOT_ALLOWED",
+		"ENDPOINT_NOT_ACTIVE",
+		"HOSTED_ZONE_NOT_FOUND",
+		"INTERNAL_FAILURE",
+		"INVALID_CHANGE_BATCH",
+		"INVALID_PUBLIC_DOMAIN",
+		"TIMED_OUT",
+	}
+}
+
+type AcmeDomainValidationStatus string
+
+// Enum values for AcmeDomainValidationStatus
+const (
+	AcmeDomainValidationStatusValidating AcmeDomainValidationStatus = "VALIDATING"
+	AcmeDomainValidationStatusValid      AcmeDomainValidationStatus = "VALID"
+	AcmeDomainValidationStatusInvalid    AcmeDomainValidationStatus = "INVALID"
+	AcmeDomainValidationStatusDeleting   AcmeDomainValidationStatus = "DELETING"
+)
+
+// Values returns all known values for AcmeDomainValidationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AcmeDomainValidationStatus) Values() []AcmeDomainValidationStatus {
+	return []AcmeDomainValidationStatus{
+		"VALIDATING",
+		"VALID",
+		"INVALID",
+		"DELETING",
+	}
+}
+
+type AcmeEndpointStatus string
+
+// Enum values for AcmeEndpointStatus
+const (
+	AcmeEndpointStatusCreating AcmeEndpointStatus = "CREATING"
+	AcmeEndpointStatusActive   AcmeEndpointStatus = "ACTIVE"
+	AcmeEndpointStatusDeleting AcmeEndpointStatus = "DELETING"
+	AcmeEndpointStatusFailed   AcmeEndpointStatus = "FAILED"
+)
+
+// Values returns all known values for AcmeEndpointStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AcmeEndpointStatus) Values() []AcmeEndpointStatus {
+	return []AcmeEndpointStatus{
+		"CREATING",
+		"ACTIVE",
+		"DELETING",
+		"FAILED",
+	}
+}
+
 type CertificateExport string
 
 // Enum values for CertificateExport
@@ -18,6 +155,27 @@ func (CertificateExport) Values() []CertificateExport {
 	return []CertificateExport{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type CertificateKeyPairOrigin string
+
+// Enum values for CertificateKeyPairOrigin
+const (
+	CertificateKeyPairOriginAwsManaged       CertificateKeyPairOrigin = "AWS_MANAGED"
+	CertificateKeyPairOriginAcme             CertificateKeyPairOrigin = "ACME"
+	CertificateKeyPairOriginCustomerProvided CertificateKeyPairOrigin = "CUSTOMER_PROVIDED"
+)
+
+// Values returns all known values for CertificateKeyPairOrigin. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateKeyPairOrigin) Values() []CertificateKeyPairOrigin {
+	return []CertificateKeyPairOrigin{
+		"AWS_MANAGED",
+		"ACME",
+		"CUSTOMER_PROVIDED",
 	}
 }
 
@@ -124,6 +282,25 @@ func (ComparisonOperator) Values() []ComparisonOperator {
 	return []ComparisonOperator{
 		"CONTAINS",
 		"EQUALS",
+	}
+}
+
+type DomainScopeOption string
+
+// Enum values for DomainScopeOption
+const (
+	DomainScopeOptionEnabled  DomainScopeOption = "ENABLED"
+	DomainScopeOptionDisabled DomainScopeOption = "DISABLED"
+)
+
+// Values returns all known values for DomainScopeOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DomainScopeOption) Values() []DomainScopeOption {
+	return []DomainScopeOption{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 
@@ -302,6 +479,44 @@ func (KeyUsageName) Values() []KeyUsageName {
 	}
 }
 
+type PrevalidationType string
+
+// Enum values for PrevalidationType
+const (
+	PrevalidationTypeDnsPrevalidation PrevalidationType = "DNS_PREVALIDATION"
+)
+
+// Values returns all known values for PrevalidationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PrevalidationType) Values() []PrevalidationType {
+	return []PrevalidationType{
+		"DNS_PREVALIDATION",
+	}
+}
+
+type PublicKeyAlgorithm string
+
+// Enum values for PublicKeyAlgorithm
+const (
+	PublicKeyAlgorithmRsa2048      PublicKeyAlgorithm = "RSA_2048"
+	PublicKeyAlgorithmEcPrime256V1 PublicKeyAlgorithm = "EC_prime256v1"
+	PublicKeyAlgorithmEcSecp384R1  PublicKeyAlgorithm = "EC_secp384r1"
+)
+
+// Values returns all known values for PublicKeyAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PublicKeyAlgorithm) Values() []PublicKeyAlgorithm {
+	return []PublicKeyAlgorithm{
+		"RSA_2048",
+		"EC_prime256v1",
+		"EC_secp384r1",
+	}
+}
+
 type RecordType string
 
 // Enum values for RecordType
@@ -402,24 +617,27 @@ type SearchCertificatesSortBy string
 
 // Enum values for SearchCertificatesSortBy
 const (
-	SearchCertificatesSortByCreatedAt          SearchCertificatesSortBy = "CREATED_AT"
-	SearchCertificatesSortByNotAfter           SearchCertificatesSortBy = "NOT_AFTER"
-	SearchCertificatesSortByStatus             SearchCertificatesSortBy = "STATUS"
-	SearchCertificatesSortByRenewalStatus      SearchCertificatesSortBy = "RENEWAL_STATUS"
-	SearchCertificatesSortByExported           SearchCertificatesSortBy = "EXPORTED"
-	SearchCertificatesSortByInUse              SearchCertificatesSortBy = "IN_USE"
-	SearchCertificatesSortByNotBefore          SearchCertificatesSortBy = "NOT_BEFORE"
-	SearchCertificatesSortByKeyAlgorithm       SearchCertificatesSortBy = "KEY_ALGORITHM"
-	SearchCertificatesSortByType               SearchCertificatesSortBy = "TYPE"
-	SearchCertificatesSortByCertificateArn     SearchCertificatesSortBy = "CERTIFICATE_ARN"
-	SearchCertificatesSortByCommonName         SearchCertificatesSortBy = "COMMON_NAME"
-	SearchCertificatesSortByRevokedAt          SearchCertificatesSortBy = "REVOKED_AT"
-	SearchCertificatesSortByRenewalEligibility SearchCertificatesSortBy = "RENEWAL_ELIGIBILITY"
-	SearchCertificatesSortByIssuedAt           SearchCertificatesSortBy = "ISSUED_AT"
-	SearchCertificatesSortByManagedBy          SearchCertificatesSortBy = "MANAGED_BY"
-	SearchCertificatesSortByExportOption       SearchCertificatesSortBy = "EXPORT_OPTION"
-	SearchCertificatesSortByValidationMethod   SearchCertificatesSortBy = "VALIDATION_METHOD"
-	SearchCertificatesSortByImportedAt         SearchCertificatesSortBy = "IMPORTED_AT"
+	SearchCertificatesSortByCreatedAt                SearchCertificatesSortBy = "CREATED_AT"
+	SearchCertificatesSortByNotAfter                 SearchCertificatesSortBy = "NOT_AFTER"
+	SearchCertificatesSortByStatus                   SearchCertificatesSortBy = "STATUS"
+	SearchCertificatesSortByRenewalStatus            SearchCertificatesSortBy = "RENEWAL_STATUS"
+	SearchCertificatesSortByExported                 SearchCertificatesSortBy = "EXPORTED"
+	SearchCertificatesSortByInUse                    SearchCertificatesSortBy = "IN_USE"
+	SearchCertificatesSortByNotBefore                SearchCertificatesSortBy = "NOT_BEFORE"
+	SearchCertificatesSortByKeyAlgorithm             SearchCertificatesSortBy = "KEY_ALGORITHM"
+	SearchCertificatesSortByType                     SearchCertificatesSortBy = "TYPE"
+	SearchCertificatesSortByCertificateArn           SearchCertificatesSortBy = "CERTIFICATE_ARN"
+	SearchCertificatesSortByCommonName               SearchCertificatesSortBy = "COMMON_NAME"
+	SearchCertificatesSortByRevokedAt                SearchCertificatesSortBy = "REVOKED_AT"
+	SearchCertificatesSortByRenewalEligibility       SearchCertificatesSortBy = "RENEWAL_ELIGIBILITY"
+	SearchCertificatesSortByIssuedAt                 SearchCertificatesSortBy = "ISSUED_AT"
+	SearchCertificatesSortByManagedBy                SearchCertificatesSortBy = "MANAGED_BY"
+	SearchCertificatesSortByExportOption             SearchCertificatesSortBy = "EXPORT_OPTION"
+	SearchCertificatesSortByValidationMethod         SearchCertificatesSortBy = "VALIDATION_METHOD"
+	SearchCertificatesSortByImportedAt               SearchCertificatesSortBy = "IMPORTED_AT"
+	SearchCertificatesSortByAcmeEndpointArn          SearchCertificatesSortBy = "ACME_ENDPOINT_ARN"
+	SearchCertificatesSortByAcmeAccountId            SearchCertificatesSortBy = "ACME_ACCOUNT_ID"
+	SearchCertificatesSortByCertificateKeyPairOrigin SearchCertificatesSortBy = "CERTIFICATE_KEY_PAIR_ORIGIN"
 )
 
 // Values returns all known values for SearchCertificatesSortBy. Note that this
@@ -446,6 +664,9 @@ func (SearchCertificatesSortBy) Values() []SearchCertificatesSortBy {
 		"EXPORT_OPTION",
 		"VALIDATION_METHOD",
 		"IMPORTED_AT",
+		"ACME_ENDPOINT_ARN",
+		"ACME_ACCOUNT_ID",
+		"CERTIFICATE_KEY_PAIR_ORIGIN",
 	}
 }
 
@@ -501,6 +722,27 @@ func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
 		"DESCENDING",
+	}
+}
+
+type TimeType string
+
+// Enum values for TimeType
+const (
+	TimeTypeMinutes TimeType = "MINUTES"
+	TimeTypeHours   TimeType = "HOURS"
+	TimeTypeDays    TimeType = "DAYS"
+)
+
+// Values returns all known values for TimeType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TimeType) Values() []TimeType {
+	return []TimeType{
+		"MINUTES",
+		"HOURS",
+		"DAYS",
 	}
 }
 

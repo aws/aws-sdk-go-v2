@@ -364,7 +364,7 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 //     verification. Follow the steps at [Removing a member account from your organization]in the Organizations User Guide.
 //
 //   - ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of
-//     accounts that you can create in one day.
+//     accounts that can be in progress at a time.
 //
 //   - ACCOUNT_CREATION_NOT_COMPLETE: Your account setup isn't complete or your
 //     account isn't fully active. You must complete the account setup before you
@@ -1051,7 +1051,9 @@ func (e *InvalidHandshakeTransitionException) ErrorFault() smithy.ErrorFault {
 //     organization, or email) as a party.
 //
 //   - INVALID_PATTERN: You provided a value that doesn't match the required
-//     pattern.
+//     pattern. The service also validates your free-text field values against common
+//     cross-site scripting (XSS) patterns and rejects requests that contain matching
+//     values.
 //
 //   - INVALID_PATTERN_TARGET_ID: You specified a policy target ID that doesn't
 //     match the required pattern.

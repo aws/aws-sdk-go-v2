@@ -18,6 +18,23 @@ import (
 // for the beginning or end of a parameter name. If the specified name for a
 // parameter contains spaces between characters, the request fails with a
 // ValidationException error.
+//
+// Parameter Store throughput defines the number of API transactions per second
+// (TPS) that Systems Manager can process. This applies to GetParameter ,
+// GetParameters , and PutParameter API calls for your Amazon Web Services account
+// and Amazon Web Services Region. By default, Parameter Store is configured with a
+// standard throughput quota suitable for low- to moderate-volume workloads.
+// Applications that retrieve configuration data infrequently or operate at smaller
+// scale can use this default setting without additional cost.
+//
+// For higher-volume workloads, you can enable higher throughput. This increases
+// the maximum number of supported transactions per second for your account and
+// Region. Increased throughput supports applications and workloads that need
+// concurrent access to multiple parameters. If you experience
+// ThrottlingException: Rate exceeded errors, enable higher throughput. For more
+// information, see [Changing Parameter Store throughput].
+//
+// [Changing Parameter Store throughput]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html
 func (c *Client) GetParameters(ctx context.Context, params *GetParametersInput, optFns ...func(*Options)) (*GetParametersOutput, error) {
 	if params == nil {
 		params = &GetParametersInput{}

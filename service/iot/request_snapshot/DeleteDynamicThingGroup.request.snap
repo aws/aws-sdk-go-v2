@@ -1,0 +1,3 @@
+DELETE /dynamic-thing-groups/__ThingGroupName__?expectedVersion=1
+
+

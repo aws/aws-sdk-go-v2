@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.RestoreVolumeFromSnapshot
+
+{"ClientRequestToken":"__ClientRequestToken__","Options":["DELETE_INTERMEDIATE_SNAPSHOTS","DELETE_INTERMEDIATE_SNAPSHOTS"],"SnapshotId":"__SnapshotId__","VolumeId":"__VolumeId__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHealth_20160804.DescribeEventDetailsForOrganization
+
+{"locale":"__Locale__","organizationEventDetailFilters":[{"awsAccountId":"__AwsAccountId__","eventArn":"__EventArn__"},{"awsAccountId":"__AwsAccountId__","eventArn":"__EventArn__"}]}

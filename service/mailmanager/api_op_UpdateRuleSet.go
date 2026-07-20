@@ -50,11 +50,11 @@ type UpdateRuleSetOutput struct {
 }
 
 func (c *Client) addOperationUpdateRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateRuleSet{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateRuleSet{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateRuleSet{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateRuleSet{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -78,6 +78,9 @@ func (c *Client) addOperationUpdateRuleSetMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

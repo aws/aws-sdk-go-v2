@@ -369,7 +369,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	//   - Must be compatible with the engine of the source.
 	Engine *string
 
-	// The life cycle type for this DB instance.
+	// The lifecycle type for this DB instance.
 	//
 	// By default, this value is set to open-source-rds-extended-support , which
 	// enrolls your DB instance into Amazon RDS Extended Support. At the end of
@@ -384,7 +384,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// version. For more information, see [Amazon RDS Extended Support with Amazon RDS]in the Amazon RDS User Guide.
 	//
 	// This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon
-	// Aurora DB instances, the life cycle type is managed by the DB cluster.
+	// Aurora DB instances, the engine lifecycle support is managed by the DB cluster.
 	//
 	// Valid Values: open-source-rds-extended-support |
 	// open-source-rds-extended-support-disabled

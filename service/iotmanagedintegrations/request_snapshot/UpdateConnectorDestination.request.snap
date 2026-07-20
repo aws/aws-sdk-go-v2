@@ -1,0 +1,5 @@
+PUT /connector-destinations/__Identifier__
+
+Content-Type: application/json
+
+{"AuthConfig":{"GeneralAuthorizationUpdate":{"AuthMaterialsToAdd":[{"AuthMaterialName":"__AuthMaterialName__","SecretsManager":{"arn":"__Arn__","versionId":"__VersionId__"}},{"AuthMaterialName":"__AuthMaterialName__","SecretsManager":{"arn":"__Arn__","versionId":"__VersionId__"}}],"AuthMaterialsToUpdate":[{"AuthMaterialName":"__AuthMaterialName__","SecretsManager":{"arn":"__Arn__","versionId":"__VersionId__"}},{"AuthMaterialName":"__AuthMaterialName__","SecretsManager":{"arn":"__Arn__","versionId":"__VersionId__"}}]},"oAuthUpdate":{"oAuthCompleteRedirectUrl":"__OAuthCompleteRedirectUrl__","proactiveRefreshTokenRenewal":{"DaysBeforeRenewal":1,"enabled":true}}},"AuthType":"OAUTH","Description":"__Description__","Name":"__Name__","SecretsManager":{"arn":"__Arn__","versionId":"__VersionId__"}}

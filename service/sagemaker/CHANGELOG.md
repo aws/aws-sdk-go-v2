@@ -1,3 +1,24 @@
+# v1.259.0 (2026-07-16)
+
+* **Feature**: Release support for g7 instance type for SageMaker inference endpoints.
+
+# v1.258.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.258.0 (2026-07-10)
+
+* **Feature**: Release support for g4d, c6g, c7g, c8g instance types for SageMaker HyperPod
+
+# v1.257.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.256.2 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.256.1 (2026-06-29)
 
 * No change notes available for this release.

@@ -212,6 +212,40 @@ func TestUploadDirectory(t *testing.T) {
 				l.expectComplete(t, in, out, 4)
 			},
 		},
+		// Two distinct directory symlinks that point to the same underlying directory
+		// must each be traversed and uploaded as separate S3 key subtrees.
+		// Regression test for the edge case raised during review of #3439.
+		"two symlinks referring to the same directory are each uploaded": {
+			source:         filepath.Join(root, "multi-file-contain-symlink"),
+			followSymLinks: true,
+			recursive:      true,
+			preprocessFunc: func(root string) (func() error, error) {
+				symlinkPath1 := filepath.Join(root, "multi-file-contain-symlink", "to", "the", "symlinkDirA")
+				symlinkPath2 := filepath.Join(root, "multi-file-contain-symlink", "to", "the", "symlinkDirB")
+				postprocessFunc := func() error {
+					os.Remove(symlinkPath1)
+					os.Remove(symlinkPath2)
+					return nil
+				}
+				// Both symlinks point to the exact same directory (dstDir1 contains one file: foo)
+				if err := os.Symlink(filepath.Join(root, "dstDir1"), symlinkPath1); err != nil {
+					return postprocessFunc, err
+				}
+				if err := os.Symlink(filepath.Join(root, "dstDir1"), symlinkPath2); err != nil {
+					return postprocessFunc, err
+				}
+				return postprocessFunc, nil
+			},
+			// dstDir1 contains one file (foo), so each directory symlink contributes one key:
+			//   to/the/symlinkDirA/foo  and  to/the/symlinkDirB/foo
+			// plus the original 4 files in multi-file-contain-symlink = 6 total
+			expectKeys:          []string{"foo", "bar", "to/baz", "to/the/yee", "to/the/symlinkDirA/foo", "to/the/symlinkDirB/foo"},
+			expectFilesUploaded: 6,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 6)
+			},
+		},
 		"folder containing files and symlink referring to folder": {
 			source:         filepath.Join(root, "multi-file-contain-symlink"),
 			followSymLinks: true,
@@ -325,7 +359,10 @@ func TestUploadDirectory(t *testing.T) {
 				l.expectFailed(t, in, err)
 			},
 		},
-		"error when a symlink refers to another file under source": {
+		// A symlink that resolves to a file already present elsewhere in the
+		// source tree represents a distinct S3 object (different key) and
+		// should be uploaded successfully alongside the original file.
+		"symlink pointing to another file already in source is uploaded": {
 			source:         filepath.Join(root, "multi-file-contain-symlink"),
 			followSymLinks: true,
 			recursive:      true,
@@ -340,9 +377,40 @@ func TestUploadDirectory(t *testing.T) {
 				}
 				return postprocessFunc, nil
 			},
-			expectErr: "traversed duplicate path",
+			expectKeys:          []string{"foo", "bar", "to/baz", "to/the/symLoop", "to/the/yee"},
+			expectFilesUploaded: 5,
 			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
-				l.expectFailed(t, in, err)
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 5)
+			},
+		},
+		// Multiple distinct symlinks pointing to the same underlying file must
+		// each be uploaded as a separate S3 object (issue #3439).
+		"multiple symlinks pointing to the same target file are each uploaded": {
+			source:         filepath.Join(root, "multi-file-contain-symlink"),
+			followSymLinks: true,
+			recursive:      true,
+			preprocessFunc: func(root string) (func() error, error) {
+				symlinkPath1 := filepath.Join(root, "multi-file-contain-symlink", "to", "the", "symLink1")
+				symlinkPath2 := filepath.Join(root, "multi-file-contain-symlink", "to", "the", "symLink2")
+				postprocessFunc := func() error {
+					os.Remove(symlinkPath1)
+					os.Remove(symlinkPath2)
+					return nil
+				}
+				if err := os.Symlink(filepath.Join(root, "dstFile1"), symlinkPath1); err != nil {
+					return postprocessFunc, err
+				}
+				if err := os.Symlink(filepath.Join(root, "dstFile1"), symlinkPath2); err != nil {
+					return postprocessFunc, err
+				}
+				return postprocessFunc, nil
+			},
+			expectKeys:          []string{"foo", "bar", "to/baz", "to/the/symLink1", "to/the/symLink2", "to/the/yee"},
+			expectFilesUploaded: 6,
+			listenerValidationFn: func(t *testing.T, l *mockDirectoryListener, in, out any, err error) {
+				l.expectStart(t, in)
+				l.expectComplete(t, in, out, 6)
 			},
 		},
 		"error when source is not directory": {

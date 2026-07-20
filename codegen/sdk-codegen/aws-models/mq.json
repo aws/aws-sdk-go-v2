@@ -754,6 +754,13 @@
                         "smithy.api#jsonName": "securityGroups"
                     }
                 },
+                "StorageSize": {
+                    "target": "com.amazonaws.mq#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The broker's storage size in GB.</p>",
+                        "smithy.api#jsonName": "storageSize"
+                    }
+                },
                 "StorageType": {
                     "target": "com.amazonaws.mq#BrokerStorageType",
                     "traits": {
@@ -1889,6 +1896,13 @@
                         "smithy.api#jsonName": "pendingSecurityGroups"
                     }
                 },
+                "PendingStorageSize": {
+                    "target": "com.amazonaws.mq#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pending storage size in GB, to be applied on the next broker restart.</p>",
+                        "smithy.api#jsonName": "pendingStorageSize"
+                    }
+                },
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.mq#__boolean",
                     "traits": {
@@ -1901,6 +1915,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.</p>",
                         "smithy.api#jsonName": "securityGroups"
+                    }
+                },
+                "StorageSize": {
+                    "target": "com.amazonaws.mq#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The broker's storage size in GB.</p>",
+                        "smithy.api#jsonName": "storageSize"
                     }
                 },
                 "StorageType": {
@@ -3802,6 +3823,13 @@
                         "smithy.api#jsonName": "securityGroups"
                     }
                 },
+                "StorageSize": {
+                    "target": "com.amazonaws.mq#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The broker's storage size in GB.</p>",
+                        "smithy.api#jsonName": "storageSize"
+                    }
+                },
                 "DataReplicationMode": {
                     "target": "com.amazonaws.mq#DataReplicationMode",
                     "traits": {
@@ -3921,6 +3949,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Describes whether this broker will be a part of a data replication pair after reboot.</p>",
                         "smithy.api#jsonName": "pendingDataReplicationMode"
+                    }
+                },
+                "StorageSize": {
+                    "target": "com.amazonaws.mq#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The broker's storage size in GB.</p>",
+                        "smithy.api#jsonName": "storageSize"
                     }
                 }
             },

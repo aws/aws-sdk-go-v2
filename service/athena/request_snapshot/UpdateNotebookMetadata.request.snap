@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.UpdateNotebookMetadata
+
+{"ClientRequestToken":"__ClientRequestToken__","Name":"__Name__","NotebookId":"__NotebookId__"}

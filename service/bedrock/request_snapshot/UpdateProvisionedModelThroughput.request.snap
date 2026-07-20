@@ -1,0 +1,5 @@
+PATCH /provisioned-model-throughput/__ProvisionedModelId__
+
+Content-Type: application/json
+
+{"desiredModelId":"__DesiredModelId__","desiredProvisionedModelName":"__DesiredProvisionedModelName__"}

@@ -56,11 +56,11 @@ type ListAddonSubscriptionsOutput struct {
 }
 
 func (c *Client) addOperationListAddonSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAddonSubscriptions{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAddonSubscriptions{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAddonSubscriptions{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAddonSubscriptions{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -84,6 +84,9 @@ func (c *Client) addOperationListAddonSubscriptionsMiddlewares(stack *middleware
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

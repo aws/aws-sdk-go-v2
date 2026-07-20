@@ -42,11 +42,11 @@ type DeleteAddonSubscriptionOutput struct {
 }
 
 func (c *Client) addOperationDeleteAddonSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteAddonSubscription{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteAddonSubscription{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteAddonSubscription{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteAddonSubscription{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -70,6 +70,9 @@ func (c *Client) addOperationDeleteAddonSubscriptionMiddlewares(stack *middlewar
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

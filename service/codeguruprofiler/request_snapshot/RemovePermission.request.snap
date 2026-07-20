@@ -1,0 +1,3 @@
+DELETE /profilingGroups/__ProfilingGroupName__/policy/agentPermissions?revisionId=__RevisionId__
+
+

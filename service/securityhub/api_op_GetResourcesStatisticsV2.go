@@ -16,6 +16,11 @@ import (
 // Currently, Scopes supports AwsOrganizations , which lets you aggregate resources
 // from your entire organization or from specific organizational units. Only the
 // delegated administrator account can use Scopes .
+//
+// If you set GroupByField to ResourceSubCategory ,
+// ResourceInfo.AIDetails.HostResourceType , or ResourceInfo.AIDetails.CanonicalId
+// , you must include a ResourceCategory string filter with comparison set to
+// EQUALS and value AI/ML in the corresponding ResourceGroupByRule .
 func (c *Client) GetResourcesStatisticsV2(ctx context.Context, params *GetResourcesStatisticsV2Input, optFns ...func(*Options)) (*GetResourcesStatisticsV2Output, error) {
 	if params == nil {
 		params = &GetResourcesStatisticsV2Input{}

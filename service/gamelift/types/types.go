@@ -568,6 +568,9 @@ type ContainerFleet struct {
 	//
 	//   - UPDATING -- Updates to the container fleet is being updated. A deployment is
 	//   in progress.
+	//
+	//   - EXPIRED -- The container fleet has been expired. The fleet is scaled down to
+	//   zero instances and cannot host new game sessions.
 	Status ContainerFleetStatus
 
 	noSmithyDocumentSerde
@@ -610,6 +613,9 @@ type ContainerFleetLocationAttributes struct {
 	//
 	//   - UPDATING -- Updates to the container fleet is being updated. A deployment is
 	//   in progress.
+	//
+	//   - EXPIRED -- The container fleet has been expired. The fleet is scaled down to
+	//   zero instances and cannot host new game sessions.
 	Status ContainerFleetLocationStatus
 
 	noSmithyDocumentSerde
@@ -1226,6 +1232,9 @@ type Event struct {
 	//
 	//   - FLEET_DELETED -- A request to delete a fleet was initiated.
 	//
+	//   - FLEET_EXPIRED -- The fleet has been expired. The fleet is scaled down to
+	//   zero instances and can no longer host game sessions.
+	//
 	//   - GENERIC_EVENT -- An unspecified event has occurred.
 	//
 	// [Debug Fleet Creation Issues]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation
@@ -1473,6 +1482,9 @@ type FleetAttributes struct {
 	//
 	//   - ERROR -- An error occurred when downloading, validating, building, or
 	//   activating the fleet.
+	//
+	//   - EXPIRED -- The fleet has been expired. The fleet is scaled down to zero
+	//   instances and cannot host new game sessions.
 	//
 	//   - DELETING -- Hosts are responding to a delete fleet request.
 	//

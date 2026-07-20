@@ -1,0 +1,5 @@
+POST /v1/datalake/delete
+
+Content-Type: application/json
+
+{"regions":["__Member__","__Member__"]}

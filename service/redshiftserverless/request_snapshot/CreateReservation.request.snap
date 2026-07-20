@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftServerless.CreateReservation
+
+{"capacity":1,"clientToken":"__ClientToken__","offeringId":"__OfferingId__"}

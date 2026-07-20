@@ -1,0 +1,5 @@
+POST /global-resolver
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","ipAddressType":"IPV4","name":"__Name__","observabilityRegion":"__ObservabilityRegion__","regions":["__Member__","__Member__"],"tags":{"key0":"__Value__"}}

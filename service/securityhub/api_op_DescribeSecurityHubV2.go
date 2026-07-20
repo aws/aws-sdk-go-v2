@@ -4,6 +4,7 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -29,6 +30,10 @@ type DescribeSecurityHubV2Input struct {
 }
 
 type DescribeSecurityHubV2Output struct {
+
+	// A map of opt-in features and their current status and metadata for the account
+	// in the current Region.
+	Features map[string]types.FeatureDetail
 
 	// The ARN of the service resource.
 	HubV2Arn *string

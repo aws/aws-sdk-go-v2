@@ -1,0 +1,6 @@
+POST /restapis/__RestApiId__/documentation/versions
+
+Accept: application/json
+Content-Type: application/json
+
+{"description":"__Description__","documentationVersion":"__DocumentationVersion__","stageName":"__StageName__"}

@@ -1,0 +1,4 @@
+DELETE /applications/__ApplicationId__/environments/__EnvironmentId__/deployments/1
+
+Allow-Revert: true
+

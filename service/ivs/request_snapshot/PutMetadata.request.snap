@@ -1,0 +1,5 @@
+POST /PutMetadata
+
+Content-Type: application/json
+
+{"channelArn":"__ChannelArn__","metadata":"__Metadata__"}

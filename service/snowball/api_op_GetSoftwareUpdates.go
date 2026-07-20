@@ -4,6 +4,8 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type GetSoftwareUpdatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSoftwareUpdatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSoftwareUpdatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSoftwareUpdatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetSoftwareUpdatesRequest_JobId, *v.JobId)
+	}
+}
+
 type GetSoftwareUpdatesOutput struct {
 
 	// The Amazon S3 presigned URL for the update file associated with the specified
@@ -50,13 +64,32 @@ type GetSoftwareUpdatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSoftwareUpdatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSoftwareUpdatesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSoftwareUpdatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UpdatesURI != nil {
+		s.WriteString(schemas.GetSoftwareUpdatesResult_UpdatesURI, *v.UpdatesURI)
+	}
+}
+func (v *GetSoftwareUpdatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSoftwareUpdatesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSoftwareUpdatesResult_UpdatesURI:
+			v.UpdatesURI = new(string)
+			return d.ReadString(schemas.GetSoftwareUpdatesResult_UpdatesURI, v.UpdatesURI)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSoftwareUpdatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetSoftwareUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSoftwareUpdates, schemas.GetSoftwareUpdatesRequest, schemas.GetSoftwareUpdatesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetSoftwareUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSoftwareUpdates, schemas.GetSoftwareUpdatesRequest, schemas.GetSoftwareUpdatesResult), output: &GetSoftwareUpdatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

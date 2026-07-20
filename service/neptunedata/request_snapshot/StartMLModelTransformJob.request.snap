@@ -1,0 +1,5 @@
+POST /ml/modeltransform
+
+Content-Type: application/json
+
+{"baseProcessingInstanceType":"__BaseProcessingInstanceType__","baseProcessingInstanceVolumeSizeInGB":1,"customModelTransformParameters":{"sourceS3DirectoryPath":"__SourceS3DirectoryPath__","transformEntryPointScript":"__TransformEntryPointScript__"},"dataProcessingJobId":"__DataProcessingJobId__","id":"__Id__","mlModelTrainingJobId":"__MlModelTrainingJobId__","modelTransformOutputS3Location":"__ModelTransformOutputS3Location__","neptuneIamRoleArn":"__NeptuneIamRoleArn__","s3OutputEncryptionKMSKey":"__S3OutputEncryptionKMSKey__","sagemakerIamRoleArn":"__SagemakerIamRoleArn__","securityGroupIds":["__Member__","__Member__"],"subnets":["__Member__","__Member__"],"trainingJobName":"__TrainingJobName__","volumeEncryptionKMSKey":"__VolumeEncryptionKMSKey__"}

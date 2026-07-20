@@ -159,6 +159,9 @@ type CreateBrokerInput struct {
 	// brokers.
 	SecurityGroups []string
 
+	// The broker's storage size in GB.
+	StorageSize *int32
+
 	// The broker's storage type.
 	StorageType types.BrokerStorageType
 

@@ -1,0 +1,5 @@
+POST /UpdateTelemetryPipeline
+
+Content-Type: application/json
+
+{"Configuration":{"Body":"__Body__"},"PipelineIdentifier":"__PipelineIdentifier__"}

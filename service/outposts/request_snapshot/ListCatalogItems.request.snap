@@ -1,0 +1,3 @@
+GET /catalog/items?EC2FamilyFilter=__Member__&EC2FamilyFilter=__Member__&ItemClassFilter=RACK&ItemClassFilter=RACK&MaxResults=1&NextToken=__NextToken__&SupportedStorageFilter=EBS&SupportedStorageFilter=EBS
+
+

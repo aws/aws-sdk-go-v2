@@ -41,6 +41,10 @@ type DescribeStandardsInput struct {
 	// of this parameter to the value returned from the previous response.
 	NextToken *string
 
+	// A list of cloud providers to filter the standards by. For example, specify Azure
+	// to return only standards that evaluate Azure resources.
+	Providers []types.StandardsProvider
+
 	noSmithyDocumentSerde
 }
 

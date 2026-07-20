@@ -1,0 +1,5 @@
+POST /data-tables/__InstanceId__/__DataTableId__/attributes/__AttributeName__
+
+Content-Type: application/json
+
+{"Description":"__Description__","Name":"__Name__","Primary":true,"Validation":{"Enum":{"Strict":true,"Values":["__Member__","__Member__"]},"ExclusiveMaximum":1,"ExclusiveMinimum":1,"IgnoreCase":true,"Maximum":1,"MaxLength":1,"MaxValues":1,"Minimum":1,"MinLength":1,"MinValues":1,"MultipleOf":1},"ValueType":"TEXT"}

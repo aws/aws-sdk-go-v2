@@ -1,0 +1,5 @@
+PATCH /global-networks/__GlobalNetworkId__
+
+Content-Type: application/json
+
+{"Description":"__Description__"}

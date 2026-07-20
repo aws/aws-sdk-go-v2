@@ -1,0 +1,5 @@
+POST /organizational-units/disassociate/__OrganizationalUnitId__
+
+Content-Type: application/json
+
+{"notificationConfigurationArn":"__NotificationConfigurationArn__"}

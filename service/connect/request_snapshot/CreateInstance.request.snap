@@ -1,0 +1,5 @@
+PUT /instance
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","DirectoryId":"__DirectoryId__","IdentityManagementType":"SAML","InboundCallsEnabled":true,"InstanceAlias":"__InstanceAlias__","OutboundCallsEnabled":true,"Tags":{"key0":"__Value__"}}

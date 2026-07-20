@@ -974,6 +974,18 @@ func TestCheckSnapshot_PutAccountDetails(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutAccountPricingAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountPricingAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAccountPricingAttributes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutAccountSendingAttributes(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutAccountSendingAttributes(context.Background(), nil, func(o *Options) {
@@ -2298,6 +2310,18 @@ func TestUpdateSnapshot_PutAccountDetails(t *testing.T) {
 	_, err := svc.PutAccountDetails(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutAccountDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAccountPricingAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountPricingAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAccountPricingAttributes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -70,7 +70,8 @@ type PutDeliverySourceInput struct {
 	//   - For Amazon Bedrock Agents, the valid values are APPLICATION_LOGS and
 	//   EVENT_LOGS .
 	//
-	//   - For Amazon Bedrock Knowledge Bases, the valid value is APPLICATION_LOGS .
+	//   - For Amazon Bedrock Knowledge Bases, the valid values are APPLICATION_LOGS
+	//   and TRACES .
 	//
 	//   - For Amazon Bedrock AgentCore Runtime, the valid values are APPLICATION_LOGS
 	//   , USAGE_LOGS and TRACES .
@@ -131,6 +132,8 @@ type PutDeliverySourceInput struct {
 	//   - For Amazon Web Services RTB Fabric, the valid values is APPLICATION_LOGS .
 	//
 	//   - For Amazon Q, the valid values are EVENT_LOGS and SYNC_JOB_LOGS .
+	//
+	//   - For Amazon S3, the valid value is S3_SERVER_ACCESS_LOGS .
 	//
 	//   - For Amazon Web Services Security Hub CSPM, the valid value is
 	//   SECURITY_FINDING_LOGS .

@@ -250,6 +250,26 @@ func (m *validateOpCreateCodeSecurityScanConfiguration) HandleInitialize(ctx con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateConnector struct {
+}
+
+func (*validateOpCreateConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateFilter struct {
 }
 
@@ -365,6 +385,26 @@ func (m *validateOpDeleteCodeSecurityScanConfiguration) HandleInitialize(ctx con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteCodeSecurityScanConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteConnector struct {
+}
+
+func (*validateOpDeleteConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConnectorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -750,6 +790,26 @@ func (m *validateOpListCodeSecurityScanConfigurationAssociations) HandleInitiali
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListConnectors struct {
+}
+
+func (*validateOpListConnectors) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListConnectors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListConnectorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListConnectorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListCoverage struct {
 }
 
@@ -1110,6 +1170,46 @@ func (m *validateOpUpdateConfiguration) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConnector struct {
+}
+
+func (*validateOpUpdateConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateConnectorScanConfiguration struct {
+}
+
+func (*validateOpUpdateConnectorScanConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConnectorScanConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConnectorScanConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConnectorScanConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEncryptionKey struct {
 }
 
@@ -1238,6 +1338,10 @@ func addOpCreateCodeSecurityScanConfigurationValidationMiddleware(stack *middlew
 	return stack.Initialize.Add(&validateOpCreateCodeSecurityScanConfiguration{}, middleware.After)
 }
 
+func addOpCreateConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConnector{}, middleware.After)
+}
+
 func addOpCreateFilterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFilter{}, middleware.After)
 }
@@ -1260,6 +1364,10 @@ func addOpDeleteCodeSecurityIntegrationValidationMiddleware(stack *middleware.St
 
 func addOpDeleteCodeSecurityScanConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCodeSecurityScanConfiguration{}, middleware.After)
+}
+
+func addOpDeleteConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConnector{}, middleware.After)
 }
 
 func addOpDeleteFilterValidationMiddleware(stack *middleware.Stack) error {
@@ -1338,6 +1446,10 @@ func addOpListCodeSecurityScanConfigurationAssociationsValidationMiddleware(stac
 	return stack.Initialize.Add(&validateOpListCodeSecurityScanConfigurationAssociations{}, middleware.After)
 }
 
+func addOpListConnectorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListConnectors{}, middleware.After)
+}
+
 func addOpListCoverageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListCoverage{}, middleware.After)
 }
@@ -1410,6 +1522,14 @@ func addOpUpdateConfigurationValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpUpdateConfiguration{}, middleware.After)
 }
 
+func addOpUpdateConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConnector{}, middleware.After)
+}
+
+func addOpUpdateConnectorScanConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConnectorScanConfiguration{}, middleware.After)
+}
+
 func addOpUpdateEncryptionKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEncryptionKey{}, middleware.After)
 }
@@ -1464,6 +1584,11 @@ func validateAggregationRequest(v types.AggregationRequest) error {
 			invalidParams.AddNested("[codeRepositoryAggregation]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.AggregationRequestMemberContainerImageAggregation:
+		if err := validateContainerImageAggregation(&uv.Value); err != nil {
+			invalidParams.AddNested("[containerImageAggregation]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.AggregationRequestMemberEc2InstanceAggregation:
 		if err := validateEc2InstanceAggregation(&uv.Value); err != nil {
 			invalidParams.AddNested("[ec2InstanceAggregation]", err.(smithy.InvalidParamsError))
@@ -1494,9 +1619,19 @@ func validateAggregationRequest(v types.AggregationRequest) error {
 			invalidParams.AddNested("[repositoryAggregation]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.AggregationRequestMemberServerlessFunctionAggregation:
+		if err := validateServerlessFunctionAggregation(&uv.Value); err != nil {
+			invalidParams.AddNested("[serverlessFunctionAggregation]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.AggregationRequestMemberTitleAggregation:
 		if err := validateTitleAggregation(&uv.Value); err != nil {
 			invalidParams.AddNested("[titleAggregation]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AggregationRequestMemberVmInstanceAggregation:
+		if err := validateVmInstanceAggregation(&uv.Value); err != nil {
+			invalidParams.AddNested("[vmInstanceAggregation]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -1577,6 +1712,41 @@ func validateAutoEnable(v *types.AutoEnable) error {
 	}
 }
 
+func validateAwsConfigConnectorArnFilter(v *types.AwsConfigConnectorArnFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AwsConfigConnectorArnFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAwsConfigConnectorArnFilterList(v []types.AwsConfigConnectorArnFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AwsConfigConnectorArnFilterList"}
+	for i := range v {
+		if err := validateAwsConfigConnectorArnFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAwsEcrContainerAggregation(v *types.AwsEcrContainerAggregation) error {
 	if v == nil {
 		return nil
@@ -1605,6 +1775,75 @@ func validateAwsEcrContainerAggregation(v *types.AwsEcrContainerAggregation) err
 	if v.ImageTags != nil {
 		if err := validateStringFilterList(v.ImageTags); err != nil {
 			invalidParams.AddNested("ImageTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureProviderDetailCreate(v *types.AzureProviderDetailCreate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureProviderDetailCreate"}
+	if v.AwsConfigConnectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsConfigConnectorArn"))
+	}
+	if v.ScopeConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScopeConfiguration"))
+	} else if v.ScopeConfiguration != nil {
+		if err := validateAzureScopeConfigurationInput(v.ScopeConfiguration); err != nil {
+			invalidParams.AddNested("ScopeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AzureRegions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AzureRegions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureProviderDetailUpdate(v *types.AzureProviderDetailUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureProviderDetailUpdate"}
+	if v.ScopeConfiguration != nil {
+		if err := validateAzureScopeConfigurationInput(v.ScopeConfiguration); err != nil {
+			invalidParams.AddNested("ScopeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureScopeConfigurationInput(v *types.AzureScopeConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureScopeConfigurationInput"}
+	if v.VmScanning != nil {
+		if err := validateScopeConfigurationInput(v.VmScanning); err != nil {
+			invalidParams.AddNested("VmScanning", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContainerImageScanning != nil {
+		if err := validateScopeConfigurationInput(v.ContainerImageScanning); err != nil {
+			invalidParams.AddNested("ContainerImageScanning", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServerlessScanning != nil {
+		if err := validateScopeConfigurationInput(v.ServerlessScanning); err != nil {
+			invalidParams.AddNested("ServerlessScanning", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2136,6 +2375,180 @@ func validateCodeSecurityScanConfiguration(v *types.CodeSecurityScanConfiguratio
 	}
 }
 
+func validateConnectorArnFilter(v *types.ConnectorArnFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorArnFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorArnFilterList(v []types.ConnectorArnFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorArnFilterList"}
+	for i := range v {
+		if err := validateConnectorArnFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorFilterCriteria(v *types.ConnectorFilterCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorFilterCriteria"}
+	if v.ConnectorArns != nil {
+		if err := validateConnectorArnFilterList(v.ConnectorArns); err != nil {
+			invalidParams.AddNested("ConnectorArns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Accounts != nil {
+		if err := validateStringFilterList(v.Accounts); err != nil {
+			invalidParams.AddNested("Accounts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AwsConfigConnectorArns != nil {
+		if err := validateAwsConfigConnectorArnFilterList(v.AwsConfigConnectorArns); err != nil {
+			invalidParams.AddNested("AwsConfigConnectorArns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConnectorType != nil {
+		if err := validateConnectorTypeFilterList(v.ConnectorType); err != nil {
+			invalidParams.AddNested("ConnectorType", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Provider != nil {
+		if err := validateProviderFilterList(v.Provider); err != nil {
+			invalidParams.AddNested("Provider", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorTypeFilter(v *types.ConnectorTypeFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorTypeFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if len(v.Value) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorTypeFilterList(v []types.ConnectorTypeFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorTypeFilterList"}
+	for i := range v {
+		if err := validateConnectorTypeFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerImageAggregation(v *types.ContainerImageAggregation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerImageAggregation"}
+	if v.ResourceIds != nil {
+		if err := validateStringFilterList(v.ResourceIds); err != nil {
+			invalidParams.AddNested("ResourceIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ImageDigests != nil {
+		if err := validateStringFilterList(v.ImageDigests); err != nil {
+			invalidParams.AddNested("ImageDigests", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Repositories != nil {
+		if err := validateStringFilterList(v.Repositories); err != nil {
+			invalidParams.AddNested("Repositories", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Registries != nil {
+		if err := validateStringFilterList(v.Registries); err != nil {
+			invalidParams.AddNested("Registries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Architectures != nil {
+		if err := validateStringFilterList(v.Architectures); err != nil {
+			invalidParams.AddNested("Architectures", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ImageTags != nil {
+		if err := validateStringFilterList(v.ImageTags); err != nil {
+			invalidParams.AddNested("ImageTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudProviders != nil {
+		if err := validateStringFilterList(v.CloudProviders); err != nil {
+			invalidParams.AddNested("CloudProviders", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudPartitions != nil {
+		if err := validateStringFilterList(v.CloudPartitions); err != nil {
+			invalidParams.AddNested("CloudPartitions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudRegions != nil {
+		if err := validateStringFilterList(v.CloudRegions); err != nil {
+			invalidParams.AddNested("CloudRegions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudOrgIds != nil {
+		if err := validateStringFilterList(v.CloudOrgIds); err != nil {
+			invalidParams.AddNested("CloudOrgIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudAccountIds != nil {
+		if err := validateStringFilterList(v.CloudAccountIds); err != nil {
+			invalidParams.AddNested("CloudAccountIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContinuousIntegrationScanConfiguration(v *types.ContinuousIntegrationScanConfiguration) error {
 	if v == nil {
 		return nil
@@ -2239,6 +2652,61 @@ func validateCoverageFilterCriteria(v *types.CoverageFilterCriteria) error {
 	if v.LastScannedCommitId != nil {
 		if err := validateCoverageStringFilterList(v.LastScannedCommitId); err != nil {
 			invalidParams.AddNested("LastScannedCommitId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudProvider != nil {
+		if err := validateCoverageStringFilterList(v.CloudProvider); err != nil {
+			invalidParams.AddNested("CloudProvider", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudProviderAccountId != nil {
+		if err := validateCoverageStringFilterList(v.CloudProviderAccountId); err != nil {
+			invalidParams.AddNested("CloudProviderAccountId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudProviderRegion != nil {
+		if err := validateCoverageStringFilterList(v.CloudProviderRegion); err != nil {
+			invalidParams.AddNested("CloudProviderRegion", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudVmInstanceTags != nil {
+		if err := validateCoverageMapFilterList(v.CloudVmInstanceTags); err != nil {
+			invalidParams.AddNested("CloudVmInstanceTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudContainerImageTags != nil {
+		if err := validateCoverageStringFilterList(v.CloudContainerImageTags); err != nil {
+			invalidParams.AddNested("CloudContainerImageTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudContainerRepositoryName != nil {
+		if err := validateCoverageStringFilterList(v.CloudContainerRepositoryName); err != nil {
+			invalidParams.AddNested("CloudContainerRepositoryName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudContainerRegistryName != nil {
+		if err := validateCoverageStringFilterList(v.CloudContainerRegistryName); err != nil {
+			invalidParams.AddNested("CloudContainerRegistryName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudServerlessFunctionName != nil {
+		if err := validateCoverageStringFilterList(v.CloudServerlessFunctionName); err != nil {
+			invalidParams.AddNested("CloudServerlessFunctionName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudServerlessFunctionRuntime != nil {
+		if err := validateCoverageStringFilterList(v.CloudServerlessFunctionRuntime); err != nil {
+			invalidParams.AddNested("CloudServerlessFunctionRuntime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudServerlessFunctionTags != nil {
+		if err := validateCoverageMapFilterList(v.CloudServerlessFunctionTags); err != nil {
+			invalidParams.AddNested("CloudServerlessFunctionTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudProviderOrgId != nil {
+		if err := validateCoverageStringFilterList(v.CloudProviderOrgId); err != nil {
+			invalidParams.AddNested("CloudProviderOrgId", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2692,6 +3160,81 @@ func validateFilterCriteria(v *types.FilterCriteria) error {
 			invalidParams.AddNested("CodeRepositoryProviderType", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CloudProvider != nil {
+		if err := validateStringFilterList(v.CloudProvider); err != nil {
+			invalidParams.AddNested("CloudProvider", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudProviderRegion != nil {
+		if err := validateStringFilterList(v.CloudProviderRegion); err != nil {
+			invalidParams.AddNested("CloudProviderRegion", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudProviderAccountId != nil {
+		if err := validateStringFilterList(v.CloudProviderAccountId); err != nil {
+			invalidParams.AddNested("CloudProviderAccountId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudProviderOrgId != nil {
+		if err := validateStringFilterList(v.CloudProviderOrgId); err != nil {
+			invalidParams.AddNested("CloudProviderOrgId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudVmImageReference != nil {
+		if err := validateStringFilterList(v.CloudVmImageReference); err != nil {
+			invalidParams.AddNested("CloudVmImageReference", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudVmNetworkId != nil {
+		if err := validateStringFilterList(v.CloudVmNetworkId); err != nil {
+			invalidParams.AddNested("CloudVmNetworkId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudVmSubnetIds != nil {
+		if err := validateStringFilterList(v.CloudVmSubnetIds); err != nil {
+			invalidParams.AddNested("CloudVmSubnetIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudImageRepositoryName != nil {
+		if err := validateStringFilterList(v.CloudImageRepositoryName); err != nil {
+			invalidParams.AddNested("CloudImageRepositoryName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudImageRegistry != nil {
+		if err := validateStringFilterList(v.CloudImageRegistry); err != nil {
+			invalidParams.AddNested("CloudImageRegistry", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudImageDigest != nil {
+		if err := validateStringFilterList(v.CloudImageDigest); err != nil {
+			invalidParams.AddNested("CloudImageDigest", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudImageTags != nil {
+		if err := validateStringFilterList(v.CloudImageTags); err != nil {
+			invalidParams.AddNested("CloudImageTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudImageArchitecture != nil {
+		if err := validateStringFilterList(v.CloudImageArchitecture); err != nil {
+			invalidParams.AddNested("CloudImageArchitecture", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudServerlessFunctionName != nil {
+		if err := validateStringFilterList(v.CloudServerlessFunctionName); err != nil {
+			invalidParams.AddNested("CloudServerlessFunctionName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudServerlessFunctionRuntime != nil {
+		if err := validateStringFilterList(v.CloudServerlessFunctionRuntime); err != nil {
+			invalidParams.AddNested("CloudServerlessFunctionRuntime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudServerlessFunctionExecutionRole != nil {
+		if err := validateStringFilterList(v.CloudServerlessFunctionExecutionRole); err != nil {
+			invalidParams.AddNested("CloudServerlessFunctionExecutionRole", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2717,6 +3260,31 @@ func validateImageLayerAggregation(v *types.ImageLayerAggregation) error {
 	if v.LayerHashes != nil {
 		if err := validateStringFilterList(v.LayerHashes); err != nil {
 			invalidParams.AddNested("LayerHashes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudProviders != nil {
+		if err := validateStringFilterList(v.CloudProviders); err != nil {
+			invalidParams.AddNested("CloudProviders", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudAccountIds != nil {
+		if err := validateStringFilterList(v.CloudAccountIds); err != nil {
+			invalidParams.AddNested("CloudAccountIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudOrgIds != nil {
+		if err := validateStringFilterList(v.CloudOrgIds); err != nil {
+			invalidParams.AddNested("CloudOrgIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudRegions != nil {
+		if err := validateStringFilterList(v.CloudRegions); err != nil {
+			invalidParams.AddNested("CloudRegions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudPartitions != nil {
+		if err := validateStringFilterList(v.CloudPartitions); err != nil {
+			invalidParams.AddNested("CloudPartitions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3071,6 +3639,79 @@ func validatePlatformFilterList(v []types.CisStringFilter) error {
 	}
 }
 
+func validateProviderDetailCreate(v types.ProviderDetailCreate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProviderDetailCreate"}
+	switch uv := v.(type) {
+	case *types.ProviderDetailCreateMemberAzure:
+		if err := validateAzureProviderDetailCreate(&uv.Value); err != nil {
+			invalidParams.AddNested("[azure]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProviderDetailUpdate(v types.ProviderDetailUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProviderDetailUpdate"}
+	switch uv := v.(type) {
+	case *types.ProviderDetailUpdateMemberAzure:
+		if err := validateAzureProviderDetailUpdate(&uv.Value); err != nil {
+			invalidParams.AddNested("[azure]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProviderFilter(v *types.ProviderFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProviderFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if len(v.Value) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProviderFilterList(v []types.ProviderFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProviderFilterList"}
+	for i := range v {
+		if err := validateProviderFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRepositoryAggregation(v *types.RepositoryAggregation) error {
 	if v == nil {
 		return nil
@@ -3273,6 +3914,21 @@ func validateSchedule(v types.Schedule) error {
 	}
 }
 
+func validateScopeConfigurationInput(v *types.ScopeConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScopeConfigurationInput"}
+	if len(v.ScopeType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScopeType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSearchVulnerabilitiesFilterCriteria(v *types.SearchVulnerabilitiesFilterCriteria) error {
 	if v == nil {
 		return nil
@@ -3280,6 +3936,63 @@ func validateSearchVulnerabilitiesFilterCriteria(v *types.SearchVulnerabilitiesF
 	invalidParams := smithy.InvalidParamsError{Context: "SearchVulnerabilitiesFilterCriteria"}
 	if v.VulnerabilityIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VulnerabilityIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServerlessFunctionAggregation(v *types.ServerlessFunctionAggregation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServerlessFunctionAggregation"}
+	if v.ResourceIds != nil {
+		if err := validateStringFilterList(v.ResourceIds); err != nil {
+			invalidParams.AddNested("ResourceIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FunctionNames != nil {
+		if err := validateStringFilterList(v.FunctionNames); err != nil {
+			invalidParams.AddNested("FunctionNames", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Runtimes != nil {
+		if err := validateStringFilterList(v.Runtimes); err != nil {
+			invalidParams.AddNested("Runtimes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FunctionTags != nil {
+		if err := validateMapFilterList(v.FunctionTags); err != nil {
+			invalidParams.AddNested("FunctionTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudProviders != nil {
+		if err := validateStringFilterList(v.CloudProviders); err != nil {
+			invalidParams.AddNested("CloudProviders", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudPartitions != nil {
+		if err := validateStringFilterList(v.CloudPartitions); err != nil {
+			invalidParams.AddNested("CloudPartitions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudRegions != nil {
+		if err := validateStringFilterList(v.CloudRegions); err != nil {
+			invalidParams.AddNested("CloudRegions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudOrgIds != nil {
+		if err := validateStringFilterList(v.CloudOrgIds); err != nil {
+			invalidParams.AddNested("CloudOrgIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudAccountIds != nil {
+		if err := validateStringFilterList(v.CloudAccountIds); err != nil {
+			invalidParams.AddNested("CloudAccountIds", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3543,6 +4256,63 @@ func validateUpdateIntegrationDetails(v types.UpdateIntegrationDetails) error {
 	}
 }
 
+func validateVmInstanceAggregation(v *types.VmInstanceAggregation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VmInstanceAggregation"}
+	if v.ResourceIds != nil {
+		if err := validateStringFilterList(v.ResourceIds); err != nil {
+			invalidParams.AddNested("ResourceIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OperatingSystems != nil {
+		if err := validateStringFilterList(v.OperatingSystems); err != nil {
+			invalidParams.AddNested("OperatingSystems", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InstanceTags != nil {
+		if err := validateMapFilterList(v.InstanceTags); err != nil {
+			invalidParams.AddNested("InstanceTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VmImageReferences != nil {
+		if err := validateStringFilterList(v.VmImageReferences); err != nil {
+			invalidParams.AddNested("VmImageReferences", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudProviders != nil {
+		if err := validateStringFilterList(v.CloudProviders); err != nil {
+			invalidParams.AddNested("CloudProviders", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudPartitions != nil {
+		if err := validateStringFilterList(v.CloudPartitions); err != nil {
+			invalidParams.AddNested("CloudPartitions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudRegions != nil {
+		if err := validateStringFilterList(v.CloudRegions); err != nil {
+			invalidParams.AddNested("CloudRegions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudOrgIds != nil {
+		if err := validateStringFilterList(v.CloudOrgIds); err != nil {
+			invalidParams.AddNested("CloudOrgIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudAccountIds != nil {
+		if err := validateStringFilterList(v.CloudAccountIds); err != nil {
+			invalidParams.AddNested("CloudAccountIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateWeeklySchedule(v *types.WeeklySchedule) error {
 	if v == nil {
 		return nil
@@ -3792,6 +4562,31 @@ func validateOpCreateCodeSecurityScanConfigurationInput(v *CreateCodeSecuritySca
 	}
 }
 
+func validateOpCreateConnectorInput(v *CreateConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectorInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Provider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Provider"))
+	}
+	if v.ProviderDetail == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderDetail"))
+	} else if v.ProviderDetail != nil {
+		if err := validateProviderDetailCreate(v.ProviderDetail); err != nil {
+			invalidParams.AddNested("ProviderDetail", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateFilterInput(v *CreateFilterInput) error {
 	if v == nil {
 		return nil
@@ -3908,6 +4703,21 @@ func validateOpDeleteCodeSecurityScanConfigurationInput(v *DeleteCodeSecuritySca
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteCodeSecurityScanConfigurationInput"}
 	if v.ScanConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScanConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteConnectorInput(v *DeleteConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConnectorInput"}
+	if v.ConnectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4228,6 +5038,23 @@ func validateOpListCodeSecurityScanConfigurationAssociationsInput(v *ListCodeSec
 	invalidParams := smithy.InvalidParamsError{Context: "ListCodeSecurityScanConfigurationAssociationsInput"}
 	if v.ScanConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScanConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListConnectorsInput(v *ListConnectorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListConnectorsInput"}
+	if v.FilterCriteria != nil {
+		if err := validateConnectorFilterCriteria(v.FilterCriteria); err != nil {
+			invalidParams.AddNested("FilterCriteria", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4588,6 +5415,44 @@ func validateOpUpdateConfigurationInput(v *UpdateConfigurationInput) error {
 		if err := validateEc2Configuration(v.Ec2Configuration); err != nil {
 			invalidParams.AddNested("Ec2Configuration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConnectorInput(v *UpdateConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectorInput"}
+	if v.ConnectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorArn"))
+	}
+	if v.ProviderDetail != nil {
+		if err := validateProviderDetailUpdate(v.ProviderDetail); err != nil {
+			invalidParams.AddNested("ProviderDetail", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConnectorScanConfigurationInput(v *UpdateConnectorScanConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectorScanConfigurationInput"}
+	if v.AwsConfigConnectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsConfigConnectorArn"))
+	}
+	if v.ScanConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanConfiguration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,5 @@
+PUT /voice-connectors/__VoiceConnectorId__/emergency-calling-configuration
+
+Content-Type: application/json
+
+{"EmergencyCallingConfiguration":{"DNIS":[{"CallingCountry":"__CallingCountry__","EmergencyPhoneNumber":"__EmergencyPhoneNumber__","TestPhoneNumber":"__TestPhoneNumber__"},{"CallingCountry":"__CallingCountry__","EmergencyPhoneNumber":"__EmergencyPhoneNumber__","TestPhoneNumber":"__TestPhoneNumber__"}]}}

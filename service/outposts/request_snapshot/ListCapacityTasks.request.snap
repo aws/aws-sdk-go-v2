@@ -1,0 +1,3 @@
+GET /capacity/tasks?CapacityTaskStatusFilter=REQUESTED&CapacityTaskStatusFilter=REQUESTED&MaxResults=1&NextToken=__NextToken__&OutpostIdentifierFilter=__OutpostIdentifierFilter__
+
+

@@ -1,0 +1,5 @@
+POST /model-customization-jobs
+
+Content-Type: application/json
+
+{"baseModelIdentifier":"__BaseModelIdentifier__","clientRequestToken":"__ClientRequestToken__","customizationConfig":{"distillationConfig":{"teacherModelConfig":{"maxResponseLengthForInference":1,"teacherModelIdentifier":"__TeacherModelIdentifier__"}}},"customizationType":"FINE_TUNING","customModelKmsKeyId":"__CustomModelKmsKeyId__","customModelName":"__CustomModelName__","customModelTags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"hyperParameters":{"key0":"__Value__"},"jobName":"__JobName__","jobTags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"outputDataConfig":{"s3Uri":"__S3Uri__"},"roleArn":"__RoleArn__","trainingDataConfig":{"invocationLogsConfig":{"invocationLogSource":{"s3Uri":"__InvocationLogSourceMemberS3Uri__"},"requestMetadataFilters":{"equals":{"key0":"__Value__"}},"usePromptResponse":true},"s3Uri":"__S3Uri__"},"validationDataConfig":{"validators":[{"s3Uri":"__S3Uri__"},{"s3Uri":"__S3Uri__"}]},"vpcConfig":{"securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"]}}

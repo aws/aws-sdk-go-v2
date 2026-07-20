@@ -1,0 +1,5 @@
+PUT /v2/email/custom-verification-email-templates/__TemplateName__
+
+Content-Type: application/json
+
+{"FailureRedirectionURL":"__FailureRedirectionURL__","FromEmailAddress":"__FromEmailAddress__","SuccessRedirectionURL":"__SuccessRedirectionURL__","TemplateContent":"__TemplateContent__","TemplateSubject":"__TemplateSubject__"}

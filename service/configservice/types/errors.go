@@ -10,8 +10,24 @@ import (
 // For [PutServiceLinkedConfigurationRecorder], you cannot create a service-linked recorder because a service-linked
 // recorder already exists for the specified service.
 //
+// For [PutThirdPartyServiceLinkedConfigurationRecorder], you cannot create a service-linked recorder because the specified service
+// principal does not support multiple configuration recorders and one already
+// exists.
+//
+// For [PutThirdPartyServiceLinkedConfigurationRecorder], another in-progress operation is currently referencing the same connector
+// or service principal. Please try again later.
+//
+// For [PutConnector], you cannot create a connector because a connector already exists for the
+// specified connector configuration.
+//
 // For [DeleteServiceLinkedConfigurationRecorder], you cannot delete the service-linked recorder because it is currently in
 // use by the linked Amazon Web Services service.
+//
+// For [DeleteServiceLinkedConfigurationRecorder], another in-progress operation is currently referencing the same
+// connector. Please try again later.
+//
+// For [DeleteConnector], another in-progress operation is currently referencing the connector.
+// Please try again later.
 //
 // For [DeleteDeliveryChannel], you cannot delete the specified delivery channel because the customer
 // managed configuration recorder is running. Use the [StopConfigurationRecorder]operation to stop the
@@ -28,10 +44,13 @@ import (
 //     service.
 //
 // [PutServiceLinkedConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html
+// [PutConnector]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutConnector.html
 // [DisassociateResourceTypes]: https://docs.aws.amazon.com/config/latest/APIReference/API_DisassociateResourceTypes.html
 // [DeleteServiceLinkedConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html
+// [PutThirdPartyServiceLinkedConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutThirdPartyServiceLinkedConfigurationRecorder.html
 // [StopConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_StopConfigurationRecorder.html
 // [AssociateResourceTypes]: https://docs.aws.amazon.com/config/latest/APIReference/API_AssociateResourceTypes.html
+// [DeleteConnector]: https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteConnector.html
 // [DeleteDeliveryChannel]: https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteDeliveryChannel.html
 type ConflictException struct {
 	Message *string
@@ -163,8 +182,12 @@ func (e *InsufficientDeliveryPolicyException) ErrorFault() smithy.ErrorFault {
 //   - For [PutServiceLinkedConfigurationRecorder], a service-linked configuration recorder cannot be created because you
 //     do not have the following permissions: IAM CreateServiceLinkedRole .
 //
+//   - For [PutConnector], a connector cannot be created because you do not have the following
+//     permissions: IAM CreateServiceLinkedRole .
+//
 // [PutOrganizationConfigRule]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutOrganizationConfigRule.html
 // [PutServiceLinkedConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html
+// [PutConnector]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutConnector.html
 // [PutConfigRule]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutConfigRule.html
 // [PutConformancePack]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutConformancePack.html
 // [PutOrganizationConformancePack]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutOrganizationConformancePack.html
@@ -740,6 +763,34 @@ func (e *MaxNumberOfConformancePacksExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MaxNumberOfConformancePacksExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// You have reached the limit of the number of connectors in your account.
+type MaxNumberOfConnectorsExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MaxNumberOfConnectorsExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MaxNumberOfConnectorsExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MaxNumberOfConnectorsExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "MaxNumberOfConnectorsExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *MaxNumberOfConnectorsExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
@@ -1708,10 +1759,19 @@ func (e *UnmodifiableEntityException) ErrorFault() smithy.ErrorFault { return sm
 //   - For service-linked configuration recorders, the configuration recorder does
 //     not record one or more of the specified resource types.
 //
+// For [DeleteServiceLinkedConfigurationRecorder], one of the following errors:
+//
+//   - You have provided both Arn and ServicePrincipal . Only one of Arn or
+//     ServicePrincipal can be specified.
+//
+//   - You have provided a service principal for service-linked configuration
+//     recorder that is not valid.
+//
 // [DescribeConfigurationRecorders]: https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationRecorders.html
 // [PutStoredQuery]: https://docs.aws.amazon.com/config/latest/APIReference/API_PutStoredQuery.html
 // [DisassociateResourceTypes]: https://docs.aws.amazon.com/config/latest/APIReference/API_DisassociateResourceTypes.html
 // [DescribeConfigurationRecorderStatus]: https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationRecorderStatus.html
+// [DeleteServiceLinkedConfigurationRecorder]: https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html
 // [AssociateResourceTypes]: https://docs.aws.amazon.com/config/latest/APIReference/API_AssociateResourceTypes.html
 type ValidationException struct {
 	Message *string

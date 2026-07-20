@@ -1,0 +1,5 @@
+POST /service-profiles
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","LoRaWAN":{"AddGwMetadata":true,"DrMax":1,"DrMin":1,"NbTransMax":1,"NbTransMin":1,"PrAllowed":true,"RaAllowed":true,"TxPowerIndexMax":1,"TxPowerIndexMin":1},"Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

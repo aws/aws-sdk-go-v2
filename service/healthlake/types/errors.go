@@ -33,6 +33,34 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The agent message does not fit within the current conversation context. Start a
+// new conversation or provide a message that relates to the current profile
+// customization session.
+type AgentMessageOutOfContextException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AgentMessageOutOfContextException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AgentMessageOutOfContextException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AgentMessageOutOfContextException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "AgentMessageOutOfContextException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *AgentMessageOutOfContextException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The data store is in a transition state and the user requested action cannot be
 // performed.
 type ConflictException struct {
@@ -60,6 +88,59 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified conversation identifier does not exist. Verify the conversation
+// ID or omit it to start a new conversation.
+type ConversationNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConversationNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConversationNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConversationNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConversationNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConversationNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A dependent service failed to fulfill the request.
+type FailedDependencyException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *FailedDependencyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *FailedDependencyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *FailedDependencyException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "FailedDependencyException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *FailedDependencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // An unknown internal error occurred in the service.
 type InternalServerException struct {
 	Message *string
@@ -85,6 +166,33 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// The requested operation is not yet available. Check the service documentation
+// for a list of supported operations.
+type NotImplementedOperationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NotImplementedOperationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NotImplementedOperationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NotImplementedOperationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "NotImplementedOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *NotImplementedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The requested data store was not found.
 type ResourceNotFoundException struct {
@@ -112,6 +220,32 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request exceeds the service quota.
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The user has exceeded their maximum number of allowed calls to the given API.
 type ThrottlingException struct {
 	Message *string
@@ -137,6 +271,60 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You are not authorized to make this request. Verify that your AWS credentials
+// are valid and that you have the required permissions.
+type UnauthorizedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *UnauthorizedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnauthorizedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnauthorizedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "UnauthorizedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The content type in your request is not supported. Use a supported content type
+// for this operation.
+type UnsupportedMIMETypeException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *UnsupportedMIMETypeException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnsupportedMIMETypeException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnsupportedMIMETypeException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "UnsupportedMIMETypeException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *UnsupportedMIMETypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The user input parameter was invalid.
 type ValidationException struct {

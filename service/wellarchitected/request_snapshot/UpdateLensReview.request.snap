@@ -1,0 +1,5 @@
+PATCH /workloads/__WorkloadId__/lensReviews/__LensAlias__
+
+Content-Type: application/json
+
+{"JiraConfiguration":{"SelectedPillars":[{"PillarId":"__PillarId__","SelectedQuestionIds":["__Member__","__Member__"]},{"PillarId":"__PillarId__","SelectedQuestionIds":["__Member__","__Member__"]}]},"LensNotes":"__LensNotes__","PillarNotes":{"key0":"__Value__"}}

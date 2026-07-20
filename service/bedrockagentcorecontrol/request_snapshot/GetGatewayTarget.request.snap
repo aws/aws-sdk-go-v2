@@ -1,0 +1,3 @@
+GET /gateways/__GatewayIdentifier__/targets/__TargetId__/
+
+

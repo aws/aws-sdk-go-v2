@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeLoadBalancers&AutoScalingGroupName=__AutoScalingGroupName__&MaxRecords=1&NextToken=__NextToken__&Version=2011-01-01

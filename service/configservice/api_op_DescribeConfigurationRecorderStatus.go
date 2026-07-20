@@ -53,6 +53,8 @@ type DescribeConfigurationRecorderStatusInput struct {
 
 	// For service-linked configuration recorders, you can use the service principal
 	// of the linked Amazon Web Services service to specify the configuration recorder.
+	// This field is only supported for Amazon Web Services service principals. For
+	// third-party service-linked configuration recorders, use Arn instead.
 	ServicePrincipal *string
 
 	noSmithyDocumentSerde

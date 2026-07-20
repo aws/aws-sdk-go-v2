@@ -1,0 +1,5 @@
+PUT /v1/domain/permissions/policy
+
+Content-Type: application/json
+
+{"domain":"__Domain__","domainOwner":"__DomainOwner__","policyDocument":"__PolicyDocument__","policyRevision":"__PolicyRevision__"}

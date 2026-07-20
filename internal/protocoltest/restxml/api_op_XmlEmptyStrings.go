@@ -52,6 +52,17 @@ type XmlEmptyStringsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlEmptyStringsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlEmptyStringsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlEmptyStringsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmptyString != nil {
+		s.WriteString(schemas.XmlEmptyStringsResponse_emptyString, *v.EmptyString)
+	}
+}
 func (v *XmlEmptyStringsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlEmptyStringsResponse, func(s *smithy.Schema) error {
 		switch s {

@@ -677,6 +677,7 @@
                     "requiredActions": [
                         "iam:PassRole",
                         "logs:PutPipelineRule",
+                        "cloudwatch:PutPipelineRule",
                         "observabilityadmin:TagResource",
                         "observabilityadmin:ListTagsForResource",
                         "observabilityadmin:GetTelemetryPipeline"
@@ -1054,6 +1055,7 @@
                 "aws.iam#iamAction": {
                     "requiredActions": [
                         "logs:DeletePipelineRule",
+                        "cloudwatch:DeletePipelineRule",
                         "observabilityadmin:GetTelemetryPipeline"
                     ]
                 },
@@ -3087,6 +3089,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CONNECTION_LOGS"
                     }
+                },
+                "S3_SERVER_ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3_SERVER_ACCESS_LOGS"
+                    }
                 }
             }
         },
@@ -4544,6 +4552,12 @@
                     "traits": {
                         "smithy.api#enumValue": "AWS::MSK::Cluster"
                     }
+                },
+                "AWS_S3_BUCKET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::S3::Bucket"
+                    }
                 }
             }
         },
@@ -4670,6 +4684,25 @@
                 "smithy.api#documentation": "<p> The requested operation would exceed the allowed quota for the specified resource type. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.observabilityadmin#SignalType": {
+            "type": "enum",
+            "members": {
+                "LOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Log signal type. The pipeline processes log records.</p>",
+                        "smithy.api#enumValue": "LOG"
+                    }
+                },
+                "METRIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metric signal type. The pipeline processes metric records.</p>",
+                        "smithy.api#enumValue": "METRIC"
+                    }
+                }
             }
         },
         "com.amazonaws.observabilityadmin#SingleHeader": {
@@ -5866,6 +5899,13 @@
                         "smithy.api#documentation": "<p>The pipeline configuration to test with the provided sample records.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "SignalType": {
+                    "target": "com.amazonaws.observabilityadmin#SignalType",
+                    "traits": {
+                        "smithy.api#default": "LOG",
+                        "smithy.api#documentation": "<p>The type of telemetry signal to test. If not specified, defaults to log processing.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6057,6 +6097,7 @@
                         "iam:PassRole",
                         "logs:DeletePipelineRule",
                         "logs:PutPipelineRule",
+                        "cloudwatch:PutPipelineRule",
                         "observabilityadmin:GetTelemetryPipeline",
                         "observabilityadmin:ListTagsForResource",
                         "observabilityadmin:TagResource",

@@ -56,6 +56,15 @@ type JsonUnionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonUnionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonUnionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonUnionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMyUnion(s, schemas.JsonUnionsOutput_contents, v.Contents)
+}
 func (v *JsonUnionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JsonUnionsOutput, func(s *smithy.Schema) error {
 		switch s {

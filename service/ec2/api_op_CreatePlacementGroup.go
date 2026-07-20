@@ -18,8 +18,8 @@ import (
 // partition placement group places groups of instances in different partitions,
 // where instances in one partition do not share the same hardware with instances
 // in another partition. A precision-time placement group places instances on
-// supported hardware with direct access to high-precision time sources in AWS
-// infrastructure.
+// supported hardware with direct access to high-precision time sources in Amazon
+// Web Services infrastructure.
 //
 // For more information, see [Placement groups] in the Amazon EC2 User Guide.
 //

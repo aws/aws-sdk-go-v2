@@ -60,6 +60,20 @@ type XmlAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attr != nil {
+		s.WriteString(schemas.XmlAttributesResponse_attr, *v.Attr)
+	}
+	if v.Foo != nil {
+		s.WriteString(schemas.XmlAttributesResponse_foo, *v.Foo)
+	}
+}
 func (v *XmlAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlAttributesResponse, func(s *smithy.Schema) error {
 		switch s {

@@ -54,6 +54,15 @@ type PostPlayerActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostPlayerActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostPlayerActionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostPlayerActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePlayerAction(s, schemas.PostPlayerActionOutput_action, v.Action)
+}
 func (v *PostPlayerActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PostPlayerActionOutput, func(s *smithy.Schema) error {
 		switch s {

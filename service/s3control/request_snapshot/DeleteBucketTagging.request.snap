@@ -1,0 +1,4 @@
+DELETE /v20180820/bucket/__Bucket__/tagging
+
+X-Amz-Account-Id: AccountId-value
+

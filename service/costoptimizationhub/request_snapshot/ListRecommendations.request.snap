@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: CostOptimizationHubService.ListRecommendations
+
+{"filter":{"accountIds":["__Member__","__Member__"],"actionTypes":["Rightsize","Rightsize"],"implementationEfforts":["VeryLow","VeryLow"],"recommendationIds":["__Member__","__Member__"],"regions":["__Member__","__Member__"],"resourceArns":["__Member__","__Member__"],"resourceIds":["__Member__","__Member__"],"resourceTypes":["Ec2Instance","Ec2Instance"],"restartNeeded":true,"rollbackPossible":true,"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]},"includeAllRecommendations":true,"maxResults":1,"nextToken":"__NextToken__","orderBy":{"dimension":"__Dimension__","order":"Asc"}}

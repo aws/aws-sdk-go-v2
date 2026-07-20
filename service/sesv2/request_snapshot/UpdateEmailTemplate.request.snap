@@ -1,0 +1,5 @@
+PUT /v2/email/templates/__TemplateName__
+
+Content-Type: application/json
+
+{"TemplateContent":{"Html":"__Html__","Subject":"__Subject__","Text":"__Text__"}}

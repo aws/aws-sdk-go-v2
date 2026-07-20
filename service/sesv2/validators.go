@@ -1170,6 +1170,26 @@ func (m *validateOpPutAccountDetails) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutAccountPricingAttributes struct {
+}
+
+func (*validateOpPutAccountPricingAttributes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccountPricingAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccountPricingAttributesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccountPricingAttributesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutAccountSuppressionAttributes struct {
 }
 
@@ -2080,6 +2100,10 @@ func addOpListTenantResourcesValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPutAccountDetailsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutAccountDetails{}, middleware.After)
+}
+
+func addOpPutAccountPricingAttributesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccountPricingAttributes{}, middleware.After)
 }
 
 func addOpPutAccountSuppressionAttributesValidationMiddleware(stack *middleware.Stack) error {
@@ -4189,6 +4213,21 @@ func validateOpPutAccountDetailsInput(v *PutAccountDetailsInput) error {
 	}
 	if v.WebsiteURL == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WebsiteURL"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAccountPricingAttributesInput(v *PutAccountPricingAttributesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccountPricingAttributesInput"}
+	if len(v.Plan) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Plan"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

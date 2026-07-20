@@ -89,6 +89,10 @@ type PutOrganizationConformancePackInput struct {
 	// conformance pack while deploying a conformance pack.
 	ExcludedAccounts []string
 
+	// The tags for the organization conformance pack. Each tag consists of a key and
+	// an optional value, both of which you define.
+	Tags []types.Tag
+
 	// A string that contains the full conformance pack template body. Structure
 	// containing the template body with a minimum length of 1 byte and a maximum
 	// length of 51,200 bytes.

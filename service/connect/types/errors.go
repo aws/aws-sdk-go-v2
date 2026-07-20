@@ -140,6 +140,34 @@ func (e *ContactNotFoundException) ErrorCode() string {
 }
 func (e *ContactNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The contact has not been disconnected and is not in a terminated state. PII can
+// be deleted only from a contact that has been disconnected. This error is
+// returned with an HTTP 409 status code.
+type ContactNotTerminatedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ContactNotTerminatedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ContactNotTerminatedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ContactNotTerminatedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ContactNotTerminatedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ContactNotTerminatedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Outbound calls to the destination number are not allowed.
 type DestinationNotAllowedException struct {
 	Message *string

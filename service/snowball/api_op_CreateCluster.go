@@ -4,7 +4,9 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -163,6 +165,72 @@ type CreateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressId != nil {
+		s.WriteString(schemas.CreateClusterRequest_AddressId, *v.AddressId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateClusterRequest_Description, *v.Description)
+	}
+	if v.ForceCreateJobs != false {
+		s.WriteBool(schemas.CreateClusterRequest_ForceCreateJobs, v.ForceCreateJobs)
+	}
+	if v.ForwardingAddressId != nil {
+		s.WriteString(schemas.CreateClusterRequest_ForwardingAddressId, *v.ForwardingAddressId)
+	}
+	if v.InitialClusterSize != nil {
+		s.WriteInt32(schemas.CreateClusterRequest_InitialClusterSize, *v.InitialClusterSize)
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.CreateClusterRequest_JobType, string(v.JobType))
+	}
+	if v.KmsKeyARN != nil {
+		s.WriteString(schemas.CreateClusterRequest_KmsKeyARN, *v.KmsKeyARN)
+	}
+	serializeLongTermPricingIdList(s, schemas.CreateClusterRequest_LongTermPricingIds, v.LongTermPricingIds)
+	if v.Notification != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_Notification)
+		v.Notification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OnDeviceServiceConfiguration != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_OnDeviceServiceConfiguration)
+		v.OnDeviceServiceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RemoteManagement != "" {
+		s.WriteString(schemas.CreateClusterRequest_RemoteManagement, string(v.RemoteManagement))
+	}
+	if v.Resources != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_Resources)
+		v.Resources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.CreateClusterRequest_RoleARN, *v.RoleARN)
+	}
+	if v.ShippingOption != "" {
+		s.WriteString(schemas.CreateClusterRequest_ShippingOption, string(v.ShippingOption))
+	}
+	if v.SnowballCapacityPreference != "" {
+		s.WriteString(schemas.CreateClusterRequest_SnowballCapacityPreference, string(v.SnowballCapacityPreference))
+	}
+	if v.SnowballType != "" {
+		s.WriteString(schemas.CreateClusterRequest_SnowballType, string(v.SnowballType))
+	}
+	if v.TaxDocuments != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_TaxDocuments)
+		v.TaxDocuments.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateClusterOutput struct {
 
 	// The automatically generated ID for a cluster.
@@ -179,13 +247,35 @@ type CreateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.CreateClusterResult_ClusterId, *v.ClusterId)
+	}
+	serializeJobListEntryList(s, schemas.CreateClusterResult_JobListEntries, v.JobListEntries)
+}
+func (v *CreateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateClusterResult_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.CreateClusterResult_ClusterId, v.ClusterId)
+		case schemas.CreateClusterResult_JobListEntries:
+			return deserializeJobListEntryList(d, schemas.CreateClusterResult_JobListEntries, &v.JobListEntries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterRequest, schemas.CreateClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterRequest, schemas.CreateClusterResult), output: &CreateClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

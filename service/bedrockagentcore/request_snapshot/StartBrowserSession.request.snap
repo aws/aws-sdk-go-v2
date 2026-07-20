@@ -1,0 +1,7 @@
+PUT /browsers/__BrowserIdentifier__/sessions/start
+
+Content-Type: application/json
+Traceparent: __TraceParent__
+X-Amzn-Trace-Id: __TraceId__
+
+{"certificates":[{"location":{"secretsManager":{"secretArn":"__SecretArn__"}}},{"location":{"secretsManager":{"secretArn":"__SecretArn__"}}}],"clientToken":"__ClientToken__","enterprisePolicies":[{"location":{"s3":{"bucket":"__Bucket__","prefix":"__Prefix__","versionId":"__VersionId__"}},"type":"MANAGED"},{"location":{"s3":{"bucket":"__Bucket__","prefix":"__Prefix__","versionId":"__VersionId__"}},"type":"MANAGED"}],"extensions":[{"location":{"s3":{"bucket":"__Bucket__","prefix":"__Prefix__","versionId":"__VersionId__"}}},{"location":{"s3":{"bucket":"__Bucket__","prefix":"__Prefix__","versionId":"__VersionId__"}}}],"name":"__Name__","profileConfiguration":{"profileIdentifier":"__ProfileIdentifier__"},"proxyConfiguration":{"bypass":{"domainPatterns":["__Member__","__Member__"]},"proxies":[{"externalProxy":{"credentials":{"basicAuth":{"secretArn":"__SecretArn__"}},"domainPatterns":["__Member__","__Member__"],"port":1,"server":"__Server__"}},{"externalProxy":{"credentials":{"basicAuth":{"secretArn":"__SecretArn__"}},"domainPatterns":["__Member__","__Member__"],"port":1,"server":"__Server__"}}]},"sessionTimeoutSeconds":1,"viewPort":{"height":1,"width":1}}

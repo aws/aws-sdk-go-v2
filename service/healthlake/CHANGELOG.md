@@ -1,3 +1,20 @@
+# v1.41.0 (2026-07-15)
+
+* **Feature**: AWS HealthLake now offers data transformation in Preview to convert CSV and C-CDA data to FHIR R4. Customers can maintain reusable mapping profiles, run sync or async jobs with provenance tracking and drift detection, and use an AI agent to build and edit mapping logic from natural language.
+
+# v1.40.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.40.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.39.2 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.1 (2026-06-29)
 
 * No change notes available for this release.

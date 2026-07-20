@@ -4,7 +4,9 @@ package computeoptimizer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -76,6 +78,29 @@ type GetRDSDatabaseRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRDSDatabaseRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRDSDatabaseRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRDSDatabaseRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.GetRDSDatabaseRecommendationsRequest_accountIds, v.AccountIds)
+	serializeRDSDBRecommendationFilters(s, schemas.GetRDSDatabaseRecommendationsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetRDSDatabaseRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRDSDatabaseRecommendationsRequest_nextToken, *v.NextToken)
+	}
+	if v.RecommendationPreferences != nil {
+		s.WriteStruct(schemas.GetRDSDatabaseRecommendationsRequest_recommendationPreferences)
+		v.RecommendationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceArns(s, schemas.GetRDSDatabaseRecommendationsRequest_resourceArns, v.ResourceArns)
+}
+
 type GetRDSDatabaseRecommendationsOutput struct {
 
 	//  An array of objects that describe errors of the request.
@@ -95,13 +120,38 @@ type GetRDSDatabaseRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRDSDatabaseRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRDSDatabaseRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRDSDatabaseRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGetRecommendationErrors(s, schemas.GetRDSDatabaseRecommendationsResponse_errors, v.Errors)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRDSDatabaseRecommendationsResponse_nextToken, *v.NextToken)
+	}
+	serializeRDSDBRecommendations(s, schemas.GetRDSDatabaseRecommendationsResponse_rdsDBRecommendations, v.RdsDBRecommendations)
+}
+func (v *GetRDSDatabaseRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRDSDatabaseRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRDSDatabaseRecommendationsResponse_errors:
+			return deserializeGetRecommendationErrors(d, schemas.GetRDSDatabaseRecommendationsResponse_errors, &v.Errors)
+		case schemas.GetRDSDatabaseRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetRDSDatabaseRecommendationsResponse_nextToken, v.NextToken)
+		case schemas.GetRDSDatabaseRecommendationsResponse_rdsDBRecommendations:
+			return deserializeRDSDBRecommendations(d, schemas.GetRDSDatabaseRecommendationsResponse_rdsDBRecommendations, &v.RdsDBRecommendations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRDSDatabaseRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetRDSDatabaseRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRDSDatabaseRecommendations, schemas.GetRDSDatabaseRecommendationsRequest, schemas.GetRDSDatabaseRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetRDSDatabaseRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRDSDatabaseRecommendations, schemas.GetRDSDatabaseRecommendationsRequest, schemas.GetRDSDatabaseRecommendationsResponse), output: &GetRDSDatabaseRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

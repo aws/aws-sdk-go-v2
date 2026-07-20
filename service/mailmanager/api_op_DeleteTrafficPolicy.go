@@ -42,11 +42,11 @@ type DeleteTrafficPolicyOutput struct {
 }
 
 func (c *Client) addOperationDeleteTrafficPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteTrafficPolicy{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteTrafficPolicy{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteTrafficPolicy{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteTrafficPolicy{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -70,6 +70,9 @@ func (c *Client) addOperationDeleteTrafficPolicyMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -1,0 +1,6 @@
+PATCH /api/v1/documents/__DocumentId__
+
+Authentication: __AuthenticationToken__
+Content-Type: application/json
+
+{"Name":"__Name__","ParentFolderId":"__ParentFolderId__","ResourceState":"ACTIVE"}

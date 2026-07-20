@@ -1,0 +1,3 @@
+GET /instance/__InstanceId__/storage-config/__AssociationId__?resourceType=CHAT_TRANSCRIPTS
+
+

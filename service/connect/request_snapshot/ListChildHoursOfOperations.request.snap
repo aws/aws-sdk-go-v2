@@ -1,0 +1,3 @@
+GET /hours-of-operations/__InstanceId__/__HoursOfOperationId__/hours?maxResults=1&nextToken=__NextToken__
+
+

@@ -1,0 +1,5 @@
+POST /clusters/__ClusterName__/assume-role-for-pod-identity
+
+Content-Type: application/json
+
+{"token":"__Token__"}

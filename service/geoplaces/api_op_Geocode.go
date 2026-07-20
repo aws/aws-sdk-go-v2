@@ -14,11 +14,13 @@ import (
 // information. It supports flexible queries, including free-form text or
 // structured queries with components like street names, postal codes, and regions.
 // The Geocode API can also provide additional features such as time zone
-// information and the inclusion of political views.
+// information and the inclusion of political views. Not supported in
+// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
 //
 // For more information, see [Geocode] in the Amazon Location Service Developer Guide.
 //
 // [Geocode]: https://docs.aws.amazon.com/location/latest/developerguide/geocode.html
+// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 func (c *Client) Geocode(ctx context.Context, params *GeocodeInput, optFns ...func(*Options)) (*GeocodeOutput, error) {
 	if params == nil {
 		params = &GeocodeInput{}
@@ -39,6 +41,20 @@ type GeocodeInput struct {
 	// A list of optional additional parameters, such as time zone, that can be
 	// requested for each result.
 	AdditionalFeatures []types.GeocodeAdditionalFeature
+
+	// Specifies how address names are returned. If not set, the service returns
+	// normalized (official) names by default. When set to Matched , address names in
+	// the response are based on the input query rather than official names. When set
+	// to Administrative , the service returns the official administrative names for
+	// address components. Administrative currently applies only to addresses in the
+	// United States.
+	AddressNamesMode types.GeocodeAddressNamesMode
+
+	// Specifies which address components to include translations for. Translations
+	// include all name variants and alternative names for the requested fields in all
+	// available languages. Valid values are District , Locality , Region , and
+	// SubRegion .
+	AddressTranslations []types.AddressTranslationComponent
 
 	// The position, in longitude and latitude, that the results should be close to.
 	// Typically, place results returned are ranked higher the closer they are to this
@@ -70,7 +86,7 @@ type GeocodeInput struct {
 	// is no data for the result in the requested language, data will be returned in
 	// the default language for the entry.
 	//
-	// [BCP 47]: https://en.wikipedia.org/wiki/IETF_language_tag
+	// [BCP 47]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
 	Language *string
 
 	// An optional limit for the number of results returned in a single call.
@@ -82,6 +98,15 @@ type GeocodeInput struct {
 	// political view applies to the results of the request to represent unresolved
 	// territorial claims through the point of view of the specified country.
 	PoliticalView *string
+
+	// The PostalCodeMode affects how postal code results are returned. If a postal
+	// code spans multiple localities and this value is empty, partial district or
+	// locality information may be returned under a single postal code result entry. If
+	// it's populated with the value EnumerateSpannedLocalities , all cities in that
+	// postal code are returned. If it's populated with the value
+	// EnumerateSpannedDistricts , all combinations of the postal code with the
+	// corresponding district and city names are returned.
+	PostalCodeMode types.PostalCodeMode
 
 	// A structured free text query allows you to search for places by the name or
 	// text representation of specific properties of the place.

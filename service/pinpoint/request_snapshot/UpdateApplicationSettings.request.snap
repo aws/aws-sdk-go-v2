@@ -1,0 +1,5 @@
+PUT /v1/apps/__ApplicationId__/settings
+
+Content-Type: application/json
+
+{"CampaignHook":{"LambdaFunctionName":"__LambdaFunctionName__","Mode":"DELIVERY","WebUrl":"__WebUrl__"},"CloudWatchMetricsEnabled":true,"EventTaggingEnabled":true,"JourneyLimits":{"DailyCap":1,"TimeframeCap":{"Cap":1,"Days":1},"TotalCap":1},"Limits":{"Daily":1,"MaximumDuration":1,"MessagesPerSecond":1,"Session":1,"Total":1},"QuietTime":{"End":"__End__","Start":"__Start__"}}

@@ -5,7 +5,9 @@ package snowball
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,24 @@ type ListClusterJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClusterJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClusterJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClusterJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.ListClusterJobsRequest_ClusterId, *v.ClusterId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListClusterJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClusterJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListClusterJobsOutput struct {
 
 	// Each JobListEntry object contains a job's state, a job's ID, and a value that
@@ -64,13 +84,35 @@ type ListClusterJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClusterJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClusterJobsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClusterJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobListEntryList(s, schemas.ListClusterJobsResult_JobListEntries, v.JobListEntries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClusterJobsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListClusterJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListClusterJobsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListClusterJobsResult_JobListEntries:
+			return deserializeJobListEntryList(d, schemas.ListClusterJobsResult_JobListEntries, &v.JobListEntries)
+		case schemas.ListClusterJobsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListClusterJobsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListClusterJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListClusterJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusterJobs, schemas.ListClusterJobsRequest, schemas.ListClusterJobsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListClusterJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusterJobs, schemas.ListClusterJobsRequest, schemas.ListClusterJobsResult), output: &ListClusterJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

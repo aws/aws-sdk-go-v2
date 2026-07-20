@@ -1,3 +1,24 @@
+# v1.88.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.88.0 (2026-07-08)
+
+* **Feature**: Amazon ECS now automatically detects the correct CPU architecture for Express Mode services.
+
+# v1.87.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.86.2 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.86.1 (2026-06-30)
+
+* **Documentation**: Updated threshold configuration documentation.
+
 # v1.86.0 (2026-06-29)
 
 * **Feature**: Amazon ECS now supports customizable deployment circuit breaker configurations. Customers can now define the failure threshold or control the failure counting mechanism.

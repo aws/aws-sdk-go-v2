@@ -2107,11 +2107,27 @@ func (m *smithyRpcv2cbor_deserializeOpPutAnomalyDetector) HandleDeserialize(ctx 
 		return out, metadata, rpc2_deserializeOpErrorPutAnomalyDetector(resp)
 	}
 
-	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
-		return out, metadata, fmt.Errorf("discard response body: %w", err)
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return out, metadata, err
 	}
 
-	out.Result = &PutAnomalyDetectorOutput{}
+	if len(payload) == 0 {
+		out.Result = &PutAnomalyDetectorOutput{}
+		return out, metadata, nil
+	}
+
+	cv, err := smithycbor.Decode(payload)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	output, err := deserializeCBOR_PutAnomalyDetectorOutput(cv)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	out.Result = output
 
 	return out, metadata, nil
 }
@@ -3239,6 +3255,17 @@ func deserializeCBOR_AnomalyDetector(v smithycbor.Value) (*types.AnomalyDetector
 	ds := &types.AnomalyDetector{}
 	for key, sv := range av {
 		_, _ = key, sv
+		if key == "AnomalyDetectorId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.AnomalyDetectorId = ptr.String(dv)
+		}
+
 		if key == "Namespace" {
 			if _, ok := sv.(*smithycbor.Nil); ok {
 				continue
@@ -4134,6 +4161,37 @@ func deserializeCBOR_EvaluationState(v smithycbor.Value) (types.EvaluationState,
 		return types.EvaluationState(""), fmt.Errorf("unexpected value type %T", v)
 	}
 	return types.EvaluationState(av), nil
+}
+
+func deserializeCBOR_EvaluationWindow(v smithycbor.Value) (types.EvaluationWindow, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	for key, sv := range av {
+		if key == "WallClockWindow" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_WallClockWindow(sv)
+			if err != nil {
+				return nil, err
+			}
+			return &types.EvaluationWindowMemberWallClockWindow{Value: *dv}, nil
+		}
+
+		if key == "SlidingWindow" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_SlidingWindow(sv)
+			if err != nil {
+				return nil, err
+			}
+			return &types.EvaluationWindowMemberSlidingWindow{Value: *dv}, nil
+		}
+	}
+	return nil, fmt.Errorf("unrecognized variant")
 }
 
 func deserializeCBOR_HistoryItemType(v smithycbor.Value) (types.HistoryItemType, error) {
@@ -5488,6 +5546,15 @@ func deserializeCBOR_MetricAlarm(v smithycbor.Value) (*types.MetricAlarm, error)
 			ds.StateTransitionedTimestamp = ptr.Time(dv)
 		}
 
+		if key == "EvaluationWindow" {
+
+			dv, err := deserializeCBOR_EvaluationWindow(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.EvaluationWindow = dv
+		}
+
 		if key == "EvaluationCriteria" {
 
 			dv, err := deserializeCBOR_EvaluationCriteria(sv)
@@ -6694,6 +6761,19 @@ func deserializeCBOR_SingleMetricAnomalyDetector(v smithycbor.Value) (*types.Sin
 	return ds, nil
 }
 
+func deserializeCBOR_SlidingWindow(v smithycbor.Value) (*types.SlidingWindow, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.SlidingWindow{}
+	for key, sv := range av {
+		_, _ = key, sv
+
+	}
+	return ds, nil
+}
+
 func deserializeCBOR_StandardUnit(v smithycbor.Value) (types.StandardUnit, error) {
 	av, ok := v.(smithycbor.String)
 	if !ok {
@@ -6791,6 +6871,28 @@ func deserializeCBOR_Timestamps(v smithycbor.Value) ([]time.Time, error) {
 		dl = append(dl, di)
 	}
 	return dl, nil
+}
+
+func deserializeCBOR_WallClockWindow(v smithycbor.Value) (*types.WallClockWindow, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.WallClockWindow{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Timezone" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Timezone = ptr.String(dv)
+		}
+	}
+	return ds, nil
 }
 
 func deserializeCBOR_Blob(v smithycbor.Value) ([]byte, error) {
@@ -7843,6 +7945,28 @@ func deserializeCBOR_ListTagsForResourceOutput(v smithycbor.Value) (*ListTagsFor
 				return nil, err
 			}
 			ds.Tags = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_PutAnomalyDetectorOutput(v smithycbor.Value) (*PutAnomalyDetectorOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &PutAnomalyDetectorOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "AnomalyDetectorId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.AnomalyDetectorId = ptr.String(dv)
 		}
 	}
 	return ds, nil

@@ -1,0 +1,5 @@
+POST /UpdateSamplingRule
+
+Content-Type: application/json
+
+{"SamplingRuleUpdate":{"Attributes":{"key0":"__Value__"},"FixedRate":1,"Host":"__Host__","HTTPMethod":"__HTTPMethod__","Priority":1,"ReservoirSize":1,"ResourceARN":"__ResourceARN__","RuleARN":"__RuleARN__","RuleName":"__RuleName__","SamplingRateBoost":{"CooldownWindowMinutes":1,"MaxRate":1},"ServiceName":"__ServiceName__","ServiceType":"__ServiceType__","URLPath":"__URLPath__"}}

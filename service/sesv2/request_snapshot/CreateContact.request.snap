@@ -1,0 +1,5 @@
+POST /v2/email/contact-lists/__ContactListName__/contacts
+
+Content-Type: application/json
+
+{"AttributesData":"__AttributesData__","EmailAddress":"__EmailAddress__","TopicPreferences":[{"SubscriptionStatus":"OPT_IN","TopicName":"__TopicName__"},{"SubscriptionStatus":"OPT_IN","TopicName":"__TopicName__"}],"UnsubscribeAll":true}

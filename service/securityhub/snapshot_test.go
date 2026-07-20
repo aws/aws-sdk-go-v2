@@ -290,6 +290,18 @@ func TestCheckSnapshot_CreateConfigurationPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateConnectorV2(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateConnectorV2(context.Background(), nil, func(o *Options) {
@@ -403,6 +415,18 @@ func TestCheckSnapshot_DeleteConfigurationPolicy(t *testing.T) {
 	_, err := svc.DeleteConfigurationPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteConfigurationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -602,6 +626,18 @@ func TestCheckSnapshot_DisableSecurityHub(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisableSecurityHubFeatureV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableSecurityHubFeatureV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableSecurityHubFeatureV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisableSecurityHubV2(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableSecurityHubV2(context.Background(), nil, func(o *Options) {
@@ -686,6 +722,18 @@ func TestCheckSnapshot_EnableSecurityHub(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_EnableSecurityHubFeatureV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableSecurityHubFeatureV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableSecurityHubFeatureV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_EnableSecurityHubV2(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableSecurityHubV2(context.Background(), nil, func(o *Options) {
@@ -763,6 +811,18 @@ func TestCheckSnapshot_GetConfigurationPolicyAssociation(t *testing.T) {
 	_, err := svc.GetConfigurationPolicyAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetConfigurationPolicyAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1058,6 +1118,18 @@ func TestCheckSnapshot_ListConfigurationPolicyAssociations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListConnectorsV2(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListConnectorsV2(context.Background(), nil, func(o *Options) {
@@ -1267,6 +1339,18 @@ func TestCheckSnapshot_UpdateConfigurationPolicy(t *testing.T) {
 	_, err := svc.UpdateConfigurationPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateConfigurationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1597,6 +1681,18 @@ func TestUpdateSnapshot_CreateConfigurationPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateConnectorV2(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateConnectorV2(context.Background(), nil, func(o *Options) {
@@ -1710,6 +1806,18 @@ func TestUpdateSnapshot_DeleteConfigurationPolicy(t *testing.T) {
 	_, err := svc.DeleteConfigurationPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteConfigurationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1909,6 +2017,18 @@ func TestUpdateSnapshot_DisableSecurityHub(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisableSecurityHubFeatureV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableSecurityHubFeatureV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableSecurityHubFeatureV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisableSecurityHubV2(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableSecurityHubV2(context.Background(), nil, func(o *Options) {
@@ -1993,6 +2113,18 @@ func TestUpdateSnapshot_EnableSecurityHub(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_EnableSecurityHubFeatureV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableSecurityHubFeatureV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableSecurityHubFeatureV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_EnableSecurityHubV2(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableSecurityHubV2(context.Background(), nil, func(o *Options) {
@@ -2070,6 +2202,18 @@ func TestUpdateSnapshot_GetConfigurationPolicyAssociation(t *testing.T) {
 	_, err := svc.GetConfigurationPolicyAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetConfigurationPolicyAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2365,6 +2509,18 @@ func TestUpdateSnapshot_ListConfigurationPolicyAssociations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListConnectorsV2(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListConnectorsV2(context.Background(), nil, func(o *Options) {
@@ -2574,6 +2730,18 @@ func TestUpdateSnapshot_UpdateConfigurationPolicy(t *testing.T) {
 	_, err := svc.UpdateConfigurationPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateConfigurationPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

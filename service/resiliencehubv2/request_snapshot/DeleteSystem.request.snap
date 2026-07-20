@@ -1,0 +1,5 @@
+POST /v2/delete-system
+
+Content-Type: application/json
+
+{"systemArn":"__SystemArn__"}

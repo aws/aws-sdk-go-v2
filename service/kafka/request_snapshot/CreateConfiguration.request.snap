@@ -1,0 +1,5 @@
+POST /v1/configurations
+
+Content-Type: application/json
+
+{"description":"__Description__","kafkaVersions":["__Member__","__Member__"],"name":"__Name__","serverProperties":"YmxvYg=="}

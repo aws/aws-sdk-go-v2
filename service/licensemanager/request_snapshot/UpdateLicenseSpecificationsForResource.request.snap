@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSLicenseManager.UpdateLicenseSpecificationsForResource
+
+{"AddLicenseSpecifications":[{"AmiAssociationScope":"__AmiAssociationScope__","LicenseConfigurationArn":"__LicenseConfigurationArn__"},{"AmiAssociationScope":"__AmiAssociationScope__","LicenseConfigurationArn":"__LicenseConfigurationArn__"}],"RemoveLicenseSpecifications":[{"AmiAssociationScope":"__AmiAssociationScope__","LicenseConfigurationArn":"__LicenseConfigurationArn__"},{"AmiAssociationScope":"__AmiAssociationScope__","LicenseConfigurationArn":"__LicenseConfigurationArn__"}],"ResourceArn":"__ResourceArn__"}

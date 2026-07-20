@@ -1,0 +1,5 @@
+PUT /prod/multiplexes/__MultiplexId__
+
+Content-Type: application/json
+
+{"multiplexSettings":{"maximumVideoBufferDelayMilliseconds":1,"transportStreamBitrate":1,"transportStreamId":1,"transportStreamReservedBitrate":1},"name":"__Name__","packetIdentifiersMapping":{"key0":{"aribCaptionsPid":1,"audioPids":[1,1],"dvbSubPids":[1,1],"dvbTeletextPid":1,"dvbTeletextPids":[1,1],"ecmPid":1,"etvPlatformPid":1,"etvSignalPid":1,"klvDataPids":[1,1],"pcrPid":1,"pmtPid":1,"privateMetadataPid":1,"scte27Pids":[1,1],"scte35Pid":1,"smpte2038Pid":1,"timedMetadataPid":1,"videoPid":1}}}

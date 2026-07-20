@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.CreateMigrationProject
+
+{"Description":"__Description__","InstanceProfileIdentifier":"__InstanceProfileIdentifier__","MigrationProjectName":"__MigrationProjectName__","SchemaConversionApplicationAttributes":{"S3BucketPath":"__S3BucketPath__","S3BucketRoleArn":"__S3BucketRoleArn__"},"SourceDataProviderDescriptors":[{"DataProviderIdentifier":"__DataProviderIdentifier__","SecretsManagerAccessRoleArn":"__SecretsManagerAccessRoleArn__","SecretsManagerSecretId":"__SecretsManagerSecretId__"},{"DataProviderIdentifier":"__DataProviderIdentifier__","SecretsManagerAccessRoleArn":"__SecretsManagerAccessRoleArn__","SecretsManagerSecretId":"__SecretsManagerSecretId__"}],"Tags":[{"Key":"__Key__","ResourceArn":"__ResourceArn__","Value":"__Value__"},{"Key":"__Key__","ResourceArn":"__ResourceArn__","Value":"__Value__"}],"TargetDataProviderDescriptors":[{"DataProviderIdentifier":"__DataProviderIdentifier__","SecretsManagerAccessRoleArn":"__SecretsManagerAccessRoleArn__","SecretsManagerSecretId":"__SecretsManagerSecretId__"},{"DataProviderIdentifier":"__DataProviderIdentifier__","SecretsManagerAccessRoleArn":"__SecretsManagerAccessRoleArn__","SecretsManagerSecretId":"__SecretsManagerSecretId__"}],"TransformationRules":"__TransformationRules__"}

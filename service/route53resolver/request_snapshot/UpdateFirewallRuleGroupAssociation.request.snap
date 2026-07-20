@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.UpdateFirewallRuleGroupAssociation
+
+{"FirewallRuleGroupAssociationId":"__FirewallRuleGroupAssociationId__","MutationProtection":"ENABLED","Name":"__Name__","Priority":1}

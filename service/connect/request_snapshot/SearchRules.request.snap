@@ -1,0 +1,5 @@
+POST /search-rules
+
+Content-Type: application/json
+
+{"InstanceId":"__InstanceId__","MaxResults":1,"NextToken":"__NextToken__","SearchCriteria":{"AndConditions":[{},{}],"OrConditions":[{},{}],"StringCondition":{"ComparisonType":"STARTS_WITH","FieldName":"__FieldName__","Value":"__Value__"}},"SearchFilter":{"AttributeFilter":{"AndCondition":{"TagConditions":[{"TagKey":"__TagKey__","TagValue":"__TagValue__"},{"TagKey":"__TagKey__","TagValue":"__TagValue__"}]},"OrConditions":[{"TagConditions":[{"TagKey":"__TagKey__","TagValue":"__TagValue__"},{"TagKey":"__TagKey__","TagValue":"__TagValue__"}]},{"TagConditions":[{"TagKey":"__TagKey__","TagValue":"__TagValue__"},{"TagKey":"__TagKey__","TagValue":"__TagValue__"}]}],"TagCondition":{"TagKey":"__TagKey__","TagValue":"__TagValue__"}}}}

@@ -11,6 +11,15 @@ func ExampleAcmCertificateMetadataFilter_outputUsage() {
 	var union types.AcmCertificateMetadataFilter
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.AcmCertificateMetadataFilterMemberAcmeAccountId:
+		_ = v.Value // Value is string
+
+	case *types.AcmCertificateMetadataFilterMemberAcmeEndpointArn:
+		_ = v.Value // Value is string
+
+	case *types.AcmCertificateMetadataFilterMemberCertificateKeyPairOrigin:
+		_ = v.Value // Value is types.CertificateKeyPairOrigin
+
 	case *types.AcmCertificateMetadataFilterMemberExported:
 		_ = v.Value // Value is bool
 
@@ -45,12 +54,33 @@ func ExampleAcmCertificateMetadataFilter_outputUsage() {
 }
 
 var _ types.CertificateType
+var _ *string
+var _ *string
 var _ types.CertificateExport
 var _ types.CertificateManagedBy
 var _ *bool
+var _ types.CertificateKeyPairOrigin
 var _ types.CertificateStatus
 var _ types.RenewalStatus
 var _ types.ValidationMethod
+
+func ExampleCertificateAuthority_outputUsage() {
+	var union types.CertificateAuthority
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CertificateAuthorityMemberPublicCertificateAuthority:
+		_ = v.Value // Value is types.PublicCertificateAuthority
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PublicCertificateAuthority
 
 func ExampleCertificateFilter_outputUsage() {
 	var union types.CertificateFilter
@@ -162,6 +192,42 @@ func ExampleGeneralName_outputUsage() {
 var _ *types.DistinguishedName
 var _ *string
 var _ *types.OtherName
+
+func ExamplePrevalidationDetails_outputUsage() {
+	var union types.PrevalidationDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PrevalidationDetailsMemberDnsPrevalidation:
+		_ = v.Value // Value is types.DnsPrevalidationDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DnsPrevalidationDetails
+
+func ExamplePrevalidationOptions_outputUsage() {
+	var union types.PrevalidationOptions
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PrevalidationOptionsMemberDnsPrevalidation:
+		_ = v.Value // Value is types.DnsPrevalidationOptions
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DnsPrevalidationOptions
 
 func ExampleSubjectAlternativeNameFilter_outputUsage() {
 	var union types.SubjectAlternativeNameFilter

@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceId__/component-types-list
+
+Content-Type: application/json
+
+{"filters":[{"extendsFrom":"__ListComponentTypesFilterMemberExtendsFrom__"},{"extendsFrom":"__ListComponentTypesFilterMemberExtendsFrom__"}],"maxResults":1,"nextToken":"__NextToken__"}

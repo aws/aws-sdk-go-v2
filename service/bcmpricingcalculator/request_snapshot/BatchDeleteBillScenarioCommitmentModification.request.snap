@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.BatchDeleteBillScenarioCommitmentModification
+
+{"billScenarioId":"__BillScenarioId__","ids":["__Member__","__Member__"]}

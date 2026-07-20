@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: EC2WindowsBarleyService.CreateLogPattern
+
+{"Pattern":"__Pattern__","PatternName":"__PatternName__","PatternSetName":"__PatternSetName__","Rank":1,"ResourceGroupName":"__ResourceGroupName__"}

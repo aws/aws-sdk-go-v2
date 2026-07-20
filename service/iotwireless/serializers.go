@@ -9943,6 +9943,23 @@ func awsRestjson1_serializeDocumentConnectionStatusResourceTypeEventConfiguratio
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDefaultSessionParametersMulticast(v *types.DefaultSessionParametersMulticast, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DlDr != nil {
+		ok := object.Key("DlDr")
+		ok.Integer(*v.DlDr)
+	}
+
+	if v.DlFreq != nil {
+		ok := object.Key("DlFreq")
+		ok.Integer(*v.DlFreq)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDeviceRegistrationStateEventConfiguration(v *types.DeviceRegistrationStateEventConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10760,6 +10777,13 @@ func awsRestjson1_serializeDocumentLoRaWANJoinResourceTypeEventConfiguration(v *
 func awsRestjson1_serializeDocumentLoRaWANMulticast(v *types.LoRaWANMulticast, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DefaultSessionParameters != nil {
+		ok := object.Key("DefaultSessionParameters")
+		if err := awsRestjson1_serializeDocumentDefaultSessionParametersMulticast(v.DefaultSessionParameters, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.DlClass) > 0 {
 		ok := object.Key("DlClass")

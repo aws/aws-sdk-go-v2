@@ -1,3 +1,20 @@
+# v1.69.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.69.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.68.1 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.68.0 (2026-06-30)
+
+* **Feature**: This release adds support for a new reservations-then-balanced capacity distribution strategy, which first attempts to launch instances into your Capacity Reservations and then balances remaining capacity across healthy Availability Zones.
+
 # v1.67.5 (2026-06-29)
 
 * No change notes available for this release.

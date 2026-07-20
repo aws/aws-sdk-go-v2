@@ -1,0 +1,5 @@
+POST /accesslogsubscriptions
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","destinationArn":"__DestinationArn__","resourceIdentifier":"__ResourceIdentifier__","serviceNetworkLogType":"SERVICE","tags":{"key0":"__Value__"}}

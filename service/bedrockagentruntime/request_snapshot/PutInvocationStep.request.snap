@@ -1,0 +1,5 @@
+PUT /sessions/__SessionIdentifier__/invocationSteps/
+
+Content-Type: application/json
+
+{"invocationIdentifier":"__InvocationIdentifier__","invocationStepId":"__InvocationStepId__","invocationStepTime":"2000-01-01T00:00:00Z","payload":{"contentBlocks":[{"text":"__BedrockSessionContentBlockMemberText__"},{"text":"__BedrockSessionContentBlockMemberText__"}]}}

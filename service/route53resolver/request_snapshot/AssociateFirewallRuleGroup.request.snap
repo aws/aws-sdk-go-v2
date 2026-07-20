@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.AssociateFirewallRuleGroup
+
+{"CreatorRequestId":"__CreatorRequestId__","FirewallRuleGroupId":"__FirewallRuleGroupId__","MutationProtection":"ENABLED","Name":"__Name__","Priority":1,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VpcId":"__VpcId__"}

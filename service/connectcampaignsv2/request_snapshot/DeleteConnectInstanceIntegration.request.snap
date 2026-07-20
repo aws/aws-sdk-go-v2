@@ -1,0 +1,5 @@
+POST /v2/connect-instance/__ConnectInstanceId__/integrations/delete
+
+Content-Type: application/json
+
+{"integrationIdentifier":{"customerProfiles":{"domainArn":"__DomainArn__"}}}

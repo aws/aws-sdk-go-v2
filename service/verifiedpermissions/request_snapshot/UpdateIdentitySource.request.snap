@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VerifiedPermissions.UpdateIdentitySource
+
+{"identitySourceId":"__IdentitySourceId__","policyStoreId":"__PolicyStoreId__","principalEntityType":"__PrincipalEntityType__","updateConfiguration":{"cognitoUserPoolConfiguration":{"clientIds":["__Member__","__Member__"],"groupConfiguration":{"groupEntityType":"__GroupEntityType__"},"userPoolArn":"__UserPoolArn__"}}}

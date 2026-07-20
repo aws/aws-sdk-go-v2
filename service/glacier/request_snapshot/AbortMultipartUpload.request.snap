@@ -1,0 +1,4 @@
+DELETE /__AccountId__/vaults/__VaultName__/multipart-uploads/__UploadId__
+
+X-Amz-Glacier-Version: 2012-06-01
+

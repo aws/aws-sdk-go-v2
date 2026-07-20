@@ -1,0 +1,6 @@
+POST /api/v1/search
+
+Authentication: __AuthenticationToken__
+Content-Type: application/json
+
+{"AdditionalResponseFields":["WEBURL","WEBURL"],"Filters":{"AncestorIds":["__Member__","__Member__"],"ContentCategories":["IMAGE","IMAGE"],"CreatedRange":{"EndValue":946684800,"StartValue":946684800},"Labels":["__Member__","__Member__"],"ModifiedRange":{"EndValue":946684800,"StartValue":946684800},"Principals":[{"Id":"__Id__","Roles":["VIEWER","VIEWER"]},{"Id":"__Id__","Roles":["VIEWER","VIEWER"]}],"ResourceTypes":["FOLDER","FOLDER"],"SearchCollectionTypes":["OWNED","OWNED"],"SizeRange":{"EndValue":1,"StartValue":1},"TextLocales":["AR","AR"]},"Limit":1,"Marker":"__Marker__","OrderBy":[{"Field":"RELEVANCE","Order":"ASC"},{"Field":"RELEVANCE","Order":"ASC"}],"OrganizationId":"__OrganizationId__","QueryScopes":["NAME","NAME"],"QueryText":"__QueryText__"}

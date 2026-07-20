@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.CreateBucket
+
+{"bucketName":"__BucketName__","bundleId":"__BundleId__","enableObjectVersioning":true,"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

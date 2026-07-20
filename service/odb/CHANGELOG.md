@@ -1,3 +1,20 @@
+# v1.14.0 (2026-07-17)
+
+* **Feature**: Adds support for sourcing Autonomous Database admin and wallet passwords from customer-managed AWS Secrets Manager secrets, including password source configuration and summaries, and enabling or disabling the OCI IAM service role for Secrets Manager integration via InitializeService.
+
+# v1.13.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.13.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.12.2 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.1 (2026-06-29)
 
 * No change notes available for this release.

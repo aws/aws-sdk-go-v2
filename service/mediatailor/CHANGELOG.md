@@ -1,3 +1,24 @@
+# v1.62.0 (2026-07-20)
+
+* **Feature**: This change adds api support for configuring ad decision server timeouts and concurrency fields on MediaTailor playback configurations
+
+# v1.61.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.61.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.60.0 (2026-07-02)
+
+* **Feature**: Added dual-stack (IPv4 and IPv6) endpoint fields to SSAI and Channel Assembly API responses.
+
+# v1.59.8 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.59.7 (2026-06-29)
 
 * No change notes available for this release.

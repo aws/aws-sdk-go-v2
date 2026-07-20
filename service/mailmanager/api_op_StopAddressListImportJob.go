@@ -42,11 +42,11 @@ type StopAddressListImportJobOutput struct {
 }
 
 func (c *Client) addOperationStopAddressListImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStopAddressListImportJob{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStopAddressListImportJob{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStopAddressListImportJob{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStopAddressListImportJob{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -70,6 +70,9 @@ func (c *Client) addOperationStopAddressListImportJobMiddlewares(stack *middlewa
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

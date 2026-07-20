@@ -1,0 +1,5 @@
+POST /collaborations/__CollaborationIdentifier__/batch-analysistemplates
+
+Content-Type: application/json
+
+{"analysisTemplateArns":["__Member__","__Member__"]}

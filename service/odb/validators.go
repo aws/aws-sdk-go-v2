@@ -1565,9 +1565,6 @@ func validateOpCreateAutonomousDatabaseWalletInput(v *CreateAutonomousDatabaseWa
 	if v.AutonomousDatabaseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutonomousDatabaseId"))
 	}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

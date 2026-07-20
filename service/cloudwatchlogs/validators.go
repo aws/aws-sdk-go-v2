@@ -1510,6 +1510,26 @@ func (m *validateOpPutRetentionPolicy) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutStorageTierPolicy struct {
+}
+
+func (*validateOpPutStorageTierPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutStorageTierPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutStorageTierPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutStorageTierPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutSubscriptionFilter struct {
 }
 
@@ -2148,6 +2168,10 @@ func addOpPutQueryDefinitionValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpPutRetentionPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutRetentionPolicy{}, middleware.After)
+}
+
+func addOpPutStorageTierPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutStorageTierPolicy{}, middleware.After)
 }
 
 func addOpPutSubscriptionFilterValidationMiddleware(stack *middleware.Stack) error {
@@ -4391,6 +4415,21 @@ func validateOpPutRetentionPolicyInput(v *PutRetentionPolicyInput) error {
 	}
 	if v.RetentionInDays == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RetentionInDays"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutStorageTierPolicyInput(v *PutStorageTierPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutStorageTierPolicyInput"}
+	if len(v.StorageTier) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageTier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

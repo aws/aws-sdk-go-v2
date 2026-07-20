@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteServerlessCache&FinalSnapshotName=__FinalSnapshotName__&ServerlessCacheName=__ServerlessCacheName__&Version=2015-02-02

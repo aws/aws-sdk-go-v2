@@ -1,0 +1,5 @@
+POST /detector/__DetectorId__/member/start
+
+Content-Type: application/json
+
+{"accountIds":["__Member__","__Member__"]}

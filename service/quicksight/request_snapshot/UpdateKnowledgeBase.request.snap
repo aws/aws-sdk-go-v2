@@ -1,0 +1,5 @@
+POST /v1/accounts/__AwsAccountId__/knowledge-bases/__KnowledgeBaseId__
+
+Content-Type: application/json
+
+{"AccessControlConfiguration":{"isACLEnabled":true},"Description":"__Description__","IsEmailNotificationOptedForIngestionFailures":true,"KnowledgeBaseConfiguration":{"templateConfiguration":{}},"MediaExtractionConfiguration":{"audioExtractionConfiguration":{"audioExtractionStatus":"ENABLED"},"imageExtractionConfiguration":{"imageExtractionStatus":"ENABLED"},"videoExtractionConfiguration":{"videoExtractionStatus":"ENABLED","videoExtractionType":"AUDIO_TRANSCRIPTION_ONLY"}},"Name":"__Name__"}

@@ -1,0 +1,5 @@
+PUT /table-record-expiration?tableArn=__TableArn__
+
+Content-Type: application/json
+
+{"value":{"settings":{"days":1},"status":"enabled"}}

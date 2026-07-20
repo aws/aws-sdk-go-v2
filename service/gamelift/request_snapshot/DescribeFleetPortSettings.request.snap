@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/DescribeFleetPortSettings
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢gFleetIdk__FleetId__hLocationl__Location__

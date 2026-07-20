@@ -1,0 +1,3 @@
+GET /v2/vpclinks?maxResults=__MaxResults__&nextToken=__NextToken__
+
+

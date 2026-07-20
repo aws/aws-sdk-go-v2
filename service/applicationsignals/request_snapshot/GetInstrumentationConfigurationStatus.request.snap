@@ -1,0 +1,5 @@
+POST /get-instrumentation-configuration-status
+
+Content-Type: application/json
+
+{"EndTime":946684800,"Environment":"__Environment__","InstrumentationType":"BREAKPOINT","LocationIdentifier":{"CodeLocation":{"ClassName":"__ClassName__","CodeUnit":"__CodeUnit__","FilePath":"__FilePath__","Language":"Java","LineNumber":1,"MethodName":"__MethodName__"}},"MaxResults":1,"NextToken":"__NextToken__","Service":"__Service__","SignalType":"SNAPSHOT","StartTime":946684800,"Status":"READY"}

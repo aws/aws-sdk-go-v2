@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.FilterLogEvents
+
+{"endTime":1,"filterPattern":"__FilterPattern__","interleaved":true,"limit":1,"logGroupIdentifier":"__LogGroupIdentifier__","logGroupName":"__LogGroupName__","logStreamNamePrefix":"__LogStreamNamePrefix__","logStreamNames":["__Member__","__Member__"],"nextToken":"__NextToken__","startFromHead":true,"startTime":1,"unmask":true}

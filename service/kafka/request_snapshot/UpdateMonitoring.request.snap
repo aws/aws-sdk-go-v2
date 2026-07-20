@@ -1,0 +1,5 @@
+PUT /v1/clusters/__ClusterArn__/monitoring
+
+Content-Type: application/json
+
+{"currentVersion":"__CurrentVersion__","enhancedMonitoring":"DEFAULT","loggingInfo":{"brokerLogs":{"cloudWatchLogs":{"enabled":true,"logGroup":"__LogGroup__"},"firehose":{"deliveryStream":"__DeliveryStream__","enabled":true},"s3":{"bucket":"__Bucket__","enabled":true,"prefix":"__Prefix__"}}},"openMonitoring":{"prometheus":{"jmxExporter":{"enabledInBroker":true},"nodeExporter":{"enabledInBroker":true}}}}

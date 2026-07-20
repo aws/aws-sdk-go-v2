@@ -1,0 +1,5 @@
+PATCH /transfer-certificate/__CertificateId__?targetAwsAccount=__TargetAwsAccount__
+
+Content-Type: application/json
+
+{"transferMessage":"__TransferMessage__"}

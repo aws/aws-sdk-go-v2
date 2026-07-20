@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.CreateRepository
+
+{"encryptionConfiguration":{"encryptionType":"AES256","kmsKey":"__KmsKey__"},"imageScanningConfiguration":{"scanOnPush":true},"imageTagMutability":"MUTABLE","imageTagMutabilityExclusionFilters":[{"filter":"__Filter__","filterType":"WILDCARD"},{"filter":"__Filter__","filterType":"WILDCARD"}],"registryId":"__RegistryId__","repositoryName":"__RepositoryName__","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

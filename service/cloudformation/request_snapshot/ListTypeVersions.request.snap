@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ListTypeVersions&Arn=__Arn__&DeprecatedStatus=LIVE&MaxResults=1&NextToken=__NextToken__&PublisherId=__PublisherId__&Type=RESOURCE&TypeName=__TypeName__&Version=2010-05-15

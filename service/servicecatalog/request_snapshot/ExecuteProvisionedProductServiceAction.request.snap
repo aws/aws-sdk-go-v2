@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.ExecuteProvisionedProductServiceAction
+
+{"AcceptLanguage":"__AcceptLanguage__","ExecuteToken":"__ExecuteToken__","Parameters":{"key0":["__Member__","__Member__"]},"ProvisionedProductId":"__ProvisionedProductId__","ServiceActionId":"__ServiceActionId__"}

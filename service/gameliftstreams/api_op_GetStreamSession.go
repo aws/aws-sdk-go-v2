@@ -143,6 +143,11 @@ type GetStreamSessionOutput struct {
 	// The data transfer protocol in use with the stream session.
 	Protocol types.Protocol
 
+	// The ARN of the AWS Identity and Access Management (IAM) role that Amazon
+	// GameLift Streams assumes on behalf of your application during the stream
+	// session.
+	RoleArn *string
+
 	// The maximum duration of a session. Amazon GameLift Streams will automatically
 	// terminate a session after this amount of time has elapsed, regardless of any
 	// existing client connections.

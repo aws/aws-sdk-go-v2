@@ -5142,6 +5142,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Allows filtering on the <code>LastModifiedDate</code> of a ResaleAuthorization.</p>"
                     }
+                },
+                "ResellerRole": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerRoleFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ResellerRole</code> of a ResaleAuthorization.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5582,6 +5588,49 @@
                 "smithy.api#pattern": "^(.)+$"
             }
         },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerRoleFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerRoleFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ResellerRole</code> of a ResaleAuthorization with list input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>ResellerRole</code> of a ResaleAuthorization.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerRoleFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerRoleString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerRoleString": {
+            "type": "enum",
+            "members": {
+                "ChannelPartner": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ChannelPartner"
+                    }
+                },
+                "Distributor": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Distributor"
+                    }
+                }
+            }
+        },
         "com.amazonaws.marketplacecatalog#ResaleAuthorizationSort": {
             "type": "structure",
             "members": {
@@ -5801,6 +5850,12 @@
                     "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
                     "traits": {
                         "smithy.api#documentation": "<p>The availability end date of the ResaleAuthorization.</p>"
+                    }
+                },
+                "ResellerRole": {
+                    "target": "com.amazonaws.marketplacecatalog#ResaleAuthorizationResellerRoleString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reseller role of the ResaleAuthorization.</p>"
                     }
                 }
             },

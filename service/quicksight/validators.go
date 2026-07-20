@@ -430,6 +430,26 @@ func (m *validateOpCreateIngestion) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateKnowledgeBase struct {
+}
+
+func (*validateOpCreateKnowledgeBase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateKnowledgeBase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateKnowledgeBaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateKnowledgeBaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateNamespace struct {
 }
 
@@ -4850,6 +4870,26 @@ func (m *validateOpUpdateKeyRegistration) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateKnowledgeBase struct {
+}
+
+func (*validateOpUpdateKnowledgeBase) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateKnowledgeBase) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateKnowledgeBaseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateKnowledgeBaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateKnowledgeBasePermissions struct {
 }
 
@@ -5432,6 +5472,10 @@ func addOpCreateIAMPolicyAssignmentValidationMiddleware(stack *middleware.Stack)
 
 func addOpCreateIngestionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIngestion{}, middleware.After)
+}
+
+func addOpCreateKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateKnowledgeBase{}, middleware.After)
 }
 
 func addOpCreateNamespaceValidationMiddleware(stack *middleware.Stack) error {
@@ -6316,6 +6360,10 @@ func addOpUpdateIpRestrictionValidationMiddleware(stack *middleware.Stack) error
 
 func addOpUpdateKeyRegistrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateKeyRegistration{}, middleware.After)
+}
+
+func addOpUpdateKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateKnowledgeBase{}, middleware.After)
 }
 
 func addOpUpdateKnowledgeBasePermissionsValidationMiddleware(stack *middleware.Stack) error {
@@ -8309,6 +8357,21 @@ func validateAssetOptions(v *types.AssetOptions) error {
 		if err := validateVisualCustomActionDefaults(v.CustomActionDefaults); err != nil {
 			invalidParams.AddNested("CustomActionDefaults", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAudioExtractionConfiguration(v *types.AudioExtractionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioExtractionConfiguration"}
+	if len(v.AudioExtractionStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AudioExtractionStatus"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11848,6 +11911,11 @@ func validateDataSourceParameters(v types.DataSourceParameters) error {
 			invalidParams.AddNested("[ExasolParameters]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.DataSourceParametersMemberFMKBParameters:
+		if err := validateFMKBParameters(&uv.Value); err != nil {
+			invalidParams.AddNested("[FMKBParameters]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.DataSourceParametersMemberImpalaParameters:
 		if err := validateImpalaParameters(&uv.Value); err != nil {
 			invalidParams.AddNested("[ImpalaParameters]", err.(smithy.InvalidParamsError))
@@ -11911,6 +11979,11 @@ func validateDataSourceParameters(v types.DataSourceParameters) error {
 	case *types.DataSourceParametersMemberServiceNowParameters:
 		if err := validateServiceNowParameters(&uv.Value); err != nil {
 			invalidParams.AddNested("[ServiceNowParameters]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DataSourceParametersMemberSharePointParameters:
+		if err := validateSharePointParameters(&uv.Value); err != nil {
+			invalidParams.AddNested("[SharePointParameters]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.DataSourceParametersMemberSnowflakeParameters:
@@ -12995,6 +13068,28 @@ func validateFieldTooltipItem(v *types.FieldTooltipItem) error {
 	}
 }
 
+func validateFileSource(v *types.FileSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FileSource"}
+	if v.DataSourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceArn"))
+	}
+	if v.InputColumns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputColumns"))
+	} else if v.InputColumns != nil {
+		if err := validateInputColumnList(v.InputColumns); err != nil {
+			invalidParams.AddNested("InputColumns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFilledMapAggregatedFieldWells(v *types.FilledMapAggregatedFieldWells) error {
 	if v == nil {
 		return nil
@@ -13736,6 +13831,21 @@ func validateFilterTextFieldControl(v *types.FilterTextFieldControl) error {
 	}
 	if v.SourceFilterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceFilterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFMKBParameters(v *types.FMKBParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FMKBParameters"}
+	if v.KnowledgeBaseArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -15888,6 +15998,21 @@ func validateImageCustomActionOperationList(v []types.ImageCustomActionOperation
 	}
 }
 
+func validateImageExtractionConfiguration(v *types.ImageExtractionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImageExtractionConfiguration"}
+	if len(v.ImageExtractionStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageExtractionStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateImageSetConfiguration(v *types.ImageSetConfiguration) error {
 	if v == nil {
 		return nil
@@ -17394,6 +17519,33 @@ func validateMeasureFieldList(v []types.MeasureField) error {
 	}
 }
 
+func validateMediaExtractionConfiguration(v *types.MediaExtractionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaExtractionConfiguration"}
+	if v.ImageExtractionConfiguration != nil {
+		if err := validateImageExtractionConfiguration(v.ImageExtractionConfiguration); err != nil {
+			invalidParams.AddNested("ImageExtractionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AudioExtractionConfiguration != nil {
+		if err := validateAudioExtractionConfiguration(v.AudioExtractionConfiguration); err != nil {
+			invalidParams.AddNested("AudioExtractionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VideoExtractionConfiguration != nil {
+		if err := validateVideoExtractionConfiguration(v.VideoExtractionConfiguration); err != nil {
+			invalidParams.AddNested("VideoExtractionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetricComparisonComputation(v *types.MetricComparisonComputation) error {
 	if v == nil {
 		return nil
@@ -18304,6 +18456,11 @@ func validatePhysicalTable(v types.PhysicalTable) error {
 	case *types.PhysicalTableMemberCustomSql:
 		if err := validateCustomSql(&uv.Value); err != nil {
 			invalidParams.AddNested("[CustomSql]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.PhysicalTableMemberFileSource:
+		if err := validateFileSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[FileSource]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.PhysicalTableMemberRelationalTable:
@@ -21004,6 +21161,21 @@ func validateSharedViewConfigurations(v *types.SharedViewConfigurations) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SharedViewConfigurations"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSharePointParameters(v *types.SharePointParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SharePointParameters"}
+	if v.SharePointDomain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SharePointDomain"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -24534,6 +24706,21 @@ func validateValueColumnConfiguration(v *types.ValueColumnConfiguration) error {
 	}
 }
 
+func validateVideoExtractionConfiguration(v *types.VideoExtractionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VideoExtractionConfiguration"}
+	if len(v.VideoExtractionStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("VideoExtractionStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVisual(v *types.Visual) error {
 	if v == nil {
 		return nil
@@ -25880,6 +26067,48 @@ func validateOpCreateIngestionInput(v *CreateIngestionInput) error {
 	}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateKnowledgeBaseInput(v *CreateKnowledgeBaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateKnowledgeBaseInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DataSourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceArn"))
+	}
+	if v.KnowledgeBaseConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseConfiguration"))
+	}
+	if v.Permissions != nil {
+		if err := validateResourcePermissionList(v.Permissions); err != nil {
+			invalidParams.AddNested("Permissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MediaExtractionConfiguration != nil {
+		if err := validateMediaExtractionConfiguration(v.MediaExtractionConfiguration); err != nil {
+			invalidParams.AddNested("MediaExtractionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -30394,6 +30623,29 @@ func validateOpUpdateKeyRegistrationInput(v *UpdateKeyRegistrationInput) error {
 	}
 	if v.KeyRegistration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyRegistration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateKnowledgeBaseInput(v *UpdateKnowledgeBaseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateKnowledgeBaseInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.MediaExtractionConfiguration != nil {
+		if err := validateMediaExtractionConfiguration(v.MediaExtractionConfiguration); err != nil {
+			invalidParams.AddNested("MediaExtractionConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

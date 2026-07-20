@@ -1,0 +1,5 @@
+POST /describe-connector-entity
+
+Content-Type: application/json
+
+{"apiVersion":"__ApiVersion__","connectorEntityName":"__ConnectorEntityName__","connectorProfileName":"__ConnectorProfileName__","connectorType":"Salesforce"}

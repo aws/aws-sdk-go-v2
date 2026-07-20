@@ -1,0 +1,5 @@
+POST /guardrail/__GuardrailIdentifier__/version/__GuardrailVersion__/apply
+
+Content-Type: application/json
+
+{"content":[{"text":{"qualifiers":["grounding_source","grounding_source"],"text":"__Text__"}},{"text":{"qualifiers":["grounding_source","grounding_source"],"text":"__Text__"}}],"outputScope":"INTERVENTIONS","source":"INPUT"}

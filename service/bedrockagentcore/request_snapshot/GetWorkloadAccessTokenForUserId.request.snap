@@ -1,0 +1,5 @@
+POST /identities/GetWorkloadAccessTokenForUserId
+
+Content-Type: application/json
+
+{"userId":"__UserId__","workloadName":"__WorkloadName__"}

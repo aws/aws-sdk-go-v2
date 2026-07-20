@@ -781,6 +781,46 @@
                 }
             }
         },
+        "com.amazonaws.configservice#AzureClientIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.configservice#AzureConnectorConfiguration": {
+            "type": "structure",
+            "members": {
+                "tenantIdentifier": {
+                    "target": "com.amazonaws.configservice#AzureTenantIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure tenant identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientIdentifier": {
+                    "target": "com.amazonaws.configservice#AzureClientIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure client identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details for connecting to Microsoft Azure.</p>"
+            }
+        },
+        "com.amazonaws.configservice#AzureTenantIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
         "com.amazonaws.configservice#BaseConfigurationItem": {
             "type": "structure",
             "members": {
@@ -1983,6 +2023,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>For service-linked configuration recorders, specifies the linked Amazon Web Services service for the configuration recorder.</p>"
                     }
+                },
+                "connectorArn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector that specifies the connection between a third-party cloud service provider and Config.</p>"
+                    }
+                },
+                "scopeConfiguration": {
+                    "target": "com.amazonaws.configservice#ScopeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the scope of resources to record from the third-party cloud service provider connected through the connector.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2160,10 +2212,16 @@
                         "smithy.api#documentation": "<p>Indicates whether the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigurationItem.html\">ConfigurationItems</a> in scope for the configuration recorder are recorded for free (<code>INTERNAL</code>) or if you are charged a service fee for recording (<code>PAID</code>).</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "provider": {
+                    "target": "com.amazonaws.configservice#Provider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For service-linked configuration recorders that record resources from a third-party cloud service provider, indicates the cloud service provider. Currently, <code>AZURE</code> is supported.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A summary of a configuration recorder, including the <code>arn</code>, <code>name</code>, <code>servicePrincipal</code>, and <code>recordingScope</code>.</p>"
+                "smithy.api#documentation": "<p>A summary of a configuration recorder, including the <code>arn</code>, <code>name</code>, <code>servicePrincipal</code>, <code>recordingScope</code>, and <code>provider</code>.</p>"
             }
         },
         "com.amazonaws.configservice#ConfigurationStateId": {
@@ -2180,7 +2238,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html\">PutServiceLinkedConfigurationRecorder</a>, you cannot create a service-linked recorder because a service-linked recorder already exists for the specified service.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html\">DeleteServiceLinkedConfigurationRecorder</a>, you cannot delete the service-linked recorder because it is currently in use by the linked Amazon Web Services service.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteDeliveryChannel.html\">DeleteDeliveryChannel</a>, you cannot delete the specified delivery channel because the customer managed configuration recorder is running. Use the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_StopConfigurationRecorder.html\">StopConfigurationRecorder</a> operation to stop the customer managed configuration\n\t\t\trecorder.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_AssociateResourceTypes.html\">AssociateResourceTypes</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DisassociateResourceTypes.html\">DisassociateResourceTypes</a>, one of the following errors:</p>\n         <ul>\n            <li>\n               <p>For service-linked configuration recorders, the configuration recorder is not in use by the service. No association or dissociation of resource types is permitted.</p>\n            </li>\n            <li>\n               <p>For service-linked configuration recorders, your requested change to the configuration recorder has been denied by its linked Amazon Web Services service.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html\">PutServiceLinkedConfigurationRecorder</a>, you cannot create a service-linked recorder because a service-linked recorder already exists for the specified service.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutThirdPartyServiceLinkedConfigurationRecorder.html\">PutThirdPartyServiceLinkedConfigurationRecorder</a>, you cannot create a service-linked recorder because the specified service principal does not support multiple configuration recorders and one already exists.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutThirdPartyServiceLinkedConfigurationRecorder.html\">PutThirdPartyServiceLinkedConfigurationRecorder</a>, another in-progress operation is currently referencing the same connector or service principal. Please try again later.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutConnector.html\">PutConnector</a>, you cannot create a connector because a connector already exists for the specified connector configuration.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html\">DeleteServiceLinkedConfigurationRecorder</a>, you cannot delete the service-linked recorder because it is currently in use by the linked Amazon Web Services service.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html\">DeleteServiceLinkedConfigurationRecorder</a>, another in-progress operation is currently referencing the same connector. Please try again later.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteConnector.html\">DeleteConnector</a>, another in-progress operation is currently referencing the connector. Please try again later.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteDeliveryChannel.html\">DeleteDeliveryChannel</a>, you cannot delete the specified delivery channel because the customer managed configuration recorder is running. Use the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_StopConfigurationRecorder.html\">StopConfigurationRecorder</a> operation to stop the customer managed configuration\n\t\t\trecorder.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_AssociateResourceTypes.html\">AssociateResourceTypes</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DisassociateResourceTypes.html\">DisassociateResourceTypes</a>, one of the following errors:</p>\n         <ul>\n            <li>\n               <p>For service-linked configuration recorders, the configuration recorder is not in use by the service. No association or dissociation of resource types is permitted.</p>\n            </li>\n            <li>\n               <p>For service-linked configuration recorders, your requested change to the configuration recorder has been denied by its linked Amazon Web Services service.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },
@@ -2763,6 +2821,163 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.configservice#Connector": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.configservice#ConnectorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectorConfiguration": {
+                    "target": "com.amazonaws.configservice#ConnectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider-specific configuration for connecting to the third-party cloud service provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdTime": {
+                    "target": "com.amazonaws.configservice#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the connector was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the connector, including the connector configuration and connector ARN.</p>"
+            }
+        },
+        "com.amazonaws.configservice#ConnectorConfiguration": {
+            "type": "structure",
+            "members": {
+                "azure": {
+                    "target": "com.amazonaws.configservice#AzureConnectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for an Azure connector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The provider-specific configuration for connecting to the third-party cloud service provider. You must specify exactly one provider configuration.</p>"
+            }
+        },
+        "com.amazonaws.configservice#ConnectorFilter": {
+            "type": "structure",
+            "members": {
+                "filterName": {
+                    "target": "com.amazonaws.configservice#ConnectorFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter. Currently, only <code>provider</code> is supported.</p>"
+                    }
+                },
+                "filterValues": {
+                    "target": "com.amazonaws.configservice#FilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the filter. For <code>provider</code>, valid values include: <code>AZURE</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters connectors based on the connector provider.</p>"
+            }
+        },
+        "com.amazonaws.configservice#ConnectorFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#ConnectorFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.configservice#ConnectorFilterName": {
+            "type": "enum",
+            "members": {
+                "provider": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "provider"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.configservice#ConnectorName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.configservice#ConnectorSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#ConnectorSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.configservice#ConnectorSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.configservice#ConnectorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "provider": {
+                    "target": "com.amazonaws.configservice#Provider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The third-party cloud service provider. Currently, <code>AZURE</code> is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tenantIdentifier": {
+                    "target": "com.amazonaws.configservice#AzureTenantIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure tenant identifier for the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdTime": {
+                    "target": "com.amazonaws.configservice#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the connector was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a connector.</p>"
+            }
+        },
         "com.amazonaws.configservice#ControlsList": {
             "type": "list",
             "member": {
@@ -2999,6 +3214,41 @@
                     "target": "com.amazonaws.configservice#ConformancePackName",
                     "traits": {
                         "smithy.api#documentation": "<p>Name of the conformance pack you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.configservice#DeleteConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.configservice#DeleteConnectorRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.configservice#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified connector.</p>"
+            }
+        },
+        "com.amazonaws.configservice#DeleteConnectorRequest": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector that you want to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3415,8 +3665,13 @@
                 "ServicePrincipal": {
                     "target": "com.amazonaws.configservice#ServicePrincipal",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to delete.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to delete. This field is only supported for Amazon Web Services service principals. For third-party service-linked configuration recorders, use <code>Arn</code> instead.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service-linked configuration recorder that you want to delete. For third-party service-linked configuration recorders, you must use <code>Arn</code>. You must specify exactly one of <code>Arn</code> or <code>ServicePrincipal</code>.</p>"
                     }
                 }
             },
@@ -4216,16 +4471,16 @@
                         "smithy.api#documentation": "<p>The names of the Config rules for which you want details.\n\t\t\tIf you do not specify any names, Config returns details for all\n\t\t\tyour rules.</p>"
                     }
                 },
-                "NextToken": {
-                    "target": "com.amazonaws.configservice#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> string returned on a previous page\n\t\t\tthat you use to get the next page of results in a paginated\n\t\t\tresponse.</p>"
-                    }
-                },
                 "Filters": {
                     "target": "com.amazonaws.configservice#DescribeConfigRulesFilters",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns a list of Detective or Proactive Config rules. By default, this API returns an unfiltered list. For more information on Detective or Proactive Config rules,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config-rules.html\">\n               <b>Evaluation Mode</b>\n            </a> in the <i>Config Developer Guide</i>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.configservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> string returned on a previous page\n\t\t\tthat you use to get the next page of results in a paginated\n\t\t\tresponse.</p>"
                     }
                 }
             },
@@ -4452,7 +4707,7 @@
                 "ServicePrincipal": {
                     "target": "com.amazonaws.configservice#ServicePrincipal",
                     "traits": {
-                        "smithy.api#documentation": "<p>For service-linked configuration recorders, you can use the service principal of the linked Amazon Web Services service to specify the configuration recorder.</p>"
+                        "smithy.api#documentation": "<p>For service-linked configuration recorders, you can use the service principal of the linked Amazon Web Services service to specify the configuration recorder. This field is only supported for Amazon Web Services service principals. For third-party service-linked configuration recorders, use <code>Arn</code> instead.</p>"
                     }
                 },
                 "Arn": {
@@ -4527,7 +4782,7 @@
                 "ServicePrincipal": {
                     "target": "com.amazonaws.configservice#ServicePrincipal",
                     "traits": {
-                        "smithy.api#documentation": "<p>For service-linked configuration recorders, you can use the service principal of the linked Amazon Web Services service to specify the configuration recorder.</p>"
+                        "smithy.api#documentation": "<p>For service-linked configuration recorders, you can use the service principal of the linked Amazon Web Services service to specify the configuration recorder. This field is only supported for Amazon Web Services service principals. For third-party service-linked configuration recorders, use <code>Arn</code> instead.</p>"
                     }
                 },
                 "Arn": {
@@ -6125,6 +6380,18 @@
         "com.amazonaws.configservice#FieldName": {
             "type": "string"
         },
+        "com.amazonaws.configservice#FilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.configservice#GetAggregateComplianceDetailsByConfigRule": {
             "type": "operation",
             "input": {
@@ -7016,6 +7283,56 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.configservice#GetConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.configservice#GetConnectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.configservice#GetConnectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.configservice#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the details of the specified connector.</p>"
+            }
+        },
+        "com.amazonaws.configservice#GetConnectorRequest": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.configservice#GetConnectorResponse": {
+            "type": "structure",
+            "members": {
+                "Connector": {
+                    "target": "com.amazonaws.configservice#Connector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the specified connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.configservice#GetCustomRulePolicy": {
             "type": "operation",
             "input": {
@@ -7666,6 +7983,18 @@
                 "smithy.api#default": false
             }
         },
+        "com.amazonaws.configservice#IncludedRegions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#ThirdPartyCloudRegion"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
         "com.amazonaws.configservice#InsufficientDeliveryPolicyException": {
             "type": "structure",
             "members": {
@@ -7692,7 +8021,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates one of the following errors:</p>\n         <ul>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutConfigRule.html\">PutConfigRule</a>, the rule cannot be created because the IAM role assigned to Config lacks permissions to perform the config:Put* action.</p>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutConfigRule.html\">PutConfigRule</a>, the Lambda function cannot be invoked. Check the function ARN, and check the function's permissions.</p>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutOrganizationConfigRule.html\">PutOrganizationConfigRule</a>, organization Config rule cannot be created because you do not have permissions to call IAM <code>GetRole</code> action or create a service-linked role.</p>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutConformancePack.html\">PutConformancePack</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutOrganizationConformancePack.html\">PutOrganizationConformancePack</a>, a conformance pack cannot be created because you do not have the following permissions: </p>\n               <ul>\n                  <li>\n                     <p>You do not have permission to call IAM <code>GetRole</code> action or create a service-linked role.</p>\n                  </li>\n                  <li>\n                     <p>You do not have permission to read Amazon S3 bucket or call SSM:GetDocument.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html\">PutServiceLinkedConfigurationRecorder</a>, a service-linked configuration recorder cannot be created because you do not have the following permissions: IAM <code>CreateServiceLinkedRole</code>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Indicates one of the following errors:</p>\n         <ul>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutConfigRule.html\">PutConfigRule</a>, the rule cannot be created because the IAM role assigned to Config lacks permissions to perform the config:Put* action.</p>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutConfigRule.html\">PutConfigRule</a>, the Lambda function cannot be invoked. Check the function ARN, and check the function's permissions.</p>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutOrganizationConfigRule.html\">PutOrganizationConfigRule</a>, organization Config rule cannot be created because you do not have permissions to call IAM <code>GetRole</code> action or create a service-linked role.</p>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutConformancePack.html\">PutConformancePack</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutOrganizationConformancePack.html\">PutOrganizationConformancePack</a>, a conformance pack cannot be created because you do not have the following permissions: </p>\n               <ul>\n                  <li>\n                     <p>You do not have permission to call IAM <code>GetRole</code> action or create a service-linked role.</p>\n                  </li>\n                  <li>\n                     <p>You do not have permission to read Amazon S3 bucket or call SSM:GetDocument.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html\">PutServiceLinkedConfigurationRecorder</a>, a service-linked configuration recorder cannot be created because you do not have the following permissions: IAM <code>CreateServiceLinkedRole</code>.</p>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutConnector.html\">PutConnector</a>, a connector cannot be created because you do not have the following permissions: IAM <code>CreateServiceLinkedRole</code>.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },
@@ -8195,6 +8524,87 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.configservice#ListConnectors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.configservice#ListConnectorsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.configservice#ListConnectorsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.configservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of connectors depending on the filters you specify.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ConnectorSummaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.configservice#ListConnectorsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.configservice#ListConnectorsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.configservice#ListConnectorsMaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results to include in the response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.configservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>NextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.configservice#ConnectorFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results based on a list of <code>ConnectorFilter</code> objects that you specify.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.configservice#ListConnectorsResponse": {
+            "type": "structure",
+            "members": {
+                "ConnectorSummaries": {
+                    "target": "com.amazonaws.configservice#ConnectorSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>ConnectorSummary</code> objects.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.configservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>NextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.configservice#ListDiscoveredResources": {
             "type": "operation",
             "input": {
@@ -8486,7 +8896,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.configservice#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. The following resources are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConfigurationRecorder</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigurationAggregator</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AggregationAuthorization</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StoredQuery</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. The following resources are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConfigurationRecorder</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigurationAggregator</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AggregationAuthorization</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StoredQuery</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Connector</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8591,6 +9001,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>You have reached the limit of the number of conformance packs you can create in an account. For more information, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html\">\n               <b>Service Limits</b>\n            </a> in the <i>Config Developer Guide</i>.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.configservice#MaxNumberOfConnectorsExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.configservice#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error executing the command</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You have reached the limit of the number of connectors in your account.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -10102,6 +10527,17 @@
                 }
             }
         },
+        "com.amazonaws.configservice#Provider": {
+            "type": "enum",
+            "members": {
+                "AZURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZURE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.configservice#PutAggregationAuthorization": {
             "type": "operation",
             "input": {
@@ -10450,6 +10886,68 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.configservice#PutConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.configservice#PutConnectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.configservice#PutConnectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.configservice#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#InsufficientPermissionsException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#MaxNumberOfConnectorsExceededException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a connector that specifies the connection between a third-party cloud service provider and Config.</p>\n         <p>A connector is required to create a service-linked configuration recorder for a third-party cloud service provider using the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutThirdPartyServiceLinkedConfigurationRecorder.html\">PutThirdPartyServiceLinkedConfigurationRecorder</a> operation.</p>\n         <p>This API creates a service-linked role <code>AWSServiceRoleForConfigThirdParty</code> in your account. The service-linked role is created only when the role does not exist in your account.</p>\n         <note>\n            <p>\n               <b>Connectors cannot be updated</b>\n            </p>\n            <p>To update the connector configuration, you must delete all associated configuration recorders, delete the connector, and recreate it with the updated configuration.</p>\n         </note>\n         <note>\n            <p>\n               <b>Tags are added at creation and cannot be updated with this operation</b>\n            </p>\n            <p>Use <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html\">TagResource</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html\">UntagResource</a> to update tags after creation.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.configservice#PutConnectorRequest": {
+            "type": "structure",
+            "members": {
+                "ConnectorConfiguration": {
+                    "target": "com.amazonaws.configservice#ConnectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider-specific configuration for connecting to the third-party cloud service provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.configservice#TagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags for the connector. Each tag consists of a key and an optional value, both of which you define.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.configservice#PutConnectorResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.configservice#PutDeliveryChannel": {
             "type": "operation",
             "input": {
@@ -10691,6 +11189,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An <code>OrganizationCustomPolicyRuleMetadata</code> object. This object specifies metadata for your organization's Config Custom Policy rule. The metadata includes the runtime system in use, which accounts have debug\n\t\t\tlogging enabled, and other custom rule metadata, such as resource type, resource ID of\n\t\t\tAmazon Web Services resource, and organization trigger types that initiate Config to evaluate Amazon Web Services resources against a rule.</p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.configservice#TagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags for the organization Config rule. Each tag consists of a key and an optional value, both of which you define.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10793,6 +11297,12 @@
                     "target": "com.amazonaws.configservice#ExcludedAccounts",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of Amazon Web Services accounts to be excluded from an organization conformance pack while deploying a conformance pack.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.configservice#TagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags for the organization conformance pack. Each tag consists of a key and an optional value, both of which you define.</p>"
                     }
                 }
             },
@@ -11172,6 +11682,86 @@
                     "target": "com.amazonaws.configservice#QueryArn",
                     "traits": {
                         "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the query. \n\t\t\tFor example, arn:partition:service:region:account-id:resource-type/resource-name/resource-id.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.configservice#PutThirdPartyServiceLinkedConfigurationRecorder": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.configservice#PutThirdPartyServiceLinkedConfigurationRecorderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.configservice#PutThirdPartyServiceLinkedConfigurationRecorderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.configservice#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#InsufficientPermissionsException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates a service-linked configuration recorder that is linked to a third-party cloud service provider based on the <code>ConnectorArn</code> you specify.</p>\n         <p>The configuration recorder's <code>name</code>, <code>recordingGroup</code>, <code>recordingMode</code>, and <code>recordingScope</code> is set by the service that is linked to the configuration recorder.</p>\n         <p>If a service-linked configuration recorder already exists for the specified service principal and connector, calling this operation again updates the <code>ScopeConfiguration</code>.</p>\n         <note>\n            <p>\n               <b>This operation can only be called by the Amazon Web Services service linked to the configuration recorder</b>\n            </p>\n            <p>Customers cannot call this operation directly. Only the linked Amazon Web Services service can create or update the service-linked configuration recorder.</p>\n         </note>\n         <note>\n            <p>\n               <b>Tags are added at creation and cannot be updated with this operation</b>\n            </p>\n            <p>Use <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html\">TagResource</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html\">UntagResource</a> to update tags after creation.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.configservice#PutThirdPartyServiceLinkedConfigurationRecorderRequest": {
+            "type": "structure",
+            "members": {
+                "ServicePrincipal": {
+                    "target": "com.amazonaws.configservice#ServicePrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to create.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectorArn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector that specifies the connection between the third-party cloud service provider and Config. The specified connector must exist.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScopeConfiguration": {
+                    "target": "com.amazonaws.configservice#ScopeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the scope of resources to record from the third-party cloud service provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.configservice#TagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags for a service-linked configuration recorder. Each tag consists of a key and an optional value, both of which you define.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.configservice#PutThirdPartyServiceLinkedConfigurationRecorderResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.configservice#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the specified configuration recorder.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.configservice#RecorderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the specified configuration recorder.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -15778,6 +16368,65 @@
                 "smithy.api#documentation": "<p>Defines which resources trigger an evaluation for an Config\n\t\t\trule. The scope can include one or more resource types, a\n\t\t\tcombination of a tag key and value, or a combination of one resource\n\t\t\ttype and one resource ID. Specify a scope to constrain which\n\t\t\tresources trigger an evaluation for a rule. Otherwise, evaluations\n\t\t\tfor the rule are triggered when any resource in your recording group\n\t\t\tchanges in configuration.</p>"
             }
         },
+        "com.amazonaws.configservice#ScopeConfiguration": {
+            "type": "structure",
+            "members": {
+                "scopeType": {
+                    "target": "com.amazonaws.configservice#ScopeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of scope for the third-party cloud resources. Valid values include <code>tenant</code> and <code>subscription</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scopeValues": {
+                    "target": "com.amazonaws.configservice#ScopeValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of specific scope values for the third-party cloud resources. For example, a list of Azure subscriptions or management groups.</p>"
+                    }
+                },
+                "allRegions": {
+                    "target": "com.amazonaws.configservice#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to record resources from all supported regions for the third-party cloud service provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "includedRegions": {
+                    "target": "com.amazonaws.configservice#IncludedRegions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of regions from the third-party cloud service provider to include when recording resources. Used when <code>allRegions</code> is set to <code>false</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the scope of resources to record from a third-party cloud service provider.</p>"
+            }
+        },
+        "com.amazonaws.configservice#ScopeType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.configservice#ScopeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.configservice#ScopeValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#ScopeValue"
+            }
+        },
         "com.amazonaws.configservice#SelectAggregateResourceConfig": {
             "type": "operation",
             "input": {
@@ -16153,6 +16802,9 @@
                     "target": "com.amazonaws.configservice#DeleteConformancePack"
                 },
                 {
+                    "target": "com.amazonaws.configservice#DeleteConnector"
+                },
+                {
                     "target": "com.amazonaws.configservice#DeleteDeliveryChannel"
                 },
                 {
@@ -16300,6 +16952,9 @@
                     "target": "com.amazonaws.configservice#GetConformancePackComplianceSummary"
                 },
                 {
+                    "target": "com.amazonaws.configservice#GetConnector"
+                },
+                {
                     "target": "com.amazonaws.configservice#GetCustomRulePolicy"
                 },
                 {
@@ -16333,6 +16988,9 @@
                     "target": "com.amazonaws.configservice#ListConformancePackComplianceScores"
                 },
                 {
+                    "target": "com.amazonaws.configservice#ListConnectors"
+                },
+                {
                     "target": "com.amazonaws.configservice#ListDiscoveredResources"
                 },
                 {
@@ -16358,6 +17016,9 @@
                 },
                 {
                     "target": "com.amazonaws.configservice#PutConformancePack"
+                },
+                {
+                    "target": "com.amazonaws.configservice#PutConnector"
                 },
                 {
                     "target": "com.amazonaws.configservice#PutDeliveryChannel"
@@ -16391,6 +17052,9 @@
                 },
                 {
                     "target": "com.amazonaws.configservice#PutStoredQuery"
+                },
+                {
+                    "target": "com.amazonaws.configservice#PutThirdPartyServiceLinkedConfigurationRecorder"
                 },
                 {
                     "target": "com.amazonaws.configservice#SelectAggregateResourceConfig"
@@ -18170,7 +18834,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.configservice#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. The following resources are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConfigurationRecorder</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigurationAggregator</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AggregationAuthorization</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StoredQuery</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. The following resources are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConfigurationRecorder</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigurationAggregator</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AggregationAuthorization</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StoredQuery</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Connector</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18256,6 +18920,15 @@
                 "smithy.api#documentation": "<p>This API allows you to create a conformance pack template with an Amazon Web Services Systems Manager document (SSM document). \n\t\t\tTo deploy a conformance pack using an SSM document, first create an SSM document with conformance pack content, and then provide the <code>DocumentName</code> in the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutConformancePack.html\">PutConformancePack API</a>. You can also provide the <code>DocumentVersion</code>.</p>\n         <p>The <code>TemplateSSMDocumentDetails</code> object contains the name of the SSM document and the version of the SSM document.</p>"
             }
         },
+        "com.amazonaws.configservice#ThirdPartyCloudRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
         "com.amazonaws.configservice#TimeWindow": {
             "type": "structure",
             "members": {
@@ -18338,7 +19011,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.configservice#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. The following resources are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConfigurationRecorder</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigurationAggregator</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AggregationAuthorization</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StoredQuery</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. The following resources are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConfigurationRecorder</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConfigRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OrganizationConformancePack</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfigurationAggregator</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AggregationAuthorization</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StoredQuery</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Connector</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18365,7 +19038,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The requested operation is not valid. You will see this exception if there are missing required fields or if the input value fails the validation.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutStoredQuery.html\">PutStoredQuery</a>, one of the following errors:</p>\n         <ul>\n            <li>\n               <p>There are missing required fields.</p>\n            </li>\n            <li>\n               <p>The input value fails the validation.</p>\n            </li>\n            <li>\n               <p>You are trying to create more than 300 queries.</p>\n            </li>\n         </ul>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationRecorders.html\">DescribeConfigurationRecorders</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationRecorderStatus.html\">DescribeConfigurationRecorderStatus</a>, one of the following errors:</p>\n         <ul>\n            <li>\n               <p>You have specified more than one configuration recorder.</p>\n            </li>\n            <li>\n               <p>You have provided a service principal for service-linked configuration recorder that is not valid.</p>\n            </li>\n         </ul>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_AssociateResourceTypes.html\">AssociateResourceTypes</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DisassociateResourceTypes.html\">DisassociateResourceTypes</a>, one of the following errors:</p>\n         <ul>\n            <li>\n               <p>Your configuraiton recorder has a recording strategy that does not allow the association or disassociation of resource types.</p>\n            </li>\n            <li>\n               <p>One or more of the specified resource types are already associated or disassociated with the configuration recorder.</p>\n            </li>\n            <li>\n               <p>For service-linked configuration recorders, the configuration recorder does not record one or more of the specified resource types.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The requested operation is not valid. You will see this exception if there are missing required fields or if the input value fails the validation.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutStoredQuery.html\">PutStoredQuery</a>, one of the following errors:</p>\n         <ul>\n            <li>\n               <p>There are missing required fields.</p>\n            </li>\n            <li>\n               <p>The input value fails the validation.</p>\n            </li>\n            <li>\n               <p>You are trying to create more than 300 queries.</p>\n            </li>\n         </ul>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationRecorders.html\">DescribeConfigurationRecorders</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeConfigurationRecorderStatus.html\">DescribeConfigurationRecorderStatus</a>, one of the following errors:</p>\n         <ul>\n            <li>\n               <p>You have specified more than one configuration recorder.</p>\n            </li>\n            <li>\n               <p>You have provided a service principal for service-linked configuration recorder that is not valid.</p>\n            </li>\n         </ul>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_AssociateResourceTypes.html\">AssociateResourceTypes</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DisassociateResourceTypes.html\">DisassociateResourceTypes</a>, one of the following errors:</p>\n         <ul>\n            <li>\n               <p>Your configuraiton recorder has a recording strategy that does not allow the association or disassociation of resource types.</p>\n            </li>\n            <li>\n               <p>One or more of the specified resource types are already associated or disassociated with the configuration recorder.</p>\n            </li>\n            <li>\n               <p>For service-linked configuration recorders, the configuration recorder does not record one or more of the specified resource types.</p>\n            </li>\n         </ul>\n         <p>For <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html\">DeleteServiceLinkedConfigurationRecorder</a>, one of the following errors:</p>\n         <ul>\n            <li>\n               <p>You have provided both <code>Arn</code> and <code>ServicePrincipal</code>. Only one of <code>Arn</code> or <code>ServicePrincipal</code> can be specified.</p>\n            </li>\n            <li>\n               <p>You have provided a service principal for service-linked configuration recorder that is not valid.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },

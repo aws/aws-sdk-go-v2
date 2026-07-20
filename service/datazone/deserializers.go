@@ -44299,6 +44299,16 @@ loop:
 			uv = &types.ConnectionPropertiesOutputMemberS3Properties{Value: mv}
 			break loop
 
+		case "snowflakeProperties":
+			var mv types.SnowflakePropertiesOutput
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentSnowflakePropertiesOutput(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConnectionPropertiesOutputMemberSnowflakeProperties{Value: mv}
+			break loop
+
 		case "sparkEmrProperties":
 			var mv types.SparkEmrPropertiesOutput
 			destAddr := &mv
@@ -51051,6 +51061,55 @@ func awsRestjson1_deserializeDocumentIamUserProfileDetails(v **types.IamUserProf
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentIdentityMapping(v **types.IdentityMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IdentityMapping
+	if *v == nil {
+		sv = &types.IdentityMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "prefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Prefix = ptr.String(jtv)
+			}
+
+		case "usernameAttribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.UsernameAttribute = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentImport(v **types.Import, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -52760,6 +52819,73 @@ func awsRestjson1_deserializeDocumentLineageSqlQueryRunDetails(v **types.Lineage
 					return err
 				}
 				sv.TotalQueriesProcessed = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLineageSyncOutput(v **types.LineageSyncOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LineageSyncOutput
+	if *v == nil {
+		sv = &types.LineageSyncOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		case "lineageJobId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LineageJobId = ptr.String(jtv)
+			}
+
+		case "schedule":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LineageSyncScheduleCronString to be of type string, got %T instead", value)
+				}
+				sv.Schedule = ptr.String(jtv)
+			}
+
+		case "timezone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timezone to be of type string, got %T instead", value)
+				}
+				sv.Timezone = types.Timezone(jtv)
 			}
 
 		default:
@@ -60010,6 +60136,74 @@ func awsRestjson1_deserializeDocumentSingleSignOn(v **types.SingleSignOn, value 
 					return fmt.Errorf("expected UserAssignment to be of type string, got %T instead", value)
 				}
 				sv.UserAssignment = types.UserAssignment(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSnowflakePropertiesOutput(v **types.SnowflakePropertiesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SnowflakePropertiesOutput
+	if *v == nil {
+		sv = &types.SnowflakePropertiesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		case "identityMapping":
+			if err := awsRestjson1_deserializeDocumentIdentityMapping(&sv.IdentityMapping, value); err != nil {
+				return err
+			}
+
+		case "lineageSync":
+			if err := awsRestjson1_deserializeDocumentLineageSyncOutput(&sv.LineageSync, value); err != nil {
+				return err
+			}
+
+		case "snowflakeRole":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnowflakeRole to be of type string, got %T instead", value)
+				}
+				sv.SnowflakeRole = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ConnectionStatus(jtv)
 			}
 
 		default:

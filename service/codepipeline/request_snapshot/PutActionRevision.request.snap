@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodePipeline_20150709.PutActionRevision
+
+{"actionName":"__ActionName__","actionRevision":{"created":946684800,"revisionChangeId":"__RevisionChangeId__","revisionId":"__RevisionId__"},"pipelineName":"__PipelineName__","stageName":"__StageName__"}

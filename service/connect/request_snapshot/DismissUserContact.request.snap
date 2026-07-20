@@ -1,0 +1,5 @@
+POST /users/__InstanceId__/__UserId__/contact
+
+Content-Type: application/json
+
+{"ContactId":"__ContactId__"}

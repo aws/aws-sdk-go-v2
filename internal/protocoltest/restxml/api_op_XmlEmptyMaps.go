@@ -51,6 +51,15 @@ type XmlEmptyMapsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlEmptyMapsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlEmptyMapsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlEmptyMapsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeXmlMapsInputOutputMap(s, schemas.XmlEmptyMapsResponse_myMap, v.MyMap)
+}
 func (v *XmlEmptyMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlEmptyMapsResponse, func(s *smithy.Schema) error {
 		switch s {

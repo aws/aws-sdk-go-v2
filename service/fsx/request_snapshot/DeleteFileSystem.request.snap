@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.DeleteFileSystem
+
+{"ClientRequestToken":"__ClientRequestToken__","FileSystemId":"__FileSystemId__","LustreConfiguration":{"FinalBackupTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"SkipFinalBackup":true},"OpenZFSConfiguration":{"FinalBackupTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Options":["DELETE_CHILD_VOLUMES_AND_SNAPSHOTS","DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"],"SkipFinalBackup":true},"WindowsConfiguration":{"FinalBackupTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"SkipFinalBackup":true}}

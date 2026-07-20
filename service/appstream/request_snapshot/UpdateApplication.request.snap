@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.UpdateApplication
+
+{"AppBlockArn":"__AppBlockArn__","AttributesToDelete":["LAUNCH_PARAMETERS","LAUNCH_PARAMETERS"],"Description":"__Description__","DisplayName":"__DisplayName__","IconS3Location":{"S3Bucket":"__S3Bucket__","S3Key":"__S3Key__"},"LaunchParameters":"__LaunchParameters__","LaunchPath":"__LaunchPath__","Name":"__Name__","WorkingDirectory":"__WorkingDirectory__"}

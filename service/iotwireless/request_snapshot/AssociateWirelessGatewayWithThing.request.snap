@@ -1,0 +1,5 @@
+PUT /wireless-gateways/__Id__/thing
+
+Content-Type: application/json
+
+{"ThingArn":"__ThingArn__"}

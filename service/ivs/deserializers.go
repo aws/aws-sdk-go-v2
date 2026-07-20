@@ -7326,6 +7326,11 @@ func awsRestjson1_deserializeDocumentAdConfiguration(v **types.AdConfiguration, 
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "postRollConfiguration":
+			if err := awsRestjson1_deserializeDocumentPostRollConfiguration(&sv.PostRollConfiguration, value); err != nil {
+				return err
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
@@ -7417,6 +7422,11 @@ func awsRestjson1_deserializeDocumentAdConfigurationSummary(v **types.AdConfigur
 					return fmt.Errorf("expected AdConfigurationName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "postRollConfiguration":
+			if err := awsRestjson1_deserializeDocumentPostRollConfiguration(&sv.PostRollConfiguration, value); err != nil {
+				return err
 			}
 
 		case "tags":
@@ -9195,6 +9205,59 @@ func awsRestjson1_deserializeDocumentPlaybackRestrictionPolicySummary(v **types.
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPostRollConfiguration(v **types.PostRollConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PostRollConfiguration
+	if *v == nil {
+		sv = &types.PostRollConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "durationSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AdDurationSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DurationSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = jtv
 			}
 
 		default:

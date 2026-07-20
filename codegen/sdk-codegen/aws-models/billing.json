@@ -18,7 +18,16 @@
                     "target": "com.amazonaws.billing#DisassociateSourceViews"
                 },
                 {
+                    "target": "com.amazonaws.billing#GetBillingPreferences"
+                },
+                {
                     "target": "com.amazonaws.billing#GetBillingView"
+                },
+                {
+                    "target": "com.amazonaws.billing#GetCreditAllocationHistory"
+                },
+                {
+                    "target": "com.amazonaws.billing#GetCredits"
                 },
                 {
                     "target": "com.amazonaws.billing#GetResourcePolicy"
@@ -33,10 +42,16 @@
                     "target": "com.amazonaws.billing#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.billing#RedeemCredits"
+                },
+                {
                     "target": "com.amazonaws.billing#TagResource"
                 },
                 {
                     "target": "com.amazonaws.billing#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.billing#UpdateBillingPreferences"
                 },
                 {
                     "target": "com.amazonaws.billing#UpdateBillingView"
@@ -1325,6 +1340,15 @@
                 "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
+        "com.amazonaws.billing#AccountName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.billing#ActiveTimeRange": {
             "type": "structure",
             "members": {
@@ -1345,6 +1369,45 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A time range with a start and end time.</p>"
+            }
+        },
+        "com.amazonaws.billing#Amount": {
+            "type": "structure",
+            "members": {
+                "currencyCode": {
+                    "target": "com.amazonaws.billing#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ISO 4217 currency code for the amount (for example, <code>USD</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "currencyAmount": {
+                    "target": "com.amazonaws.billing#CurrencyAmount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount as a decimal string (for example, <code>\"743.21\"</code>). Negative values represent credits that reduce a bill.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A monetary amount with a currency code. Used throughout the Billing API to represent credit balances, allocations, and adjustments.</p>"
+            }
+        },
+        "com.amazonaws.billing#ApplicationType": {
+            "type": "enum",
+            "members": {
+                "BEFORE_CROSS_SERVICE_DISCOUNTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEFORE_CROSS_SERVICE_DISCOUNTS"
+                    }
+                },
+                "AFTER_DISCOUNTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AFTER_DISCOUNTS"
+                    }
+                }
             }
         },
         "com.amazonaws.billing#AssociateSourceViews": {
@@ -1436,6 +1499,241 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.billing#BillingFeature": {
+            "type": "enum",
+            "members": {
+                "RI_SHARING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RI_SHARING"
+                    }
+                },
+                "RI_SHARING_HISTORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RI_SHARING_HISTORY"
+                    }
+                },
+                "CREDIT_SHARING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_SHARING"
+                    }
+                },
+                "CREDIT_SHARING_HISTORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_SHARING_HISTORY"
+                    }
+                },
+                "CREDIT_LEVEL_SHARING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_LEVEL_SHARING"
+                    }
+                },
+                "BILLING_ALERTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BILLING_ALERTS"
+                    }
+                },
+                "CREDIT_PREFERENCE_OPTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_PREFERENCE_OPTIONS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.billing#BillingFeatureFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.billing#BillingFeatureFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter name. Currently the only supported value is <code>PREFERENCE_KEY</code>.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.billing#BillingFeatureFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter values to match. For <code>PREFERENCE_KEY</code>, supply 1 to 10 preference key values to match.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that narrows the set of preferences returned by <code>GetBillingPreferences</code>.</p>"
+            }
+        },
+        "com.amazonaws.billing#BillingFeatureFilterName": {
+            "type": "enum",
+            "members": {
+                "PREFERENCE_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREFERENCE_KEY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.billing#BillingFeatureFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-/]+$"
+            }
+        },
+        "com.amazonaws.billing#BillingFeatureFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#BillingFeatureFilterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.billing#BillingFeatureFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#BillingFeatureFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.billing#BillingFeatures": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#BillingFeature"
+            }
+        },
+        "com.amazonaws.billing#BillingMonth": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 7
+                }
+            }
+        },
+        "com.amazonaws.billing#BillingPeriod": {
+            "type": "structure",
+            "members": {
+                "year": {
+                    "target": "com.amazonaws.billing#BillingYear",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The four-digit year of the billing period.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "month": {
+                    "target": "com.amazonaws.billing#Month",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The month of the billing period as an integer between 1 and 12.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A specific billing period identified by year and month.</p>"
+            }
+        },
+        "com.amazonaws.billing#BillingPreferenceForKey": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.billing#PreferenceKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preference key. Format depends on the feature being updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.billing#PreferenceValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preference value. Valid values: <code>ENABLED</code> or <code>DISABLED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single key/value entry used to update a billing preference.</p>"
+            }
+        },
+        "com.amazonaws.billing#BillingPreferenceSummary": {
+            "type": "structure",
+            "members": {
+                "feature": {
+                    "target": "com.amazonaws.billing#BillingFeature",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The feature this preference belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.billing#PreferenceKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preference key. Format depends on the feature.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.billing#PreferenceValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preference value. Valid values: <code>ENABLED</code> or <code>DISABLED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountName": {
+                    "target": "com.amazonaws.billing#AccountName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the account. Populated together with <code>accountId</code>; <code>null</code> otherwise.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The associated Amazon Web Services account ID. Populated for account-list keys; <code>null</code> otherwise.</p>"
+                    }
+                },
+                "billingPeriod": {
+                    "target": "com.amazonaws.billing#BillingPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing period associated with the preference change. Populated only for the history features <code>RI_SHARING_HISTORY</code> and <code>CREDIT_SHARING_HISTORY</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single billing preference entry returned by <code>GetBillingPreferences</code>.</p>"
+            }
+        },
+        "com.amazonaws.billing#BillingPreferences": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#BillingPreferenceSummary"
+            }
+        },
+        "com.amazonaws.billing#BillingPreferencesPerKey": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#BillingPreferenceForKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.billing#BillingViewArn": {
@@ -1806,6 +2104,15 @@
                 }
             }
         },
+        "com.amazonaws.billing#BillingYear": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 2005,
+                    "max": 2120
+                }
+            }
+        },
         "com.amazonaws.billing#ClientToken": {
             "type": "string",
             "traits": {
@@ -2008,6 +2315,277 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.billing#CreditAllocationHistoryEntry": {
+            "type": "structure",
+            "members": {
+                "creditId": {
+                    "target": "com.amazonaws.billing#CreditId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the credit that was applied.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creditAmount": {
+                    "target": "com.amazonaws.billing#Amount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of credit applied. Negative values represent credits that reduced the bill.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the credit allocation.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account the credit was applied to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "appliedServiceName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services service the credit was applied to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "billingMonth": {
+                    "target": "com.amazonaws.billing#BillingMonth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing month of the application in <code>YYYY-MM</code> format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "isEstimatedBill": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> <code>true</code> when the entry was applied to an in-flight bill that has not yet been finalized.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single entry in the credit allocation history, representing how a credit was applied to a specific service during a billing month.</p>"
+            }
+        },
+        "com.amazonaws.billing#CreditAllocationHistoryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#CreditAllocationHistoryEntry"
+            }
+        },
+        "com.amazonaws.billing#CreditData": {
+            "type": "structure",
+            "members": {
+                "creditId": {
+                    "target": "com.amazonaws.billing#CreditId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the credit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the credit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creditType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of credit. Examples: <code>Promotion</code>, <code>Refund</code>, <code>TrueUp</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "initialAmount": {
+                    "target": "com.amazonaws.billing#Amount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The initial amount of the credit when it was issued.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "remainingAmount": {
+                    "target": "com.amazonaws.billing#Amount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unused balance of the credit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "estimatedAmount": {
+                    "target": "com.amazonaws.billing#Amount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated remaining balance, including in-flight (open) bills that have not yet been finalized.</p>"
+                    }
+                },
+                "applicableProductNames": {
+                    "target": "com.amazonaws.billing#ProductNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of Amazon Web Services services this credit applies to.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the credit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the credit becomes valid, as Unix epoch seconds.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the credit expires, as Unix epoch seconds.</p>"
+                    }
+                },
+                "exhaustDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the credit balance reached zero, as Unix epoch seconds.</p>"
+                    }
+                },
+                "applicationType": {
+                    "target": "com.amazonaws.billing#ApplicationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the credit is applied during bill computation. Valid values: <code>BEFORE_CROSS_SERVICE_DISCOUNTS</code>, <code>AFTER_DISCOUNTS</code>.</p>"
+                    }
+                },
+                "shareableAccounts": {
+                    "target": "com.amazonaws.billing#ShareableAccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account IDs entitled to apply this credit.</p>"
+                    }
+                },
+                "accountHasCreditSharingEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the owning account has account-level credit sharing turned on.</p>"
+                    }
+                },
+                "creditConsoleVisibility": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display configuration for the credit in the Amazon Web Services Billing console.</p>"
+                    }
+                },
+                "creditSharingType": {
+                    "target": "com.amazonaws.billing#CreditSharingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sharing configuration for the credit. Valid values: <code>DEFAULT</code>, <code>DISABLED</code>, <code>CUSTOM</code>, <code>COST_CATEGORY_RULE</code>.</p>"
+                    }
+                },
+                "costCategoryArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Cost Category controlling the credit's sharing scope. Present only when <code>creditSharingType</code> is <code>COST_CATEGORY_RULE</code>.</p>"
+                    }
+                },
+                "ruleName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule name within the Cost Category. Present only when <code>creditSharingType</code> is <code>COST_CATEGORY_RULE</code>.</p>"
+                    }
+                },
+                "creditStatus": {
+                    "target": "com.amazonaws.billing#CreditStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the credit participates in billing runs. Valid values: <code>ENABLED</code>, <code>DISABLED</code>.</p>"
+                    }
+                },
+                "purchaseTypeApplications": {
+                    "target": "com.amazonaws.billing#PurchaseTypeApplications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Restricts which purchase types this credit applies to. When <code>null</code> or omitted, the credit applies to all purchase types.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detailed information about an Amazon Web Services credit, including its identifier, type, monetary amounts, applicable products, sharing configuration, and current enabled status.</p>"
+            }
+        },
+        "com.amazonaws.billing#CreditDataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#CreditData"
+            }
+        },
+        "com.amazonaws.billing#CreditId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[0-9]+$"
+            }
+        },
+        "com.amazonaws.billing#CreditSharingType": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                },
+                "COST_CATEGORY_RULE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COST_CATEGORY_RULE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.billing#CreditStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.billing#CurrencyAmount": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]+(.[0-9]+)$"
+            }
+        },
+        "com.amazonaws.billing#CurrencyCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[A-Z]{3}$"
             }
         },
         "com.amazonaws.billing#DeleteBillingView": {
@@ -2249,12 +2827,110 @@
                 "smithy.api#documentation": "<p> See <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html\">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code>, <code>Tags</code>, and <code>CostCategories</code>. </p>"
             }
         },
+        "com.amazonaws.billing#FailedMonthsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#BillingMonth"
+            }
+        },
         "com.amazonaws.billing#FieldName": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.billing#GetBillingPreferences": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#GetBillingPreferencesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#GetBillingPreferencesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves billing preferences for the specified feature. Each feature controls a distinct billing capability: which accounts can share Reserved Instances or credits, whether billing alerts are enabled, the historical record of sharing changes, and per-credit options.</p>"
+            }
+        },
+        "com.amazonaws.billing#GetBillingPreferencesRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.billing#PageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token from a previous response. Pass the value returned in <code>nextToken</code> to retrieve the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of records to return per page. Range: 1 to 50. Default: 50.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                },
+                "features": {
+                    "target": "com.amazonaws.billing#BillingFeatures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The feature to retrieve. Specify exactly one value. Valid values: <code>BILLING_ALERTS</code>, <code>RI_SHARING</code>, <code>RI_SHARING_HISTORY</code>, <code>CREDIT_SHARING</code>, <code>CREDIT_SHARING_HISTORY</code>, <code>CREDIT_LEVEL_SHARING</code>, <code>CREDIT_PREFERENCE_OPTIONS</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.billing#BillingFeatureFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to narrow results. Specify exactly one filter when supplied. The supported filter name is <code>PREFERENCE_KEY</code>, which accepts 1 to 10 values to match preference keys.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#GetBillingPreferencesResponse": {
+            "type": "structure",
+            "members": {
+                "billingPreferences": {
+                    "target": "com.amazonaws.billing#BillingPreferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of preference entries matching the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.billing#PageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token. Present when more pages are available; <code>null</code> when there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.billing#GetBillingView": {
@@ -2335,6 +3011,196 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The billing view element associated with the specified ARN. </p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.billing#GetCreditAllocationHistory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#GetCreditAllocationHistoryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#GetCreditAllocationHistoryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the per-billing-month allocation history for credits applied to an Amazon Web Services account's bills. Traverses the consolidated billing family to capture cross-account credit applications. Supports pagination and optional filtering to a single credit.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "creditAllocationHistoryList"
+                }
+            }
+        },
+        "com.amazonaws.billing#GetCreditAllocationHistoryRequest": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID whose allocation history to retrieve. Must be a 12-digit numeric string.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creditId": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the result to a single credit. When omitted, returns allocation entries for all credits.</p>"
+                    }
+                },
+                "startDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Inclusive start date as Unix epoch seconds. Must be on or before <code>endDate</code>. The range from <code>startDate</code> to <code>endDate</code> cannot exceed 24 billing months.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Inclusive end date as Unix epoch seconds.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.billing#PageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token from a previous response. Pass the value returned in <code>nextToken</code> to retrieve the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of records to return per page. Range: 1 to 1000. Default: 100.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#GetCreditAllocationHistoryResponse": {
+            "type": "structure",
+            "members": {
+                "creditAllocationHistoryList": {
+                    "target": "com.amazonaws.billing#CreditAllocationHistoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allocation entries sorted by <code>billingMonth</code> in descending order.</p>"
+                    }
+                },
+                "partialResults": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> <code>true</code> when data could not be retrieved for one or more billing months. The <code>failedMonths</code> field lists which months are missing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "failedMonths": {
+                    "target": "com.amazonaws.billing#FailedMonthsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Billing months in <code>YYYY-MM</code> format that failed to return data. Non-empty only when <code>partialResults</code> is <code>true</code>.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.billing#PageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token. Present when more pages are available; <code>null</code> when there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.billing#GetCredits": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#GetCreditsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#GetCreditsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the list of Amazon Web Services account credits for the specified account. Each credit includes its identifier, type, monetary amounts, applicable products, expiration, sharing configuration, and current enabled status.</p> <p>When the caller is the management account of a consolidated billing family and <code>payerAccountFlag</code> is <code>true</code>, the response aggregates credits across the entire family. Otherwise, the response includes only credits owned by the account specified in <code>accountId</code>.</p>"
+            }
+        },
+        "com.amazonaws.billing#GetCreditsRequest": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID. Must be a 12-digit numeric string.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date for the credit period as Unix epoch seconds. Must be a past date that is not more than one year before the current date.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end date for the credit period as Unix epoch seconds. Must not be a future date and must be on or after <code>startDate</code>. Defaults to the current date when omitted.</p>"
+                    }
+                },
+                "payerAccountFlag": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>true</code> and the caller is the management account, the response aggregates credits across the entire consolidated billing family. When <code>false</code> or omitted, returns only credits for the specified <code>accountId</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#GetCreditsResponse": {
+            "type": "structure",
+            "members": {
+                "credits": {
+                    "target": "com.amazonaws.billing#CreditDataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of credits matching the request. Returns an empty list when no credits exist.</p>"
                     }
                 }
             },
@@ -2783,17 +3649,104 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.billing#Month": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 12
+                }
+            }
+        },
         "com.amazonaws.billing#PageToken": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 2047
-                }
+                    "max": 4095
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9+=/_]+$"
             }
         },
         "com.amazonaws.billing#PolicyDocument": {
             "type": "string"
+        },
+        "com.amazonaws.billing#PreferenceKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2148
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-\\/\\*: ]+$"
+            }
+        },
+        "com.amazonaws.billing#PreferenceValue": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.billing#ProductName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.billing#ProductNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#ProductName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.billing#PromoCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[^<>\"&\\%|'\n\t]*"
+            }
+        },
+        "com.amazonaws.billing#PurchaseType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.billing#PurchaseTypeApplications": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#PurchaseType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 50
+                }
+            }
         },
         "com.amazonaws.billing#QuotaCode": {
             "type": "string",
@@ -2802,6 +3755,54 @@
                     "min": 1,
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.billing#RedeemCredits": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#RedeemCreditsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#RedeemCreditsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Redeems an Amazon Web Services promotional credit code on behalf of the calling account. On success, a new credit is added to the account's credit ledger with the amount, validity period, and applicable products defined by the promotion. The credit is then automatically applied to subsequent bills according to the standard credit application order.</p>"
+            }
+        },
+        "com.amazonaws.billing#RedeemCreditsRequest": {
+            "type": "structure",
+            "members": {
+                "promoCode": {
+                    "target": "com.amazonaws.billing#PromoCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The promotional credit code to redeem.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#RedeemCreditsResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.billing#ResourceArn": {
@@ -3001,6 +4002,12 @@
                 "smithy.api#documentation": "<p> You've reached the limit of resources you can create, or exceeded the size of an individual resource. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.billing#ShareableAccountIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#AccountId"
             }
         },
         "com.amazonaws.billing#StringSearch": {
@@ -3246,6 +4253,61 @@
             }
         },
         "com.amazonaws.billing#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.billing#UpdateBillingPreferences": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#UpdateBillingPreferencesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#UpdateBillingPreferencesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates billing preferences for the specified feature. Each feature targets a distinct billing capability and has its own set of supported keys. The action sets the value for each provided key; keys not present in the request are unchanged.</p> <p>Sharing keys (<code>RI_SHARING</code>, <code>CREDIT_SHARING</code>, <code>CREDIT_LEVEL_SHARING</code>, and sharing keys under <code>CREDIT_PREFERENCE_OPTIONS</code>) may only be set by the management account of a consolidated billing family. The <code>credit/{creditId}/status</code> key may be set by member accounts for credits they own, or by the management account for any credit in the family.</p>"
+            }
+        },
+        "com.amazonaws.billing#UpdateBillingPreferencesRequest": {
+            "type": "structure",
+            "members": {
+                "feature": {
+                    "target": "com.amazonaws.billing#BillingFeature",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The feature to update. Valid values: <code>BILLING_ALERTS</code>, <code>RI_SHARING</code>, <code>CREDIT_SHARING</code>, <code>CREDIT_LEVEL_SHARING</code>, <code>CREDIT_PREFERENCE_OPTIONS</code>. The history features (<code>RI_SHARING_HISTORY</code> and <code>CREDIT_SHARING_HISTORY</code>) are read-only and cannot be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "billingPreferencesPerKey": {
+                    "target": "com.amazonaws.billing#BillingPreferencesPerKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key/value pairs to apply. All keys in a single request must be valid for the specified <code>feature</code> and must not be duplicated. For <code>CREDIT_PREFERENCE_OPTIONS</code>, all keys must reference the same <code>creditId</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#UpdateBillingPreferencesResponse": {
             "type": "structure",
             "members": {},
             "traits": {

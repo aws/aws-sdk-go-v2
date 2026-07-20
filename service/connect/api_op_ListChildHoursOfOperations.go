@@ -17,7 +17,7 @@ import (
 // For more information about child hours of operations, see [Link overrides from different hours of operation] in the Administrator
 // Guide.
 //
-// [Link overrides from different hours of operation]: https://docs.aws.amazon.com/connect/latest/adminguide/
+// [Link overrides from different hours of operation]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
 func (c *Client) ListChildHoursOfOperations(ctx context.Context, params *ListChildHoursOfOperationsInput, optFns ...func(*Options)) (*ListChildHoursOfOperationsOutput, error) {
 	if params == nil {
 		params = &ListChildHoursOfOperationsInput{}

@@ -1,0 +1,5 @@
+POST /account/__AwsAccountId__
+
+Content-Type: application/json
+
+{"AccountName":"__AccountName__","ActiveDirectoryName":"__ActiveDirectoryName__","AdminGroup":["__Member__","__Member__"],"AdminProGroup":["__Member__","__Member__"],"AuthenticationMethod":"IAM_AND_QUICKSIGHT","AuthorGroup":["__Member__","__Member__"],"AuthorProGroup":["__Member__","__Member__"],"ContactNumber":"__ContactNumber__","DirectoryId":"__DirectoryId__","Edition":"STANDARD","EmailAddress":"__EmailAddress__","FirstName":"__FirstName__","IAMIdentityCenterInstanceArn":"__IAMIdentityCenterInstanceArn__","LastName":"__LastName__","NotificationEmail":"__NotificationEmail__","ReaderGroup":["__Member__","__Member__"],"ReaderProGroup":["__Member__","__Member__"],"Realm":"__Realm__"}

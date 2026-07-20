@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CertificateManager.CreateAcmeDomainValidation
+
+{"AcmeEndpointArn":"__AcmeEndpointArn__","DomainName":"__DomainName__","IdempotencyToken":"__IdempotencyToken__","PrevalidationOptions":{"DnsPrevalidation":{"DomainScope":{"ExactDomain":"ENABLED","Subdomains":"ENABLED","Wildcards":"ENABLED"},"HostedZoneId":"__HostedZoneId__"}},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

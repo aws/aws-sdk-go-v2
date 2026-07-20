@@ -121,8 +121,9 @@ type CapacityDistributionStrategy string
 
 // Enum values for CapacityDistributionStrategy
 const (
-	CapacityDistributionStrategyBalancedOnly       CapacityDistributionStrategy = "balanced-only"
-	CapacityDistributionStrategyBalancedBestEffort CapacityDistributionStrategy = "balanced-best-effort"
+	CapacityDistributionStrategyBalancedOnly             CapacityDistributionStrategy = "balanced-only"
+	CapacityDistributionStrategyBalancedBestEffort       CapacityDistributionStrategy = "balanced-best-effort"
+	CapacityDistributionStrategyReservationsThenBalanced CapacityDistributionStrategy = "reservations-then-balanced"
 )
 
 // Values returns all known values for CapacityDistributionStrategy. Note that
@@ -134,6 +135,7 @@ func (CapacityDistributionStrategy) Values() []CapacityDistributionStrategy {
 	return []CapacityDistributionStrategy{
 		"balanced-only",
 		"balanced-best-effort",
+		"reservations-then-balanced",
 	}
 }
 

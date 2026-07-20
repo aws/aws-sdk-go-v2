@@ -180,6 +180,9 @@ type Endpoint struct {
 	// The ARN of the endpoint.
 	Arn *string
 
+	// The auth proxy URL of the endpoint.
+	AuthProxyUrl *string
+
 	// The certificate ARN of the endpoint. This field is under deprecation and will
 	// be removed in future.
 	//
@@ -533,6 +536,9 @@ type S3MonitoringConfiguration struct {
 	// This member is required.
 	LogUri *string
 
+	// The Amazon resource name (ARN) of the encryption key for logs.
+	EncryptionKeyArn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -672,6 +678,9 @@ type VirtualCluster struct {
 
 	// The ID of the security configuration.
 	SecurityConfigurationId *string
+
+	// Indicates whether the virtual cluster has session support enabled.
+	SessionEnabled *bool
 
 	// The state of the virtual cluster.
 	State VirtualClusterState

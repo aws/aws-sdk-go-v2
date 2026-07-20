@@ -1,0 +1,5 @@
+POST /2021-01-01/packages/updateScope
+
+Content-Type: application/json
+
+{"Operation":"ADD","PackageID":"__PackageID__","PackageUserList":["__Member__","__Member__"]}

@@ -1,0 +1,5 @@
+PUT /v20190125/untag?resourceArn=__ResourceArn__
+
+Content-Type: application/json
+
+{"tagKeys":["__Member__","__Member__"]}

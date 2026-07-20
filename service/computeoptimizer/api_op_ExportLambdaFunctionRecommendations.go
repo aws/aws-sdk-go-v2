@@ -4,7 +4,9 @@ package computeoptimizer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -107,6 +109,29 @@ type ExportLambdaFunctionRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportLambdaFunctionRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportLambdaFunctionRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportLambdaFunctionRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.ExportLambdaFunctionRecommendationsRequest_accountIds, v.AccountIds)
+	serializeExportableLambdaFunctionFields(s, schemas.ExportLambdaFunctionRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	if v.FileFormat != "" {
+		s.WriteString(schemas.ExportLambdaFunctionRecommendationsRequest_fileFormat, string(v.FileFormat))
+	}
+	serializeLambdaFunctionRecommendationFilters(s, schemas.ExportLambdaFunctionRecommendationsRequest_filters, v.Filters)
+	if v.IncludeMemberAccounts != false {
+		s.WriteBool(schemas.ExportLambdaFunctionRecommendationsRequest_includeMemberAccounts, v.IncludeMemberAccounts)
+	}
+	if v.S3DestinationConfig != nil {
+		s.WriteStruct(schemas.ExportLambdaFunctionRecommendationsRequest_s3DestinationConfig)
+		v.S3DestinationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ExportLambdaFunctionRecommendationsOutput struct {
 
 	// The identification number of the export job.
@@ -125,13 +150,40 @@ type ExportLambdaFunctionRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportLambdaFunctionRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportLambdaFunctionRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportLambdaFunctionRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.ExportLambdaFunctionRecommendationsResponse_jobId, *v.JobId)
+	}
+	if v.S3Destination != nil {
+		s.WriteStruct(schemas.ExportLambdaFunctionRecommendationsResponse_s3Destination)
+		v.S3Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExportLambdaFunctionRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportLambdaFunctionRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportLambdaFunctionRecommendationsResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.ExportLambdaFunctionRecommendationsResponse_jobId, v.JobId)
+		case schemas.ExportLambdaFunctionRecommendationsResponse_s3Destination:
+			v.S3Destination = &types.S3Destination{}
+			return v.S3Destination.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportLambdaFunctionRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpExportLambdaFunctionRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportLambdaFunctionRecommendations, schemas.ExportLambdaFunctionRecommendationsRequest, schemas.ExportLambdaFunctionRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpExportLambdaFunctionRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportLambdaFunctionRecommendations, schemas.ExportLambdaFunctionRecommendationsRequest, schemas.ExportLambdaFunctionRecommendationsResponse), output: &ExportLambdaFunctionRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

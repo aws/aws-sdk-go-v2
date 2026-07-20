@@ -1,0 +1,5 @@
+POST /sbomexport/create
+
+Content-Type: application/json
+
+{"reportFormat":"CYCLONEDX_1_4","resourceFilterCriteria":{"accountId":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}],"ec2InstanceTags":[{"comparison":"EQUALS","key":"__Key__","value":"__Value__"},{"comparison":"EQUALS","key":"__Key__","value":"__Value__"}],"ecrImageTags":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}],"ecrRepositoryName":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}],"lambdaFunctionName":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}],"lambdaFunctionTags":[{"comparison":"EQUALS","key":"__Key__","value":"__Value__"},{"comparison":"EQUALS","key":"__Key__","value":"__Value__"}],"resourceId":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}],"resourceType":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}]},"s3Destination":{"bucketName":"__BucketName__","keyPrefix":"__KeyPrefix__","kmsKeyArn":"__KmsKeyArn__"}}

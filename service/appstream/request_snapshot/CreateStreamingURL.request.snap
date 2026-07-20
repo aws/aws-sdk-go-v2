@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PhotonAdminProxyService.CreateStreamingURL
+
+{"ApplicationId":"__ApplicationId__","FleetName":"__FleetName__","SessionContext":"__SessionContext__","StackName":"__StackName__","UserId":"__UserId__","Validity":1}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: FmrsService.UpdateLocationFsxOpenZfs
+
+{"LocationArn":"__LocationArn__","Protocol":{"NFS":{"MountOptions":{"Version":"AUTOMATIC"}},"SMB":{"CmkSecretConfig":{"KmsKeyArn":"__KmsKeyArn__","SecretArn":"__SecretArn__"},"CustomSecretConfig":{"SecretAccessRoleArn":"__SecretAccessRoleArn__","SecretArn":"__SecretArn__"},"Domain":"__Domain__","ManagedSecretConfig":{"SecretArn":"__SecretArn__"},"MountOptions":{"Version":"AUTOMATIC"},"Password":"__Password__","User":"__User__"}},"Subdirectory":"__Subdirectory__"}

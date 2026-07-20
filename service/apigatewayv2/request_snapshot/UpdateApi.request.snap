@@ -1,0 +1,5 @@
+PATCH /v2/apis/__ApiId__
+
+Content-Type: application/json
+
+{"apiKeySelectionExpression":"__ApiKeySelectionExpression__","corsConfiguration":{"allowCredentials":true,"allowHeaders":["__Member__","__Member__"],"allowMethods":["__Member__","__Member__"],"allowOrigins":["__Member__","__Member__"],"exposeHeaders":["__Member__","__Member__"],"maxAge":1},"credentialsArn":"__CredentialsArn__","description":"__Description__","disableExecuteApiEndpoint":true,"disableSchemaValidation":true,"ipAddressType":"ipv4","name":"__Name__","routeKey":"__RouteKey__","routeSelectionExpression":"__RouteSelectionExpression__","target":"__Target__","version":"__Version__"}

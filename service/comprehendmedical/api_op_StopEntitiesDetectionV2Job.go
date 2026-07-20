@@ -4,6 +4,8 @@ package comprehendmedical
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,6 +36,18 @@ type StopEntitiesDetectionV2JobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEntitiesDetectionV2JobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopEntitiesDetectionV2JobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEntitiesDetectionV2JobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopEntitiesDetectionV2JobRequest_JobId, *v.JobId)
+	}
+}
+
 type StopEntitiesDetectionV2JobOutput struct {
 
 	// The identifier of the medical entities detection job that was stopped.
@@ -45,13 +59,32 @@ type StopEntitiesDetectionV2JobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEntitiesDetectionV2JobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopEntitiesDetectionV2JobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEntitiesDetectionV2JobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopEntitiesDetectionV2JobResponse_JobId, *v.JobId)
+	}
+}
+func (v *StopEntitiesDetectionV2JobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopEntitiesDetectionV2JobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopEntitiesDetectionV2JobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StopEntitiesDetectionV2JobResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopEntitiesDetectionV2JobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStopEntitiesDetectionV2Job{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEntitiesDetectionV2Job, schemas.StopEntitiesDetectionV2JobRequest, schemas.StopEntitiesDetectionV2JobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStopEntitiesDetectionV2Job{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEntitiesDetectionV2Job, schemas.StopEntitiesDetectionV2JobRequest, schemas.StopEntitiesDetectionV2JobResponse), output: &StopEntitiesDetectionV2JobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

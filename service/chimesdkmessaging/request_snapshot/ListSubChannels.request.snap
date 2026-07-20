@@ -1,0 +1,4 @@
+GET /channels/__ChannelArn__/subchannels?max-results=1&next-token=__NextToken__
+
+X-Amz-Chime-Bearer: __ChimeBearer__
+

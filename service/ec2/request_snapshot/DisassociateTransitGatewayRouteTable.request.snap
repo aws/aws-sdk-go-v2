@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DisassociateTransitGatewayRouteTable&DryRun=true&TransitGatewayAttachmentId=__TransitGatewayAttachmentId__&TransitGatewayRouteTableId=__TransitGatewayRouteTableId__&Version=2016-11-15

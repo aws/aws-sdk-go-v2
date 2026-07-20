@@ -1,0 +1,5 @@
+PUT /domains/__DomainId__/fields/__FieldId__/options
+
+Content-Type: application/json
+
+{"options":[{"active":true,"name":"__Name__","value":"__Value__"},{"active":true,"name":"__Name__","value":"__Value__"}]}

@@ -1,0 +1,5 @@
+PUT /2015-02-01/file-systems/__FileSystemId__
+
+Content-Type: application/json
+
+{"ProvisionedThroughputInMibps":1,"ThroughputMode":"bursting"}

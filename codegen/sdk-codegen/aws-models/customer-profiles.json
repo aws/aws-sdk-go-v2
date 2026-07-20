@@ -6432,6 +6432,122 @@
                 "target": "com.amazonaws.customerprofiles#Dimension"
             }
         },
+        "com.amazonaws.customerprofiles#DiversityCapType": {
+            "type": "enum",
+            "members": {
+                "PERCENTAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERCENTAGE"
+                    }
+                },
+                "VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALUE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DiversityCapValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DiversityColumn": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the item catalog column on which to apply the diversity cap. The column must be defined in the recommender schema.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CapType": {
+                    "target": "com.amazonaws.customerprofiles#DiversityCapType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of diversity cap to apply. Valid values are <code>PERCENTAGE</code> (interpret <code>Target</code> as a percentage of returned items) and <code>VALUE</code> (interpret <code>Target</code> as an absolute count).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Target": {
+                    "target": "com.amazonaws.customerprofiles#DiversityTargetExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The diversity cap target. Either an integer literal (for example, <code>\"25\"</code>) or a placeholder expression of the form <code>$name</code> whose value is supplied at inference time through <code>GetProfileRecommendations</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a diversity constraint for a single item column, specifying a cap type and a target value or placeholder that controls how many recommended items may share the same column value.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#DiversityColumnsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#DiversityColumn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DiversityConfig": {
+            "type": "structure",
+            "members": {
+                "DiversityColumns": {
+                    "target": "com.amazonaws.customerprofiles#DiversityColumnsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of up to two diversity columns. Each column defines a cap on the number or percentage of recommended items that share the same value for that column.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that controls diversity of recommendation results by capping the representation of specified item columns.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#DiversityPlaceholderName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
+            }
+        },
+        "com.amazonaws.customerprofiles#DiversityTargetExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^(\\d+|\\$[a-z_]+)$"
+            }
+        },
+        "com.amazonaws.customerprofiles#DiversityValuesMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.customerprofiles#DiversityPlaceholderName"
+            },
+            "value": {
+                "target": "com.amazonaws.customerprofiles#DiversityCapValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#DomainList": {
             "type": "list",
             "member": {
@@ -9610,6 +9726,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for including item metadata in the recommendation response. Use this to specify which metadata columns to return alongside recommended items.</p>"
                     }
+                },
+                "DiversityConfig": {
+                    "target": "com.amazonaws.customerprofiles#RecommendationDiversityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Runtime diversity configuration for this request. Enables diversity-aware recommendations and optionally supplies values for placeholder-based diversity caps configured on the recommender.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9888,6 +10010,12 @@
                     "target": "com.amazonaws.customerprofiles#RecommenderUpdate",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the most recent update performed on the recommender, including status and timestamp.</p>"
+                    }
+                },
+                "ActiveRecommenderVersionName": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderVersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender version currently serving recommendations. Omitted when no active recommender version is set.</p>"
                     }
                 },
                 "TrainingMetrics": {
@@ -16614,6 +16742,27 @@
                 "smithy.api#documentation": "<p>Represents a single recommendation generated by the recommender system.</p>"
             }
         },
+        "com.amazonaws.customerprofiles#RecommendationDiversityConfig": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.customerprofiles#optionalBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether diversity-aware recommendations are enabled for this request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#DiversityValuesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional map of placeholder name to integer cap value used to resolve <code>$name</code> placeholders defined in the recommender's <code>DiversityConfig</code> at inference time. Up to 2 entries are supported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Runtime diversity configuration for a <code>GetProfileRecommendations</code> request.</p>"
+            }
+        },
         "com.amazonaws.customerprofiles#Recommendations": {
             "type": "list",
             "member": {
@@ -16654,6 +16803,12 @@
                     "target": "com.amazonaws.customerprofiles#IncludedColumns",
                     "traits": {
                         "smithy.api#documentation": "<p>A map of dataset type to a list of column names to exclude from training. The <code>_webAnalytics</code> and <code>_catalogItem</code> keys are supported. The column names must be valid columns defined in the recommender schema. All columns in the schema except the listed columns will be used for training. The following columns are mandatory and cannot be excluded: <code>Item.Id</code>, <code>EventTimestamp</code>, and <code>EventType</code> for <code>_webAnalytics</code>; <code>Id</code> for <code>_catalogItem</code>. Mutually exclusive with IncludedColumns — both cannot be specified in the same request.</p>"
+                    }
+                },
+                "DiversityConfig": {
+                    "target": "com.amazonaws.customerprofiles#DiversityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for diversity-aware recommendations. When set, the recommender applies diversity constraints defined per item column to reduce over-concentration of similar items in the results.</p>"
                     }
                 }
             },
@@ -17255,10 +17410,26 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If the update operation failed, provides the reason for the failure.</p>"
                     }
+                },
+                "RecommenderVersionName": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderVersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender version associated with this update operation.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about an update operation performed on a recommender.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderVersionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+/\\d{4}-\\d{2}-\\d{2}T\\d{2}-\\d{2}-\\d{2}Z$"
             }
         },
         "com.amazonaws.customerprofiles#ResourceNotFoundException": {
@@ -19466,6 +19637,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A collection of performance metrics and statistics from the training process.</p>"
                     }
+                },
+                "RecommenderVersionName": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderVersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender version that produced these training metrics.</p>"
+                    }
                 }
             },
             "traits": {
@@ -20622,6 +20799,12 @@
                     "target": "com.amazonaws.customerprofiles#RecommenderConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The new configuration settings to apply to the recommender, including updated parameters and settings that define its behavior.</p>"
+                    }
+                },
+                "RecommenderVersionName": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderVersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a specific recommender version to activate as part of this update (for example, to roll back to a previously trained version).</p>"
                     }
                 }
             },

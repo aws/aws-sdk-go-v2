@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSInsightsIndexService.CreateAnomalyMonitor
+
+{"AnomalyMonitor":{"CreationDate":"__CreationDate__","DimensionalValueCount":1,"LastEvaluatedDate":"__LastEvaluatedDate__","LastUpdatedDate":"__LastUpdatedDate__","MonitorArn":"__MonitorArn__","MonitorDimension":"SERVICE","MonitorName":"__MonitorName__","MonitorSpecification":{"And":[{},{}],"CostCategories":{"Key":"__Key__","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]},"Dimensions":{"Key":"AZ","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]},"Or":[{},{}],"Tags":{"Key":"__Key__","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]}},"MonitorType":"DIMENSIONAL"},"ResourceTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

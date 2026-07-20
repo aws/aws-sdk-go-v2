@@ -1,0 +1,5 @@
+POST /connectors
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","Name":"__Name__","Provider":{"Azure":{"AWSConfigConnectorArn":"__AWSConfigConnectorArn__","AzureRegions":["__Member__","__Member__"],"ScopeConfiguration":{"ScopeType":"TENANT","ScopeValues":["__Member__","__Member__"]}}},"Tags":{"key0":"__Value__"}}

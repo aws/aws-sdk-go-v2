@@ -1,0 +1,5 @@
+PUT /notification-configurations/__Arn__
+
+Content-Type: application/json
+
+{"aggregationDuration":"LONG","description":"__Description__","name":"__Name__"}

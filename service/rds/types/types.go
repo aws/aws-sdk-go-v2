@@ -1183,6 +1183,23 @@ type DBCluster struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about an Amazon Web Services Identity and Access
+// Management (IAM) role to associate with a DB cluster. You can specify this
+// structure in the AssociatedRoles parameter of CreateDBCluster, RestoreDBClusterFromS3, RestoreDBClusterFromSnapshot, and RestoreDBClusterToPointInTime.
+type DBClusterAssociatedRole struct {
+
+	// The Amazon Resource Name (ARN) of the IAM role to associate with the DB cluster.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The name of the feature associated with the IAM role. For information about
+	// supported feature names, see DBEngineVersion.
+	FeatureName *string
+
+	noSmithyDocumentSerde
+}
+
 // An automated backup of a DB cluster. It consists of system backups, transaction
 // logs, and the database cluster properties that existed at the time you deleted
 // the source cluster.

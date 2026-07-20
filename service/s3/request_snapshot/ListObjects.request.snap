@@ -1,0 +1,7 @@
+GET /?delimiter=__Delimiter__&encoding-type=url&marker=__Marker__&max-keys=1&prefix=__Prefix__
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Optional-Object-Attributes: RestoreStatus
+X-Amz-Optional-Object-Attributes: RestoreStatus
+X-Amz-Request-Payer: requester
+

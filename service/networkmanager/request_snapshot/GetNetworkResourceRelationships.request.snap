@@ -1,0 +1,3 @@
+GET /global-networks/__GlobalNetworkId__/network-resource-relationships?accountId=__AccountId__&awsRegion=__AwsRegion__&coreNetworkId=__CoreNetworkId__&maxResults=1&nextToken=__NextToken__&registeredGatewayArn=__RegisteredGatewayArn__&resourceArn=__ResourceArn__&resourceType=__ResourceType__
+
+

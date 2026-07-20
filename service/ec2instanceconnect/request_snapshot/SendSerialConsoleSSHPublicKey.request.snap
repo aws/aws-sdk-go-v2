@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEC2InstanceConnectService.SendSerialConsoleSSHPublicKey
+
+{"InstanceId":"__InstanceId__","SerialPort":1,"SSHPublicKey":"__SSHPublicKey__"}

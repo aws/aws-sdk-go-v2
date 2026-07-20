@@ -1,0 +1,5 @@
+POST /custom-data-identifiers/list
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__"}

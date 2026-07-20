@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: SimpleWorkflowService.StartWorkflowExecution
+
+{"childPolicy":"TERMINATE","domain":"__Domain__","executionStartToCloseTimeout":"__ExecutionStartToCloseTimeout__","input":"__Input__","lambdaRole":"__LambdaRole__","tagList":["__Member__","__Member__"],"taskList":{"name":"__Name__"},"taskPriority":"__TaskPriority__","taskStartToCloseTimeout":"__TaskStartToCloseTimeout__","workflowId":"__WorkflowId__","workflowType":{"name":"__Name__","version":"__Version__"}}

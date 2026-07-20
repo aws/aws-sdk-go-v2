@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=SetInstanceProtection&AutoScalingGroupName=__AutoScalingGroupName__&InstanceIds.member.1=__Member__&InstanceIds.member.2=__Member__&ProtectedFromScaleIn=true&Version=2011-01-01

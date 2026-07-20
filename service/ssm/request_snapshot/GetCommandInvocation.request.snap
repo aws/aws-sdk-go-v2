@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.GetCommandInvocation
+
+{"CommandId":"__CommandId__","InstanceId":"__InstanceId__","PluginName":"__PluginName__"}

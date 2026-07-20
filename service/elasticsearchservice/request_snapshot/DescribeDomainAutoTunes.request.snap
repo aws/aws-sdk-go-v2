@@ -1,0 +1,3 @@
+GET /2015-01-01/es/domain/__DomainName__/autoTunes?maxResults=1&nextToken=__NextToken__
+
+

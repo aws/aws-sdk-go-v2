@@ -1,0 +1,3 @@
+GET /sol/vnflcm/v1/vnf_instances?max_results=1&nextpage_opaque_marker=__NextToken__
+
+

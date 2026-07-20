@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyEventSubscription&Enabled=true&EventCategories.EventCategory.1=__Member__&EventCategories.EventCategory.2=__Member__&SnsTopicArn=__SnsTopicArn__&SourceType=__SourceType__&SubscriptionName=__SubscriptionName__&Version=2014-10-31

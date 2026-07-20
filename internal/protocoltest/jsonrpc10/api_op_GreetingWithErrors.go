@@ -60,6 +60,17 @@ type GreetingWithErrorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GreetingWithErrorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GreetingWithErrorsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GreetingWithErrorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Greeting != nil {
+		s.WriteString(schemas.GreetingWithErrorsOutput_greeting, *v.Greeting)
+	}
+}
 func (v *GreetingWithErrorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GreetingWithErrorsOutput, func(s *smithy.Schema) error {
 		switch s {

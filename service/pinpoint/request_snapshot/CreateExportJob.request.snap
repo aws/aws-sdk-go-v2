@@ -1,0 +1,5 @@
+POST /v1/apps/__ApplicationId__/jobs/export
+
+Content-Type: application/json
+
+{"RoleArn":"__RoleArn__","S3UrlPrefix":"__S3UrlPrefix__","SegmentId":"__SegmentId__","SegmentVersion":1}

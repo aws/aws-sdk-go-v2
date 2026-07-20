@@ -41,7 +41,7 @@
                 "VendedMetrics": {
                     "target": "com.amazonaws.appconfig#VendedMetricsSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration for vended metrics in the account.</p>"
+                        "smithy.api#documentation": "<p>The configuration for vended metrics in the account.</p>"
                     }
                 }
             }
@@ -3628,7 +3628,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Optional deployment parameters for an experiment run, including extension parameters and tags.</p>"
+                "smithy.api#documentation": "<p>The deployment parameters for an experiment run, including dynamic extension parameters and tags.</p>"
             }
         },
         "com.amazonaws.appconfig#DeploymentState": {
@@ -4863,7 +4863,7 @@
                     "target": "com.amazonaws.appconfig#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Whether the feature flag is enabled for this treatment.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the feature flag is enabled for this treatment.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7455,7 +7455,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an experiment run for the specified experiment definition. An experiment run delivers treatments to the target audience and collects metrics. You can start multiple experiment runs from the same experiment definition.</p>",
+                "smithy.api#documentation": "<p>Starts an experiment run for the specified experiment definition. An experiment run delivers treatments to the target audience and collects metrics. You can start multiple experiment runs from the same experiment definition.</p>\n         <note>\n            <p>Billing for this experiment begins when you call this operation and continues until the experiment is stopped. For pricing details, see <a href=\"https://aws.amazon.com/systems-manager/pricing/\">AppConfig pricing</a>.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "To start an experiment run",
@@ -7554,7 +7554,7 @@
                 "DeploymentParameters": {
                     "target": "com.amazonaws.appconfig#DeploymentParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional deployment parameters including a KMS key for encryption.</p>"
+                        "smithy.api#documentation": "<p>The deployment parameters for the experiment run, including a KMS key identifier for encryption.</p>"
                     }
                 }
             },
@@ -7662,6 +7662,9 @@
                     "target": "com.amazonaws.appconfig#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.appconfig#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.appconfig#InternalServerException"
                 },
                 {
@@ -7767,7 +7770,7 @@
                 "DeploymentParameters": {
                     "target": "com.amazonaws.appconfig#DeploymentParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional deployment parameters for the stop operation.</p>"
+                        "smithy.api#documentation": "<p>The deployment parameters for the stop operation.</p>"
                     }
                 }
             },
@@ -8188,7 +8191,7 @@
                 "VendedMetrics": {
                     "target": "com.amazonaws.appconfig#VendedMetricsSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration for vended metrics in the account.</p>"
+                        "smithy.api#documentation": "<p>The configuration for vended metrics in the account.</p>"
                     }
                 }
             },
@@ -8646,7 +8649,7 @@
                 "Treatments": {
                     "target": "com.amazonaws.appconfig#TreatmentInputList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An updated list of treatments.</p>"
+                        "smithy.api#documentation": "<p>The updated list of treatments to evaluate during the experiment. Each treatment defines a distinct variation compared to the control.</p>"
                     }
                 },
                 "Control": {
@@ -8803,13 +8806,13 @@
                 "TreatmentOverrides": {
                     "target": "com.amazonaws.appconfig#TreatmentOverrides",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updated treatment assignment overrides.</p>"
+                        "smithy.api#documentation": "<p>The updated treatment assignment overrides that assign specific entity IDs to treatments, bypassing random assignment.</p>"
                     }
                 },
                 "DeploymentParameters": {
                     "target": "com.amazonaws.appconfig#DeploymentParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updated deployment parameters.</p>"
+                        "smithy.api#documentation": "<p>The updated deployment parameters for the experiment run.</p>"
                     }
                 }
             },
@@ -9089,12 +9092,12 @@
                     "target": "com.amazonaws.appconfig#Boolean",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>Whether vended metrics are enabled for the account.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether vended metrics are enabled for the account.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration settings for vended metrics.</p>"
+                "smithy.api#documentation": "<p>The configuration settings for vended metrics in your AppConfig account.</p>"
             }
         },
         "com.amazonaws.appconfig#Version": {

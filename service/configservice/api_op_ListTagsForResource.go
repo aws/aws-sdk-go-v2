@@ -47,6 +47,8 @@ type ListTagsForResourceInput struct {
 	//
 	//   - StoredQuery
 	//
+	//   - Connector
+	//
 	// This member is required.
 	ResourceArn *string
 

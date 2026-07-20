@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftData.ExecuteStatement
+
+{"ClientToken":"__ClientToken__","ClusterIdentifier":"__ClusterIdentifier__","Database":"__Database__","DbUser":"__DbUser__","Parameters":[{"name":"__Name__","value":"__Value__"},{"name":"__Name__","value":"__Value__"}],"ResultFormat":"JSON","SecretArn":"__SecretArn__","SessionId":"__SessionId__","SessionKeepAliveSeconds":1,"Sql":"__Sql__","StatementName":"__StatementName__","WithEvent":true,"WorkgroupName":"__WorkgroupName__"}

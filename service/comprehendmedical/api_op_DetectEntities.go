@@ -4,7 +4,9 @@ package comprehendmedical
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,18 @@ type DetectEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Text != nil {
+		s.WriteString(schemas.DetectEntitiesRequest_Text, *v.Text)
+	}
+}
+
 type DetectEntitiesOutput struct {
 
 	// The collection of medical entities extracted from the input text and their
@@ -75,13 +89,44 @@ type DetectEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityList(s, schemas.DetectEntitiesResponse_Entities, v.Entities)
+	if v.ModelVersion != nil {
+		s.WriteString(schemas.DetectEntitiesResponse_ModelVersion, *v.ModelVersion)
+	}
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.DetectEntitiesResponse_PaginationToken, *v.PaginationToken)
+	}
+	serializeUnmappedAttributeList(s, schemas.DetectEntitiesResponse_UnmappedAttributes, v.UnmappedAttributes)
+}
+func (v *DetectEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectEntitiesResponse_Entities:
+			return deserializeEntityList(d, schemas.DetectEntitiesResponse_Entities, &v.Entities)
+		case schemas.DetectEntitiesResponse_ModelVersion:
+			v.ModelVersion = new(string)
+			return d.ReadString(schemas.DetectEntitiesResponse_ModelVersion, v.ModelVersion)
+		case schemas.DetectEntitiesResponse_PaginationToken:
+			v.PaginationToken = new(string)
+			return d.ReadString(schemas.DetectEntitiesResponse_PaginationToken, v.PaginationToken)
+		case schemas.DetectEntitiesResponse_UnmappedAttributes:
+			return deserializeUnmappedAttributeList(d, schemas.DetectEntitiesResponse_UnmappedAttributes, &v.UnmappedAttributes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDetectEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectEntities, schemas.DetectEntitiesRequest, schemas.DetectEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDetectEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectEntities, schemas.DetectEntitiesRequest, schemas.DetectEntitiesResponse), output: &DetectEntitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

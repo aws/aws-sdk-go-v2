@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/themes?max-results=1&next-token=__NextToken__&type=QUICKSIGHT
+
+

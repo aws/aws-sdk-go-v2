@@ -1,0 +1,3 @@
+GET /thing-types?maxResults=1&nextToken=__NextToken__&thingTypeName=__ThingTypeName__
+
+

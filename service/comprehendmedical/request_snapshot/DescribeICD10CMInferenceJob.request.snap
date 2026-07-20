@@ -1,0 +1,7 @@
+POST /service/ComprehendMedical_20181030/operation/DescribeICD10CMInferenceJob
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¡eJobIdi__JobId__

@@ -1,0 +1,5 @@
+POST /v1/offerings/__OfferingArn__
+
+Content-Type: application/json
+
+{"reservationName":"__ReservationName__","start":"__Start__"}

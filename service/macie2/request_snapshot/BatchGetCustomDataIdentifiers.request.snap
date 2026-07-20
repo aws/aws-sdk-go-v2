@@ -1,0 +1,5 @@
+POST /custom-data-identifiers/get
+
+Content-Type: application/json
+
+{"ids":["__Member__","__Member__"]}

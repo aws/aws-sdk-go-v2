@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListAliases
+
+{"Alias":"__Alias__","ImageName":"__ImageName__","MaxResults":1,"NextToken":"__NextToken__","Version":1}

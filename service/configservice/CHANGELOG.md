@@ -1,3 +1,24 @@
+# v1.67.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.67.0 (2026-07-07)
+
+* **Feature**: Added support for connecting AWS Config to third-party cloud service providers. New APIs include PutConnector, GetConnector, DeleteConnector, and ListConnectors for managing connectors, and PutThirdPartyServiceLinkedConfigurationRecorder for creating third-party service-linked recorders.
+
+# v1.66.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.65.0 (2026-07-02)
+
+* **Feature**: AWS Config now supports tag-on-create for organization-managed Config rules and conformance packs through the PutOrganizationConfigRule and PutOrganizationConformancePack APIs.
+
+# v1.64.3 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.64.2 (2026-06-29)
 
 * No change notes available for this release.

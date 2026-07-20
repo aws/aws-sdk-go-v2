@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodePipeline_20150709.PutWebhook
+
+{"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"webhook":{"authentication":"GITHUB_HMAC","authenticationConfiguration":{"AllowedIPRange":"__AllowedIPRange__","SecretToken":"__SecretToken__"},"filters":[{"jsonPath":"__JsonPath__","matchEquals":"__MatchEquals__"},{"jsonPath":"__JsonPath__","matchEquals":"__MatchEquals__"}],"name":"__Name__","targetAction":"__TargetAction__","targetPipeline":"__TargetPipeline__"}}

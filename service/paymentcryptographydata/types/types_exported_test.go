@@ -409,6 +409,9 @@ func ExampleSessionKeyDerivation_outputUsage() {
 	case *types.SessionKeyDerivationMemberMastercard:
 		_ = v.Value // Value is types.SessionKeyMastercard
 
+	case *types.SessionKeyDerivationMemberUnionPay:
+		_ = v.Value // Value is types.SessionKeyUnionPay
+
 	case *types.SessionKeyDerivationMemberVisa:
 		_ = v.Value // Value is types.SessionKeyVisa
 
@@ -422,6 +425,7 @@ func ExampleSessionKeyDerivation_outputUsage() {
 }
 
 var _ *types.SessionKeyVisa
+var _ *types.SessionKeyUnionPay
 var _ *types.SessionKeyEmvCommon
 var _ *types.SessionKeyEmv2000
 var _ *types.SessionKeyAmex

@@ -1,0 +1,5 @@
+POST /get-control
+
+Content-Type: application/json
+
+{"ControlArn":"__ControlArn__"}

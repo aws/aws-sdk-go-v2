@@ -1,0 +1,3 @@
+DELETE /requester-gateway/__GatewayId__/outbound-external-link/__LinkId__
+
+

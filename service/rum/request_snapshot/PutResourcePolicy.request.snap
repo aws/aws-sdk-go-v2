@@ -1,0 +1,5 @@
+PUT /appmonitor/__Name__/policy
+
+Content-Type: application/json
+
+{"PolicyDocument":"__PolicyDocument__","PolicyRevisionId":"__PolicyRevisionId__"}

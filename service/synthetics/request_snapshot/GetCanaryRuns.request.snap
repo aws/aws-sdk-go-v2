@@ -1,0 +1,5 @@
+POST /canary/__Name__/runs
+
+Content-Type: application/json
+
+{"DryRunId":"__DryRunId__","MaxResults":1,"NextToken":"__NextToken__","RunType":"CANARY_RUN"}

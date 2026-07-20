@@ -4066,6 +4066,7 @@ const (
 	FormatAvi       Format = "avi"
 	FormatMpegts    Format = "mpegts"
 	FormatMpegps    Format = "mpegps"
+	FormatMp3       Format = "mp3"
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
@@ -4083,6 +4084,7 @@ func (Format) Values() []Format {
 		"avi",
 		"mpegts",
 		"mpegps",
+		"mp3",
 	}
 }
 
@@ -4332,6 +4334,26 @@ func (H264EntropyEncoding) Values() []H264EntropyEncoding {
 	return []H264EntropyEncoding{
 		"CABAC",
 		"CAVLC",
+	}
+}
+
+type H264ExplicitWeightedPrediction string
+
+// Enum values for H264ExplicitWeightedPrediction
+const (
+	H264ExplicitWeightedPredictionDisabled H264ExplicitWeightedPrediction = "DISABLED"
+	H264ExplicitWeightedPredictionEnabled  H264ExplicitWeightedPrediction = "ENABLED"
+)
+
+// Values returns all known values for H264ExplicitWeightedPrediction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H264ExplicitWeightedPrediction) Values() []H264ExplicitWeightedPrediction {
+	return []H264ExplicitWeightedPrediction{
+		"DISABLED",
+		"ENABLED",
 	}
 }
 

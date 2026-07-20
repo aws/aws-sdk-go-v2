@@ -837,6 +837,27 @@ func (AuthorSpecifiedAggregation) Values() []AuthorSpecifiedAggregation {
 	}
 }
 
+type AuthType string
+
+// Enum values for AuthType
+const (
+	AuthTypeThreeLeggedOauth AuthType = "THREE_LEGGED_OAUTH"
+	AuthTypeTwoLeggedOauth   AuthType = "TWO_LEGGED_OAUTH"
+	AuthTypeServiceAccount   AuthType = "SERVICE_ACCOUNT"
+)
+
+// Values returns all known values for AuthType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthType) Values() []AuthType {
+	return []AuthType{
+		"THREE_LEGGED_OAUTH",
+		"TWO_LEGGED_OAUTH",
+		"SERVICE_ACCOUNT",
+	}
+}
+
 type AutomationJobStatus string
 
 // Enum values for AutomationJobStatus
@@ -1549,6 +1570,27 @@ func (ControlSortDirection) Values() []ControlSortDirection {
 		"ASC",
 		"DESC",
 		"USER_DEFINED_ORDER",
+	}
+}
+
+type CredentialStatus string
+
+// Enum values for CredentialStatus
+const (
+	CredentialStatusConnected   CredentialStatus = "CONNECTED"
+	CredentialStatusAuthFailed  CredentialStatus = "AUTH_FAILED"
+	CredentialStatusNotVerified CredentialStatus = "NOT_VERIFIED"
+)
+
+// Values returns all known values for CredentialStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CredentialStatus) Values() []CredentialStatus {
+	return []CredentialStatus{
+		"CONNECTED",
+		"AUTH_FAILED",
+		"NOT_VERIFIED",
 	}
 }
 
@@ -3561,6 +3603,7 @@ const (
 	KnowledgeBaseSearchFilterNameDirectQuicksightSoleOwner     KnowledgeBaseSearchFilterName = "DIRECT_QUICKSIGHT_SOLE_OWNER"
 	KnowledgeBaseSearchFilterNameKnowledgeBaseSizeBytes        KnowledgeBaseSearchFilterName = "KNOWLEDGE_BASE_SIZE_BYTES"
 	KnowledgeBaseSearchFilterNamePrimaryOwner                  KnowledgeBaseSearchFilterName = "PRIMARY_OWNER"
+	KnowledgeBaseSearchFilterNameDatasourceArn                 KnowledgeBaseSearchFilterName = "DATASOURCE_ARN"
 )
 
 // Values returns all known values for KnowledgeBaseSearchFilterName. Note that
@@ -3577,6 +3620,7 @@ func (KnowledgeBaseSearchFilterName) Values() []KnowledgeBaseSearchFilterName {
 		"DIRECT_QUICKSIGHT_SOLE_OWNER",
 		"KNOWLEDGE_BASE_SIZE_BYTES",
 		"PRIMARY_OWNER",
+		"DATASOURCE_ARN",
 	}
 }
 
@@ -5273,9 +5317,10 @@ type ServiceType string
 
 // Enum values for ServiceType
 const (
-	ServiceTypeRedshift  ServiceType = "REDSHIFT"
-	ServiceTypeQbusiness ServiceType = "QBUSINESS"
-	ServiceTypeAthena    ServiceType = "ATHENA"
+	ServiceTypeRedshift        ServiceType = "REDSHIFT"
+	ServiceTypeQbusiness       ServiceType = "QBUSINESS"
+	ServiceTypeAthena          ServiceType = "ATHENA"
+	ServiceTypeGlueDataCatalog ServiceType = "GLUE_DATA_CATALOG"
 )
 
 // Values returns all known values for ServiceType. Note that this can be expanded
@@ -5287,6 +5332,7 @@ func (ServiceType) Values() []ServiceType {
 		"REDSHIFT",
 		"QBUSINESS",
 		"ATHENA",
+		"GLUE_DATA_CATALOG",
 	}
 }
 

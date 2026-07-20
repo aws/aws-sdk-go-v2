@@ -4046,6 +4046,15 @@ func awsRestjson1_deserializeOpDocumentGetLaunchConfigurationOutput(v **GetLaunc
 				sv.PostLaunchEnabled = ptr.Bool(jtv)
 			}
 
+		case "recoveryMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecoveryMode to be of type string, got %T instead", value)
+				}
+				sv.RecoveryMode = types.RecoveryMode(jtv)
+			}
+
 		case "sourceServerID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7826,6 +7835,15 @@ func awsRestjson1_deserializeOpDocumentUpdateLaunchConfigurationOutput(v **Updat
 				sv.PostLaunchEnabled = ptr.Bool(jtv)
 			}
 
+		case "recoveryMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecoveryMode to be of type string, got %T instead", value)
+				}
+				sv.RecoveryMode = types.RecoveryMode(jtv)
+			}
+
 		case "sourceServerID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10943,6 +10961,15 @@ func awsRestjson1_deserializeDocumentLaunchConfigurationTemplate(v **types.Launc
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.PostLaunchEnabled = ptr.Bool(jtv)
+			}
+
+		case "recoveryMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecoveryMode to be of type string, got %T instead", value)
+				}
+				sv.RecoveryMode = types.RecoveryMode(jtv)
 			}
 
 		case "tags":

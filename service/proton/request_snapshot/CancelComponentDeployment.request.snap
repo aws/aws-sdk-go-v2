@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.CancelComponentDeployment
+
+{"componentName":"__ComponentName__"}

@@ -4,6 +4,8 @@ package comprehendmedical
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,6 +36,18 @@ type StopSNOMEDCTInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSNOMEDCTInferenceJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopSNOMEDCTInferenceJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSNOMEDCTInferenceJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopSNOMEDCTInferenceJobRequest_JobId, *v.JobId)
+	}
+}
+
 type StopSNOMEDCTInferenceJobOutput struct {
 
 	//  The identifier generated for the job. To get the status of job, use this
@@ -46,13 +60,32 @@ type StopSNOMEDCTInferenceJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSNOMEDCTInferenceJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopSNOMEDCTInferenceJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSNOMEDCTInferenceJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopSNOMEDCTInferenceJobResponse_JobId, *v.JobId)
+	}
+}
+func (v *StopSNOMEDCTInferenceJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopSNOMEDCTInferenceJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopSNOMEDCTInferenceJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StopSNOMEDCTInferenceJobResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopSNOMEDCTInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStopSNOMEDCTInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSNOMEDCTInferenceJob, schemas.StopSNOMEDCTInferenceJobRequest, schemas.StopSNOMEDCTInferenceJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStopSNOMEDCTInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSNOMEDCTInferenceJob, schemas.StopSNOMEDCTInferenceJobRequest, schemas.StopSNOMEDCTInferenceJobResponse), output: &StopSNOMEDCTInferenceJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

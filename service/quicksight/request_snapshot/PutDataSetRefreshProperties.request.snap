@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/data-sets/__DataSetId__/refresh-properties
+
+Content-Type: application/json
+
+{"DataSetRefreshProperties":{"FailureConfiguration":{"EmailAlert":{"AlertStatus":"ENABLED"}},"RefreshConfiguration":{"IncrementalRefresh":{"LookbackWindow":{"ColumnName":"__ColumnName__","Size":1,"SizeUnit":"HOUR"}}}}}

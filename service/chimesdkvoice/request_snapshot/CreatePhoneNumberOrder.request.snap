@@ -1,0 +1,5 @@
+POST /phone-number-orders
+
+Content-Type: application/json
+
+{"E164PhoneNumbers":["__Member__","__Member__"],"Name":"__Name__","ProductType":"VoiceConnector"}

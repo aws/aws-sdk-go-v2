@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.PutPermission
+
+{"Action":"__Action__","Condition":{"Key":"__Key__","Type":"__Type__","Value":"__Value__"},"EventBusName":"__EventBusName__","Policy":"__Policy__","Principal":"__Principal__","StatementId":"__StatementId__"}

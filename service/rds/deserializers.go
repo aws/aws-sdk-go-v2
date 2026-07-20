@@ -1889,6 +1889,9 @@ func awsAwsquery_deserializeOpErrorCreateDBCluster(response *smithyhttp.Response
 	case strings.EqualFold("DBClusterQuotaExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterQuotaExceededFault(response, errorBody)
 
+	case strings.EqualFold("DBClusterRoleQuotaExceeded", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterRoleQuotaExceededFault(response, errorBody)
+
 	case strings.EqualFold("DBInstanceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
 
@@ -17090,6 +17093,9 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterFromS3(response *smithyhttp.R
 	case strings.EqualFold("DBClusterQuotaExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterQuotaExceededFault(response, errorBody)
 
+	case strings.EqualFold("DBClusterRoleQuotaExceeded", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterRoleQuotaExceededFault(response, errorBody)
+
 	case strings.EqualFold("DBSubnetGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBSubnetGroupNotFoundFault(response, errorBody)
 
@@ -17243,6 +17249,9 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterFromSnapshot(response *smithy
 
 	case strings.EqualFold("DBClusterQuotaExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterQuotaExceededFault(response, errorBody)
+
+	case strings.EqualFold("DBClusterRoleQuotaExceeded", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterRoleQuotaExceededFault(response, errorBody)
 
 	case strings.EqualFold("DBClusterSnapshotNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterSnapshotNotFoundFault(response, errorBody)
@@ -17427,6 +17436,9 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterToPointInTime(response *smith
 
 	case strings.EqualFold("DBClusterQuotaExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterQuotaExceededFault(response, errorBody)
+
+	case strings.EqualFold("DBClusterRoleQuotaExceeded", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterRoleQuotaExceededFault(response, errorBody)
 
 	case strings.EqualFold("DBClusterSnapshotNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterSnapshotNotFoundFault(response, errorBody)

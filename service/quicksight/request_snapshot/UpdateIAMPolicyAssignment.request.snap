@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/namespaces/__Namespace__/iam-policy-assignments/__AssignmentName__
+
+Content-Type: application/json
+
+{"AssignmentStatus":"ENABLED","Identities":{"key0":["__Member__","__Member__"]},"PolicyArn":"__PolicyArn__"}

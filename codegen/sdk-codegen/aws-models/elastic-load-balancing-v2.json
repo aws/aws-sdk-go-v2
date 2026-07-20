@@ -9257,6 +9257,23 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#SourceIpAddressTypeEnum": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv4"
+                    }
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv6"
+                    }
+                }
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#SourceIpConditionConfig": {
             "type": "structure",
             "members": {
@@ -9264,6 +9281,12 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#ListOfString",
                     "traits": {
                         "smithy.api#documentation": "<p>The source IP addresses, in CIDR format. You can use both IPv4 and IPv6 addresses.\n      Wildcards are not supported.</p>\n         <p>If you specify multiple addresses, the condition is satisfied if the source IP address of\n      the request matches one of the CIDR blocks. This condition is not satisfied by the addresses\n      in the X-Forwarded-For header. To search for addresses in the X-Forwarded-For header, use\n      an <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#http-header-conditions\">HTTP header condition</a>.</p>\n         <p>The total number of values must be less than, or equal to five.</p>"
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#SourceIpAddressTypeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for Network Load Balancers.</p>\n         <p>The valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ipv4</code> – IPv4 addresses only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ipv6</code> – IPv6 addresses only.</p>\n            </li>\n         </ul>"
                     }
                 }
             },

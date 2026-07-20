@@ -1,0 +1,5 @@
+POST /codesecurity/scan-configuration/get
+
+Content-Type: application/json
+
+{"scanConfigurationArn":"__ScanConfigurationArn__"}

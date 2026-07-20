@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.PutEncryptionConfiguration
+
+{"encryptionType":"KMS_BASED_ENCRYPTION","kmsKeyId":"__KmsKeyId__"}

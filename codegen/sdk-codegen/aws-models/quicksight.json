@@ -63,6 +63,21 @@
                 "smithy.api#documentation": "<p>Configuration for API key-based authentication to external services.</p>"
             }
         },
+        "com.amazonaws.quicksight#AccessControlConfiguration": {
+            "type": "structure",
+            "members": {
+                "isACLEnabled": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Specifies whether ACLs are enabled for the knowledge base.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The access control settings for a knowledge base. Use this structure to enable or disable document-level access control lists (ACLs) that filter query results based on the permissions from the source data connector.</p>"
+            }
+        },
         "com.amazonaws.quicksight#AccessDeniedException": {
             "type": "structure",
             "members": {
@@ -4949,6 +4964,29 @@
                 "smithy.api#documentation": "<p>Authentication configuration for connecting to external services.</p>"
             }
         },
+        "com.amazonaws.quicksight#AuthType": {
+            "type": "enum",
+            "members": {
+                "THREE_LEGGED_OAUTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THREE_LEGGED_OAUTH"
+                    }
+                },
+                "TWO_LEGGED_OAUTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TWO_LEGGED_OAUTH"
+                    }
+                },
+                "SERVICE_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_ACCOUNT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#AuthenticationMetadata": {
             "type": "union",
             "members": {
@@ -8970,6 +9008,30 @@
                     "target": "com.amazonaws.quicksight#CapabilityState",
                     "traits": {
                         "smithy.api#documentation": "<p>The ability to perform Scenario-related actions.</p>"
+                    }
+                },
+                "Trigger": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to manage trigger-related settings for flows and automations.</p>"
+                    }
+                },
+                "ScheduleTrigger": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, view, edit, delete, and run schedule triggers for flows and automations.</p>"
+                    }
+                },
+                "InboundEmailTrigger": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, view, edit, delete, and run inbound email triggers for flows and automations.</p>"
+                    }
+                },
+                "QuickEventTrigger": {
+                    "target": "com.amazonaws.quicksight#CapabilityState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ability to create, view, edit, delete, and run Quick event triggers for flows and automations.</p>"
                     }
                 }
             },
@@ -14304,6 +14366,171 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#CreateKnowledgeBase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#CreateKnowledgeBaseRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#CreateKnowledgeBaseResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a knowledge base from a specified data source. Supported data source connector types include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>S3_KNOWLEDGE_BASE</code> – Uses an Amazon S3 bucket as the data source.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WEB_CRAWLER</code> – Uses web pages indexed by the built-in web crawler as the data source.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GOOGLE_DRIVE</code> – Uses Google Drive as the data source. Supports service account authentication only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SHAREPOINT</code> – Uses SharePoint as the data source. Supports two-legged OAuth only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ONE_DRIVE</code> – Uses OneDrive as the data source. Supports two-legged OAuth only.</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/accounts/{AwsAccountId}/knowledge-bases",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateKnowledgeBaseRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#KbAwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "KnowledgeBaseId": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSourceArn": {
+                    "target": "com.amazonaws.quicksight#DataSourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the data source for the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KnowledgeBaseConfiguration": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the knowledge base. If you don't specify a description, the knowledge base is created without one.</p>"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of resource permissions on the knowledge base. Each entry grants a specified Amazon QuickSight principal either owner or viewer access. If you don't specify permissions, only the primary owner (if provided) receives owner access.</p>"
+                    }
+                },
+                "MediaExtractionConfiguration": {
+                    "target": "com.amazonaws.quicksight#MediaExtractionConfiguration"
+                },
+                "AccessControlConfiguration": {
+                    "target": "com.amazonaws.quicksight#AccessControlConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access control configuration for the knowledge base. If you don't specify this parameter, document-level ACLs are disabled.</p>"
+                    }
+                },
+                "PrimaryOwnerArn": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the primary owner for the knowledge base. The specified user is always granted owner access, regardless of what is specified in the <code>Permissions</code> field. If you don't specify a primary owner, the knowledge base is created without one.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.quicksight#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to assign to the knowledge base. If you don't specify tags, the knowledge base is created without tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#CreateKnowledgeBaseResponse": {
+            "type": "structure",
+            "members": {
+                "KnowledgeBaseArn": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KnowledgeBaseId": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreationStatus": {
+                    "target": "com.amazonaws.quicksight#DataSetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation status of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#CreateNamespace": {
             "type": "operation",
             "input": {
@@ -15945,6 +16172,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The combination of user name and password that are used as credentials.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#CredentialStatus": {
+            "type": "enum",
+            "members": {
+                "CONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTED"
+                    }
+                },
+                "AUTH_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTH_FAILED"
+                    }
+                },
+                "NOT_VERIFIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_VERIFIED"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#CrossDatasetTypes": {
@@ -19515,6 +19765,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>"
                     }
+                },
+                "CredentialStatus": {
+                    "target": "com.amazonaws.quicksight#CredentialStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The credential verification status of the data source. Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONNECTED</code> – Credential validation succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTH_FAILED</code> – Credential validation failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_VERIFIED</code> – Credential validation has not been performed.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "LastCredentialVerifiedAt": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the credentials were last verified.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19883,6 +20145,30 @@
                     "target": "com.amazonaws.quicksight#QBusinessParameters",
                     "traits": {
                         "smithy.api#documentation": "<p>The parameters for Amazon Q Business.</p>"
+                    }
+                },
+                "SharePointParameters": {
+                    "target": "com.amazonaws.quicksight#SharePointParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters for a SharePoint data source.</p>"
+                    }
+                },
+                "GoogleDriveParameters": {
+                    "target": "com.amazonaws.quicksight#GoogleDriveParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters for a Google Drive data source.</p>"
+                    }
+                },
+                "OneDriveParameters": {
+                    "target": "com.amazonaws.quicksight#OneDriveParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters for an OneDrive data source.</p>"
+                    }
+                },
+                "FMKBParameters": {
+                    "target": "com.amazonaws.quicksight#FMKBParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters for a fully managed knowledge base data source.</p>"
                     }
                 }
             },
@@ -32919,6 +33205,37 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.quicksight#FMKBKnowledgeBaseArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 47,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:bedrock:[a-zA-Z0-9-]*:[0-9]{12}:knowledge-base/[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.quicksight#FMKBParameters": {
+            "type": "structure",
+            "members": {
+                "KnowledgeBaseArn": {
+                    "target": "com.amazonaws.quicksight#FMKBKnowledgeBaseArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Bedrock knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LinkedDataSourceIds": {
+                    "target": "com.amazonaws.quicksight#LinkedDataSourceIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the linked data sources.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The connection parameters for a fully managed knowledge base data source. Provide these parameters in the <code>DataSourceParameters</code> object when you create or update a data source that uses a fully managed knowledge base.</p>"
+            }
+        },
         "com.amazonaws.quicksight#FailedKeyRegistrationEntries": {
             "type": "list",
             "member": {
@@ -33383,6 +33700,42 @@
                         "smithy.api#enumValue": "JSON"
                     }
                 }
+            }
+        },
+        "com.amazonaws.quicksight#FileSource": {
+            "type": "structure",
+            "members": {
+                "DataSourceArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UploadSettings": {
+                    "target": "com.amazonaws.quicksight#UploadSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the format for the source file.</p>"
+                    }
+                },
+                "SheetIndex": {
+                    "target": "com.amazonaws.quicksight#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The zero-based index of the sheet to use within the file. For files that contain\n            multiple sheets, this identifies which sheet to read. Files that contain a single sheet,\n            or that have no concept of sheets, use sheet 0.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InputColumns": {
+                    "target": "com.amazonaws.quicksight#InputColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column schema of the file.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A physical table type that contains the schema and upload settings for a file-based data source.</p>"
             }
         },
         "com.amazonaws.quicksight#FilledMapAggregatedFieldWells": {
@@ -38591,6 +38944,20 @@
                 "smithy.api#documentation": "<p>Determines the border options for a table visual.</p>"
             }
         },
+        "com.amazonaws.quicksight#GoogleDriveParameters": {
+            "type": "structure",
+            "members": {
+                "AuthType": {
+                    "target": "com.amazonaws.quicksight#AuthType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type for the Google Drive data source. Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SERVICE_ACCOUNT</code> – Server-to-server authentication using a Google service account key.</p>\n            </li>\n            <li>\n               <p>\n                  <code>THREE_LEGGED_OAUTH</code> – Interactive OAuth that requires user consent.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The connection parameters for a Google Drive data source. Provide these parameters in the <code>DataSourceParameters</code> object when you create or update a data source that uses Google Drive.</p>"
+            }
+        },
         "com.amazonaws.quicksight#GradientColor": {
             "type": "structure",
             "members": {
@@ -42372,6 +42739,12 @@
                         "smithy.api#documentation": "<p>The media extraction configuration for the knowledge base.</p>"
                     }
                 },
+                "AccessControlConfiguration": {
+                    "target": "com.amazonaws.quicksight#AccessControlConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access control configuration for the knowledge base.</p>"
+                    }
+                },
                 "Type": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -42400,7 +42773,7 @@
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>Indicates whether email notifications are enabled for ingestion failures.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether email notifications are enabled for ingestion failures.</p>"
                     }
                 },
                 "FirstCompletedIngestionSummary": {
@@ -42436,7 +42809,7 @@
                     }
                 },
                 "PrimaryOwnerArn": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.quicksight#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the primary owner of the knowledge base.</p>"
                     }
@@ -42469,13 +42842,6 @@
                     "target": "com.amazonaws.quicksight#KbTemplateConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The template configuration for the knowledge base.</p>"
-                    }
-                },
-                "eventEnabled": {
-                    "target": "com.amazonaws.quicksight#Boolean",
-                    "traits": {
-                        "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>Indicates whether event notifications are enabled for the knowledge base.</p>"
                     }
                 }
             },
@@ -42621,7 +42987,16 @@
                     "traits": {
                         "smithy.api#enumValue": "PRIMARY_OWNER"
                     }
+                },
+                "DATASOURCE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATASOURCE_ARN"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name of a field that you can use to filter knowledge base search results. Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DATASOURCE_ARN</code> – The Amazon Resource Name (ARN) of the associated data source.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECT_QUICKSIGHT_OWNER</code> – An Amazon QuickSight user or group with direct owner permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECT_QUICKSIGHT_SOLE_OWNER</code> – An Amazon QuickSight user or group that is the sole direct owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECT_QUICKSIGHT_VIEWER_OR_OWNER</code> – An Amazon QuickSight user or group with direct viewer or owner permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KNOWLEDGE_BASE_ID</code> – The unique identifier of the knowledge base.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KNOWLEDGE_BASE_NAME</code> – The display name of the knowledge base.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KNOWLEDGE_BASE_SIZE_BYTES</code> – The size of the knowledge base in bytes.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PRIMARY_OWNER</code> – The Amazon Resource Name (ARN) of the primary owner of the knowledge base.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.quicksight#KnowledgeBaseSearchFilters": {
@@ -42632,7 +43007,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 5
+                    "max": 6
                 }
             }
         },
@@ -43728,6 +44103,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A structure that contains the configuration of a shareable link to the\n            dashboard.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#LinkedDataSourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.quicksight#LinkedDataSourceIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#LinkedDataSourceId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.quicksight#ListActionConnectors": {
@@ -50939,6 +51336,50 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#OneDriveClientId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.quicksight#OneDriveParameters": {
+            "type": "structure",
+            "members": {
+                "TenantId": {
+                    "target": "com.amazonaws.quicksight#OneDriveTenantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tenant ID for the OneDrive data source.</p>"
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.quicksight#OneDriveClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client ID for the OneDrive data source.</p>"
+                    }
+                },
+                "AuthType": {
+                    "target": "com.amazonaws.quicksight#AuthType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type for the OneDrive data source. Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TWO_LEGGED_OAUTH</code> – Server-to-server authentication using client credentials that do not require user interaction.</p>\n            </li>\n            <li>\n               <p>\n                  <code>THREE_LEGGED_OAUTH</code> – Interactive OAuth that requires user consent.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The connection parameters for an OneDrive data source. Provide these parameters in the <code>DataSourceParameters</code> object when you create or update a data source that uses OneDrive.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#OneDriveTenantId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.quicksight#Opacity": {
             "type": "double",
             "traits": {
@@ -52228,13 +52669,19 @@
                 "S3Source": {
                     "target": "com.amazonaws.quicksight#S3Source",
                     "traits": {
-                        "smithy.api#documentation": "<p>A physical table type for as S3 data source.</p>"
+                        "smithy.api#documentation": "<p>A physical table type for an S3 data source.</p>"
                     }
                 },
                 "SaaSTable": {
                     "target": "com.amazonaws.quicksight#SaaSTable",
                     "traits": {
                         "smithy.api#documentation": "<p>A physical table type for Software-as-a-Service (SaaS) sources.</p>"
+                    }
+                },
+                "FileSource": {
+                    "target": "com.amazonaws.quicksight#FileSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A physical table type for a file data source.</p>"
                     }
                 }
             },
@@ -54571,6 +55018,9 @@
                     "target": "com.amazonaws.quicksight#CreateIngestion"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#CreateKnowledgeBase"
+                },
+                {
                     "target": "com.amazonaws.quicksight#CreateNamespace"
                 },
                 {
@@ -55232,6 +55682,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateKeyRegistration"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateKnowledgeBase"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateKnowledgeBasePermissions"
@@ -61923,6 +62376,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ATHENA"
                     }
+                },
+                "GLUE_DATA_CATALOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GLUE_DATA_CATALOG"
+                    }
                 }
             }
         },
@@ -62065,6 +62524,66 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The shape conditional formatting of a filled map visual.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SharePointClientId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SharePointDomain": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SharePointParameters": {
+            "type": "structure",
+            "members": {
+                "SharePointDomain": {
+                    "target": "com.amazonaws.quicksight#SharePointDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SharePoint domain for the data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TenantId": {
+                    "target": "com.amazonaws.quicksight#SharePointTenantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tenant ID for the SharePoint data source.</p>"
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.quicksight#SharePointClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client ID for the SharePoint data source.</p>"
+                    }
+                },
+                "AuthType": {
+                    "target": "com.amazonaws.quicksight#AuthType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type for the SharePoint data source. Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TWO_LEGGED_OAUTH</code> – Server-to-server authentication using client credentials that do not require user interaction.</p>\n            </li>\n            <li>\n               <p>\n                  <code>THREE_LEGGED_OAUTH</code> – Interactive OAuth that requires user consent.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The connection parameters for a SharePoint data source. Provide these parameters in the <code>DataSourceParameters</code> object when you create or update a data source that uses SharePoint.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SharePointTenantId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.quicksight#SharedColumnSemanticMetadata": {
@@ -75709,6 +76228,53 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#UpdateKnowledgeBase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateKnowledgeBaseRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateKnowledgeBaseResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the properties of an existing knowledge base.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
         "com.amazonaws.quicksight#UpdateKnowledgeBasePermissions": {
             "type": "operation",
             "input": {
@@ -75813,6 +76379,97 @@
                     "target": "com.amazonaws.quicksight#ResourcePermissionList",
                     "traits": {
                         "smithy.api#documentation": "<p>The resource permissions for the knowledge base.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateKnowledgeBaseRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#KbAwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "KnowledgeBaseId": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the knowledge base.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the knowledge base. If you don't specify a name, the existing name is retained.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the knowledge base. If you don't specify a description, the existing description is retained.</p>"
+                    }
+                },
+                "KnowledgeBaseConfiguration": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseConfiguration"
+                },
+                "MediaExtractionConfiguration": {
+                    "target": "com.amazonaws.quicksight#MediaExtractionConfiguration"
+                },
+                "IsEmailNotificationOptedForIngestionFailures": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Specifies whether email notifications are enabled for ingestion failures.</p>"
+                    }
+                },
+                "AccessControlConfiguration": {
+                    "target": "com.amazonaws.quicksight#AccessControlConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access control configuration for the knowledge base. If you don't specify this parameter, the existing setting is retained.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateKnowledgeBaseResponse": {
+            "type": "structure",
+            "members": {
+                "KnowledgeBaseArn": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KnowledgeBaseId": {
+                    "target": "com.amazonaws.quicksight#KnowledgeBaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the knowledge base.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "RequestId": {

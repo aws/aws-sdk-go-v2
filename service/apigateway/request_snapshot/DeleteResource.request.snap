@@ -1,0 +1,4 @@
+DELETE /restapis/__RestApiId__/resources/__ResourceId__
+
+Accept: application/json
+

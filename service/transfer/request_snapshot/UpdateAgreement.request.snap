@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.UpdateAgreement
+
+{"AccessRole":"__AccessRole__","AgreementId":"__AgreementId__","BaseDirectory":"__BaseDirectory__","CustomDirectories":{"FailedFilesDirectory":"__FailedFilesDirectory__","MdnFilesDirectory":"__MdnFilesDirectory__","PayloadFilesDirectory":"__PayloadFilesDirectory__","StatusFilesDirectory":"__StatusFilesDirectory__","TemporaryFilesDirectory":"__TemporaryFilesDirectory__"},"Description":"__Description__","EnforceMessageSigning":"ENABLED","LocalProfileId":"__LocalProfileId__","PartnerProfileId":"__PartnerProfileId__","PreserveFilename":"ENABLED","ServerId":"__ServerId__","Status":"ACTIVE"}

@@ -1,0 +1,5 @@
+POST /subscribe
+
+Content-Type: application/json
+
+{"Arn":"__Arn__","ClientRequestToken":"__ClientRequestToken__","Target":{"TargetAddress":"__TargetAddress__","TargetType":"__TargetType__"}}

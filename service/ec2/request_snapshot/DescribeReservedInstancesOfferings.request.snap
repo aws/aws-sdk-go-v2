@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeReservedInstancesOfferings&AvailabilityZone=__AvailabilityZone__&AvailabilityZoneId=__AvailabilityZoneId__&DryRun=true&Filter.1.Name=__Name__&Filter.1.Value.1=__Member__&Filter.1.Value.2=__Member__&Filter.2.Name=__Name__&Filter.2.Value.1=__Member__&Filter.2.Value.2=__Member__&IncludeMarketplace=true&InstanceTenancy=default&InstanceType=a1.medium&MaxDuration=1&MaxInstanceCount=1&MaxResults=1&MinDuration=1&NextToken=__NextToken__&OfferingClass=standard&OfferingType=Heavy+Utilization&ProductDescription=Linux%2FUNIX&ReservedInstancesOfferingId.1=__Member__&ReservedInstancesOfferingId.2=__Member__&Version=2016-11-15

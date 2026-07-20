@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Kinesis_20131202.PutRecords
+
+{"Records":[{"Data":"YmxvYg==","ExplicitHashKey":"__ExplicitHashKey__","PartitionKey":"__PartitionKey__"},{"Data":"YmxvYg==","ExplicitHashKey":"__ExplicitHashKey__","PartitionKey":"__PartitionKey__"}],"StreamARN":"__StreamARN__","StreamId":"__StreamId__","StreamName":"__StreamName__"}

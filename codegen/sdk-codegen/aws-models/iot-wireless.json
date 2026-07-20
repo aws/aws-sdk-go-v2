@@ -2391,6 +2391,20 @@
                 "target": "com.amazonaws.iotwireless#DakCertificateMetadata"
             }
         },
+        "com.amazonaws.iotwireless#DefaultSessionParametersMulticast": {
+            "type": "structure",
+            "members": {
+                "DlDr": {
+                    "target": "com.amazonaws.iotwireless#DlDr"
+                },
+                "DlFreq": {
+                    "target": "com.amazonaws.iotwireless#DlFreq"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The default session parameters for the multicast group.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#DeleteDestination": {
             "type": "operation",
             "input": {
@@ -9729,6 +9743,12 @@
                 },
                 "ParticipatingGateways": {
                     "target": "com.amazonaws.iotwireless#ParticipatingGatewaysMulticast"
+                },
+                "DefaultSessionParameters": {
+                    "target": "com.amazonaws.iotwireless#DefaultSessionParametersMulticast",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default session parameters for the multicast group.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9752,6 +9772,12 @@
                 },
                 "ParticipatingGateways": {
                     "target": "com.amazonaws.iotwireless#ParticipatingGatewaysMulticast"
+                },
+                "DefaultSessionParameters": {
+                    "target": "com.amazonaws.iotwireless#DefaultSessionParametersMulticast",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default session parameters for the multicast group.</p>"
+                    }
                 }
             },
             "traits": {

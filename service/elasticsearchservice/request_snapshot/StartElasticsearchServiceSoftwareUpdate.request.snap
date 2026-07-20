@@ -1,0 +1,5 @@
+POST /2015-01-01/es/serviceSoftwareUpdate/start
+
+Content-Type: application/json
+
+{"DomainName":"__DomainName__"}

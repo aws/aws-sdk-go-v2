@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=GetIpamPrefixListResolverVersionEntries&DryRun=true&IpamPrefixListResolverId=__IpamPrefixListResolverId__&IpamPrefixListResolverVersion=1&MaxResults=1&NextToken=__NextToken__&Version=2016-11-15

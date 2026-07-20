@@ -1,3 +1,20 @@
+# v1.52.2 (2026-07-20)
+
+* **Documentation**: Updated InvalidInputException error documentation to clarify that the service validates free-text field values against common cross-site scripting (XSS) patterns.
+
+# v1.52.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.52.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.51.12 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.51.11 (2026-06-29)
 
 * No change notes available for this release.

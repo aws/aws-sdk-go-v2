@@ -1,0 +1,5 @@
+POST /kx/environments/__EnvironmentId__/scalingGroups
+
+Content-Type: application/x-amz-json-1.1
+
+{"availabilityZoneId":"__AvailabilityZoneId__","clientToken":"__ClientToken__","hostType":"__HostType__","scalingGroupName":"__ScalingGroupName__","tags":{"key0":"__Value__"}}

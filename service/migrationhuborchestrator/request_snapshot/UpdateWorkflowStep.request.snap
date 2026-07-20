@@ -1,0 +1,5 @@
+POST /workflowstep/__Id__
+
+Content-Type: application/json
+
+{"description":"__Description__","name":"__Name__","next":["__Member__","__Member__"],"outputs":[{"dataType":"STRING","name":"__Name__","required":true,"value":{"integerValue":1}},{"dataType":"STRING","name":"__Name__","required":true,"value":{"integerValue":1}}],"previous":["__Member__","__Member__"],"status":"AWAITING_DEPENDENCIES","stepActionType":"MANUAL","stepGroupId":"__StepGroupId__","stepTarget":["__Member__","__Member__"],"workflowId":"__WorkflowId__","workflowStepAutomationConfiguration":{"command":{"linux":"__Linux__","windows":"__Windows__"},"runEnvironment":"AWS","scriptLocationS3Bucket":"__ScriptLocationS3Bucket__","scriptLocationS3Key":{"linux":"__Linux__","windows":"__Windows__"},"targetType":"SINGLE"}}

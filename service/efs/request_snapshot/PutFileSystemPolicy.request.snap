@@ -1,0 +1,5 @@
+PUT /2015-02-01/file-systems/__FileSystemId__/policy
+
+Content-Type: application/json
+
+{"BypassPolicyLockoutSafetyCheck":true,"Policy":"__Policy__"}

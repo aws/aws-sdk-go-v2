@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateDataTransformationProfile struct {
+}
+
+func (*validateOpCreateDataTransformationProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataTransformationProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDataTransformationProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDataTransformationProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateFHIRDatastore struct {
 }
 
@@ -30,6 +50,26 @@ func (m *validateOpCreateFHIRDatastore) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDataTransformationProfile struct {
+}
+
+func (*validateOpDeleteDataTransformationProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataTransformationProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDataTransformationProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDataTransformationProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteFHIRDatastore struct {
 }
 
@@ -45,6 +85,26 @@ func (m *validateOpDeleteFHIRDatastore) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteFHIRDatastoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeDataTransformationJob struct {
+}
+
+func (*validateOpDescribeDataTransformationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDataTransformationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDataTransformationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDataTransformationJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -110,6 +170,66 @@ func (m *validateOpDescribeFHIRImportJob) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataTransformationProfile struct {
+}
+
+func (*validateOpGetDataTransformationProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataTransformationProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataTransformationProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataTransformationProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDataTransformationProfiles struct {
+}
+
+func (*validateOpListDataTransformationProfiles) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataTransformationProfiles) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataTransformationProfilesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataTransformationProfilesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDataTransformationProfileVersions struct {
+}
+
+func (*validateOpListDataTransformationProfileVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataTransformationProfileVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataTransformationProfileVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataTransformationProfileVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListFHIRExportJobs struct {
 }
 
@@ -165,6 +285,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPublishDataTransformationProfile struct {
+}
+
+func (*validateOpPublishDataTransformationProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPublishDataTransformationProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PublishDataTransformationProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPublishDataTransformationProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartDataTransformationJob struct {
+}
+
+func (*validateOpStartDataTransformationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDataTransformationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDataTransformationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDataTransformationJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +410,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDataTransformationProfile struct {
+}
+
+func (*validateOpUpdateDataTransformationProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDataTransformationProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDataTransformationProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDataTransformationProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFHIRDatastore struct {
 }
 
@@ -270,12 +450,44 @@ func (m *validateOpUpdateFHIRDatastore) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateProfileWithAgent struct {
+}
+
+func (*validateOpUpdateProfileWithAgent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProfileWithAgent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProfileWithAgentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProfileWithAgentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpCreateDataTransformationProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataTransformationProfile{}, middleware.After)
+}
+
 func addOpCreateFHIRDatastoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFHIRDatastore{}, middleware.After)
 }
 
+func addOpDeleteDataTransformationProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataTransformationProfile{}, middleware.After)
+}
+
 func addOpDeleteFHIRDatastoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFHIRDatastore{}, middleware.After)
+}
+
+func addOpDescribeDataTransformationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDataTransformationJob{}, middleware.After)
 }
 
 func addOpDescribeFHIRDatastoreValidationMiddleware(stack *middleware.Stack) error {
@@ -290,6 +502,18 @@ func addOpDescribeFHIRImportJobValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDescribeFHIRImportJob{}, middleware.After)
 }
 
+func addOpGetDataTransformationProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataTransformationProfile{}, middleware.After)
+}
+
+func addOpListDataTransformationProfilesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataTransformationProfiles{}, middleware.After)
+}
+
+func addOpListDataTransformationProfileVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataTransformationProfileVersions{}, middleware.After)
+}
+
 func addOpListFHIRExportJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFHIRExportJobs{}, middleware.After)
 }
@@ -300,6 +524,14 @@ func addOpListFHIRImportJobsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPublishDataTransformationProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPublishDataTransformationProfile{}, middleware.After)
+}
+
+func addOpStartDataTransformationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDataTransformationJob{}, middleware.After)
 }
 
 func addOpStartFHIRExportJobValidationMiddleware(stack *middleware.Stack) error {
@@ -318,8 +550,104 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateDataTransformationProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDataTransformationProfile{}, middleware.After)
+}
+
 func addOpUpdateFHIRDatastoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFHIRDatastore{}, middleware.After)
+}
+
+func addOpUpdateProfileWithAgentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProfileWithAgent{}, middleware.After)
+}
+
+func validateAgentInputMessage(v *types.AgentInputMessage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentInputMessage"}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateDataTransformationProfileSource(v types.CreateDataTransformationProfileSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataTransformationProfileSource"}
+	switch uv := v.(type) {
+	case *types.CreateDataTransformationProfileSourceMemberExistingVersionedProfileId:
+		if err := validateExistingVersionedProfileSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[ExistingVersionedProfileId]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CreateDataTransformationProfileSourceMemberProfileMapping:
+		if err := validateProfileMappingSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[ProfileMapping]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CreateDataTransformationProfileSourceMemberSampleData:
+		if err := validateSampleDataSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[SampleData]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CreateDataTransformationProfileSourceMemberStarterProfile:
+		if err := validateStarterProfileSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[StarterProfile]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataTransformationS3Configuration(v *types.DataTransformationS3Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataTransformationS3Configuration"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if v.KmsKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExistingVersionedProfileSource(v *types.ExistingVersionedProfileSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExistingVersionedProfileSource"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateIdentityProviderConfiguration(v *types.IdentityProviderConfiguration) error {
@@ -386,6 +714,21 @@ func validatePreloadDataConfig(v *types.PreloadDataConfig) error {
 	}
 }
 
+func validateProfileMappingSource(v *types.ProfileMappingSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProfileMappingSource"}
+	if v.ProfileMapping == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileMapping"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3Configuration(v *types.S3Configuration) error {
 	if v == nil {
 		return nil
@@ -396,6 +739,21 @@ func validateS3Configuration(v *types.S3Configuration) error {
 	}
 	if v.KmsKeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSampleDataSource(v *types.SampleDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SampleDataSource"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -415,6 +773,21 @@ func validateSseConfiguration(v *types.SseConfiguration) error {
 		if err := validateKmsEncryptionConfig(v.KmsEncryptionConfig); err != nil {
 			invalidParams.AddNested("KmsEncryptionConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStarterProfileSource(v *types.StarterProfileSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StarterProfileSource"}
+	if v.StarterProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StarterProfileName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -458,6 +831,65 @@ func validateTagList(v []types.Tag) error {
 	}
 }
 
+func validateTransformationInputDataConfig(v *types.TransformationInputDataConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TransformationInputDataConfig"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTransformationOutputDataConfig(v *types.TransformationOutputDataConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TransformationOutputDataConfig"}
+	if v.S3Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Configuration"))
+	} else if v.S3Configuration != nil {
+		if err := validateDataTransformationS3Configuration(v.S3Configuration); err != nil {
+			invalidParams.AddNested("S3Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDataTransformationProfileInput(v *CreateDataTransformationProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataTransformationProfileInput"}
+	if len(v.SourceFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceFormat"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateCreateDataTransformationProfileSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateFHIRDatastoreInput(v *CreateFHIRDatastoreInput) error {
 	if v == nil {
 		return nil
@@ -493,6 +925,21 @@ func validateOpCreateFHIRDatastoreInput(v *CreateFHIRDatastoreInput) error {
 	}
 }
 
+func validateOpDeleteDataTransformationProfileInput(v *DeleteDataTransformationProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataTransformationProfileInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteFHIRDatastoreInput(v *DeleteFHIRDatastoreInput) error {
 	if v == nil {
 		return nil
@@ -500,6 +947,21 @@ func validateOpDeleteFHIRDatastoreInput(v *DeleteFHIRDatastoreInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFHIRDatastoreInput"}
 	if v.DatastoreId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatastoreId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDataTransformationJobInput(v *DescribeDataTransformationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDataTransformationJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -559,6 +1021,51 @@ func validateOpDescribeFHIRImportJobInput(v *DescribeFHIRImportJobInput) error {
 	}
 }
 
+func validateOpGetDataTransformationProfileInput(v *GetDataTransformationProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataTransformationProfileInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDataTransformationProfilesInput(v *ListDataTransformationProfilesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataTransformationProfilesInput"}
+	if len(v.SourceFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDataTransformationProfileVersionsInput(v *ListDataTransformationProfileVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataTransformationProfileVersionsInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListFHIRExportJobsInput(v *ListFHIRExportJobsInput) error {
 	if v == nil {
 		return nil
@@ -596,6 +1103,59 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPublishDataTransformationProfileInput(v *PublishDataTransformationProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublishDataTransformationProfileInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if len(v.SourceFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartDataTransformationJobInput(v *StartDataTransformationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDataTransformationJobInput"}
+	if v.InputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputDataConfig"))
+	} else if v.InputDataConfig != nil {
+		if err := validateTransformationInputDataConfig(v.InputDataConfig); err != nil {
+			invalidParams.AddNested("InputDataConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputDataConfig"))
+	} else if v.OutputDataConfig != nil {
+		if err := validateTransformationOutputDataConfig(v.OutputDataConfig); err != nil {
+			invalidParams.AddNested("OutputDataConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -697,6 +1257,24 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 }
 
+func validateOpUpdateDataTransformationProfileInput(v *UpdateDataTransformationProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDataTransformationProfileInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if v.ProfileMapping == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileMapping"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateFHIRDatastoreInput(v *UpdateFHIRDatastoreInput) error {
 	if v == nil {
 		return nil
@@ -708,6 +1286,31 @@ func validateOpUpdateFHIRDatastoreInput(v *UpdateFHIRDatastoreInput) error {
 	if v.IdentityProviderConfiguration != nil {
 		if err := validateIdentityProviderConfiguration(v.IdentityProviderConfiguration); err != nil {
 			invalidParams.AddNested("IdentityProviderConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProfileWithAgentInput(v *UpdateProfileWithAgentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProfileWithAgentInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if len(v.SourceFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceFormat"))
+	}
+	if v.InputMessage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputMessage"))
+	} else if v.InputMessage != nil {
+		if err := validateAgentInputMessage(v.InputMessage); err != nil {
+			invalidParams.AddNested("InputMessage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

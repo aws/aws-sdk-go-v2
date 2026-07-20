@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=UntagResource&ResourceArn=__ResourceArn__&TagKeys.member.1=__Member__&TagKeys.member.2=__Member__&Version=2010-03-31

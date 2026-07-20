@@ -1,0 +1,5 @@
+POST /UpdateIndexType
+
+Content-Type: application/json
+
+{"Arn":"__Arn__","Type":"LOCAL"}

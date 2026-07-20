@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.ListEngagements
+
+{"Catalog":"__Catalog__","ContextTypes":["CustomerProject","CustomerProject"],"CreatedBy":["__Member__","__Member__"],"EngagementIdentifier":["__Member__","__Member__"],"ExcludeContextTypes":["CustomerProject","CustomerProject"],"ExcludeCreatedBy":["__Member__","__Member__"],"MaxResults":1,"NextToken":"__NextToken__","Sort":{"SortBy":"CreatedDate","SortOrder":"ASCENDING"}}

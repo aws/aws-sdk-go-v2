@@ -1,0 +1,7 @@
+PUT /2020-05-31/trust-store/__Id__
+
+Content-Type: application/xml
+If-Match: __IfMatch__
+Useclientcertificateocspendpoint: true
+
+<CaCertificatesBundleSource xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><CaCertificatesBundleS3Location><Bucket>__Bucket__</Bucket><Key>__Key__</Key><Region>__Region__</Region><Version>__Version__</Version></CaCertificatesBundleS3Location></CaCertificatesBundleSource>

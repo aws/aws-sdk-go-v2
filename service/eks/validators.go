@@ -70,6 +70,26 @@ func (m *validateOpAssociateIdentityProviderConfig) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelUpdate struct {
+}
+
+func (*validateOpCancelUpdate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelUpdate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelUpdateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelUpdateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAccessEntry struct {
 }
 
@@ -1202,6 +1222,10 @@ func addOpAssociateIdentityProviderConfigValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpAssociateIdentityProviderConfig{}, middleware.After)
 }
 
+func addOpCancelUpdateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelUpdate{}, middleware.After)
+}
+
 func addOpCreateAccessEntryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAccessEntry{}, middleware.After)
 }
@@ -1778,6 +1802,24 @@ func validateOpAssociateIdentityProviderConfigInput(v *AssociateIdentityProvider
 		if err := validateOidcIdentityProviderConfigRequest(v.Oidc); err != nil {
 			invalidParams.AddNested("Oidc", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelUpdateInput(v *CancelUpdateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelUpdateInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.UpdateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,5 @@
+POST /phone-numbers?operation=batch-delete
+
+Content-Type: application/json
+
+{"PhoneNumberIds":["__Member__","__Member__"]}

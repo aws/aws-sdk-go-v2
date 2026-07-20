@@ -1,0 +1,3 @@
+GET /experimentTemplates/__ExperimentTemplateId__/targetAccountConfigurations?maxResults=1&nextToken=__NextToken__
+
+

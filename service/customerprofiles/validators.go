@@ -2994,6 +2994,61 @@ func validateDimensionList(v []types.Dimension) error {
 	}
 }
 
+func validateDiversityColumn(v *types.DiversityColumn) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DiversityColumn"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.CapType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CapType"))
+	}
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDiversityColumnsList(v []types.DiversityColumn) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DiversityColumnsList"}
+	for i := range v {
+		if err := validateDiversityColumn(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDiversityConfig(v *types.DiversityConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DiversityConfig"}
+	if v.DiversityColumns != nil {
+		if err := validateDiversityColumnsList(v.DiversityColumns); err != nil {
+			invalidParams.AddNested("DiversityColumns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDomainObjectTypeField(v *types.DomainObjectTypeField) error {
 	if v == nil {
 		return nil
@@ -3772,6 +3827,21 @@ func validateRangeOverride(v *types.RangeOverride) error {
 	}
 }
 
+func validateRecommendationDiversityConfig(v *types.RecommendationDiversityConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecommendationDiversityConfig"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRecommenderConfig(v *types.RecommenderConfig) error {
 	if v == nil {
 		return nil
@@ -3780,6 +3850,11 @@ func validateRecommenderConfig(v *types.RecommenderConfig) error {
 	if v.EventsConfig != nil {
 		if err := validateEventsConfig(v.EventsConfig); err != nil {
 			invalidParams.AddNested("EventsConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DiversityConfig != nil {
+		if err := validateDiversityConfig(v.DiversityConfig); err != nil {
+			invalidParams.AddNested("DiversityConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5301,6 +5376,11 @@ func validateOpGetProfileRecommendationsInput(v *GetProfileRecommendationsInput)
 	}
 	if v.RecommenderName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecommenderName"))
+	}
+	if v.DiversityConfig != nil {
+		if err := validateRecommendationDiversityConfig(v.DiversityConfig); err != nil {
+			invalidParams.AddNested("DiversityConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

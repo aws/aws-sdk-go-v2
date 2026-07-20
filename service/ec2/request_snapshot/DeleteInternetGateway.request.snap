@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteInternetGateway&DryRun=true&InternetGatewayId=__InternetGatewayId__&Version=2016-11-15

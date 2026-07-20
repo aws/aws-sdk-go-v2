@@ -1,0 +1,5 @@
+PUT /assessments/__AssessmentId__/controlSets/__ControlSetId__/controls/__ControlId__
+
+Content-Type: application/json
+
+{"commentBody":"__CommentBody__","controlStatus":"UNDER_REVIEW"}

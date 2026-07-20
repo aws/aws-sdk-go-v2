@@ -1,0 +1,5 @@
+POST /metrics/historical/__InstanceId__
+
+Content-Type: application/json
+
+{"EndTime":946684800,"Filters":{"AgentStatuses":["__Member__","__Member__"],"Channels":["VOICE","VOICE"],"Queues":["__Member__","__Member__"],"RoutingProfiles":["__Member__","__Member__"],"RoutingStepExpressions":["__Member__","__Member__"],"Subtypes":["__Member__","__Member__"],"ValidationTestTypes":["__Member__","__Member__"]},"Groupings":["QUEUE","QUEUE"],"HistoricalMetrics":[{"Name":"CONTACTS_QUEUED","Statistic":"SUM","Threshold":{"Comparison":"LT","ThresholdValue":1},"Unit":"SECONDS"},{"Name":"CONTACTS_QUEUED","Statistic":"SUM","Threshold":{"Comparison":"LT","ThresholdValue":1},"Unit":"SECONDS"}],"MaxResults":1,"NextToken":"__NextToken__","StartTime":946684800}

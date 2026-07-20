@@ -6260,6 +6260,78 @@ func awsAwsjson10_deserializeDocumentAwsMarketplaceOfferSetIdentifiers(v *[]stri
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentAwsMarketplaceProductIdentifiers(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AwsMarketplaceProductArn to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentAwsMarketplaceSolutionIdentifiers(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AwsMarketplaceSolutionIdentifier to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentAwsOpportunityCustomer(v **types.AwsOpportunityCustomer, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6499,6 +6571,16 @@ func awsAwsjson10_deserializeDocumentAwsOpportunityRelatedEntities(v **types.Aws
 
 	for key, value := range shape {
 		switch key {
+		case "AwsMarketplaceProducts":
+			if err := awsAwsjson10_deserializeDocumentAwsMarketplaceProductIdentifiers(&sv.AwsMarketplaceProducts, value); err != nil {
+				return err
+			}
+
+		case "AwsMarketplaceSolutions":
+			if err := awsAwsjson10_deserializeDocumentAwsMarketplaceSolutionIdentifiers(&sv.AwsMarketplaceSolutions, value); err != nil {
+				return err
+			}
+
 		case "AwsProducts":
 			if err := awsAwsjson10_deserializeDocumentAwsProductIdentifiers(&sv.AwsProducts, value); err != nil {
 				return err
@@ -11837,6 +11919,16 @@ func awsAwsjson10_deserializeDocumentRelatedEntityIdentifiers(v **types.RelatedE
 				return err
 			}
 
+		case "AwsMarketplaceProducts":
+			if err := awsAwsjson10_deserializeDocumentAwsMarketplaceProductIdentifiers(&sv.AwsMarketplaceProducts, value); err != nil {
+				return err
+			}
+
+		case "AwsMarketplaceSolutions":
+			if err := awsAwsjson10_deserializeDocumentAwsMarketplaceSolutionIdentifiers(&sv.AwsMarketplaceSolutions, value); err != nil {
+				return err
+			}
+
 		case "AwsProducts":
 			if err := awsAwsjson10_deserializeDocumentAwsProductIdentifiers(&sv.AwsProducts, value); err != nil {
 				return err
@@ -12448,6 +12540,15 @@ func awsAwsjson10_deserializeDocumentSolutionBase(v **types.SolutionBase, value 
 					return fmt.Errorf("expected SolutionArn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "AwsMarketplaceSolutionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsMarketplaceSolutionArn to be of type string, got %T instead", value)
+				}
+				sv.AwsMarketplaceSolutionArn = ptr.String(jtv)
 			}
 
 		case "Catalog":

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyVpcEndpointConnectionNotification&ConnectionEvents.1=__Member__&ConnectionEvents.2=__Member__&ConnectionNotificationArn=__ConnectionNotificationArn__&ConnectionNotificationId=__ConnectionNotificationId__&DryRun=true&Version=2016-11-15

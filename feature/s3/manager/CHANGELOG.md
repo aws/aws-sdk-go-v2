@@ -1,3 +1,24 @@
+# v1.22.34 (2026-07-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.33 (2026-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.32 (2026-07-08.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.31 (2026-07-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.30 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.29 (2026-06-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

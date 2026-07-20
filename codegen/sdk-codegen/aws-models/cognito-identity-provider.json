@@ -266,6 +266,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#GetLogDeliveryConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#GetProvisionedLimit"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#GetSigningCertificate"
                 },
                 {
@@ -393,6 +396,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#UpdateManagedLoginBranding"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UpdateProvisionedLimit"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#UpdateResourceServer"
@@ -7038,6 +7044,12 @@
                         "smithy.api#documentation": "<p>You must specify an IAM role that has permission to log import-job results to\n            Amazon CloudWatch Logs. This parameter is the ARN of that role.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "PasswordHashingAlgorithm": {
+                    "target": "com.amazonaws.cognitoidentityprovider#PasswordHashingAlgorithmType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The password hashing algorithm used to generate the hashes in the CSV file for this\n            import job.</p>\n         <p>Valid values: <code>BCRYPT</code> | <code>SCRYPT</code> | <code>ARGON2ID</code> |\n                <code>PBKDF2_SHA256</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -8329,7 +8341,7 @@
                 "SecurityPolicy": {
                     "target": "com.amazonaws.cognitoidentityprovider#SecurityPolicyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The security policy for the custom domain. Defines the minimum TLS version and cipher\n            suites that CloudFront uses when communicating with viewers (clients). Valid values are\n            as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TLS_V1</code>: Supports TLS 1.0 and later. Provides the broadest client\n                    compatibility.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TLS_V1_2_2021</code>: Supports TLS 1.2 and later with 2021 cipher\n                    suites. Recommended minimum for most use cases.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TLS_V1_3_2025</code>: Supports TLS 1.3 and later with 2025 cipher\n                    suites. Provides the strongest security posture.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The security policy for the custom domain. Defines the minimum TLS version and cipher\n            suites that Amazon CloudFront supports when communicating with clients. For specific guidance,\n            see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html\">Supported protocols and ciphers between viewers and CloudFront</a>. Valid values are\n            as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TLS_V1_3_2025</code> (strictest): A post-quantum-ready policy requiring TLS 1.3.\n                    It provides the strongest security posture and is ideal for\n                    workloads where all clients and browsers are updated to the latest\n                    versions. <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html\">Supported protocols and ciphers for TLSv1.3_2025</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TLS_V1_2_2021</code> (recommended): A post-quantum-ready policy which prefers TLS 1.3 but allows\n                    fallback to TLS 1.2 to accommodate older clients. It\n                    is the recommended minimum for typical commercial-grade consumer\n                    applications. <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html\">Supported protocols and ciphers for TLSv1.2_2021</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TLS_V1</code> (strongly discouraged): Permits fallback to TLS 1.0. It offers the broadest\n                    compatibility, including support for legacy clients that are more than a\n                    decade old. This compatibility comes at the expense of allowing TLS versions\n                    and cryptographic algorithms that are no longer considered safe for\n                    commercial use. <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html\">Supported protocols and ciphers for TLSv1</a>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -10475,6 +10487,57 @@
                 }
             }
         },
+        "com.amazonaws.cognitoidentityprovider#EumsSmsConfigurationType": {
+            "type": "structure",
+            "members": {
+                "CallerArn": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ArnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that Amazon Cognito assumes to send SMS messages through Amazon Web Services\n            End User Messaging SMS. The role must grant permission to call the\n                <code>sms-voice:SendTextMessage</code> operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExternalId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#StringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external ID that Amazon Cognito includes when it assumes the <code>CallerArn</code> role.\n            Use this value as a condition in the role trust policy to prevent the confused deputy\n            problem.</p>"
+                    }
+                },
+                "OriginationIdentity": {
+                    "target": "com.amazonaws.cognitoidentityprovider#StringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origination identity that Amazon Web Services End User Messaging SMS uses to send messages to your users. This value can be one of the following:</p>\n         <ul>\n            <li>\n               <p>A phone number – A long code, toll-free number, or short code\n                    that is assigned to your account.</p>\n            </li>\n            <li>\n               <p>A sender ID – An alphabetic name that identifies the message sender\n                    in supported countries.</p>\n            </li>\n            <li>\n               <p>A phone pool – A group of phone numbers that Amazon Web Services End User\n                    Messaging SMS selects from when it sends messages.</p>\n            </li>\n         </ul>\n         <p>You can provide an E.164 phone number or the ARN of the phone number, sender ID, or\n            phone pool. Amazon Web Services End User Messaging SMS evaluates IAM authorization with the value\n            that you provide. If the permissions policy of your <code>CallerArn</code> role scopes\n            the <code>sms-voice:SendTextMessage</code> resource to a specific ARN, provide that same\n            ARN. If the formats do not match, requests fail with an\n            <code>InvalidSmsRoleAccessPolicyException</code>.</p>\n         <p>Depending on the destination country, you must provide an origination identity. For\n            country-specific requirements, see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html\">Supported\n                countries and regions for SMS messaging</a> in the Amazon Web Services End User Messaging SMS\n            User Guide.</p>"
+                    }
+                },
+                "ConfigurationSetName": {
+                    "target": "com.amazonaws.cognitoidentityprovider#StringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services End User Messaging SMS configuration set that Amazon Cognito\n            applies to messages, for logging and event destinations. If you omit this member,\n            Amazon Cognito sends messages without applying a configuration set.</p>"
+                    }
+                },
+                "InEntityId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#StringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal entity ID required by India's Distributed Ledger Technology (DLT) regulations for SMS messages.</p>"
+                    }
+                },
+                "InTemplateId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#StringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registered template ID for the message template required by India's DLT regulations for SMS messages.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.cognitoidentityprovider#RegionCodeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region of the Amazon Web Services End User Messaging SMS resources that Amazon Cognito uses to send messages. Amazon Web Services End User Messaging SMS must be available in your user pool's Region.</p>\n         <p>If you omit this parameter, Amazon Cognito uses the same Region as your user pool. You can also set this parameter to your user pool's Region explicitly. Amazon Cognito rejects any other value with an <code>InvalidParameterException</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration that Amazon Cognito uses to send SMS messages through Amazon Web Services End User\n            Messaging SMS. Provide this structure in the <code>EumsSms</code> member of\n            <code>SmsConfigurationType</code> to use Amazon Web Services End User Messaging SMS instead of\n            Amazon SNS.</p>"
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#EventContextDataType": {
             "type": "structure",
             "members": {
@@ -11411,6 +11474,91 @@
                     "target": "com.amazonaws.cognitoidentityprovider#LogDeliveryConfigurationType",
                     "traits": {
                         "smithy.api#documentation": "<p>The logging configuration of the requested user pool. Includes types of logs\n            configured and their destinations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetProvisionedLimit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#GetProvisionedLimitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#GetProvisionedLimitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the current provisioned limit for a specific API category.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example get a provisioned limit",
+                        "documentation": "The following example returns the provisioned limit for the UserAuthentication API category.",
+                        "input": {
+                            "LimitDefinition": {
+                                "LimitClass": "API_CATEGORY",
+                                "Attributes": {
+                                    "Category": "UserAuthentication"
+                                }
+                            }
+                        },
+                        "output": {
+                            "Limit": {
+                                "LimitDefinition": {
+                                    "LimitClass": "API_CATEGORY",
+                                    "Attributes": {
+                                        "Category": "UserAuthentication"
+                                    }
+                                },
+                                "ProvisionedLimitValue": 120,
+                                "FreeLimitValue": 120
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetProvisionedLimitRequest": {
+            "type": "structure",
+            "members": {
+                "LimitDefinition": {
+                    "target": "com.amazonaws.cognitoidentityprovider#LimitDefinitionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The limit to retrieve. Specify the limit class and the attributes that identify the\n            limit.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetProvisionedLimitResponse": {
+            "type": "structure",
+            "members": {
+                "Limit": {
+                    "target": "com.amazonaws.cognitoidentityprovider#LimitType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provisioned and default limit values for the requested limit.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -12916,6 +13064,39 @@
                 "smithy.api#pattern": "^cognito:(default|dutch|english|french|spanish|german|bahasa-indonesia|italian|japanese|korean|portuguese-brazil|chinese-(simplified|traditional))$"
             }
         },
+        "com.amazonaws.cognitoidentityprovider#LimitClass": {
+            "type": "enum",
+            "members": {
+                "API_CATEGORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "API_CATEGORY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#LimitDefinitionType": {
+            "type": "structure",
+            "members": {
+                "LimitClass": {
+                    "target": "com.amazonaws.cognitoidentityprovider#LimitClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The class of the limit. For API rate limits, this is\n            <code>API_CATEGORY</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.cognitoidentityprovider#StringToStringMapType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes that identify the specific limit. For API rate limits, specify the\n            <code>Category</code> key with a value like <code>UserAuthentication</code> or\n            <code>UserCreation</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The class and attributes that identify a specific limit at the account level.</p>"
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#LimitExceededException": {
             "type": "structure",
             "members": {
@@ -12930,6 +13111,37 @@
                 "smithy.api#documentation": "<p>This exception is thrown when a user exceeds the limit for a requested Amazon Web Services\n            resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#LimitType": {
+            "type": "structure",
+            "members": {
+                "LimitDefinition": {
+                    "target": "com.amazonaws.cognitoidentityprovider#LimitDefinitionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition that identifies this limit, including the class and attributes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProvisionedLimitValue": {
+                    "target": "com.amazonaws.cognitoidentityprovider#IntegerType",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The provisioned limit value, in requests per second (RPS). This is the rate that\n            Amazon Cognito currently enforces for your account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FreeLimitValue": {
+                    "target": "com.amazonaws.cognitoidentityprovider#IntegerType",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The default (free) limit value, in requests per second (RPS). This is the rate\n            included at no additional cost.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The limit definition and current limit values for a provisioned limit.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#LinkUrlType": {
@@ -14713,6 +14925,16 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.cognitoidentityprovider#OptionalArnType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:([\\w+=/,.@-]*)?:[0-9]+:[\\w+=/,.@-]+(:[\\w+=/,.@-]+)?(:[\\w+=/,.@-]+)?)?$"
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#PaginationKey": {
             "type": "string",
             "traits": {
@@ -14730,6 +14952,35 @@
                     "min": 1
                 },
                 "smithy.api#pattern": "^[\\S]+$"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#PasswordHashingAlgorithmType": {
+            "type": "enum",
+            "members": {
+                "BCRYPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BCRYPT"
+                    }
+                },
+                "SCRYPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCRYPT"
+                    }
+                },
+                "ARGON2ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARGON2ID"
+                    }
+                },
+                "PBKDF2_SHA256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PBKDF2_SHA256"
+                    }
+                }
             }
         },
         "com.amazonaws.cognitoidentityprovider#PasswordHistoryPolicyViolationException": {
@@ -16135,6 +16386,19 @@
                 }
             }
         },
+        "com.amazonaws.cognitoidentityprovider#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentityprovider#MessageType"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request exceeded your account's service quota. To increase your limit, use  or submit a Service Quotas increase request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#SessionType": {
             "type": "string",
             "traits": {
@@ -16876,10 +17140,11 @@
             "type": "structure",
             "members": {
                 "SnsCallerArn": {
-                    "target": "com.amazonaws.cognitoidentityprovider#ArnType",
+                    "target": "com.amazonaws.cognitoidentityprovider#OptionalArnType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon SNS caller. This is the ARN of the IAM role\n            in your Amazon Web Services account that Amazon Cognito will use to send SMS messages. SMS\n            messages are subject to a <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html\">spending limit</a>. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon SNS caller. This is the ARN of the IAM role\n            in your Amazon Web Services account that Amazon Cognito will use to send SMS messages. SMS\n            messages are subject to a <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html\">spending limit</a>. </p>"
                     }
                 },
                 "ExternalId": {
@@ -16892,6 +17157,12 @@
                     "target": "com.amazonaws.cognitoidentityprovider#RegionCodeType",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services Region to use with Amazon SNS integration. You can choose the same Region as your\n            user pool, or a supported <b>Legacy Amazon SNS alternate\n            Region</b>. </p>\n         <p>\n            Amazon Cognito resources in the Asia Pacific (Seoul) Amazon Web Services Region must use your Amazon SNS\n            configuration in the Asia Pacific (Tokyo) Region. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html\">SMS message settings for Amazon Cognito user pools</a>.</p>"
+                    }
+                },
+                "EumsSms": {
+                    "target": "com.amazonaws.cognitoidentityprovider#EumsSmsConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for sending SMS messages through Amazon Web Services End User Messaging SMS, as\n            an alternative to Amazon SNS. In a user pool, provide either the Amazon SNS configuration\n            (<code>SnsCallerArn</code>) or this configuration, but not both. In Amazon Web Services Regions\n            where Amazon SNS is not available, this configuration is required.</p>"
                     }
                 }
             },
@@ -17257,6 +17528,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The minimum and maximum length values of an attribute that is of the string type, for\n            example <code>custom:department</code>.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#StringToStringMapType": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cognitoidentityprovider#StringType"
+            },
+            "value": {
+                "target": "com.amazonaws.cognitoidentityprovider#StringType"
             }
         },
         "com.amazonaws.cognitoidentityprovider#StringType": {
@@ -18265,6 +18545,103 @@
                     "target": "com.amazonaws.cognitoidentityprovider#ManagedLoginBrandingType",
                     "traits": {
                         "smithy.api#documentation": "<p>The details of the branding style that you updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#UpdateProvisionedLimit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#UpdateProvisionedLimitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#UpdateProvisionedLimitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the provisioned limit for a specific API category. The value must be between the\n            default limit and your account-level maximum limit in Service Quotas.</p>\n         <p>Managed login user pools don't support adjustments to the\n            <code>UserAuthentication</code> or <code>UserFederation</code> categories. To\n            increase these limits, submit a Service Quotas increase request.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example update a provisioned limit",
+                        "documentation": "The following example sets the provisioned limit for the UserAuthentication API category to 300 RPS.",
+                        "input": {
+                            "LimitDefinition": {
+                                "LimitClass": "API_CATEGORY",
+                                "Attributes": {
+                                    "Category": "UserAuthentication"
+                                }
+                            },
+                            "RequestedLimitValue": 300
+                        },
+                        "output": {
+                            "Limit": {
+                                "LimitDefinition": {
+                                    "LimitClass": "API_CATEGORY",
+                                    "Attributes": {
+                                        "Category": "UserAuthentication"
+                                    }
+                                },
+                                "ProvisionedLimitValue": 300,
+                                "FreeLimitValue": 120
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#UpdateProvisionedLimitRequest": {
+            "type": "structure",
+            "members": {
+                "LimitDefinition": {
+                    "target": "com.amazonaws.cognitoidentityprovider#LimitDefinitionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The limit to update. Specify the limit class and the attributes that identify the\n            limit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestedLimitValue": {
+                    "target": "com.amazonaws.cognitoidentityprovider#IntegerType",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The provisioned rate to set, in requests per second (RPS).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#UpdateProvisionedLimitResponse": {
+            "type": "structure",
+            "members": {
+                "Limit": {
+                    "target": "com.amazonaws.cognitoidentityprovider#LimitType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated provisioned and default limit values.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -19426,6 +19803,12 @@
                     "target": "com.amazonaws.cognitoidentityprovider#CompletionMessageType",
                     "traits": {
                         "smithy.api#documentation": "<p>The message returned when the user import job is completed.</p>"
+                    }
+                },
+                "PasswordHashingAlgorithm": {
+                    "target": "com.amazonaws.cognitoidentityprovider#PasswordHashingAlgorithmType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The password hashing algorithm used to generate the hashes in the CSV file for this\n            import job.</p>\n         <p>Valid values: <code>BCRYPT</code> | <code>SCRYPT</code> | <code>ARGON2ID</code> |\n                <code>PBKDF2_SHA256</code>\n         </p>"
                     }
                 }
             },

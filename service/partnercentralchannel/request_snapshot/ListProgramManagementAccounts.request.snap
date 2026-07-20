@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralChannel.ListProgramManagementAccounts
+
+{"accountIds":["__Member__","__Member__"],"catalog":"__Catalog__","displayNames":["__Member__","__Member__"],"maxResults":1,"nextToken":"__NextToken__","programs":["SOLUTION_PROVIDER","SOLUTION_PROVIDER"],"sort":{"sortBy":"UpdatedAt","sortOrder":"Ascending"},"statuses":["PENDING","PENDING"]}

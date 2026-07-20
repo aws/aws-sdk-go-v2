@@ -1,0 +1,5 @@
+POST /CancelTransaction
+
+Content-Type: application/json
+
+{"TransactionId":"__TransactionId__"}

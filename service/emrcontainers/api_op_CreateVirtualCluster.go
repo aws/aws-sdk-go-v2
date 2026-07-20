@@ -50,6 +50,9 @@ type CreateVirtualClusterInput struct {
 	// The ID of the security configuration.
 	SecurityConfigurationId *string
 
+	// Indicates whether the virtual cluster has session support enabled.
+	SessionEnabled *bool
+
 	// The tags assigned to the virtual cluster.
 	Tags map[string]string
 

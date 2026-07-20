@@ -1,0 +1,5 @@
+POST /v2/email/reputation/entities
+
+Content-Type: application/json
+
+{"Filter":{"key0":"__Value__"},"NextToken":"__NextToken__","PageSize":1}

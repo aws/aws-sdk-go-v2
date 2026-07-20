@@ -1,3 +1,16 @@
+# v1.37.0 (2026-07-13)
+
+* **Feature**: Add support for preserving datasharing, zero-ETL and S3 event integrations on snapshot restore to serverless namespace.
+
+# v1.36.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.35.10 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.9 (2026-06-29)
 
 * No change notes available for this release.

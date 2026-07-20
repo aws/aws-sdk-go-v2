@@ -9,7 +9,8 @@ import (
 )
 
 // Disable the service for the current Amazon Web Services Region or specified
-// Amazon Web Services Region.
+// Amazon Web Services Region. Disabling the service also disables all opt-in
+// features that are currently enabled in that Region.
 func (c *Client) DisableSecurityHubV2(ctx context.Context, params *DisableSecurityHubV2Input, optFns ...func(*Options)) (*DisableSecurityHubV2Output, error) {
 	if params == nil {
 		params = &DisableSecurityHubV2Input{}

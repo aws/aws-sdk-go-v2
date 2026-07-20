@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: MTurkRequesterServiceV20170117.AssociateQualificationWithWorker
+
+{"IntegerValue":1,"QualificationTypeId":"__QualificationTypeId__","SendNotification":true,"WorkerId":"__WorkerId__"}

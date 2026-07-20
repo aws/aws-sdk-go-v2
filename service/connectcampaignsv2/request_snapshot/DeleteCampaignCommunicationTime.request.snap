@@ -1,0 +1,3 @@
+DELETE /v2/campaigns/__Id__/communication-time?config=TELEPHONY
+
+

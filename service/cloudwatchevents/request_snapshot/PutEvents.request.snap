@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.PutEvents
+
+{"Entries":[{"Detail":"__Detail__","DetailType":"__DetailType__","EventBusName":"__EventBusName__","Resources":["__Member__","__Member__"],"Source":"__Source__","Time":946684800,"TraceHeader":"__TraceHeader__"},{"Detail":"__Detail__","DetailType":"__DetailType__","EventBusName":"__EventBusName__","Resources":["__Member__","__Member__"],"Source":"__Source__","Time":946684800,"TraceHeader":"__TraceHeader__"}]}

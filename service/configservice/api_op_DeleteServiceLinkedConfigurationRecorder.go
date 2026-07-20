@@ -41,10 +41,15 @@ func (c *Client) DeleteServiceLinkedConfigurationRecorder(ctx context.Context, p
 
 type DeleteServiceLinkedConfigurationRecorderInput struct {
 
+	// The Amazon Resource Name (ARN) of the service-linked configuration recorder
+	// that you want to delete. For third-party service-linked configuration recorders,
+	// you must use Arn . You must specify exactly one of Arn or ServicePrincipal .
+	Arn *string
+
 	// The service principal of the Amazon Web Services service for the service-linked
-	// configuration recorder that you want to delete.
-	//
-	// This member is required.
+	// configuration recorder that you want to delete. This field is only supported for
+	// Amazon Web Services service principals. For third-party service-linked
+	// configuration recorders, use Arn instead.
 	ServicePrincipal *string
 
 	noSmithyDocumentSerde
@@ -100,9 +105,6 @@ func (c *Client) addOperationDeleteServiceLinkedConfigurationRecorderMiddlewares
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpDeleteServiceLinkedConfigurationRecorderValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware(options.Region, "DeleteServiceLinkedConfigurationRecorder"), middleware.Before); err != nil {

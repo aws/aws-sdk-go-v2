@@ -5,7 +5,9 @@ package computeoptimizer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,23 @@ type DescribeRecommendationExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRecommendationExportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecommendationExportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecommendationExportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobFilters(s, schemas.DescribeRecommendationExportJobsRequest_filters, v.Filters)
+	serializeJobIds(s, schemas.DescribeRecommendationExportJobsRequest_jobIds, v.JobIds)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeRecommendationExportJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRecommendationExportJobsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeRecommendationExportJobsOutput struct {
 
 	// The token to use to advance to the next page of export jobs.
@@ -71,13 +90,35 @@ type DescribeRecommendationExportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRecommendationExportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecommendationExportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecommendationExportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRecommendationExportJobsResponse_nextToken, *v.NextToken)
+	}
+	serializeRecommendationExportJobs(s, schemas.DescribeRecommendationExportJobsResponse_recommendationExportJobs, v.RecommendationExportJobs)
+}
+func (v *DescribeRecommendationExportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRecommendationExportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRecommendationExportJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeRecommendationExportJobsResponse_nextToken, v.NextToken)
+		case schemas.DescribeRecommendationExportJobsResponse_recommendationExportJobs:
+			return deserializeRecommendationExportJobs(d, schemas.DescribeRecommendationExportJobsResponse_recommendationExportJobs, &v.RecommendationExportJobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRecommendationExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeRecommendationExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecommendationExportJobs, schemas.DescribeRecommendationExportJobsRequest, schemas.DescribeRecommendationExportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeRecommendationExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecommendationExportJobs, schemas.DescribeRecommendationExportJobsRequest, schemas.DescribeRecommendationExportJobsResponse), output: &DescribeRecommendationExportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

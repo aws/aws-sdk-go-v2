@@ -1,0 +1,5 @@
+POST /v1/accounts/__AwsAccountId__/knowledge-bases
+
+Content-Type: application/json
+
+{"AccessControlConfiguration":{"isACLEnabled":true},"DataSourceArn":"__DataSourceArn__","Description":"__Description__","KnowledgeBaseConfiguration":{"templateConfiguration":{}},"KnowledgeBaseId":"__KnowledgeBaseId__","MediaExtractionConfiguration":{"audioExtractionConfiguration":{"audioExtractionStatus":"ENABLED"},"imageExtractionConfiguration":{"imageExtractionStatus":"ENABLED"},"videoExtractionConfiguration":{"videoExtractionStatus":"ENABLED","videoExtractionType":"AUDIO_TRANSCRIPTION_ONLY"}},"Name":"__Name__","Permissions":[{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"},{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"}],"PrimaryOwnerArn":"__PrimaryOwnerArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

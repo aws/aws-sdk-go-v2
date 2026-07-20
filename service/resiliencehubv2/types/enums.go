@@ -84,6 +84,23 @@ func (AssessmentErrorCode) Values() []AssessmentErrorCode {
 	}
 }
 
+type AssessmentSortField string
+
+// Enum values for AssessmentSortField
+const (
+	AssessmentSortFieldStartedAt AssessmentSortField = "STARTED_AT"
+)
+
+// Values returns all known values for AssessmentSortField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssessmentSortField) Values() []AssessmentSortField {
+	return []AssessmentSortField{
+		"STARTED_AT",
+	}
+}
+
 type AssessmentStatus string
 
 // Enum values for AssessmentStatus
@@ -113,9 +130,15 @@ type AssessmentStep string
 
 // Enum values for AssessmentStep
 const (
-	AssessmentStepTopologyEnhancement       AssessmentStep = "TOPOLOGY_ENHANCEMENT"
-	AssessmentStepServiceFunctionGeneration AssessmentStep = "SERVICE_FUNCTION_GENERATION"
-	AssessmentStepResilienceAssessment      AssessmentStep = "RESILIENCE_ASSESSMENT"
+	AssessmentStepTopologyGeneration               AssessmentStep = "TOPOLOGY_GENERATION"
+	AssessmentStepInputValidation                  AssessmentStep = "INPUT_VALIDATION"
+	AssessmentStepDesignAnalysis                   AssessmentStep = "DESIGN_ANALYSIS"
+	AssessmentStepTopologyEnhancement              AssessmentStep = "TOPOLOGY_ENHANCEMENT"
+	AssessmentStepServiceFunctionGeneration        AssessmentStep = "SERVICE_FUNCTION_GENERATION"
+	AssessmentStepPolicyValidation                 AssessmentStep = "POLICY_VALIDATION"
+	AssessmentStepResilienceAssessment             AssessmentStep = "RESILIENCE_ASSESSMENT"
+	AssessmentStepFailureModeFindingsConsolidation AssessmentStep = "FAILURE_MODE_FINDINGS_CONSOLIDATION"
+	AssessmentStepFailureModeFindingsEnrichment    AssessmentStep = "FAILURE_MODE_FINDINGS_ENRICHMENT"
 )
 
 // Values returns all known values for AssessmentStep. Note that this can be
@@ -124,9 +147,15 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AssessmentStep) Values() []AssessmentStep {
 	return []AssessmentStep{
+		"TOPOLOGY_GENERATION",
+		"INPUT_VALIDATION",
+		"DESIGN_ANALYSIS",
 		"TOPOLOGY_ENHANCEMENT",
 		"SERVICE_FUNCTION_GENERATION",
+		"POLICY_VALIDATION",
 		"RESILIENCE_ASSESSMENT",
+		"FAILURE_MODE_FINDINGS_CONSOLIDATION",
+		"FAILURE_MODE_FINDINGS_ENRICHMENT",
 	}
 }
 
@@ -616,6 +645,25 @@ func (ServiceFunctionSource) Values() []ServiceFunctionSource {
 	return []ServiceFunctionSource{
 		"AI_GENERATED",
 		"USER",
+	}
+}
+
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAsc  SortOrder = "ASC"
+	SortOrderDesc SortOrder = "DESC"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASC",
+		"DESC",
 	}
 }
 

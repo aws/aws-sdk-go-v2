@@ -4164,6 +4164,11 @@ func awsAwsjson11_serializeDocumentProjectEnvironment(v *types.ProjectEnvironmen
 		}
 	}
 
+	if len(v.HostKernel) > 0 {
+		ok := object.Key("hostKernel")
+		ok.String(string(v.HostKernel))
+	}
+
 	if v.Image != nil {
 		ok := object.Key("image")
 		ok.String(*v.Image)
@@ -6198,6 +6203,11 @@ func awsAwsjson11_serializeOpDocumentStartBuildInput(v *StartBuildInput, value s
 		if err := awsAwsjson11_serializeDocumentGitSubmodulesConfig(v.GitSubmodulesConfigOverride, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.HostKernelOverride) > 0 {
+		ok := object.Key("hostKernelOverride")
+		ok.String(string(v.HostKernelOverride))
 	}
 
 	if v.IdempotencyToken != nil {

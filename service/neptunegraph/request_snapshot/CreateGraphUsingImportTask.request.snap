@@ -1,0 +1,5 @@
+POST /importtasks
+
+Content-Type: application/json
+
+{"blankNodeHandling":"convertToIri","deletionProtection":true,"failOnError":true,"format":"CSV","graphName":"__GraphName__","importOptions":{"neptune":{"preserveDefaultVertexLabels":true,"preserveEdgeIds":true,"s3ExportKmsKeyId":"__S3ExportKmsKeyId__","s3ExportPath":"__S3ExportPath__"}},"kmsKeyIdentifier":"__KmsKeyIdentifier__","maxProvisionedMemory":1,"minProvisionedMemory":1,"parquetType":"COLUMNAR","publicConnectivity":true,"replicaCount":1,"roleArn":"__RoleArn__","source":"__Source__","tags":{"key0":"__Value__"},"vectorSearchConfiguration":{"dimension":1}}

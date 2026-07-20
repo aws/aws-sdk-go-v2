@@ -349,6 +349,13 @@ func awsRestjson1_serializeOpDocumentCreateAdConfigurationInput(v *CreateAdConfi
 		ok.String(*v.Name)
 	}
 
+	if v.PostRollConfiguration != nil {
+		ok := object.Key("postRollConfiguration")
+		if err := awsRestjson1_serializeDocumentPostRollConfiguration(v.PostRollConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
@@ -3443,6 +3450,13 @@ func awsRestjson1_serializeOpDocumentUpdateAdConfigurationInput(v *UpdateAdConfi
 		ok.String(*v.Name)
 	}
 
+	if v.PostRollConfiguration != nil {
+		ok := object.Key("postRollConfiguration")
+		if err := awsRestjson1_serializeDocumentPostRollConfiguration(v.PostRollConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3815,6 +3829,23 @@ func awsRestjson1_serializeDocumentPlaybackRestrictionPolicyAllowedOriginList(v 
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPostRollConfiguration(v *types.PostRollConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DurationSeconds != nil {
+		ok := object.Key("durationSeconds")
+		ok.Integer(*v.DurationSeconds)
+	}
+
+	{
+		ok := object.Key("enabled")
+		ok.Boolean(v.Enabled)
+	}
+
 	return nil
 }
 

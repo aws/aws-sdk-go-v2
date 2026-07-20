@@ -1,0 +1,5 @@
+POST /variantStore/__Name__
+
+Content-Type: application/json
+
+{"description":"__Description__"}

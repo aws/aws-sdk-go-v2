@@ -47,6 +47,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The achievability status of the multi-Region RTO and RPO targets for the service.</p>"
                     }
+                },
+                "dataRecoveryTimeBetweenBackups": {
+                    "target": "com.amazonaws.resiliencehubv2#AchievabilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The achievability status of the data recovery time between backups for the service.</p>"
+                    }
                 }
             },
             "traits": {
@@ -302,6 +308,20 @@
                 }
             }
         },
+        "com.amazonaws.resiliencehubv2#AssessmentSortField": {
+            "type": "enum",
+            "members": {
+                "STARTED_AT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTED_AT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The field by which to sort failure mode assessment results.</p>"
+            }
+        },
         "com.amazonaws.resiliencehubv2#AssessmentStatus": {
             "type": "enum",
             "members": {
@@ -337,9 +357,38 @@
                 }
             }
         },
+        "com.amazonaws.resiliencehubv2#AssessmentStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#AssessmentStatus"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.resiliencehubv2#AssessmentStep": {
             "type": "enum",
             "members": {
+                "TOPOLOGY_GENERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOPOLOGY_GENERATION"
+                    }
+                },
+                "INPUT_VALIDATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INPUT_VALIDATION"
+                    }
+                },
+                "DESIGN_ANALYSIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESIGN_ANALYSIS"
+                    }
+                },
                 "TOPOLOGY_ENHANCEMENT": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -352,10 +401,28 @@
                         "smithy.api#enumValue": "SERVICE_FUNCTION_GENERATION"
                     }
                 },
+                "POLICY_VALIDATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POLICY_VALIDATION"
+                    }
+                },
                 "RESILIENCE_ASSESSMENT": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RESILIENCE_ASSESSMENT"
+                    }
+                },
+                "FAILURE_MODE_FINDINGS_CONSOLIDATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILURE_MODE_FINDINGS_CONSOLIDATION"
+                    }
+                },
+                "FAILURE_MODE_FINDINGS_ENRICHMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILURE_MODE_FINDINGS_ENRICHMENT"
                     }
                 }
             }
@@ -2337,6 +2404,25 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when dependency discovery was last updated.</p>"
                     }
+                },
+                "eligibleResourceCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The count of resources eligible for dependency attribution.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A status message for dependency discovery, displayed during the initialization state.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        }
+                    }
                 }
             },
             "traits": {
@@ -4279,6 +4365,41 @@
                         "smithy.api#required": {}
                     }
                 },
+                "assessmentStatuses": {
+                    "target": "com.amazonaws.resiliencehubv2#AssessmentStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the assessment statuses to include in the results.</p>",
+                        "smithy.api#httpQuery": "assessmentStatuses"
+                    }
+                },
+                "startedAfter": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that only assessments that started at or after this timestamp appear in the results.</p>",
+                        "smithy.api#httpQuery": "startedAfter"
+                    }
+                },
+                "endedBefore": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that only assessments that ended at or before this timestamp appear in the results.</p>",
+                        "smithy.api#httpQuery": "endedBefore"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.resiliencehubv2#AssessmentSortField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to use for sorting failure mode assessments.</p>",
+                        "smithy.api#httpQuery": "sortBy"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.resiliencehubv2#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order for results.</p>",
+                        "smithy.api#httpQuery": "sortOrder"
+                    }
+                },
                 "maxResults": {
                     "target": "com.amazonaws.resiliencehubv2#MaxResults",
                     "traits": {
@@ -4856,6 +4977,21 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Filter resources by AWS Region.</p>",
                         "smithy.api#httpQuery": "awsRegion"
+                    }
+                },
+                "resourceTypes": {
+                    "target": "com.amazonaws.resiliencehubv2#ResourceTypeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudFormation resource types to include in the response.</p>",
+                        "smithy.api#httpQuery": "resourceTypes"
+                    }
+                },
+                "billable": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": true,
+                        "smithy.api#documentation": "<p>Specifies whether to filter non-billable resources. When true (the default), the operation returns only billable resources.</p>",
+                        "smithy.api#httpQuery": "billable"
                     }
                 },
                 "maxResults": {
@@ -7700,6 +7836,27 @@
                 }
             }
         },
+        "com.amazonaws.resiliencehubv2#ResourceTypeFilter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#ResourceTypeFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehubv2#ResourceTypeFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.resiliencehubv2#ResourceTypeList": {
             "type": "list",
             "member": {
@@ -8896,6 +9053,30 @@
                         "smithy.api#required": {}
                     }
                 },
+                "sourceRegion": {
+                    "target": "com.amazonaws.resiliencehubv2#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Region of the source resource.</p>"
+                    }
+                },
+                "destinationRegion": {
+                    "target": "com.amazonaws.resiliencehubv2#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Region of the destination resource.</p>"
+                    }
+                },
+                "sourceAccount": {
+                    "target": "com.amazonaws.resiliencehubv2#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the source resource.</p>"
+                    }
+                },
+                "destinationAccount": {
+                    "target": "com.amazonaws.resiliencehubv2#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the destination resource.</p>"
+                    }
+                },
                 "properties": {
                     "target": "com.amazonaws.resiliencehubv2#EdgePropertyList",
                     "traits": {
@@ -8956,6 +9137,26 @@
                 "smithy.api#documentation": "<p>Contains the effective availability SLO value and its source.</p>"
             }
         },
+        "com.amazonaws.resiliencehubv2#SortOrder": {
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASC"
+                    }
+                },
+                "DESC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESC"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The order in which to sort results.</p>"
+            }
+        },
         "com.amazonaws.resiliencehubv2#StartFailureModeAssessment": {
             "type": "operation",
             "input": {
@@ -8997,7 +9198,7 @@
                         }
                     }
                 },
-                "smithy.api#documentation": "<p>Start a failure mode assessment.</p>",
+                "smithy.api#documentation": "<p>Starts a failure mode assessment.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v2/start-failure-mode-assessment"

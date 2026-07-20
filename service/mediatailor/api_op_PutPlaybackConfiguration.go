@@ -52,6 +52,16 @@ type PutPlaybackConfigurationInput struct {
 	// VAST URL. The maximum length is 25,000 characters.
 	AdDecisionServerUrl *string
 
+	// The concurrency settings for ad decision server interactions. These settings
+	// control how many simultaneous ADS requests MediaTailor makes per manifest
+	// request.
+	AdsPersonalizationConcurrency *types.AdsPersonalizationConcurrency
+
+	// The timeout settings for ad decision server interactions. These settings
+	// control how long MediaTailor waits for ADS responses and the total time budget
+	// for ad personalization across live, VOD, and prefetch workflows.
+	AdsPersonalizationTimeouts *types.AdsPersonalizationTimeouts
+
 	// The configuration for avail suppression, also known as ad suppression. For more
 	// information about ad suppression, see [Ad Suppression].
 	//
@@ -158,6 +168,16 @@ type PutPlaybackConfigurationOutput struct {
 	// VAST URL. The maximum length is 25,000 characters.
 	AdDecisionServerUrl *string
 
+	// The concurrency settings for ad decision server interactions. These settings
+	// control how many simultaneous ADS requests MediaTailor makes per manifest
+	// request.
+	AdsPersonalizationConcurrency *types.AdsPersonalizationConcurrency
+
+	// The timeout settings for ad decision server interactions. These settings
+	// control how long MediaTailor waits for ADS responses and the total time budget
+	// for ad personalization across live, VOD, and prefetch workflows.
+	AdsPersonalizationTimeouts *types.AdsPersonalizationTimeouts
+
 	// The configuration for avail suppression, also known as ad suppression. For more
 	// information about ad suppression, see [Ad Suppression].
 	//
@@ -183,6 +203,14 @@ type PutPlaybackConfigurationOutput struct {
 
 	// The configuration for DASH content.
 	DashConfiguration *types.DashConfiguration
+
+	// The dual-stack (IPv4 and IPv6) playback endpoint prefix associated with the
+	// playback configuration.
+	DualStackPlaybackEndpointPrefix *string
+
+	// The dual-stack (IPv4 and IPv6) session initialization endpoint prefix
+	// associated with the playback configuration.
+	DualStackSessionInitializationEndpointPrefix *string
 
 	// A map of lifecycle hook event names to function identifiers. The function
 	// mapping specifies which function MediaTailor executes at each lifecycle hook

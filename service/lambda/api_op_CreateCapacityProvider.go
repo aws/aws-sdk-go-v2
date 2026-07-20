@@ -63,6 +63,10 @@ type CreateCapacityProviderInput struct {
 	// A list of tags to associate with the capacity provider.
 	Tags map[string]string
 
+	// The telemetry configuration for the capacity provider. Specifies logging
+	// settings for managed resources.
+	TelemetryConfig *types.CapacityProviderTelemetryConfig
+
 	noSmithyDocumentSerde
 }
 

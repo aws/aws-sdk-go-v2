@@ -74,6 +74,18 @@ func TestCheckSnapshot_CreateOAuth2Token(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateOAuth2TokenWithIAM(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateOAuth2TokenWithIAM(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateOAuth2TokenWithIAM")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteConsoleAuthorizationConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteConsoleAuthorizationConfiguration(context.Background(), nil, func(o *Options) {
@@ -122,6 +134,18 @@ func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_IntrospectOAuth2TokenWithIAM(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.IntrospectOAuth2TokenWithIAM(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "IntrospectOAuth2TokenWithIAM")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListResourcePermissionStatements(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListResourcePermissionStatements(context.Background(), nil, func(o *Options) {
@@ -157,11 +181,35 @@ func TestCheckSnapshot_PutResourcePermissionStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_RevokeOAuth2TokenWithIAM(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeOAuth2TokenWithIAM(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RevokeOAuth2TokenWithIAM")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_CreateOAuth2Token(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateOAuth2Token(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateOAuth2Token")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateOAuth2TokenWithIAM(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateOAuth2TokenWithIAM(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateOAuth2TokenWithIAM")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -217,6 +265,18 @@ func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_IntrospectOAuth2TokenWithIAM(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.IntrospectOAuth2TokenWithIAM(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "IntrospectOAuth2TokenWithIAM")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListResourcePermissionStatements(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListResourcePermissionStatements(context.Background(), nil, func(o *Options) {
@@ -246,6 +306,18 @@ func TestUpdateSnapshot_PutResourcePermissionStatement(t *testing.T) {
 	_, err := svc.PutResourcePermissionStatement(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutResourcePermissionStatement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RevokeOAuth2TokenWithIAM(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeOAuth2TokenWithIAM(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RevokeOAuth2TokenWithIAM")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

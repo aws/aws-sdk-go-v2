@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeBuild_20161006.UpdateReportGroup
+
+{"arn":"__Arn__","exportConfig":{"exportConfigType":"S3","s3Destination":{"bucket":"__Bucket__","bucketOwner":"__BucketOwner__","encryptionDisabled":true,"encryptionKey":"__EncryptionKey__","packaging":"ZIP","path":"__Path__"}},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

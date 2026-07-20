@@ -562,17 +562,27 @@ type CustomDomainConfigType struct {
 	CertificateArn *string
 
 	// The security policy for the custom domain. Defines the minimum TLS version and
-	// cipher suites that CloudFront uses when communicating with viewers (clients).
-	// Valid values are as follows:
+	// cipher suites that Amazon CloudFront supports when communicating with clients.
+	// For specific guidance, see [Supported protocols and ciphers between viewers and CloudFront]. Valid values are as follows:
 	//
-	//   - TLS_V1 : Supports TLS 1.0 and later. Provides the broadest client
-	//   compatibility.
+	//   - TLS_V1_3_2025 (strictest): A post-quantum-ready policy requiring TLS 1.3. It
+	//   provides the strongest security posture and is ideal for workloads where all
+	//   clients and browsers are updated to the latest versions. [Supported protocols and ciphers for TLSv1.3_2025].
 	//
-	//   - TLS_V1_2_2021 : Supports TLS 1.2 and later with 2021 cipher suites.
-	//   Recommended minimum for most use cases.
+	//   - TLS_V1_2_2021 (recommended): A post-quantum-ready policy which prefers TLS
+	//   1.3 but allows fallback to TLS 1.2 to accommodate older clients. It is the
+	//   recommended minimum for typical commercial-grade consumer applications. [Supported protocols and ciphers for TLSv1.2_2021].
 	//
-	//   - TLS_V1_3_2025 : Supports TLS 1.3 and later with 2025 cipher suites. Provides
-	//   the strongest security posture.
+	//   - TLS_V1 (strongly discouraged): Permits fallback to TLS 1.0. It offers the
+	//   broadest compatibility, including support for legacy clients that are more than
+	//   a decade old. This compatibility comes at the expense of allowing TLS versions
+	//   and cryptographic algorithms that are no longer considered safe for commercial
+	//   use. [Supported protocols and ciphers for TLSv1].
+	//
+	// [Supported protocols and ciphers between viewers and CloudFront]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html
+	// [Supported protocols and ciphers for TLSv1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html
+	// [Supported protocols and ciphers for TLSv1.2_2021]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html
+	// [Supported protocols and ciphers for TLSv1.3_2025]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html
 	SecurityPolicy SecurityPolicyType
 
 	noSmithyDocumentSerde
@@ -873,6 +883,76 @@ type EmailMfaSettingsType struct {
 
 	// Specifies whether email message MFA is the user's preferred method.
 	PreferredMfa bool
+
+	noSmithyDocumentSerde
+}
+
+// The configuration that Amazon Cognito uses to send SMS messages through Amazon
+// Web Services End User Messaging SMS. Provide this structure in the EumsSms
+// member of SmsConfigurationType to use Amazon Web Services End User Messaging
+// SMS instead of Amazon SNS.
+type EumsSmsConfigurationType struct {
+
+	// The ARN of the IAM role that Amazon Cognito assumes to send SMS messages
+	// through Amazon Web Services End User Messaging SMS. The role must grant
+	// permission to call the sms-voice:SendTextMessage operation.
+	//
+	// This member is required.
+	CallerArn *string
+
+	// The name of the Amazon Web Services End User Messaging SMS configuration set
+	// that Amazon Cognito applies to messages, for logging and event destinations. If
+	// you omit this member, Amazon Cognito sends messages without applying a
+	// configuration set.
+	ConfigurationSetName *string
+
+	// The external ID that Amazon Cognito includes when it assumes the CallerArn
+	// role. Use this value as a condition in the role trust policy to prevent the
+	// confused deputy problem.
+	ExternalId *string
+
+	// The principal entity ID required by India's Distributed Ledger Technology (DLT)
+	// regulations for SMS messages.
+	InEntityId *string
+
+	// The registered template ID for the message template required by India's DLT
+	// regulations for SMS messages.
+	InTemplateId *string
+
+	// The origination identity that Amazon Web Services End User Messaging SMS uses
+	// to send messages to your users. This value can be one of the following:
+	//
+	//   - A phone number – A long code, toll-free number, or short code that is
+	//   assigned to your account.
+	//
+	//   - A sender ID – An alphabetic name that identifies the message sender in
+	//   supported countries.
+	//
+	//   - A phone pool – A group of phone numbers that Amazon Web Services End User
+	//   Messaging SMS selects from when it sends messages.
+	//
+	// You can provide an E.164 phone number or the ARN of the phone number, sender
+	// ID, or phone pool. Amazon Web Services End User Messaging SMS evaluates IAM
+	// authorization with the value that you provide. If the permissions policy of your
+	// CallerArn role scopes the sms-voice:SendTextMessage resource to a specific ARN,
+	// provide that same ARN. If the formats do not match, requests fail with an
+	// InvalidSmsRoleAccessPolicyException .
+	//
+	// Depending on the destination country, you must provide an origination identity.
+	// For country-specific requirements, see [Supported countries and regions for SMS messaging]in the Amazon Web Services End User
+	// Messaging SMS User Guide.
+	//
+	// [Supported countries and regions for SMS messaging]: https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html
+	OriginationIdentity *string
+
+	// The Amazon Web Services Region of the Amazon Web Services End User Messaging
+	// SMS resources that Amazon Cognito uses to send messages. Amazon Web Services End
+	// User Messaging SMS must be available in your user pool's Region.
+	//
+	// If you omit this parameter, Amazon Cognito uses the same Region as your user
+	// pool. You can also set this parameter to your user pool's Region explicitly.
+	// Amazon Cognito rejects any other value with an InvalidParameterException .
+	Region *string
 
 	noSmithyDocumentSerde
 }
@@ -1340,6 +1420,46 @@ type LambdaConfigType struct {
 	//
 	// [custom authentication challenge triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-challenge.html
 	VerifyAuthChallengeResponse *string
+
+	noSmithyDocumentSerde
+}
+
+// The class and attributes that identify a specific limit at the account level.
+type LimitDefinitionType struct {
+
+	// The attributes that identify the specific limit. For API rate limits, specify
+	// the Category key with a value like UserAuthentication or UserCreation .
+	//
+	// This member is required.
+	Attributes map[string]string
+
+	// The class of the limit. For API rate limits, this is API_CATEGORY .
+	//
+	// This member is required.
+	LimitClass LimitClass
+
+	noSmithyDocumentSerde
+}
+
+// The limit definition and current limit values for a provisioned limit.
+type LimitType struct {
+
+	// The default (free) limit value, in requests per second (RPS). This is the rate
+	// included at no additional cost.
+	//
+	// This member is required.
+	FreeLimitValue int32
+
+	// The definition that identifies this limit, including the class and attributes.
+	//
+	// This member is required.
+	LimitDefinition *LimitDefinitionType
+
+	// The provisioned limit value, in requests per second (RPS). This is the rate
+	// that Amazon Cognito currently enforces for your account.
+	//
+	// This member is required.
+	ProvisionedLimitValue int32
 
 	noSmithyDocumentSerde
 }
@@ -1932,14 +2052,12 @@ type SignInPolicyType struct {
 // Access Management (IAM) role in your Amazon Web Services account.
 type SmsConfigurationType struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon SNS caller. This is the ARN of the
-	// IAM role in your Amazon Web Services account that Amazon Cognito will use to
-	// send SMS messages. SMS messages are subject to a [spending limit].
-	//
-	// [spending limit]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html
-	//
-	// This member is required.
-	SnsCallerArn *string
+	// The configuration for sending SMS messages through Amazon Web Services End User
+	// Messaging SMS, as an alternative to Amazon SNS. In a user pool, provide either
+	// the Amazon SNS configuration ( SnsCallerArn ) or this configuration, but not
+	// both. In Amazon Web Services Regions where Amazon SNS is not available, this
+	// configuration is required.
+	EumsSms *EumsSmsConfigurationType
 
 	// The external ID provides additional security for your IAM role. You can use an
 	// ExternalId with the IAM role that you use with Amazon SNS to send SMS messages
@@ -1955,6 +2073,13 @@ type SmsConfigurationType struct {
 	//
 	// [How to use an external ID when granting access to your Amazon Web Services resources to a third party]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
 	ExternalId *string
+
+	// The Amazon Resource Name (ARN) of the Amazon SNS caller. This is the ARN of the
+	// IAM role in your Amazon Web Services account that Amazon Cognito will use to
+	// send SMS messages. SMS messages are subject to a [spending limit].
+	//
+	// [spending limit]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html
+	SnsCallerArn *string
 
 	// The Amazon Web Services Region to use with Amazon SNS integration. You can
 	// choose the same Region as your user pool, or a supported Legacy Amazon SNS
@@ -2286,6 +2411,12 @@ type UserImportJobType struct {
 
 	// The friendly name of the user import job.
 	JobName *string
+
+	// The password hashing algorithm used to generate the hashes in the CSV file for
+	// this import job.
+	//
+	// Valid values: BCRYPT | SCRYPT | ARGON2ID | PBKDF2_SHA256
+	PasswordHashingAlgorithm PasswordHashingAlgorithmType
 
 	// The pre-signed URL target for uploading the CSV file.
 	PreSignedUrl *string

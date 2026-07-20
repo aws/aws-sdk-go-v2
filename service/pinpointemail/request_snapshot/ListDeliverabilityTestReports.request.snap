@@ -1,0 +1,3 @@
+GET /v1/email/deliverability-dashboard/test-reports?NextToken=__NextToken__&PageSize=1
+
+

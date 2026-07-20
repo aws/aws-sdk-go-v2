@@ -56,6 +56,17 @@ type ResponseCodeRequiredOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResponseCodeRequiredOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseCodeRequiredOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseCodeRequiredOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResponseCode != nil {
+		s.WriteInt32(schemas.ResponseCodeRequiredOutput_responseCode, *v.ResponseCode)
+	}
+}
 func (v *ResponseCodeRequiredOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResponseCodeRequiredOutput, func(s *smithy.Schema) error {
 		switch s {

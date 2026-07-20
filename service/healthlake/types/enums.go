@@ -2,6 +2,54 @@
 
 package types
 
+type AgentInputMessageType string
+
+// Enum values for AgentInputMessageType
+const (
+	AgentInputMessageTypeNormal                   AgentInputMessageType = "normal"
+	AgentInputMessageTypeUserConfirmationResponse AgentInputMessageType = "confirmation_response"
+)
+
+// Values returns all known values for AgentInputMessageType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentInputMessageType) Values() []AgentInputMessageType {
+	return []AgentInputMessageType{
+		"normal",
+		"confirmation_response",
+	}
+}
+
+type AgentOutputMessageType string
+
+// Enum values for AgentOutputMessageType
+const (
+	AgentOutputMessageTypeInitialGreeting         AgentOutputMessageType = "INITIAL_GREETING"
+	AgentOutputMessageTypeNormal                  AgentOutputMessageType = "normal"
+	AgentOutputMessageTypeUserConfirmationRequest AgentOutputMessageType = "confirmation"
+	AgentOutputMessageTypeComplete                AgentOutputMessageType = "complete"
+	AgentOutputMessageTypeError                   AgentOutputMessageType = "error"
+	AgentOutputMessageTypeOptions                 AgentOutputMessageType = "options"
+	AgentOutputMessageTypeChoices                 AgentOutputMessageType = "choices"
+)
+
+// Values returns all known values for AgentOutputMessageType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentOutputMessageType) Values() []AgentOutputMessageType {
+	return []AgentOutputMessageType{
+		"INITIAL_GREETING",
+		"normal",
+		"confirmation",
+		"complete",
+		"error",
+		"options",
+		"choices",
+	}
+}
+
 type AnalyticsStatus string
 
 // Enum values for AnalyticsStatus
@@ -174,8 +222,8 @@ type NlpStatus string
 // Enum values for NlpStatus
 const (
 	NlpStatusEnabled   NlpStatus = "ENABLED"
-	NlpStatusDisabled  NlpStatus = "DISABLED"
 	NlpStatusEnabling  NlpStatus = "ENABLING"
+	NlpStatusDisabled  NlpStatus = "DISABLED"
 	NlpStatusDisabling NlpStatus = "DISABLING"
 )
 
@@ -186,8 +234,8 @@ const (
 func (NlpStatus) Values() []NlpStatus {
 	return []NlpStatus{
 		"ENABLED",
-		"DISABLED",
 		"ENABLING",
+		"DISABLED",
 		"DISABLING",
 	}
 }
@@ -206,6 +254,69 @@ const (
 func (PreloadDataType) Values() []PreloadDataType {
 	return []PreloadDataType{
 		"SYNTHEA",
+	}
+}
+
+type SourceFormat string
+
+// Enum values for SourceFormat
+const (
+	SourceFormatCcda SourceFormat = "CCDA"
+	SourceFormatCsv  SourceFormat = "CSV"
+)
+
+// Values returns all known values for SourceFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SourceFormat) Values() []SourceFormat {
+	return []SourceFormat{
+		"CCDA",
+		"CSV",
+	}
+}
+
+type TargetFormat string
+
+// Enum values for TargetFormat
+const (
+	TargetFormatFhirR4 TargetFormat = "FHIR_R4"
+)
+
+// Values returns all known values for TargetFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetFormat) Values() []TargetFormat {
+	return []TargetFormat{
+		"FHIR_R4",
+	}
+}
+
+type TransformationJobStatus string
+
+// Enum values for TransformationJobStatus
+const (
+	TransformationJobStatusSubmitted           TransformationJobStatus = "SUBMITTED"
+	TransformationJobStatusQueued              TransformationJobStatus = "QUEUED"
+	TransformationJobStatusInProgress          TransformationJobStatus = "IN_PROGRESS"
+	TransformationJobStatusCompleted           TransformationJobStatus = "COMPLETED"
+	TransformationJobStatusCompletedWithErrors TransformationJobStatus = "COMPLETED_WITH_ERRORS"
+	TransformationJobStatusFailed              TransformationJobStatus = "FAILED"
+)
+
+// Values returns all known values for TransformationJobStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TransformationJobStatus) Values() []TransformationJobStatus {
+	return []TransformationJobStatus{
+		"SUBMITTED",
+		"QUEUED",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"COMPLETED_WITH_ERRORS",
+		"FAILED",
 	}
 }
 

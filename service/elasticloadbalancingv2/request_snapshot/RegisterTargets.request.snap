@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=RegisterTargets&TargetGroupArn=__TargetGroupArn__&Targets.member.1.AvailabilityZone=__AvailabilityZone__&Targets.member.1.Id=__Id__&Targets.member.1.Port=1&Targets.member.1.QuicServerId=__QuicServerId__&Targets.member.2.AvailabilityZone=__AvailabilityZone__&Targets.member.2.Id=__Id__&Targets.member.2.Port=1&Targets.member.2.QuicServerId=__QuicServerId__&Version=2015-12-01

@@ -97,6 +97,52 @@ type OperationWithRequiredMembersWithDefaultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OperationWithRequiredMembersWithDefaultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationWithRequiredMembersWithDefaultsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationWithRequiredMembersWithDefaultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequiredBlob != nil {
+		s.WriteBlob(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredBlob, v.RequiredBlob)
+	}
+	if v.RequiredBoolean != nil {
+		s.WriteBool(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredBoolean, *v.RequiredBoolean)
+	}
+	if v.RequiredByte != nil {
+		s.WriteInt8(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredByte, *v.RequiredByte)
+	}
+	if v.RequiredDouble != nil {
+		s.WriteFloat64(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredDouble, *v.RequiredDouble)
+	}
+	if v.RequiredEnum != "" {
+		s.WriteString(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredEnum, string(v.RequiredEnum))
+	}
+	if v.RequiredFloat != nil {
+		s.WriteFloat32(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredFloat, *v.RequiredFloat)
+	}
+	if v.RequiredIntEnum != 0 {
+		s.WriteInt32(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredIntEnum, int32(v.RequiredIntEnum))
+	}
+	if v.RequiredInteger != nil {
+		s.WriteInt32(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredInteger, *v.RequiredInteger)
+	}
+	serializeRequiredStringList(s, schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredList, v.RequiredList)
+	if v.RequiredLong != nil {
+		s.WriteInt64(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredLong, *v.RequiredLong)
+	}
+	serializeRequiredStringMap(s, schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredMap, v.RequiredMap)
+	if v.RequiredShort != nil {
+		s.WriteInt16(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredShort, *v.RequiredShort)
+	}
+	if v.RequiredString != nil {
+		s.WriteString(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredString, *v.RequiredString)
+	}
+	if v.RequiredTimestamp != nil {
+		s.WriteTime(schemas.OperationWithRequiredMembersWithDefaultsOutput_requiredTimestamp, *v.RequiredTimestamp)
+	}
+}
 func (v *OperationWithRequiredMembersWithDefaultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OperationWithRequiredMembersWithDefaultsOutput, func(s *smithy.Schema) error {
 		switch s {

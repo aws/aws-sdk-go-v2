@@ -1,0 +1,5 @@
+GET /?accelerate=
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Request-Payer: requester
+

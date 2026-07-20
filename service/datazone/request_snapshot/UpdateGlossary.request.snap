@@ -1,0 +1,5 @@
+PATCH /v2/domains/__DomainIdentifier__/glossaries/__Identifier__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","name":"__Name__","status":"DISABLED"}

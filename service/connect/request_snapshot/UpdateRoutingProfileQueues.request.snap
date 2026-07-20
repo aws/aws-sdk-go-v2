@@ -1,0 +1,5 @@
+POST /routing-profiles/__InstanceId__/__RoutingProfileId__/queues
+
+Content-Type: application/json
+
+{"QueueConfigs":[{"Delay":1,"Priority":1,"QueueReference":{"Channel":"VOICE","QueueId":"__QueueId__"}},{"Delay":1,"Priority":1,"QueueReference":{"Channel":"VOICE","QueueId":"__QueueId__"}}]}

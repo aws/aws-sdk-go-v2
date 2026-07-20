@@ -1,0 +1,7 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonSQS.ReceiveMessage
+X-Amzn-Query-Mode: true
+
+{"AttributeNames":["All","All"],"MaxNumberOfMessages":1,"MessageAttributeNames":["__Member__","__Member__"],"MessageSystemAttributeNames":["All","All"],"QueueUrl":"__QueueUrl__","ReceiveRequestAttemptId":"__ReceiveRequestAttemptId__","VisibilityTimeout":1,"WaitTimeSeconds":1}

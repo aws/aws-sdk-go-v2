@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ListSubscriptionsByTopic&NextToken=__NextToken__&TopicArn=__TopicArn__&Version=2010-03-31

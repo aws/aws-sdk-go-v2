@@ -5336,6 +5336,11 @@ func awsAwsjson11_serializeOpDocumentRestoreFromRecoveryPointInput(v *RestoreFro
 	object := value.Object()
 	defer object.Close()
 
+	if v.MaintainIntegration != nil {
+		ok := object.Key("maintainIntegration")
+		ok.Boolean(*v.MaintainIntegration)
+	}
+
 	if v.NamespaceName != nil {
 		ok := object.Key("namespaceName")
 		ok.String(*v.NamespaceName)
@@ -5361,6 +5366,11 @@ func awsAwsjson11_serializeOpDocumentRestoreFromSnapshotInput(v *RestoreFromSnap
 	if v.AdminPasswordSecretKmsKeyId != nil {
 		ok := object.Key("adminPasswordSecretKmsKeyId")
 		ok.String(*v.AdminPasswordSecretKmsKeyId)
+	}
+
+	if v.MaintainIntegration != nil {
+		ok := object.Key("maintainIntegration")
+		ok.Boolean(*v.MaintainIntegration)
 	}
 
 	if v.ManageAdminPassword != nil {

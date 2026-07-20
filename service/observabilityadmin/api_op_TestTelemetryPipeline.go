@@ -40,6 +40,10 @@ type TestTelemetryPipelineInput struct {
 	// This member is required.
 	Records []types.Record
 
+	// The type of telemetry signal to test. If not specified, defaults to log
+	// processing.
+	SignalType types.SignalType
+
 	noSmithyDocumentSerde
 }
 

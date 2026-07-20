@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateDefaultSubnet&AvailabilityZone=__AvailabilityZone__&AvailabilityZoneId=__AvailabilityZoneId__&DryRun=true&Ipv6Native=true&Version=2016-11-15

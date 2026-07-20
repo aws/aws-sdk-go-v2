@@ -1,0 +1,3 @@
+DELETE /v2/domains/__DomainIdentifier__/entities/ASSET/__EntityIdentifier__/time-series-data-points?clientToken=__ClientToken__&formName=__FormName__
+
+

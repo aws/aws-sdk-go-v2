@@ -299,6 +299,11 @@ func awsRestjson1_serializeOpDocumentCreateLaunchConfigurationTemplateInput(v *C
 		ok.Boolean(*v.PostLaunchEnabled)
 	}
 
+	if len(v.RecoveryMode) > 0 {
+		ok := object.Key("recoveryMode")
+		ok.String(string(v.RecoveryMode))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
@@ -4223,6 +4228,11 @@ func awsRestjson1_serializeOpDocumentUpdateLaunchConfigurationInput(v *UpdateLau
 		ok.Boolean(*v.PostLaunchEnabled)
 	}
 
+	if len(v.RecoveryMode) > 0 {
+		ok := object.Key("recoveryMode")
+		ok.String(string(v.RecoveryMode))
+	}
+
 	if v.SourceServerID != nil {
 		ok := object.Key("sourceServerID")
 		ok.String(*v.SourceServerID)
@@ -4349,6 +4359,11 @@ func awsRestjson1_serializeOpDocumentUpdateLaunchConfigurationTemplateInput(v *U
 	if v.PostLaunchEnabled != nil {
 		ok := object.Key("postLaunchEnabled")
 		ok.Boolean(*v.PostLaunchEnabled)
+	}
+
+	if len(v.RecoveryMode) > 0 {
+		ok := object.Key("recoveryMode")
+		ok.String(string(v.RecoveryMode))
 	}
 
 	if len(v.TargetInstanceTypeRightSizingMethod) > 0 {

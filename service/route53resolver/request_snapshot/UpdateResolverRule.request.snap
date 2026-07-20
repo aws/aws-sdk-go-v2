@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.UpdateResolverRule
+
+{"Config":{"Name":"__Name__","ResolverEndpointId":"__ResolverEndpointId__","TargetIps":[{"Ip":"__Ip__","Ipv6":"__Ipv6__","Port":1,"Protocol":"DoH","ServerNameIndication":"__ServerNameIndication__"},{"Ip":"__Ip__","Ipv6":"__Ipv6__","Port":1,"Protocol":"DoH","ServerNameIndication":"__ServerNameIndication__"}]},"ResolverRuleId":"__ResolverRuleId__"}

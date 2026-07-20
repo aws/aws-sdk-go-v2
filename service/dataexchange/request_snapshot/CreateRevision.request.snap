@@ -1,0 +1,5 @@
+POST /v1/data-sets/__DataSetId__/revisions
+
+Content-Type: application/json
+
+{"Comment":"__Comment__","Tags":{"key0":"__Value__"}}

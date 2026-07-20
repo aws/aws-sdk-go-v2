@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetUserDefinedFunctions
+
+{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","FunctionType":"REGULAR_FUNCTION","MaxResults":1,"NextToken":"__NextToken__","Pattern":"__Pattern__"}

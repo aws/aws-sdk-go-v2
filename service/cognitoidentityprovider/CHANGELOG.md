@@ -1,3 +1,24 @@
+# v1.65.0 (2026-07-17)
+
+* **Feature**: Amazon Cognito user pools now support sending SMS via AWS End User Messaging. A new EumsSms object in SmsConfigurationType lets you deliver MFA and verification texts through AWS End User Messaging, alongside the existing Amazon SNS option.
+
+# v1.64.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.64.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.63.0 (2026-07-02)
+
+* **Feature**: Add support for provisioned limit management, enabling customers to view and update their provisioned API rate limits for Amazon Cognito User Pools programmatically through the new GetProvisionedLimit and UpdateProvisionedLimit APIs.
+
+# v1.62.2 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.62.1 (2026-06-29)
 
 * No change notes available for this release.

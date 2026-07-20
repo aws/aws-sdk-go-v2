@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.UpdateConstraint
+
+{"AcceptLanguage":"__AcceptLanguage__","Description":"__Description__","Id":"__Id__","Parameters":"__Parameters__"}

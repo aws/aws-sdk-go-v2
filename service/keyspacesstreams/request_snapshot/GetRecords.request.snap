@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: KeyspacesStreams.GetRecords
+
+{"maxResults":1,"shardIterator":"__ShardIterator__"}

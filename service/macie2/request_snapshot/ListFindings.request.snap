@@ -1,0 +1,5 @@
+POST /findings
+
+Content-Type: application/json
+
+{"findingCriteria":{"criterion":{"key0":{"eq":["__Member__","__Member__"],"eqExactMatch":["__Member__","__Member__"],"gt":1,"gte":1,"lt":1,"lte":1,"neq":["__Member__","__Member__"]}}},"maxResults":1,"nextToken":"__NextToken__","sortCriteria":{"attributeName":"__AttributeName__","orderBy":"ASC"}}

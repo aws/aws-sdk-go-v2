@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/relevant-content
+
+Content-Type: application/json
+
+{"attributeFilter":{"andAllFilters":[{},{}],"containsAll":{"name":"__Name__","value":{"stringValue":"__DocumentAttributeValueMemberStringValue__"}},"containsAny":{"name":"__Name__","value":{"stringValue":"__DocumentAttributeValueMemberStringValue__"}},"equalsTo":{"name":"__Name__","value":{"stringValue":"__DocumentAttributeValueMemberStringValue__"}},"greaterThan":{"name":"__Name__","value":{"stringValue":"__DocumentAttributeValueMemberStringValue__"}},"greaterThanOrEquals":{"name":"__Name__","value":{"stringValue":"__DocumentAttributeValueMemberStringValue__"}},"lessThan":{"name":"__Name__","value":{"stringValue":"__DocumentAttributeValueMemberStringValue__"}},"lessThanOrEquals":{"name":"__Name__","value":{"stringValue":"__DocumentAttributeValueMemberStringValue__"}},"orAllFilters":[{},{}]},"contentSource":{"retriever":{"retrieverId":"__RetrieverId__"}},"maxResults":1,"nextToken":"__NextToken__","queryText":"__QueryText__"}

@@ -1,0 +1,5 @@
+POST /UpdateCentralizationRuleForOrganization
+
+Content-Type: application/json
+
+{"Rule":{"Destination":{"Account":"__Account__","DestinationLogsConfiguration":{"BackupConfiguration":{"KmsKeyArn":"__KmsKeyArn__","Region":"__Region__"},"LogGroupNameConfiguration":{"LogGroupNamePattern":"__LogGroupNamePattern__"},"LogsEncryptionConfiguration":{"EncryptionConflictResolutionStrategy":"ALLOW","EncryptionStrategy":"CUSTOMER_MANAGED","KmsKeyArn":"__KmsKeyArn__"}},"DestinationMetricsConfiguration":{"BackupConfiguration":{"Region":"__Region__"}},"Region":"__Region__"},"Source":{"Regions":["__Member__","__Member__"],"Scope":"__Scope__","SourceLogsConfiguration":{"DataSourceSelectionCriteria":"__DataSourceSelectionCriteria__","EncryptedLogGroupStrategy":"ALLOW","LogGroupSelectionCriteria":"__LogGroupSelectionCriteria__"},"SourceMetricsConfiguration":{"MetricsSelectionCriteria":"__MetricsSelectionCriteria__"}}},"RuleIdentifier":"__RuleIdentifier__"}

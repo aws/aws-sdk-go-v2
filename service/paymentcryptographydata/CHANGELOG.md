@@ -1,3 +1,20 @@
+# v1.29.0 (2026-07-15)
+
+* **Feature**: Adds support for UnionPay session key derivation to the GenerateAuthRequestCryptogram, VerifyAuthRequestCryptogram, GenerateMac, and VerifyMac APIs.
+
+# v1.28.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.28.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.27.7 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.6 (2026-06-29)
 
 * No change notes available for this release.

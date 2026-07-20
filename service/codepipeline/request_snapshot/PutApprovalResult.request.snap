@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodePipeline_20150709.PutApprovalResult
+
+{"actionName":"__ActionName__","pipelineName":"__PipelineName__","result":{"status":"Approved","summary":"__Summary__"},"stageName":"__StageName__","token":"__Token__"}

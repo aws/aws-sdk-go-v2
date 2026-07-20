@@ -1,0 +1,5 @@
+POST /v1/whatsapp/send
+
+Content-Type: application/json
+
+{"message":"YmxvYg==","metaApiVersion":"__MetaApiVersion__","originationPhoneNumberId":"__OriginationPhoneNumberId__"}

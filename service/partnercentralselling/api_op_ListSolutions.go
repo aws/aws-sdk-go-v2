@@ -39,6 +39,9 @@ type ListSolutionsInput struct {
 	// This member is required.
 	Catalog *string
 
+	// Filters results by AWS Marketplace solution ARN. You can provide up to 10 ARNs.
+	AwsMarketplaceSolutionArn []string
+
 	// Filters the solutions based on the category to which they belong. This allows
 	// partners to search for solutions within specific categories, such as Software ,
 	// Consulting , or Managed Services .

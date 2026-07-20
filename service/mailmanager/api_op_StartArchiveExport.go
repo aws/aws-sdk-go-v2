@@ -74,11 +74,11 @@ type StartArchiveExportOutput struct {
 }
 
 func (c *Client) addOperationStartArchiveExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartArchiveExport{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartArchiveExport{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartArchiveExport{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartArchiveExport{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -102,6 +102,9 @@ func (c *Client) addOperationStartArchiveExportMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

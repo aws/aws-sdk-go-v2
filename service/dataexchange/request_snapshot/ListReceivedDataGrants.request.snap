@@ -1,0 +1,3 @@
+GET /v1/received-data-grants?acceptanceState=PENDING_RECEIVER_ACCEPTANCE&acceptanceState=PENDING_RECEIVER_ACCEPTANCE&maxResults=1&nextToken=__NextToken__
+
+

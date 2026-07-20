@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ReplaceNetworkAclEntry&CidrBlock=__CidrBlock__&DryRun=true&Egress=true&Icmp.Code=1&Icmp.Type=1&Ipv6CidrBlock=__Ipv6CidrBlock__&NetworkAclId=__NetworkAclId__&PortRange.From=1&PortRange.To=1&Protocol=__Protocol__&RuleAction=allow&RuleNumber=1&Version=2016-11-15

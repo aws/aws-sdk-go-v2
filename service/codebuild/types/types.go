@@ -898,6 +898,8 @@ type DockerServer struct {
 	SecurityGroupIds []string
 
 	// A DockerServerStatus object to use for this docker server.
+	//
+	// Note that status is only an output and cannot be passed in as an input.
 	Status *DockerServerStatus
 
 	noSmithyDocumentSerde
@@ -1923,6 +1925,21 @@ type ProjectEnvironment struct {
 
 	// A ProjectFleet object to use for this build project.
 	Fleet *ProjectFleet
+
+	// The host operating system kernel used for on-demand builds in the build
+	// project. The host kernel does not affect the build environment operating system,
+	// which is determined by the image you specify. Valid values are:
+	//
+	//   - LINUX_KERNEL_4 : Runs on an Amazon Linux 2 host (kernel 4.x).
+	//
+	//   - LINUX_KERNEL_6 : Runs on an Amazon Linux 2023 host (kernel 6.x).
+	//
+	//   - LINUX_KERNEL_LATEST : Runs on the latest supported host kernel.
+	//
+	// This setting applies to the LINUX_CONTAINER , ARM_CONTAINER , LINUX_EC2 , and
+	// ARM_EC2 environment types. It is not applicable to Windows, Lambda, or Mac
+	// environment types.
+	HostKernel HostKernel
 
 	//  The type of credentials CodeBuild uses to pull images in your build. There are
 	// two valid values:

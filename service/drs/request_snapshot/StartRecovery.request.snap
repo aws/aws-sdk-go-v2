@@ -1,0 +1,5 @@
+POST /StartRecovery
+
+Content-Type: application/json
+
+{"isDrill":true,"sourceServers":[{"recoverySnapshotID":"__RecoverySnapshotID__","sourceServerID":"__SourceServerID__"},{"recoverySnapshotID":"__RecoverySnapshotID__","sourceServerID":"__SourceServerID__"}],"tags":{"key0":"__Value__"}}

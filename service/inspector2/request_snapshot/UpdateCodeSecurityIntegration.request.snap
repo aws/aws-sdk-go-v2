@@ -1,0 +1,5 @@
+POST /codesecurity/integration/update
+
+Content-Type: application/json
+
+{"details":{"gitlabSelfManaged":{"authCode":"__AuthCode__"}},"integrationArn":"__IntegrationArn__"}

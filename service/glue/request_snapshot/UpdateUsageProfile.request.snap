@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.UpdateUsageProfile
+
+{"Configuration":{"JobConfiguration":{"key0":{"AllowedValues":["__Member__","__Member__"],"DefaultValue":"__DefaultValue__","MaxValue":"__MaxValue__","MinValue":"__MinValue__"}},"SessionConfiguration":{"key0":{"AllowedValues":["__Member__","__Member__"],"DefaultValue":"__DefaultValue__","MaxValue":"__MaxValue__","MinValue":"__MinValue__"}}},"Description":"__Description__","Name":"__Name__"}

@@ -1,0 +1,5 @@
+PATCH /automated-reasoning-policies/__PolicyArn__
+
+Content-Type: application/json
+
+{"description":"__Description__","name":"__Name__","policyDefinition":{"rules":[{"alternateExpression":"__AlternateExpression__","expression":"__Expression__","id":"__Id__"},{"alternateExpression":"__AlternateExpression__","expression":"__Expression__","id":"__Id__"}],"types":[{"description":"__Description__","name":"__Name__","values":[{"description":"__Description__","value":"__Value__"},{"description":"__Description__","value":"__Value__"}]},{"description":"__Description__","name":"__Name__","values":[{"description":"__Description__","value":"__Value__"},{"description":"__Description__","value":"__Value__"}]}],"variables":[{"description":"__Description__","name":"__Name__","type":"__Type__"},{"description":"__Description__","name":"__Name__","type":"__Type__"}],"version":"__Version__"}}

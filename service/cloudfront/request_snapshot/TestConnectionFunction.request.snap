@@ -1,0 +1,6 @@
+POST /2020-05-31/connection-function/__Id__/test
+
+Content-Type: application/xml
+If-Match: __IfMatch__
+
+<TestConnectionFunctionRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><ConnectionObject>YmxvYg==</ConnectionObject><Stage>DEVELOPMENT</Stage></TestConnectionFunctionRequest>

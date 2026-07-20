@@ -1,0 +1,5 @@
+POST /createNotificationRule
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","DetailType":"BASIC","EventTypeIds":["__Member__","__Member__"],"Name":"__Name__","Resource":"__Resource__","Status":"ENABLED","Tags":{"key0":"__Value__"},"Targets":[{"TargetAddress":"__TargetAddress__","TargetType":"__TargetType__"},{"TargetAddress":"__TargetAddress__","TargetType":"__TargetType__"}]}

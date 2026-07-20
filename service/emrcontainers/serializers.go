@@ -319,6 +319,11 @@ func awsRestjson1_serializeOpDocumentCreateManagedEndpointInput(v *CreateManaged
 		ok.String(*v.ReleaseLabel)
 	}
 
+	if v.SessionIdleTimeoutInMinutes != 0 {
+		ok := object.Key("sessionIdleTimeoutInMinutes")
+		ok.Integer(v.SessionIdleTimeoutInMinutes)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -534,6 +539,11 @@ func awsRestjson1_serializeOpDocumentCreateVirtualClusterInput(v *CreateVirtualC
 	if v.SecurityConfigurationId != nil {
 		ok := object.Key("securityConfigurationId")
 		ok.String(*v.SecurityConfigurationId)
+	}
+
+	if v.SessionEnabled != nil {
+		ok := object.Key("sessionEnabled")
+		ok.Boolean(*v.SessionEnabled)
 	}
 
 	if v.Tags != nil {
@@ -2556,6 +2566,11 @@ func awsRestjson1_serializeDocumentRetryPolicyConfiguration(v *types.RetryPolicy
 func awsRestjson1_serializeDocumentS3MonitoringConfiguration(v *types.S3MonitoringConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.EncryptionKeyArn != nil {
+		ok := object.Key("encryptionKeyArn")
+		ok.String(*v.EncryptionKeyArn)
+	}
 
 	if v.LogUri != nil {
 		ok := object.Key("logUri")

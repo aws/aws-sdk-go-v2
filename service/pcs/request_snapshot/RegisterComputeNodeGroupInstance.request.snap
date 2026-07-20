@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSParallelComputingService.RegisterComputeNodeGroupInstance
+
+{"bootstrapId":"__BootstrapId__","clusterIdentifier":"__ClusterIdentifier__"}

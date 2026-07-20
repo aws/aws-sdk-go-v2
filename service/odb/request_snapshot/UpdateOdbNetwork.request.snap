@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.UpdateOdbNetwork
+
+{"crossRegionS3RestoreSourcesToDisable":["__Member__","__Member__"],"crossRegionS3RestoreSourcesToEnable":["__Member__","__Member__"],"displayName":"__DisplayName__","kmsAccess":"ENABLED","kmsPolicyDocument":"__KmsPolicyDocument__","odbNetworkId":"__OdbNetworkId__","peeredCidrsToBeAdded":["__Member__","__Member__"],"peeredCidrsToBeRemoved":["__Member__","__Member__"],"s3Access":"ENABLED","s3PolicyDocument":"__S3PolicyDocument__","stsAccess":"ENABLED","stsPolicyDocument":"__StsPolicyDocument__","zeroEtlAccess":"ENABLED"}

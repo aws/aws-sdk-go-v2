@@ -25,22 +25,23 @@ var vID string = "myversion"
 
 func TestGetObject(t *testing.T) {
 	cases := map[string]struct {
-		data              []byte
-		errReaders        []s3testing.TestErrReader
-		getObjectFn       func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
-		optFn             func(*Options)
-		rng               string
-		versionID         string
-		checksumType      s3types.ChecksumType
-		expectInvocations int
-		expectRanges      []string
-		expectVersions    []string
-		expectETags       []string
-		partsCount        int32
-		expectParts       []int32
-		expectGetErr      string
-		expectReadErr     string
-		dataValidationFn  func(*testing.T, []byte)
+		data               []byte
+		errReaders         []s3testing.TestErrReader
+		getObjectFn        func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
+		optFn              func(*Options)
+		rng                string
+		versionID          string
+		checksumType       s3types.ChecksumType
+		expectInvocations  int
+		expectRanges       []string
+		expectContentRange string
+		expectVersions     []string
+		expectETags        []string
+		partsCount         int32
+		expectParts        []int32
+		expectGetErr       string
+		expectReadErr      string
+		dataValidationFn   func(*testing.T, []byte)
 	}{
 		"range download in order": {
 			data:        buf20MB,
@@ -59,10 +60,11 @@ func TestGetObject(t *testing.T) {
 			optFn: func(o *Options) {
 				o.GetObjectType = types.GetObjectRanges
 			},
-			rng:               "bytes=2-8388609",
-			expectInvocations: 1,
-			expectRanges:      []string{"bytes=2-8388609"},
-			expectETags:       []string{etag},
+			rng:                "bytes=2-8388609",
+			expectInvocations:  1,
+			expectRanges:       []string{"bytes=2-8388609"},
+			expectContentRange: "bytes 2-8388609/20971520",
+			expectETags:        []string{etag},
 		},
 		"range download a limited range sequentially in multiple chunks": {
 			data:        buf20MB,
@@ -209,10 +211,11 @@ func TestGetObject(t *testing.T) {
 			optFn: func(o *Options) {
 				o.Concurrency = 1
 			},
-			partsCount:        3,
-			expectInvocations: 3,
-			expectETags:       []string{etag, etag, etag},
-			expectParts:       []int32{1, 2, 3},
+			partsCount:         3,
+			expectInvocations:  3,
+			expectContentRange: "bytes 0-2097151/2097152",
+			expectETags:        []string{etag, etag, etag},
+			expectParts:        []int32{1, 2, 3},
 		},
 		"parts download with composite checksum type": {
 			data:        buf2MB,
@@ -368,6 +371,11 @@ func TestGetObject(t *testing.T) {
 			if len(c.expectRanges) > 0 {
 				if e, a := c.expectRanges, *ranges; !reflect.DeepEqual(e, a) {
 					t.Errorf("expect %v ranges, got %v", e, a)
+				}
+			}
+			if c.expectContentRange != "" {
+				if e, a := c.expectContentRange, aws.ToString(out.ContentRange); e != a {
+					t.Errorf("expect ContentRange %q, got %q", e, a)
 				}
 			}
 			if len(c.expectVersions) > 0 {

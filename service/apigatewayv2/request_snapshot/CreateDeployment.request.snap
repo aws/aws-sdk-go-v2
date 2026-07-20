@@ -1,0 +1,5 @@
+POST /v2/apis/__ApiId__/deployments
+
+Content-Type: application/json
+
+{"description":"__Description__","stageName":"__StageName__"}

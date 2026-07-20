@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: OvertureService.DescribeDirectConnectGatewayAttachments
+
+{"directConnectGatewayId":"__DirectConnectGatewayId__","maxResults":1,"nextToken":"__NextToken__","virtualInterfaceId":"__VirtualInterfaceId__"}

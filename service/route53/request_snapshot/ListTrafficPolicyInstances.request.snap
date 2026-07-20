@@ -1,0 +1,3 @@
+GET /2013-04-01/trafficpolicyinstances?hostedzoneid=__HostedZoneIdMarker__&maxitems=1&trafficpolicyinstancename=__TrafficPolicyInstanceNameMarker__&trafficpolicyinstancetype=SOA
+
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudTrail_20131101.PutInsightSelectors
+
+{"EventDataStore":"__EventDataStore__","InsightsDestination":"__InsightsDestination__","InsightSelectors":[{"EventCategories":["Management","Management"],"InsightType":"ApiCallRateInsight"},{"EventCategories":["Management","Management"],"InsightType":"ApiCallRateInsight"}],"TrailName":"__TrailName__"}

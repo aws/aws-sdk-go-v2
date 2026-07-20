@@ -90,6 +90,46 @@ type OperationWithRequiredMembersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OperationWithRequiredMembersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationWithRequiredMembersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationWithRequiredMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequiredBlob != nil {
+		s.WriteBlob(schemas.OperationWithRequiredMembersOutput_requiredBlob, v.RequiredBlob)
+	}
+	if v.RequiredBoolean != nil {
+		s.WriteBool(schemas.OperationWithRequiredMembersOutput_requiredBoolean, *v.RequiredBoolean)
+	}
+	if v.RequiredByte != nil {
+		s.WriteInt8(schemas.OperationWithRequiredMembersOutput_requiredByte, *v.RequiredByte)
+	}
+	if v.RequiredDouble != nil {
+		s.WriteFloat64(schemas.OperationWithRequiredMembersOutput_requiredDouble, *v.RequiredDouble)
+	}
+	if v.RequiredFloat != nil {
+		s.WriteFloat32(schemas.OperationWithRequiredMembersOutput_requiredFloat, *v.RequiredFloat)
+	}
+	if v.RequiredInteger != nil {
+		s.WriteInt32(schemas.OperationWithRequiredMembersOutput_requiredInteger, *v.RequiredInteger)
+	}
+	serializeRequiredStringList(s, schemas.OperationWithRequiredMembersOutput_requiredList, v.RequiredList)
+	if v.RequiredLong != nil {
+		s.WriteInt64(schemas.OperationWithRequiredMembersOutput_requiredLong, *v.RequiredLong)
+	}
+	serializeRequiredStringMap(s, schemas.OperationWithRequiredMembersOutput_requiredMap, v.RequiredMap)
+	if v.RequiredShort != nil {
+		s.WriteInt16(schemas.OperationWithRequiredMembersOutput_requiredShort, *v.RequiredShort)
+	}
+	if v.RequiredString != nil {
+		s.WriteString(schemas.OperationWithRequiredMembersOutput_requiredString, *v.RequiredString)
+	}
+	if v.RequiredTimestamp != nil {
+		s.WriteTime(schemas.OperationWithRequiredMembersOutput_requiredTimestamp, *v.RequiredTimestamp)
+	}
+}
 func (v *OperationWithRequiredMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OperationWithRequiredMembersOutput, func(s *smithy.Schema) error {
 		switch s {

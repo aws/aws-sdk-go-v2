@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=GetDataProtectionPolicy&ResourceArn=__ResourceArn__&Version=2010-03-31

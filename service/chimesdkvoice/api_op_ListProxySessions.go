@@ -11,6 +11,13 @@ import (
 )
 
 // Lists the proxy sessions for the specified Amazon Chime SDK Voice Connector.
+//
+// End of support notice: On April 7, 2026, AWS will end support for Amazon Chime
+// SDK proxy sessions.
+//
+// Deprecated: End of support notice: On April 7, 2026, AWS ended support for
+// Amazon Chime SDK proxy sessions. For more information, refer to
+// https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_ListProxySessions.html
 func (c *Client) ListProxySessions(ctx context.Context, params *ListProxySessionsInput, optFns ...func(*Options)) (*ListProxySessionsOutput, error) {
 	if params == nil {
 		params = &ListProxySessionsInput{}

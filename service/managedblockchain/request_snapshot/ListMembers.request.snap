@@ -1,0 +1,3 @@
+GET /networks/__NetworkId__/members?isOwned=true&maxResults=1&name=__Name__&nextToken=__NextToken__&status=CREATING
+
+

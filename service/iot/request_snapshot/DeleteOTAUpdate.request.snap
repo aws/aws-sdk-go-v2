@@ -1,0 +1,3 @@
+DELETE /otaUpdates/__OtaUpdateId__?deleteStream=true&forceDeleteAWSJob=true
+
+

@@ -1,0 +1,5 @@
+PUT /function/__FunctionId__
+
+Content-Type: application/json
+
+{"CustomOutputConfiguration":{"Output":{"key0":"__Value__"},"Runtime":"JSONATA"},"Description":"__Description__","FunctionType":"HTTP_REQUEST","HttpRequestConfiguration":{"Body":"__Body__","Headers":{"key0":"__Value__"},"MethodType":"GET","Output":{"key0":"__Value__"},"RequestTimeoutMilliseconds":1,"Runtime":"JSONATA","Url":"__Url__"},"SequentialExecutorConfiguration":{"FunctionList":[{"FunctionId":"__FunctionId__","RunCondition":"__RunCondition__"},{"FunctionId":"__FunctionId__","RunCondition":"__RunCondition__"}],"Output":{"key0":"__Value__"},"Runtime":"JSONATA","TimeoutMilliseconds":1},"tags":{"key0":"__Value__"}}

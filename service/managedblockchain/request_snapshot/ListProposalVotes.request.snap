@@ -1,0 +1,3 @@
+GET /networks/__NetworkId__/proposals/__ProposalId__/votes?maxResults=1&nextToken=__NextToken__
+
+

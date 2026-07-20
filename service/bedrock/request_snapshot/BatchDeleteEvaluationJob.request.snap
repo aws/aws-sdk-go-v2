@@ -1,0 +1,5 @@
+POST /evaluation-jobs/batch-delete
+
+Content-Type: application/json
+
+{"jobIdentifiers":["__Member__","__Member__"]}

@@ -1,0 +1,3 @@
+DELETE /v20190125/meshes/__MeshName__/virtualRouter/__VirtualRouterName__/routes/__RouteName__?meshOwner=__MeshOwner__
+
+

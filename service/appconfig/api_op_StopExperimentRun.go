@@ -44,7 +44,7 @@ type StopExperimentRunInput struct {
 	// This member is required.
 	Run *int32
 
-	// Optional deployment parameters for the stop operation.
+	// The deployment parameters for the stop operation.
 	DeploymentParameters *types.DeploymentParameters
 
 	// The result of the experiment run, including an executive summary and reasons

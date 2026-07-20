@@ -1493,6 +1493,19 @@ func awsRestjson1_deserializeOpDocumentDescribeBrokerOutput(v **DescribeBrokerOu
 				return err
 			}
 
+		case "pendingStorageSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PendingStorageSize = ptr.Int32(int32(i64))
+			}
+
 		case "publiclyAccessible":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1505,6 +1518,19 @@ func awsRestjson1_deserializeOpDocumentDescribeBrokerOutput(v **DescribeBrokerOu
 		case "securityGroups":
 			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.SecurityGroups, value); err != nil {
 				return err
+			}
+
+		case "storageSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StorageSize = ptr.Int32(int32(i64))
 			}
 
 		case "storageType":
@@ -4115,6 +4141,19 @@ func awsRestjson1_deserializeOpDocumentUpdateBrokerOutput(v **UpdateBrokerOutput
 		case "securityGroups":
 			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.SecurityGroups, value); err != nil {
 				return err
+			}
+
+		case "storageSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StorageSize = ptr.Int32(int32(i64))
 			}
 
 		default:

@@ -9,6 +9,8 @@ LINT_IGNORE_PRIVATE_METRICS='aws/middleware/private/metrics'
 UNIT_TEST_TAGS=
 BUILD_TAGS=-tags "example,codegen,integration,ec2env,perftest"
 SNAPSHOT_TAGS=-tags "snapshot"
+REQUEST_SNAPSHOT_TAGS=-tags "request_snapshot"
+RESPONSE_SNAPSHOT_TAGS=-tags "response_snapshot"
 
 SMITHY_GO_SRC ?= $(abspath $(shell pwd)/..)/smithy-go
 
@@ -321,6 +323,36 @@ test-ci-check-snapshot-%:
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst test-ci-check-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test ${SNAPSHOT_TAGS} -run TestCheckSnapshot -failfast ./..."
+
+test-update-request-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-update-request-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${REQUEST_SNAPSHOT_TAGS} -run TestUpdateRequestSnapshot ."
+
+test-check-request-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-check-request-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${REQUEST_SNAPSHOT_TAGS} -run TestCheckRequestSnapshot ."
+
+test-ci-check-request-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-ci-check-request-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${REQUEST_SNAPSHOT_TAGS} -run TestCheckRequestSnapshot -failfast ."
+
+test-update-response-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-update-response-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${RESPONSE_SNAPSHOT_TAGS} -run TestUpdateResponseSnapshot ."
+
+test-check-response-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-check-response-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${RESPONSE_SNAPSHOT_TAGS} -run TestCheckResponseSnapshot ."
+
+test-ci-check-response-snapshot-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-ci-check-response-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${RESPONSE_SNAPSHOT_TAGS} -run TestCheckResponseSnapshot -failfast ."
 
 cachedep: cachedep-modules-.
 

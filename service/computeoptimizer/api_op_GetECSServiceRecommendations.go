@@ -4,7 +4,9 @@ package computeoptimizer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,6 +69,24 @@ type GetECSServiceRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetECSServiceRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetECSServiceRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetECSServiceRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.GetECSServiceRecommendationsRequest_accountIds, v.AccountIds)
+	serializeECSServiceRecommendationFilters(s, schemas.GetECSServiceRecommendationsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetECSServiceRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetECSServiceRecommendationsRequest_nextToken, *v.NextToken)
+	}
+	serializeServiceArns(s, schemas.GetECSServiceRecommendationsRequest_serviceArns, v.ServiceArns)
+}
+
 type GetECSServiceRecommendationsOutput struct {
 
 	//  An array of objects that describe the Amazon ECS service recommendations.
@@ -84,13 +104,38 @@ type GetECSServiceRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetECSServiceRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetECSServiceRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetECSServiceRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeECSServiceRecommendations(s, schemas.GetECSServiceRecommendationsResponse_ecsServiceRecommendations, v.EcsServiceRecommendations)
+	serializeGetRecommendationErrors(s, schemas.GetECSServiceRecommendationsResponse_errors, v.Errors)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetECSServiceRecommendationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetECSServiceRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetECSServiceRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetECSServiceRecommendationsResponse_ecsServiceRecommendations:
+			return deserializeECSServiceRecommendations(d, schemas.GetECSServiceRecommendationsResponse_ecsServiceRecommendations, &v.EcsServiceRecommendations)
+		case schemas.GetECSServiceRecommendationsResponse_errors:
+			return deserializeGetRecommendationErrors(d, schemas.GetECSServiceRecommendationsResponse_errors, &v.Errors)
+		case schemas.GetECSServiceRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetECSServiceRecommendationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetECSServiceRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetECSServiceRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetECSServiceRecommendations, schemas.GetECSServiceRecommendationsRequest, schemas.GetECSServiceRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetECSServiceRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetECSServiceRecommendations, schemas.GetECSServiceRecommendationsRequest, schemas.GetECSServiceRecommendationsResponse), output: &GetECSServiceRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

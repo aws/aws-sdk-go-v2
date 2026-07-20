@@ -1,0 +1,5 @@
+POST /2021-01-01/packages/associateMultiple
+
+Content-Type: application/json
+
+{"DomainName":"__DomainName__","PackageList":[{"AssociationConfiguration":{"KeyStoreAccessOption":{"KeyAccessRoleArn":"__KeyAccessRoleArn__","KeyStoreAccessEnabled":true}},"PackageID":"__PackageID__","PrerequisitePackageIDList":["__Member__","__Member__"]},{"AssociationConfiguration":{"KeyStoreAccessOption":{"KeyAccessRoleArn":"__KeyAccessRoleArn__","KeyStoreAccessEnabled":true}},"PackageID":"__PackageID__","PrerequisitePackageIDList":["__Member__","__Member__"]}]}

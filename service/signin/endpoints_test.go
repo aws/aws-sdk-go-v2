@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"net/url"
 	"reflect"
+	"strings"
 	"testing"
 )
 
@@ -589,6 +590,240 @@ func TestEndpointCase14(t *testing.T) {
 	}
 
 	uri, _ := url.Parse("https://us-isob-east-1.signin.sc2shome.sgov.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// OAuth endpoint in us-east-1 (aws partition)
+func TestEndpointCase15(t *testing.T) {
+	var params = EndpointParameters{
+		IsOAuthEndpoint: ptr.Bool(true),
+		Region:          ptr.String("us-east-1"),
+		UseFIPS:         ptr.Bool(false),
+		UseDualStack:    ptr.Bool(false),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://us-east-1.oauth.signin.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "signin")
+						smithyhttp.SetSigV4ASigningName(&sp, "signin")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// OAuth endpoint in us-west-2 (aws partition)
+func TestEndpointCase16(t *testing.T) {
+	var params = EndpointParameters{
+		IsOAuthEndpoint: ptr.Bool(true),
+		Region:          ptr.String("us-west-2"),
+		UseFIPS:         ptr.Bool(false),
+		UseDualStack:    ptr.Bool(false),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://us-west-2.oauth.signin.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "signin")
+						smithyhttp.SetSigV4ASigningName(&sp, "signin")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-west-2")
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// OAuth endpoint with FIPS returns an error (no FIPS variant exists)
+func TestEndpointCase17(t *testing.T) {
+	var params = EndpointParameters{
+		IsOAuthEndpoint: ptr.Bool(true),
+		Region:          ptr.String("us-east-1"),
+		UseFIPS:         ptr.Bool(true),
+		UseDualStack:    ptr.Bool(false),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "FIPS endpoints are not supported for OAuth operations. Disable FIPS or use a non-OAuth operation.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// OAuth endpoint with FIPS returns an error in us-west-2 (aws partition)
+func TestEndpointCase18(t *testing.T) {
+	var params = EndpointParameters{
+		IsOAuthEndpoint: ptr.Bool(true),
+		Region:          ptr.String("us-west-2"),
+		UseFIPS:         ptr.Bool(true),
+		UseDualStack:    ptr.Bool(false),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "FIPS endpoints are not supported for OAuth operations. Disable FIPS or use a non-OAuth operation.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// OAuth endpoint with FIPS returns an error in cn-north-1 (non-aws partition,
+// error is partition-agnostic)
+func TestEndpointCase19(t *testing.T) {
+	var params = EndpointParameters{
+		IsOAuthEndpoint: ptr.Bool(true),
+		Region:          ptr.String("cn-north-1"),
+		UseFIPS:         ptr.Bool(true),
+		UseDualStack:    ptr.Bool(false),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "FIPS endpoints are not supported for OAuth operations. Disable FIPS or use a non-OAuth operation.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// OAuth endpoint with FIPS returns an error even with a custom SDK endpoint
+// override
+func TestEndpointCase20(t *testing.T) {
+	var params = EndpointParameters{
+		IsOAuthEndpoint: ptr.Bool(true),
+		Region:          ptr.String("us-east-1"),
+		Endpoint:        ptr.String("https://custom.signin.example.com"),
+		UseFIPS:         ptr.Bool(true),
+		UseDualStack:    ptr.Bool(false),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "FIPS endpoints are not supported for OAuth operations. Disable FIPS or use a non-OAuth operation.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// OAuth operation with custom SDK endpoint override
+func TestEndpointCase21(t *testing.T) {
+	var params = EndpointParameters{
+		IsOAuthEndpoint: ptr.Bool(true),
+		Region:          ptr.String("us-east-1"),
+		Endpoint:        ptr.String("https://custom.signin.example.com"),
+		UseFIPS:         ptr.Bool(false),
+		UseDualStack:    ptr.Bool(false),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://custom.signin.example.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,

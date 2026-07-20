@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CopyServerlessCacheSnapshot&KmsKeyId=__KmsKeyId__&SourceServerlessCacheSnapshotName=__SourceServerlessCacheSnapshotName__&Tags.Tag.1.Key=__Key__&Tags.Tag.1.Value=__Value__&Tags.Tag.2.Key=__Key__&Tags.Tag.2.Value=__Value__&TargetServerlessCacheSnapshotName=__TargetServerlessCacheSnapshotName__&Version=2015-02-02

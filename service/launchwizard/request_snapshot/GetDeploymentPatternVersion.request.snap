@@ -1,0 +1,5 @@
+POST /getDeploymentPatternVersion
+
+Content-Type: application/json
+
+{"deploymentPatternName":"__DeploymentPatternName__","deploymentPatternVersionName":"__DeploymentPatternVersionName__","workloadName":"__WorkloadName__"}

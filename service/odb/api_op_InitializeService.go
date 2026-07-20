@@ -4,6 +4,7 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -25,6 +26,10 @@ func (c *Client) InitializeService(ctx context.Context, params *InitializeServic
 }
 
 type InitializeServiceInput struct {
+
+	// Specifies whether to enable or disable the OCI service-account role for Amazon
+	// Web Services Secrets Manager integration with Autonomous Database.
+	AutonomousDatabaseOciAwsSecretsManagerIntegration types.Access
 
 	// The Oracle Cloud Infrastructure (OCI) identity domain configuration for service
 	// initialization.

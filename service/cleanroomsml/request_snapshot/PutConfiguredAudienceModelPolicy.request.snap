@@ -1,0 +1,5 @@
+PUT /configured-audience-model/__ConfiguredAudienceModelArn__/policy
+
+Content-Type: application/json
+
+{"configuredAudienceModelPolicy":"__ConfiguredAudienceModelPolicy__","policyExistenceCondition":"POLICY_MUST_EXIST","previousPolicyHash":"__PreviousPolicyHash__"}

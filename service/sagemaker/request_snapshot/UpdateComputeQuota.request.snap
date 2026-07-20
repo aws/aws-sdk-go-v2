@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateComputeQuota
+
+{"ActivationState":"Enabled","ComputeQuotaConfig":{"ComputeQuotaResources":[{"AcceleratorPartition":{"Count":1,"Type":"mig-1g.5gb"},"Accelerators":1,"Count":1,"InstanceType":"ml.p4d.24xlarge","MemoryInGiB":1,"VCpu":1},{"AcceleratorPartition":{"Count":1,"Type":"mig-1g.5gb"},"Accelerators":1,"Count":1,"InstanceType":"ml.p4d.24xlarge","MemoryInGiB":1,"VCpu":1}],"PreemptTeamTasks":"Never","ResourceSharingConfig":{"AbsoluteBorrowLimits":[{"AcceleratorPartition":{"Count":1,"Type":"mig-1g.5gb"},"Accelerators":1,"Count":1,"InstanceType":"ml.p4d.24xlarge","MemoryInGiB":1,"VCpu":1},{"AcceleratorPartition":{"Count":1,"Type":"mig-1g.5gb"},"Accelerators":1,"Count":1,"InstanceType":"ml.p4d.24xlarge","MemoryInGiB":1,"VCpu":1}],"BorrowLimit":1,"Strategy":"Lend"}},"ComputeQuotaId":"__ComputeQuotaId__","ComputeQuotaTarget":{"FairShareWeight":1,"TeamName":"__TeamName__"},"Description":"__Description__","TargetVersion":1}

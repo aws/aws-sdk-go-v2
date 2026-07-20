@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetConnections
+
+{"CatalogId":"__CatalogId__","Filter":{"ConnectionSchemaVersion":1,"ConnectionType":"JDBC","MatchCriteria":["__Member__","__Member__"]},"HidePassword":true,"MaxResults":1,"NextToken":"__NextToken__"}

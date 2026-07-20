@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyVerifiedAccessEndpointPolicy&ClientToken=__ClientToken__&DryRun=true&PolicyDocument=__PolicyDocument__&PolicyEnabled=true&SseSpecification.CustomerManagedKeyEnabled=true&SseSpecification.KmsKeyArn=__KmsKeyArn__&VerifiedAccessEndpointId=__VerifiedAccessEndpointId__&Version=2016-11-15

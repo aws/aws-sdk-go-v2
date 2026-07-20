@@ -1,0 +1,5 @@
+POST /workloads/__WorkloadId__/checkSummaries
+
+Content-Type: application/json
+
+{"ChoiceId":"__ChoiceId__","LensArn":"__LensArn__","MaxResults":1,"NextToken":"__NextToken__","PillarId":"__PillarId__","QuestionId":"__QuestionId__"}

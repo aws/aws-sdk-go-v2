@@ -272,6 +272,71 @@ type AggregatorV2 struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about self-hosted AI resources and their host resources.
+// The fields that are present depend on the role of the resource.
+//
+// On a self-hosted AI resource (a resource with a SelfHosted::AI:: resource type,
+// such as SelfHosted::AI::Model or SelfHosted::AI::Agent ), the HostResourceGuid
+// and HostResourceType fields link the resource to its host. The CanonicalId
+// field identifies what the resource is, enabling aggregation of identical
+// resources across multiple hosts.
+//
+// On a host resource (such as an Amazon EC2 instance), the
+// SelfHostedAI*ResourceCount fields contain the count for each ResourceSubCategory
+// and the total count of self-hosted AI resources detected on the host.
+type AIDetails struct {
+
+	// The canonical identifier for the AI resource, independent of where it is
+	// deployed. Multiple occurrences of the same resource on different hosts share the
+	// same CanonicalId . For model resources, the value follows the format model/ ,
+	// such as model/pkg:huggingface/meta-llama/llama-3-8b . Present only on
+	// self-hosted AI resources.
+	CanonicalId *string
+
+	// The identifier of the host resource that hosts the self-hosted AI resource.
+	// Present only on self-hosted AI resources.
+	HostResourceGuid *string
+
+	// The ResourceType of the host resource that hosts the self-hosted AI resource,
+	// such as AWS::EC2::Instance . Present only on self-hosted AI resources.
+	HostResourceType *string
+
+	// The number of self-hosted AI resources of ResourceSubCategory AgentFramework
+	// detected on the host resource. Present only on host resources.
+	SelfHostedAIAgentFrameworkResourceCount *int32
+
+	// The number of self-hosted AI resources of ResourceSubCategory Agent detected on
+	// the host resource. Present only on host resources.
+	SelfHostedAIAgentResourceCount *int32
+
+	// The number of self-hosted AI resources of ResourceSubCategory
+	// AgentToolsAndIdentity detected on the host resource. Present only on host
+	// resources.
+	SelfHostedAIAgentToolsAndIdentityResourceCount *int32
+
+	// The number of self-hosted AI resources of ResourceSubCategory Development
+	// detected on the host resource. Present only on host resources.
+	SelfHostedAIDevelopmentResourceCount *int32
+
+	// The number of self-hosted AI resources of ResourceSubCategory ExternalEndpoint
+	// detected on the host resource. Present only on host resources.
+	SelfHostedAIExternalEndpointResourceCount *int32
+
+	// The number of self-hosted AI resources of ResourceSubCategory Model detected on
+	// the host resource. Present only on host resources.
+	SelfHostedAIModelResourceCount *int32
+
+	// The number of self-hosted AI resources of ResourceSubCategory ModelServing
+	// detected on the host resource. Present only on host resources.
+	SelfHostedAIModelServingResourceCount *int32
+
+	// The total number of all self-hosted AI resources detected on the host resource.
+	// Present only on host resources.
+	SelfHostedTotalAIResourceCount *int32
+
+	noSmithyDocumentSerde
+}
+
 //	Information about an enabled security standard in which a security control is
 //
 // enabled.
@@ -691,12 +756,23 @@ type AutomationRulesFindingFilters struct {
 	// Array Members: Minimum number of 1 item. Maximum number of 100 items.
 	ResourceId []StringFilter
 
+	// The unique identifier of the account that owns the resource that the finding
+	// applies to, for example, Azure Subscription Id or Amazon Web Services Account Id
+	ResourceOwnerAccountId []StringFilter
+
+	// The unique identifier of the organization that owns the resource that the
+	// finding applies to, for example, Azure Tenant Id
+	ResourceOwnerOrgId []StringFilter
+
 	//  The partition in which the resource that the finding pertains to is located. A
 	// partition is a group of Amazon Web Services Regions. Each Amazon Web Services
 	// account is scoped to one partition.
 	//
 	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	ResourcePartition []StringFilter
+
+	// The cloud provider that the resource belongs to. Valid values are AWS and Azure .
+	ResourceProvider []StringFilter
 
 	//  The Amazon Web Services Region where the resource that a finding pertains to
 	// is located.
@@ -12943,8 +13019,19 @@ type AwsSecurityFindingFilters struct {
 	// The canonical identifier for the given resource type.
 	ResourceId []StringFilter
 
+	// The unique identifier of the account that owns the resource that the finding
+	// applies to, for example, Azure Subscription Id or Amazon Web Services Account Id
+	ResourceOwnerAccountId []StringFilter
+
+	// The unique identifier of the organization that owns the resource that the
+	// finding applies to, for example, Azure Tenant Id
+	ResourceOwnerOrgId []StringFilter
+
 	// The canonical Amazon Web Services partition name that the Region is assigned to.
 	ResourcePartition []StringFilter
+
+	// The cloud provider that the resource belongs to. Valid values are AWS and Azure .
+	ResourceProvider []StringFilter
 
 	// The canonical Amazon Web Services external Region name where this resource is
 	// located.
@@ -14154,6 +14241,82 @@ type AwsXrayEncryptionConfigDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The detailed Azure configuration for a connector.
+type AzureDetail struct {
+
+	// The ARN of the multi-cloud configuration connector used to establish the
+	// connection to Azure.
+	//
+	// This member is required.
+	AWSConfigConnectorArn *string
+
+	// The list of Azure regions being monitored.
+	//
+	// This member is required.
+	AzureRegions []string
+
+	// The scope configuration that defines which Azure resources are monitored.
+	//
+	// This member is required.
+	ScopeConfiguration *AzureScopeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for connecting to an Azure environment.
+type AzureProviderConfiguration struct {
+
+	// The ARN of the multi-cloud configuration connector used to establish the
+	// connection to Azure.
+	//
+	// This member is required.
+	AWSConfigConnectorArn *string
+
+	// The list of Azure regions to monitor.
+	//
+	// This member is required.
+	AzureRegions []string
+
+	// The scope configuration that defines which Azure resources are monitored.
+	//
+	// This member is required.
+	ScopeConfiguration *AzureScopeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The scope configuration for an Azure connector, defining the tenant or
+// subscription scope.
+type AzureScopeConfiguration struct {
+
+	// The type of scope. Valid values are tenant and subscription .
+	//
+	// This member is required.
+	ScopeType ScopeType
+
+	// The list of scope values, such as subscription IDs, when the scope type is
+	// subscription .
+	ScopeValues []string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for updating an Azure connector's scope and regions.
+type AzureUpdateConfiguration struct {
+
+	// The updated list of Azure regions to monitor.
+	//
+	// This member is required.
+	AzureRegions []string
+
+	// The updated scope configuration.
+	//
+	// This member is required.
+	ScopeConfiguration *AzureScopeConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // A finding from a BatchUpdateFindings request that Security Hub CSPM was unable
 // to update.
 type BatchUpdateFindingsUnprocessedFinding struct {
@@ -14697,6 +14860,13 @@ type ConnectorSummary struct {
 	// The description of the connectorV2.
 	Description *string
 
+	// The enablement status of the connector.
+	EnablementStatus EnablementStatus
+
+	// The reason for the current enablement status. Provides additional context when
+	// the connector is in a failed state.
+	EnablementStatusReason *string
+
 	noSmithyDocumentSerde
 }
 
@@ -14763,6 +14933,130 @@ type CriteriaMemberOcsfFindingCriteria struct {
 }
 
 func (*CriteriaMemberOcsfFindingCriteria) isCriteria() {}
+
+// A summary of a CSPM connector.
+type CspmConnectorSummary struct {
+
+	// The Amazon Resource Name (ARN) of the connector.
+	ConnectorArn *string
+
+	// The unique identifier of the connector.
+	ConnectorId *string
+
+	// The ISO 8601 UTC timestamp indicating when the connector was created.
+	CreatedAt *time.Time
+
+	// The service principal that created the connector.
+	CreatedBy *string
+
+	// The description of the connector.
+	Description *string
+
+	// The enablement status of the connector.
+	EnablementStatus CspmEnablementStatus
+
+	// The name of the connector.
+	Name *string
+
+	// A summary of the cloud provider configuration for the connector.
+	ProviderSummary *CspmProviderSummary
+
+	noSmithyDocumentSerde
+}
+
+// Information about the operational status and health of a CSPM connector.
+type CspmHealthCheck struct {
+
+	// The connectivity status of the connector.
+	//
+	// This member is required.
+	ConnectorStatus CspmConnectorStatus
+
+	// The ISO 8601 UTC timestamp indicating when the health status was last checked.
+	//
+	// This member is required.
+	LastCheckedAt *time.Time
+
+	// A list of health issues associated with the connector.
+	Issues []HealthIssue
+
+	// A message describing the reason for the current connector status.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The cloud provider configuration for creating a connector. This is a union type
+// that currently supports Azure.
+//
+// The following types satisfy this interface:
+//
+//	CspmProviderConfigurationMemberAzure
+type CspmProviderConfiguration interface {
+	isCspmProviderConfiguration()
+}
+
+// The Azure provider configuration.
+type CspmProviderConfigurationMemberAzure struct {
+	Value AzureProviderConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*CspmProviderConfigurationMemberAzure) isCspmProviderConfiguration() {}
+
+// The detailed cloud provider configuration for a connector. This is a union type
+// that currently supports Azure.
+//
+// The following types satisfy this interface:
+//
+//	CspmProviderDetailMemberAzure
+type CspmProviderDetail interface {
+	isCspmProviderDetail()
+}
+
+// The Azure provider detail.
+type CspmProviderDetailMemberAzure struct {
+	Value AzureDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*CspmProviderDetailMemberAzure) isCspmProviderDetail() {}
+
+// A summary of the cloud provider configuration for a connector.
+type CspmProviderSummary struct {
+
+	// The connectivity status of the connector.
+	ConnectorStatus CspmConnectorStatus
+
+	// The provider configuration details.
+	ProviderConfiguration CspmProviderDetail
+
+	// The name of the cloud provider.
+	ProviderName CspmConnectorProviderName
+
+	noSmithyDocumentSerde
+}
+
+// The cloud provider configuration for updating a connector. This is a union type
+// that currently supports Azure.
+//
+// The following types satisfy this interface:
+//
+//	CspmProviderUpdateConfigurationMemberAzure
+type CspmProviderUpdateConfiguration interface {
+	isCspmProviderUpdateConfiguration()
+}
+
+// The Azure update configuration.
+type CspmProviderUpdateConfigurationMemberAzure struct {
+	Value AzureUpdateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*CspmProviderUpdateConfigurationMemberAzure) isCspmProviderUpdateConfiguration() {}
 
 // The list of detected instances of sensitive data.
 type CustomDataIdentifiersDetections struct {
@@ -14960,6 +15254,18 @@ type ExternalIntegrationConfiguration struct {
 
 	// The ARN of the connector that establishes the integration.
 	ConnectorArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the status and metadata for an opt-in feature.
+type FeatureDetail struct {
+
+	// The current enablement status of the feature. Valid values: ENABLED | DISABLED .
+	FeatureStatus FeatureStatus
+
+	// The date and time when the feature status was last updated.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -15243,7 +15549,46 @@ type FindingsTrendsFilters struct {
 // A filter for string-based fields in findings trend data.
 type FindingsTrendsStringFilter struct {
 
-	// The name of the findings field to filter on.
+	// The name of the findings field to filter on. You can specify one of the
+	// following fields.
+	//
+	//   - account_id – The Amazon Web Services account ID associated with the finding.
+	//
+	//   - region – The Amazon Web Services Region associated with the finding.
+	//
+	//   - finding_types – The finding types associated with the finding.
+	//
+	//   - finding_status – The status of the finding.
+	//
+	//   - finding_cve_ids – The Common Vulnerabilities and Exposures (CVE) identifiers
+	//   associated with the finding.
+	//
+	//   - finding_compliance_status – The compliance status of the finding.
+	//
+	//   - finding_control_id – The identifier of the security control associated with
+	//   the finding.
+	//
+	//   - finding_class_name – The finding class, such as Compliance Finding .
+	//
+	//   - finding_provider – The name of the product that generated the finding.
+	//
+	//   - finding_activity_name – The activity name associated with the finding.
+	//
+	//   - resource_cloud_providers – The cloud providers of the resources that the
+	//   finding is associated with. Valid values are AWS and Azure .
+	//
+	//   - resource_regions – The Regions of the associated resources. For an Amazon
+	//   Web Services resource, this is the Amazon Web Services Region. For an Azure
+	//   resource, this is the Azure Region, such as eastus .
+	//
+	//   - resource_owner_ids – The identifiers of the accounts that own the associated
+	//   resources. For an Amazon Web Services resource, this is the Amazon Web Services
+	//   account ID. For an Azure resource, this is the Azure subscription ID.
+	//
+	//   - resource_owner_organization_ids – The identifiers of the organizations that
+	//   own the associated resources. For an Amazon Web Services resource, this is the
+	//   Amazon Web Services organization ID. For an Azure resource, this is the Azure
+	//   tenant ID.
 	FieldName FindingsTrendsStringField
 
 	// A string filter for filtering Security Hub CSPM findings.
@@ -15402,7 +15747,27 @@ type HealthCheck struct {
 	// This member is required.
 	LastCheckedAt *time.Time
 
+	// A list of health issues associated with the connector, including error codes
+	// and messages.
+	Issues []HealthIssue
+
 	// The message for the reason of connectorStatus change.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a specific health issue detected for a connector.
+type HealthIssue struct {
+
+	// The error code that identifies the type of health issue.
+	//
+	// This member is required.
+	Code HealthIssueCode
+
+	// A human-readable message that describes the health issue.
+	//
+	// This member is required.
 	Message *string
 
 	noSmithyDocumentSerde
@@ -16790,11 +17155,22 @@ type PropagatingVgwSetDetails struct {
 //
 // The following types satisfy this interface:
 //
+//	ProviderConfigurationMemberAzure
 //	ProviderConfigurationMemberJiraCloud
 //	ProviderConfigurationMemberServiceNow
 type ProviderConfiguration interface {
 	isProviderConfiguration()
 }
+
+// The configuration settings required to establish a CSPM integration with
+// Microsoft Azure.
+type ProviderConfigurationMemberAzure struct {
+	Value AzureProviderConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderConfigurationMemberAzure) isProviderConfiguration() {}
 
 // The configuration settings required to establish an integration with Jira Cloud.
 type ProviderConfigurationMemberJiraCloud struct {
@@ -16819,11 +17195,21 @@ func (*ProviderConfigurationMemberServiceNow) isProviderConfiguration() {}
 //
 // The following types satisfy this interface:
 //
+//	ProviderDetailMemberAzure
 //	ProviderDetailMemberJiraCloud
 //	ProviderDetailMemberServiceNow
 type ProviderDetail interface {
 	isProviderDetail()
 }
+
+// Details about a Microsoft Azure CSPM integration.
+type ProviderDetailMemberAzure struct {
+	Value AzureDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderDetailMemberAzure) isProviderDetail() {}
 
 // Details about a Jira Cloud integration.
 type ProviderDetailMemberJiraCloud struct {
@@ -16849,6 +17235,9 @@ type ProviderSummary struct {
 	// The status for the connectorV2.
 	ConnectorStatus ConnectorStatus
 
+	// The third-party provider detail for a service configuration.
+	ProviderConfiguration ProviderDetail
+
 	// The name of the provider.
 	ProviderName ConnectorProviderName
 
@@ -16859,11 +17248,22 @@ type ProviderSummary struct {
 //
 // The following types satisfy this interface:
 //
+//	ProviderUpdateConfigurationMemberAzure
 //	ProviderUpdateConfigurationMemberJiraCloud
 //	ProviderUpdateConfigurationMemberServiceNow
 type ProviderUpdateConfiguration interface {
 	isProviderUpdateConfiguration()
 }
+
+// The parameters required to update the configuration for a Microsoft Azure CSPM
+// integration.
+type ProviderUpdateConfigurationMemberAzure struct {
+	Value AzureUpdateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderUpdateConfigurationMemberAzure) isProviderUpdateConfiguration() {}
 
 // The parameters required to update the configuration for a Jira Cloud
 // integration.
@@ -17025,8 +17425,14 @@ type Resource struct {
 	// Additional details about the resource related to a finding.
 	Details *ResourceDetails
 
+	// Information about the account and organization that own the resource.
+	Owner *ResourceOwner
+
 	// The canonical Amazon Web Services partition name that the Region is assigned to.
 	Partition Partition
+
+	// The cloud provider that the resource belongs to. Valid values are AWS and Azure .
+	Provider CloudProviderName
 
 	// The canonical Amazon Web Services external Region name where this resource is
 	// located.
@@ -17390,6 +17796,9 @@ type ResourceDetails struct {
 	// Information about the encryption configuration for X-Ray.
 	AwsXrayEncryptionConfig *AwsXrayEncryptionConfigDetails
 
+	// Details about an Azure resource that is related to a finding.
+	AzureResource document.Interface
+
 	//  Details about an external code repository with which you can connect your
 	// Amazon Web Services resources. The connection is established through Amazon
 	// Inspector.
@@ -17452,16 +17861,63 @@ type ResourceGroupByRule struct {
 	noSmithyDocumentSerde
 }
 
+// Additional details about a resource that are specific to its category. For
+// AI/ML resources and their host resources, this structure contains AIDetails .
+type ResourceInfo struct {
+
+	// Details that are specific to self-hosted AI resources and their host resources.
+	AIDetails *AIDetails
+
+	noSmithyDocumentSerde
+}
+
+// Information about the owner of a resource, including the account and
+// organization that the resource belongs to.
+type ResourceOwner struct {
+
+	// Information about the account that owns the resource, for example, an Azure
+	// Subscription or Amazon Web Services Account.
+	Account *ResourceOwnerAccount
+
+	// Information about the organization that owns the resource, for example, an
+	// Azure Tenant.
+	Org *ResourceOwnerOrg
+
+	noSmithyDocumentSerde
+}
+
+// Information about the account that owns a resource, for example, an Azure
+// Subscription or Amazon Web Services Account.
+type ResourceOwnerAccount struct {
+
+	// The unique identifier of the account that owns the resource, for example, Azure
+	// Subscription Id or Amazon Web Services Account Id.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the organization that owns a resource, for example, an Azure
+// Tenant.
+type ResourceOwnerOrg struct {
+
+	// The unique identifier of the organization that owns the resource, for example,
+	// Azure Tenant Id.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides comprehensive details about an Amazon Web Services resource and its
 // associated security findings.
 type ResourceResult struct {
 
-	// The Amazon Web Services account that owns the resource.
+	// The Amazon Web Services account that recorded the resource data in Security Hub.
 	//
 	// This member is required.
 	AccountId *string
 
-	// The Amazon Web Services Region where the resource is located.
+	// The Amazon Web Services Region that recorded the resource data in Security Hub.
 	//
 	// This member is required.
 	Region *string
@@ -17481,11 +17937,30 @@ type ResourceResult struct {
 	// This member is required.
 	ResourceId *string
 
+	// The type of resource.
+	//
+	// This member is required.
+	ResourceType *string
+
+	// The name of the Amazon Web Services account that's associated with the resource.
+	AccountName *string
+
+	// Specifies how the resource was discovered. If the value is Managed , the
+	// resource is natively provided by a cloud service provider. If the value is
+	// SelfHosted , the resource is hosted on customer-managed infrastructure, such as
+	// a compute instance or container image.
+	DiscoveryType DiscoveryType
+
 	// An aggregated view of security findings associated with a resource.
 	FindingsSummary []ResourceFindingsSummary
 
 	// The grouping where the resource belongs.
 	ResourceCategory ResourceCategory
+
+	// The cloud partition where the resource exists. For Amazon Web Services, valid
+	// values include aws , aws-cn , and aws-us-gov . This field isn't returned for
+	// cloud providers that don't use partitions.
+	ResourceCloudPartition *string
 
 	// The time when the resource was created.
 	ResourceCreationTimeDt *string
@@ -17493,14 +17968,39 @@ type ResourceResult struct {
 	// The global identifier used to identify a resource.
 	ResourceGuid *string
 
+	// Additional resource-type-specific details. For self-hosted AI resources and
+	// their host resources, contains an AIDetails structure.
+	ResourceInfo *ResourceInfo
+
 	// The name of the resource.
 	ResourceName *string
 
+	// The identifier of the cloud account that owns the resource. For Amazon Web
+	// Services resources, this is the Amazon Web Services account ID. For Azure
+	// resources, this is the Azure subscription ID.
+	ResourceOwnerAccountId *string
+
+	// The identifier of the cloud organization that owns the resource. For Amazon Web
+	// Services resources, this is the Organizations ID. For Azure resources, this is
+	// the Azure tenant ID.
+	ResourceOwnerOrgId *string
+
+	// The cloud provider where the resource exists. Valid values are AWS and Azure .
+	// This field is always included.
+	ResourceProvider *string
+
+	// The native cloud region where the resource is located. For Amazon Web Services,
+	// this is an Amazon Web Services Region (for example, us-east-1 ). For Azure
+	// resources, this is the Azure region (for example, westus2 ). This field is
+	// always included.
+	ResourceRegion *string
+
+	// The AI/ML sub-grouping of the resource. Present only when ResourceCategory is
+	// AI/ML .
+	ResourceSubCategory ResourceSubCategory
+
 	// The key-value pairs associated with a resource.
 	ResourceTags []ResourceTag
-
-	// The type of resource.
-	ResourceType *string
 
 	noSmithyDocumentSerde
 }
@@ -17706,8 +18206,31 @@ type ResourcesTrendsMetricsResult struct {
 // or account ID.
 type ResourcesTrendsStringFilter struct {
 
-	// The name of the resources field to filter on, such as resourceType, accountId,
-	// or region.
+	// The name of the resources field to filter on. You can specify one of the
+	// following fields.
+	//
+	//   - account_id – The Amazon Web Services account ID that owns the resource.
+	//
+	//   - region – The Amazon Web Services Region of the resource.
+	//
+	//   - resource_type – The type of the resource.
+	//
+	//   - resource_category – The category of the resource.
+	//
+	//   - resource_cloud_provider – The cloud provider of the resource. Valid values
+	//   are AWS and Azure .
+	//
+	//   - resource_region – The Region of the resource. For an Amazon Web Services
+	//   resource, this is the Amazon Web Services Region. For an Azure resource, this is
+	//   the Azure Region, such as eastus .
+	//
+	//   - resource_owner_id – The identifier of the account that owns the resource.
+	//   For an Amazon Web Services resource, this is the Amazon Web Services account ID.
+	//   For an Azure resource, this is the Azure subscription ID.
+	//
+	//   - resource_owner_organization_id – The identifier of the organization that
+	//   owns the resource. For an Amazon Web Services resource, this is the Amazon Web
+	//   Services organization ID. For an Azure resource, this is the Azure tenant ID.
 	FieldName ResourcesTrendsStringField
 
 	// A string filter for filtering Security Hub CSPM findings.
@@ -18155,6 +18678,10 @@ type SecurityControl struct {
 	// and whether it has been customized.
 	Parameters map[string]ParameterConfiguration
 
+	// The cloud provider whose resources the security control evaluates. For example,
+	// AWS or Azure .
+	Provider SecurityControlsProvider
+
 	//  Identifies whether customizable properties of a security control are reflected
 	// in Security Hub CSPM findings. A status of READY indicates that Security Hub
 	// CSPM uses the current control parameter values when running security checks of
@@ -18238,6 +18765,10 @@ type SecurityControlDefinition struct {
 	// the options for customizing it. This object is excluded for a control that
 	// doesn't support custom parameters.
 	ParameterDefinitions map[string]ParameterDefinition
+
+	// The cloud provider whose resources the security control evaluates. For example,
+	// AWS or Azure .
+	Provider SecurityControlsProvider
 
 	noSmithyDocumentSerde
 }
@@ -18746,6 +19277,10 @@ type Standard struct {
 	// The name of the standard.
 	Name *string
 
+	// The cloud provider whose resources the standard evaluates. For example, AWS or
+	// Azure .
+	Provider StandardsProvider
+
 	// The ARN of the standard.
 	StandardsArn *string
 
@@ -19020,6 +19555,10 @@ type StandardsSubscription struct {
 	//
 	// This member is required.
 	StandardsSubscriptionArn *string
+
+	// The cloud provider whose resources the standard evaluates. For example, AWS or
+	// Azure .
+	Provider StandardsProvider
 
 	// Specifies whether you can retrieve information about and configure individual
 	// controls that apply to the standard. Possible values are:
@@ -19849,12 +20388,15 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isConfigurationOptions()        {}
-func (*UnknownUnionMember) isCriteria()                    {}
-func (*UnknownUnionMember) isParameterValue()              {}
-func (*UnknownUnionMember) isPolicy()                      {}
-func (*UnknownUnionMember) isProviderConfiguration()       {}
-func (*UnknownUnionMember) isProviderDetail()              {}
-func (*UnknownUnionMember) isProviderUpdateConfiguration() {}
-func (*UnknownUnionMember) isRecommendationStep()          {}
-func (*UnknownUnionMember) isTarget()                      {}
+func (*UnknownUnionMember) isConfigurationOptions()            {}
+func (*UnknownUnionMember) isCriteria()                        {}
+func (*UnknownUnionMember) isCspmProviderConfiguration()       {}
+func (*UnknownUnionMember) isCspmProviderDetail()              {}
+func (*UnknownUnionMember) isCspmProviderUpdateConfiguration() {}
+func (*UnknownUnionMember) isParameterValue()                  {}
+func (*UnknownUnionMember) isPolicy()                          {}
+func (*UnknownUnionMember) isProviderConfiguration()           {}
+func (*UnknownUnionMember) isProviderDetail()                  {}
+func (*UnknownUnionMember) isProviderUpdateConfiguration()     {}
+func (*UnknownUnionMember) isRecommendationStep()              {}
+func (*UnknownUnionMember) isTarget()                          {}

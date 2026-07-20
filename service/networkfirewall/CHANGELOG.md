@@ -1,3 +1,20 @@
+# v1.63.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.63.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.62.1 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.62.0 (2026-06-30)
+
+* **Feature**: AWS Network Firewall now supports container associations for monitoring ECS and EKS workloads. You can create container associations to dynamically track the IP addresses of running containers in your Amazon ECS and Amazon EKS clusters.
+
 # v1.61.9 (2026-06-29)
 
 * No change notes available for this release.

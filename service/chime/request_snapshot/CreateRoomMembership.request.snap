@@ -1,0 +1,5 @@
+POST /accounts/__AccountId__/rooms/__RoomId__/memberships
+
+Content-Type: application/json
+
+{"MemberId":"__MemberId__","Role":"Administrator"}

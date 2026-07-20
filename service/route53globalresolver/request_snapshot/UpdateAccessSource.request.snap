@@ -1,0 +1,5 @@
+PATCH /access-sources/__AccessSourceId__
+
+Content-Type: application/json
+
+{"cidr":"__Cidr__","ipAddressType":"IPV4","name":"__Name__","protocol":"DO53"}

@@ -1,0 +1,5 @@
+POST /v1/describeservicejob
+
+Content-Type: application/json
+
+{"jobId":"__JobId__"}

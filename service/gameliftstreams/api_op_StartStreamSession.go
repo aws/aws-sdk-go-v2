@@ -217,6 +217,14 @@ type StartStreamSessionInput struct {
 	// the client
 	PerformanceStatsConfiguration *types.PerformanceStatsConfiguration
 
+	// The ARN of an AWS Identity and Access Management (IAM) role that Amazon
+	// GameLift Streams assumes on your behalf during the stream session. The role
+	// grants Amazon GameLift Streams permission to obtain temporary credentials for
+	// your application. The role's trust policy must allow the
+	// gameliftstreams.amazonaws.com service principal to assume it. The role name must
+	// start with GameLiftStreams- .
+	RoleArn *string
+
 	// The maximum duration of a session. Amazon GameLift Streams will automatically
 	// terminate a session after this amount of time has elapsed, regardless of any
 	// existing client connections. Default value is 43200 (12 hours).
@@ -312,6 +320,11 @@ type StartStreamSessionOutput struct {
 
 	// The data transfer protocol in use with the stream session.
 	Protocol types.Protocol
+
+	// The ARN of the AWS Identity and Access Management (IAM) role that Amazon
+	// GameLift Streams assumes on behalf of your application during the stream
+	// session.
+	RoleArn *string
 
 	// The maximum duration of a session. Amazon GameLift Streams will automatically
 	// terminate a session after this amount of time has elapsed, regardless of any

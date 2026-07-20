@@ -1,0 +1,6 @@
+PATCH /restapis/__RestApiId__/resources/__ResourceId__/methods/__HttpMethod__/responses/__StatusCode__
+
+Accept: application/json
+Content-Type: application/json
+
+{"patchOperations":[{"from":"__From__","op":"add","path":"__Path__","value":"__Value__"},{"from":"__From__","op":"add","path":"__Path__","value":"__Value__"}]}

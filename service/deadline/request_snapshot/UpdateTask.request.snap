@@ -1,0 +1,6 @@
+PATCH /2023-10-12/farms/__FarmId__/queues/__QueueId__/jobs/__JobId__/steps/__StepId__/tasks/__TaskId__
+
+Content-Type: application/json
+X-Amz-Client-Token: __ClientToken__
+
+{"targetRunStatus":"READY"}

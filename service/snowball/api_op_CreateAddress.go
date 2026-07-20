@@ -4,7 +4,9 @@ package snowball
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,20 @@ type CreateAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAddressInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAddressRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAddressInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteStruct(schemas.CreateAddressRequest_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateAddressOutput struct {
 
 	// The automatically generated ID for a specific address. You'll use this ID when
@@ -53,13 +69,32 @@ type CreateAddressOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAddressOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAddressResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAddressOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressId != nil {
+		s.WriteString(schemas.CreateAddressResult_AddressId, *v.AddressId)
+	}
+}
+func (v *CreateAddressOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAddressResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAddressResult_AddressId:
+			v.AddressId = new(string)
+			return d.ReadString(schemas.CreateAddressResult_AddressId, v.AddressId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateAddress{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAddress, schemas.CreateAddressRequest, schemas.CreateAddressResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateAddress{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAddress, schemas.CreateAddressRequest, schemas.CreateAddressResult), output: &CreateAddressOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

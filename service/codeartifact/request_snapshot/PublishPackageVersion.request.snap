@@ -1,0 +1,5 @@
+POST /v1/package/version/publish?asset=__AssetName__&domain=__Domain__&domain-owner=__DomainOwner__&format=npm&namespace=__Namespace__&package=__Package__&repository=__Repository__&unfinished=true&version=__PackageVersion__
+
+Content-Type: application/octet-stream
+X-Amz-Content-Sha256: __AssetSHA256__
+

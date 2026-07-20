@@ -1,0 +1,5 @@
+PUT /2017-08-29/policy
+
+Content-Type: application/json
+
+{"policy":{"httpInputs":"ALLOWED","httpsInputs":"ALLOWED","s3Inputs":"ALLOWED"}}

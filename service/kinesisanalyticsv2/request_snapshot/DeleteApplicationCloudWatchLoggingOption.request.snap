@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20180523.DeleteApplicationCloudWatchLoggingOption
+
+{"ApplicationName":"__ApplicationName__","CloudWatchLoggingOptionId":"__CloudWatchLoggingOptionId__","ConditionalToken":"__ConditionalToken__","CurrentApplicationVersionId":1}

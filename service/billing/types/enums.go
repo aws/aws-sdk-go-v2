@@ -2,6 +2,71 @@
 
 package types
 
+type ApplicationType string
+
+// Enum values for ApplicationType
+const (
+	ApplicationTypeBeforeCrossServiceDiscounts ApplicationType = "BEFORE_CROSS_SERVICE_DISCOUNTS"
+	ApplicationTypeAfterDiscounts              ApplicationType = "AFTER_DISCOUNTS"
+)
+
+// Values returns all known values for ApplicationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationType) Values() []ApplicationType {
+	return []ApplicationType{
+		"BEFORE_CROSS_SERVICE_DISCOUNTS",
+		"AFTER_DISCOUNTS",
+	}
+}
+
+type BillingFeature string
+
+// Enum values for BillingFeature
+const (
+	BillingFeatureRiSharing               BillingFeature = "RI_SHARING"
+	BillingFeatureRiSharingHistory        BillingFeature = "RI_SHARING_HISTORY"
+	BillingFeatureCreditSharing           BillingFeature = "CREDIT_SHARING"
+	BillingFeatureCreditSharingHistory    BillingFeature = "CREDIT_SHARING_HISTORY"
+	BillingFeatureCreditLevelSharing      BillingFeature = "CREDIT_LEVEL_SHARING"
+	BillingFeatureBillingAlerts           BillingFeature = "BILLING_ALERTS"
+	BillingFeatureCreditPreferenceOptions BillingFeature = "CREDIT_PREFERENCE_OPTIONS"
+)
+
+// Values returns all known values for BillingFeature. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BillingFeature) Values() []BillingFeature {
+	return []BillingFeature{
+		"RI_SHARING",
+		"RI_SHARING_HISTORY",
+		"CREDIT_SHARING",
+		"CREDIT_SHARING_HISTORY",
+		"CREDIT_LEVEL_SHARING",
+		"BILLING_ALERTS",
+		"CREDIT_PREFERENCE_OPTIONS",
+	}
+}
+
+type BillingFeatureFilterName string
+
+// Enum values for BillingFeatureFilterName
+const (
+	BillingFeatureFilterNamePreferenceKey BillingFeatureFilterName = "PREFERENCE_KEY"
+)
+
+// Values returns all known values for BillingFeatureFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BillingFeatureFilterName) Values() []BillingFeatureFilterName {
+	return []BillingFeatureFilterName{
+		"PREFERENCE_KEY",
+	}
+}
+
 type BillingViewStatus string
 
 // Enum values for BillingViewStatus
@@ -81,6 +146,48 @@ func (BillingViewType) Values() []BillingViewType {
 	}
 }
 
+type CreditSharingType string
+
+// Enum values for CreditSharingType
+const (
+	CreditSharingTypeDefault          CreditSharingType = "DEFAULT"
+	CreditSharingTypeDisabled         CreditSharingType = "DISABLED"
+	CreditSharingTypeCustom           CreditSharingType = "CUSTOM"
+	CreditSharingTypeCostCategoryRule CreditSharingType = "COST_CATEGORY_RULE"
+)
+
+// Values returns all known values for CreditSharingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CreditSharingType) Values() []CreditSharingType {
+	return []CreditSharingType{
+		"DEFAULT",
+		"DISABLED",
+		"CUSTOM",
+		"COST_CATEGORY_RULE",
+	}
+}
+
+type CreditStatus string
+
+// Enum values for CreditStatus
+const (
+	CreditStatusEnabled  CreditStatus = "ENABLED"
+	CreditStatusDisabled CreditStatus = "DISABLED"
+)
+
+// Values returns all known values for CreditStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CreditStatus) Values() []CreditStatus {
+	return []CreditStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type Dimension string
 
 // Enum values for Dimension
@@ -95,6 +202,25 @@ const (
 func (Dimension) Values() []Dimension {
 	return []Dimension{
 		"LINKED_ACCOUNT",
+	}
+}
+
+type PreferenceValue string
+
+// Enum values for PreferenceValue
+const (
+	PreferenceValueEnabled  PreferenceValue = "ENABLED"
+	PreferenceValueDisabled PreferenceValue = "DISABLED"
+)
+
+// Values returns all known values for PreferenceValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreferenceValue) Values() []PreferenceValue {
+	return []PreferenceValue{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

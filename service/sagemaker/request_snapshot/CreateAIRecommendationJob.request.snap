@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateAIRecommendationJob
+
+{"AIRecommendationJobName":"__AIRecommendationJobName__","AIWorkloadConfigIdentifier":"__AIWorkloadConfigIdentifier__","ComputeSpec":{"CapacityReservationConfig":{"CapacityReservationPreference":"capacity-reservations-only","MlReservationArns":["__Member__","__Member__"]},"InstanceTypes":["ml.g5.xlarge","ml.g5.xlarge"]},"InferenceSpecification":{"Framework":"LMI"},"ModelSource":{"S3":{"S3Uri":"__S3Uri__"}},"OptimizeModel":true,"OutputConfig":{"MlflowConfig":{"MlflowExperimentName":"__MlflowExperimentName__","MlflowResourceArn":"__MlflowResourceArn__","MlflowRunName":"__MlflowRunName__"},"ModelPackageGroupIdentifier":"__ModelPackageGroupIdentifier__","S3OutputLocation":"__S3OutputLocation__"},"PerformanceTarget":{"Constraints":[{"Metric":"ttft-ms"},{"Metric":"ttft-ms"}]},"RoleArn":"__RoleArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

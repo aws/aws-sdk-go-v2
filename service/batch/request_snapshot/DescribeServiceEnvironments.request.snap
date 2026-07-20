@@ -1,0 +1,5 @@
+POST /v1/describeserviceenvironments
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","serviceEnvironments":["__Member__","__Member__"]}

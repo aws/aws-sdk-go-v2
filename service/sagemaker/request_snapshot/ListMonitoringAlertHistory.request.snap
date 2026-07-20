@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListMonitoringAlertHistory
+
+{"CreationTimeAfter":946684800,"CreationTimeBefore":946684800,"MaxResults":1,"MonitoringAlertName":"__MonitoringAlertName__","MonitoringScheduleName":"__MonitoringScheduleName__","NextToken":"__NextToken__","SortBy":"CreationTime","SortOrder":"Ascending","StatusEquals":"InAlert"}

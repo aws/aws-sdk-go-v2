@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ReleaseHosts&HostId.1=__Member__&HostId.2=__Member__&Version=2016-11-15

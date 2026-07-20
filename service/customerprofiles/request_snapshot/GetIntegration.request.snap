@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/integrations
+
+Content-Type: application/json
+
+{"Uri":"__Uri__"}

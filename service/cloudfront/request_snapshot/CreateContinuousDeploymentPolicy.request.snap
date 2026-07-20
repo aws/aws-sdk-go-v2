@@ -1,0 +1,5 @@
+POST /2020-05-31/continuous-deployment-policy
+
+Content-Type: application/xml
+
+<ContinuousDeploymentPolicyConfig xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Enabled>true</Enabled><StagingDistributionDnsNames><Items><DnsName>__Member__</DnsName><DnsName>__Member__</DnsName></Items><Quantity>1</Quantity></StagingDistributionDnsNames><TrafficConfig><SingleHeaderConfig><Header>__Header__</Header><Value>__Value__</Value></SingleHeaderConfig><SingleWeightConfig><SessionStickinessConfig><IdleTTL>1</IdleTTL><MaximumTTL>1</MaximumTTL></SessionStickinessConfig><Weight>1</Weight></SingleWeightConfig><Type>SingleWeight</Type></TrafficConfig></ContinuousDeploymentPolicyConfig>

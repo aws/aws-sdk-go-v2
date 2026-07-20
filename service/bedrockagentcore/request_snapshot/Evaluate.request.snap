@@ -1,0 +1,5 @@
+POST /evaluations/evaluate/__EvaluatorId__
+
+Content-Type: application/json
+
+{"evaluationInput":{"sessionSpans":[,]},"evaluationReferenceInputs":[{"assertions":[{"text":"__EvaluationContentMemberText__"},{"text":"__EvaluationContentMemberText__"}],"context":{"spanContext":{"sessionId":"__SessionId__","spanId":"__SpanId__","traceId":"__TraceId__"}},"expectedResponse":{"text":"__EvaluationContentMemberText__"},"expectedTrajectory":{"toolNames":["__Member__","__Member__"]}},{"assertions":[{"text":"__EvaluationContentMemberText__"},{"text":"__EvaluationContentMemberText__"}],"context":{"spanContext":{"sessionId":"__SessionId__","spanId":"__SpanId__","traceId":"__TraceId__"}},"expectedResponse":{"text":"__EvaluationContentMemberText__"},"expectedTrajectory":{"toolNames":["__Member__","__Member__"]}}],"evaluationTarget":{"spanIds":["__Member__","__Member__"]}}

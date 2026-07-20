@@ -13,7 +13,8 @@ import (
 // buyers to make multiple purchases per Amazon Web Services account. Starting June
 // 1, 2026, new SaaS products must use CustomerAWSAccountId (instead of
 // CustomerIdentifier ), LicenseArn (instead of ProductCode ) to support this
-// feature. Existing integrations will continue to work. Review the new integration
+// feature. BatchMeterUsage does not support CustomerIdentifier for new
+// integrations. Existing integrations continue to work. Review the new integration
 // for Concurrent Agreements [here].
 //
 // To post metering records for customers, SaaS applications call BatchMeterUsage ,
@@ -23,7 +24,12 @@ import (
 // meter usage for multiple products, you must make multiple BatchMeterUsage calls.
 //
 // Usage records should be submitted in quick succession following a recorded
-// event. Usage records aren't accepted 6 hours or more after an event.
+// event. Usage records aren't accepted 24 hours or more after an event. At the end
+// of each billing cycle, a 6-hour grace period applies. We accept usage records
+// for the previous billing month until 06:00 UTC on the first day of the next
+// month. For example, you must submit March usage records before 06:00 UTC on
+// April 1. After this grace period, we return a TimestampOutOfBoundsException
+// error.
 //
 // BatchMeterUsage can process up to 25 UsageRecords at a time, and each request
 // must be less than 1 MB in size. Optionally, you can have multiple usage

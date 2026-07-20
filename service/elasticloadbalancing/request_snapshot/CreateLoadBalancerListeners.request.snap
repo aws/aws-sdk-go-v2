@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateLoadBalancerListeners&Listeners.member.1.InstancePort=1&Listeners.member.1.InstanceProtocol=__InstanceProtocol__&Listeners.member.1.LoadBalancerPort=1&Listeners.member.1.Protocol=__Protocol__&Listeners.member.1.SSLCertificateId=__SSLCertificateId__&Listeners.member.2.InstancePort=1&Listeners.member.2.InstanceProtocol=__InstanceProtocol__&Listeners.member.2.LoadBalancerPort=1&Listeners.member.2.Protocol=__Protocol__&Listeners.member.2.SSLCertificateId=__SSLCertificateId__&LoadBalancerName=__LoadBalancerName__&Version=2012-06-01

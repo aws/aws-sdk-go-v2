@@ -1,0 +1,5 @@
+POST /v1/apis/__ApiId__/ApiCaches/update
+
+Content-Type: application/json
+
+{"apiCachingBehavior":"FULL_REQUEST_CACHING","healthMetricsConfig":"ENABLED","ttl":1,"type":"T2_SMALL"}

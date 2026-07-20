@@ -55,7 +55,8 @@ type UpdateExperimentDefinitionInput struct {
 	// Updated launch criteria.
 	LaunchCriteria *string
 
-	// An updated list of treatments.
+	// The updated list of treatments to evaluate during the experiment. Each
+	// treatment defines a distinct variation compared to the control.
 	Treatments []types.TreatmentInput
 
 	noSmithyDocumentSerde
