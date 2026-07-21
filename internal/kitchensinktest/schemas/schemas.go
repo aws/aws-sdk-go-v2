@@ -13,12 +13,23 @@ var GetItem = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetItem",
 }, smithy.ShapeTypeOperation, 0)
 
+var SubscribeEvents = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "SubscribeEvents",
+}, smithy.ShapeTypeOperation, 0)
+
 var _AwsJson1KitchenSink = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
 	Name:      "AwsJson1KitchenSink",
 }, smithy.ShapeTypeService, 0)
 
 var AwsJson1KitchenSink = smithy.NewServiceSchema(_AwsJson1KitchenSink, "2025-03-01")
+
+var Events = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "Events",
+}, smithy.ShapeTypeUnion, 1, &smithytraits.Streaming{})
+var Events_message *smithy.Schema
 
 var Item = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
@@ -29,6 +40,12 @@ var ItemNotFound = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
 	Name:      "ItemNotFound",
 }, smithy.ShapeTypeStructure, 0)
+
+var MessageEvent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "MessageEvent",
+}, smithy.ShapeTypeStructure, 1)
+var MessageEvent_body *smithy.Schema
 
 var GetItemInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
@@ -43,11 +60,28 @@ var GetItemOutput = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetItemOutput",
 }, smithy.ShapeTypeStructure, 0)
 
+var SubscribeEventsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "SubscribeEventsInput",
+}, smithy.ShapeTypeStructure, 0)
+
+var SubscribeEventsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "SubscribeEventsOutput",
+}, smithy.ShapeTypeStructure, 1)
+var SubscribeEventsOutput_events *smithy.Schema
+
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
+	MessageEvent_body = MessageEvent.AddMember("body", smithyprelude.String)
+
+	Events_message = Events.AddMember("message", MessageEvent)
+
 	GetItemInput_item = GetItemInput.AddMember("item", Item)
 
 	GetItemInput_id = GetItemInput.AddMember("id", smithyprelude.String, &smithytraits.ContextParam{})
+
+	SubscribeEventsOutput_events = SubscribeEventsOutput.AddMember("events", Events)
 
 }
