@@ -100,7 +100,7 @@ func (c *Client) addOperationGreetingWithErrorsMiddlewares(stack *middleware.Sta
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {

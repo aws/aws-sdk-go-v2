@@ -137,7 +137,7 @@ func (c *Client) addOperationUpdateChangesetMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addRestJsonContentTypeCustomization(stack); err != nil {

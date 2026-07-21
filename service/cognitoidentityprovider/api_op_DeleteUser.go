@@ -74,7 +74,7 @@ func (c *Client) addOperationDeleteUserMiddlewares(stack *middleware.Stack, opti
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {

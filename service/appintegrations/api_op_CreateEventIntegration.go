@@ -96,7 +96,7 @@ func (c *Client) addOperationCreateEventIntegrationMiddlewares(stack *middleware
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {

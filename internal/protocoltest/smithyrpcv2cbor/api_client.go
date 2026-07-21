@@ -551,15 +551,16 @@ func setResolvedDefaultsMode(o *Options) {
 // NewFromConfig returns a new client from the provided config.
 func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	opts := Options{
-		Region:               cfg.Region,
-		DefaultsMode:         cfg.DefaultsMode,
-		RuntimeEnvironment:   cfg.RuntimeEnvironment,
-		HTTPClient:           cfg.HTTPClient,
-		APIOptions:           cfg.APIOptions,
-		Logger:               cfg.Logger,
-		ClientLogMode:        cfg.ClientLogMode,
-		AppID:                cfg.AppID,
-		AuthSchemePreference: cfg.AuthSchemePreference,
+		Region:                     cfg.Region,
+		DefaultsMode:               cfg.DefaultsMode,
+		RuntimeEnvironment:         cfg.RuntimeEnvironment,
+		HTTPClient:                 cfg.HTTPClient,
+		APIOptions:                 cfg.APIOptions,
+		Logger:                     cfg.Logger,
+		ClientLogMode:              cfg.ClientLogMode,
+		AppID:                      cfg.AppID,
+		DisableClockSkewCorrection: cfg.DisableClockSkewCorrection,
+		AuthSchemePreference:       cfg.AuthSchemePreference,
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
@@ -738,8 +739,10 @@ func addRawResponseToMetadata(stack *middleware.Stack) error {
 	return stack.Deserialize.Add(&awsmiddleware.AddRawResponse{}, middleware.Before)
 }
 
-func addRecordResponseTiming(stack *middleware.Stack) error {
-	return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{}, middleware.After)
+func addRecordResponseTiming(stack *middleware.Stack, options Options) error {
+	return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{
+		DisableClockSkewCorrection: options.DisableClockSkewCorrection,
+	}, middleware.After)
 }
 
 func addSpanRetryLoop(stack *middleware.Stack, options Options) error {
@@ -795,6 +798,7 @@ func addRetry(stack *middleware.Stack, o Options, c *Client) error {
 		m.LogAttempts = o.ClientLogMode.IsRetries()
 		m.OperationMeter = o.MeterProvider.Meter("github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor")
 		m.ClientSkew = c.timeOffset
+		m.DisableClockSkewCorrection = o.DisableClockSkewCorrection
 	})
 	if err := stack.Finalize.Insert(attempt, "ResolveAuthScheme", middleware.Before); err != nil {
 		return err

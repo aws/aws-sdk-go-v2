@@ -47,11 +47,11 @@ func TestWrapAsClockSkew(t *testing.T) {
 		"RequestInTheFuture not skew": {apiErr("RequestInTheFuture"), above, true, 0, false},
 
 		// stale offset healing: |attemptSkew - candidateSkew| > 4min
-		"stale offset heals when clocks realign":    {apiErr("RequestTimeTooSkewed"), 0, true, above, true},
+		"stale offset heals when clocks realign":     {apiErr("RequestTimeTooSkewed"), 0, true, above, true},
 		"stale offset with low candidate not enough": {apiErr("InvalidSignatureException"), below, true, above, false},
-		"stale offset no date header":               {apiErr("RequestTimeTooSkewed"), 0, false, above, false},
-		"stale offset small attempt skew":           {apiErr("RequestTimeTooSkewed"), 0, true, below, false},
-		"stale offset unknown code":                 {apiErr("ValidationException"), 0, true, above, false},
+		"stale offset no date header":                {apiErr("RequestTimeTooSkewed"), 0, false, above, false},
+		"stale offset small attempt skew":            {apiErr("RequestTimeTooSkewed"), 0, true, below, false},
+		"stale offset unknown code":                  {apiErr("ValidationException"), 0, true, above, false},
 	}
 
 	for name, c := range cases {

@@ -105,7 +105,7 @@ func (c *Client) addOperationInputStreamWithInitialRequestMiddlewares(stack *mid
 	if err = addContentSHA256Header(stack); err != nil {
 		return err
 	}
-	if err = addRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

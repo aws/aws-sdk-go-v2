@@ -44,6 +44,11 @@ type Options struct {
 	// clients initial default settings.
 	DefaultsMode aws.DefaultsMode
 
+	// Disables SDK clock skew correction. When set, the SDK will not adjust request
+	// signing timestamps to compensate for clock drift between the client and the
+	// service.
+	DisableClockSkewCorrection bool
+
 	// Whether to disable automatic request compression for supported operations.
 	DisableRequestCompression bool
 

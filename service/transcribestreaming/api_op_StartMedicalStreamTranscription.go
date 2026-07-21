@@ -223,7 +223,7 @@ func (c *Client) addOperationStartMedicalStreamTranscriptionMiddlewares(stack *m
 	if err = addContentSHA256Header(stack); err != nil {
 		return err
 	}
-	if err = addRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = eventstreamapi.AddInitializeStreamWriter(stack); err != nil {

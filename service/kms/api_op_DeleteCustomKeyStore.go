@@ -121,7 +121,7 @@ func (c *Client) addOperationDeleteCustomKeyStoreMiddlewares(stack *middleware.S
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {

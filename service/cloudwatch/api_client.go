@@ -494,6 +494,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		AppID:                       cfg.AppID,
 		DisableRequestCompression:   cfg.DisableRequestCompression,
 		RequestMinCompressSizeBytes: cfg.RequestMinCompressSizeBytes,
+		DisableClockSkewCorrection:  cfg.DisableClockSkewCorrection,
 		AuthSchemePreference:        cfg.AuthSchemePreference,
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
@@ -691,8 +692,10 @@ func addRawResponseToMetadata(stack *middleware.Stack) error {
 	return stack.Deserialize.Add(&awsmiddleware.AddRawResponse{}, middleware.Before)
 }
 
-func addRecordResponseTiming(stack *middleware.Stack) error {
-	return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{}, middleware.After)
+func addRecordResponseTiming(stack *middleware.Stack, options Options) error {
+	return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{
+		DisableClockSkewCorrection: options.DisableClockSkewCorrection,
+	}, middleware.After)
 }
 
 func addSpanRetryLoop(stack *middleware.Stack, options Options) error {
@@ -763,6 +766,7 @@ func addRetry(stack *middleware.Stack, o Options, c *Client) error {
 		m.LogAttempts = o.ClientLogMode.IsRetries()
 		m.OperationMeter = o.MeterProvider.Meter("github.com/aws/aws-sdk-go-v2/service/cloudwatch")
 		m.ClientSkew = c.timeOffset
+		m.DisableClockSkewCorrection = o.DisableClockSkewCorrection
 	})
 	if err := stack.Finalize.Insert(attempt, "ResolveAuthScheme", middleware.Before); err != nil {
 		return err

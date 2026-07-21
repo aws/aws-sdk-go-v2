@@ -175,7 +175,7 @@ func (c *Client) addOperationInvokeAgentRuntimeCommandMiddlewares(stack *middlew
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
