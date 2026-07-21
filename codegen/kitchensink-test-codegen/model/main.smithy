@@ -128,7 +128,7 @@ namespace aws.kitchensinktest
 )
 service AwsJson1KitchenSink {
     version: "2025-03-01",
-    operations: [GetItem],
+    operations: [GetItem, SubscribeEvents],
 }
 
 operation GetItem {
@@ -149,3 +149,26 @@ structure Item {}
 
 @error("client")
 structure ItemNotFound {}
+
+// Event stream (caller-owned) operation: the response body backs an event
+// stream reader and must NOT be closed on the success path.
+operation SubscribeEvents {
+    input: SubscribeEventsInput,
+    output: SubscribeEventsOutput,
+    errors: [ItemNotFound],
+}
+
+structure SubscribeEventsInput {}
+
+structure SubscribeEventsOutput {
+    events: Events,
+}
+
+@streaming
+union Events {
+    message: MessageEvent,
+}
+
+structure MessageEvent {
+    body: String,
+}

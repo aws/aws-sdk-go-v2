@@ -1,11 +1,91 @@
 {
   "version": "1.0",
-  "plugins": {
-    "go-codegen": {
-      "service": "aws.kitchensinktest#AwsJson1KitchenSink",
-      "module": "github.com/aws/aws-sdk-go-v2/internal/kitchensinktest",
-      "moduleVersion": "0.0.1",
-      "generateGoMod": true
+  "projections": {
+    "awsjson": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.kitchensinktest#AwsJson1KitchenSink"]
+          }
+        },
+        {
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.kitchensinktest#AwsJson1KitchenSink",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/kitchensinktest",
+          "moduleVersion": "0.0.1",
+          "generateGoMod": true
+        }
+      }
+    },
+    "awsjsonlegacy": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.kitchensinktest#AwsJson1KitchenSink"]
+          }
+        },
+        {
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.kitchensinktest#AwsJson1KitchenSink",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/kitchensinktestlegacy",
+          "moduleVersion": "0.0.1",
+          "generateGoMod": true,
+          "useLegacySerde": true
+        }
+      }
+    },
+    "restjson": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.kitchensinktestrestjson#RestJson1KitchenSink"]
+          }
+        },
+        {
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.kitchensinktestrestjson#RestJson1KitchenSink",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/kitchensinktestrestjson",
+          "moduleVersion": "0.0.1",
+          "generateGoMod": true
+        }
+      }
+    },
+    "restjsonlegacy": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.kitchensinktestrestjson#RestJson1KitchenSink"]
+          }
+        },
+        {
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.kitchensinktestrestjson#RestJson1KitchenSink",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/kitchensinktestrestjsonlegacy",
+          "moduleVersion": "0.0.1",
+          "generateGoMod": true,
+          "useLegacySerde": true
+        }
+      }
     }
   }
 }
