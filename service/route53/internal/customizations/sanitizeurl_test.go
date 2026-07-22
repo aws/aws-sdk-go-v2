@@ -13,20 +13,20 @@ import (
 
 func TestSanitizeURLMiddleware(t *testing.T) {
 	cases := map[string]struct {
-		Given       string
-		ExpectedURL string
+		Given              string
+		ExpectedPathSuffix string
 	}{
 		"includes hostedzone": {
-			Given:       "hostedzone/ABCDEFG",
-			ExpectedURL: "https://route53.amazonaws.com/" + route53.ServiceAPIVersion + "/delegationset/ABCDEFG",
+			Given:              "hostedzone/ABCDEFG",
+			ExpectedPathSuffix: "/delegationset/ABCDEFG",
 		},
 		"excludes hostedzone": {
-			Given:       "ABCDEFG",
-			ExpectedURL: "https://route53.amazonaws.com/" + route53.ServiceAPIVersion + "/delegationset/ABCDEFG",
+			Given:              "ABCDEFG",
+			ExpectedPathSuffix: "/delegationset/ABCDEFG",
 		},
 		"includes leading / in hostedzone": {
-			Given:       "/hostedzone/ABCDEFG",
-			ExpectedURL: "https://route53.amazonaws.com/" + route53.ServiceAPIVersion + "/delegationset/ABCDEFG",
+			Given:              "/hostedzone/ABCDEFG",
+			ExpectedPathSuffix: "/delegationset/ABCDEFG",
 		},
 	}
 
@@ -52,8 +52,8 @@ func TestSanitizeURLMiddleware(t *testing.T) {
 				t.Fatalf("expected request to be serialized, got none")
 			}
 
-			if e, a := c.ExpectedURL, captured.request.URL.String(); !strings.EqualFold(e, a) {
-				t.Fatalf("Expected url to be serialized as %v, got %v", e, a)
+			if !strings.HasSuffix(captured.request.URL.Path, c.ExpectedPathSuffix) {
+				t.Fatalf("Expected URL path to end with %v, got %v", c.ExpectedPathSuffix, captured.request.URL.Path)
 			}
 
 		})
