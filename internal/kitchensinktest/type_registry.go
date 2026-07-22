@@ -15,9 +15,5 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.ItemNotFound,
 			New:    func() any { return &types.ItemNotFound{} },
 		},
-		"aws.kitchensinktest#MessageEvent": {
-			Schema: schemas.MessageEvent,
-			New:    func() any { return &types.MessageEvent{} },
-		},
 	},
 }
