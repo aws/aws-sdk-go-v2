@@ -18,15 +18,15 @@ func TestSanitizeURLMiddleware(t *testing.T) {
 	}{
 		"includes hostedzone": {
 			Given:       "hostedzone/ABCDEFG",
-			ExpectedURL: "https://route53.amazonaws.com/2013-04-01/delegationset/ABCDEFG",
+			ExpectedURL: "https://route53.amazonaws.com/" + route53.ServiceAPIVersion + "/delegationset/ABCDEFG",
 		},
 		"excludes hostedzone": {
 			Given:       "ABCDEFG",
-			ExpectedURL: "https://route53.amazonaws.com/2013-04-01/delegationset/ABCDEFG",
+			ExpectedURL: "https://route53.amazonaws.com/" + route53.ServiceAPIVersion + "/delegationset/ABCDEFG",
 		},
 		"includes leading / in hostedzone": {
 			Given:       "/hostedzone/ABCDEFG",
-			ExpectedURL: "https://route53.amazonaws.com/2013-04-01/delegationset/ABCDEFG",
+			ExpectedURL: "https://route53.amazonaws.com/" + route53.ServiceAPIVersion + "/delegationset/ABCDEFG",
 		},
 	}
 
