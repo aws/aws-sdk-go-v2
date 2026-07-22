@@ -1,0 +1,7 @@
+200
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+X-Amzn-Query-Mode: true
+
+¿lManagedRulesŸ¿kResourceARNo__ResourceARN__iRuleState¿hRuleNamel__RuleName__eStatei__State__ÿlTemplateNamep__TemplateName__ÿ¿kResourceARNo__ResourceARN__iRuleState¿hRuleNamel__RuleName__eStatei__State__ÿlTemplateNamep__TemplateName__ÿÿiNextTokenm__NextToken__ÿ

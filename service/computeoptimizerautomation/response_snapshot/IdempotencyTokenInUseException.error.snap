@@ -1,0 +1,6 @@
+409
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢gmessagek__Message__f__typexIdempotencyTokenInUseException
