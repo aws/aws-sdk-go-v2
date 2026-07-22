@@ -1,40 +1,22 @@
-package testing
+package kitchensinktestrestjsonlegacy
 
 import (
 	"bytes"
 	"context"
-	"io"
 	"net/http"
 	"net/url"
-	"sync/atomic"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
-	kitchensink "github.com/aws/aws-sdk-go-v2/internal/kitchensinktestrestjson"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// closeTrackingBody wraps a response body and records whether Close was called.
-type closeTrackingBody struct {
-	r      io.Reader
-	closed int32
-}
-
-func (b *closeTrackingBody) Read(p []byte) (int, error) { return b.r.Read(p) }
-
-func (b *closeTrackingBody) Close() error {
-	atomic.AddInt32(&b.closed, 1)
-	return nil
-}
-
-func (b *closeTrackingBody) closeCount() int { return int(atomic.LoadInt32(&b.closed)) }
-
 type eventStreamEndpointResolver struct{}
 
-func (*eventStreamEndpointResolver) ResolveEndpoint(ctx context.Context, params kitchensink.EndpointParameters) (smithyendpoints.Endpoint, error) {
+func (*eventStreamEndpointResolver) ResolveEndpoint(ctx context.Context, params EndpointParameters) (smithyendpoints.Endpoint, error) {
 	return smithyendpoints.Endpoint{URI: url.URL{Scheme: "https", Host: "test.example.com"}}, nil
 }
 
@@ -51,8 +33,6 @@ func encodeEventStream(t *testing.T, msgs []eventstream.Message) []byte {
 	}
 	return buf.Bytes()
 }
-
-func strPtr(s string) *string { return &s }
 
 // TestSubscribeEvents_Close verifies the caller-owned event stream behavior on
 // the success path: the response body is handed to the event stream reader
@@ -80,7 +60,7 @@ func TestSubscribeEvents_Close(t *testing.T) {
 
 	body := &closeTrackingBody{r: bytes.NewReader(payload)}
 
-	svc := kitchensink.New(kitchensink.Options{
+	svc := New(Options{
 		Region: "us-east-1",
 		HTTPClient: smithyhttp.ClientDoFunc(func(req *http.Request) (*http.Response, error) {
 			h := http.Header{}
@@ -102,7 +82,7 @@ func TestSubscribeEvents_Close(t *testing.T) {
 		},
 	})
 
-	resp, err := svc.SubscribeEvents(context.Background(), &kitchensink.SubscribeEventsInput{
+	resp, err := svc.SubscribeEvents(context.Background(), &SubscribeEventsInput{
 		Id: strPtr("some-id"),
 	})
 	if err != nil {

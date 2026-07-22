@@ -1,4 +1,4 @@
-package testing
+package kitchensinktestlegacy
 
 import (
 	"bytes"
@@ -11,7 +11,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
-	kitchensink "github.com/aws/aws-sdk-go-v2/internal/kitchensinktest"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -34,7 +33,7 @@ func (b *closeTrackingBody) closeCount() int { return int(atomic.LoadInt32(&b.cl
 
 type eventStreamEndpointResolver struct{}
 
-func (*eventStreamEndpointResolver) ResolveEndpoint(ctx context.Context, params kitchensink.EndpointParameters) (smithyendpoints.Endpoint, error) {
+func (*eventStreamEndpointResolver) ResolveEndpoint(ctx context.Context, params EndpointParameters) (smithyendpoints.Endpoint, error) {
 	return smithyendpoints.Endpoint{URI: url.URL{Scheme: "https", Host: "test.example.com"}}, nil
 }
 
@@ -78,7 +77,7 @@ func TestSubscribeEvents_Close(t *testing.T) {
 
 	body := &closeTrackingBody{r: bytes.NewReader(payload)}
 
-	svc := kitchensink.New(kitchensink.Options{
+	svc := New(Options{
 		Region: "us-east-1",
 		HTTPClient: smithyhttp.ClientDoFunc(func(req *http.Request) (*http.Response, error) {
 			h := http.Header{}
@@ -100,7 +99,7 @@ func TestSubscribeEvents_Close(t *testing.T) {
 		},
 	})
 
-	resp, err := svc.SubscribeEvents(context.Background(), &kitchensink.SubscribeEventsInput{})
+	resp, err := svc.SubscribeEvents(context.Background(), &SubscribeEventsInput{})
 	if err != nil {
 		t.Fatalf("subscribe events: %v", err)
 	}
