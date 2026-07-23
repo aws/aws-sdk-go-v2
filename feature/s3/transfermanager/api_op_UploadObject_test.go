@@ -1278,7 +1278,7 @@ func TestUploadRetry(t *testing.T) {
 			client := s3.New(s3.Options{
 				Region:       "us-west-2",
 				UsePathStyle: true,
-				HTTPClient: &retryHttpClient{
+				HTTPClient: &retryHTTPClient{
 					failsLeft: failsLeft,
 					t:         t,
 				},
@@ -1301,12 +1301,12 @@ func TestUploadRetry(t *testing.T) {
 	}
 }
 
-type retryHttpClient struct {
+type retryHTTPClient struct {
 	failsLeft []int
 	t         *testing.T
 }
 
-func (c *retryHttpClient) Do(r *http.Request) (*http.Response, error) {
+func (c *retryHTTPClient) Do(r *http.Request) (*http.Response, error) {
 	_, hasUploads := r.URL.Query()["uploads"]
 	switch {
 	case r.Method == "POST" && hasUploads:
