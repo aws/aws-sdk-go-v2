@@ -1,0 +1,26 @@
+{
+  "Item": {
+    "id": {
+      "B": "cmVjaXBlLTAwMQ=="
+    },
+    "name": {
+      "B": "Q2xhc3NpYyBDYXJib25hcmE="
+    },
+    "cuisine": {
+      "B": "SXRhbGlhbg=="
+    },
+    "cook_time": {
+      "N": "20"
+    },
+    "difficulty": {
+      "B": "TWVkaXVt"
+    },
+    "rating": {
+      "N": "4.8"
+    }
+  },
+  "ConsumedCapacity": {
+    "TableName": "pasta-recipes",
+    "CapacityUnits": 1
+  }
+}

@@ -73,6 +73,21 @@
   [modules."internal/protocoltest/nonquerycompatiblerpcv2protocol"]
     no_tag = true
 
+  [modules."service/internal/serdebenchmark/jsonrpc10dataplane"]
+    no_tag = true
+
+  [modules."service/internal/serdebenchmark/querydataplane"]
+    no_tag = true
+
+  [modules."service/internal/serdebenchmark/restjsondataplane"]
+    no_tag = true
+
+  [modules."service/internal/serdebenchmark/restxmldataplane"]
+    no_tag = true
+
+  [modules."service/internal/serdebenchmark/rpcv2cbordataplane"]
+    no_tag = true
+
   [modules."internal/kitchensinktest"]
     no_tag = true
 
