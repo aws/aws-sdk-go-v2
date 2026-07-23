@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"reflect"
@@ -1280,7 +1281,6 @@ func TestUploadRetry(t *testing.T) {
 				UsePathStyle: true,
 				HTTPClient: &retryHTTPClient{
 					failsLeft: failsLeft,
-					t:         t,
 				},
 				Retryer: retry.NewStandard(func(o *retry.StandardOptions) {
 					o.MaxAttempts = retries + 1
@@ -1303,7 +1303,6 @@ func TestUploadRetry(t *testing.T) {
 
 type retryHTTPClient struct {
 	failsLeft []int
-	t         *testing.T
 }
 
 func (c *retryHTTPClient) Do(r *http.Request) (*http.Response, error) {
@@ -1319,7 +1318,7 @@ func (c *retryHTTPClient) Do(r *http.Request) (*http.Response, error) {
 	case r.Method == "PUT":
 		defer func() {
 			if err := r.Body.Close(); err != nil {
-				c.t.Errorf("failed to close response body: %v", err)
+				log.Printf("failed to close response body: %q", err)
 			}
 		}()
 		partStr := r.URL.Query().Get("partNumber")
@@ -1334,7 +1333,13 @@ func (c *retryHTTPClient) Do(r *http.Request) (*http.Response, error) {
 		n, _ := io.Copy(io.Discard, r.Body)
 		if c.failsLeft[part-1] == 0 {
 			if e, a := r.ContentLength, n; e != a {
-				c.t.Errorf("expect content length to be %d, got %d", e, a)
+				errBody := fmt.Sprintf("content length mismatch, expect %d, got %d", e, a)
+				return &http.Response{
+					StatusCode: 400,
+					Status:     "InternalException",
+					Header:     http.Header{"Content-Length": {strconv.Itoa(len(errBody))}},
+					Body:       io.NopCloser(strings.NewReader(errBody)),
+				}, nil
 			}
 			return &http.Response{
 				StatusCode: 200,
