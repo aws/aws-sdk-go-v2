@@ -1318,7 +1318,7 @@ func (c *retryHTTPClient) Do(r *http.Request) (*http.Response, error) {
 	case r.Method == "PUT":
 		defer func() {
 			if err := r.Body.Close(); err != nil {
-				log.Printf("failed to close response body: %q", err)
+				log.Printf("failed to close request body: %q", err)
 			}
 		}()
 		partStr := r.URL.Query().Get("partNumber")
