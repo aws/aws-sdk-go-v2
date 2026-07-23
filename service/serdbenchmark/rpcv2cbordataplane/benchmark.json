@@ -1,0 +1,140 @@
+{
+  "metadata": {
+    "lang": "Go",
+    "software": [
+      [
+        "smithy-go",
+        "tip"
+      ],
+      [
+        "AWS SDK for Go v2",
+        "tip"
+      ]
+    ],
+    "os": "darwin/arm64",
+    "instance": "",
+    "precision": "-9"
+  },
+  "serde_benchmarks": [
+    {
+      "id": "rpcv2Cbor_PutItemRequest_BinaryData_L",
+      "n": 9000,
+      "mean": 26681.398111111142,
+      "p50": 14583,
+      "p90": 64916,
+      "p95": 76416,
+      "p99": 96125,
+      "std_dev": 23214.313239523824
+    },
+    {
+      "id": "rpcv2Cbor_PutItemRequest_ShallowMap_S",
+      "n": 9000,
+      "mean": 1146.5796666666158,
+      "p50": 958,
+      "p90": 1167,
+      "p95": 1292,
+      "p99": 2875,
+      "std_dev": 2125.8209650464446
+    },
+    {
+      "id": "rpcv2Cbor_PutItemRequest_ShallowMap_L",
+      "n": 9000,
+      "mean": 8739.958888888861,
+      "p50": 7625,
+      "p90": 8750,
+      "p95": 10000,
+      "p99": 56916,
+      "std_dev": 7343.733030828921
+    },
+    {
+      "id": "rpcv2Cbor_PutItemRequest_Nested_M",
+      "n": 9000,
+      "mean": 1176.0502222221617,
+      "p50": 1000,
+      "p90": 1208,
+      "p95": 1333,
+      "p99": 2958,
+      "std_dev": 1861.5542229038242
+    },
+    {
+      "id": "rpcv2Cbor_PutItemRequest_Nested_L",
+      "n": 9000,
+      "mean": 2135.372666666517,
+      "p50": 1958,
+      "p90": 2208,
+      "p95": 2500,
+      "p99": 4584,
+      "std_dev": 2031.678146537871
+    },
+    {
+      "id": "rpcv2Cbor_PutItemRequest_MixedItem_L",
+      "n": 9000,
+      "mean": 7675.895111111145,
+      "p50": 6875,
+      "p90": 7667,
+      "p95": 8959,
+      "p99": 42375,
+      "std_dev": 6026.699169925117
+    },
+    {
+      "id": "rpcv2Cbor_PutItemRequest_BinaryData_M",
+      "n": 9000,
+      "mean": 4036.9111111111124,
+      "p50": 2125,
+      "p90": 5167,
+      "p95": 13750,
+      "p99": 41208,
+      "std_dev": 6870.045368610427
+    },
+    {
+      "id": "rpcv2Cbor_PutItemRequest_Baseline",
+      "n": 9000,
+      "mean": 753.5587777778203,
+      "p50": 625,
+      "p90": 791,
+      "p95": 875,
+      "p99": 2042,
+      "std_dev": 1411.8573323780333
+    },
+    {
+      "id": "rpcv2Cbor_PutItemRequest_ShallowMap_M",
+      "n": 9000,
+      "mean": 3124.021777777779,
+      "p50": 2708,
+      "p90": 3083,
+      "p95": 3667,
+      "p99": 16416,
+      "std_dev": 3192.8069021148767
+    },
+    {
+      "id": "rpcv2Cbor_PutItemRequest_MixedItem_S",
+      "n": 9000,
+      "mean": 1124.3148888888124,
+      "p50": 959,
+      "p90": 1125,
+      "p95": 1250,
+      "p99": 3042,
+      "std_dev": 1641.5908698442804
+    },
+    {
+      "id": "rpcv2Cbor_PutItemRequest_MixedItem_M",
+      "n": 9000,
+      "mean": 3011.203333333287,
+      "p50": 2667,
+      "p90": 3000,
+      "p95": 3292,
+      "p99": 7583,
+      "std_dev": 3090.2546360004435
+    },
+    {
+      "id": "rpcv2Cbor_PutItemRequest_BinaryData_S",
+      "n": 9000,
+      "mean": 781.8053333333684,
+      "p50": 666,
+      "p90": 792,
+      "p95": 917,
+      "p99": 2417,
+      "std_dev": 1509.4071065945798
+    }
+  ]
+}

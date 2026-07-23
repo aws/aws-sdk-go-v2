@@ -1,0 +1,90 @@
+{
+  "metadata": {
+    "lang": "Go",
+    "software": [
+      [
+        "smithy-go",
+        "tip"
+      ],
+      [
+        "AWS SDK for Go v2",
+        "tip"
+      ]
+    ],
+    "os": "darwin/arm64",
+    "instance": "",
+    "precision": "-9"
+  },
+  "serde_benchmarks": [
+    {
+      "id": "awsQuery_GetMetricDataRequest_S",
+      "n": 9000,
+      "mean": 6343.437333333312,
+      "p50": 5584,
+      "p90": 7167,
+      "p95": 7583,
+      "p99": 29667,
+      "std_dev": 4868.481592842962
+    },
+    {
+      "id": "awsQuery_GetMetricDataRequest_M",
+      "n": 9000,
+      "mean": 27863.660444444376,
+      "p50": 25750,
+      "p90": 28625,
+      "p95": 32750,
+      "p99": 102875,
+      "std_dev": 12941.92238202964
+    },
+    {
+      "id": "awsQuery_GetMetricDataRequest_L",
+      "n": 9000,
+      "mean": 54651.64255555511,
+      "p50": 49917,
+      "p90": 55042,
+      "p95": 66292,
+      "p99": 189417,
+      "std_dev": 22202.519798885463
+    },
+    {
+      "id": "awsQuery_PutMetricDataRequest_Baseline",
+      "n": 9000,
+      "mean": 899.6695555554788,
+      "p50": 750,
+      "p90": 958,
+      "p95": 1209,
+      "p99": 2417,
+      "std_dev": 1619.3289983219802
+    },
+    {
+      "id": "awsQuery_PutMetricDataRequest_S",
+      "n": 9000,
+      "mean": 3086.7741111111436,
+      "p50": 2792,
+      "p90": 3042,
+      "p95": 3500,
+      "p99": 6625,
+      "std_dev": 2852.7313463448772
+    },
+    {
+      "id": "awsQuery_PutMetricDataRequest_M",
+      "n": 9000,
+      "mean": 22707.08988888921,
+      "p50": 20584,
+      "p90": 22750,
+      "p95": 26791,
+      "p99": 88375,
+      "std_dev": 10813.342154796443
+    },
+    {
+      "id": "awsQuery_PutMetricDataRequest_L",
+      "n": 9000,
+      "mean": 245918.06699999995,
+      "p50": 232667,
+      "p90": 326042,
+      "p95": 382209,
+      "p99": 415292,
+      "std_dev": 49338.611185868336
+    }
+  ]
+}

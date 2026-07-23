@@ -1,0 +1,160 @@
+{
+  "metadata": {
+    "lang": "Go",
+    "software": [
+      [
+        "smithy-go",
+        "tip"
+      ],
+      [
+        "AWS SDK for Go v2",
+        "tip"
+      ]
+    ],
+    "os": "darwin/arm64",
+    "instance": "",
+    "precision": "-9"
+  },
+  "serde_benchmarks": [
+    {
+      "id": "awsJson1_0_GetItemInput_Baseline",
+      "n": 9000,
+      "mean": 764.0843333333509,
+      "p50": 584,
+      "p90": 833,
+      "p95": 1083,
+      "p99": 2333,
+      "std_dev": 1708.5040545261622
+    },
+    {
+      "id": "awsJson1_0_HealthcheckRequest_Example",
+      "n": 9000,
+      "mean": 472.554111111084,
+      "p50": 375,
+      "p90": 500,
+      "p95": 583,
+      "p99": 1583,
+      "std_dev": 1131.7800597901762
+    },
+    {
+      "id": "awsJson1_0_PutItemRequest_Nested_L",
+      "n": 9000,
+      "mean": 2139.9355555554657,
+      "p50": 1916,
+      "p90": 2416,
+      "p95": 2625,
+      "p99": 4459,
+      "std_dev": 2046.0944341903407
+    },
+    {
+      "id": "awsJson1_0_PutItemRequest_MixedItem_S",
+      "n": 9000,
+      "mean": 1249.82799999995,
+      "p50": 1000,
+      "p90": 1375,
+      "p95": 1542,
+      "p99": 3542,
+      "std_dev": 2008.868066895826
+    },
+    {
+      "id": "awsJson1_0_PutItemRequest_MixedItem_L",
+      "n": 9000,
+      "mean": 9914.087777777813,
+      "p50": 8542,
+      "p90": 10500,
+      "p95": 11833,
+      "p99": 59000,
+      "std_dev": 7981.728271277921
+    },
+    {
+      "id": "awsJson1_0_PutItemRequest_BinaryData_S",
+      "n": 9000,
+      "mean": 919.9958888888295,
+      "p50": 750,
+      "p90": 917,
+      "p95": 1125,
+      "p99": 2500,
+      "std_dev": 2130.1602495495213
+    },
+    {
+      "id": "awsJson1_0_PutItemRequest_BinaryData_M",
+      "n": 9000,
+      "mean": 8444.182111111106,
+      "p50": 5542,
+      "p90": 10833,
+      "p95": 27667,
+      "p99": 53583,
+      "std_dev": 9130.883861029732
+    },
+    {
+      "id": "awsJson1_0_PutItemRequest_Baseline",
+      "n": 9000,
+      "mean": 797.5620000000164,
+      "p50": 625,
+      "p90": 833,
+      "p95": 1083,
+      "p99": 2292,
+      "std_dev": 2024.9906137341861
+    },
+    {
+      "id": "awsJson1_0_PutItemRequest_ShallowMap_S",
+      "n": 9000,
+      "mean": 1080.593555555583,
+      "p50": 875,
+      "p90": 1125,
+      "p95": 1334,
+      "p99": 3042,
+      "std_dev": 1925.796578077821
+    },
+    {
+      "id": "awsJson1_0_PutItemRequest_ShallowMap_M",
+      "n": 9000,
+      "mean": 3734.5259999998034,
+      "p50": 3167,
+      "p90": 4083,
+      "p95": 4458,
+      "p99": 21625,
+      "std_dev": 3797.364425257716
+    },
+    {
+      "id": "awsJson1_0_PutItemRequest_MixedItem_M",
+      "n": 9000,
+      "mean": 3589.270555555484,
+      "p50": 3125,
+      "p90": 3541,
+      "p95": 4167,
+      "p99": 18542,
+      "std_dev": 3655.217002316267
+    },
+    {
+      "id": "awsJson1_0_PutItemRequest_BinaryData_L",
+      "n": 9000,
+      "mean": 66337.34466666679,
+      "p50": 46542,
+      "p90": 118958,
+      "p95": 134250,
+      "p99": 161083,
+      "std_dev": 34226.13606817463
+    },
+    {
+      "id": "awsJson1_0_PutItemRequest_ShallowMap_L",
+      "n": 9000,
+      "mean": 11641.838555555873,
+      "p50": 9833,
+      "p90": 11583,
+      "p95": 13334,
+      "p99": 67583,
+      "std_dev": 10093.850829624615
+    },
+    {
+      "id": "awsJson1_0_PutItemRequest_Nested_M",
+      "n": 9000,
+      "mean": 1124.407777777803,
+      "p50": 917,
+      "p90": 1167,
+      "p95": 1334,
+      "p99": 3042,
+      "std_dev": 2140.789403349863
+    }
+  ]
+}

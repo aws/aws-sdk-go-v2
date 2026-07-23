@@ -1,0 +1,70 @@
+{
+  "metadata": {
+    "lang": "Go",
+    "software": [
+      [
+        "smithy-go",
+        "tip"
+      ],
+      [
+        "AWS SDK for Go v2",
+        "tip"
+      ]
+    ],
+    "os": "darwin/arm64",
+    "instance": "",
+    "precision": "-9"
+  },
+  "serde_benchmarks": [
+    {
+      "id": "restXml_CopyObjectRequest_Baseline",
+      "n": 9000,
+      "mean": 4632.713000000021,
+      "p50": 4250,
+      "p90": 5041,
+      "p95": 5500,
+      "p99": 8167,
+      "std_dev": 3582.2519769254845
+    },
+    {
+      "id": "restXml_CopyObjectRequest_M",
+      "n": 9000,
+      "mean": 9967.292888888835,
+      "p50": 9166,
+      "p90": 10375,
+      "p95": 12042,
+      "p99": 36000,
+      "std_dev": 5380.3918862429955
+    },
+    {
+      "id": "restXml_PutObject_S",
+      "n": 9000,
+      "mean": 4063.803000000124,
+      "p50": 3750,
+      "p90": 4125,
+      "p95": 4875,
+      "p99": 8375,
+      "std_dev": 2956.5586227481717
+    },
+    {
+      "id": "restXml_PutObject_M",
+      "n": 9000,
+      "mean": 4207.228555555594,
+      "p50": 3917,
+      "p90": 4375,
+      "p95": 4959,
+      "p99": 7625,
+      "std_dev": 3207.40780234446
+    },
+    {
+      "id": "restXml_PutObject_L",
+      "n": 9000,
+      "mean": 4098.877555555689,
+      "p50": 3792,
+      "p90": 4166,
+      "p95": 4916,
+      "p99": 7750,
+      "std_dev": 2865.165200221955
+    }
+  ]
+}
