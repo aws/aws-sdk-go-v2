@@ -1,6 +1,7 @@
-POST /
+POST /service/EC2WindowsBarleyService/operation/CreateComponent
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: EC2WindowsBarleyService.CreateComponent
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ComponentName":"__ComponentName__","ResourceGroupName":"__ResourceGroupName__","ResourceList":["__Member__","__Member__"]}
+£mComponentNameq__ComponentName__lResourceList‚j__Member__j__Member__qResourceGroupNameu__ResourceGroupName__

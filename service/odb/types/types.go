@@ -2242,6 +2242,11 @@ type CustomerManagedAwsSecretConfigurationInput struct {
 
 	// The type of Oracle Cloud Identifier (OCID) used as the external ID when
 	// assuming the IAM role.
+	//
+	// The valid values depend on the operation. For the CreateAutonomousDatabase
+	// operation, only compartment_ocid and tenant_ocid are allowed. For the
+	// UpdateAutonomousDatabase and CreateAutonomousDatabaseWallet operations,
+	// database_ocid , compartment_ocid , and tenant_ocid are all allowed.
 	ExternalIdType ExternalIdType
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access

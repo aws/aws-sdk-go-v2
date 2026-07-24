@@ -582,6 +582,42 @@ func TestCheckRequestSnapshot_PutAccountSettings(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_PutComplianceInquiryFeedback(t *testing.T) {
+	input := &PutComplianceInquiryFeedbackInput{
+		ComplianceInquiryId: ptr.String("__ComplianceInquiryId__"),
+		QueryIdentifier:     ptr.Int32(1),
+		Rating:              types.FeedbackRating("THUMBS_UP"),
+		ResponseRevisionId:  ptr.Int32(1),
+		ReasonCodes: []types.FeedbackReasonCode{
+			types.FeedbackReasonCode("OTHER"),
+			types.FeedbackReasonCode("OTHER"),
+		},
+		Comment:     ptr.String("__Comment__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutComplianceInquiryFeedback(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutComplianceInquiryFeedback"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_TagResource(t *testing.T) {
 	input := &TagResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -1038,6 +1074,42 @@ func TestUpdateRequestSnapshot_PutAccountSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutAccountSettings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PutComplianceInquiryFeedback(t *testing.T) {
+	input := &PutComplianceInquiryFeedbackInput{
+		ComplianceInquiryId: ptr.String("__ComplianceInquiryId__"),
+		QueryIdentifier:     ptr.Int32(1),
+		Rating:              types.FeedbackRating("THUMBS_UP"),
+		ResponseRevisionId:  ptr.Int32(1),
+		ReasonCodes: []types.FeedbackReasonCode{
+			types.FeedbackReasonCode("OTHER"),
+			types.FeedbackReasonCode("OTHER"),
+		},
+		Comment:     ptr.String("__Comment__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutComplianceInquiryFeedback(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutComplianceInquiryFeedback"); err != nil {
 		t.Fatal(err)
 	}
 }

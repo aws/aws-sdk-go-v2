@@ -157,6 +157,20 @@ type CreateUserPoolInput struct {
 	// users to set up MFA. Amazon Cognito generates MFA prompts in API responses and
 	// in managed login for users who have chosen and configured a preferred MFA
 	// factor.
+	//
+	// The CreateUserPool operation supports only SMS MFA configuration. If you set
+	// MfaConfiguration to either of these values, include an SmsConfiguration in the
+	// same request:
+	//
+	//   - ON – Requires MFA for all users
+	//
+	//   - OPTIONAL – Makes MFA optional for each user
+	//
+	// If you omit SmsConfiguration , the operation returns an
+	// InvalidParameterException . To configure TOTP or email MFA, use the [SetUserPoolMfaConfig] operation.
+	// You can also use SetUserPoolMfaConfig to add MFA factors later.
+	//
+	// [SetUserPoolMfaConfig]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html
 	MfaConfiguration types.UserPoolMfaType
 
 	// The password policy and sign-in policy in the user pool. The password policy

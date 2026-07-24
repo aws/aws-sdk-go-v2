@@ -436,6 +436,36 @@ func TestCheckResponseSnapshot_AdminGetUser(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_AdminGetUserAuthFactors(t *testing.T) {
+	want := &AdminGetUserAuthFactorsOutput{
+		Username:            ptr.String("__Username__"),
+		PreferredMfaSetting: ptr.String("__PreferredMfaSetting__"),
+		UserMFASettingList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConfiguredUserAuthFactors: []types.AuthFactorType{
+			types.AuthFactorType("PASSWORD"),
+			types.AuthFactorType("PASSWORD"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("AdminGetUserAuthFactors.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AdminGetUserAuthFactors(context.Background(), &AdminGetUserAuthFactorsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AdminGetUserAuthFactors.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_AdminInitiateAuth(t *testing.T) {
 	want := &AdminInitiateAuthOutput{
 		ChallengeName: types.ChallengeNameType("SMS_MFA"),

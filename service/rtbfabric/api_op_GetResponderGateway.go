@@ -95,11 +95,6 @@ type GetResponderGatewayOutput struct {
 	// The type of gateway. Valid values are EXTERNAL or INTERNAL .
 	GatewayType types.GatewayType
 
-	// Deprecated. Use 'linksRequestedCount' instead.
-	//
-	// Deprecated: Use linksRequestedCount instead
-	InboundLinksCount *int32
-
 	// The count of requested links waiting for the responder gateway to accept or
 	// reject.
 	LinksRequestedCount *int32

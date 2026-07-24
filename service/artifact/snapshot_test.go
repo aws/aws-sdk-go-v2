@@ -230,6 +230,18 @@ func TestCheckSnapshot_PutAccountSettings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutComplianceInquiryFeedback(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutComplianceInquiryFeedback(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutComplianceInquiryFeedback")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -414,6 +426,18 @@ func TestUpdateSnapshot_PutAccountSettings(t *testing.T) {
 	_, err := svc.PutAccountSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutComplianceInquiryFeedback(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutComplianceInquiryFeedback(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutComplianceInquiryFeedback")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

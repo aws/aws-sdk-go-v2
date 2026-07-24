@@ -1,6 +1,7 @@
-POST /
+POST /service/EC2WindowsBarleyService/operation/DescribeWorkload
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: EC2WindowsBarleyService.DescribeWorkload
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AccountId":"__AccountId__","ComponentName":"__ComponentName__","ResourceGroupName":"__ResourceGroupName__","WorkloadId":"__WorkloadId__"}
+¤qResourceGroupNameu__ResourceGroupName__mComponentNameq__ComponentName__jWorkloadIdn__WorkloadId__iAccountIdm__AccountId__

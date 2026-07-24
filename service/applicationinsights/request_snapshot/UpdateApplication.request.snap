@@ -1,6 +1,7 @@
-POST /
+POST /service/EC2WindowsBarleyService/operation/UpdateApplication
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: EC2WindowsBarleyService.UpdateApplication
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AttachMissingPermission":true,"AutoConfigEnabled":true,"CWEMonitorEnabled":true,"OpsCenterEnabled":true,"OpsItemSNSTopicArn":"__OpsItemSNSTopicArn__","RemoveSNSTopic":true,"ResourceGroupName":"__ResourceGroupName__","SNSNotificationArn":"__SNSNotificationArn__"}
+¨qCWEMonitorEnabledõrOpsItemSNSTopicArnv__OpsItemSNSTopicArn__rSNSNotificationArnv__SNSNotificationArn__nRemoveSNSTopicõqAutoConfigEnabledõwAttachMissingPermissionõqResourceGroupNameu__ResourceGroupName__pOpsCenterEnabledõ

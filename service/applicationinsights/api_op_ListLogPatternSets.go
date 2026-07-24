@@ -67,11 +67,11 @@ type ListLogPatternSetsOutput struct {
 }
 
 func (c *Client) addOperationListLogPatternSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLogPatternSets{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListLogPatternSets{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLogPatternSets{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListLogPatternSets{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -95,6 +95,9 @@ func (c *Client) addOperationListLogPatternSetsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

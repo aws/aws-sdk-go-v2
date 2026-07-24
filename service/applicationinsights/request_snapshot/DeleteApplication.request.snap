@@ -1,6 +1,7 @@
-POST /
+POST /service/EC2WindowsBarleyService/operation/DeleteApplication
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: EC2WindowsBarleyService.DeleteApplication
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ResourceGroupName":"__ResourceGroupName__"}
+¡qResourceGroupNameu__ResourceGroupName__

@@ -1,0 +1,8 @@
+{
+    "id": "0cb3c159-18ea-4f8f-a3de-ca71ce77961d",
+    "type": "feature",
+    "description": "Added the PutComplianceInquiryFeedback API, enabling customers to submit feedback on compliance inquiry responses. Customers can rate responses as helpful or not helpful and provide optional reason codes and comments.",
+    "modules": [
+        "service/artifact"
+    ]
+}

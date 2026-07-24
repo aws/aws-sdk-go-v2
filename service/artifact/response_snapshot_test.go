@@ -656,6 +656,27 @@ func TestCheckResponseSnapshot_PutAccountSettings(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_PutComplianceInquiryFeedback(t *testing.T) {
+	want := &PutComplianceInquiryFeedbackOutput{
+		SubmittedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("PutComplianceInquiryFeedback.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutComplianceInquiryFeedback(context.Background(), &PutComplianceInquiryFeedbackInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutComplianceInquiryFeedback.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
 	status, header, body, err := serdeRespReadSnapshot("TagResource.response")

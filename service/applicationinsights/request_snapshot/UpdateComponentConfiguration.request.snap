@@ -1,6 +1,7 @@
-POST /
+POST /service/EC2WindowsBarleyService/operation/UpdateComponentConfiguration
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: EC2WindowsBarleyService.UpdateComponentConfiguration
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AutoConfigEnabled":true,"ComponentConfiguration":"__ComponentConfiguration__","ComponentName":"__ComponentName__","Monitor":true,"ResourceGroupName":"__ResourceGroupName__","Tier":"CUSTOM"}
+¦mComponentNameq__ComponentName__gMonitorõdTierfCUSTOMvComponentConfigurationx__ComponentConfiguration__qAutoConfigEnabledõqResourceGroupNameu__ResourceGroupName__

@@ -1,6 +1,7 @@
-POST /
+POST /service/EC2WindowsBarleyService/operation/ListApplications
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: EC2WindowsBarleyService.ListApplications
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AccountId":"__AccountId__","MaxResults":1,"NextToken":"__NextToken__"}
+£jMaxResultsiNextTokenm__NextToken__iAccountIdm__AccountId__

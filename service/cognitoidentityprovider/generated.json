@@ -21,6 +21,7 @@
         "api_op_AdminForgetDevice.go",
         "api_op_AdminGetDevice.go",
         "api_op_AdminGetUser.go",
+        "api_op_AdminGetUserAuthFactors.go",
         "api_op_AdminInitiateAuth.go",
         "api_op_AdminLinkProviderForUser.go",
         "api_op_AdminListDevices.go",

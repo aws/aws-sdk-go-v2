@@ -1,6 +1,7 @@
-POST /
+POST /service/EC2WindowsBarleyService/operation/AddWorkload
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: EC2WindowsBarleyService.AddWorkload
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ComponentName":"__ComponentName__","ResourceGroupName":"__ResourceGroupName__","WorkloadConfiguration":{"Configuration":"__Configuration__","Tier":"CUSTOM","WorkloadName":"__WorkloadName__"}}
+£qResourceGroupNameu__ResourceGroupName__mComponentNameq__ComponentName__uWorkloadConfiguration£lWorkloadNamep__WorkloadName__dTierfCUSTOMmConfigurationq__Configuration__

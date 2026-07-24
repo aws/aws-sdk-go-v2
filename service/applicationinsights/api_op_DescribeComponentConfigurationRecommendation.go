@@ -65,11 +65,11 @@ type DescribeComponentConfigurationRecommendationOutput struct {
 }
 
 func (c *Client) addOperationDescribeComponentConfigurationRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeComponentConfigurationRecommendation{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeComponentConfigurationRecommendation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeComponentConfigurationRecommendation{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeComponentConfigurationRecommendation{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -93,6 +93,9 @@ func (c *Client) addOperationDescribeComponentConfigurationRecommendationMiddlew
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

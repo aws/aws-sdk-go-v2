@@ -1,0 +1,8 @@
+{
+    "id": "63a63545-2401-4bc2-be68-8ad51fb2e28f",
+    "type": "feature",
+    "description": "The deprecated inboundLinksCount field has been removed from the GetResponderGateway API response. Customers who previously relied on this field should use linksRequestedCount instead.",
+    "modules": [
+        "service/rtbfabric"
+    ]
+}

@@ -622,6 +622,34 @@ func TestCheckRequestSnapshot_AdminGetUser(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_AdminGetUserAuthFactors(t *testing.T) {
+	input := &AdminGetUserAuthFactorsInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AdminGetUserAuthFactors(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AdminGetUserAuthFactors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_AdminInitiateAuth(t *testing.T) {
 	input := &AdminInitiateAuthInput{
 		UserPoolId: ptr.String("__UserPoolId__"),
@@ -5247,6 +5275,34 @@ func TestUpdateRequestSnapshot_AdminGetUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AdminGetUser"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_AdminGetUserAuthFactors(t *testing.T) {
+	input := &AdminGetUserAuthFactorsInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AdminGetUserAuthFactors(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AdminGetUserAuthFactors"); err != nil {
 		t.Fatal(err)
 	}
 }

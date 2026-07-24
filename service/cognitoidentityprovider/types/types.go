@@ -2041,6 +2041,9 @@ type SignInPolicyType struct {
 	// The sign-in methods that a user pool supports as the first factor. You can
 	// permit users to start authentication with a standard username and password, or
 	// with other one-time password and hardware factors.
+	//
+	// SOFTWARE_TOKEN is not currently supported as a first auth factor. Do not
+	// include this value in AllowedFirstAuthFactors .
 	AllowedFirstAuthFactors []AuthFactorType
 
 	noSmithyDocumentSerde

@@ -1,6 +1,7 @@
-POST /
+POST /service/EC2WindowsBarleyService/operation/DescribeLogPattern
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: EC2WindowsBarleyService.DescribeLogPattern
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AccountId":"__AccountId__","PatternName":"__PatternName__","PatternSetName":"__PatternSetName__","ResourceGroupName":"__ResourceGroupName__"}
+¤qResourceGroupNameu__ResourceGroupName__nPatternSetNamer__PatternSetName__kPatternNameo__PatternName__iAccountIdm__AccountId__

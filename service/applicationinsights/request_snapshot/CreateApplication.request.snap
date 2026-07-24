@@ -1,6 +1,7 @@
-POST /
+POST /service/EC2WindowsBarleyService/operation/CreateApplication
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: EC2WindowsBarleyService.CreateApplication
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AttachMissingPermission":true,"AutoConfigEnabled":true,"AutoCreate":true,"CWEMonitorEnabled":true,"GroupingType":"ACCOUNT_BASED","OpsCenterEnabled":true,"OpsItemSNSTopicArn":"__OpsItemSNSTopicArn__","ResourceGroupName":"__ResourceGroupName__","SNSNotificationArn":"__SNSNotificationArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}
+ªlGroupingTypemACCOUNT_BASEDqCWEMonitorEnabledõrOpsItemSNSTopicArnv__OpsItemSNSTopicArn__dTags‚¢cKeyg__Key__eValuei__Value__¢cKeyg__Key__eValuei__Value__jAutoCreateõwAttachMissingPermissionõqResourceGroupNameu__ResourceGroupName__pOpsCenterEnabledõrSNSNotificationArnv__SNSNotificationArn__qAutoConfigEnabledõ

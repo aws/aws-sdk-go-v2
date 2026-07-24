@@ -1,6 +1,7 @@
-POST /
+POST /service/EC2WindowsBarleyService/operation/ListLogPatterns
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: EC2WindowsBarleyService.ListLogPatterns
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AccountId":"__AccountId__","MaxResults":1,"NextToken":"__NextToken__","PatternSetName":"__PatternSetName__","ResourceGroupName":"__ResourceGroupName__"}
+¥iAccountIdm__AccountId__qResourceGroupNameu__ResourceGroupName__nPatternSetNamer__PatternSetName__jMaxResultsiNextTokenm__NextToken__

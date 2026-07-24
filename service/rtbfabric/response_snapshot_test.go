@@ -1193,7 +1193,6 @@ func TestCheckResponseSnapshot_GetResponderGateway(t *testing.T) {
 		},
 		ActiveLinksCount:        ptr.Int32(1),
 		TotalLinksCount:         ptr.Int32(1),
-		InboundLinksCount:       ptr.Int32(1),
 		LinksRequestedCount:     ptr.Int32(1),
 		GatewayType:             types.GatewayType("EXTERNAL"),
 		ExternalInboundEndpoint: ptr.String("__ExternalInboundEndpoint__"),

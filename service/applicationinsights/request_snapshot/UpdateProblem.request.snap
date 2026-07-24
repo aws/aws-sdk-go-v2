@@ -1,6 +1,7 @@
-POST /
+POST /service/EC2WindowsBarleyService/operation/UpdateProblem
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: EC2WindowsBarleyService.UpdateProblem
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ProblemId":"__ProblemId__","UpdateStatus":"RESOLVED","Visibility":"IGNORED"}
+£iProblemIdm__ProblemId__lUpdateStatushRESOLVEDjVisibilitygIGNORED

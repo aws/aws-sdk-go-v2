@@ -218,6 +218,18 @@ func TestCheckSnapshot_AdminGetUser(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AdminGetUserAuthFactors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AdminGetUserAuthFactors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AdminGetUserAuthFactors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AdminInitiateAuth(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AdminInitiateAuth(context.Background(), nil, func(o *Options) {
@@ -1746,6 +1758,18 @@ func TestUpdateSnapshot_AdminGetUser(t *testing.T) {
 	_, err := svc.AdminGetUser(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AdminGetUser")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AdminGetUserAuthFactors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AdminGetUserAuthFactors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AdminGetUserAuthFactors")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

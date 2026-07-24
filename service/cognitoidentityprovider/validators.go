@@ -250,6 +250,26 @@ func (m *validateOpAdminGetDevice) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAdminGetUserAuthFactors struct {
+}
+
+func (*validateOpAdminGetUserAuthFactors) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAdminGetUserAuthFactors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AdminGetUserAuthFactorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAdminGetUserAuthFactorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAdminGetUser struct {
 }
 
@@ -2598,6 +2618,10 @@ func addOpAdminGetDeviceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAdminGetDevice{}, middleware.After)
 }
 
+func addOpAdminGetUserAuthFactorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAdminGetUserAuthFactors{}, middleware.After)
+}
+
 func addOpAdminGetUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAdminGetUser{}, middleware.After)
 }
@@ -3910,6 +3934,24 @@ func validateOpAdminGetDeviceInput(v *AdminGetDeviceInput) error {
 	if v.DeviceKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceKey"))
 	}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAdminGetUserAuthFactorsInput(v *AdminGetUserAuthFactorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdminGetUserAuthFactorsInput"}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}

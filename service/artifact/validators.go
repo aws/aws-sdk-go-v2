@@ -190,6 +190,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutComplianceInquiryFeedback struct {
+}
+
+func (*validateOpPutComplianceInquiryFeedback) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutComplianceInquiryFeedback) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutComplianceInquiryFeedbackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutComplianceInquiryFeedbackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -264,6 +284,10 @@ func addOpListReportVersionsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutComplianceInquiryFeedbackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutComplianceInquiryFeedback{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -445,6 +469,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutComplianceInquiryFeedbackInput(v *PutComplianceInquiryFeedbackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutComplianceInquiryFeedbackInput"}
+	if v.ComplianceInquiryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComplianceInquiryId"))
+	}
+	if len(v.Rating) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Rating"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

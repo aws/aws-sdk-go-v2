@@ -67,6 +67,46 @@ func (CustomerAgreementState) Values() []CustomerAgreementState {
 	}
 }
 
+type FeedbackRating string
+
+// Enum values for FeedbackRating
+const (
+	FeedbackRatingThumbsUp   FeedbackRating = "THUMBS_UP"
+	FeedbackRatingThumbsDown FeedbackRating = "THUMBS_DOWN"
+)
+
+// Values returns all known values for FeedbackRating. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FeedbackRating) Values() []FeedbackRating {
+	return []FeedbackRating{
+		"THUMBS_UP",
+		"THUMBS_DOWN",
+	}
+}
+
+type FeedbackReasonCode string
+
+// Enum values for FeedbackReasonCode
+const (
+	FeedbackReasonCodeOther              FeedbackReasonCode = "OTHER"
+	FeedbackReasonCodePartialResponse    FeedbackReasonCode = "PARTIAL_RESPONSE"
+	FeedbackReasonCodeIrrelevantResponse FeedbackReasonCode = "IRRELEVANT_RESPONSE"
+)
+
+// Values returns all known values for FeedbackReasonCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FeedbackReasonCode) Values() []FeedbackReasonCode {
+	return []FeedbackReasonCode{
+		"OTHER",
+		"PARTIAL_RESPONSE",
+		"IRRELEVANT_RESPONSE",
+	}
+}
+
 type InputSource string
 
 // Enum values for InputSource

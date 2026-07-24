@@ -185,10 +185,11 @@ type AuthFactorType string
 
 // Enum values for AuthFactorType
 const (
-	AuthFactorTypePassword AuthFactorType = "PASSWORD"
-	AuthFactorTypeEmailOtp AuthFactorType = "EMAIL_OTP"
-	AuthFactorTypeSmsOtp   AuthFactorType = "SMS_OTP"
-	AuthFactorTypeWebAuthn AuthFactorType = "WEB_AUTHN"
+	AuthFactorTypePassword      AuthFactorType = "PASSWORD"
+	AuthFactorTypeEmailOtp      AuthFactorType = "EMAIL_OTP"
+	AuthFactorTypeSmsOtp        AuthFactorType = "SMS_OTP"
+	AuthFactorTypeWebAuthn      AuthFactorType = "WEB_AUTHN"
+	AuthFactorTypeSoftwareToken AuthFactorType = "SOFTWARE_TOKEN"
 )
 
 // Values returns all known values for AuthFactorType. Note that this can be
@@ -201,6 +202,7 @@ func (AuthFactorType) Values() []AuthFactorType {
 		"EMAIL_OTP",
 		"SMS_OTP",
 		"WEB_AUTHN",
+		"SOFTWARE_TOKEN",
 	}
 }
 

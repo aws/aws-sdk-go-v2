@@ -1,6 +1,7 @@
-POST /
+POST /service/EC2WindowsBarleyService/operation/ListTagsForResource
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: EC2WindowsBarleyService.ListTagsForResource
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ResourceARN":"__ResourceARN__"}
+¡kResourceARNo__ResourceARN__

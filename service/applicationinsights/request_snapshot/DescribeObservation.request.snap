@@ -1,6 +1,7 @@
-POST /
+POST /service/EC2WindowsBarleyService/operation/DescribeObservation
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: EC2WindowsBarleyService.DescribeObservation
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"AccountId":"__AccountId__","ObservationId":"__ObservationId__"}
+¢mObservationIdq__ObservationId__iAccountIdm__AccountId__

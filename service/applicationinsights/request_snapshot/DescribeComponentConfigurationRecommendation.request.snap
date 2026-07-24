@@ -1,6 +1,7 @@
-POST /
+POST /service/EC2WindowsBarleyService/operation/DescribeComponentConfigurationRecommendation
 
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: EC2WindowsBarleyService.DescribeComponentConfigurationRecommendation
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
 
-{"ComponentName":"__ComponentName__","RecommendationType":"INFRA_ONLY","ResourceGroupName":"__ResourceGroupName__","Tier":"CUSTOM","WorkloadName":"__WorkloadName__"}
+¥rRecommendationTypejINFRA_ONLYqResourceGroupNameu__ResourceGroupName__mComponentNameq__ComponentName__dTierfCUSTOMlWorkloadNamep__WorkloadName__
