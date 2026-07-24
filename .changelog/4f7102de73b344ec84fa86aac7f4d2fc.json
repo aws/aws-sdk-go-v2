@@ -1,0 +1,8 @@
+{
+    "id": "4f7102de-73b3-44ec-84fa-86aac7f4d2fc",
+    "type": "bugfix",
+    "description": "Forward SSE-C, VersionId, RequestPayer and other fields to HeadObject call when using transfer manager",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}
