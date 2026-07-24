@@ -44,5 +44,6 @@ DeleteObject
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer
+		S3:ProcessResponseFor200Error
 		RecordResponseTiming
 		RequestResponseLogger
