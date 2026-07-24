@@ -1716,6 +1716,7 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<fullname>Amazon CloudWatch Application Insights</fullname>\n         <p> Amazon CloudWatch Application Insights is a service that helps you detect common\n         problems with your applications. It enables you to pinpoint the source of issues in your\n         applications (built with technologies such as Microsoft IIS, .NET, and Microsoft SQL\n         Server), by providing key insights into detected problems.</p>\n         <p>After you onboard your application, CloudWatch Application Insights identifies,\n         recommends, and sets up metrics and logs. It continuously analyzes and correlates your\n         metrics and logs for unusual behavior to surface actionable problems with your application.\n         For example, if your application is slow and unresponsive and leading to HTTP 500 errors in\n         your Application Load Balancer (ALB), Application Insights informs you that a memory\n         pressure problem with your SQL Server database is occurring. It bases this analysis on\n         impactful metrics and log errors. </p>",
                 "smithy.api#title": "Amazon CloudWatch Application Insights",
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {

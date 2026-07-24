@@ -5460,7 +5460,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"
+                "smithy.api#pattern": "^arn:aws[^:]*:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"
             }
         },
         "com.amazonaws.neptunegraph#ListExportTasks": {
@@ -7643,7 +7643,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+                "smithy.api#pattern": "^[a-zA-Z+-=._:/]+$"
             }
         },
         "com.amazonaws.neptunegraph#TagKeyList": {

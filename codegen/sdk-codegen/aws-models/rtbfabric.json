@@ -4334,7 +4334,6 @@
                             "updatedAt": "2024-01-15T10:35:00Z",
                             "activeLinksCount": 2,
                             "totalLinksCount": 5,
-                            "inboundLinksCount": 3,
                             "linksRequestedCount": 3
                         }
                     }
@@ -4569,16 +4568,6 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The total count of links for the responder gateway.</p>"
-                    }
-                },
-                "inboundLinksCount": {
-                    "target": "smithy.api#Integer",
-                    "traits": {
-                        "smithy.api#deprecated": {
-                            "message": "Use linksRequestedCount instead",
-                            "since": "2026-05-11"
-                        },
-                        "smithy.api#documentation": "<p>Deprecated. Use 'linksRequestedCount' instead.</p>"
                     }
                 },
                 "linksRequestedCount": {
