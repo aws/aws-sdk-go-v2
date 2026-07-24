@@ -517,15 +517,15 @@ func TestGetObjectWithContextCanceled(t *testing.T) {
 	}
 }
 
-func TestGetObject_SSECParamsForwardedToHeadObject(t *testing.T) {
+func TestGetObject_HeadObjectForwardsRequiredFields(t *testing.T) {
 	cases := map[string]struct {
 		getObjectType types.GetObjectType
 		partsCount    int32
 	}{
-		"GetObjectRanges forwards SSE-C to HeadObject": {
+		"GetObjectRanges": {
 			getObjectType: types.GetObjectRanges,
 		},
-		"GetObjectParts forwards SSE-C to HeadObject": {
+		"GetObjectParts": {
 			getObjectType: types.GetObjectParts,
 			partsCount:    3,
 		},
@@ -549,6 +549,8 @@ func TestGetObject_SSECParamsForwardedToHeadObject(t *testing.T) {
 			// 32 bytes encoded as base64 — the value SSE-C requires
 			sseKey := base64.StdEncoding.EncodeToString([]byte("01234567890123456789012345678901"))
 			sseKeyMD5 := base64.StdEncoding.EncodeToString([]byte("md5-of-the-key!!"))
+			modifiedSince := time.Date(2026, 1, 1, 0, 0, 0, 0, time.UTC)
+			unmodifiedSince := time.Date(2026, 7, 1, 0, 0, 0, 0, time.UTC)
 
 			input := &GetObjectInput{
 				Bucket:               aws.String("bucket"),
@@ -556,6 +558,11 @@ func TestGetObject_SSECParamsForwardedToHeadObject(t *testing.T) {
 				SSECustomerAlgorithm: aws.String("AES256"),
 				SSECustomerKey:       aws.String(sseKey),
 				SSECustomerKeyMD5:    aws.String(sseKeyMD5),
+				ExpectedBucketOwner:  aws.String("123456789012"),
+				RequestPayer:         "requester",
+				VersionID:            aws.String("version-abc"),
+				IfModifiedSince:      &modifiedSince,
+				IfUnmodifiedSince:    &unmodifiedSince,
 			}
 
 			out, err := mgr.GetObject(context.Background(), input)
@@ -571,6 +578,7 @@ func TestGetObject_SSECParamsForwardedToHeadObject(t *testing.T) {
 
 			headInput := s3Client.HeadObjectInputs[0]
 
+			// SSE-C fields
 			if e, a := "AES256", aws.ToString(headInput.SSECustomerAlgorithm); e != a {
 				t.Errorf("HeadObject SSECustomerAlgorithm: expected %q, got %q", e, a)
 			}
@@ -579,6 +587,29 @@ func TestGetObject_SSECParamsForwardedToHeadObject(t *testing.T) {
 			}
 			if e, a := sseKeyMD5, aws.ToString(headInput.SSECustomerKeyMD5); e != a {
 				t.Errorf("HeadObject SSECustomerKeyMD5: expected %q, got %q", e, a)
+			}
+
+			// Requester-pays
+			if e, a := s3types.RequestPayerRequester, headInput.RequestPayer; e != a {
+				t.Errorf("HeadObject RequestPayer: expected %q, got %q", e, a)
+			}
+
+			// Account safety
+			if e, a := "123456789012", aws.ToString(headInput.ExpectedBucketOwner); e != a {
+				t.Errorf("HeadObject ExpectedBucketOwner: expected %q, got %q", e, a)
+			}
+
+			// Version
+			if e, a := "version-abc", aws.ToString(headInput.VersionId); e != a {
+				t.Errorf("HeadObject VersionId: expected %q, got %q", e, a)
+			}
+
+			// Conditional request fields
+			if headInput.IfModifiedSince == nil || !headInput.IfModifiedSince.Equal(modifiedSince) {
+				t.Errorf("HeadObject IfModifiedSince: expected %v, got %v", modifiedSince, headInput.IfModifiedSince)
+			}
+			if headInput.IfUnmodifiedSince == nil || !headInput.IfUnmodifiedSince.Equal(unmodifiedSince) {
+				t.Errorf("HeadObject IfUnmodifiedSince: expected %v, got %v", unmodifiedSince, headInput.IfUnmodifiedSince)
 			}
 		})
 	}
