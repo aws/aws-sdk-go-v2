@@ -1,3 +1,7 @@
+# v1.15.1 (2026-07-24)
+
+* **Documentation**: Documentation-only update to clarify the operation-specific valid values for the externalIdType field.
+
 # v1.15.0 (2026-07-21)
 
 * **Feature**: Add an option to clients to disable clock skew

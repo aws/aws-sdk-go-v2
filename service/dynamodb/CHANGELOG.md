@@ -1,3 +1,7 @@
+# v1.62.0 (2026-07-24)
+
+* **Feature**: Endpoint test standardizations
+
 # v1.61.0 (2026-07-21)
 
 * **Feature**: Add an option to clients to disable clock skew

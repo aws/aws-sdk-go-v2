@@ -1,8 +1,0 @@
-{
-    "id": "2d292d35-d674-484e-a1b5-5977d649efa8",
-    "type": "documentation",
-    "description": "Documentation-only update to clarify the operation-specific valid values for the externalIdType field.",
-    "modules": [
-        "service/odb"
-    ]
-}

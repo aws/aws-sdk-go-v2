@@ -1,3 +1,7 @@
+# v1.20.0 (2026-07-24)
+
+* **Feature**: Added the PutComplianceInquiryFeedback API, enabling customers to submit feedback on compliance inquiry responses. Customers can rate responses as helpful or not helpful and provide optional reason codes and comments.
+
 # v1.19.0 (2026-07-21)
 
 * **Feature**: Add an option to clients to disable clock skew

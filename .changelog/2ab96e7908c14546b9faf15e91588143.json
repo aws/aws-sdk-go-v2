@@ -1,8 +1,0 @@
-{
-    "id": "2ab96e79-08c1-4546-b9fa-f15e91588143",
-    "type": "feature",
-    "description": "Endpoint test standardizations",
-    "modules": [
-        "service/dynamodb"
-    ]
-}

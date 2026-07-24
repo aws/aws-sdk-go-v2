@@ -1,3 +1,7 @@
+# v1.38.0 (2026-07-24)
+
+* **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+
 # v1.37.0 (2026-07-21)
 
 * **Feature**: Add an option to clients to disable clock skew

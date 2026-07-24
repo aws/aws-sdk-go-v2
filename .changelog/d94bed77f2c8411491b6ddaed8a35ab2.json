@@ -1,8 +1,0 @@
-{
-    "id": "d94bed77-f2c8-4114-91b6-ddaed8a35ab2",
-    "type": "feature",
-    "description": "Update validations for Tag Keys and KMS Key ARNs.",
-    "modules": [
-        "service/neptunegraph"
-    ]
-}

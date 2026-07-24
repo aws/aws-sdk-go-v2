@@ -1,3 +1,7 @@
+# v1.10.0 (2026-07-24)
+
+* **Feature**: The deprecated inboundLinksCount field has been removed from the GetResponderGateway API response. Customers who previously relied on this field should use linksRequestedCount instead.
+
 # v1.9.0 (2026-07-21)
 
 * **Feature**: Add an option to clients to disable clock skew

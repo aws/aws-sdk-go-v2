@@ -1,3 +1,22 @@
+# Release (2026-07-24)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationinsights`: [v1.38.0](service/applicationinsights/CHANGELOG.md#v1380-2026-07-24)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.20.0](service/artifact/CHANGELOG.md#v1200-2026-07-24)
+  * **Feature**: Added the PutComplianceInquiryFeedback API, enabling customers to submit feedback on compliance inquiry responses. Customers can rate responses as helpful or not helpful and provide optional reason codes and comments.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.67.0](service/cognitoidentityprovider/CHANGELOG.md#v1670-2026-07-24)
+  * **Feature**: Amazon Cognito user pools now support the AdminGetUserAuthFactors operation, which lets administrators retrieve the configured authentication factors (such as password, SMS, email, and TOTP) available for a specific user in a user pool.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.62.0](service/dynamodb/CHANGELOG.md#v1620-2026-07-24)
+  * **Feature**: Endpoint test standardizations
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.15.1](service/odb/CHANGELOG.md#v1151-2026-07-24)
+  * **Documentation**: Documentation-only update to clarify the operation-specific valid values for the externalIdType field.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.10.0](service/rtbfabric/CHANGELOG.md#v1100-2026-07-24)
+  * **Feature**: The deprecated inboundLinksCount field has been removed from the GetResponderGateway API response. Customers who previously relied on this field should use linksRequestedCount instead.
+
 # Release (2026-07-23)
 
 ## Module Highlights
