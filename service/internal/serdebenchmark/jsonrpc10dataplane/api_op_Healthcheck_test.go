@@ -47,10 +47,19 @@ func TestSerdClient_Healthcheck_awsAwsjson10(t *testing.T) {
 			protocol := New(Options{}).options.Protocol
 			opSchema := smithy.NewOperationSchema(schemas.Healthcheck, nil, schemas.HealthcheckOutput)
 
+			const (
+				// benchmarkIterations collects enough samples for stable percentile metrics.
+				benchmarkIterations = 10_000
+				// benchmarkWarmupIterations excludes startup effects from measurements.
+				benchmarkWarmupIterations = 1_000
+				// maxBenchmarkDuration prevents a slow case from delaying the benchmark suite.
+				maxBenchmarkDuration = 30 * time.Second
+			)
+
 			timings := make([]time.Duration, 0)
 			benchmarkStart := time.Now()
 
-			for i := 0; i < 10000; i++ {
+			for i := 0; i < benchmarkIterations; i++ {
 				req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 
 				serializeStart := time.Now()
@@ -60,10 +69,10 @@ func TestSerdClient_Healthcheck_awsAwsjson10(t *testing.T) {
 				}
 
 				serializeEnd := time.Now()
-				if i >= 1000 {
+				if i >= benchmarkWarmupIterations {
 					timings = append(timings, serializeEnd.Sub(serializeStart))
 				}
-				if benchmarkStart.Add(30000000000).Before(serializeEnd) {
+				if benchmarkStart.Add(maxBenchmarkDuration).Before(serializeEnd) {
 					break
 				}
 
@@ -124,10 +133,19 @@ func TestDeserdClient_Healthcheck_(t *testing.T) {
 			protocol := New(Options{}).options.Protocol
 			opSchema := smithy.NewOperationSchema(schemas.Healthcheck, nil, schemas.HealthcheckOutput)
 
+			const (
+				// benchmarkIterations collects enough samples for stable percentile metrics.
+				benchmarkIterations = 10_000
+				// benchmarkWarmupIterations excludes startup effects from measurements.
+				benchmarkWarmupIterations = 1_000
+				// maxBenchmarkDuration prevents a slow case from delaying the benchmark suite.
+				maxBenchmarkDuration = 30 * time.Second
+			)
+
 			timings := make([]time.Duration, 0)
 			benchmarkStart := time.Now()
 
-			for i := 0; i < 10000; i++ {
+			for i := 0; i < benchmarkIterations; i++ {
 				resp := &smithyhttp.Response{
 					Response: &http.Response{
 						StatusCode: c.StatusCode,
@@ -144,10 +162,10 @@ func TestDeserdClient_Healthcheck_(t *testing.T) {
 				}
 
 				deserializeEnd := time.Now()
-				if i >= 1000 {
+				if i >= benchmarkWarmupIterations {
 					timings = append(timings, deserializeEnd.Sub(deserializeStart))
 				}
-				if benchmarkStart.Add(30000000000).Before(deserializeEnd) {
+				if benchmarkStart.Add(maxBenchmarkDuration).Before(deserializeEnd) {
 					break
 				}
 
