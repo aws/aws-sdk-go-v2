@@ -86,6 +86,49 @@
           "useLegacySerde": true
         }
       }
+    },
+    "cbor": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.kitchensinktestcbor#RpcV2CborKitchenSink"]
+          }
+        },
+        {
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.kitchensinktestcbor#RpcV2CborKitchenSink",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/kitchensinktestcbor",
+          "moduleVersion": "0.0.1",
+          "generateGoMod": true
+        }
+      }
+    },
+    "cborlegacy": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.kitchensinktestcbor#RpcV2CborKitchenSink"]
+          }
+        },
+        {
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.kitchensinktestcbor#RpcV2CborKitchenSink",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/kitchensinktestcborlegacy",
+          "moduleVersion": "0.0.1",
+          "generateGoMod": true,
+          "useLegacySerde": true
+        }
+      }
     }
   }
 }

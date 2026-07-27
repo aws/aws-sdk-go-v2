@@ -27,7 +27,7 @@ namespace aws.kitchensinktestrestjson
 })
 service RestJson1KitchenSink {
     version: "2025-03-01",
-    operations: [GetResource, GetStreamingResource, SubscribeEvents],
+    operations: [GetResource, GetStreamingResource, SubscribeEvents, PutCompressedData],
 }
 
 // Non-streaming operation: response body should be closed after deserialization.
@@ -106,3 +106,21 @@ union Events {
 structure MessageEvent {
     body: String,
 }
+
+// Request-compression operation: the request body is gzip-compressed by a
+// Serialize-step middleware after serialization. Content length must be
+// computed from the compressed body, so this guards against it being computed
+// (inline in the serializer) from the uncompressed body.
+@requestCompression(encodings: ["gzip"])
+@http(method: "POST", uri: "/compressed")
+operation PutCompressedData {
+    input: PutCompressedDataInput,
+    output: PutCompressedDataOutput,
+    errors: [ResourceNotFound],
+}
+
+structure PutCompressedDataInput {
+    data: String,
+}
+
+structure PutCompressedDataOutput {}
