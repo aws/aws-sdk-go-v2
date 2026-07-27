@@ -3,6 +3,7 @@ package transfermanager
 import (
 	"bytes"
 	"context"
+	"encoding/base64"
 	"fmt"
 	"io"
 	"reflect"
@@ -511,6 +512,104 @@ func TestGetObjectWithContextCanceled(t *testing.T) {
 			}
 			if e, a := "canceled", err.Error(); !strings.Contains(a, e) {
 				t.Errorf("expected error message to contain %q, but did not %q", e, a)
+			}
+		})
+	}
+}
+
+func TestGetObject_HeadObjectForwardsRequiredFields(t *testing.T) {
+	cases := map[string]struct {
+		getObjectType types.GetObjectType
+		partsCount    int32
+	}{
+		"GetObjectRanges": {
+			getObjectType: types.GetObjectRanges,
+		},
+		"GetObjectParts": {
+			getObjectType: types.GetObjectParts,
+			partsCount:    3,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			s3Client, _, _, _, _, _ := s3testing.NewDownloadClient()
+			s3Client.Data = buf2MB
+			s3Client.GetObjectFn = s3testing.RangeGetObjectFn
+			s3Client.PartsCount = c.partsCount
+
+			if c.getObjectType == types.GetObjectParts {
+				s3Client.GetObjectFn = s3testing.PartGetObjectFn
+			}
+
+			mgr := New(s3Client, func(o *Options) {
+				o.GetObjectType = c.getObjectType
+			})
+
+			// 32 bytes encoded as base64 — the value SSE-C requires
+			sseKey := base64.StdEncoding.EncodeToString([]byte("01234567890123456789012345678901"))
+			sseKeyMD5 := base64.StdEncoding.EncodeToString([]byte("md5-of-the-key!!"))
+			modifiedSince := time.Date(2026, 1, 1, 0, 0, 0, 0, time.UTC)
+			unmodifiedSince := time.Date(2026, 7, 1, 0, 0, 0, 0, time.UTC)
+
+			input := &GetObjectInput{
+				Bucket:               aws.String("bucket"),
+				Key:                  aws.String("key"),
+				SSECustomerAlgorithm: aws.String("AES256"),
+				SSECustomerKey:       aws.String(sseKey),
+				SSECustomerKeyMD5:    aws.String(sseKeyMD5),
+				ExpectedBucketOwner:  aws.String("123456789012"),
+				RequestPayer:         "requester",
+				VersionID:            aws.String("version-abc"),
+				IfModifiedSince:      &modifiedSince,
+				IfUnmodifiedSince:    &unmodifiedSince,
+			}
+
+			out, err := mgr.GetObject(context.Background(), input)
+			if err != nil {
+				t.Fatalf("expected no error, got %v", err)
+			}
+			// drain the body
+			io.Copy(io.Discard, out.Body)
+
+			if len(s3Client.HeadObjectInputs) == 0 {
+				t.Fatal("expected HeadObject to be called, but it was not")
+			}
+
+			headInput := s3Client.HeadObjectInputs[0]
+
+			// SSE-C fields
+			if e, a := "AES256", aws.ToString(headInput.SSECustomerAlgorithm); e != a {
+				t.Errorf("HeadObject SSECustomerAlgorithm: expected %q, got %q", e, a)
+			}
+			if e, a := sseKey, aws.ToString(headInput.SSECustomerKey); e != a {
+				t.Errorf("HeadObject SSECustomerKey: expected %q, got %q", e, a)
+			}
+			if e, a := sseKeyMD5, aws.ToString(headInput.SSECustomerKeyMD5); e != a {
+				t.Errorf("HeadObject SSECustomerKeyMD5: expected %q, got %q", e, a)
+			}
+
+			// Requester-pays
+			if e, a := s3types.RequestPayerRequester, headInput.RequestPayer; e != a {
+				t.Errorf("HeadObject RequestPayer: expected %q, got %q", e, a)
+			}
+
+			// Account safety
+			if e, a := "123456789012", aws.ToString(headInput.ExpectedBucketOwner); e != a {
+				t.Errorf("HeadObject ExpectedBucketOwner: expected %q, got %q", e, a)
+			}
+
+			// Version
+			if e, a := "version-abc", aws.ToString(headInput.VersionId); e != a {
+				t.Errorf("HeadObject VersionId: expected %q, got %q", e, a)
+			}
+
+			// Conditional request fields
+			if headInput.IfModifiedSince == nil || !headInput.IfModifiedSince.Equal(modifiedSince) {
+				t.Errorf("HeadObject IfModifiedSince: expected %v, got %v", modifiedSince, headInput.IfModifiedSince)
+			}
+			if headInput.IfUnmodifiedSince == nil || !headInput.IfUnmodifiedSince.Equal(unmodifiedSince) {
+				t.Errorf("HeadObject IfUnmodifiedSince: expected %v, got %v", unmodifiedSince, headInput.IfUnmodifiedSince)
 			}
 		})
 	}

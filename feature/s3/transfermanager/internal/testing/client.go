@@ -40,6 +40,8 @@ type TransferManagerLoggingClient struct {
 
 	GetObjectInvocations int
 
+	HeadObjectInputs []*s3.HeadObjectInput
+
 	RetrievedRanges []string
 	RetrievedParts  []int32
 	Versions        []string
@@ -246,6 +248,8 @@ func (c *TransferManagerLoggingClient) GetObject(ctx context.Context, params *s3
 func (c *TransferManagerLoggingClient) HeadObject(ctx context.Context, params *s3.HeadObjectInput, optFns ...func(*s3.Options)) (*s3.HeadObjectOutput, error) {
 	c.m.Lock()
 	defer c.m.Unlock()
+
+	c.HeadObjectInputs = append(c.HeadObjectInputs, params)
 
 	return &s3.HeadObjectOutput{
 		PartsCount:        aws.Int32(c.PartsCount),
