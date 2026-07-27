@@ -13053,6 +13053,12 @@
                         "smithy.api#documentation": "<p>The location of the task execution logs.</p>"
                     }
                 },
+                "taskHours": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of active work hours consumed by the task during execution.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -13171,6 +13177,12 @@
                     "target": "com.amazonaws.securityagent#TaskExecutionStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The current execution status of the task.</p>"
+                    }
+                },
+                "taskHours": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of active work hours consumed by the task during execution.</p>"
                     }
                 },
                 "createdAt": {

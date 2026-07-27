@@ -21560,6 +21560,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CR.4X"
                     }
+                },
+                "CR8X": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CR.8X"
+                    }
                 }
             }
         }

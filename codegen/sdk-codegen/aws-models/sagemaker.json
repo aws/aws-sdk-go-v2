@@ -1,6 +1,109 @@
 {
     "smithy": "2.0",
     "shapes": {
+        "com.amazonaws.sagemaker#AIAdapterId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A unique identifier for a LoRA adapter within a recommendation job request. The ID must start and end with an alphanumeric character, can contain hyphens between alphanumeric characters, and can be up to 63 characters long. This ID is used as the inference component name when the adapter is deployed.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+            }
+        },
+        "com.amazonaws.sagemaker#AIAdapterModelPackageEntry": {
+            "type": "structure",
+            "members": {
+                "AdapterId": {
+                    "target": "com.amazonaws.sagemaker#AIAdapterId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A unique identifier for the adapter. This ID is used as the inference component name when the adapter is deployed. The ID must start and end with an alphanumeric character, can contain hyphens between alphanumeric characters, and can be up to 63 characters long.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelPackageArn": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model package that contains the LoRA adapter artifacts.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A LoRA adapter entry identified by a model package ARN.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#AIAdapterModelPackageEntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#AIAdapterModelPackageEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#AIAdapterS3Entry": {
+            "type": "structure",
+            "members": {
+                "AdapterId": {
+                    "target": "com.amazonaws.sagemaker#AIAdapterId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A unique identifier for the adapter. This ID is used as the inference component name when the adapter is deployed. The ID must start and end with an alphanumeric character, can contain hyphens between alphanumeric characters, and can be up to 63 characters long.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3Uri": {
+                    "target": "com.amazonaws.sagemaker#S3Uri",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of the directory that contains the LoRA adapter artifacts in PEFT format.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A LoRA adapter entry identified by an Amazon S3 URI.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#AIAdapterS3EntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#AIAdapterS3Entry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#AIAdapterSource": {
+            "type": "union",
+            "members": {
+                "ModelPackageArns": {
+                    "target": "com.amazonaws.sagemaker#AIAdapterModelPackageEntryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of LoRA adapters identified by their model package ARNs. Use this when your adapters were produced by a SageMaker AI fine-tuning workflow that registers model packages.</p>"
+                    }
+                },
+                "S3Uris": {
+                    "target": "com.amazonaws.sagemaker#AIAdapterS3EntryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of LoRA adapters identified by their Amazon S3 URIs. Use this when your adapters are stored as raw artifacts in Amazon S3.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of LoRA adapters for an AI recommendation job. This is a union type — specify exactly one of the members.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#AIBenchmarkEndpoint": {
             "type": "structure",
             "members": {
@@ -472,10 +575,40 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The expected performance metrics for this recommendation.</p>"
                     }
+                },
+                "AdapterDetails": {
+                    "target": "com.amazonaws.sagemaker#AIRecommendationAdapterDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The LoRA adapter details for this recommendation. This field contains both the model package ARNs and Amazon S3 URIs for each adapter, regardless of which form was originally supplied. This field is absent when the job was created without LoRA adapters.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An optimization recommendation generated by an AI recommendation job.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#AIRecommendationAdapterDetails": {
+            "type": "structure",
+            "members": {
+                "ModelPackageArns": {
+                    "target": "com.amazonaws.sagemaker#AIAdapterModelPackageEntryList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The list of LoRA adapters with their model package ARNs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3Uris": {
+                    "target": "com.amazonaws.sagemaker#AIAdapterS3EntryList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The list of LoRA adapters with their Amazon S3 URIs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The per-recommendation LoRA adapter details. Contains both the model package ARNs and Amazon S3 URIs for each adapter, regardless of which form was originally supplied in the request. When the customer supplies only Amazon S3 URIs, Amazon SageMaker AI creates model packages on their behalf.</p>"
             }
         },
         "com.amazonaws.sagemaker#AIRecommendationAllowOptimization": {
@@ -563,6 +696,12 @@
                     "target": "com.amazonaws.sagemaker#EnvironmentMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The environment variables for the deployment.</p>"
+                    }
+                },
+                "MinCpuMemoryRequiredInMb": {
+                    "target": "com.amazonaws.sagemaker#AIRecommendationMinCpuMemoryRequiredInMb",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum host (CPU) memory, in MiB, to reserve per model copy when deploying the recommendation as an Inference Component. This value maps to the base Inference Component's <code>ComputeResourceRequirements$MinMemoryRequiredInMb</code> and is sized so that <code>CopyCountPerInstance</code> copies co-place within the instance's allocatable host memory.</p>"
                     }
                 }
             },
@@ -1053,6 +1192,14 @@
                     "traits": {
                         "smithy.api#enumValue": "cost"
                     }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#AIRecommendationMinCpuMemoryRequiredInMb": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
                 }
             }
         },
@@ -15180,6 +15327,12 @@
                         "smithy.api#documentation": "<p>The compute resource specification for the recommendation job. You can specify up to 3 instance types to consider, and optionally provide capacity reservation configuration.</p>"
                     }
                 },
+                "AdapterSource": {
+                    "target": "com.amazonaws.sagemaker#AIAdapterSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The LoRA adapter source for the recommendation job. Specify either a list of model package ARNs or Amazon S3 URIs for your LoRA adapters. When this parameter is absent, the recommendation job runs without LoRA adapter support.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
@@ -19998,6 +20151,12 @@
                     "target": "com.amazonaws.sagemaker#OptimizationVpcConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>A VPC in Amazon VPC that your optimized model has access to.</p>"
+                    }
+                },
+                "TrainingPlanArns": {
+                    "target": "com.amazonaws.sagemaker#OptimizationJobTrainingPlanArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the training plan to use for this optimization job.</p> <p>When you use reserved capacity from a training plan, the optimization job runs on that reserved capacity instead of on-demand capacity. If you omit this field, the job uses on-demand capacity. Currently, you can specify at most one training plan.</p> <p>For more information about how to reserve GPU capacity for your optimization jobs using Amazon SageMaker Training Plans, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/reserve-capacity-with-training-plans.html\">Reserve capacity with training plans</a>.</p>"
                     }
                 }
             },
@@ -25811,6 +25970,12 @@
                     "target": "com.amazonaws.sagemaker#AIRecommendationComputeSpec",
                     "traits": {
                         "smithy.api#documentation": "<p>The compute resource specification for the recommendation job.</p>"
+                    }
+                },
+                "AdapterSource": {
+                    "target": "com.amazonaws.sagemaker#AIAdapterSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The LoRA adapter source that was specified when the recommendation job was created. This field is absent when the job was created without LoRA adapters.</p>"
                     }
                 },
                 "CreationTime": {
@@ -33086,6 +33251,12 @@
                     "target": "com.amazonaws.sagemaker#OptimizationVpcConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>A VPC in Amazon VPC that your optimized model has access to.</p>"
+                    }
+                },
+                "TrainingPlanArns": {
+                    "target": "com.amazonaws.sagemaker#OptimizationJobTrainingPlanArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the training plan associated with this optimization job. This field appears only when you specified a training plan when you created the job. Optimization jobs that use on-demand capacity don't return this field.</p>"
                     }
                 }
             },
@@ -46710,6 +46881,42 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.g6.48xlarge"
+                    }
+                },
+                "ML_G7E_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7e.2xlarge"
+                    }
+                },
+                "ML_G7E_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7e.4xlarge"
+                    }
+                },
+                "ML_G7E_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7e.8xlarge"
+                    }
+                },
+                "ML_G7E_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7e.12xlarge"
+                    }
+                },
+                "ML_G7E_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7e.24xlarge"
+                    }
+                },
+                "ML_G7E_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7e.48xlarge"
                     }
                 },
                 "ML_P5_4XLARGE": {
@@ -64436,6 +64643,48 @@
                     "traits": {
                         "smithy.api#enumValue": "ml.trn1n.32xlarge"
                     }
+                },
+                "ML_P6_B200_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p6-b200.48xlarge"
+                    }
+                },
+                "ML_G7E_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7e.2xlarge"
+                    }
+                },
+                "ML_G7E_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7e.4xlarge"
+                    }
+                },
+                "ML_G7E_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7e.8xlarge"
+                    }
+                },
+                "ML_G7E_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7e.12xlarge"
+                    }
+                },
+                "ML_G7E_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7e.24xlarge"
+                    }
+                },
+                "ML_G7E_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g7e.48xlarge"
+                    }
                 }
             }
         },
@@ -64655,6 +64904,19 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Summarizes an optimization job by providing some of its key properties.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#OptimizationJobTrainingPlanArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#TrainingPlanArn"
+            },
+            "traits": {
+                "smithy.api#documentation": "Amazon Resource Names (ARNs) of the training plans whose reserved capacity\nbacks the optimization job. Bounded to a single plan for now; the list shape\nallows widening to multiple plans in the future without a breaking\nscalar-to-list change.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.sagemaker#OptimizationModelAcceptEula": {

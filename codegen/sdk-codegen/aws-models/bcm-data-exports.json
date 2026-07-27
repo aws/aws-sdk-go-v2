@@ -874,6 +874,12 @@
                     "traits": {
                         "smithy.api#enumValue": "PARQUET"
                     }
+                },
+                "ZIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZIP"
+                    }
                 }
             }
         },
@@ -1198,6 +1204,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "INTERNAL_FAILURE"
+                    }
+                },
+                "DEPRECATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPRECATED"
                     }
                 }
             }
@@ -2097,7 +2109,7 @@
                 "S3BucketOwner": {
                     "target": "com.amazonaws.bcmdataexports#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Account ID that owns the S3 bucket used as the destination for the data export.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the S3 bucket used as the destination for the data export.</p>"
                     }
                 },
                 "S3Prefix": {

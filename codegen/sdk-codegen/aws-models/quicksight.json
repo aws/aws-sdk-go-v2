@@ -9077,7 +9077,16 @@
                     "traits": {
                         "smithy.api#enumValue": "DENY"
                     }
+                },
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The permission state of a capability in a custom permissions profile. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DENY</code> – Amazon Quick denies this capability for users assigned to the profile.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALLOW</code> – Amazon Quick grants this capability to users assigned to the profile. This value is only relevant when governance is enabled for the capability's category. Without governance, the default effect is always <code>ALLOW</code>. In a governed category, this value overrides the category-level deny-by-default behavior for that capability only.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.quicksight#CapacityBytesRangeFilter": {
@@ -12893,6 +12902,12 @@
                     "target": "com.amazonaws.quicksight#Capabilities",
                     "traits": {
                         "smithy.api#documentation": "<p>A set of actions to include in the custom permissions profile.</p>"
+                    }
+                },
+                "Governance": {
+                    "target": "com.amazonaws.quicksight#Governance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The governance configuration for the custom permissions profile. When governance controls are defined for a category, any capabilities in that category not explicitly set to <code>ALLOW</code> in <code>Capabilities</code> are denied. Even newly added capabilities in the category are implicitly disabled when Amazon Quick releases them.</p>"
                     }
                 },
                 "Tags": {
@@ -16774,6 +16789,12 @@
                     "target": "com.amazonaws.quicksight#Capabilities",
                     "traits": {
                         "smithy.api#documentation": "<p>A set of actions in the custom permissions profile.</p>"
+                    }
+                },
+                "Governance": {
+                    "target": "com.amazonaws.quicksight#Governance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The governance configuration for the custom permissions profile. When you enable governance for a category, Amazon Quick denies access to any current or new capability in that category unless you explicitly set that capability to <code>ALLOW</code> in <code>Capabilities</code>.</p>"
                     }
                 }
             },
@@ -21823,6 +21844,35 @@
                     "traits": {
                         "smithy.api#enumValue": "VARP"
                     }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DefaultCategoryEffect": {
+            "type": "enum",
+            "members": {
+                "DENY_BY_DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENY_BY_DEFAULT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The default effect that Amazon Quick applies to capabilities in a governed category when you do not explicitly list those capabilities in <code>Capabilities</code>. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DENY_BY_DEFAULT</code> – Amazon Quick denies any capability access in the given category that the profile does not explicitly set to <code>ALLOW</code>.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.quicksight#DefaultCategoryEffectsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.quicksight#GovernanceCategoryName"
+            },
+            "value": {
+                "target": "com.amazonaws.quicksight#DefaultCategoryEffect"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
                 }
             }
         },
@@ -38986,6 +39036,30 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The connection parameters for a Google Drive data source. Provide these parameters in the <code>DataSourceParameters</code> object when you create or update a data source that uses Google Drive.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#Governance": {
+            "type": "structure",
+            "members": {
+                "DefaultCategoryEffects": {
+                    "target": "com.amazonaws.quicksight#DefaultCategoryEffectsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of <code>DefaultCategoryEffects</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the governance configuration for a custom permissions profile. When governance controls are defined for a category, any capabilities in that category not explicitly set to <code>ALLOW</code> in <code>Capabilities</code> are denied. Even newly added capabilities in the category are implicitly disabled when Amazon Quick releases them.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GovernanceCategoryName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of a governance category. A governance category groups related capabilities so that you can apply a default effect to all capabilities in the category at once. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AI</code> – Capabilities related to Amazon Quick AI features.</p>\n            </li>\n         </ul>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
             }
         },
         "com.amazonaws.quicksight#GradientColor": {
@@ -73973,6 +74047,12 @@
                     "target": "com.amazonaws.quicksight#Capabilities",
                     "traits": {
                         "smithy.api#documentation": "<p>A set of actions to include in the custom permissions profile.</p>"
+                    }
+                },
+                "Governance": {
+                    "target": "com.amazonaws.quicksight#Governance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The governance configuration for the custom permissions profile. The <code>UpdateCustomPermissions</code> operation replaces all existing <code>Capabilities</code> and <code>Governance</code> values. If you omit this parameter, Amazon Quick removes governance from the profile and the existing custom permission behavior applies.</p>"
                     }
                 }
             },
