@@ -68,6 +68,11 @@ type CreateAIRecommendationJobInput struct {
 	// This member is required.
 	RoleArn *string
 
+	// The LoRA adapter source for the recommendation job. Specify either a list of
+	// model package ARNs or Amazon S3 URIs for your LoRA adapters. When this parameter
+	// is absent, the recommendation job runs without LoRA adapter support.
+	AdapterSource types.AIAdapterSource
+
 	// The compute resource specification for the recommendation job. You can specify
 	// up to 3 instance types to consider, and optionally provide capacity reservation
 	// configuration.

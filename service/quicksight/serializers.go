@@ -1362,6 +1362,13 @@ func awsRestjson1_serializeOpDocumentCreateCustomPermissionsInput(v *CreateCusto
 		ok.String(*v.CustomPermissionsName)
 	}
 
+	if v.Governance != nil {
+		ok := object.Key("Governance")
+		if err := awsRestjson1_serializeDocumentGovernance(v.Governance, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -21193,6 +21200,13 @@ func awsRestjson1_serializeOpDocumentUpdateCustomPermissionsInput(v *UpdateCusto
 		}
 	}
 
+	if v.Governance != nil {
+		ok := object.Key("Governance")
+		if err := awsRestjson1_serializeDocumentGovernance(v.Governance, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -37153,6 +37167,17 @@ func awsRestjson1_serializeDocumentDecimalValueWhenUnsetConfiguration(v *types.D
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDefaultCategoryEffectsMap(v map[string]types.DefaultCategoryEffect, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(string(v[key]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDefaultDateTimePickerControlOptions(v *types.DefaultDateTimePickerControlOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -41749,6 +41774,20 @@ func awsRestjson1_serializeDocumentGoogleDriveParameters(v *types.GoogleDrivePar
 	if len(v.AuthType) > 0 {
 		ok := object.Key("AuthType")
 		ok.String(string(v.AuthType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGovernance(v *types.Governance, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultCategoryEffects != nil {
+		ok := object.Key("DefaultCategoryEffects")
+		if err := awsRestjson1_serializeDocumentDefaultCategoryEffectsMap(v.DefaultCategoryEffects, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

@@ -682,6 +682,36 @@ func TestCheckRequestSnapshot_BatchGetDataQualityResult(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_BatchGetDataQualityRulesetEvaluationRun(t *testing.T) {
+	input := &BatchGetDataQualityRulesetEvaluationRunInput{
+		RunIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchGetDataQualityRulesetEvaluationRun(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchGetDataQualityRulesetEvaluationRun"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_BatchGetDevEndpoints(t *testing.T) {
 	input := &BatchGetDevEndpointsInput{
 		DevEndpointNames: []string{
@@ -10594,6 +10624,9 @@ func TestCheckRequestSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.T
 		},
 		NextToken:  ptr.String("__NextToken__"),
 		MaxResults: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -12860,6 +12893,9 @@ func TestCheckRequestSnapshot_StartDataQualityRuleRecommendationRun(t *testing.T
 		CreatedRulesetName:               ptr.String("__CreatedRulesetName__"),
 		DataQualitySecurityConfiguration: ptr.String("__DataQualitySecurityConfiguration__"),
 		ClientToken:                      ptr.String("__ClientToken__"),
+		AdditionalRunOptions: &types.DataQualityRuleRecommendationRunAdditionalRunOptions{
+			CustomLogGroupPrefix: ptr.String("__CustomLogGroupPrefix__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -12916,6 +12952,54 @@ func TestCheckRequestSnapshot_StartDataQualityRulesetEvaluationRun(t *testing.T)
 			ResultsS3Prefix:               ptr.String("__ResultsS3Prefix__"),
 			CompositeRuleEvaluationMethod: types.DQCompositeRuleEvaluationMethod("COLUMN"),
 			CustomLogGroupPrefix:          ptr.String("__CustomLogGroupPrefix__"),
+			RowLevelResults: &types.RowLevelResultsOptions{
+				MaxRowsToWrite: ptr.Int32(1),
+				ResultType:     types.ResultTypeEnum("ALL"),
+				CatalogTableConfig: &types.CatalogTableConfigOptions{
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					S3Location:   ptr.String("__S3Location__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+				},
+			},
+			ProfilingResults: &types.ProfilingResultsOptions{
+				WriteProfilingResultsEnabled: ptr.Bool(true),
+				CatalogTableConfig: &types.CatalogTableConfigOptions{
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					S3Location:   ptr.String("__S3Location__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+				},
+				DistributionResults: &types.DistributionResultsOptions{
+					WriteDistributionResultsEnabled: ptr.Bool(true),
+					CatalogTableConfig: &types.CatalogTableConfigOptions{
+						DatabaseName: ptr.String("__DatabaseName__"),
+						TableName:    ptr.String("__TableName__"),
+						S3Location:   ptr.String("__S3Location__"),
+						CatalogId:    ptr.String("__CatalogId__"),
+					},
+				},
+			},
+			ObservationScope: types.ObservationConfiguration("ALL"),
+			ObservationMode:  types.ObservationMode("SCHEDULED"),
+			DataQualityRuleResults: &types.DataQualityRuleResultsOptions{
+				WriteDataQualityRuleResultsEnabled: ptr.Bool(true),
+				CatalogTableConfig: &types.CatalogTableConfigOptions{
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					S3Location:   ptr.String("__S3Location__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+				},
+			},
+			ObservationResults: &types.ObservationResultsOptions{
+				WriteObservationResultsEnabled: ptr.Bool(true),
+				CatalogTableConfig: &types.CatalogTableConfigOptions{
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					S3Location:   ptr.String("__S3Location__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+				},
+			},
 		},
 		RulesetNames: []string{
 			"__Member__",
@@ -18960,6 +19044,36 @@ func TestUpdateRequestSnapshot_BatchGetDataQualityResult(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchGetDataQualityResult"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_BatchGetDataQualityRulesetEvaluationRun(t *testing.T) {
+	input := &BatchGetDataQualityRulesetEvaluationRunInput{
+		RunIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchGetDataQualityRulesetEvaluationRun(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchGetDataQualityRulesetEvaluationRun"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -28876,6 +28990,9 @@ func TestUpdateRequestSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.
 		},
 		NextToken:  ptr.String("__NextToken__"),
 		MaxResults: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -31142,6 +31259,9 @@ func TestUpdateRequestSnapshot_StartDataQualityRuleRecommendationRun(t *testing.
 		CreatedRulesetName:               ptr.String("__CreatedRulesetName__"),
 		DataQualitySecurityConfiguration: ptr.String("__DataQualitySecurityConfiguration__"),
 		ClientToken:                      ptr.String("__ClientToken__"),
+		AdditionalRunOptions: &types.DataQualityRuleRecommendationRunAdditionalRunOptions{
+			CustomLogGroupPrefix: ptr.String("__CustomLogGroupPrefix__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -31198,6 +31318,54 @@ func TestUpdateRequestSnapshot_StartDataQualityRulesetEvaluationRun(t *testing.T
 			ResultsS3Prefix:               ptr.String("__ResultsS3Prefix__"),
 			CompositeRuleEvaluationMethod: types.DQCompositeRuleEvaluationMethod("COLUMN"),
 			CustomLogGroupPrefix:          ptr.String("__CustomLogGroupPrefix__"),
+			RowLevelResults: &types.RowLevelResultsOptions{
+				MaxRowsToWrite: ptr.Int32(1),
+				ResultType:     types.ResultTypeEnum("ALL"),
+				CatalogTableConfig: &types.CatalogTableConfigOptions{
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					S3Location:   ptr.String("__S3Location__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+				},
+			},
+			ProfilingResults: &types.ProfilingResultsOptions{
+				WriteProfilingResultsEnabled: ptr.Bool(true),
+				CatalogTableConfig: &types.CatalogTableConfigOptions{
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					S3Location:   ptr.String("__S3Location__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+				},
+				DistributionResults: &types.DistributionResultsOptions{
+					WriteDistributionResultsEnabled: ptr.Bool(true),
+					CatalogTableConfig: &types.CatalogTableConfigOptions{
+						DatabaseName: ptr.String("__DatabaseName__"),
+						TableName:    ptr.String("__TableName__"),
+						S3Location:   ptr.String("__S3Location__"),
+						CatalogId:    ptr.String("__CatalogId__"),
+					},
+				},
+			},
+			ObservationScope: types.ObservationConfiguration("ALL"),
+			ObservationMode:  types.ObservationMode("SCHEDULED"),
+			DataQualityRuleResults: &types.DataQualityRuleResultsOptions{
+				WriteDataQualityRuleResultsEnabled: ptr.Bool(true),
+				CatalogTableConfig: &types.CatalogTableConfigOptions{
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					S3Location:   ptr.String("__S3Location__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+				},
+			},
+			ObservationResults: &types.ObservationResultsOptions{
+				WriteObservationResultsEnabled: ptr.Bool(true),
+				CatalogTableConfig: &types.CatalogTableConfigOptions{
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					S3Location:   ptr.String("__S3Location__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+				},
+			},
 		},
 		RulesetNames: []string{
 			"__Member__",

@@ -2262,6 +2262,44 @@ func (OAuth2GrantType) Values() []OAuth2GrantType {
 	}
 }
 
+type ObservationConfiguration string
+
+// Enum values for ObservationConfiguration
+const (
+	ObservationConfigurationAll  ObservationConfiguration = "ALL"
+	ObservationConfigurationNone ObservationConfiguration = "NONE"
+)
+
+// Values returns all known values for ObservationConfiguration. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ObservationConfiguration) Values() []ObservationConfiguration {
+	return []ObservationConfiguration{
+		"ALL",
+		"NONE",
+	}
+}
+
+type ObservationMode string
+
+// Enum values for ObservationMode
+const (
+	ObservationModeScheduled ObservationMode = "SCHEDULED"
+	ObservationModeFixed     ObservationMode = "FIXED"
+)
+
+// Values returns all known values for ObservationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ObservationMode) Values() []ObservationMode {
+	return []ObservationMode{
+		"SCHEDULED",
+		"FIXED",
+	}
+}
+
 type OverwriteChildResourcePermissionsWithDefaultEnum string
 
 // Enum values for OverwriteChildResourcePermissionsWithDefaultEnum
@@ -2663,6 +2701,27 @@ func (ResourceType) Values() []ResourceType {
 		"JAR",
 		"FILE",
 		"ARCHIVE",
+	}
+}
+
+type ResultTypeEnum string
+
+// Enum values for ResultTypeEnum
+const (
+	ResultTypeEnumAll        ResultTypeEnum = "ALL"
+	ResultTypeEnumPassedOnly ResultTypeEnum = "PASSED_ONLY"
+	ResultTypeEnumFailedOnly ResultTypeEnum = "FAILED_ONLY"
+)
+
+// Values returns all known values for ResultTypeEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResultTypeEnum) Values() []ResultTypeEnum {
+	return []ResultTypeEnum{
+		"ALL",
+		"PASSED_ONLY",
+		"FAILED_ONLY",
 	}
 }
 

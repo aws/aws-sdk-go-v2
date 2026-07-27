@@ -630,6 +630,67 @@ func (m *awsAwsjson11_serializeOpBatchGetDataQualityResult) HandleSerialize(ctx 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpBatchGetDataQualityRulesetEvaluationRun struct {
+}
+
+func (*awsAwsjson11_serializeOpBatchGetDataQualityRulesetEvaluationRun) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpBatchGetDataQualityRulesetEvaluationRun) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchGetDataQualityRulesetEvaluationRunInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.BatchGetDataQualityRulesetEvaluationRun")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentBatchGetDataQualityRulesetEvaluationRunInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpBatchGetDevEndpoints struct {
 }
 
@@ -19377,6 +19438,33 @@ func awsAwsjson11_serializeDocumentCatalogSource(v *types.CatalogSource, value s
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCatalogTableConfigOptions(v *types.CatalogTableConfigOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.S3Location != nil {
+		ok := object.Key("S3Location")
+		ok.String(*v.S3Location)
+	}
+
+	if v.TableName != nil {
+		ok := object.Key("TableName")
+		ok.String(*v.TableName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCatalogTablesList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -21552,9 +21640,47 @@ func awsAwsjson11_serializeDocumentDataQualityEvaluationRunAdditionalRunOptions(
 		ok.String(*v.CustomLogGroupPrefix)
 	}
 
+	if v.DataQualityRuleResults != nil {
+		ok := object.Key("DataQualityRuleResults")
+		if err := awsAwsjson11_serializeDocumentDataQualityRuleResultsOptions(v.DataQualityRuleResults, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ObservationMode) > 0 {
+		ok := object.Key("ObservationMode")
+		ok.String(string(v.ObservationMode))
+	}
+
+	if v.ObservationResults != nil {
+		ok := object.Key("ObservationResults")
+		if err := awsAwsjson11_serializeDocumentObservationResultsOptions(v.ObservationResults, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ObservationScope) > 0 {
+		ok := object.Key("ObservationScope")
+		ok.String(string(v.ObservationScope))
+	}
+
+	if v.ProfilingResults != nil {
+		ok := object.Key("ProfilingResults")
+		if err := awsAwsjson11_serializeDocumentProfilingResultsOptions(v.ProfilingResults, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResultsS3Prefix != nil {
 		ok := object.Key("ResultsS3Prefix")
 		ok.String(*v.ResultsS3Prefix)
+	}
+
+	if v.RowLevelResults != nil {
+		ok := object.Key("RowLevelResults")
+		if err := awsAwsjson11_serializeDocumentRowLevelResultsOptions(v.RowLevelResults, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -21644,6 +21770,18 @@ func awsAwsjson11_serializeDocumentDataQualityResultIds(v []string, value smithy
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDataQualityRuleRecommendationRunAdditionalRunOptions(v *types.DataQualityRuleRecommendationRunAdditionalRunOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomLogGroupPrefix != nil {
+		ok := object.Key("CustomLogGroupPrefix")
+		ok.String(*v.CustomLogGroupPrefix)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDataQualityRuleRecommendationRunFilter(v *types.DataQualityRuleRecommendationRunFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -21663,6 +21801,25 @@ func awsAwsjson11_serializeDocumentDataQualityRuleRecommendationRunFilter(v *typ
 	if v.StartedBefore != nil {
 		ok := object.Key("StartedBefore")
 		ok.Double(smithytime.FormatEpochSeconds(*v.StartedBefore))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDataQualityRuleResultsOptions(v *types.DataQualityRuleResultsOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogTableConfig != nil {
+		ok := object.Key("CatalogTableConfig")
+		if err := awsAwsjson11_serializeDocumentCatalogTableConfigOptions(v.CatalogTableConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WriteDataQualityRuleResultsEnabled != nil {
+		ok := object.Key("WriteDataQualityRuleResultsEnabled")
+		ok.Boolean(*v.WriteDataQualityRuleResultsEnabled)
 	}
 
 	return nil
@@ -21694,6 +21851,17 @@ func awsAwsjson11_serializeDocumentDataQualityRulesetEvaluationRunFilter(v *type
 		ok.Double(smithytime.FormatEpochSeconds(*v.StartedBefore))
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDataQualityRulesetEvaluationRunIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -22168,6 +22336,25 @@ func awsAwsjson11_serializeDocumentDirectSchemaChangePolicy(v *types.DirectSchem
 	if len(v.UpdateBehavior) > 0 {
 		ok := object.Key("UpdateBehavior")
 		ok.String(string(v.UpdateBehavior))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDistributionResultsOptions(v *types.DistributionResultsOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogTableConfig != nil {
+		ok := object.Key("CatalogTableConfig")
+		if err := awsAwsjson11_serializeDocumentCatalogTableConfigOptions(v.CatalogTableConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WriteDistributionResultsEnabled != nil {
+		ok := object.Key("WriteDistributionResultsEnabled")
+		ok.Boolean(*v.WriteDistributionResultsEnabled)
 	}
 
 	return nil
@@ -25561,6 +25748,25 @@ func awsAwsjson11_serializeDocumentOAuth2PropertiesInput(v *types.OAuth2Properti
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentObservationResultsOptions(v *types.ObservationResultsOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogTableConfig != nil {
+		ok := object.Key("CatalogTableConfig")
+		if err := awsAwsjson11_serializeDocumentCatalogTableConfigOptions(v.CatalogTableConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WriteObservationResultsEnabled != nil {
+		ok := object.Key("WriteObservationResultsEnabled")
+		ok.Boolean(*v.WriteObservationResultsEnabled)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentOffsetConfiguration(v *types.OffsetConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -26193,6 +26399,32 @@ func awsAwsjson11_serializeDocumentProfileConfiguration(v *types.ProfileConfigur
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentProfilingResultsOptions(v *types.ProfilingResultsOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogTableConfig != nil {
+		ok := object.Key("CatalogTableConfig")
+		if err := awsAwsjson11_serializeDocumentCatalogTableConfigOptions(v.CatalogTableConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DistributionResults != nil {
+		ok := object.Key("DistributionResults")
+		if err := awsAwsjson11_serializeDocumentDistributionResultsOptions(v.DistributionResults, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WriteProfilingResultsEnabled != nil {
+		ok := object.Key("WriteProfilingResultsEnabled")
+		ok.Boolean(*v.WriteProfilingResultsEnabled)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentPropertyMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -26663,6 +26895,30 @@ func awsAwsjson11_serializeDocumentRoute(v *types.Route, value smithyjson.Value)
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRowLevelResultsOptions(v *types.RowLevelResultsOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogTableConfig != nil {
+		ok := object.Key("CatalogTableConfig")
+		if err := awsAwsjson11_serializeDocumentCatalogTableConfigOptions(v.CatalogTableConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxRowsToWrite != nil {
+		ok := object.Key("MaxRowsToWrite")
+		ok.Integer(*v.MaxRowsToWrite)
+	}
+
+	if len(v.ResultType) > 0 {
+		ok := object.Key("ResultType")
+		ok.String(string(v.ResultType))
 	}
 
 	return nil
@@ -30452,6 +30708,20 @@ func awsAwsjson11_serializeOpDocumentBatchGetDataQualityResultInput(v *BatchGetD
 	if v.ResultIds != nil {
 		ok := object.Key("ResultIds")
 		if err := awsAwsjson11_serializeDocumentDataQualityResultIds(v.ResultIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentBatchGetDataQualityRulesetEvaluationRunInput(v *BatchGetDataQualityRulesetEvaluationRunInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RunIds != nil {
+		ok := object.Key("RunIds")
+		if err := awsAwsjson11_serializeDocumentDataQualityRulesetEvaluationRunIdList(v.RunIds, ok); err != nil {
 			return err
 		}
 	}
@@ -35179,6 +35449,13 @@ func awsAwsjson11_serializeOpDocumentListDataQualityRuleRecommendationRunsInput(
 		ok.String(*v.NextToken)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -36482,6 +36759,13 @@ func awsAwsjson11_serializeOpDocumentStartCrawlerScheduleInput(v *StartCrawlerSc
 func awsAwsjson11_serializeOpDocumentStartDataQualityRuleRecommendationRunInput(v *StartDataQualityRuleRecommendationRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AdditionalRunOptions != nil {
+		ok := object.Key("AdditionalRunOptions")
+		if err := awsAwsjson11_serializeDocumentDataQualityRuleRecommendationRunAdditionalRunOptions(v.AdditionalRunOptions, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")

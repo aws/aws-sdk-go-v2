@@ -678,6 +678,14 @@ func TestCheckResponseSnapshot_DescribeVirtualCluster(t *testing.T) {
 			},
 			SecurityConfigurationId: ptr.String("__SecurityConfigurationId__"),
 			SessionEnabled:          ptr.Bool(true),
+			SchedulerConfiguration: &types.SchedulerConfiguration{
+				MaxInQueueJobRuns:    ptr.Int32(1),
+				MaxConcurrentJobRuns: ptr.Int32(1),
+			},
+			SchedulerStatus: &types.SchedulerStatus{
+				CurrentInQueueJobRuns:    1,
+				CurrentConcurrentJobRuns: 1,
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeVirtualCluster.response")
@@ -1398,6 +1406,14 @@ func TestCheckResponseSnapshot_ListVirtualClusters(t *testing.T) {
 				},
 				SecurityConfigurationId: ptr.String("__SecurityConfigurationId__"),
 				SessionEnabled:          ptr.Bool(true),
+				SchedulerConfiguration: &types.SchedulerConfiguration{
+					MaxInQueueJobRuns:    ptr.Int32(1),
+					MaxConcurrentJobRuns: ptr.Int32(1),
+				},
+				SchedulerStatus: &types.SchedulerStatus{
+					CurrentInQueueJobRuns:    1,
+					CurrentConcurrentJobRuns: 1,
+				},
 			},
 			{
 				Id:    ptr.String("__Id__"),
@@ -1420,6 +1436,14 @@ func TestCheckResponseSnapshot_ListVirtualClusters(t *testing.T) {
 				},
 				SecurityConfigurationId: ptr.String("__SecurityConfigurationId__"),
 				SessionEnabled:          ptr.Bool(true),
+				SchedulerConfiguration: &types.SchedulerConfiguration{
+					MaxInQueueJobRuns:    ptr.Int32(1),
+					MaxConcurrentJobRuns: ptr.Int32(1),
+				},
+				SchedulerStatus: &types.SchedulerStatus{
+					CurrentInQueueJobRuns:    1,
+					CurrentConcurrentJobRuns: 1,
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1500,6 +1524,56 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UntagResource.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateVirtualCluster(t *testing.T) {
+	want := &UpdateVirtualClusterOutput{
+		VirtualCluster: &types.VirtualCluster{
+			Id:    ptr.String("__Id__"),
+			Name:  ptr.String("__Name__"),
+			Arn:   ptr.String("__Arn__"),
+			State: types.VirtualClusterState("RUNNING"),
+			ContainerProvider: &types.ContainerProvider{
+				Type: types.ContainerProviderType("EKS"),
+				Id:   ptr.String("__Id__"),
+				Info: &types.ContainerInfoMemberEksInfo{
+					Value: types.EksInfo{
+						Namespace: ptr.String("__Namespace__"),
+						NodeLabel: ptr.String("__NodeLabel__"),
+					},
+				},
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			SecurityConfigurationId: ptr.String("__SecurityConfigurationId__"),
+			SessionEnabled:          ptr.Bool(true),
+			SchedulerConfiguration: &types.SchedulerConfiguration{
+				MaxInQueueJobRuns:    ptr.Int32(1),
+				MaxConcurrentJobRuns: ptr.Int32(1),
+			},
+			SchedulerStatus: &types.SchedulerStatus{
+				CurrentInQueueJobRuns:    1,
+				CurrentConcurrentJobRuns: 1,
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateVirtualCluster.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateVirtualCluster(context.Background(), &UpdateVirtualClusterInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateVirtualCluster.response", err)
 	}
 }
 

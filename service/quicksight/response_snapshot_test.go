@@ -5942,6 +5942,11 @@ func TestCheckResponseSnapshot_DescribeCustomPermissions(t *testing.T) {
 				InboundEmailTrigger:                       types.CapabilityState("DENY"),
 				QuickEventTrigger:                         types.CapabilityState("DENY"),
 			},
+			Governance: &types.Governance{
+				DefaultCategoryEffects: map[string]types.DefaultCategoryEffect{
+					"key0": types.DefaultCategoryEffect("DENY_BY_DEFAULT"),
+				},
+			},
 		},
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -15619,6 +15624,11 @@ func TestCheckResponseSnapshot_ListCustomPermissions(t *testing.T) {
 					InboundEmailTrigger:                       types.CapabilityState("DENY"),
 					QuickEventTrigger:                         types.CapabilityState("DENY"),
 				},
+				Governance: &types.Governance{
+					DefaultCategoryEffects: map[string]types.DefaultCategoryEffect{
+						"key0": types.DefaultCategoryEffect("DENY_BY_DEFAULT"),
+					},
+				},
 			},
 			{
 				Arn:                   ptr.String("__Arn__"),
@@ -15861,6 +15871,11 @@ func TestCheckResponseSnapshot_ListCustomPermissions(t *testing.T) {
 					ScheduleTrigger:                           types.CapabilityState("DENY"),
 					InboundEmailTrigger:                       types.CapabilityState("DENY"),
 					QuickEventTrigger:                         types.CapabilityState("DENY"),
+				},
+				Governance: &types.Governance{
+					DefaultCategoryEffects: map[string]types.DefaultCategoryEffect{
+						"key0": types.DefaultCategoryEffect("DENY_BY_DEFAULT"),
+					},
 				},
 			},
 		},

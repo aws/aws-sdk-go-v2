@@ -2143,6 +2143,23 @@ func awsAwsjson10_serializeDocumentBusinessVerificationDetails(v *types.Business
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentHeadquarters(v *types.Headquarters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CountryCode != nil {
+		ok := object.Key("CountryCode")
+		ok.String(*v.CountryCode)
+	}
+
+	if v.SubdivisionCode != nil {
+		ok := object.Key("SubdivisionCode")
+		ok.String(*v.SubdivisionCode)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentIndustrySegmentList(v []types.IndustrySegment, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2287,6 +2304,13 @@ func awsAwsjson10_serializeDocumentTaskDetails(v *types.TaskDetails, value smith
 	if v.DisplayName != nil {
 		ok := object.Key("DisplayName")
 		ok.String(*v.DisplayName)
+	}
+
+	if v.Headquarters != nil {
+		ok := object.Key("Headquarters")
+		if err := awsAwsjson10_serializeDocumentHeadquarters(v.Headquarters, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.IndustrySegments != nil {

@@ -5573,6 +5573,12 @@ type CustomPermissions struct {
 	// The name of the custom permissions profile.
 	CustomPermissionsName *string
 
+	// The governance configuration for the custom permissions profile. When you
+	// enable governance for a category, Amazon Quick denies access to any current or
+	// new capability in that category unless you explicitly set that capability to
+	// ALLOW in Capabilities .
+	Governance *Governance
+
 	noSmithyDocumentSerde
 }
 
@@ -11228,6 +11234,19 @@ type GoogleDriveParameters struct {
 	//
 	//   - THREE_LEGGED_OAUTH – Interactive OAuth that requires user consent.
 	AuthType AuthType
+
+	noSmithyDocumentSerde
+}
+
+// Contains the governance configuration for a custom permissions profile. When
+// governance controls are defined for a category, any capabilities in that
+// category not explicitly set to ALLOW in Capabilities are denied. Even newly
+// added capabilities in the category are implicitly disabled when Amazon Quick
+// releases them.
+type Governance struct {
+
+	// A map of DefaultCategoryEffects .
+	DefaultCategoryEffects map[string]DefaultCategoryEffect
 
 	noSmithyDocumentSerde
 }

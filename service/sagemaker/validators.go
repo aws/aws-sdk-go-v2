@@ -8135,6 +8135,100 @@ func validateAdditionalS3DataSource(v *types.AdditionalS3DataSource) error {
 	}
 }
 
+func validateAIAdapterModelPackageEntry(v *types.AIAdapterModelPackageEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIAdapterModelPackageEntry"}
+	if v.AdapterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdapterId"))
+	}
+	if v.ModelPackageArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelPackageArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIAdapterModelPackageEntryList(v []types.AIAdapterModelPackageEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIAdapterModelPackageEntryList"}
+	for i := range v {
+		if err := validateAIAdapterModelPackageEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIAdapterS3Entry(v *types.AIAdapterS3Entry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIAdapterS3Entry"}
+	if v.AdapterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdapterId"))
+	}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIAdapterS3EntryList(v []types.AIAdapterS3Entry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIAdapterS3EntryList"}
+	for i := range v {
+		if err := validateAIAdapterS3Entry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIAdapterSource(v types.AIAdapterSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIAdapterSource"}
+	switch uv := v.(type) {
+	case *types.AIAdapterSourceMemberModelPackageArns:
+		if err := validateAIAdapterModelPackageEntryList(uv.Value); err != nil {
+			invalidParams.AddNested("[ModelPackageArns]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AIAdapterSourceMemberS3Uris:
+		if err := validateAIAdapterS3EntryList(uv.Value); err != nil {
+			invalidParams.AddNested("[S3Uris]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAIBenchmarkEndpoint(v *types.AIBenchmarkEndpoint) error {
 	if v == nil {
 		return nil
@@ -16454,6 +16548,11 @@ func validateOpCreateAIRecommendationJobInput(v *CreateAIRecommendationJobInput)
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.AdapterSource != nil {
+		if err := validateAIAdapterSource(v.AdapterSource); err != nil {
+			invalidParams.AddNested("AdapterSource", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {

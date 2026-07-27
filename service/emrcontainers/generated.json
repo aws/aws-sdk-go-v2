@@ -32,6 +32,7 @@
         "api_op_StartJobRun.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
+        "api_op_UpdateVirtualCluster.go",
         "auth.go",
         "deserializers.go",
         "doc.go",

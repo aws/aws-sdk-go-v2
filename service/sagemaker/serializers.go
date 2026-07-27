@@ -24842,6 +24842,90 @@ func awsAwsjson11_serializeDocumentAggregationTransformations(v map[string]types
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAIAdapterModelPackageEntry(v *types.AIAdapterModelPackageEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdapterId != nil {
+		ok := object.Key("AdapterId")
+		ok.String(*v.AdapterId)
+	}
+
+	if v.ModelPackageArn != nil {
+		ok := object.Key("ModelPackageArn")
+		ok.String(*v.ModelPackageArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAIAdapterModelPackageEntryList(v []types.AIAdapterModelPackageEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentAIAdapterModelPackageEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAIAdapterS3Entry(v *types.AIAdapterS3Entry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdapterId != nil {
+		ok := object.Key("AdapterId")
+		ok.String(*v.AdapterId)
+	}
+
+	if v.S3Uri != nil {
+		ok := object.Key("S3Uri")
+		ok.String(*v.S3Uri)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAIAdapterS3EntryList(v []types.AIAdapterS3Entry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentAIAdapterS3Entry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAIAdapterSource(v types.AIAdapterSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.AIAdapterSourceMemberModelPackageArns:
+		av := object.Key("ModelPackageArns")
+		if err := awsAwsjson11_serializeDocumentAIAdapterModelPackageEntryList(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.AIAdapterSourceMemberS3Uris:
+		av := object.Key("S3Uris")
+		if err := awsAwsjson11_serializeDocumentAIAdapterS3EntryList(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAIBenchmarkEndpoint(v *types.AIBenchmarkEndpoint, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -34332,6 +34416,17 @@ func awsAwsjson11_serializeDocumentOptimizationJobOutputConfig(v *types.Optimiza
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentOptimizationJobTrainingPlanArns(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentOptimizationModelAccessConfig(v *types.OptimizationModelAccessConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -39151,6 +39246,13 @@ func awsAwsjson11_serializeOpDocumentCreateAIRecommendationJobInput(v *CreateAIR
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdapterSource != nil {
+		ok := object.Key("AdapterSource")
+		if err := awsAwsjson11_serializeDocumentAIAdapterSource(v.AdapterSource, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AIRecommendationJobName != nil {
 		ok := object.Key("AIRecommendationJobName")
 		ok.String(*v.AIRecommendationJobName)
@@ -41893,6 +41995,13 @@ func awsAwsjson11_serializeOpDocumentCreateOptimizationJobInput(v *CreateOptimiz
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TrainingPlanArns != nil {
+		ok := object.Key("TrainingPlanArns")
+		if err := awsAwsjson11_serializeDocumentOptimizationJobTrainingPlanArns(v.TrainingPlanArns, ok); err != nil {
 			return err
 		}
 	}

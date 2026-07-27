@@ -6438,6 +6438,11 @@ func TestCheckRequestSnapshot_CreateCustomPermissions(t *testing.T) {
 			InboundEmailTrigger:                       types.CapabilityState("DENY"),
 			QuickEventTrigger:                         types.CapabilityState("DENY"),
 		},
+		Governance: &types.Governance{
+			DefaultCategoryEffects: map[string]types.DefaultCategoryEffect{
+				"key0": types.DefaultCategoryEffect("DENY_BY_DEFAULT"),
+			},
+		},
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -22922,6 +22927,11 @@ func TestCheckRequestSnapshot_UpdateCustomPermissions(t *testing.T) {
 			InboundEmailTrigger:                       types.CapabilityState("DENY"),
 			QuickEventTrigger:                         types.CapabilityState("DENY"),
 		},
+		Governance: &types.Governance{
+			DefaultCategoryEffects: map[string]types.DefaultCategoryEffect{
+				"key0": types.DefaultCategoryEffect("DENY_BY_DEFAULT"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -37155,6 +37165,11 @@ func TestUpdateRequestSnapshot_CreateCustomPermissions(t *testing.T) {
 			ScheduleTrigger:                           types.CapabilityState("DENY"),
 			InboundEmailTrigger:                       types.CapabilityState("DENY"),
 			QuickEventTrigger:                         types.CapabilityState("DENY"),
+		},
+		Governance: &types.Governance{
+			DefaultCategoryEffects: map[string]types.DefaultCategoryEffect{
+				"key0": types.DefaultCategoryEffect("DENY_BY_DEFAULT"),
+			},
 		},
 		Tags: []types.Tag{
 			{
@@ -53639,6 +53654,11 @@ func TestUpdateRequestSnapshot_UpdateCustomPermissions(t *testing.T) {
 			ScheduleTrigger:                           types.CapabilityState("DENY"),
 			InboundEmailTrigger:                       types.CapabilityState("DENY"),
 			QuickEventTrigger:                         types.CapabilityState("DENY"),
+		},
+		Governance: &types.Governance{
+			DefaultCategoryEffects: map[string]types.DefaultCategoryEffect{
+				"key0": types.DefaultCategoryEffect("DENY_BY_DEFAULT"),
+			},
 		},
 	}
 	body := &bytes.Buffer{}

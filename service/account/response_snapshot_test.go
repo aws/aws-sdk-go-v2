@@ -313,6 +313,28 @@ func TestCheckResponseSnapshot_GetPrimaryEmail(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetPrimaryEmailUpdateStatus(t *testing.T) {
+	want := &GetPrimaryEmailUpdateStatusOutput{
+		Status:    types.PrimaryEmailUpdateStatus("PENDING"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetPrimaryEmailUpdateStatus.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetPrimaryEmailUpdateStatus(context.Background(), &GetPrimaryEmailUpdateStatusInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetPrimaryEmailUpdateStatus.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetRegionOptStatus(t *testing.T) {
 	want := &GetRegionOptStatusOutput{
 		RegionName:      ptr.String("__RegionName__"),

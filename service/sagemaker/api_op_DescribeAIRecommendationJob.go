@@ -81,6 +81,10 @@ type DescribeAIRecommendationJobOutput struct {
 	// This member is required.
 	RoleArn *string
 
+	// The LoRA adapter source that was specified when the recommendation job was
+	// created. This field is absent when the job was created without LoRA adapters.
+	AdapterSource types.AIAdapterSource
+
 	// The compute resource specification for the recommendation job.
 	ComputeSpec *types.AIRecommendationComputeSpec
 

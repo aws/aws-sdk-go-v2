@@ -277,6 +277,10 @@ func TestCheckResponseSnapshot_CancelProfileUpdateTask(t *testing.T) {
 					Locale:      ptr.String("__Locale__"),
 				},
 			},
+			Headquarters: &types.Headquarters{
+				CountryCode:     ptr.String("__CountryCode__"),
+				SubdivisionCode: ptr.String("__SubdivisionCode__"),
+			},
 		},
 		StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		Status:    types.ProfileTaskStatus("IN_PROGRESS"),
@@ -378,6 +382,10 @@ func TestCheckResponseSnapshot_CreatePartner(t *testing.T) {
 					LogoUrl:     ptr.String("__LogoUrl__"),
 					Locale:      ptr.String("__Locale__"),
 				},
+			},
+			Headquarters: &types.Headquarters{
+				CountryCode:     ptr.String("__CountryCode__"),
+				SubdivisionCode: ptr.String("__SubdivisionCode__"),
 			},
 			ProfileId: ptr.String("__ProfileId__"),
 		},
@@ -601,6 +609,10 @@ func TestCheckResponseSnapshot_GetPartner(t *testing.T) {
 					Locale:      ptr.String("__Locale__"),
 				},
 			},
+			Headquarters: &types.Headquarters{
+				CountryCode:     ptr.String("__CountryCode__"),
+				SubdivisionCode: ptr.String("__SubdivisionCode__"),
+			},
 			ProfileId: ptr.String("__ProfileId__"),
 		},
 		AwsTrainingCertificationEmailDomains: []types.PartnerDomain{
@@ -663,6 +675,10 @@ func TestCheckResponseSnapshot_GetProfileUpdateTask(t *testing.T) {
 					LogoUrl:     ptr.String("__LogoUrl__"),
 					Locale:      ptr.String("__Locale__"),
 				},
+			},
+			Headquarters: &types.Headquarters{
+				CountryCode:     ptr.String("__CountryCode__"),
+				SubdivisionCode: ptr.String("__SubdivisionCode__"),
 			},
 		},
 		StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -1176,6 +1192,10 @@ func TestCheckResponseSnapshot_StartProfileUpdateTask(t *testing.T) {
 					LogoUrl:     ptr.String("__LogoUrl__"),
 					Locale:      ptr.String("__Locale__"),
 				},
+			},
+			Headquarters: &types.Headquarters{
+				CountryCode:     ptr.String("__CountryCode__"),
+				SubdivisionCode: ptr.String("__SubdivisionCode__"),
 			},
 		},
 		StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),

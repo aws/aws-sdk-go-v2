@@ -342,6 +342,25 @@ type FieldValidationError struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the partner's headquarters location using International Organization
+// for Standardization (ISO) 3166 country and subdivision codes.
+type Headquarters struct {
+
+	// The ISO 3166-1 alpha-2 country code of the partner's headquarters. For example,
+	// US , BR , or DE .
+	//
+	// This member is required.
+	CountryCode *string
+
+	// The subdivision portion of the ISO 3166-2 code for the partner's headquarters
+	// (for example, SP from BR-SP , NSW from AU-NSW , or 13 from JP-13 ).
+	//
+	// This member is required.
+	SubdivisionCode *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains localized content for a partner profile in a specific language or
 // locale.
 type LocalizedContent struct {
@@ -468,6 +487,11 @@ type PartnerProfile struct {
 	//
 	// This member is required.
 	WebsiteUrl *string
+
+	// The ISO 3166 country and subdivision codes for the partner's headquarters
+	// location. If no headquarters location is set, this field is not included in the
+	// response.
+	Headquarters *Headquarters
 
 	// A list of localized content versions for different languages and regions.
 	LocalizedContents []LocalizedContent
@@ -640,6 +664,11 @@ type TaskDetails struct {
 	//
 	// This member is required.
 	WebsiteUrl *string
+
+	// The ISO 3166 country and subdivision codes for the partner's headquarters
+	// location. If you omit this field, the service retains the existing headquarters
+	// value.
+	Headquarters *Headquarters
 
 	// The updated localized content for the partner profile.
 	LocalizedContents []LocalizedContent

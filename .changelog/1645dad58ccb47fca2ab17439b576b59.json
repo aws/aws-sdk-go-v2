@@ -1,0 +1,8 @@
+{
+    "id": "1645dad5-8ccb-47fc-a2ab-17439b576b59",
+    "type": "feature",
+    "description": "AWS Security Agent adds a new task hours field that reflects the active work done for a task.",
+    "modules": [
+        "service/securityagent"
+    ]
+}

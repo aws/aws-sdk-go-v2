@@ -39,6 +39,9 @@ type GetDataQualityRuleRecommendationRunInput struct {
 // The response for the Data Quality rule recommendation run.
 type GetDataQualityRuleRecommendationRunOutput struct {
 
+	// Additional run options you can specify for a recommendation run.
+	AdditionalRunOptions *types.DataQualityRuleRecommendationRunAdditionalRunOptions
+
 	// The date and time when this run was completed.
 	CompletedOn *time.Time
 

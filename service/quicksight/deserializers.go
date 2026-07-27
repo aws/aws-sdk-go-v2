@@ -73436,6 +73436,11 @@ func awsRestjson1_deserializeDocumentCustomPermissions(v **types.CustomPermissio
 				sv.CustomPermissionsName = ptr.String(jtv)
 			}
 
+		case "Governance":
+			if err := awsRestjson1_deserializeDocumentGovernance(&sv.Governance, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -80091,6 +80096,42 @@ func awsRestjson1_deserializeDocumentDecimalValueWhenUnsetConfiguration(v **type
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDefaultCategoryEffectsMap(v *map[string]types.DefaultCategoryEffect, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.DefaultCategoryEffect
+	if *v == nil {
+		mv = map[string]types.DefaultCategoryEffect{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.DefaultCategoryEffect
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected DefaultCategoryEffect to be of type string, got %T instead", value)
+			}
+			parsedVal = types.DefaultCategoryEffect(jtv)
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -90666,6 +90707,42 @@ func awsRestjson1_deserializeDocumentGoogleDriveParameters(v **types.GoogleDrive
 					return fmt.Errorf("expected AuthType to be of type string, got %T instead", value)
 				}
 				sv.AuthType = types.AuthType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGovernance(v **types.Governance, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Governance
+	if *v == nil {
+		sv = &types.Governance{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DefaultCategoryEffects":
+			if err := awsRestjson1_deserializeDocumentDefaultCategoryEffectsMap(&sv.DefaultCategoryEffects, value); err != nil {
+				return err
 			}
 
 		default:

@@ -7,13 +7,14 @@ import (
 	"time"
 )
 
-// Authentication configuration for the security configuration.
+// Contains the authentication settings for a security configuration, including
+// Identity Center and IAM configuration options.
 type AuthenticationConfiguration struct {
 
-	// IAM configuration for authentication in the security configuration.
+	// The IAM configuration to use for authentication.
 	IamConfiguration *IAMConfiguration
 
-	// Identity Center configuration for authentication in the security configuration.
+	// The IAM Identity Center configuration to use for authentication.
 	IdentityCenterConfiguration *IdentityCenterConfiguration
 
 	noSmithyDocumentSerde
@@ -192,7 +193,7 @@ type Endpoint struct {
 	// The ARN of the endpoint.
 	Arn *string
 
-	// The auth proxy URL of the endpoint.
+	// The authentication proxy URL of the endpoint.
 	AuthProxyUrl *string
 
 	// The certificate ARN of the endpoint. This field is under deprecation and will
@@ -255,29 +256,33 @@ type Endpoint struct {
 	noSmithyDocumentSerde
 }
 
-// IAM configuration for the security configuration.
+// Contains the IAM settings for a security configuration, including the system
+// role used for authentication.
 type IAMConfiguration struct {
 
-	// The ARN of the system role used by the security configuration.
+	// The Amazon Resource Name (ARN) of the system role used by the security
+	// configuration.
 	SystemRole *string
 
 	noSmithyDocumentSerde
 }
 
-// Identity Center related configuration for the security configuration.
+// Contains the IAM Identity Center settings for a security configuration,
+// including instance ARN, application assignment requirements, and application
+// ARN.
 type IdentityCenterConfiguration struct {
 
-	// The ARN of the EMR Identity Center application.
+	// The Amazon Resource Name (ARN) of the Amazon EMR Identity Center application.
 	EmrIdentityCenterApplicationARN *string
 
-	// Determines whether Identity Center is enabled for the security configuration.
+	// Specifies whether Identity Center is enabled for the security configuration.
 	EnableIdentityCenter *bool
 
-	// Determines whether user assignment is required for the Identity Center
+	// Specifies whether user assignment is required for the Identity Center
 	// application.
 	IdentityCenterApplicationAssignmentRequired *bool
 
-	// The ARN of the Identity Center instance.
+	// The Amazon Resource Name (ARN) of the Identity Center instance.
 	IdentityCenterInstanceARN *string
 
 	noSmithyDocumentSerde
@@ -576,8 +581,41 @@ type S3MonitoringConfiguration struct {
 	// This member is required.
 	LogUri *string
 
-	// The Amazon resource name (ARN) of the encryption key for logs.
+	// The Amazon Resource Name (ARN) of the encryption key for logs.
 	EncryptionKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The scheduler configuration for a virtual cluster on Amazon EMR on EKS. It
+// controls how many job runs can run concurrently and how many can wait in the
+// queue. When not set, no concurrency or queue limits are applied.
+type SchedulerConfiguration struct {
+
+	// The maximum number of job runs that can be in the RUNNING state at any time for
+	// the virtual cluster. As running slots free up, queued job runs start
+	// automatically. If you omit this field, the service applies no concurrency limit.
+	MaxConcurrentJobRuns *int32
+
+	// The maximum number of job runs that can be in the PENDING or SUBMITTED state at
+	// any time for the virtual cluster. When the queue is full, the service rejects
+	// StartJobRun requests with a ValidationException . If you omit this field, the
+	// service applies no queue-depth limit.
+	MaxInQueueJobRuns *int32
+
+	noSmithyDocumentSerde
+}
+
+// The current job-run counts for a virtual cluster, reflecting how much of the
+// configured scheduler capacity is in use.
+type SchedulerStatus struct {
+
+	// The number of job runs currently in the RUNNING state for the virtual cluster.
+	CurrentConcurrentJobRuns int32
+
+	// The number of job runs currently waiting in the queue ( PENDING or SUBMITTED )
+	// for the virtual cluster.
+	CurrentInQueueJobRuns int32
 
 	noSmithyDocumentSerde
 }
@@ -719,10 +757,18 @@ type VirtualCluster struct {
 	// The name of the virtual cluster.
 	Name *string
 
+	// The scheduler configuration (concurrency and queue limits) applied to the
+	// virtual cluster. The service does not return this field when no scheduler limits
+	// are configured.
+	SchedulerConfiguration *SchedulerConfiguration
+
+	// The current in-queue and concurrent job-run counts for the virtual cluster.
+	SchedulerStatus *SchedulerStatus
+
 	// The ID of the security configuration.
 	SecurityConfigurationId *string
 
-	// Indicates whether the virtual cluster has session support enabled.
+	// Specifies whether the virtual cluster has session support enabled.
 	SessionEnabled *bool
 
 	// The state of the virtual cluster.

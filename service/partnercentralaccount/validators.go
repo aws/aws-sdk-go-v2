@@ -871,6 +871,24 @@ func validateBusinessVerificationDetails(v *types.BusinessVerificationDetails) e
 	}
 }
 
+func validateHeadquarters(v *types.Headquarters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Headquarters"}
+	if v.CountryCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CountryCode"))
+	}
+	if v.SubdivisionCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubdivisionCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLocalizedContent(v *types.LocalizedContent) error {
 	if v == nil {
 		return nil
@@ -979,6 +997,11 @@ func validateTaskDetails(v *types.TaskDetails) error {
 	if v.LocalizedContents != nil {
 		if err := validateLocalizedContentList(v.LocalizedContents); err != nil {
 			invalidParams.AddNested("LocalizedContents", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Headquarters != nil {
+		if err := validateHeadquarters(v.Headquarters); err != nil {
+			invalidParams.AddNested("Headquarters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

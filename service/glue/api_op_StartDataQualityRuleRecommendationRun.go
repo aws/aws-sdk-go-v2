@@ -43,6 +43,9 @@ type StartDataQualityRuleRecommendationRunInput struct {
 	// This member is required.
 	Role *string
 
+	// Additional run options you can specify for a recommendation run.
+	AdditionalRunOptions *types.DataQualityRuleRecommendationRunAdditionalRunOptions
+
 	// Used for idempotency and is recommended to be set to a random ID (such as a
 	// UUID) to avoid creating or starting multiple instances of the same resource.
 	ClientToken *string

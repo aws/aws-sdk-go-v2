@@ -206,6 +206,78 @@ type AgentVersion struct {
 	noSmithyDocumentSerde
 }
 
+// A LoRA adapter entry identified by a model package ARN.
+type AIAdapterModelPackageEntry struct {
+
+	// A unique identifier for the adapter. This ID is used as the inference component
+	// name when the adapter is deployed. The ID must start and end with an
+	// alphanumeric character, can contain hyphens between alphanumeric characters, and
+	// can be up to 63 characters long.
+	//
+	// This member is required.
+	AdapterId *string
+
+	// The Amazon Resource Name (ARN) of the model package that contains the LoRA
+	// adapter artifacts.
+	//
+	// This member is required.
+	ModelPackageArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A LoRA adapter entry identified by an Amazon S3 URI.
+type AIAdapterS3Entry struct {
+
+	// A unique identifier for the adapter. This ID is used as the inference component
+	// name when the adapter is deployed. The ID must start and end with an
+	// alphanumeric character, can contain hyphens between alphanumeric characters, and
+	// can be up to 63 characters long.
+	//
+	// This member is required.
+	AdapterId *string
+
+	// The Amazon S3 URI of the directory that contains the LoRA adapter artifacts in
+	// PEFT format.
+	//
+	// This member is required.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// The source of LoRA adapters for an AI recommendation job. This is a union type
+// — specify exactly one of the members.
+//
+// The following types satisfy this interface:
+//
+//	AIAdapterSourceMemberModelPackageArns
+//	AIAdapterSourceMemberS3Uris
+type AIAdapterSource interface {
+	isAIAdapterSource()
+}
+
+// A list of LoRA adapters identified by their model package ARNs. Use this when
+// your adapters were produced by a SageMaker AI fine-tuning workflow that
+// registers model packages.
+type AIAdapterSourceMemberModelPackageArns struct {
+	Value []AIAdapterModelPackageEntry
+
+	noSmithyDocumentSerde
+}
+
+func (*AIAdapterSourceMemberModelPackageArns) isAIAdapterSource() {}
+
+// A list of LoRA adapters identified by their Amazon S3 URIs. Use this when your
+// adapters are stored as raw artifacts in Amazon S3.
+type AIAdapterSourceMemberS3Uris struct {
+	Value []AIAdapterS3Entry
+
+	noSmithyDocumentSerde
+}
+
+func (*AIAdapterSourceMemberS3Uris) isAIAdapterSource() {}
+
 // The SageMaker endpoint configuration for benchmarking.
 type AIBenchmarkEndpoint struct {
 
@@ -424,6 +496,12 @@ type AIRecommendation struct {
 	// recommendation.
 	AIBenchmarkJobArn *string
 
+	// The LoRA adapter details for this recommendation. This field contains both the
+	// model package ARNs and Amazon S3 URIs for each adapter, regardless of which form
+	// was originally supplied. This field is absent when the job was created without
+	// LoRA adapters.
+	AdapterDetails *AIRecommendationAdapterDetails
+
 	// The deployment configuration for this recommendation, including the container
 	// image, instance type, instance count, and environment variables.
 	DeploymentConfiguration *AIRecommendationDeploymentConfiguration
@@ -439,6 +517,25 @@ type AIRecommendation struct {
 
 	// A description of the recommendation.
 	RecommendationDescription *string
+
+	noSmithyDocumentSerde
+}
+
+// The per-recommendation LoRA adapter details. Contains both the model package
+// ARNs and Amazon S3 URIs for each adapter, regardless of which form was
+// originally supplied in the request. When the customer supplies only Amazon S3
+// URIs, Amazon SageMaker AI creates model packages on their behalf.
+type AIRecommendationAdapterDetails struct {
+
+	// The list of LoRA adapters with their model package ARNs.
+	//
+	// This member is required.
+	ModelPackageArns []AIAdapterModelPackageEntry
+
+	// The list of LoRA adapters with their Amazon S3 URIs.
+	//
+	// This member is required.
+	S3Uris []AIAdapterS3Entry
 
 	noSmithyDocumentSerde
 }
@@ -485,6 +582,13 @@ type AIRecommendationDeploymentConfiguration struct {
 
 	// The recommended instance type for the deployment.
 	InstanceType AIRecommendationInstanceType
+
+	// The minimum host (CPU) memory, in MiB, to reserve per model copy when deploying
+	// the recommendation as an Inference Component. This value maps to the base
+	// Inference Component's ComputeResourceRequirements$MinMemoryRequiredInMb and is
+	// sized so that CopyCountPerInstance copies co-place within the instance's
+	// allocatable host memory.
+	MinCpuMemoryRequiredInMb *int32
 
 	// The Amazon S3 data channels for the deployment.
 	S3 []AIRecommendationDeploymentS3Channel
@@ -24573,6 +24677,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isAIAdapterSource()                     {}
 func (*UnknownUnionMember) isAIBenchmarkTarget()                   {}
 func (*UnknownUnionMember) isAIDatasetConfig()                     {}
 func (*UnknownUnionMember) isAIModelSource()                       {}

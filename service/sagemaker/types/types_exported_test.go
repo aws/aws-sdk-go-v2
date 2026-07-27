@@ -7,6 +7,28 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
 
+func ExampleAIAdapterSource_outputUsage() {
+	var union types.AIAdapterSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AIAdapterSourceMemberModelPackageArns:
+		_ = v.Value // Value is []types.AIAdapterModelPackageEntry
+
+	case *types.AIAdapterSourceMemberS3Uris:
+		_ = v.Value // Value is []types.AIAdapterS3Entry
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.AIAdapterModelPackageEntry
+var _ []types.AIAdapterS3Entry
+
 func ExampleAIBenchmarkTarget_outputUsage() {
 	var union types.AIBenchmarkTarget
 	// type switches can be used to check the union value

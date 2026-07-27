@@ -3584,6 +3584,7 @@ func TestCheckResponseSnapshot_DescribeAIRecommendationJob(t *testing.T) {
 					EnvironmentVariables: map[string]string{
 						"key0": "__Value__",
 					},
+					MinCpuMemoryRequiredInMb: ptr.Int32(1),
 				},
 				AIBenchmarkJobArn: ptr.String("__AIBenchmarkJobArn__"),
 				ExpectedPerformance: []types.AIRecommendationPerformanceMetric{
@@ -3598,6 +3599,28 @@ func TestCheckResponseSnapshot_DescribeAIRecommendationJob(t *testing.T) {
 						Stat:   ptr.String("__Stat__"),
 						Value:  ptr.String("__Value__"),
 						Unit:   ptr.String("__Unit__"),
+					},
+				},
+				AdapterDetails: &types.AIRecommendationAdapterDetails{
+					ModelPackageArns: []types.AIAdapterModelPackageEntry{
+						{
+							AdapterId:       ptr.String("__AdapterId__"),
+							ModelPackageArn: ptr.String("__ModelPackageArn__"),
+						},
+						{
+							AdapterId:       ptr.String("__AdapterId__"),
+							ModelPackageArn: ptr.String("__ModelPackageArn__"),
+						},
+					},
+					S3Uris: []types.AIAdapterS3Entry{
+						{
+							AdapterId: ptr.String("__AdapterId__"),
+							S3Uri:     ptr.String("__S3Uri__"),
+						},
+						{
+							AdapterId: ptr.String("__AdapterId__"),
+							S3Uri:     ptr.String("__S3Uri__"),
+						},
 					},
 				},
 			},
@@ -3651,6 +3674,7 @@ func TestCheckResponseSnapshot_DescribeAIRecommendationJob(t *testing.T) {
 					EnvironmentVariables: map[string]string{
 						"key0": "__Value__",
 					},
+					MinCpuMemoryRequiredInMb: ptr.Int32(1),
 				},
 				AIBenchmarkJobArn: ptr.String("__AIBenchmarkJobArn__"),
 				ExpectedPerformance: []types.AIRecommendationPerformanceMetric{
@@ -3667,6 +3691,28 @@ func TestCheckResponseSnapshot_DescribeAIRecommendationJob(t *testing.T) {
 						Unit:   ptr.String("__Unit__"),
 					},
 				},
+				AdapterDetails: &types.AIRecommendationAdapterDetails{
+					ModelPackageArns: []types.AIAdapterModelPackageEntry{
+						{
+							AdapterId:       ptr.String("__AdapterId__"),
+							ModelPackageArn: ptr.String("__ModelPackageArn__"),
+						},
+						{
+							AdapterId:       ptr.String("__AdapterId__"),
+							ModelPackageArn: ptr.String("__ModelPackageArn__"),
+						},
+					},
+					S3Uris: []types.AIAdapterS3Entry{
+						{
+							AdapterId: ptr.String("__AdapterId__"),
+							S3Uri:     ptr.String("__S3Uri__"),
+						},
+						{
+							AdapterId: ptr.String("__AdapterId__"),
+							S3Uri:     ptr.String("__S3Uri__"),
+						},
+					},
+				},
 			},
 		},
 		RoleArn: ptr.String("__RoleArn__"),
@@ -3680,6 +3726,18 @@ func TestCheckResponseSnapshot_DescribeAIRecommendationJob(t *testing.T) {
 				MlReservationArns: []string{
 					"__Member__",
 					"__Member__",
+				},
+			},
+		},
+		AdapterSource: &types.AIAdapterSourceMemberModelPackageArns{
+			Value: []types.AIAdapterModelPackageEntry{
+				{
+					AdapterId:       ptr.String("__AdapterId__"),
+					ModelPackageArn: ptr.String("__ModelPackageArn__"),
+				},
+				{
+					AdapterId:       ptr.String("__AdapterId__"),
+					ModelPackageArn: ptr.String("__ModelPackageArn__"),
 				},
 			},
 		},
@@ -12523,6 +12581,10 @@ func TestCheckResponseSnapshot_DescribeOptimizationJob(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+		},
+		TrainingPlanArns: []string{
+			"__Member__",
+			"__Member__",
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeOptimizationJob.response")

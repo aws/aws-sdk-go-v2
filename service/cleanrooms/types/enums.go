@@ -1658,6 +1658,7 @@ type WorkerComputeType string
 const (
 	WorkerComputeTypeCr1x WorkerComputeType = "CR.1X"
 	WorkerComputeTypeCr4x WorkerComputeType = "CR.4X"
+	WorkerComputeTypeCr8x WorkerComputeType = "CR.8X"
 )
 
 // Values returns all known values for WorkerComputeType. Note that this can be
@@ -1668,5 +1669,6 @@ func (WorkerComputeType) Values() []WorkerComputeType {
 	return []WorkerComputeType{
 		"CR.1X",
 		"CR.4X",
+		"CR.8X",
 	}
 }

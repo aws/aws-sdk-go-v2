@@ -1034,7 +1034,8 @@ type CapabilityState string
 
 // Enum values for CapabilityState
 const (
-	CapabilityStateDeny CapabilityState = "DENY"
+	CapabilityStateDeny  CapabilityState = "DENY"
+	CapabilityStateAllow CapabilityState = "ALLOW"
 )
 
 // Values returns all known values for CapabilityState. Note that this can be
@@ -1044,6 +1045,7 @@ const (
 func (CapabilityState) Values() []CapabilityState {
 	return []CapabilityState{
 		"DENY",
+		"ALLOW",
 	}
 }
 
@@ -2437,6 +2439,23 @@ func (DefaultAggregation) Values() []DefaultAggregation {
 		"STDEVP",
 		"VAR",
 		"VARP",
+	}
+}
+
+type DefaultCategoryEffect string
+
+// Enum values for DefaultCategoryEffect
+const (
+	DefaultCategoryEffectDenyByDefault DefaultCategoryEffect = "DENY_BY_DEFAULT"
+)
+
+// Values returns all known values for DefaultCategoryEffect. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DefaultCategoryEffect) Values() []DefaultCategoryEffect {
+	return []DefaultCategoryEffect{
+		"DENY_BY_DEFAULT",
 	}
 }
 

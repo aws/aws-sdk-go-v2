@@ -956,6 +956,19 @@ func TestCheckResponseSnapshot_BatchGetDataQualityResult(t *testing.T) {
 						EvaluatedMetrics: map[string]float64{
 							"key0": 1.0,
 						},
+						EvaluatedDistributions: map[string]types.DistributionData{
+							"key0": {
+								BinEdges: []string{
+									"__Member__",
+									"__Member__",
+								},
+								Count: []int32{
+									1,
+									1,
+								},
+								DataType: ptr.String("__DataType__"),
+							},
+						},
 					},
 					{
 						Name:              ptr.String("__Name__"),
@@ -963,6 +976,19 @@ func TestCheckResponseSnapshot_BatchGetDataQualityResult(t *testing.T) {
 						EvaluationMessage: ptr.String("__EvaluationMessage__"),
 						EvaluatedMetrics: map[string]float64{
 							"key0": 1.0,
+						},
+						EvaluatedDistributions: map[string]types.DistributionData{
+							"key0": {
+								BinEdges: []string{
+									"__Member__",
+									"__Member__",
+								},
+								Count: []int32{
+									1,
+									1,
+								},
+								DataType: ptr.String("__DataType__"),
+							},
 						},
 					},
 				},
@@ -1085,6 +1111,19 @@ func TestCheckResponseSnapshot_BatchGetDataQualityResult(t *testing.T) {
 						EvaluatedMetrics: map[string]float64{
 							"key0": 1.0,
 						},
+						EvaluatedDistributions: map[string]types.DistributionData{
+							"key0": {
+								BinEdges: []string{
+									"__Member__",
+									"__Member__",
+								},
+								Count: []int32{
+									1,
+									1,
+								},
+								DataType: ptr.String("__DataType__"),
+							},
+						},
 					},
 					{
 						Name:              ptr.String("__Name__"),
@@ -1092,6 +1131,19 @@ func TestCheckResponseSnapshot_BatchGetDataQualityResult(t *testing.T) {
 						EvaluationMessage: ptr.String("__EvaluationMessage__"),
 						EvaluatedMetrics: map[string]float64{
 							"key0": 1.0,
+						},
+						EvaluatedDistributions: map[string]types.DistributionData{
+							"key0": {
+								BinEdges: []string{
+									"__Member__",
+									"__Member__",
+								},
+								Count: []int32{
+									1,
+									1,
+								},
+								DataType: ptr.String("__DataType__"),
+							},
 						},
 					},
 				},
@@ -1160,6 +1212,268 @@ func TestCheckResponseSnapshot_BatchGetDataQualityResult(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "BatchGetDataQualityResult.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_BatchGetDataQualityRulesetEvaluationRun(t *testing.T) {
+	want := &BatchGetDataQualityRulesetEvaluationRunOutput{
+		Runs: []types.DataQualityRulesetEvaluationRun{
+			{
+				RunId: ptr.String("__RunId__"),
+				DataSource: &types.DataSource{
+					GlueTable: &types.GlueTable{
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						CatalogId:      ptr.String("__CatalogId__"),
+						ConnectionName: ptr.String("__ConnectionName__"),
+						AdditionalOptions: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					DataQualityGlueTable: &types.DataQualityGlueTable{
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						CatalogId:      ptr.String("__CatalogId__"),
+						ConnectionName: ptr.String("__ConnectionName__"),
+						AdditionalOptions: map[string]string{
+							"key0": "__Value__",
+						},
+						PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
+					},
+				},
+				Role:            ptr.String("__Role__"),
+				NumberOfWorkers: ptr.Int32(1),
+				Timeout:         ptr.Int32(1),
+				AdditionalRunOptions: &types.DataQualityEvaluationRunAdditionalRunOptions{
+					CloudWatchMetricsEnabled:      ptr.Bool(true),
+					ResultsS3Prefix:               ptr.String("__ResultsS3Prefix__"),
+					CompositeRuleEvaluationMethod: types.DQCompositeRuleEvaluationMethod("COLUMN"),
+					CustomLogGroupPrefix:          ptr.String("__CustomLogGroupPrefix__"),
+					RowLevelResults: &types.RowLevelResultsOptions{
+						MaxRowsToWrite: ptr.Int32(1),
+						ResultType:     types.ResultTypeEnum("ALL"),
+						CatalogTableConfig: &types.CatalogTableConfigOptions{
+							DatabaseName: ptr.String("__DatabaseName__"),
+							TableName:    ptr.String("__TableName__"),
+							S3Location:   ptr.String("__S3Location__"),
+							CatalogId:    ptr.String("__CatalogId__"),
+						},
+					},
+					ProfilingResults: &types.ProfilingResultsOptions{
+						WriteProfilingResultsEnabled: ptr.Bool(true),
+						CatalogTableConfig: &types.CatalogTableConfigOptions{
+							DatabaseName: ptr.String("__DatabaseName__"),
+							TableName:    ptr.String("__TableName__"),
+							S3Location:   ptr.String("__S3Location__"),
+							CatalogId:    ptr.String("__CatalogId__"),
+						},
+						DistributionResults: &types.DistributionResultsOptions{
+							WriteDistributionResultsEnabled: ptr.Bool(true),
+							CatalogTableConfig: &types.CatalogTableConfigOptions{
+								DatabaseName: ptr.String("__DatabaseName__"),
+								TableName:    ptr.String("__TableName__"),
+								S3Location:   ptr.String("__S3Location__"),
+								CatalogId:    ptr.String("__CatalogId__"),
+							},
+						},
+					},
+					ObservationScope: types.ObservationConfiguration("ALL"),
+					ObservationMode:  types.ObservationMode("SCHEDULED"),
+					DataQualityRuleResults: &types.DataQualityRuleResultsOptions{
+						WriteDataQualityRuleResultsEnabled: ptr.Bool(true),
+						CatalogTableConfig: &types.CatalogTableConfigOptions{
+							DatabaseName: ptr.String("__DatabaseName__"),
+							TableName:    ptr.String("__TableName__"),
+							S3Location:   ptr.String("__S3Location__"),
+							CatalogId:    ptr.String("__CatalogId__"),
+						},
+					},
+					ObservationResults: &types.ObservationResultsOptions{
+						WriteObservationResultsEnabled: ptr.Bool(true),
+						CatalogTableConfig: &types.CatalogTableConfigOptions{
+							DatabaseName: ptr.String("__DatabaseName__"),
+							TableName:    ptr.String("__TableName__"),
+							S3Location:   ptr.String("__S3Location__"),
+							CatalogId:    ptr.String("__CatalogId__"),
+						},
+					},
+				},
+				Status:         types.TaskStatusType("STARTING"),
+				ErrorString:    ptr.String("__ErrorString__"),
+				StartedOn:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedOn:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExecutionTime:  1,
+				RulesetNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ResultIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AdditionalDataSources: map[string]types.DataSource{
+					"key0": {
+						GlueTable: &types.GlueTable{
+							DatabaseName:   ptr.String("__DatabaseName__"),
+							TableName:      ptr.String("__TableName__"),
+							CatalogId:      ptr.String("__CatalogId__"),
+							ConnectionName: ptr.String("__ConnectionName__"),
+							AdditionalOptions: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						DataQualityGlueTable: &types.DataQualityGlueTable{
+							DatabaseName:   ptr.String("__DatabaseName__"),
+							TableName:      ptr.String("__TableName__"),
+							CatalogId:      ptr.String("__CatalogId__"),
+							ConnectionName: ptr.String("__ConnectionName__"),
+							AdditionalOptions: map[string]string{
+								"key0": "__Value__",
+							},
+							PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
+						},
+					},
+				},
+			},
+			{
+				RunId: ptr.String("__RunId__"),
+				DataSource: &types.DataSource{
+					GlueTable: &types.GlueTable{
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						CatalogId:      ptr.String("__CatalogId__"),
+						ConnectionName: ptr.String("__ConnectionName__"),
+						AdditionalOptions: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					DataQualityGlueTable: &types.DataQualityGlueTable{
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						CatalogId:      ptr.String("__CatalogId__"),
+						ConnectionName: ptr.String("__ConnectionName__"),
+						AdditionalOptions: map[string]string{
+							"key0": "__Value__",
+						},
+						PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
+					},
+				},
+				Role:            ptr.String("__Role__"),
+				NumberOfWorkers: ptr.Int32(1),
+				Timeout:         ptr.Int32(1),
+				AdditionalRunOptions: &types.DataQualityEvaluationRunAdditionalRunOptions{
+					CloudWatchMetricsEnabled:      ptr.Bool(true),
+					ResultsS3Prefix:               ptr.String("__ResultsS3Prefix__"),
+					CompositeRuleEvaluationMethod: types.DQCompositeRuleEvaluationMethod("COLUMN"),
+					CustomLogGroupPrefix:          ptr.String("__CustomLogGroupPrefix__"),
+					RowLevelResults: &types.RowLevelResultsOptions{
+						MaxRowsToWrite: ptr.Int32(1),
+						ResultType:     types.ResultTypeEnum("ALL"),
+						CatalogTableConfig: &types.CatalogTableConfigOptions{
+							DatabaseName: ptr.String("__DatabaseName__"),
+							TableName:    ptr.String("__TableName__"),
+							S3Location:   ptr.String("__S3Location__"),
+							CatalogId:    ptr.String("__CatalogId__"),
+						},
+					},
+					ProfilingResults: &types.ProfilingResultsOptions{
+						WriteProfilingResultsEnabled: ptr.Bool(true),
+						CatalogTableConfig: &types.CatalogTableConfigOptions{
+							DatabaseName: ptr.String("__DatabaseName__"),
+							TableName:    ptr.String("__TableName__"),
+							S3Location:   ptr.String("__S3Location__"),
+							CatalogId:    ptr.String("__CatalogId__"),
+						},
+						DistributionResults: &types.DistributionResultsOptions{
+							WriteDistributionResultsEnabled: ptr.Bool(true),
+							CatalogTableConfig: &types.CatalogTableConfigOptions{
+								DatabaseName: ptr.String("__DatabaseName__"),
+								TableName:    ptr.String("__TableName__"),
+								S3Location:   ptr.String("__S3Location__"),
+								CatalogId:    ptr.String("__CatalogId__"),
+							},
+						},
+					},
+					ObservationScope: types.ObservationConfiguration("ALL"),
+					ObservationMode:  types.ObservationMode("SCHEDULED"),
+					DataQualityRuleResults: &types.DataQualityRuleResultsOptions{
+						WriteDataQualityRuleResultsEnabled: ptr.Bool(true),
+						CatalogTableConfig: &types.CatalogTableConfigOptions{
+							DatabaseName: ptr.String("__DatabaseName__"),
+							TableName:    ptr.String("__TableName__"),
+							S3Location:   ptr.String("__S3Location__"),
+							CatalogId:    ptr.String("__CatalogId__"),
+						},
+					},
+					ObservationResults: &types.ObservationResultsOptions{
+						WriteObservationResultsEnabled: ptr.Bool(true),
+						CatalogTableConfig: &types.CatalogTableConfigOptions{
+							DatabaseName: ptr.String("__DatabaseName__"),
+							TableName:    ptr.String("__TableName__"),
+							S3Location:   ptr.String("__S3Location__"),
+							CatalogId:    ptr.String("__CatalogId__"),
+						},
+					},
+				},
+				Status:         types.TaskStatusType("STARTING"),
+				ErrorString:    ptr.String("__ErrorString__"),
+				StartedOn:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedOn: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedOn:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExecutionTime:  1,
+				RulesetNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ResultIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AdditionalDataSources: map[string]types.DataSource{
+					"key0": {
+						GlueTable: &types.GlueTable{
+							DatabaseName:   ptr.String("__DatabaseName__"),
+							TableName:      ptr.String("__TableName__"),
+							CatalogId:      ptr.String("__CatalogId__"),
+							ConnectionName: ptr.String("__ConnectionName__"),
+							AdditionalOptions: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+						DataQualityGlueTable: &types.DataQualityGlueTable{
+							DatabaseName:   ptr.String("__DatabaseName__"),
+							TableName:      ptr.String("__TableName__"),
+							CatalogId:      ptr.String("__CatalogId__"),
+							ConnectionName: ptr.String("__ConnectionName__"),
+							AdditionalOptions: map[string]string{
+								"key0": "__Value__",
+							},
+							PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
+						},
+					},
+				},
+			},
+		},
+		RunsNotFound: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchGetDataQualityRulesetEvaluationRun.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchGetDataQualityRulesetEvaluationRun(context.Background(), &BatchGetDataQualityRulesetEvaluationRunInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchGetDataQualityRulesetEvaluationRun.response", err)
 	}
 }
 
@@ -14058,6 +14372,19 @@ func TestCheckResponseSnapshot_GetDataQualityResult(t *testing.T) {
 				EvaluatedMetrics: map[string]float64{
 					"key0": 1.0,
 				},
+				EvaluatedDistributions: map[string]types.DistributionData{
+					"key0": {
+						BinEdges: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: []int32{
+							1,
+							1,
+						},
+						DataType: ptr.String("__DataType__"),
+					},
+				},
 			},
 			{
 				Name:              ptr.String("__Name__"),
@@ -14065,6 +14392,19 @@ func TestCheckResponseSnapshot_GetDataQualityResult(t *testing.T) {
 				EvaluationMessage: ptr.String("__EvaluationMessage__"),
 				EvaluatedMetrics: map[string]float64{
 					"key0": 1.0,
+				},
+				EvaluatedDistributions: map[string]types.DistributionData{
+					"key0": {
+						BinEdges: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: []int32{
+							1,
+							1,
+						},
+						DataType: ptr.String("__DataType__"),
+					},
 				},
 			},
 		},
@@ -14166,6 +14506,9 @@ func TestCheckResponseSnapshot_GetDataQualityRuleRecommendationRun(t *testing.T)
 		RecommendedRuleset:               ptr.String("__RecommendedRuleset__"),
 		CreatedRulesetName:               ptr.String("__CreatedRulesetName__"),
 		DataQualitySecurityConfiguration: ptr.String("__DataQualitySecurityConfiguration__"),
+		AdditionalRunOptions: &types.DataQualityRuleRecommendationRunAdditionalRunOptions{
+			CustomLogGroupPrefix: ptr.String("__CustomLogGroupPrefix__"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetDataQualityRuleRecommendationRun.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -14248,6 +14591,54 @@ func TestCheckResponseSnapshot_GetDataQualityRulesetEvaluationRun(t *testing.T) 
 			ResultsS3Prefix:               ptr.String("__ResultsS3Prefix__"),
 			CompositeRuleEvaluationMethod: types.DQCompositeRuleEvaluationMethod("COLUMN"),
 			CustomLogGroupPrefix:          ptr.String("__CustomLogGroupPrefix__"),
+			RowLevelResults: &types.RowLevelResultsOptions{
+				MaxRowsToWrite: ptr.Int32(1),
+				ResultType:     types.ResultTypeEnum("ALL"),
+				CatalogTableConfig: &types.CatalogTableConfigOptions{
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					S3Location:   ptr.String("__S3Location__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+				},
+			},
+			ProfilingResults: &types.ProfilingResultsOptions{
+				WriteProfilingResultsEnabled: ptr.Bool(true),
+				CatalogTableConfig: &types.CatalogTableConfigOptions{
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					S3Location:   ptr.String("__S3Location__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+				},
+				DistributionResults: &types.DistributionResultsOptions{
+					WriteDistributionResultsEnabled: ptr.Bool(true),
+					CatalogTableConfig: &types.CatalogTableConfigOptions{
+						DatabaseName: ptr.String("__DatabaseName__"),
+						TableName:    ptr.String("__TableName__"),
+						S3Location:   ptr.String("__S3Location__"),
+						CatalogId:    ptr.String("__CatalogId__"),
+					},
+				},
+			},
+			ObservationScope: types.ObservationConfiguration("ALL"),
+			ObservationMode:  types.ObservationMode("SCHEDULED"),
+			DataQualityRuleResults: &types.DataQualityRuleResultsOptions{
+				WriteDataQualityRuleResultsEnabled: ptr.Bool(true),
+				CatalogTableConfig: &types.CatalogTableConfigOptions{
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					S3Location:   ptr.String("__S3Location__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+				},
+			},
+			ObservationResults: &types.ObservationResultsOptions{
+				WriteObservationResultsEnabled: ptr.Bool(true),
+				CatalogTableConfig: &types.CatalogTableConfigOptions{
+					DatabaseName: ptr.String("__DatabaseName__"),
+					TableName:    ptr.String("__TableName__"),
+					S3Location:   ptr.String("__S3Location__"),
+					CatalogId:    ptr.String("__CatalogId__"),
+				},
+			},
 		},
 		Status:         types.TaskStatusType("STARTING"),
 		ErrorString:    ptr.String("__ErrorString__"),
@@ -30651,6 +31042,7 @@ func TestCheckResponseSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.
 						PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
 					},
 				},
+				CreatedRulesetName: ptr.String("__CreatedRulesetName__"),
 			},
 			{
 				RunId:     ptr.String("__RunId__"),
@@ -30677,6 +31069,7 @@ func TestCheckResponseSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.
 						PreProcessingQuery: ptr.String("__PreProcessingQuery__"),
 					},
 				},
+				CreatedRulesetName: ptr.String("__CreatedRulesetName__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -30873,8 +31266,19 @@ func TestCheckResponseSnapshot_ListDataQualityStatistics(t *testing.T) {
 					RunId:    ptr.String("__RunId__"),
 					JobRunId: ptr.String("__JobRunId__"),
 				},
-				StatisticName:   ptr.String("__StatisticName__"),
-				DoubleValue:     1.0,
+				StatisticName: ptr.String("__StatisticName__"),
+				DoubleValue:   1.0,
+				DistributionValue: &types.DistributionData{
+					BinEdges: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Count: []int32{
+						1,
+						1,
+					},
+					DataType: ptr.String("__DataType__"),
+				},
 				EvaluationLevel: types.StatisticEvaluationLevel("Dataset"),
 				ColumnsReferenced: []string{
 					"__Member__",
@@ -30900,8 +31304,19 @@ func TestCheckResponseSnapshot_ListDataQualityStatistics(t *testing.T) {
 					RunId:    ptr.String("__RunId__"),
 					JobRunId: ptr.String("__JobRunId__"),
 				},
-				StatisticName:   ptr.String("__StatisticName__"),
-				DoubleValue:     1.0,
+				StatisticName: ptr.String("__StatisticName__"),
+				DoubleValue:   1.0,
+				DistributionValue: &types.DistributionData{
+					BinEdges: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Count: []int32{
+						1,
+						1,
+					},
+					DataType: ptr.String("__DataType__"),
+				},
 				EvaluationLevel: types.StatisticEvaluationLevel("Dataset"),
 				ColumnsReferenced: []string{
 					"__Member__",

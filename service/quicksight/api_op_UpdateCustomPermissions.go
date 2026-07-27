@@ -41,6 +41,12 @@ type UpdateCustomPermissionsInput struct {
 	// A set of actions to include in the custom permissions profile.
 	Capabilities *types.Capabilities
 
+	// The governance configuration for the custom permissions profile. The
+	// UpdateCustomPermissions operation replaces all existing Capabilities and
+	// Governance values. If you omit this parameter, Amazon Quick removes governance
+	// from the profile and the existing custom permission behavior applies.
+	Governance *types.Governance
+
 	noSmithyDocumentSerde
 }
 

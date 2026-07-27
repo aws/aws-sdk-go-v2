@@ -73,8 +73,10 @@ type PrimaryEmailUpdateStatus string
 
 // Enum values for PrimaryEmailUpdateStatus
 const (
-	PrimaryEmailUpdateStatusPending  PrimaryEmailUpdateStatus = "PENDING"
-	PrimaryEmailUpdateStatusAccepted PrimaryEmailUpdateStatus = "ACCEPTED"
+	PrimaryEmailUpdateStatusPending   PrimaryEmailUpdateStatus = "PENDING"
+	PrimaryEmailUpdateStatusAccepted  PrimaryEmailUpdateStatus = "ACCEPTED"
+	PrimaryEmailUpdateStatusCompleted PrimaryEmailUpdateStatus = "COMPLETED"
+	PrimaryEmailUpdateStatusFailed    PrimaryEmailUpdateStatus = "FAILED"
 )
 
 // Values returns all known values for PrimaryEmailUpdateStatus. Note that this
@@ -85,6 +87,8 @@ func (PrimaryEmailUpdateStatus) Values() []PrimaryEmailUpdateStatus {
 	return []PrimaryEmailUpdateStatus{
 		"PENDING",
 		"ACCEPTED",
+		"COMPLETED",
+		"FAILED",
 	}
 }
 

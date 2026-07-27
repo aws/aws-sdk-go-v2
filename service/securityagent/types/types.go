@@ -2466,6 +2466,9 @@ type Task struct {
 	// The target endpoint being tested by the task.
 	TargetEndpoint *Endpoint
 
+	// The number of active work hours consumed by the task during execution.
+	TaskHours *float64
+
 	// The title of the task.
 	Title *string
 
@@ -2500,6 +2503,9 @@ type TaskSummary struct {
 
 	// The type of security risk the task is testing for.
 	RiskType RiskType
+
+	// The number of active work hours consumed by the task during execution.
+	TaskHours *float64
 
 	// The title of the task.
 	Title *string

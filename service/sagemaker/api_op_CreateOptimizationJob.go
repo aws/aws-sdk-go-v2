@@ -118,6 +118,20 @@ type CreateOptimizationJobInput struct {
 	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags []types.Tag
 
+	// The Amazon Resource Name (ARN) of the training plan to use for this
+	// optimization job.
+	//
+	// When you use reserved capacity from a training plan, the optimization job runs
+	// on that reserved capacity instead of on-demand capacity. If you omit this field,
+	// the job uses on-demand capacity. Currently, you can specify at most one training
+	// plan.
+	//
+	// For more information about how to reserve GPU capacity for your optimization
+	// jobs using Amazon SageMaker Training Plans, see [Reserve capacity with training plans].
+	//
+	// [Reserve capacity with training plans]: https://docs.aws.amazon.com/sagemaker/latest/dg/reserve-capacity-with-training-plans.html
+	TrainingPlanArns []string
+
 	// A VPC in Amazon VPC that your optimized model has access to.
 	VpcConfig *types.OptimizationVpcConfig
 

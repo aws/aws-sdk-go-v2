@@ -41,6 +41,13 @@ type CreateCustomPermissionsInput struct {
 	// A set of actions to include in the custom permissions profile.
 	Capabilities *types.Capabilities
 
+	// The governance configuration for the custom permissions profile. When
+	// governance controls are defined for a category, any capabilities in that
+	// category not explicitly set to ALLOW in Capabilities are denied. Even newly
+	// added capabilities in the category are implicitly disabled when Amazon Quick
+	// releases them.
+	Governance *types.Governance
+
 	// The tags to associate with the custom permissions profile.
 	Tags []types.Tag
 

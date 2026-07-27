@@ -17,6 +17,7 @@
         "api_op_GetContactInformation.go",
         "api_op_GetGovCloudAccountInformation.go",
         "api_op_GetPrimaryEmail.go",
+        "api_op_GetPrimaryEmailUpdateStatus.go",
         "api_op_GetRegionOptStatus.go",
         "api_op_ListRegions.go",
         "api_op_PutAccountName.go",

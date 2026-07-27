@@ -4712,6 +4712,12 @@ const (
 	InstanceTypeMlG616xlarge     InstanceType = "ml.g6.16xlarge"
 	InstanceTypeMlG624xlarge     InstanceType = "ml.g6.24xlarge"
 	InstanceTypeMlG648xlarge     InstanceType = "ml.g6.48xlarge"
+	InstanceTypeMlG7e2xlarge     InstanceType = "ml.g7e.2xlarge"
+	InstanceTypeMlG7e4xlarge     InstanceType = "ml.g7e.4xlarge"
+	InstanceTypeMlG7e8xlarge     InstanceType = "ml.g7e.8xlarge"
+	InstanceTypeMlG7e12xlarge    InstanceType = "ml.g7e.12xlarge"
+	InstanceTypeMlG7e24xlarge    InstanceType = "ml.g7e.24xlarge"
+	InstanceTypeMlG7e48xlarge    InstanceType = "ml.g7e.48xlarge"
 	InstanceTypeMlP54xlarge      InstanceType = "ml.p5.4xlarge"
 	InstanceTypeMlP5en48xlarge   InstanceType = "ml.p5en.48xlarge"
 	InstanceTypeMlG6eXlarge      InstanceType = "ml.g6e.xlarge"
@@ -4903,6 +4909,12 @@ func (InstanceType) Values() []InstanceType {
 		"ml.g6.16xlarge",
 		"ml.g6.24xlarge",
 		"ml.g6.48xlarge",
+		"ml.g7e.2xlarge",
+		"ml.g7e.4xlarge",
+		"ml.g7e.8xlarge",
+		"ml.g7e.12xlarge",
+		"ml.g7e.24xlarge",
+		"ml.g7e.48xlarge",
 		"ml.p5.4xlarge",
 		"ml.p5en.48xlarge",
 		"ml.g6e.xlarge",
@@ -6634,48 +6646,55 @@ type OptimizationJobDeploymentInstanceType string
 
 // Enum values for OptimizationJobDeploymentInstanceType
 const (
-	OptimizationJobDeploymentInstanceTypeMlP4d24xlarge   OptimizationJobDeploymentInstanceType = "ml.p4d.24xlarge"
-	OptimizationJobDeploymentInstanceTypeMlP4de24xlarge  OptimizationJobDeploymentInstanceType = "ml.p4de.24xlarge"
-	OptimizationJobDeploymentInstanceTypeMlP548xlarge    OptimizationJobDeploymentInstanceType = "ml.p5.48xlarge"
-	OptimizationJobDeploymentInstanceTypeMlP5e48xlarge   OptimizationJobDeploymentInstanceType = "ml.p5e.48xlarge"
-	OptimizationJobDeploymentInstanceTypeMlP5en48xlarge  OptimizationJobDeploymentInstanceType = "ml.p5en.48xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG4dnXlarge    OptimizationJobDeploymentInstanceType = "ml.g4dn.xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG4dn2xlarge   OptimizationJobDeploymentInstanceType = "ml.g4dn.2xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG4dn4xlarge   OptimizationJobDeploymentInstanceType = "ml.g4dn.4xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG4dn8xlarge   OptimizationJobDeploymentInstanceType = "ml.g4dn.8xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG4dn12xlarge  OptimizationJobDeploymentInstanceType = "ml.g4dn.12xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG4dn16xlarge  OptimizationJobDeploymentInstanceType = "ml.g4dn.16xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG5Xlarge      OptimizationJobDeploymentInstanceType = "ml.g5.xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG52xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.2xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG54xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.4xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG58xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.8xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG512xlarge    OptimizationJobDeploymentInstanceType = "ml.g5.12xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG516xlarge    OptimizationJobDeploymentInstanceType = "ml.g5.16xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG524xlarge    OptimizationJobDeploymentInstanceType = "ml.g5.24xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG548xlarge    OptimizationJobDeploymentInstanceType = "ml.g5.48xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6Xlarge      OptimizationJobDeploymentInstanceType = "ml.g6.xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG62xlarge     OptimizationJobDeploymentInstanceType = "ml.g6.2xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG64xlarge     OptimizationJobDeploymentInstanceType = "ml.g6.4xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG68xlarge     OptimizationJobDeploymentInstanceType = "ml.g6.8xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG612xlarge    OptimizationJobDeploymentInstanceType = "ml.g6.12xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG616xlarge    OptimizationJobDeploymentInstanceType = "ml.g6.16xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG624xlarge    OptimizationJobDeploymentInstanceType = "ml.g6.24xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG648xlarge    OptimizationJobDeploymentInstanceType = "ml.g6.48xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6eXlarge     OptimizationJobDeploymentInstanceType = "ml.g6e.xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6e2xlarge    OptimizationJobDeploymentInstanceType = "ml.g6e.2xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6e4xlarge    OptimizationJobDeploymentInstanceType = "ml.g6e.4xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6e8xlarge    OptimizationJobDeploymentInstanceType = "ml.g6e.8xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6e12xlarge   OptimizationJobDeploymentInstanceType = "ml.g6e.12xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6e16xlarge   OptimizationJobDeploymentInstanceType = "ml.g6e.16xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6e24xlarge   OptimizationJobDeploymentInstanceType = "ml.g6e.24xlarge"
-	OptimizationJobDeploymentInstanceTypeMlG6e48xlarge   OptimizationJobDeploymentInstanceType = "ml.g6e.48xlarge"
-	OptimizationJobDeploymentInstanceTypeMlInf2Xlarge    OptimizationJobDeploymentInstanceType = "ml.inf2.xlarge"
-	OptimizationJobDeploymentInstanceTypeMlInf28xlarge   OptimizationJobDeploymentInstanceType = "ml.inf2.8xlarge"
-	OptimizationJobDeploymentInstanceTypeMlInf224xlarge  OptimizationJobDeploymentInstanceType = "ml.inf2.24xlarge"
-	OptimizationJobDeploymentInstanceTypeMlInf248xlarge  OptimizationJobDeploymentInstanceType = "ml.inf2.48xlarge"
-	OptimizationJobDeploymentInstanceTypeMlTrn12xlarge   OptimizationJobDeploymentInstanceType = "ml.trn1.2xlarge"
-	OptimizationJobDeploymentInstanceTypeMlTrn132xlarge  OptimizationJobDeploymentInstanceType = "ml.trn1.32xlarge"
-	OptimizationJobDeploymentInstanceTypeMlTrn1n32xlarge OptimizationJobDeploymentInstanceType = "ml.trn1n.32xlarge"
+	OptimizationJobDeploymentInstanceTypeMlP4d24xlarge    OptimizationJobDeploymentInstanceType = "ml.p4d.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlP4de24xlarge   OptimizationJobDeploymentInstanceType = "ml.p4de.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlP548xlarge     OptimizationJobDeploymentInstanceType = "ml.p5.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlP5e48xlarge    OptimizationJobDeploymentInstanceType = "ml.p5e.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlP5en48xlarge   OptimizationJobDeploymentInstanceType = "ml.p5en.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dnXlarge     OptimizationJobDeploymentInstanceType = "ml.g4dn.xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dn2xlarge    OptimizationJobDeploymentInstanceType = "ml.g4dn.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dn4xlarge    OptimizationJobDeploymentInstanceType = "ml.g4dn.4xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dn8xlarge    OptimizationJobDeploymentInstanceType = "ml.g4dn.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dn12xlarge   OptimizationJobDeploymentInstanceType = "ml.g4dn.12xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dn16xlarge   OptimizationJobDeploymentInstanceType = "ml.g4dn.16xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG5Xlarge       OptimizationJobDeploymentInstanceType = "ml.g5.xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG52xlarge      OptimizationJobDeploymentInstanceType = "ml.g5.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG54xlarge      OptimizationJobDeploymentInstanceType = "ml.g5.4xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG58xlarge      OptimizationJobDeploymentInstanceType = "ml.g5.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG512xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.12xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG516xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.16xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG524xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG548xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6Xlarge       OptimizationJobDeploymentInstanceType = "ml.g6.xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG62xlarge      OptimizationJobDeploymentInstanceType = "ml.g6.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG64xlarge      OptimizationJobDeploymentInstanceType = "ml.g6.4xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG68xlarge      OptimizationJobDeploymentInstanceType = "ml.g6.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG612xlarge     OptimizationJobDeploymentInstanceType = "ml.g6.12xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG616xlarge     OptimizationJobDeploymentInstanceType = "ml.g6.16xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG624xlarge     OptimizationJobDeploymentInstanceType = "ml.g6.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG648xlarge     OptimizationJobDeploymentInstanceType = "ml.g6.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6eXlarge      OptimizationJobDeploymentInstanceType = "ml.g6e.xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6e2xlarge     OptimizationJobDeploymentInstanceType = "ml.g6e.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6e4xlarge     OptimizationJobDeploymentInstanceType = "ml.g6e.4xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6e8xlarge     OptimizationJobDeploymentInstanceType = "ml.g6e.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6e12xlarge    OptimizationJobDeploymentInstanceType = "ml.g6e.12xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6e16xlarge    OptimizationJobDeploymentInstanceType = "ml.g6e.16xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6e24xlarge    OptimizationJobDeploymentInstanceType = "ml.g6e.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG6e48xlarge    OptimizationJobDeploymentInstanceType = "ml.g6e.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlInf2Xlarge     OptimizationJobDeploymentInstanceType = "ml.inf2.xlarge"
+	OptimizationJobDeploymentInstanceTypeMlInf28xlarge    OptimizationJobDeploymentInstanceType = "ml.inf2.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlInf224xlarge   OptimizationJobDeploymentInstanceType = "ml.inf2.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlInf248xlarge   OptimizationJobDeploymentInstanceType = "ml.inf2.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlTrn12xlarge    OptimizationJobDeploymentInstanceType = "ml.trn1.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlTrn132xlarge   OptimizationJobDeploymentInstanceType = "ml.trn1.32xlarge"
+	OptimizationJobDeploymentInstanceTypeMlTrn1n32xlarge  OptimizationJobDeploymentInstanceType = "ml.trn1n.32xlarge"
+	OptimizationJobDeploymentInstanceTypeMlP6B20048xlarge OptimizationJobDeploymentInstanceType = "ml.p6-b200.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG7e2xlarge     OptimizationJobDeploymentInstanceType = "ml.g7e.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG7e4xlarge     OptimizationJobDeploymentInstanceType = "ml.g7e.4xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG7e8xlarge     OptimizationJobDeploymentInstanceType = "ml.g7e.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG7e12xlarge    OptimizationJobDeploymentInstanceType = "ml.g7e.12xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG7e24xlarge    OptimizationJobDeploymentInstanceType = "ml.g7e.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG7e48xlarge    OptimizationJobDeploymentInstanceType = "ml.g7e.48xlarge"
 )
 
 // Values returns all known values for OptimizationJobDeploymentInstanceType. Note
@@ -6727,6 +6746,13 @@ func (OptimizationJobDeploymentInstanceType) Values() []OptimizationJobDeploymen
 		"ml.trn1.2xlarge",
 		"ml.trn1.32xlarge",
 		"ml.trn1n.32xlarge",
+		"ml.p6-b200.48xlarge",
+		"ml.g7e.2xlarge",
+		"ml.g7e.4xlarge",
+		"ml.g7e.8xlarge",
+		"ml.g7e.12xlarge",
+		"ml.g7e.24xlarge",
+		"ml.g7e.48xlarge",
 	}
 }
 

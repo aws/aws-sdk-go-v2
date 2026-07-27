@@ -36,7 +36,7 @@ type DeleteSecurityConfigurationInput struct {
 
 type DeleteSecurityConfigurationOutput struct {
 
-	// The ID of the security configuration that was deleted.
+	// The ID of the deleted security configuration.
 	Id *string
 
 	// Metadata pertaining to the operation's result.

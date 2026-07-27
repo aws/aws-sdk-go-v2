@@ -476,6 +476,10 @@ func TestCheckRequestSnapshot_CreateVirtualCluster(t *testing.T) {
 		},
 		SecurityConfigurationId: ptr.String("__SecurityConfigurationId__"),
 		SessionEnabled:          ptr.Bool(true),
+		SchedulerConfiguration: &types.SchedulerConfiguration{
+			MaxInQueueJobRuns:    ptr.Int32(1),
+			MaxConcurrentJobRuns: ptr.Int32(1),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1136,6 +1140,38 @@ func TestCheckRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckRequestSnapshot_UpdateVirtualCluster(t *testing.T) {
+	input := &UpdateVirtualClusterInput{
+		Id: ptr.String("__Id__"),
+		SchedulerConfiguration: &types.SchedulerConfiguration{
+			MaxInQueueJobRuns:    ptr.Int32(1),
+			MaxConcurrentJobRuns: ptr.Int32(1),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateVirtualCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateVirtualCluster"); err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateRequestSnapshot_CancelJobRun(t *testing.T) {
 	input := &CancelJobRunInput{
 		Id:               ptr.String("__Id__"),
@@ -1429,6 +1465,10 @@ func TestUpdateRequestSnapshot_CreateVirtualCluster(t *testing.T) {
 		},
 		SecurityConfigurationId: ptr.String("__SecurityConfigurationId__"),
 		SessionEnabled:          ptr.Bool(true),
+		SchedulerConfiguration: &types.SchedulerConfiguration{
+			MaxInQueueJobRuns:    ptr.Int32(1),
+			MaxConcurrentJobRuns: ptr.Int32(1),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2086,6 +2126,38 @@ func TestUpdateRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateVirtualCluster(t *testing.T) {
+	input := &UpdateVirtualClusterInput{
+		Id: ptr.String("__Id__"),
+		SchedulerConfiguration: &types.SchedulerConfiguration{
+			MaxInQueueJobRuns:    ptr.Int32(1),
+			MaxConcurrentJobRuns: ptr.Int32(1),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateVirtualCluster(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateVirtualCluster"); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -668,6 +668,18 @@ func TestCheckRequestSnapshot_CreateAIRecommendationJob(t *testing.T) {
 				},
 			},
 		},
+		AdapterSource: &types.AIAdapterSourceMemberModelPackageArns{
+			Value: []types.AIAdapterModelPackageEntry{
+				{
+					AdapterId:       ptr.String("__AdapterId__"),
+					ModelPackageArn: ptr.String("__ModelPackageArn__"),
+				},
+				{
+					AdapterId:       ptr.String("__AdapterId__"),
+					ModelPackageArn: ptr.String("__ModelPackageArn__"),
+				},
+			},
+		},
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -8068,6 +8080,10 @@ func TestCheckRequestSnapshot_CreateOptimizationJob(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+		},
+		TrainingPlanArns: []string{
+			"__Member__",
+			"__Member__",
 		},
 	}
 	body := &bytes.Buffer{}
@@ -23002,6 +23018,18 @@ func TestUpdateRequestSnapshot_CreateAIRecommendationJob(t *testing.T) {
 				},
 			},
 		},
+		AdapterSource: &types.AIAdapterSourceMemberModelPackageArns{
+			Value: []types.AIAdapterModelPackageEntry{
+				{
+					AdapterId:       ptr.String("__AdapterId__"),
+					ModelPackageArn: ptr.String("__ModelPackageArn__"),
+				},
+				{
+					AdapterId:       ptr.String("__AdapterId__"),
+					ModelPackageArn: ptr.String("__ModelPackageArn__"),
+				},
+			},
+		},
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -30402,6 +30430,10 @@ func TestUpdateRequestSnapshot_CreateOptimizationJob(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+		},
+		TrainingPlanArns: []string{
+			"__Member__",
+			"__Member__",
 		},
 	}
 	body := &bytes.Buffer{}

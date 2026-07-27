@@ -210,6 +210,26 @@ func (m *validateOpBatchGetDataQualityResult) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetDataQualityRulesetEvaluationRun struct {
+}
+
+func (*validateOpBatchGetDataQualityRulesetEvaluationRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetDataQualityRulesetEvaluationRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetDataQualityRulesetEvaluationRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetDataQualityRulesetEvaluationRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetDevEndpoints struct {
 }
 
@@ -5028,6 +5048,10 @@ func addOpBatchGetCustomEntityTypesValidationMiddleware(stack *middleware.Stack)
 
 func addOpBatchGetDataQualityResultValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetDataQualityResult{}, middleware.After)
+}
+
+func addOpBatchGetDataQualityRulesetEvaluationRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetDataQualityRulesetEvaluationRun{}, middleware.After)
 }
 
 func addOpBatchGetDevEndpointsValidationMiddleware(stack *middleware.Stack) error {
@@ -11241,6 +11265,21 @@ func validateOpBatchGetDataQualityResultInput(v *BatchGetDataQualityResultInput)
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetDataQualityResultInput"}
 	if v.ResultIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResultIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetDataQualityRulesetEvaluationRunInput(v *BatchGetDataQualityRulesetEvaluationRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetDataQualityRulesetEvaluationRunInput"}
+	if v.RunIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

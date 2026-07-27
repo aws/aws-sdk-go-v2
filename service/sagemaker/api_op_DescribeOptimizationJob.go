@@ -129,6 +129,12 @@ type DescribeOptimizationJobOutput struct {
 	// The time when the optimization job started.
 	OptimizationStartTime *time.Time
 
+	// The Amazon Resource Name (ARN) of the training plan associated with this
+	// optimization job. This field appears only when you specified a training plan
+	// when you created the job. Optimization jobs that use on-demand capacity don't
+	// return this field.
+	TrainingPlanArns []string
+
 	// A VPC in Amazon VPC that your optimized model has access to.
 	VpcConfig *types.OptimizationVpcConfig
 

@@ -11,10 +11,11 @@ import (
 )
 
 // Creates a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on
-// EKS. You can create, describe, list and delete virtual clusters. They do not
-// consume any additional resource in your system. A single virtual cluster maps to
-// a single Kubernetes namespace. Given this relationship, you can model virtual
-// clusters the same way you model Kubernetes namespaces to meet your requirements.
+// EKS. You can create, update, describe, list and delete virtual clusters. They do
+// not consume any additional resource in your system. A single virtual cluster
+// maps to a single Kubernetes namespace. Given this relationship, you can model
+// virtual clusters the same way you model Kubernetes namespaces to meet your
+// requirements.
 func (c *Client) CreateVirtualCluster(ctx context.Context, params *CreateVirtualClusterInput, optFns ...func(*Options)) (*CreateVirtualClusterOutput, error) {
 	if params == nil {
 		params = &CreateVirtualClusterInput{}
@@ -46,6 +47,10 @@ type CreateVirtualClusterInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The scheduler configuration (concurrency and queue limits) to apply to the
+	// virtual cluster at creation time. When omitted, no limits are applied.
+	SchedulerConfiguration *types.SchedulerConfiguration
 
 	// The ID of the security configuration.
 	SecurityConfigurationId *string

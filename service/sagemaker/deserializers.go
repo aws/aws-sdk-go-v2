@@ -44365,6 +44365,218 @@ func awsAwsjson11_deserializeDocumentAggregationTransformations(v *map[string]ty
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAIAdapterModelPackageEntry(v **types.AIAdapterModelPackageEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AIAdapterModelPackageEntry
+	if *v == nil {
+		sv = &types.AIAdapterModelPackageEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdapterId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AIAdapterId to be of type string, got %T instead", value)
+				}
+				sv.AdapterId = ptr.String(jtv)
+			}
+
+		case "ModelPackageArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelPackageArn to be of type string, got %T instead", value)
+				}
+				sv.ModelPackageArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAIAdapterModelPackageEntryList(v *[]types.AIAdapterModelPackageEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AIAdapterModelPackageEntry
+	if *v == nil {
+		cv = []types.AIAdapterModelPackageEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AIAdapterModelPackageEntry
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAIAdapterModelPackageEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAIAdapterS3Entry(v **types.AIAdapterS3Entry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AIAdapterS3Entry
+	if *v == nil {
+		sv = &types.AIAdapterS3Entry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdapterId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AIAdapterId to be of type string, got %T instead", value)
+				}
+				sv.AdapterId = ptr.String(jtv)
+			}
+
+		case "S3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.S3Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAIAdapterS3EntryList(v *[]types.AIAdapterS3Entry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AIAdapterS3Entry
+	if *v == nil {
+		cv = []types.AIAdapterS3Entry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AIAdapterS3Entry
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAIAdapterS3Entry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAIAdapterSource(v *types.AIAdapterSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.AIAdapterSource
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "ModelPackageArns":
+			var mv []types.AIAdapterModelPackageEntry
+			if err := awsAwsjson11_deserializeDocumentAIAdapterModelPackageEntryList(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.AIAdapterSourceMemberModelPackageArns{Value: mv}
+			break loop
+
+		case "S3Uris":
+			var mv []types.AIAdapterS3Entry
+			if err := awsAwsjson11_deserializeDocumentAIAdapterS3EntryList(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.AIAdapterSourceMemberS3Uris{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAIBenchmarkEndpoint(v **types.AIBenchmarkEndpoint, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -45114,6 +45326,11 @@ func awsAwsjson11_deserializeDocumentAIRecommendation(v **types.AIRecommendation
 
 	for key, value := range shape {
 		switch key {
+		case "AdapterDetails":
+			if err := awsAwsjson11_deserializeDocumentAIRecommendationAdapterDetails(&sv.AdapterDetails, value); err != nil {
+				return err
+			}
+
 		case "AIBenchmarkJobArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -45150,6 +45367,47 @@ func awsAwsjson11_deserializeDocumentAIRecommendation(v **types.AIRecommendation
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.RecommendationDescription = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAIRecommendationAdapterDetails(v **types.AIRecommendationAdapterDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AIRecommendationAdapterDetails
+	if *v == nil {
+		sv = &types.AIRecommendationAdapterDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ModelPackageArns":
+			if err := awsAwsjson11_deserializeDocumentAIAdapterModelPackageEntryList(&sv.ModelPackageArns, value); err != nil {
+				return err
+			}
+
+		case "S3Uris":
+			if err := awsAwsjson11_deserializeDocumentAIAdapterS3EntryList(&sv.S3Uris, value); err != nil {
+				return err
 			}
 
 		default:
@@ -45345,6 +45603,19 @@ func awsAwsjson11_deserializeDocumentAIRecommendationDeploymentConfiguration(v *
 					return fmt.Errorf("expected AIRecommendationInstanceType to be of type string, got %T instead", value)
 				}
 				sv.InstanceType = types.AIRecommendationInstanceType(jtv)
+			}
+
+		case "MinCpuMemoryRequiredInMb":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AIRecommendationMinCpuMemoryRequiredInMb to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinCpuMemoryRequiredInMb = ptr.Int32(int32(i64))
 			}
 
 		case "S3":
@@ -85152,6 +85423,42 @@ func awsAwsjson11_deserializeDocumentOptimizationJobSummary(v **types.Optimizati
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentOptimizationJobTrainingPlanArns(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected TrainingPlanArn to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentOptimizationModelAccessConfig(v **types.OptimizationModelAccessConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -109160,6 +109467,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeAIRecommendationJobOutput(v **Des
 
 	for key, value := range shape {
 		switch key {
+		case "AdapterSource":
+			if err := awsAwsjson11_deserializeDocumentAIAdapterSource(&sv.AdapterSource, value); err != nil {
+				return err
+			}
+
 		case "AIRecommendationJobArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -116999,6 +117311,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeOptimizationJobOutput(v **Describ
 
 		case "StoppingCondition":
 			if err := awsAwsjson11_deserializeDocumentStoppingCondition(&sv.StoppingCondition, value); err != nil {
+				return err
+			}
+
+		case "TrainingPlanArns":
+			if err := awsAwsjson11_deserializeDocumentOptimizationJobTrainingPlanArns(&sv.TrainingPlanArns, value); err != nil {
 				return err
 			}
 

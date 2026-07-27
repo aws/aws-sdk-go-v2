@@ -1027,6 +1027,10 @@ func TestCheckRequestSnapshot_StartProfileUpdateTask(t *testing.T) {
 					Locale:      ptr.String("__Locale__"),
 				},
 			},
+			Headquarters: &types.Headquarters{
+				CountryCode:     ptr.String("__CountryCode__"),
+				SubdivisionCode: ptr.String("__SubdivisionCode__"),
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2097,6 +2101,10 @@ func TestUpdateRequestSnapshot_StartProfileUpdateTask(t *testing.T) {
 					LogoUrl:     ptr.String("__LogoUrl__"),
 					Locale:      ptr.String("__Locale__"),
 				},
+			},
+			Headquarters: &types.Headquarters{
+				CountryCode:     ptr.String("__CountryCode__"),
+				SubdivisionCode: ptr.String("__SubdivisionCode__"),
 			},
 		},
 	}

@@ -1239,6 +1239,25 @@ type CatalogSource struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for a Glue Data Catalog table used to store data quality
+// results.
+type CatalogTableConfigOptions struct {
+
+	// A unique identifier for the Glue Data Catalog.
+	CatalogId *string
+
+	// The name of the database in the Glue Data Catalog.
+	DatabaseName *string
+
+	// The Amazon S3 location for storing the results.
+	S3Location *string
+
+	// The name of the table in the Glue Data Catalog.
+	TableName *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies an Glue Data Catalog target.
 type CatalogTarget struct {
 
@@ -3513,6 +3532,9 @@ type DataQualityAnalyzerResult struct {
 	// A description of the data quality analyzer.
 	Description *string
 
+	// A map of distribution metrics associated with the evaluation of the analyzer.
+	EvaluatedDistributions map[string]DistributionData
+
 	// A map of metrics associated with the evaluation of the analyzer.
 	EvaluatedMetrics map[string]float64
 
@@ -3556,8 +3578,29 @@ type DataQualityEvaluationRunAdditionalRunOptions struct {
 	// /aws-glue/data-quality/error and /aws-glue/data-quality/output log groups.
 	CustomLogGroupPrefix *string
 
+	// The configuration for writing rule results to a Glue Data Catalog table.
+	DataQualityRuleResults *DataQualityRuleResultsOptions
+
+	// The observation mode for the evaluation run. Specifies how anomaly detection
+	// bounds are calculated.
+	ObservationMode ObservationMode
+
+	// The configuration for writing observation results to a Glue Data Catalog table.
+	ObservationResults *ObservationResultsOptions
+
+	// The scope of the observation for the evaluation run. Specifies whether anomaly
+	// detection is enabled or disabled.
+	ObservationScope ObservationConfiguration
+
+	// The configuration for writing profiling results to a Glue Data Catalog table.
+	ProfilingResults *ProfilingResultsOptions
+
 	// Prefix for Amazon S3 to store results.
 	ResultsS3Prefix *string
+
+	// The configuration for writing row-level evaluation results to a Glue Data
+	// Catalog table.
+	RowLevelResults *RowLevelResultsOptions
 
 	noSmithyDocumentSerde
 }
@@ -3734,8 +3777,23 @@ type DataQualityResultFilterCriteria struct {
 	noSmithyDocumentSerde
 }
 
+// Additional run options you can specify for a recommendation run.
+type DataQualityRuleRecommendationRunAdditionalRunOptions struct {
+
+	// A custom prefix for the CloudWatch log group names. When specified,
+	// recommendation run logs are written to /error and /output instead of the
+	// default /aws-glue/data-quality/error and /aws-glue/data-quality/output log
+	// groups.
+	CustomLogGroupPrefix *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the result of a data quality rule recommendation run.
 type DataQualityRuleRecommendationRunDescription struct {
+
+	// The name of the ruleset that was created by the recommendation run.
+	CreatedRulesetName *string
 
 	// The data source (Glue table) associated with the recommendation run.
 	DataSource *DataSource
@@ -3796,6 +3854,72 @@ type DataQualityRuleResult struct {
 	// A map containing metrics associated with the evaluation of the rule based on
 	// row-level results.
 	RuleMetrics map[string]float64
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for writing data quality rule results.
+type DataQualityRuleResultsOptions struct {
+
+	// The Glue Data Catalog table configuration for storing the rule results.
+	CatalogTableConfig *CatalogTableConfigOptions
+
+	// Set to true to write data quality rule results.
+	WriteDataQualityRuleResultsEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// The details of a data quality ruleset evaluation run.
+type DataQualityRulesetEvaluationRun struct {
+
+	// A map of reference strings to additional data sources you can specify for an
+	// evaluation run.
+	AdditionalDataSources map[string]DataSource
+
+	// Additional run options you can specify for an evaluation run.
+	AdditionalRunOptions *DataQualityEvaluationRunAdditionalRunOptions
+
+	// The date and time when this run was completed.
+	CompletedOn *time.Time
+
+	// A data source (an Glue table) for which you want data quality results.
+	DataSource *DataSource
+
+	// The error strings that are associated with the run.
+	ErrorString *string
+
+	// The amount of time (in seconds) that the run consumed resources.
+	ExecutionTime int32
+
+	// A timestamp. The last point in time when this run was modified.
+	LastModifiedOn *time.Time
+
+	// The number of G.1X workers to be used in the run. The default is 5.
+	NumberOfWorkers *int32
+
+	// A list of result IDs for the data quality results for the run.
+	ResultIds []string
+
+	// An IAM role supplied to encrypt the results of the run.
+	Role *string
+
+	// A list of ruleset names for the run.
+	RulesetNames []string
+
+	// The unique run identifier associated with this run.
+	RunId *string
+
+	// The date and time when this run started.
+	StartedOn *time.Time
+
+	// The status for this run.
+	Status TaskStatusType
+
+	// The timeout for a run in minutes. This is the maximum time that a run can
+	// consume resources before it is terminated and enters TIMEOUT status. The
+	// default is 2,880 minutes (48 hours).
+	Timeout *int32
 
 	noSmithyDocumentSerde
 }
@@ -4347,6 +4471,33 @@ type DirectSchemaChangePolicy struct {
 
 	// The update behavior when the crawler finds a changed schema.
 	UpdateBehavior UpdateCatalogBehavior
+
+	noSmithyDocumentSerde
+}
+
+// The distribution data for a statistic.
+type DistributionData struct {
+
+	// The bin edge values for the distribution.
+	BinEdges []string
+
+	// The frequency count for each bin in the distribution.
+	Count []int32
+
+	// The data type of the column for the distribution.
+	DataType *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for writing distribution results.
+type DistributionResultsOptions struct {
+
+	// The Glue Data Catalog table configuration for storing the distribution results.
+	CatalogTableConfig *CatalogTableConfigOptions
+
+	// Set to true to write distribution results.
+	WriteDistributionResultsEnabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -8349,6 +8500,18 @@ type OAuth2PropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for writing observation results.
+type ObservationResultsOptions struct {
+
+	// The Glue Data Catalog table configuration for storing the observation results.
+	CatalogTableConfig *CatalogTableConfigOptions
+
+	// Set to true to write observation results.
+	WriteObservationResultsEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // Offset-based pagination configuration that defines how to handle pagination
 // using numeric offsets and limits.
 type OffsetConfiguration struct {
@@ -8829,6 +8992,21 @@ type ProfileConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for writing profiling results.
+type ProfilingResultsOptions struct {
+
+	// The Glue Data Catalog table configuration for storing the profiling results.
+	CatalogTableConfig *CatalogTableConfigOptions
+
+	// The configuration for writing distribution results.
+	DistributionResults *DistributionResultsOptions
+
+	// Set to true to write profiling results.
+	WriteProfilingResultsEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // An object that defines a connection type for a compute environment.
 type Property struct {
 
@@ -9251,6 +9429,21 @@ type Route struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for writing row-level evaluation results.
+type RowLevelResultsOptions struct {
+
+	// The Glue Data Catalog table configuration for storing the results.
+	CatalogTableConfig *CatalogTableConfigOptions
+
+	// The maximum number of rows to write in the results.
+	MaxRowsToWrite *int32
+
+	// The result type to include in the row-level results output.
+	ResultType ResultTypeEnum
 
 	noSmithyDocumentSerde
 }
@@ -11311,6 +11504,9 @@ type StatisticSummary struct {
 
 	// The list of columns referenced by the statistic.
 	ColumnsReferenced []string
+
+	// The distribution value for the statistic.
+	DistributionValue *DistributionData
 
 	// The value of the statistic.
 	DoubleValue float64

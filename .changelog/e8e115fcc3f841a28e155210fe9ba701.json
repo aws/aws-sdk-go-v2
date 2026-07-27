@@ -1,0 +1,8 @@
+{
+    "id": "e8e115fc-c3f8-41a2-8e15-5210fe9ba701",
+    "type": "feature",
+    "description": "Added new Governance fields to Custom Permissions API to support Deny By Default functionality.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

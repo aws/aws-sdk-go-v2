@@ -18,6 +18,7 @@
         "api_op_BatchGetCrawlers.go",
         "api_op_BatchGetCustomEntityTypes.go",
         "api_op_BatchGetDataQualityResult.go",
+        "api_op_BatchGetDataQualityRulesetEvaluationRun.go",
         "api_op_BatchGetDevEndpoints.go",
         "api_op_BatchGetIterableForms.go",
         "api_op_BatchGetJobs.go",
