@@ -1,8 +1,0 @@
-{
-    "id": "03ba5864-ce60-414c-a2a9-116f67bfb245",
-    "type": "feature",
-    "description": "This release adds LoRA adapters, training plans, and new instance types to SageMaker inference optimization. CreateAIRecommendationJob accepts optional AdapterSource and CreateOptimizationJob accepts optional TrainingPlanArns and the ml.g7e and ml.p6-b200 families.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

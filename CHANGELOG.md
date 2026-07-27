@@ -1,3 +1,27 @@
+# Release (2026-07-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.35.0](service/account/CHANGELOG.md#v1350-2026-07-27)
+  * **Feature**: This release adds support for the GetPrimaryEmailUpdateStatus API operation, which allows customers to retrieve the current status of a primary email address update request for an AWS account. The operation returns status information including whether the update is pending, completed, or failed.
+* `github.com/aws/aws-sdk-go-v2/service/bcmdataexports`: [v1.19.0](service/bcmdataexports/CHANGELOG.md#v1190-2026-07-27)
+  * **Feature**: With this release, customers can configure their data exports to deliver CSV reports in ZIP compressed format.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.49.0](service/cleanrooms/CHANGELOG.md#v1490-2026-07-27)
+  * **Feature**: This release adds support for the CR.8X worker type for SQL (32 vCPU)
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.27.0](service/cleanroomsml/CHANGELOG.md#v1270-2026-07-27)
+  * **Feature**: This release adds support for the CR.8X worker type for SQL (32 vCPU)
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.45.0](service/emrcontainers/CHANGELOG.md#v1450-2026-07-27)
+  * **Feature**: With this launch, you can now set concurrent job limits on a virtual cluster, giving you fine-grained control over how many job runs execute at once and how many can wait in queue.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.150.0](service/glue/CHANGELOG.md#v11500-2026-07-27)
+  * **Feature**: Adds BatchGetDataQualityRulesetEvaluationRun API to retrieve multiple runs in one call, ObservationScope and ObservationMode parameters for anomaly detection, writing evaluation results to Data Catalog tables, and custom log group paths for recommendation runs.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralaccount`: [v1.8.0](service/partnercentralaccount/CHANGELOG.md#v180-2026-07-27)
+  * **Feature**: Adds optional headquarters location to StartProfileUpdateTask, letting partners record their headquarters as an ISO 3166 country and subdivision code on their profile. When headquarters is provided, both the country and subdivision codes are required.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.122.0](service/quicksight/CHANGELOG.md#v11220-2026-07-27)
+  * **Feature**: Added new Governance fields to Custom Permissions API to support Deny By Default functionality.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.262.0](service/sagemaker/CHANGELOG.md#v12620-2026-07-27)
+  * **Feature**: This release adds LoRA adapters, training plans, and new instance types to SageMaker inference optimization. CreateAIRecommendationJob accepts optional AdapterSource and CreateOptimizationJob accepts optional TrainingPlanArns and the ml.g7e and ml.p6-b200 families.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.8.0](service/securityagent/CHANGELOG.md#v180-2026-07-27)
+  * **Feature**: AWS Security Agent adds a new task hours field that reflects the active work done for a task.
+
 # Release (2026-07-24)
 
 ## General Highlights

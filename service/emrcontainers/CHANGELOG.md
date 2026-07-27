@@ -1,3 +1,7 @@
+# v1.45.0 (2026-07-27)
+
+* **Feature**: With this launch, you can now set concurrent job limits on a virtual cluster, giving you fine-grained control over how many job runs execute at once and how many can wait in queue.
+
 # v1.44.0 (2026-07-21)
 
 * **Feature**: Add an option to clients to disable clock skew

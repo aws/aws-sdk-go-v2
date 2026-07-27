@@ -1,8 +1,0 @@
-{
-    "id": "1d6e098d-8f1d-403f-a016-fff4d24e0452",
-    "type": "feature",
-    "description": "With this launch, you can now set concurrent job limits on a virtual cluster, giving you fine-grained control over how many job runs execute at once and how many can wait in queue.",
-    "modules": [
-        "service/emrcontainers"
-    ]
-}

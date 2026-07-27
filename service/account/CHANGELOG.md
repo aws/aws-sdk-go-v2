@@ -1,3 +1,7 @@
+# v1.35.0 (2026-07-27)
+
+* **Feature**: This release adds support for the GetPrimaryEmailUpdateStatus API operation, which allows customers to retrieve the current status of a primary email address update request for an AWS account. The operation returns status information including whether the update is pending, completed, or failed.
+
 # v1.34.0 (2026-07-21)
 
 * **Feature**: Add an option to clients to disable clock skew

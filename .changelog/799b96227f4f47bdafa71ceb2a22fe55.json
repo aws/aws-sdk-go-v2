@@ -1,8 +1,0 @@
-{
-    "id": "799b9622-7f4f-47bd-afa7-1ceb2a22fe55",
-    "type": "feature",
-    "description": "Adds BatchGetDataQualityRulesetEvaluationRun API to retrieve multiple runs in one call, ObservationScope and ObservationMode parameters for anomaly detection, writing evaluation results to Data Catalog tables, and custom log group paths for recommendation runs.",
-    "modules": [
-        "service/glue"
-    ]
-}

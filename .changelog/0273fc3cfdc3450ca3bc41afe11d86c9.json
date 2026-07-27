@@ -1,8 +1,0 @@
-{
-    "id": "0273fc3c-fdc3-450c-a3bc-41afe11d86c9",
-    "type": "feature",
-    "description": "This release adds support for the GetPrimaryEmailUpdateStatus API operation, which allows customers to retrieve the current status of a primary email address update request for an AWS account. The operation returns status information including whether the update is pending, completed, or failed.",
-    "modules": [
-        "service/account"
-    ]
-}

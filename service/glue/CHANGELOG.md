@@ -1,3 +1,7 @@
+# v1.150.0 (2026-07-27)
+
+* **Feature**: Adds BatchGetDataQualityRulesetEvaluationRun API to retrieve multiple runs in one call, ObservationScope and ObservationMode parameters for anomaly detection, writing evaluation results to Data Catalog tables, and custom log group paths for recommendation runs.
+
 # v1.149.0 (2026-07-21)
 
 * **Feature**: Add an option to clients to disable clock skew

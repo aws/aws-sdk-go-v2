@@ -1,3 +1,7 @@
+# v1.19.0 (2026-07-27)
+
+* **Feature**: With this release, customers can configure their data exports to deliver CSV reports in ZIP compressed format.
+
 # v1.18.0 (2026-07-21)
 
 * **Feature**: Add an option to clients to disable clock skew

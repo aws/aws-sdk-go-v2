@@ -1,8 +1,0 @@
-{
-    "id": "ab29a43b-1d3d-49d4-ba9c-42dd2a51b833",
-    "type": "feature",
-    "description": "Adds optional headquarters location to StartProfileUpdateTask, letting partners record their headquarters as an ISO 3166 country and subdivision code on their profile. When headquarters is provided, both the country and subdivision codes are required.",
-    "modules": [
-        "service/partnercentralaccount"
-    ]
-}

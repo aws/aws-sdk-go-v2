@@ -1,3 +1,7 @@
+# v1.8.0 (2026-07-27)
+
+* **Feature**: AWS Security Agent adds a new task hours field that reflects the active work done for a task.
+
 # v1.7.0 (2026-07-21)
 
 * **Feature**: Add an option to clients to disable clock skew

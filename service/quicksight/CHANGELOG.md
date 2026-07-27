@@ -1,3 +1,7 @@
+# v1.122.0 (2026-07-27)
+
+* **Feature**: Added new Governance fields to Custom Permissions API to support Deny By Default functionality.
+
 # v1.121.0 (2026-07-23)
 
 * **Feature**: Added new capabilities to custom permissions profiles to control access to Amazon Quick through the browser extension and Microsoft Word, Outlook, Excel, and PowerPoint add-ins.

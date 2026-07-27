@@ -1,3 +1,7 @@
+# v1.262.0 (2026-07-27)
+
+* **Feature**: This release adds LoRA adapters, training plans, and new instance types to SageMaker inference optimization. CreateAIRecommendationJob accepts optional AdapterSource and CreateOptimizationJob accepts optional TrainingPlanArns and the ml.g7e and ml.p6-b200 families.
+
 # v1.261.0 (2026-07-23)
 
 * **Feature**: Release support for c6a, m6a, m6g, m7g, m8g instance types for SageMaker HyperPod

@@ -1,8 +1,0 @@
-{
-    "id": "de49bb32-03b3-4eed-9924-a133ee07d606",
-    "type": "feature",
-    "description": "This release adds support for the CR.8X worker type for SQL (32 vCPU)",
-    "modules": [
-        "service/cleanroomsml"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.27.0 (2026-07-27)
+
+* **Feature**: This release adds support for the CR.8X worker type for SQL (32 vCPU)
+
 # v1.26.0 (2026-07-21)
 
 * **Feature**: Add an option to clients to disable clock skew
