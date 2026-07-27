@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -83,6 +85,22 @@ type StartMatchmakingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMatchmakingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMatchmakingInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMatchmakingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationName != nil {
+		s.WriteString(schemas.StartMatchmakingInput_ConfigurationName, *v.ConfigurationName)
+	}
+	serializePlayerList(s, schemas.StartMatchmakingInput_Players, v.Players)
+	if v.TicketId != nil {
+		s.WriteString(schemas.StartMatchmakingInput_TicketId, *v.TicketId)
+	}
+}
+
 type StartMatchmakingOutput struct {
 
 	// Ticket representing the matchmaking request. This object include the
@@ -96,13 +114,34 @@ type StartMatchmakingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMatchmakingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMatchmakingOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMatchmakingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MatchmakingTicket != nil {
+		s.WriteStruct(schemas.StartMatchmakingOutput_MatchmakingTicket)
+		v.MatchmakingTicket.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartMatchmakingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMatchmakingOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMatchmakingOutput_MatchmakingTicket:
+			v.MatchmakingTicket = &types.MatchmakingTicket{}
+			return v.MatchmakingTicket.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMatchmakingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartMatchmaking{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMatchmaking, schemas.StartMatchmakingInput, schemas.StartMatchmakingOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartMatchmaking{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMatchmaking, schemas.StartMatchmakingInput, schemas.StartMatchmakingOutput), output: &StartMatchmakingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package cloudwatch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,15 @@ type StartOTelEnrichmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOTelEnrichmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOTelEnrichmentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOTelEnrichmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type StartOTelEnrichmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +55,26 @@ type StartOTelEnrichmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOTelEnrichmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOTelEnrichmentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOTelEnrichmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartOTelEnrichmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartOTelEnrichmentOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartOTelEnrichmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartOTelEnrichment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOTelEnrichment, schemas.StartOTelEnrichmentInput, schemas.StartOTelEnrichmentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartOTelEnrichment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOTelEnrichment, schemas.StartOTelEnrichmentInput, schemas.StartOTelEnrichmentOutput), output: &StartOTelEnrichmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

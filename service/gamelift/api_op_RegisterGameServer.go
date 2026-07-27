@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -81,6 +83,30 @@ type RegisterGameServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterGameServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterGameServerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterGameServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionInfo != nil {
+		s.WriteString(schemas.RegisterGameServerInput_ConnectionInfo, *v.ConnectionInfo)
+	}
+	if v.GameServerData != nil {
+		s.WriteString(schemas.RegisterGameServerInput_GameServerData, *v.GameServerData)
+	}
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.RegisterGameServerInput_GameServerGroupName, *v.GameServerGroupName)
+	}
+	if v.GameServerId != nil {
+		s.WriteString(schemas.RegisterGameServerInput_GameServerId, *v.GameServerId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.RegisterGameServerInput_InstanceId, *v.InstanceId)
+	}
+}
+
 type RegisterGameServerOutput struct {
 
 	// Object that describes the newly registered game server.
@@ -92,13 +118,34 @@ type RegisterGameServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterGameServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterGameServerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterGameServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServer != nil {
+		s.WriteStruct(schemas.RegisterGameServerOutput_GameServer)
+		v.GameServer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegisterGameServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterGameServerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterGameServerOutput_GameServer:
+			v.GameServer = &types.GameServer{}
+			return v.GameServer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpRegisterGameServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterGameServer, schemas.RegisterGameServerInput, schemas.RegisterGameServerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpRegisterGameServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterGameServer, schemas.RegisterGameServerInput, schemas.RegisterGameServerOutput), output: &RegisterGameServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

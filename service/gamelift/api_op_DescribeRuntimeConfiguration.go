@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,18 @@ type DescribeRuntimeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRuntimeConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRuntimeConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRuntimeConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeRuntimeConfigurationInput_FleetId, *v.FleetId)
+	}
+}
+
 type DescribeRuntimeConfigurationOutput struct {
 
 	// Instructions that describe how server processes are launched and maintained on
@@ -69,13 +83,34 @@ type DescribeRuntimeConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRuntimeConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRuntimeConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRuntimeConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuntimeConfiguration != nil {
+		s.WriteStruct(schemas.DescribeRuntimeConfigurationOutput_RuntimeConfiguration)
+		v.RuntimeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeRuntimeConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRuntimeConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRuntimeConfigurationOutput_RuntimeConfiguration:
+			v.RuntimeConfiguration = &types.RuntimeConfiguration{}
+			return v.RuntimeConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRuntimeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeRuntimeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRuntimeConfiguration, schemas.DescribeRuntimeConfigurationInput, schemas.DescribeRuntimeConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeRuntimeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRuntimeConfiguration, schemas.DescribeRuntimeConfigurationInput, schemas.DescribeRuntimeConfigurationOutput), output: &DescribeRuntimeConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

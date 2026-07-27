@@ -5,7 +5,9 @@ package computeoptimizerautomation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,22 @@ type ListAutomationRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomationRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomationRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomationRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListAutomationRulesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutomationRulesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomationRulesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAutomationRulesOutput struct {
 
 	//  The list of automation rules that match the specified criteria.
@@ -57,13 +75,35 @@ type ListAutomationRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomationRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomationRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomationRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomationRules(s, schemas.ListAutomationRulesResponse_automationRules, v.AutomationRules)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomationRulesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAutomationRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutomationRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutomationRulesResponse_automationRules:
+			return deserializeAutomationRules(d, schemas.ListAutomationRulesResponse_automationRules, &v.AutomationRules)
+		case schemas.ListAutomationRulesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutomationRulesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutomationRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAutomationRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomationRules, schemas.ListAutomationRulesRequest, schemas.ListAutomationRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAutomationRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomationRules, schemas.ListAutomationRulesRequest, schemas.ListAutomationRulesResponse), output: &ListAutomationRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

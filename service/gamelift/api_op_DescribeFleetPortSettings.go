@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,6 +66,21 @@ type DescribeFleetPortSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetPortSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetPortSettingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetPortSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeFleetPortSettingsInput_FleetId, *v.FleetId)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.DescribeFleetPortSettingsInput_Location, *v.Location)
+	}
+}
+
 type DescribeFleetPortSettingsOutput struct {
 
 	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift Servers fleet
@@ -94,13 +111,57 @@ type DescribeFleetPortSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetPortSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetPortSettingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetPortSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetArn != nil {
+		s.WriteString(schemas.DescribeFleetPortSettingsOutput_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeFleetPortSettingsOutput_FleetId, *v.FleetId)
+	}
+	serializeIpPermissionsList(s, schemas.DescribeFleetPortSettingsOutput_InboundPermissions, v.InboundPermissions)
+	if v.Location != nil {
+		s.WriteString(schemas.DescribeFleetPortSettingsOutput_Location, *v.Location)
+	}
+	if v.UpdateStatus != "" {
+		s.WriteString(schemas.DescribeFleetPortSettingsOutput_UpdateStatus, string(v.UpdateStatus))
+	}
+}
+func (v *DescribeFleetPortSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFleetPortSettingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFleetPortSettingsOutput_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.DescribeFleetPortSettingsOutput_FleetArn, v.FleetArn)
+		case schemas.DescribeFleetPortSettingsOutput_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.DescribeFleetPortSettingsOutput_FleetId, v.FleetId)
+		case schemas.DescribeFleetPortSettingsOutput_InboundPermissions:
+			return deserializeIpPermissionsList(d, schemas.DescribeFleetPortSettingsOutput_InboundPermissions, &v.InboundPermissions)
+		case schemas.DescribeFleetPortSettingsOutput_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.DescribeFleetPortSettingsOutput_Location, v.Location)
+		case schemas.DescribeFleetPortSettingsOutput_UpdateStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeFleetPortSettingsOutput_UpdateStatus, &ev); err != nil {
+				return err
+			}
+			v.UpdateStatus = types.LocationUpdateStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFleetPortSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeFleetPortSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetPortSettings, schemas.DescribeFleetPortSettingsInput, schemas.DescribeFleetPortSettingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeFleetPortSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetPortSettings, schemas.DescribeFleetPortSettingsInput, schemas.DescribeFleetPortSettingsOutput), output: &DescribeFleetPortSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

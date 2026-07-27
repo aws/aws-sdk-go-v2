@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,21 @@ type DescribeFleetDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetDeploymentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.DescribeFleetDeploymentInput_DeploymentId, *v.DeploymentId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeFleetDeploymentInput_FleetId, *v.FleetId)
+	}
+}
+
 type DescribeFleetDeploymentOutput struct {
 
 	// The requested deployment information.
@@ -68,13 +85,37 @@ type DescribeFleetDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetDeploymentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetDeployment != nil {
+		s.WriteStruct(schemas.DescribeFleetDeploymentOutput_FleetDeployment)
+		v.FleetDeployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeLocationalDeployments(s, schemas.DescribeFleetDeploymentOutput_LocationalDeployments, v.LocationalDeployments)
+}
+func (v *DescribeFleetDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFleetDeploymentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFleetDeploymentOutput_FleetDeployment:
+			v.FleetDeployment = &types.FleetDeployment{}
+			return v.FleetDeployment.Deserialize(d)
+		case schemas.DescribeFleetDeploymentOutput_LocationalDeployments:
+			return deserializeLocationalDeployments(d, schemas.DescribeFleetDeploymentOutput_LocationalDeployments, &v.LocationalDeployments)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFleetDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeFleetDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetDeployment, schemas.DescribeFleetDeploymentInput, schemas.DescribeFleetDeploymentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeFleetDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetDeployment, schemas.DescribeFleetDeploymentInput, schemas.DescribeFleetDeploymentOutput), output: &DescribeFleetDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

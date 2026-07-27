@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,21 @@ type DescribeGameServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGameServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGameServerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGameServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.DescribeGameServerInput_GameServerGroupName, *v.GameServerGroupName)
+	}
+	if v.GameServerId != nil {
+		s.WriteString(schemas.DescribeGameServerInput_GameServerId, *v.GameServerId)
+	}
+}
+
 type DescribeGameServerOutput struct {
 
 	// Object that describes the requested game server.
@@ -65,13 +82,34 @@ type DescribeGameServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGameServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGameServerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGameServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServer != nil {
+		s.WriteStruct(schemas.DescribeGameServerOutput_GameServer)
+		v.GameServer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeGameServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGameServerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGameServerOutput_GameServer:
+			v.GameServer = &types.GameServer{}
+			return v.GameServer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeGameServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGameServer, schemas.DescribeGameServerInput, schemas.DescribeGameServerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeGameServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGameServer, schemas.DescribeGameServerInput, schemas.DescribeGameServerOutput), output: &DescribeGameServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

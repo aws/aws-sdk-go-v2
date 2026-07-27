@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -89,6 +91,32 @@ type UpdateScriptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScriptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScriptInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScriptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateScriptInput_Name, *v.Name)
+	}
+	if v.ScriptId != nil {
+		s.WriteString(schemas.UpdateScriptInput_ScriptId, *v.ScriptId)
+	}
+	if v.StorageLocation != nil {
+		s.WriteStruct(schemas.UpdateScriptInput_StorageLocation)
+		v.StorageLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.UpdateScriptInput_Version, *v.Version)
+	}
+	if v.ZipFile != nil {
+		s.WriteBlob(schemas.UpdateScriptInput_ZipFile, v.ZipFile)
+	}
+}
+
 type UpdateScriptOutput struct {
 
 	// The newly created script record with a unique script ID. The new script's
@@ -105,13 +133,34 @@ type UpdateScriptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScriptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScriptOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScriptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Script != nil {
+		s.WriteStruct(schemas.UpdateScriptOutput_Script)
+		v.Script.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateScriptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateScriptOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateScriptOutput_Script:
+			v.Script = &types.Script{}
+			return v.Script.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateScript{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScript, schemas.UpdateScriptInput, schemas.UpdateScriptOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateScript{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScript, schemas.UpdateScriptInput, schemas.UpdateScriptOutput), output: &UpdateScriptOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

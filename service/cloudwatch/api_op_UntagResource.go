@@ -4,6 +4,8 @@ package cloudwatch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,19 @@ type UntagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UntagResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.UntagResourceInput_ResourceARN, *v.ResourceARN)
+	}
+	serializeTagKeyList(s, schemas.UntagResourceInput_TagKeys, v.TagKeys)
+}
+
 type UntagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,13 +79,26 @@ type UntagResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UntagResourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UntagResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UntagResourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUntagResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceInput, schemas.UntagResourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUntagResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagResource, schemas.UntagResourceInput, schemas.UntagResourceOutput), output: &UntagResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

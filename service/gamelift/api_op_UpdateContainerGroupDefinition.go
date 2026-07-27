@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -119,6 +121,39 @@ type UpdateContainerGroupDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContainerGroupDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContainerGroupDefinitionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContainerGroupDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerContainerDefinition != nil {
+		s.WriteStruct(schemas.UpdateContainerGroupDefinitionInput_GameServerContainerDefinition)
+		v.GameServerContainerDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateContainerGroupDefinitionInput_Name, *v.Name)
+	}
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.UpdateContainerGroupDefinitionInput_OperatingSystem, string(v.OperatingSystem))
+	}
+	if v.SourceVersionNumber != nil {
+		s.WriteInt32(schemas.UpdateContainerGroupDefinitionInput_SourceVersionNumber, *v.SourceVersionNumber)
+	}
+	serializeSupportContainerDefinitionInputList(s, schemas.UpdateContainerGroupDefinitionInput_SupportContainerDefinitions, v.SupportContainerDefinitions)
+	if v.TotalMemoryLimitMebibytes != nil {
+		s.WriteInt32(schemas.UpdateContainerGroupDefinitionInput_TotalMemoryLimitMebibytes, *v.TotalMemoryLimitMebibytes)
+	}
+	if v.TotalVcpuLimit != nil {
+		s.WriteFloat64(schemas.UpdateContainerGroupDefinitionInput_TotalVcpuLimit, *v.TotalVcpuLimit)
+	}
+	if v.VersionDescription != nil {
+		s.WriteString(schemas.UpdateContainerGroupDefinitionInput_VersionDescription, *v.VersionDescription)
+	}
+}
+
 type UpdateContainerGroupDefinitionOutput struct {
 
 	// The properties of the updated container group definition version.
@@ -130,13 +165,34 @@ type UpdateContainerGroupDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContainerGroupDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContainerGroupDefinitionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContainerGroupDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerGroupDefinition != nil {
+		s.WriteStruct(schemas.UpdateContainerGroupDefinitionOutput_ContainerGroupDefinition)
+		v.ContainerGroupDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateContainerGroupDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateContainerGroupDefinitionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateContainerGroupDefinitionOutput_ContainerGroupDefinition:
+			v.ContainerGroupDefinition = &types.ContainerGroupDefinition{}
+			return v.ContainerGroupDefinition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateContainerGroupDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateContainerGroupDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContainerGroupDefinition, schemas.UpdateContainerGroupDefinitionInput, schemas.UpdateContainerGroupDefinitionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateContainerGroupDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContainerGroupDefinition, schemas.UpdateContainerGroupDefinitionInput, schemas.UpdateContainerGroupDefinitionOutput), output: &UpdateContainerGroupDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

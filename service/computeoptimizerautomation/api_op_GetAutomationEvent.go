@@ -4,7 +4,9 @@ package computeoptimizerautomation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -34,6 +36,18 @@ type GetAutomationEventInput struct {
 	EventId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAutomationEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutomationEventRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutomationEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventId != nil {
+		s.WriteString(schemas.GetAutomationEventRequest_eventId, *v.EventId)
+	}
 }
 
 type GetAutomationEventOutput struct {
@@ -89,13 +103,130 @@ type GetAutomationEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutomationEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutomationEventResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutomationEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_accountId, *v.AccountId)
+	}
+	if v.CompletedTimestamp != nil {
+		s.WriteTime(schemas.GetAutomationEventResponse_completedTimestamp, *v.CompletedTimestamp)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.GetAutomationEventResponse_createdTimestamp, *v.CreatedTimestamp)
+	}
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteStruct(schemas.GetAutomationEventResponse_estimatedMonthlySavings)
+		v.EstimatedMonthlySavings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventDescription != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_eventDescription, *v.EventDescription)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_eventId, *v.EventId)
+	}
+	if v.EventStatus != "" {
+		s.WriteString(schemas.GetAutomationEventResponse_eventStatus, string(v.EventStatus))
+	}
+	if v.EventStatusReason != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_eventStatusReason, *v.EventStatusReason)
+	}
+	if v.EventType != "" {
+		s.WriteString(schemas.GetAutomationEventResponse_eventType, string(v.EventType))
+	}
+	if v.RecommendedActionId != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_recommendedActionId, *v.RecommendedActionId)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_region, *v.Region)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_resourceArn, *v.ResourceArn)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_resourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.GetAutomationEventResponse_resourceType, string(v.ResourceType))
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.GetAutomationEventResponse_ruleId, *v.RuleId)
+	}
+}
+func (v *GetAutomationEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAutomationEventResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAutomationEventResponse_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.GetAutomationEventResponse_accountId, v.AccountId)
+		case schemas.GetAutomationEventResponse_completedTimestamp:
+			v.CompletedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetAutomationEventResponse_completedTimestamp, v.CompletedTimestamp)
+		case schemas.GetAutomationEventResponse_createdTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetAutomationEventResponse_createdTimestamp, v.CreatedTimestamp)
+		case schemas.GetAutomationEventResponse_estimatedMonthlySavings:
+			v.EstimatedMonthlySavings = &types.EstimatedMonthlySavings{}
+			return v.EstimatedMonthlySavings.Deserialize(d)
+		case schemas.GetAutomationEventResponse_eventDescription:
+			v.EventDescription = new(string)
+			return d.ReadString(schemas.GetAutomationEventResponse_eventDescription, v.EventDescription)
+		case schemas.GetAutomationEventResponse_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.GetAutomationEventResponse_eventId, v.EventId)
+		case schemas.GetAutomationEventResponse_eventStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetAutomationEventResponse_eventStatus, &ev); err != nil {
+				return err
+			}
+			v.EventStatus = types.EventStatus(ev)
+			return nil
+		case schemas.GetAutomationEventResponse_eventStatusReason:
+			v.EventStatusReason = new(string)
+			return d.ReadString(schemas.GetAutomationEventResponse_eventStatusReason, v.EventStatusReason)
+		case schemas.GetAutomationEventResponse_eventType:
+			var ev string
+			if err := d.ReadString(schemas.GetAutomationEventResponse_eventType, &ev); err != nil {
+				return err
+			}
+			v.EventType = types.EventType(ev)
+			return nil
+		case schemas.GetAutomationEventResponse_recommendedActionId:
+			v.RecommendedActionId = new(string)
+			return d.ReadString(schemas.GetAutomationEventResponse_recommendedActionId, v.RecommendedActionId)
+		case schemas.GetAutomationEventResponse_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.GetAutomationEventResponse_region, v.Region)
+		case schemas.GetAutomationEventResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.GetAutomationEventResponse_resourceArn, v.ResourceArn)
+		case schemas.GetAutomationEventResponse_resourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.GetAutomationEventResponse_resourceId, v.ResourceId)
+		case schemas.GetAutomationEventResponse_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.GetAutomationEventResponse_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = types.ResourceType(ev)
+			return nil
+		case schemas.GetAutomationEventResponse_ruleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.GetAutomationEventResponse_ruleId, v.RuleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAutomationEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetAutomationEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomationEvent, schemas.GetAutomationEventRequest, schemas.GetAutomationEventResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetAutomationEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomationEvent, schemas.GetAutomationEventRequest, schemas.GetAutomationEventResponse), output: &GetAutomationEventOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

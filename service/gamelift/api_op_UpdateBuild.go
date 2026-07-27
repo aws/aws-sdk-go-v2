@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,24 @@ type UpdateBuildInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBuildInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBuildInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBuildInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildId != nil {
+		s.WriteString(schemas.UpdateBuildInput_BuildId, *v.BuildId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateBuildInput_Name, *v.Name)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.UpdateBuildInput_Version, *v.Version)
+	}
+}
+
 type UpdateBuildOutput struct {
 
 	// The updated build resource.
@@ -68,13 +88,34 @@ type UpdateBuildOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBuildOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBuildOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBuildOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Build != nil {
+		s.WriteStruct(schemas.UpdateBuildOutput_Build)
+		v.Build.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateBuildOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBuildOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBuildOutput_Build:
+			v.Build = &types.Build{}
+			return v.Build.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateBuild{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBuild, schemas.UpdateBuildInput, schemas.UpdateBuildOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateBuild{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBuild, schemas.UpdateBuildInput, schemas.UpdateBuildOutput), output: &UpdateBuildOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

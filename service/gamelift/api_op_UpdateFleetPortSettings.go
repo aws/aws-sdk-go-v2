@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,6 +64,20 @@ type UpdateFleetPortSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFleetPortSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFleetPortSettingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFleetPortSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.UpdateFleetPortSettingsInput_FleetId, *v.FleetId)
+	}
+	serializeIpPermissionsList(s, schemas.UpdateFleetPortSettingsInput_InboundPermissionAuthorizations, v.InboundPermissionAuthorizations)
+	serializeIpPermissionsList(s, schemas.UpdateFleetPortSettingsInput_InboundPermissionRevocations, v.InboundPermissionRevocations)
+}
+
 type UpdateFleetPortSettingsOutput struct {
 
 	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift Servers fleet
@@ -80,13 +96,38 @@ type UpdateFleetPortSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFleetPortSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFleetPortSettingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFleetPortSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetArn != nil {
+		s.WriteString(schemas.UpdateFleetPortSettingsOutput_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.UpdateFleetPortSettingsOutput_FleetId, *v.FleetId)
+	}
+}
+func (v *UpdateFleetPortSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFleetPortSettingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFleetPortSettingsOutput_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.UpdateFleetPortSettingsOutput_FleetArn, v.FleetArn)
+		case schemas.UpdateFleetPortSettingsOutput_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.UpdateFleetPortSettingsOutput_FleetId, v.FleetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFleetPortSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateFleetPortSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFleetPortSettings, schemas.UpdateFleetPortSettingsInput, schemas.UpdateFleetPortSettingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateFleetPortSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFleetPortSettings, schemas.UpdateFleetPortSettingsInput, schemas.UpdateFleetPortSettingsOutput), output: &UpdateFleetPortSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

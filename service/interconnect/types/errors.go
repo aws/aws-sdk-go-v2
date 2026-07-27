@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/interconnect/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,6 +34,27 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessDeniedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccessDeniedException_message, *v.Message)
+	}
+}
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was denied due to incorrect client supplied parameters.
 type InterconnectClientException struct {
@@ -59,6 +81,27 @@ func (e *InterconnectClientException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InterconnectClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InterconnectClientException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InterconnectClientException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InterconnectClientException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InterconnectClientException_message, *v.Message)
+	}
+}
+func (v *InterconnectClientException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InterconnectClientException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InterconnectClientException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InterconnectClientException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request resulted in an exception internal to the service.
 type InterconnectServerException struct {
@@ -85,6 +128,27 @@ func (e *InterconnectServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InterconnectServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InterconnectServerException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InterconnectServerException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InterconnectServerException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InterconnectServerException_message, *v.Message)
+	}
+}
+func (v *InterconnectServerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InterconnectServerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InterconnectServerException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InterconnectServerException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The input fails to satisfy the constraints specified.
 type InterconnectValidationException struct {
@@ -111,6 +175,27 @@ func (e *InterconnectValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InterconnectValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InterconnectValidationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InterconnectValidationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InterconnectValidationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InterconnectValidationException_message, *v.Message)
+	}
+}
+func (v *InterconnectValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InterconnectValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InterconnectValidationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InterconnectValidationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request specifies a resource that does not exist on the server.
 type ResourceNotFoundException struct {
@@ -137,6 +222,27 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested operation would result in the calling principal exceeding their
 // allotted quota.
@@ -164,6 +270,27 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_message, *v.Message)
+	}
+}
+func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceQuotaExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was denied due to request throttling.
 type ThrottlingException struct {
@@ -190,3 +317,24 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ThrottlingException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThrottlingException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThrottlingException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ThrottlingException_message, *v.Message)
+	}
+}
+func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThrottlingException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ThrottlingException_message, v.Message)
+		}
+		return nil
+	})
+}

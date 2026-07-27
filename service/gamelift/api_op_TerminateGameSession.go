@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -110,6 +112,21 @@ type TerminateGameSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateGameSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateGameSessionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateGameSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSessionId != nil {
+		s.WriteString(schemas.TerminateGameSessionInput_GameSessionId, *v.GameSessionId)
+	}
+	if v.TerminationMode != "" {
+		s.WriteString(schemas.TerminateGameSessionInput_TerminationMode, string(v.TerminationMode))
+	}
+}
+
 type TerminateGameSessionOutput struct {
 
 	// Properties describing a game session.
@@ -132,13 +149,34 @@ type TerminateGameSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateGameSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateGameSessionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateGameSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSession != nil {
+		s.WriteStruct(schemas.TerminateGameSessionOutput_GameSession)
+		v.GameSession.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TerminateGameSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateGameSessionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminateGameSessionOutput_GameSession:
+			v.GameSession = &types.GameSession{}
+			return v.GameSession.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTerminateGameSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpTerminateGameSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateGameSession, schemas.TerminateGameSessionInput, schemas.TerminateGameSessionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpTerminateGameSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateGameSession, schemas.TerminateGameSessionInput, schemas.TerminateGameSessionOutput), output: &TerminateGameSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

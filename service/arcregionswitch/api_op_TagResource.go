@@ -4,6 +4,8 @@ package arcregionswitch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,6 +44,18 @@ type TagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.TagResourceRequest_arn, *v.Arn)
+	}
+	serializeTags(s, schemas.TagResourceRequest_tags, v.Tags)
+}
 func (in *TagResourceInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.UseControlPlaneEndpoint = ptr.Bool(true)
@@ -54,13 +68,26 @@ type TagResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *TagResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpTagResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagResource, schemas.TagResourceRequest, schemas.TagResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpTagResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TagResource, schemas.TagResourceRequest, schemas.TagResourceResponse), output: &TagResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

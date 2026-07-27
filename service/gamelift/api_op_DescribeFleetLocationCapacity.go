@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,21 @@ type DescribeFleetLocationCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetLocationCapacityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetLocationCapacityInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetLocationCapacityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeFleetLocationCapacityInput_FleetId, *v.FleetId)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.DescribeFleetLocationCapacityInput_Location, *v.Location)
+	}
+}
+
 type DescribeFleetLocationCapacityOutput struct {
 
 	// Resource capacity information for the requested fleet location. Capacity
@@ -81,13 +98,34 @@ type DescribeFleetLocationCapacityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetLocationCapacityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetLocationCapacityOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetLocationCapacityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetCapacity != nil {
+		s.WriteStruct(schemas.DescribeFleetLocationCapacityOutput_FleetCapacity)
+		v.FleetCapacity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeFleetLocationCapacityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFleetLocationCapacityOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFleetLocationCapacityOutput_FleetCapacity:
+			v.FleetCapacity = &types.FleetCapacity{}
+			return v.FleetCapacity.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFleetLocationCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeFleetLocationCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetLocationCapacity, schemas.DescribeFleetLocationCapacityInput, schemas.DescribeFleetLocationCapacityOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeFleetLocationCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetLocationCapacity, schemas.DescribeFleetLocationCapacityInput, schemas.DescribeFleetLocationCapacityOutput), output: &DescribeFleetLocationCapacityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

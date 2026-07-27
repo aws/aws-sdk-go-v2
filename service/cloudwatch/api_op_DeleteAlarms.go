@@ -4,6 +4,8 @@ package cloudwatch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,16 @@ type DeleteAlarmsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAlarmsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAlarmsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAlarmsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAlarmNames(s, schemas.DeleteAlarmsInput_AlarmNames, v.AlarmNames)
+}
+
 type DeleteAlarmsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,13 +78,26 @@ type DeleteAlarmsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAlarmsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAlarmsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAlarmsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAlarmsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteAlarms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAlarms, schemas.DeleteAlarmsInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteAlarms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAlarms, schemas.DeleteAlarmsInput, nil), output: &DeleteAlarmsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

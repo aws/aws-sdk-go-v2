@@ -4,6 +4,8 @@ package cloudwatch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type GetDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDashboardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDashboardInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardName != nil {
+		s.WriteString(schemas.GetDashboardInput_DashboardName, *v.DashboardName)
+	}
+}
+
 type GetDashboardOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dashboard.
@@ -59,13 +73,44 @@ type GetDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDashboardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDashboardOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardArn != nil {
+		s.WriteString(schemas.GetDashboardOutput_DashboardArn, *v.DashboardArn)
+	}
+	if v.DashboardBody != nil {
+		s.WriteString(schemas.GetDashboardOutput_DashboardBody, *v.DashboardBody)
+	}
+	if v.DashboardName != nil {
+		s.WriteString(schemas.GetDashboardOutput_DashboardName, *v.DashboardName)
+	}
+}
+func (v *GetDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDashboardOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDashboardOutput_DashboardArn:
+			v.DashboardArn = new(string)
+			return d.ReadString(schemas.GetDashboardOutput_DashboardArn, v.DashboardArn)
+		case schemas.GetDashboardOutput_DashboardBody:
+			v.DashboardBody = new(string)
+			return d.ReadString(schemas.GetDashboardOutput_DashboardBody, v.DashboardBody)
+		case schemas.GetDashboardOutput_DashboardName:
+			v.DashboardName = new(string)
+			return d.ReadString(schemas.GetDashboardOutput_DashboardName, v.DashboardName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDashboard, schemas.GetDashboardInput, schemas.GetDashboardOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDashboard, schemas.GetDashboardInput, schemas.GetDashboardOutput), output: &GetDashboardOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

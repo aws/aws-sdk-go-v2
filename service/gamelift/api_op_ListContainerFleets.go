@@ -5,7 +5,9 @@ package gamelift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,6 +72,24 @@ type ListContainerFleetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContainerFleetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContainerFleetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContainerFleetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerGroupDefinitionName != nil {
+		s.WriteString(schemas.ListContainerFleetsInput_ContainerGroupDefinitionName, *v.ContainerGroupDefinitionName)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListContainerFleetsInput_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContainerFleetsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListContainerFleetsOutput struct {
 
 	// A collection of container fleet objects for all fleets that match the request
@@ -87,13 +107,35 @@ type ListContainerFleetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContainerFleetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContainerFleetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContainerFleetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerFleetList(s, schemas.ListContainerFleetsOutput_ContainerFleets, v.ContainerFleets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContainerFleetsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListContainerFleetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContainerFleetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContainerFleetsOutput_ContainerFleets:
+			return deserializeContainerFleetList(d, schemas.ListContainerFleetsOutput_ContainerFleets, &v.ContainerFleets)
+		case schemas.ListContainerFleetsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContainerFleetsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContainerFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListContainerFleets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContainerFleets, schemas.ListContainerFleetsInput, schemas.ListContainerFleetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListContainerFleets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContainerFleets, schemas.ListContainerFleetsInput, schemas.ListContainerFleetsOutput), output: &ListContainerFleetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

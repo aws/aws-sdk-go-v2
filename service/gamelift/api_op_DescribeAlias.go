@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,18 @@ type DescribeAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAliasInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasId != nil {
+		s.WriteString(schemas.DescribeAliasInput_AliasId, *v.AliasId)
+	}
+}
+
 type DescribeAliasOutput struct {
 
 	// The requested alias resource.
@@ -59,13 +73,34 @@ type DescribeAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAliasOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteStruct(schemas.DescribeAliasOutput_Alias)
+		v.Alias.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAliasOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAliasOutput_Alias:
+			v.Alias = &types.Alias{}
+			return v.Alias.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAlias, schemas.DescribeAliasInput, schemas.DescribeAliasOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAlias, schemas.DescribeAliasInput, schemas.DescribeAliasOutput), output: &DescribeAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

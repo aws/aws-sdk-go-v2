@@ -4,6 +4,8 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,21 @@ type DeregisterGameServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterGameServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterGameServerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterGameServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.DeregisterGameServerInput_GameServerGroupName, *v.GameServerGroupName)
+	}
+	if v.GameServerId != nil {
+		s.WriteString(schemas.DeregisterGameServerInput_GameServerId, *v.GameServerId)
+	}
+}
+
 type DeregisterGameServerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,13 +77,26 @@ type DeregisterGameServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterGameServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterGameServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeregisterGameServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeregisterGameServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterGameServer, schemas.DeregisterGameServerInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeregisterGameServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterGameServer, schemas.DeregisterGameServerInput, nil), output: &DeregisterGameServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -102,6 +104,24 @@ type CreateVpcPeeringConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcPeeringConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcPeeringConnectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcPeeringConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.CreateVpcPeeringConnectionInput_FleetId, *v.FleetId)
+	}
+	if v.PeerVpcAwsAccountId != nil {
+		s.WriteString(schemas.CreateVpcPeeringConnectionInput_PeerVpcAwsAccountId, *v.PeerVpcAwsAccountId)
+	}
+	if v.PeerVpcId != nil {
+		s.WriteString(schemas.CreateVpcPeeringConnectionInput_PeerVpcId, *v.PeerVpcId)
+	}
+}
+
 type CreateVpcPeeringConnectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -109,13 +129,26 @@ type CreateVpcPeeringConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcPeeringConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcPeeringConnectionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcPeeringConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateVpcPeeringConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVpcPeeringConnectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVpcPeeringConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateVpcPeeringConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcPeeringConnection, schemas.CreateVpcPeeringConnectionInput, schemas.CreateVpcPeeringConnectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateVpcPeeringConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcPeeringConnection, schemas.CreateVpcPeeringConnectionInput, schemas.CreateVpcPeeringConnectionOutput), output: &CreateVpcPeeringConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

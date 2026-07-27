@@ -4,6 +4,8 @@ package arcregionswitch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -37,6 +39,17 @@ type DeletePlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeletePlanRequest_arn, *v.Arn)
+	}
+}
 func (in *DeletePlanInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.UseControlPlaneEndpoint = ptr.Bool(true)
@@ -49,13 +62,26 @@ type DeletePlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeletePlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePlan, schemas.DeletePlanRequest, schemas.DeletePlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeletePlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePlan, schemas.DeletePlanRequest, schemas.DeletePlanResponse), output: &DeletePlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

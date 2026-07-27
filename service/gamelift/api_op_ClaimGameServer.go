@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -89,6 +91,29 @@ type ClaimGameServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClaimGameServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClaimGameServerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClaimGameServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterOption != nil {
+		s.WriteStruct(schemas.ClaimGameServerInput_FilterOption)
+		v.FilterOption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GameServerData != nil {
+		s.WriteString(schemas.ClaimGameServerInput_GameServerData, *v.GameServerData)
+	}
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.ClaimGameServerInput_GameServerGroupName, *v.GameServerGroupName)
+	}
+	if v.GameServerId != nil {
+		s.WriteString(schemas.ClaimGameServerInput_GameServerId, *v.GameServerId)
+	}
+}
+
 type ClaimGameServerOutput struct {
 
 	// Object that describes the newly claimed game server.
@@ -100,13 +125,34 @@ type ClaimGameServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClaimGameServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClaimGameServerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClaimGameServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServer != nil {
+		s.WriteStruct(schemas.ClaimGameServerOutput_GameServer)
+		v.GameServer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ClaimGameServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClaimGameServerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClaimGameServerOutput_GameServer:
+			v.GameServer = &types.GameServer{}
+			return v.GameServer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationClaimGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpClaimGameServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ClaimGameServer, schemas.ClaimGameServerInput, schemas.ClaimGameServerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpClaimGameServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ClaimGameServer, schemas.ClaimGameServerInput, schemas.ClaimGameServerOutput), output: &ClaimGameServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

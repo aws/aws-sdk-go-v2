@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -82,6 +84,22 @@ type AcceptMatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptMatchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptMatchInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptMatchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptanceType != "" {
+		s.WriteString(schemas.AcceptMatchInput_AcceptanceType, string(v.AcceptanceType))
+	}
+	serializePlayerIdsForAcceptMatch(s, schemas.AcceptMatchInput_PlayerIds, v.PlayerIds)
+	if v.TicketId != nil {
+		s.WriteString(schemas.AcceptMatchInput_TicketId, *v.TicketId)
+	}
+}
+
 type AcceptMatchOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -89,13 +107,26 @@ type AcceptMatchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptMatchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptMatchOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptMatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AcceptMatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptMatchOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptMatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpAcceptMatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptMatch, schemas.AcceptMatchInput, schemas.AcceptMatchOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpAcceptMatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptMatch, schemas.AcceptMatchInput, schemas.AcceptMatchOutput), output: &AcceptMatchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

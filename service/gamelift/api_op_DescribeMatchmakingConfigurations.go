@@ -5,7 +5,9 @@ package gamelift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,25 @@ type DescribeMatchmakingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMatchmakingConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMatchmakingConfigurationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMatchmakingConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeMatchmakingConfigurationsInput_Limit, *v.Limit)
+	}
+	serializeMatchmakingConfigurationNameList(s, schemas.DescribeMatchmakingConfigurationsInput_Names, v.Names)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeMatchmakingConfigurationsInput_NextToken, *v.NextToken)
+	}
+	if v.RuleSetName != nil {
+		s.WriteString(schemas.DescribeMatchmakingConfigurationsInput_RuleSetName, *v.RuleSetName)
+	}
+}
+
 type DescribeMatchmakingConfigurationsOutput struct {
 
 	// A collection of requested matchmaking configurations.
@@ -84,13 +105,35 @@ type DescribeMatchmakingConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMatchmakingConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMatchmakingConfigurationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMatchmakingConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMatchmakingConfigurationList(s, schemas.DescribeMatchmakingConfigurationsOutput_Configurations, v.Configurations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeMatchmakingConfigurationsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeMatchmakingConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMatchmakingConfigurationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMatchmakingConfigurationsOutput_Configurations:
+			return deserializeMatchmakingConfigurationList(d, schemas.DescribeMatchmakingConfigurationsOutput_Configurations, &v.Configurations)
+		case schemas.DescribeMatchmakingConfigurationsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeMatchmakingConfigurationsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMatchmakingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeMatchmakingConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMatchmakingConfigurations, schemas.DescribeMatchmakingConfigurationsInput, schemas.DescribeMatchmakingConfigurationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeMatchmakingConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMatchmakingConfigurations, schemas.DescribeMatchmakingConfigurationsInput, schemas.DescribeMatchmakingConfigurationsOutput), output: &DescribeMatchmakingConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

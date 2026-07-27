@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,6 +68,23 @@ type UpdateRuntimeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRuntimeConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRuntimeConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRuntimeConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.UpdateRuntimeConfigurationInput_FleetId, *v.FleetId)
+	}
+	if v.RuntimeConfiguration != nil {
+		s.WriteStruct(schemas.UpdateRuntimeConfigurationInput_RuntimeConfiguration)
+		v.RuntimeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateRuntimeConfigurationOutput struct {
 
 	// The runtime configuration currently in use by computes in the fleet. If the
@@ -78,13 +97,34 @@ type UpdateRuntimeConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRuntimeConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRuntimeConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRuntimeConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuntimeConfiguration != nil {
+		s.WriteStruct(schemas.UpdateRuntimeConfigurationOutput_RuntimeConfiguration)
+		v.RuntimeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateRuntimeConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRuntimeConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRuntimeConfigurationOutput_RuntimeConfiguration:
+			v.RuntimeConfiguration = &types.RuntimeConfiguration{}
+			return v.RuntimeConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRuntimeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateRuntimeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRuntimeConfiguration, schemas.UpdateRuntimeConfigurationInput, schemas.UpdateRuntimeConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateRuntimeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRuntimeConfiguration, schemas.UpdateRuntimeConfigurationInput, schemas.UpdateRuntimeConfigurationOutput), output: &UpdateRuntimeConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

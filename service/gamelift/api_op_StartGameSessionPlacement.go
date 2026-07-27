@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -173,6 +175,38 @@ type StartGameSessionPlacementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartGameSessionPlacementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartGameSessionPlacementInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartGameSessionPlacementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDesiredPlayerSessionList(s, schemas.StartGameSessionPlacementInput_DesiredPlayerSessions, v.DesiredPlayerSessions)
+	serializeGamePropertyList(s, schemas.StartGameSessionPlacementInput_GameProperties, v.GameProperties)
+	if v.GameSessionData != nil {
+		s.WriteString(schemas.StartGameSessionPlacementInput_GameSessionData, *v.GameSessionData)
+	}
+	if v.GameSessionName != nil {
+		s.WriteString(schemas.StartGameSessionPlacementInput_GameSessionName, *v.GameSessionName)
+	}
+	if v.GameSessionQueueName != nil {
+		s.WriteString(schemas.StartGameSessionPlacementInput_GameSessionQueueName, *v.GameSessionQueueName)
+	}
+	if v.MaximumPlayerSessionCount != nil {
+		s.WriteInt32(schemas.StartGameSessionPlacementInput_MaximumPlayerSessionCount, *v.MaximumPlayerSessionCount)
+	}
+	if v.PlacementId != nil {
+		s.WriteString(schemas.StartGameSessionPlacementInput_PlacementId, *v.PlacementId)
+	}
+	serializePlayerLatencyList(s, schemas.StartGameSessionPlacementInput_PlayerLatencies, v.PlayerLatencies)
+	if v.PriorityConfigurationOverride != nil {
+		s.WriteStruct(schemas.StartGameSessionPlacementInput_PriorityConfigurationOverride)
+		v.PriorityConfigurationOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartGameSessionPlacementOutput struct {
 
 	// Object that describes the newly created game session placement. This object
@@ -186,13 +220,34 @@ type StartGameSessionPlacementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartGameSessionPlacementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartGameSessionPlacementOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartGameSessionPlacementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSessionPlacement != nil {
+		s.WriteStruct(schemas.StartGameSessionPlacementOutput_GameSessionPlacement)
+		v.GameSessionPlacement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartGameSessionPlacementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartGameSessionPlacementOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartGameSessionPlacementOutput_GameSessionPlacement:
+			v.GameSessionPlacement = &types.GameSessionPlacement{}
+			return v.GameSessionPlacement.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartGameSessionPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartGameSessionPlacement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartGameSessionPlacement, schemas.StartGameSessionPlacementInput, schemas.StartGameSessionPlacementOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartGameSessionPlacement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartGameSessionPlacement, schemas.StartGameSessionPlacementInput, schemas.StartGameSessionPlacementOutput), output: &StartGameSessionPlacementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

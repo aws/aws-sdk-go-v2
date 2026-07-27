@@ -5,7 +5,9 @@ package gamelift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -72,6 +74,27 @@ type ListAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAliasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAliasesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListAliasesInput_Limit, *v.Limit)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListAliasesInput_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAliasesInput_NextToken, *v.NextToken)
+	}
+	if v.RoutingStrategyType != "" {
+		s.WriteString(schemas.ListAliasesInput_RoutingStrategyType, string(v.RoutingStrategyType))
+	}
+}
+
 type ListAliasesOutput struct {
 
 	// A collection of alias resources that match the request parameters.
@@ -88,13 +111,35 @@ type ListAliasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAliasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAliasesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAliasList(s, schemas.ListAliasesOutput_Aliases, v.Aliases)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAliasesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAliasesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAliasesOutput_Aliases:
+			return deserializeAliasList(d, schemas.ListAliasesOutput_Aliases, &v.Aliases)
+		case schemas.ListAliasesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAliasesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAliases, schemas.ListAliasesInput, schemas.ListAliasesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAliases, schemas.ListAliasesInput, schemas.ListAliasesOutput), output: &ListAliasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

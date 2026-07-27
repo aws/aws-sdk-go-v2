@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -196,6 +198,46 @@ type CreateGameServerGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGameServerGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGameServerGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGameServerGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingPolicy != nil {
+		s.WriteStruct(schemas.CreateGameServerGroupInput_AutoScalingPolicy)
+		v.AutoScalingPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BalancingStrategy != "" {
+		s.WriteString(schemas.CreateGameServerGroupInput_BalancingStrategy, string(v.BalancingStrategy))
+	}
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.CreateGameServerGroupInput_GameServerGroupName, *v.GameServerGroupName)
+	}
+	if v.GameServerProtectionPolicy != "" {
+		s.WriteString(schemas.CreateGameServerGroupInput_GameServerProtectionPolicy, string(v.GameServerProtectionPolicy))
+	}
+	serializeInstanceDefinitions(s, schemas.CreateGameServerGroupInput_InstanceDefinitions, v.InstanceDefinitions)
+	if v.LaunchTemplate != nil {
+		s.WriteStruct(schemas.CreateGameServerGroupInput_LaunchTemplate)
+		v.LaunchTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxSize != nil {
+		s.WriteInt32(schemas.CreateGameServerGroupInput_MaxSize, *v.MaxSize)
+	}
+	if v.MinSize != nil {
+		s.WriteInt32(schemas.CreateGameServerGroupInput_MinSize, *v.MinSize)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateGameServerGroupInput_RoleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateGameServerGroupInput_Tags, v.Tags)
+	serializeVpcSubnets(s, schemas.CreateGameServerGroupInput_VpcSubnets, v.VpcSubnets)
+}
+
 type CreateGameServerGroupOutput struct {
 
 	// The newly created game server group object, including the new ARN value for the
@@ -211,13 +253,34 @@ type CreateGameServerGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGameServerGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGameServerGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGameServerGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerGroup != nil {
+		s.WriteStruct(schemas.CreateGameServerGroupOutput_GameServerGroup)
+		v.GameServerGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateGameServerGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGameServerGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGameServerGroupOutput_GameServerGroup:
+			v.GameServerGroup = &types.GameServerGroup{}
+			return v.GameServerGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateGameServerGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGameServerGroup, schemas.CreateGameServerGroupInput, schemas.CreateGameServerGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateGameServerGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGameServerGroup, schemas.CreateGameServerGroupInput, schemas.CreateGameServerGroupOutput), output: &CreateGameServerGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

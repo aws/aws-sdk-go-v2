@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,19 @@ type DeleteFleetLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFleetLocationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFleetLocationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFleetLocationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.DeleteFleetLocationsInput_FleetId, *v.FleetId)
+	}
+	serializeLocationList(s, schemas.DeleteFleetLocationsInput_Locations, v.Locations)
+}
+
 type DeleteFleetLocationsOutput struct {
 
 	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift Servers fleet
@@ -82,13 +97,41 @@ type DeleteFleetLocationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFleetLocationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFleetLocationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFleetLocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetArn != nil {
+		s.WriteString(schemas.DeleteFleetLocationsOutput_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.DeleteFleetLocationsOutput_FleetId, *v.FleetId)
+	}
+	serializeLocationStateList(s, schemas.DeleteFleetLocationsOutput_LocationStates, v.LocationStates)
+}
+func (v *DeleteFleetLocationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFleetLocationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFleetLocationsOutput_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.DeleteFleetLocationsOutput_FleetArn, v.FleetArn)
+		case schemas.DeleteFleetLocationsOutput_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.DeleteFleetLocationsOutput_FleetId, v.FleetId)
+		case schemas.DeleteFleetLocationsOutput_LocationStates:
+			return deserializeLocationStateList(d, schemas.DeleteFleetLocationsOutput_LocationStates, &v.LocationStates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFleetLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteFleetLocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFleetLocations, schemas.DeleteFleetLocationsInput, schemas.DeleteFleetLocationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteFleetLocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFleetLocations, schemas.DeleteFleetLocationsInput, schemas.DeleteFleetLocationsOutput), output: &DeleteFleetLocationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

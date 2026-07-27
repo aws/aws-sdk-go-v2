@@ -4,6 +4,8 @@ package cloudwatch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -105,6 +107,21 @@ type AssociateDatasetKmsKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateDatasetKmsKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateDatasetKmsKeyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateDatasetKmsKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetIdentifier != nil {
+		s.WriteString(schemas.AssociateDatasetKmsKeyInput_DatasetIdentifier, *v.DatasetIdentifier)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.AssociateDatasetKmsKeyInput_KmsKeyArn, *v.KmsKeyArn)
+	}
+}
+
 type AssociateDatasetKmsKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -112,13 +129,26 @@ type AssociateDatasetKmsKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateDatasetKmsKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateDatasetKmsKeyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateDatasetKmsKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateDatasetKmsKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateDatasetKmsKeyOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateDatasetKmsKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpAssociateDatasetKmsKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDatasetKmsKey, schemas.AssociateDatasetKmsKeyInput, schemas.AssociateDatasetKmsKeyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpAssociateDatasetKmsKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDatasetKmsKey, schemas.AssociateDatasetKmsKeyInput, schemas.AssociateDatasetKmsKeyOutput), output: &AssociateDatasetKmsKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

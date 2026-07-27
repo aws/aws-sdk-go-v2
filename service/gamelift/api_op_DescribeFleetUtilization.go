@@ -5,7 +5,9 @@ package gamelift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -82,6 +84,22 @@ type DescribeFleetUtilizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetUtilizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetUtilizationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetUtilizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFleetIdOrArnList(s, schemas.DescribeFleetUtilizationInput_FleetIds, v.FleetIds)
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeFleetUtilizationInput_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetUtilizationInput_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeFleetUtilizationOutput struct {
 
 	// A collection of objects containing utilization information for each requested
@@ -99,13 +117,35 @@ type DescribeFleetUtilizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetUtilizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetUtilizationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetUtilizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFleetUtilizationList(s, schemas.DescribeFleetUtilizationOutput_FleetUtilization, v.FleetUtilization)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetUtilizationOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeFleetUtilizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFleetUtilizationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFleetUtilizationOutput_FleetUtilization:
+			return deserializeFleetUtilizationList(d, schemas.DescribeFleetUtilizationOutput_FleetUtilization, &v.FleetUtilization)
+		case schemas.DescribeFleetUtilizationOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeFleetUtilizationOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFleetUtilizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeFleetUtilization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetUtilization, schemas.DescribeFleetUtilizationInput, schemas.DescribeFleetUtilizationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeFleetUtilization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetUtilization, schemas.DescribeFleetUtilizationInput, schemas.DescribeFleetUtilizationOutput), output: &DescribeFleetUtilizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

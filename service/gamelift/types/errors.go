@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,27 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_Message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified fleet has no available instances to fulfill a CreateGameSession
 // request. Clients can retry such requests immediately or after a waiting period.
@@ -61,6 +83,27 @@ func (e *FleetCapacityExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *FleetCapacityExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *FleetCapacityExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FleetCapacityExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FleetCapacityExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.FleetCapacityExceededException_Message, *v.Message)
+	}
+}
+func (v *FleetCapacityExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FleetCapacityExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FleetCapacityExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FleetCapacityExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The game instance is currently full and cannot allow the requested player(s) to
 // join. Clients can retry such requests immediately or after a waiting period.
@@ -88,6 +131,27 @@ func (e *GameSessionFullException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *GameSessionFullException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *GameSessionFullException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameSessionFullException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameSessionFullException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.GameSessionFullException_Message, *v.Message)
+	}
+}
+func (v *GameSessionFullException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameSessionFullException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameSessionFullException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GameSessionFullException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A game session with this custom ID string already exists in this fleet. Resolve
 // this conflict before retrying this request.
@@ -117,6 +181,27 @@ func (e *IdempotentParameterMismatchException) ErrorCode() string {
 func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *IdempotentParameterMismatchException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdempotentParameterMismatchException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdempotentParameterMismatchException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.IdempotentParameterMismatchException_Message, *v.Message)
+	}
+}
+func (v *IdempotentParameterMismatchException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdempotentParameterMismatchException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdempotentParameterMismatchException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.IdempotentParameterMismatchException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The service encountered an unrecoverable internal failure while processing the
 // request. Clients can retry such requests immediately or after a waiting period.
@@ -144,6 +229,27 @@ func (e *InternalServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServiceException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServiceException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServiceException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServiceException_Message, *v.Message)
+	}
+}
+func (v *InternalServiceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServiceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServiceException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServiceException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested operation would cause a conflict with the current state of a
 // resource associated with the request and/or the fleet. Resolve the conflict
@@ -172,6 +278,27 @@ func (e *InvalidFleetStatusException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidFleetStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidFleetStatusException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidFleetStatusException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidFleetStatusException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidFleetStatusException_Message, *v.Message)
+	}
+}
+func (v *InvalidFleetStatusException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidFleetStatusException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidFleetStatusException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidFleetStatusException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested operation would cause a conflict with the current state of a
 // resource associated with the request and/or the game instance. Resolve the
@@ -200,6 +327,27 @@ func (e *InvalidGameSessionStatusException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidGameSessionStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidGameSessionStatusException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidGameSessionStatusException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidGameSessionStatusException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidGameSessionStatusException_Message, *v.Message)
+	}
+}
+func (v *InvalidGameSessionStatusException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidGameSessionStatusException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidGameSessionStatusException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidGameSessionStatusException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // One or more parameter values in the request are invalid. Correct the invalid
 // parameter values before retrying.
@@ -227,6 +375,27 @@ func (e *InvalidRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidRequestException_Message, *v.Message)
+	}
+}
+func (v *InvalidRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidRequestException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidRequestException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested operation would cause the resource to exceed the allowed service
 // limit. Resolve the issue before retrying.
@@ -254,6 +423,27 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_Message, *v.Message)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested resource was not found. The resource was either not created yet
 // or deleted.
@@ -281,6 +471,27 @@ func (e *NotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NotFoundException_Message, *v.Message)
+	}
+}
+func (v *NotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 //	The operation failed because Amazon GameLift Servers has not yet finished
 //
@@ -312,6 +523,27 @@ func (e *NotReadyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotReadyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotReadyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotReadyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NotReadyException_Message, *v.Message)
+	}
+}
+func (v *NotReadyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotReadyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotReadyException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotReadyException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified game server group has no available game servers to fulfill a
 // ClaimGameServer request. Clients can retry such requests immediately or after a
@@ -340,6 +572,27 @@ func (e *OutOfCapacityException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *OutOfCapacityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *OutOfCapacityException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutOfCapacityException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutOfCapacityException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.OutOfCapacityException_Message, *v.Message)
+	}
+}
+func (v *OutOfCapacityException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutOfCapacityException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutOfCapacityException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OutOfCapacityException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested tagging operation did not succeed. This may be due to invalid tag
 // format or the maximum tag limit may have been exceeded. Resolve the issue before
@@ -368,6 +621,27 @@ func (e *TaggingFailedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TaggingFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TaggingFailedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaggingFailedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaggingFailedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TaggingFailedException_Message, *v.Message)
+	}
+}
+func (v *TaggingFailedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaggingFailedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaggingFailedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TaggingFailedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The service is unable to resolve the routing for a particular alias because it
 // has a terminal RoutingStrategy associated with it. The message returned in this
@@ -398,6 +672,27 @@ func (e *TerminalRoutingStrategyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TerminalRoutingStrategyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TerminalRoutingStrategyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminalRoutingStrategyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminalRoutingStrategyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TerminalRoutingStrategyException_Message, *v.Message)
+	}
+}
+func (v *TerminalRoutingStrategyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminalRoutingStrategyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminalRoutingStrategyException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TerminalRoutingStrategyException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The client failed authentication. Clients should not retry such requests.
 type UnauthorizedException struct {
@@ -424,6 +719,27 @@ func (e *UnauthorizedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnauthorizedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnauthorizedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnauthorizedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnauthorizedException_Message, *v.Message)
+	}
+}
+func (v *UnauthorizedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnauthorizedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnauthorizedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnauthorizedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested operation is not supported in the Region specified.
 type UnsupportedRegionException struct {
@@ -450,3 +766,24 @@ func (e *UnsupportedRegionException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedRegionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedRegionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedRegionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedRegionException_Message, *v.Message)
+	}
+}
+func (v *UnsupportedRegionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedRegionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedRegionException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedRegionException_Message, v.Message)
+		}
+		return nil
+	})
+}

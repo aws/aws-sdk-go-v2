@@ -5,7 +5,9 @@ package gamelift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,24 @@ type ListContainerGroupDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContainerGroupDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContainerGroupDefinitionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContainerGroupDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerGroupType != "" {
+		s.WriteString(schemas.ListContainerGroupDefinitionsInput_ContainerGroupType, string(v.ContainerGroupType))
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListContainerGroupDefinitionsInput_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContainerGroupDefinitionsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListContainerGroupDefinitionsOutput struct {
 
 	// A result set of container group definitions that match the request.
@@ -84,13 +104,35 @@ type ListContainerGroupDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContainerGroupDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContainerGroupDefinitionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContainerGroupDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerGroupDefinitionList(s, schemas.ListContainerGroupDefinitionsOutput_ContainerGroupDefinitions, v.ContainerGroupDefinitions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContainerGroupDefinitionsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListContainerGroupDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContainerGroupDefinitionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContainerGroupDefinitionsOutput_ContainerGroupDefinitions:
+			return deserializeContainerGroupDefinitionList(d, schemas.ListContainerGroupDefinitionsOutput_ContainerGroupDefinitions, &v.ContainerGroupDefinitions)
+		case schemas.ListContainerGroupDefinitionsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContainerGroupDefinitionsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContainerGroupDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListContainerGroupDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContainerGroupDefinitions, schemas.ListContainerGroupDefinitionsInput, schemas.ListContainerGroupDefinitionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListContainerGroupDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContainerGroupDefinitions, schemas.ListContainerGroupDefinitionsInput, schemas.ListContainerGroupDefinitionsOutput), output: &ListContainerGroupDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

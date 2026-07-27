@@ -5,7 +5,9 @@ package gamelift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,6 +65,27 @@ type ListGameServersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGameServersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGameServersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGameServersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.ListGameServersInput_GameServerGroupName, *v.GameServerGroupName)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListGameServersInput_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGameServersInput_NextToken, *v.NextToken)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListGameServersInput_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListGameServersOutput struct {
 
 	// A collection of game server objects that match the request.
@@ -79,13 +102,35 @@ type ListGameServersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGameServersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGameServersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGameServersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGameServers(s, schemas.ListGameServersOutput_GameServers, v.GameServers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGameServersOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGameServersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGameServersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGameServersOutput_GameServers:
+			return deserializeGameServers(d, schemas.ListGameServersOutput_GameServers, &v.GameServers)
+		case schemas.ListGameServersOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGameServersOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGameServersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListGameServers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGameServers, schemas.ListGameServersInput, schemas.ListGameServersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListGameServers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGameServers, schemas.ListGameServersInput, schemas.ListGameServersOutput), output: &ListGameServersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

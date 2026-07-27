@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -86,6 +88,31 @@ type UpdateGameSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGameSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGameSessionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGameSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGamePropertyList(s, schemas.UpdateGameSessionInput_GameProperties, v.GameProperties)
+	if v.GameSessionId != nil {
+		s.WriteString(schemas.UpdateGameSessionInput_GameSessionId, *v.GameSessionId)
+	}
+	if v.MaximumPlayerSessionCount != nil {
+		s.WriteInt32(schemas.UpdateGameSessionInput_MaximumPlayerSessionCount, *v.MaximumPlayerSessionCount)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateGameSessionInput_Name, *v.Name)
+	}
+	if v.PlayerSessionCreationPolicy != "" {
+		s.WriteString(schemas.UpdateGameSessionInput_PlayerSessionCreationPolicy, string(v.PlayerSessionCreationPolicy))
+	}
+	if v.ProtectionPolicy != "" {
+		s.WriteString(schemas.UpdateGameSessionInput_ProtectionPolicy, string(v.ProtectionPolicy))
+	}
+}
+
 type UpdateGameSessionOutput struct {
 
 	// The updated game session properties.
@@ -97,13 +124,34 @@ type UpdateGameSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGameSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGameSessionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGameSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSession != nil {
+		s.WriteStruct(schemas.UpdateGameSessionOutput_GameSession)
+		v.GameSession.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateGameSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGameSessionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGameSessionOutput_GameSession:
+			v.GameSession = &types.GameSession{}
+			return v.GameSession.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGameSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateGameSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGameSession, schemas.UpdateGameSessionInput, schemas.UpdateGameSessionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateGameSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGameSession, schemas.UpdateGameSessionInput, schemas.UpdateGameSessionOutput), output: &UpdateGameSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

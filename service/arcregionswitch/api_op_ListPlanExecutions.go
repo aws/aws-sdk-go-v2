@@ -5,7 +5,9 @@ package arcregionswitch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,27 @@ type ListPlanExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlanExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlanExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlanExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPlanExecutionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlanExecutionsRequest_nextToken, *v.NextToken)
+	}
+	if v.PlanArn != nil {
+		s.WriteString(schemas.ListPlanExecutionsRequest_planArn, *v.PlanArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ListPlanExecutionsRequest_state, string(v.State))
+	}
+}
+
 type ListPlanExecutionsOutput struct {
 
 	// The items in the plan execution to return.
@@ -67,13 +90,35 @@ type ListPlanExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlanExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlanExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlanExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAbbreviatedExecutionsList(s, schemas.ListPlanExecutionsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlanExecutionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListPlanExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlanExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlanExecutionsResponse_items:
+			return deserializeAbbreviatedExecutionsList(d, schemas.ListPlanExecutionsResponse_items, &v.Items)
+		case schemas.ListPlanExecutionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlanExecutionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPlanExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListPlanExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlanExecutions, schemas.ListPlanExecutionsRequest, schemas.ListPlanExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListPlanExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlanExecutions, schemas.ListPlanExecutionsRequest, schemas.ListPlanExecutionsResponse), output: &ListPlanExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

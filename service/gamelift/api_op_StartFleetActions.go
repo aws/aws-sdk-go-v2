@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,6 +71,22 @@ type StartFleetActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFleetActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFleetActionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFleetActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFleetActionList(s, schemas.StartFleetActionsInput_Actions, v.Actions)
+	if v.FleetId != nil {
+		s.WriteString(schemas.StartFleetActionsInput_FleetId, *v.FleetId)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.StartFleetActionsInput_Location, *v.Location)
+	}
+}
+
 type StartFleetActionsOutput struct {
 
 	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift Servers fleet
@@ -87,13 +105,38 @@ type StartFleetActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFleetActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFleetActionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFleetActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetArn != nil {
+		s.WriteString(schemas.StartFleetActionsOutput_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.StartFleetActionsOutput_FleetId, *v.FleetId)
+	}
+}
+func (v *StartFleetActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFleetActionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartFleetActionsOutput_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.StartFleetActionsOutput_FleetArn, v.FleetArn)
+		case schemas.StartFleetActionsOutput_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.StartFleetActionsOutput_FleetId, v.FleetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartFleetActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartFleetActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFleetActions, schemas.StartFleetActionsInput, schemas.StartFleetActionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartFleetActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFleetActions, schemas.StartFleetActionsInput, schemas.StartFleetActionsOutput), output: &StartFleetActionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

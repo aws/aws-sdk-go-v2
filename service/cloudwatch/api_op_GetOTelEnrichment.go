@@ -4,7 +4,9 @@ package cloudwatch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,6 +36,15 @@ type GetOTelEnrichmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOTelEnrichmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOTelEnrichmentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOTelEnrichmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetOTelEnrichmentOutput struct {
 
 	// The status of OTel enrichment for the account. Valid values are Running
@@ -48,13 +59,36 @@ type GetOTelEnrichmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOTelEnrichmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOTelEnrichmentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOTelEnrichmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.GetOTelEnrichmentOutput_Status, string(v.Status))
+	}
+}
+func (v *GetOTelEnrichmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOTelEnrichmentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOTelEnrichmentOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetOTelEnrichmentOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.OTelEnrichmentStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOTelEnrichmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetOTelEnrichment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOTelEnrichment, schemas.GetOTelEnrichmentInput, schemas.GetOTelEnrichmentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetOTelEnrichment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOTelEnrichment, schemas.GetOTelEnrichmentInput, schemas.GetOTelEnrichmentOutput), output: &GetOTelEnrichmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

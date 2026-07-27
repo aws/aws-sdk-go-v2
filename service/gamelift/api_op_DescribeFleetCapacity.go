@@ -5,7 +5,9 @@ package gamelift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -83,6 +85,22 @@ type DescribeFleetCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetCapacityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetCapacityInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetCapacityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFleetIdOrArnList(s, schemas.DescribeFleetCapacityInput_FleetIds, v.FleetIds)
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeFleetCapacityInput_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetCapacityInput_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeFleetCapacityOutput struct {
 
 	// A collection of objects that contains capacity information for each requested
@@ -101,13 +119,35 @@ type DescribeFleetCapacityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetCapacityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetCapacityOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetCapacityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFleetCapacityList(s, schemas.DescribeFleetCapacityOutput_FleetCapacity, v.FleetCapacity)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetCapacityOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeFleetCapacityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFleetCapacityOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFleetCapacityOutput_FleetCapacity:
+			return deserializeFleetCapacityList(d, schemas.DescribeFleetCapacityOutput_FleetCapacity, &v.FleetCapacity)
+		case schemas.DescribeFleetCapacityOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeFleetCapacityOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFleetCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeFleetCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetCapacity, schemas.DescribeFleetCapacityInput, schemas.DescribeFleetCapacityOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeFleetCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetCapacity, schemas.DescribeFleetCapacityInput, schemas.DescribeFleetCapacityOutput), output: &DescribeFleetCapacityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

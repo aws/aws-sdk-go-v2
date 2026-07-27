@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -33,6 +35,43 @@ type AlarmContributor struct {
 	StateTransitionedTimestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *AlarmContributor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AlarmContributor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AlarmContributor) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContributorAttributes(s, schemas.AlarmContributor_ContributorAttributes, v.ContributorAttributes)
+	if v.ContributorId != nil {
+		s.WriteString(schemas.AlarmContributor_ContributorId, *v.ContributorId)
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.AlarmContributor_StateReason, *v.StateReason)
+	}
+	if v.StateTransitionedTimestamp != nil {
+		s.WriteTime(schemas.AlarmContributor_StateTransitionedTimestamp, *v.StateTransitionedTimestamp)
+	}
+}
+func (v *AlarmContributor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AlarmContributor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AlarmContributor_ContributorAttributes:
+			return deserializeContributorAttributes(d, schemas.AlarmContributor_ContributorAttributes, &v.ContributorAttributes)
+		case schemas.AlarmContributor_ContributorId:
+			v.ContributorId = new(string)
+			return d.ReadString(schemas.AlarmContributor_ContributorId, v.ContributorId)
+		case schemas.AlarmContributor_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.AlarmContributor_StateReason, v.StateReason)
+		case schemas.AlarmContributor_StateTransitionedTimestamp:
+			v.StateTransitionedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.AlarmContributor_StateTransitionedTimestamp, v.StateTransitionedTimestamp)
+		}
+		return nil
+	})
 }
 
 // Represents the history of a specific alarm.
@@ -68,6 +107,75 @@ type AlarmHistoryItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AlarmHistoryItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AlarmHistoryItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AlarmHistoryItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContributorAttributes(s, schemas.AlarmHistoryItem_AlarmContributorAttributes, v.AlarmContributorAttributes)
+	if v.AlarmContributorId != nil {
+		s.WriteString(schemas.AlarmHistoryItem_AlarmContributorId, *v.AlarmContributorId)
+	}
+	if v.AlarmName != nil {
+		s.WriteString(schemas.AlarmHistoryItem_AlarmName, *v.AlarmName)
+	}
+	if v.AlarmType != "" {
+		s.WriteString(schemas.AlarmHistoryItem_AlarmType, string(v.AlarmType))
+	}
+	if v.HistoryData != nil {
+		s.WriteString(schemas.AlarmHistoryItem_HistoryData, *v.HistoryData)
+	}
+	if v.HistoryItemType != "" {
+		s.WriteString(schemas.AlarmHistoryItem_HistoryItemType, string(v.HistoryItemType))
+	}
+	if v.HistorySummary != nil {
+		s.WriteString(schemas.AlarmHistoryItem_HistorySummary, *v.HistorySummary)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.AlarmHistoryItem_Timestamp, *v.Timestamp)
+	}
+}
+func (v *AlarmHistoryItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AlarmHistoryItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AlarmHistoryItem_AlarmContributorAttributes:
+			return deserializeContributorAttributes(d, schemas.AlarmHistoryItem_AlarmContributorAttributes, &v.AlarmContributorAttributes)
+		case schemas.AlarmHistoryItem_AlarmContributorId:
+			v.AlarmContributorId = new(string)
+			return d.ReadString(schemas.AlarmHistoryItem_AlarmContributorId, v.AlarmContributorId)
+		case schemas.AlarmHistoryItem_AlarmName:
+			v.AlarmName = new(string)
+			return d.ReadString(schemas.AlarmHistoryItem_AlarmName, v.AlarmName)
+		case schemas.AlarmHistoryItem_AlarmType:
+			var ev string
+			if err := d.ReadString(schemas.AlarmHistoryItem_AlarmType, &ev); err != nil {
+				return err
+			}
+			v.AlarmType = AlarmType(ev)
+			return nil
+		case schemas.AlarmHistoryItem_HistoryData:
+			v.HistoryData = new(string)
+			return d.ReadString(schemas.AlarmHistoryItem_HistoryData, v.HistoryData)
+		case schemas.AlarmHistoryItem_HistoryItemType:
+			var ev string
+			if err := d.ReadString(schemas.AlarmHistoryItem_HistoryItemType, &ev); err != nil {
+				return err
+			}
+			v.HistoryItemType = HistoryItemType(ev)
+			return nil
+		case schemas.AlarmHistoryItem_HistorySummary:
+			v.HistorySummary = new(string)
+			return d.ReadString(schemas.AlarmHistoryItem_HistorySummary, v.HistorySummary)
+		case schemas.AlarmHistoryItem_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.AlarmHistoryItem_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
+
 // Summary information about an alarm mute rule, including its name, status, and
 // configuration details.
 type AlarmMuteRuleSummary struct {
@@ -93,6 +201,56 @@ type AlarmMuteRuleSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AlarmMuteRuleSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AlarmMuteRuleSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AlarmMuteRuleSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmMuteRuleArn != nil {
+		s.WriteString(schemas.AlarmMuteRuleSummary_AlarmMuteRuleArn, *v.AlarmMuteRuleArn)
+	}
+	if v.ExpireDate != nil {
+		s.WriteTime(schemas.AlarmMuteRuleSummary_ExpireDate, *v.ExpireDate)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteTime(schemas.AlarmMuteRuleSummary_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.MuteType != nil {
+		s.WriteString(schemas.AlarmMuteRuleSummary_MuteType, *v.MuteType)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AlarmMuteRuleSummary_Status, string(v.Status))
+	}
+}
+func (v *AlarmMuteRuleSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AlarmMuteRuleSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AlarmMuteRuleSummary_AlarmMuteRuleArn:
+			v.AlarmMuteRuleArn = new(string)
+			return d.ReadString(schemas.AlarmMuteRuleSummary_AlarmMuteRuleArn, v.AlarmMuteRuleArn)
+		case schemas.AlarmMuteRuleSummary_ExpireDate:
+			v.ExpireDate = new(time.Time)
+			return d.ReadTime(schemas.AlarmMuteRuleSummary_ExpireDate, v.ExpireDate)
+		case schemas.AlarmMuteRuleSummary_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.AlarmMuteRuleSummary_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.AlarmMuteRuleSummary_MuteType:
+			v.MuteType = new(string)
+			return d.ReadString(schemas.AlarmMuteRuleSummary_MuteType, v.MuteType)
+		case schemas.AlarmMuteRuleSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.AlarmMuteRuleSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AlarmMuteRuleStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains the configuration that determines how a PromQL alarm evaluates its
 // contributors, including the query to run and the durations that define when
 // contributors transition between states.
@@ -113,6 +271,40 @@ type AlarmPromQLCriteria struct {
 	RecoveryPeriod *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AlarmPromQLCriteria) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AlarmPromQLCriteria)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AlarmPromQLCriteria) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PendingPeriod != nil {
+		s.WriteInt32(schemas.AlarmPromQLCriteria_PendingPeriod, *v.PendingPeriod)
+	}
+	if v.Query != nil {
+		s.WriteString(schemas.AlarmPromQLCriteria_Query, *v.Query)
+	}
+	if v.RecoveryPeriod != nil {
+		s.WriteInt32(schemas.AlarmPromQLCriteria_RecoveryPeriod, *v.RecoveryPeriod)
+	}
+}
+func (v *AlarmPromQLCriteria) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AlarmPromQLCriteria, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AlarmPromQLCriteria_PendingPeriod:
+			v.PendingPeriod = new(int32)
+			return d.ReadInt32(schemas.AlarmPromQLCriteria_PendingPeriod, v.PendingPeriod)
+		case schemas.AlarmPromQLCriteria_Query:
+			v.Query = new(string)
+			return d.ReadString(schemas.AlarmPromQLCriteria_Query, v.Query)
+		case schemas.AlarmPromQLCriteria_RecoveryPeriod:
+			v.RecoveryPeriod = new(int32)
+			return d.ReadInt32(schemas.AlarmPromQLCriteria_RecoveryPeriod, v.RecoveryPeriod)
+		}
+		return nil
+	})
 }
 
 // An anomaly detection model associated with a particular CloudWatch metric,
@@ -172,6 +364,91 @@ type AnomalyDetector struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnomalyDetector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnomalyDetector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnomalyDetector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyDetectorId != nil {
+		s.WriteString(schemas.AnomalyDetector_AnomalyDetectorId, *v.AnomalyDetectorId)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.AnomalyDetector_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDimensions(s, schemas.AnomalyDetector_Dimensions, v.Dimensions)
+	if v.MetricCharacteristics != nil {
+		s.WriteStruct(schemas.AnomalyDetector_MetricCharacteristics)
+		v.MetricCharacteristics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetricMathAnomalyDetector != nil {
+		s.WriteStruct(schemas.AnomalyDetector_MetricMathAnomalyDetector)
+		v.MetricMathAnomalyDetector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.AnomalyDetector_MetricName, *v.MetricName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.AnomalyDetector_Namespace, *v.Namespace)
+	}
+	if v.SingleMetricAnomalyDetector != nil {
+		s.WriteStruct(schemas.AnomalyDetector_SingleMetricAnomalyDetector)
+		v.SingleMetricAnomalyDetector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Stat != nil {
+		s.WriteString(schemas.AnomalyDetector_Stat, *v.Stat)
+	}
+	if v.StateValue != "" {
+		s.WriteString(schemas.AnomalyDetector_StateValue, string(v.StateValue))
+	}
+}
+func (v *AnomalyDetector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnomalyDetector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnomalyDetector_AnomalyDetectorId:
+			v.AnomalyDetectorId = new(string)
+			return d.ReadString(schemas.AnomalyDetector_AnomalyDetectorId, v.AnomalyDetectorId)
+		case schemas.AnomalyDetector_Configuration:
+			v.Configuration = &AnomalyDetectorConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.AnomalyDetector_Dimensions:
+			return deserializeDimensions(d, schemas.AnomalyDetector_Dimensions, &v.Dimensions)
+		case schemas.AnomalyDetector_MetricCharacteristics:
+			v.MetricCharacteristics = &MetricCharacteristics{}
+			return v.MetricCharacteristics.Deserialize(d)
+		case schemas.AnomalyDetector_MetricMathAnomalyDetector:
+			v.MetricMathAnomalyDetector = &MetricMathAnomalyDetector{}
+			return v.MetricMathAnomalyDetector.Deserialize(d)
+		case schemas.AnomalyDetector_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.AnomalyDetector_MetricName, v.MetricName)
+		case schemas.AnomalyDetector_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.AnomalyDetector_Namespace, v.Namespace)
+		case schemas.AnomalyDetector_SingleMetricAnomalyDetector:
+			v.SingleMetricAnomalyDetector = &SingleMetricAnomalyDetector{}
+			return v.SingleMetricAnomalyDetector.Deserialize(d)
+		case schemas.AnomalyDetector_Stat:
+			v.Stat = new(string)
+			return d.ReadString(schemas.AnomalyDetector_Stat, v.Stat)
+		case schemas.AnomalyDetector_StateValue:
+			var ev string
+			if err := d.ReadString(schemas.AnomalyDetector_StateValue, &ev); err != nil {
+				return err
+			}
+			v.StateValue = AnomalyDetectorStateValue(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration specifies details about how the anomaly detection model is to
 // be trained, including time ranges to exclude from use for training the model and
 // the time zone to use for the metric.
@@ -193,6 +470,31 @@ type AnomalyDetectorConfiguration struct {
 	MetricTimezone *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AnomalyDetectorConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnomalyDetectorConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnomalyDetectorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnomalyDetectorExcludedTimeRanges(s, schemas.AnomalyDetectorConfiguration_ExcludedTimeRanges, v.ExcludedTimeRanges)
+	if v.MetricTimezone != nil {
+		s.WriteString(schemas.AnomalyDetectorConfiguration_MetricTimezone, *v.MetricTimezone)
+	}
+}
+func (v *AnomalyDetectorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnomalyDetectorConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnomalyDetectorConfiguration_ExcludedTimeRanges:
+			return deserializeAnomalyDetectorExcludedTimeRanges(d, schemas.AnomalyDetectorConfiguration_ExcludedTimeRanges, &v.ExcludedTimeRanges)
+		case schemas.AnomalyDetectorConfiguration_MetricTimezone:
+			v.MetricTimezone = new(string)
+			return d.ReadString(schemas.AnomalyDetectorConfiguration_MetricTimezone, v.MetricTimezone)
+		}
+		return nil
+	})
 }
 
 // The details about a composite alarm.
@@ -282,6 +584,135 @@ type CompositeAlarm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompositeAlarm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompositeAlarm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompositeAlarm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionsEnabled != nil {
+		s.WriteBool(schemas.CompositeAlarm_ActionsEnabled, *v.ActionsEnabled)
+	}
+	if v.ActionsSuppressedBy != "" {
+		s.WriteString(schemas.CompositeAlarm_ActionsSuppressedBy, string(v.ActionsSuppressedBy))
+	}
+	if v.ActionsSuppressedReason != nil {
+		s.WriteString(schemas.CompositeAlarm_ActionsSuppressedReason, *v.ActionsSuppressedReason)
+	}
+	if v.ActionsSuppressor != nil {
+		s.WriteString(schemas.CompositeAlarm_ActionsSuppressor, *v.ActionsSuppressor)
+	}
+	if v.ActionsSuppressorExtensionPeriod != nil {
+		s.WriteInt32(schemas.CompositeAlarm_ActionsSuppressorExtensionPeriod, *v.ActionsSuppressorExtensionPeriod)
+	}
+	if v.ActionsSuppressorWaitPeriod != nil {
+		s.WriteInt32(schemas.CompositeAlarm_ActionsSuppressorWaitPeriod, *v.ActionsSuppressorWaitPeriod)
+	}
+	serializeResourceList(s, schemas.CompositeAlarm_AlarmActions, v.AlarmActions)
+	if v.AlarmArn != nil {
+		s.WriteString(schemas.CompositeAlarm_AlarmArn, *v.AlarmArn)
+	}
+	if v.AlarmConfigurationUpdatedTimestamp != nil {
+		s.WriteTime(schemas.CompositeAlarm_AlarmConfigurationUpdatedTimestamp, *v.AlarmConfigurationUpdatedTimestamp)
+	}
+	if v.AlarmDescription != nil {
+		s.WriteString(schemas.CompositeAlarm_AlarmDescription, *v.AlarmDescription)
+	}
+	if v.AlarmName != nil {
+		s.WriteString(schemas.CompositeAlarm_AlarmName, *v.AlarmName)
+	}
+	if v.AlarmRule != nil {
+		s.WriteString(schemas.CompositeAlarm_AlarmRule, *v.AlarmRule)
+	}
+	serializeResourceList(s, schemas.CompositeAlarm_InsufficientDataActions, v.InsufficientDataActions)
+	serializeResourceList(s, schemas.CompositeAlarm_OKActions, v.OKActions)
+	if v.StateReason != nil {
+		s.WriteString(schemas.CompositeAlarm_StateReason, *v.StateReason)
+	}
+	if v.StateReasonData != nil {
+		s.WriteString(schemas.CompositeAlarm_StateReasonData, *v.StateReasonData)
+	}
+	if v.StateTransitionedTimestamp != nil {
+		s.WriteTime(schemas.CompositeAlarm_StateTransitionedTimestamp, *v.StateTransitionedTimestamp)
+	}
+	if v.StateUpdatedTimestamp != nil {
+		s.WriteTime(schemas.CompositeAlarm_StateUpdatedTimestamp, *v.StateUpdatedTimestamp)
+	}
+	if v.StateValue != "" {
+		s.WriteString(schemas.CompositeAlarm_StateValue, string(v.StateValue))
+	}
+}
+func (v *CompositeAlarm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompositeAlarm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompositeAlarm_ActionsEnabled:
+			v.ActionsEnabled = new(bool)
+			return d.ReadBool(schemas.CompositeAlarm_ActionsEnabled, v.ActionsEnabled)
+		case schemas.CompositeAlarm_ActionsSuppressedBy:
+			var ev string
+			if err := d.ReadString(schemas.CompositeAlarm_ActionsSuppressedBy, &ev); err != nil {
+				return err
+			}
+			v.ActionsSuppressedBy = ActionsSuppressedBy(ev)
+			return nil
+		case schemas.CompositeAlarm_ActionsSuppressedReason:
+			v.ActionsSuppressedReason = new(string)
+			return d.ReadString(schemas.CompositeAlarm_ActionsSuppressedReason, v.ActionsSuppressedReason)
+		case schemas.CompositeAlarm_ActionsSuppressor:
+			v.ActionsSuppressor = new(string)
+			return d.ReadString(schemas.CompositeAlarm_ActionsSuppressor, v.ActionsSuppressor)
+		case schemas.CompositeAlarm_ActionsSuppressorExtensionPeriod:
+			v.ActionsSuppressorExtensionPeriod = new(int32)
+			return d.ReadInt32(schemas.CompositeAlarm_ActionsSuppressorExtensionPeriod, v.ActionsSuppressorExtensionPeriod)
+		case schemas.CompositeAlarm_ActionsSuppressorWaitPeriod:
+			v.ActionsSuppressorWaitPeriod = new(int32)
+			return d.ReadInt32(schemas.CompositeAlarm_ActionsSuppressorWaitPeriod, v.ActionsSuppressorWaitPeriod)
+		case schemas.CompositeAlarm_AlarmActions:
+			return deserializeResourceList(d, schemas.CompositeAlarm_AlarmActions, &v.AlarmActions)
+		case schemas.CompositeAlarm_AlarmArn:
+			v.AlarmArn = new(string)
+			return d.ReadString(schemas.CompositeAlarm_AlarmArn, v.AlarmArn)
+		case schemas.CompositeAlarm_AlarmConfigurationUpdatedTimestamp:
+			v.AlarmConfigurationUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CompositeAlarm_AlarmConfigurationUpdatedTimestamp, v.AlarmConfigurationUpdatedTimestamp)
+		case schemas.CompositeAlarm_AlarmDescription:
+			v.AlarmDescription = new(string)
+			return d.ReadString(schemas.CompositeAlarm_AlarmDescription, v.AlarmDescription)
+		case schemas.CompositeAlarm_AlarmName:
+			v.AlarmName = new(string)
+			return d.ReadString(schemas.CompositeAlarm_AlarmName, v.AlarmName)
+		case schemas.CompositeAlarm_AlarmRule:
+			v.AlarmRule = new(string)
+			return d.ReadString(schemas.CompositeAlarm_AlarmRule, v.AlarmRule)
+		case schemas.CompositeAlarm_InsufficientDataActions:
+			return deserializeResourceList(d, schemas.CompositeAlarm_InsufficientDataActions, &v.InsufficientDataActions)
+		case schemas.CompositeAlarm_OKActions:
+			return deserializeResourceList(d, schemas.CompositeAlarm_OKActions, &v.OKActions)
+		case schemas.CompositeAlarm_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.CompositeAlarm_StateReason, v.StateReason)
+		case schemas.CompositeAlarm_StateReasonData:
+			v.StateReasonData = new(string)
+			return d.ReadString(schemas.CompositeAlarm_StateReasonData, v.StateReasonData)
+		case schemas.CompositeAlarm_StateTransitionedTimestamp:
+			v.StateTransitionedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CompositeAlarm_StateTransitionedTimestamp, v.StateTransitionedTimestamp)
+		case schemas.CompositeAlarm_StateUpdatedTimestamp:
+			v.StateUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CompositeAlarm_StateUpdatedTimestamp, v.StateUpdatedTimestamp)
+		case schemas.CompositeAlarm_StateValue:
+			var ev string
+			if err := d.ReadString(schemas.CompositeAlarm_StateValue, &ev); err != nil {
+				return err
+			}
+			v.StateValue = StateValue(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents a specific dashboard.
 type DashboardEntry struct {
 
@@ -302,6 +733,46 @@ type DashboardEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DashboardEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DashboardEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DashboardEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardArn != nil {
+		s.WriteString(schemas.DashboardEntry_DashboardArn, *v.DashboardArn)
+	}
+	if v.DashboardName != nil {
+		s.WriteString(schemas.DashboardEntry_DashboardName, *v.DashboardName)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.DashboardEntry_LastModified, *v.LastModified)
+	}
+	if v.Size != nil {
+		s.WriteInt64(schemas.DashboardEntry_Size, *v.Size)
+	}
+}
+func (v *DashboardEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DashboardEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DashboardEntry_DashboardArn:
+			v.DashboardArn = new(string)
+			return d.ReadString(schemas.DashboardEntry_DashboardArn, v.DashboardArn)
+		case schemas.DashboardEntry_DashboardName:
+			v.DashboardName = new(string)
+			return d.ReadString(schemas.DashboardEntry_DashboardName, v.DashboardName)
+		case schemas.DashboardEntry_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.DashboardEntry_LastModified, v.LastModified)
+		case schemas.DashboardEntry_Size:
+			v.Size = new(int64)
+			return d.ReadInt64(schemas.DashboardEntry_Size, v.Size)
+		}
+		return nil
+	})
+}
+
 // An error or warning for the operation.
 type DashboardValidationMessage struct {
 
@@ -312,6 +783,34 @@ type DashboardValidationMessage struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DashboardValidationMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DashboardValidationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DashboardValidationMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataPath != nil {
+		s.WriteString(schemas.DashboardValidationMessage_DataPath, *v.DataPath)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DashboardValidationMessage_Message, *v.Message)
+	}
+}
+func (v *DashboardValidationMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DashboardValidationMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DashboardValidationMessage_DataPath:
+			v.DataPath = new(string)
+			return d.ReadString(schemas.DashboardValidationMessage_DataPath, v.DataPath)
+		case schemas.DashboardValidationMessage_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DashboardValidationMessage_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Encapsulates the statistical data that CloudWatch computes from metric data.
@@ -345,6 +844,71 @@ type Datapoint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Datapoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Datapoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Datapoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Average != nil {
+		s.WriteFloat64(schemas.Datapoint_Average, *v.Average)
+	}
+	serializeDatapointValueMap(s, schemas.Datapoint_ExtendedStatistics, v.ExtendedStatistics)
+	if v.Maximum != nil {
+		s.WriteFloat64(schemas.Datapoint_Maximum, *v.Maximum)
+	}
+	if v.Minimum != nil {
+		s.WriteFloat64(schemas.Datapoint_Minimum, *v.Minimum)
+	}
+	if v.SampleCount != nil {
+		s.WriteFloat64(schemas.Datapoint_SampleCount, *v.SampleCount)
+	}
+	if v.Sum != nil {
+		s.WriteFloat64(schemas.Datapoint_Sum, *v.Sum)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.Datapoint_Timestamp, *v.Timestamp)
+	}
+	if v.Unit != "" {
+		s.WriteString(schemas.Datapoint_Unit, string(v.Unit))
+	}
+}
+func (v *Datapoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Datapoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Datapoint_Average:
+			v.Average = new(float64)
+			return d.ReadFloat64(schemas.Datapoint_Average, v.Average)
+		case schemas.Datapoint_ExtendedStatistics:
+			return deserializeDatapointValueMap(d, schemas.Datapoint_ExtendedStatistics, &v.ExtendedStatistics)
+		case schemas.Datapoint_Maximum:
+			v.Maximum = new(float64)
+			return d.ReadFloat64(schemas.Datapoint_Maximum, v.Maximum)
+		case schemas.Datapoint_Minimum:
+			v.Minimum = new(float64)
+			return d.ReadFloat64(schemas.Datapoint_Minimum, v.Minimum)
+		case schemas.Datapoint_SampleCount:
+			v.SampleCount = new(float64)
+			return d.ReadFloat64(schemas.Datapoint_SampleCount, v.SampleCount)
+		case schemas.Datapoint_Sum:
+			v.Sum = new(float64)
+			return d.ReadFloat64(schemas.Datapoint_Sum, v.Sum)
+		case schemas.Datapoint_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.Datapoint_Timestamp, v.Timestamp)
+		case schemas.Datapoint_Unit:
+			var ev string
+			if err := d.ReadString(schemas.Datapoint_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = StandardUnit(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A dimension is a name/value pair that is part of the identity of a metric.
 // Because dimensions are part of the unique identifier for a metric, whenever you
 // add a unique name/value pair to one of your metrics, you are creating a new
@@ -373,6 +937,34 @@ type Dimension struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Dimension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Dimension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Dimension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Dimension_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Dimension_Value, *v.Value)
+	}
+}
+func (v *Dimension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Dimension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Dimension_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Dimension_Name, v.Name)
+		case schemas.Dimension_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Dimension_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Represents filters for a dimension.
 type DimensionFilter struct {
 
@@ -385,6 +977,34 @@ type DimensionFilter struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DimensionFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DimensionFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DimensionFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DimensionFilter_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.DimensionFilter_Value, *v.Value)
+	}
+}
+func (v *DimensionFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DimensionFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DimensionFilter_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DimensionFilter_Name, v.Name)
+		case schemas.DimensionFilter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.DimensionFilter_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // An entity associated with metrics, to allow for finding related telemetry. An
@@ -419,6 +1039,28 @@ type Entity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Entity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Entity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Entity) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityAttributesMap(s, schemas.Entity_Attributes, v.Attributes)
+	serializeEntityKeyAttributesMap(s, schemas.Entity_KeyAttributes, v.KeyAttributes)
+}
+func (v *Entity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Entity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Entity_Attributes:
+			return deserializeEntityAttributesMap(d, schemas.Entity_Attributes, &v.Attributes)
+		case schemas.Entity_KeyAttributes:
+			return deserializeEntityKeyAttributesMap(d, schemas.Entity_KeyAttributes, &v.KeyAttributes)
+		}
+		return nil
+	})
+}
+
 // A set of metrics that are associated with an entity, such as a specific service
 // or resource. Contains the entity and the list of metric data associated with it.
 type EntityMetricData struct {
@@ -430,6 +1072,33 @@ type EntityMetricData struct {
 	MetricData []MetricDatum
 
 	noSmithyDocumentSerde
+}
+
+func (v *EntityMetricData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityMetricData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityMetricData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Entity != nil {
+		s.WriteStruct(schemas.EntityMetricData_Entity)
+		v.Entity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMetricData(s, schemas.EntityMetricData_MetricData, v.MetricData)
+}
+func (v *EntityMetricData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityMetricData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityMetricData_Entity:
+			v.Entity = &Entity{}
+			return v.Entity.Deserialize(d)
+		case schemas.EntityMetricData_MetricData:
+			return deserializeMetricData(d, schemas.EntityMetricData_MetricData, &v.MetricData)
+		}
+		return nil
+	})
 }
 
 // The evaluation criteria for an alarm. This is a union type that currently
@@ -450,6 +1119,14 @@ type EvaluationCriteriaMemberPromQLCriteria struct {
 }
 
 func (*EvaluationCriteriaMemberPromQLCriteria) isEvaluationCriteria() {}
+func (v *EvaluationCriteriaMemberPromQLCriteria) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationCriteria_PromQLCriteria)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EvaluationCriteriaMemberPromQLCriteria) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The evaluation window that an alarm uses to select the range of metric data
 // that it evaluates each time it runs. This is a union type. Set exactly one of
@@ -477,6 +1154,14 @@ type EvaluationWindowMemberSlidingWindow struct {
 }
 
 func (*EvaluationWindowMemberSlidingWindow) isEvaluationWindow() {}
+func (v *EvaluationWindowMemberSlidingWindow) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationWindow_SlidingWindow)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EvaluationWindowMemberSlidingWindow) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A wall clock window, which aligns the evaluated range to fixed clock boundaries
 // that match the alarm's period, such as the top of the hour, midnight, or the
@@ -488,6 +1173,14 @@ type EvaluationWindowMemberWallClockWindow struct {
 }
 
 func (*EvaluationWindowMemberWallClockWindow) isEvaluationWindow() {}
+func (v *EvaluationWindowMemberWallClockWindow) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationWindow_WallClockWindow)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EvaluationWindowMemberWallClockWindow) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // This structure contains the definition for a Contributor Insights rule. For
 // more information about this rule, see[Using Constributor Insights to analyze high-cardinality data] in the Amazon CloudWatch User Guide.
@@ -535,6 +1228,58 @@ type InsightRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InsightRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsightRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsightRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplyOnTransformedLogs != nil {
+		s.WriteBool(schemas.InsightRule_ApplyOnTransformedLogs, *v.ApplyOnTransformedLogs)
+	}
+	if v.Definition != nil {
+		s.WriteString(schemas.InsightRule_Definition, *v.Definition)
+	}
+	if v.ManagedRule != nil {
+		s.WriteBool(schemas.InsightRule_ManagedRule, *v.ManagedRule)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.InsightRule_Name, *v.Name)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.InsightRule_Schema, *v.Schema)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.InsightRule_State, *v.State)
+	}
+}
+func (v *InsightRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InsightRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InsightRule_ApplyOnTransformedLogs:
+			v.ApplyOnTransformedLogs = new(bool)
+			return d.ReadBool(schemas.InsightRule_ApplyOnTransformedLogs, v.ApplyOnTransformedLogs)
+		case schemas.InsightRule_Definition:
+			v.Definition = new(string)
+			return d.ReadString(schemas.InsightRule_Definition, v.Definition)
+		case schemas.InsightRule_ManagedRule:
+			v.ManagedRule = new(bool)
+			return d.ReadBool(schemas.InsightRule_ManagedRule, v.ManagedRule)
+		case schemas.InsightRule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.InsightRule_Name, v.Name)
+		case schemas.InsightRule_Schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.InsightRule_Schema, v.Schema)
+		case schemas.InsightRule_State:
+			v.State = new(string)
+			return d.ReadString(schemas.InsightRule_State, v.State)
+		}
+		return nil
+	})
+}
+
 // One of the unique contributors found by a Contributor Insights rule. If the
 // rule contains multiple keys, then a unique contributor is a unique combination
 // of values from all the keys in the rule.
@@ -567,6 +1312,34 @@ type InsightRuleContributor struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InsightRuleContributor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsightRuleContributor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsightRuleContributor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateAggregateValue != nil {
+		s.WriteFloat64(schemas.InsightRuleContributor_ApproximateAggregateValue, *v.ApproximateAggregateValue)
+	}
+	serializeInsightRuleContributorDatapoints(s, schemas.InsightRuleContributor_Datapoints, v.Datapoints)
+	serializeInsightRuleContributorKeys(s, schemas.InsightRuleContributor_Keys, v.Keys)
+}
+func (v *InsightRuleContributor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InsightRuleContributor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InsightRuleContributor_ApproximateAggregateValue:
+			v.ApproximateAggregateValue = new(float64)
+			return d.ReadFloat64(schemas.InsightRuleContributor_ApproximateAggregateValue, v.ApproximateAggregateValue)
+		case schemas.InsightRuleContributor_Datapoints:
+			return deserializeInsightRuleContributorDatapoints(d, schemas.InsightRuleContributor_Datapoints, &v.Datapoints)
+		case schemas.InsightRuleContributor_Keys:
+			return deserializeInsightRuleContributorKeys(d, schemas.InsightRuleContributor_Keys, &v.Keys)
+		}
+		return nil
+	})
+}
+
 // One data point related to one contributor.
 //
 // For more information, see [GetInsightRuleReport] and [InsightRuleContributor].
@@ -586,6 +1359,34 @@ type InsightRuleContributorDatapoint struct {
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *InsightRuleContributorDatapoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsightRuleContributorDatapoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsightRuleContributorDatapoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateValue != nil {
+		s.WriteFloat64(schemas.InsightRuleContributorDatapoint_ApproximateValue, *v.ApproximateValue)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.InsightRuleContributorDatapoint_Timestamp, *v.Timestamp)
+	}
+}
+func (v *InsightRuleContributorDatapoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InsightRuleContributorDatapoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InsightRuleContributorDatapoint_ApproximateValue:
+			v.ApproximateValue = new(float64)
+			return d.ReadFloat64(schemas.InsightRuleContributorDatapoint_ApproximateValue, v.ApproximateValue)
+		case schemas.InsightRuleContributorDatapoint_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.InsightRuleContributorDatapoint_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
 }
 
 // One data point from the metric time series returned in a Contributor Insights
@@ -652,6 +1453,70 @@ type InsightRuleMetricDatapoint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InsightRuleMetricDatapoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsightRuleMetricDatapoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsightRuleMetricDatapoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Average != nil {
+		s.WriteFloat64(schemas.InsightRuleMetricDatapoint_Average, *v.Average)
+	}
+	if v.MaxContributorValue != nil {
+		s.WriteFloat64(schemas.InsightRuleMetricDatapoint_MaxContributorValue, *v.MaxContributorValue)
+	}
+	if v.Maximum != nil {
+		s.WriteFloat64(schemas.InsightRuleMetricDatapoint_Maximum, *v.Maximum)
+	}
+	if v.Minimum != nil {
+		s.WriteFloat64(schemas.InsightRuleMetricDatapoint_Minimum, *v.Minimum)
+	}
+	if v.SampleCount != nil {
+		s.WriteFloat64(schemas.InsightRuleMetricDatapoint_SampleCount, *v.SampleCount)
+	}
+	if v.Sum != nil {
+		s.WriteFloat64(schemas.InsightRuleMetricDatapoint_Sum, *v.Sum)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.InsightRuleMetricDatapoint_Timestamp, *v.Timestamp)
+	}
+	if v.UniqueContributors != nil {
+		s.WriteFloat64(schemas.InsightRuleMetricDatapoint_UniqueContributors, *v.UniqueContributors)
+	}
+}
+func (v *InsightRuleMetricDatapoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InsightRuleMetricDatapoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InsightRuleMetricDatapoint_Average:
+			v.Average = new(float64)
+			return d.ReadFloat64(schemas.InsightRuleMetricDatapoint_Average, v.Average)
+		case schemas.InsightRuleMetricDatapoint_MaxContributorValue:
+			v.MaxContributorValue = new(float64)
+			return d.ReadFloat64(schemas.InsightRuleMetricDatapoint_MaxContributorValue, v.MaxContributorValue)
+		case schemas.InsightRuleMetricDatapoint_Maximum:
+			v.Maximum = new(float64)
+			return d.ReadFloat64(schemas.InsightRuleMetricDatapoint_Maximum, v.Maximum)
+		case schemas.InsightRuleMetricDatapoint_Minimum:
+			v.Minimum = new(float64)
+			return d.ReadFloat64(schemas.InsightRuleMetricDatapoint_Minimum, v.Minimum)
+		case schemas.InsightRuleMetricDatapoint_SampleCount:
+			v.SampleCount = new(float64)
+			return d.ReadFloat64(schemas.InsightRuleMetricDatapoint_SampleCount, v.SampleCount)
+		case schemas.InsightRuleMetricDatapoint_Sum:
+			v.Sum = new(float64)
+			return d.ReadFloat64(schemas.InsightRuleMetricDatapoint_Sum, v.Sum)
+		case schemas.InsightRuleMetricDatapoint_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.InsightRuleMetricDatapoint_Timestamp, v.Timestamp)
+		case schemas.InsightRuleMetricDatapoint_UniqueContributors:
+			v.UniqueContributors = new(float64)
+			return d.ReadFloat64(schemas.InsightRuleMetricDatapoint_UniqueContributors, v.UniqueContributors)
+		}
+		return nil
+	})
+}
+
 // This structure includes the Timezone parameter, which you can use to specify
 // your time zone so that the labels that are associated with returned metrics
 // display the correct time for your time zone.
@@ -671,6 +1536,28 @@ type LabelOptions struct {
 	Timezone *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LabelOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LabelOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LabelOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Timezone != nil {
+		s.WriteString(schemas.LabelOptions_Timezone, *v.Timezone)
+	}
+}
+func (v *LabelOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LabelOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LabelOptions_Timezone:
+			v.Timezone = new(string)
+			return d.ReadString(schemas.LabelOptions_Timezone, v.Timezone)
+		}
+		return nil
+	})
 }
 
 // The details about a log alarm.
@@ -771,6 +1658,159 @@ type LogAlarm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LogAlarm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogAlarm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogAlarm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionLogLineCount != nil {
+		s.WriteInt32(schemas.LogAlarm_ActionLogLineCount, *v.ActionLogLineCount)
+	}
+	if v.ActionLogLineRoleArn != nil {
+		s.WriteString(schemas.LogAlarm_ActionLogLineRoleArn, *v.ActionLogLineRoleArn)
+	}
+	if v.ActionsEnabled != nil {
+		s.WriteBool(schemas.LogAlarm_ActionsEnabled, *v.ActionsEnabled)
+	}
+	serializeResourceList(s, schemas.LogAlarm_AlarmActions, v.AlarmActions)
+	if v.AlarmArn != nil {
+		s.WriteString(schemas.LogAlarm_AlarmArn, *v.AlarmArn)
+	}
+	if v.AlarmConfigurationUpdatedTimestamp != nil {
+		s.WriteTime(schemas.LogAlarm_AlarmConfigurationUpdatedTimestamp, *v.AlarmConfigurationUpdatedTimestamp)
+	}
+	if v.AlarmDescription != nil {
+		s.WriteString(schemas.LogAlarm_AlarmDescription, *v.AlarmDescription)
+	}
+	if v.AlarmName != nil {
+		s.WriteString(schemas.LogAlarm_AlarmName, *v.AlarmName)
+	}
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.LogAlarm_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	if v.EvaluationState != "" {
+		s.WriteString(schemas.LogAlarm_EvaluationState, string(v.EvaluationState))
+	}
+	serializeResourceList(s, schemas.LogAlarm_InsufficientDataActions, v.InsufficientDataActions)
+	serializeResourceList(s, schemas.LogAlarm_OKActions, v.OKActions)
+	if v.QueryResultsToAlarm != nil {
+		s.WriteInt32(schemas.LogAlarm_QueryResultsToAlarm, *v.QueryResultsToAlarm)
+	}
+	if v.QueryResultsToEvaluate != nil {
+		s.WriteInt32(schemas.LogAlarm_QueryResultsToEvaluate, *v.QueryResultsToEvaluate)
+	}
+	if v.ScheduledQueryConfiguration != nil {
+		s.WriteStruct(schemas.LogAlarm_ScheduledQueryConfiguration)
+		v.ScheduledQueryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.LogAlarm_StateReason, *v.StateReason)
+	}
+	if v.StateReasonData != nil {
+		s.WriteString(schemas.LogAlarm_StateReasonData, *v.StateReasonData)
+	}
+	if v.StateTransitionedTimestamp != nil {
+		s.WriteTime(schemas.LogAlarm_StateTransitionedTimestamp, *v.StateTransitionedTimestamp)
+	}
+	if v.StateUpdatedTimestamp != nil {
+		s.WriteTime(schemas.LogAlarm_StateUpdatedTimestamp, *v.StateUpdatedTimestamp)
+	}
+	if v.StateValue != "" {
+		s.WriteString(schemas.LogAlarm_StateValue, string(v.StateValue))
+	}
+	if v.Threshold != nil {
+		s.WriteFloat64(schemas.LogAlarm_Threshold, *v.Threshold)
+	}
+	if v.TreatMissingData != nil {
+		s.WriteString(schemas.LogAlarm_TreatMissingData, *v.TreatMissingData)
+	}
+}
+func (v *LogAlarm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogAlarm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LogAlarm_ActionLogLineCount:
+			v.ActionLogLineCount = new(int32)
+			return d.ReadInt32(schemas.LogAlarm_ActionLogLineCount, v.ActionLogLineCount)
+		case schemas.LogAlarm_ActionLogLineRoleArn:
+			v.ActionLogLineRoleArn = new(string)
+			return d.ReadString(schemas.LogAlarm_ActionLogLineRoleArn, v.ActionLogLineRoleArn)
+		case schemas.LogAlarm_ActionsEnabled:
+			v.ActionsEnabled = new(bool)
+			return d.ReadBool(schemas.LogAlarm_ActionsEnabled, v.ActionsEnabled)
+		case schemas.LogAlarm_AlarmActions:
+			return deserializeResourceList(d, schemas.LogAlarm_AlarmActions, &v.AlarmActions)
+		case schemas.LogAlarm_AlarmArn:
+			v.AlarmArn = new(string)
+			return d.ReadString(schemas.LogAlarm_AlarmArn, v.AlarmArn)
+		case schemas.LogAlarm_AlarmConfigurationUpdatedTimestamp:
+			v.AlarmConfigurationUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.LogAlarm_AlarmConfigurationUpdatedTimestamp, v.AlarmConfigurationUpdatedTimestamp)
+		case schemas.LogAlarm_AlarmDescription:
+			v.AlarmDescription = new(string)
+			return d.ReadString(schemas.LogAlarm_AlarmDescription, v.AlarmDescription)
+		case schemas.LogAlarm_AlarmName:
+			v.AlarmName = new(string)
+			return d.ReadString(schemas.LogAlarm_AlarmName, v.AlarmName)
+		case schemas.LogAlarm_ComparisonOperator:
+			var ev string
+			if err := d.ReadString(schemas.LogAlarm_ComparisonOperator, &ev); err != nil {
+				return err
+			}
+			v.ComparisonOperator = ComparisonOperator(ev)
+			return nil
+		case schemas.LogAlarm_EvaluationState:
+			var ev string
+			if err := d.ReadString(schemas.LogAlarm_EvaluationState, &ev); err != nil {
+				return err
+			}
+			v.EvaluationState = EvaluationState(ev)
+			return nil
+		case schemas.LogAlarm_InsufficientDataActions:
+			return deserializeResourceList(d, schemas.LogAlarm_InsufficientDataActions, &v.InsufficientDataActions)
+		case schemas.LogAlarm_OKActions:
+			return deserializeResourceList(d, schemas.LogAlarm_OKActions, &v.OKActions)
+		case schemas.LogAlarm_QueryResultsToAlarm:
+			v.QueryResultsToAlarm = new(int32)
+			return d.ReadInt32(schemas.LogAlarm_QueryResultsToAlarm, v.QueryResultsToAlarm)
+		case schemas.LogAlarm_QueryResultsToEvaluate:
+			v.QueryResultsToEvaluate = new(int32)
+			return d.ReadInt32(schemas.LogAlarm_QueryResultsToEvaluate, v.QueryResultsToEvaluate)
+		case schemas.LogAlarm_ScheduledQueryConfiguration:
+			v.ScheduledQueryConfiguration = &ScheduledQueryConfiguration{}
+			return v.ScheduledQueryConfiguration.Deserialize(d)
+		case schemas.LogAlarm_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.LogAlarm_StateReason, v.StateReason)
+		case schemas.LogAlarm_StateReasonData:
+			v.StateReasonData = new(string)
+			return d.ReadString(schemas.LogAlarm_StateReasonData, v.StateReasonData)
+		case schemas.LogAlarm_StateTransitionedTimestamp:
+			v.StateTransitionedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.LogAlarm_StateTransitionedTimestamp, v.StateTransitionedTimestamp)
+		case schemas.LogAlarm_StateUpdatedTimestamp:
+			v.StateUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.LogAlarm_StateUpdatedTimestamp, v.StateUpdatedTimestamp)
+		case schemas.LogAlarm_StateValue:
+			var ev string
+			if err := d.ReadString(schemas.LogAlarm_StateValue, &ev); err != nil {
+				return err
+			}
+			v.StateValue = StateValue(ev)
+			return nil
+		case schemas.LogAlarm_Threshold:
+			v.Threshold = new(float64)
+			return d.ReadFloat64(schemas.LogAlarm_Threshold, v.Threshold)
+		case schemas.LogAlarm_TreatMissingData:
+			v.TreatMissingData = new(string)
+			return d.ReadString(schemas.LogAlarm_TreatMissingData, v.TreatMissingData)
+		}
+		return nil
+	})
+}
+
 //	Contains the information that's required to enable a managed Contributor
 //
 // Insights rule for an Amazon Web Services resource.
@@ -802,6 +1842,37 @@ type ManagedRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.ManagedRule_ResourceARN, *v.ResourceARN)
+	}
+	serializeTagList(s, schemas.ManagedRule_Tags, v.Tags)
+	if v.TemplateName != nil {
+		s.WriteString(schemas.ManagedRule_TemplateName, *v.TemplateName)
+	}
+}
+func (v *ManagedRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedRule_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.ManagedRule_ResourceARN, v.ResourceARN)
+		case schemas.ManagedRule_Tags:
+			return deserializeTagList(d, schemas.ManagedRule_Tags, &v.Tags)
+		case schemas.ManagedRule_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.ManagedRule_TemplateName, v.TemplateName)
+		}
+		return nil
+	})
+}
+
 //	Contains information about managed Contributor Insights rules, as returned by
 //
 // ListManagedInsightRules .
@@ -823,6 +1894,42 @@ type ManagedRuleDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedRuleDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedRuleDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedRuleDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.ManagedRuleDescription_ResourceARN, *v.ResourceARN)
+	}
+	if v.RuleState != nil {
+		s.WriteStruct(schemas.ManagedRuleDescription_RuleState)
+		v.RuleState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.ManagedRuleDescription_TemplateName, *v.TemplateName)
+	}
+}
+func (v *ManagedRuleDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedRuleDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedRuleDescription_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.ManagedRuleDescription_ResourceARN, v.ResourceARN)
+		case schemas.ManagedRuleDescription_RuleState:
+			v.RuleState = &ManagedRuleState{}
+			return v.RuleState.Deserialize(d)
+		case schemas.ManagedRuleDescription_TemplateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.ManagedRuleDescription_TemplateName, v.TemplateName)
+		}
+		return nil
+	})
+}
+
 // The status of a managed Contributor Insights rule.
 type ManagedRuleState struct {
 
@@ -838,6 +1945,34 @@ type ManagedRuleState struct {
 	State *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ManagedRuleState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedRuleState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedRuleState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleName != nil {
+		s.WriteString(schemas.ManagedRuleState_RuleName, *v.RuleName)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.ManagedRuleState_State, *v.State)
+	}
+}
+func (v *ManagedRuleState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedRuleState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedRuleState_RuleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.ManagedRuleState_RuleName, v.RuleName)
+		case schemas.ManagedRuleState_State:
+			v.State = new(string)
+			return d.ReadString(schemas.ManagedRuleState_State, v.State)
+		}
+		return nil
+	})
 }
 
 // A message returned by the GetMetricData API, including a code and a description.
@@ -857,6 +1992,34 @@ type MessageData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MessageData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.MessageData_Code, *v.Code)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.MessageData_Value, *v.Value)
+	}
+}
+func (v *MessageData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageData_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.MessageData_Code, v.Code)
+		case schemas.MessageData_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.MessageData_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Represents a specific metric.
 type Metric struct {
 
@@ -870,6 +2033,37 @@ type Metric struct {
 	Namespace *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Metric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Metric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Metric) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensions(s, schemas.Metric_Dimensions, v.Dimensions)
+	if v.MetricName != nil {
+		s.WriteString(schemas.Metric_MetricName, *v.MetricName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.Metric_Namespace, *v.Namespace)
+	}
+}
+func (v *Metric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Metric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Metric_Dimensions:
+			return deserializeDimensions(d, schemas.Metric_Dimensions, &v.Dimensions)
+		case schemas.Metric_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.Metric_MetricName, v.MetricName)
+		case schemas.Metric_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.Metric_Namespace, v.Namespace)
+		}
+		return nil
+	})
 }
 
 // The details about a metric alarm.
@@ -1013,6 +2207,213 @@ type MetricAlarm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricAlarm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricAlarm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricAlarm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionsEnabled != nil {
+		s.WriteBool(schemas.MetricAlarm_ActionsEnabled, *v.ActionsEnabled)
+	}
+	serializeResourceList(s, schemas.MetricAlarm_AlarmActions, v.AlarmActions)
+	if v.AlarmArn != nil {
+		s.WriteString(schemas.MetricAlarm_AlarmArn, *v.AlarmArn)
+	}
+	if v.AlarmConfigurationUpdatedTimestamp != nil {
+		s.WriteTime(schemas.MetricAlarm_AlarmConfigurationUpdatedTimestamp, *v.AlarmConfigurationUpdatedTimestamp)
+	}
+	if v.AlarmDescription != nil {
+		s.WriteString(schemas.MetricAlarm_AlarmDescription, *v.AlarmDescription)
+	}
+	if v.AlarmName != nil {
+		s.WriteString(schemas.MetricAlarm_AlarmName, *v.AlarmName)
+	}
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.MetricAlarm_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	if v.DatapointsToAlarm != nil {
+		s.WriteInt32(schemas.MetricAlarm_DatapointsToAlarm, *v.DatapointsToAlarm)
+	}
+	serializeDimensions(s, schemas.MetricAlarm_Dimensions, v.Dimensions)
+	if v.EvaluateLowSampleCountPercentile != nil {
+		s.WriteString(schemas.MetricAlarm_EvaluateLowSampleCountPercentile, *v.EvaluateLowSampleCountPercentile)
+	}
+	serializeEvaluationCriteria(s, schemas.MetricAlarm_EvaluationCriteria, v.EvaluationCriteria)
+	if v.EvaluationInterval != nil {
+		s.WriteInt32(schemas.MetricAlarm_EvaluationInterval, *v.EvaluationInterval)
+	}
+	if v.EvaluationPeriods != nil {
+		s.WriteInt32(schemas.MetricAlarm_EvaluationPeriods, *v.EvaluationPeriods)
+	}
+	if v.EvaluationState != "" {
+		s.WriteString(schemas.MetricAlarm_EvaluationState, string(v.EvaluationState))
+	}
+	serializeEvaluationWindow(s, schemas.MetricAlarm_EvaluationWindow, v.EvaluationWindow)
+	if v.ExtendedStatistic != nil {
+		s.WriteString(schemas.MetricAlarm_ExtendedStatistic, *v.ExtendedStatistic)
+	}
+	serializeResourceList(s, schemas.MetricAlarm_InsufficientDataActions, v.InsufficientDataActions)
+	if v.MetricName != nil {
+		s.WriteString(schemas.MetricAlarm_MetricName, *v.MetricName)
+	}
+	serializeMetricDataQueries(s, schemas.MetricAlarm_Metrics, v.Metrics)
+	if v.Namespace != nil {
+		s.WriteString(schemas.MetricAlarm_Namespace, *v.Namespace)
+	}
+	serializeResourceList(s, schemas.MetricAlarm_OKActions, v.OKActions)
+	if v.Period != nil {
+		s.WriteInt32(schemas.MetricAlarm_Period, *v.Period)
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.MetricAlarm_StateReason, *v.StateReason)
+	}
+	if v.StateReasonData != nil {
+		s.WriteString(schemas.MetricAlarm_StateReasonData, *v.StateReasonData)
+	}
+	if v.StateTransitionedTimestamp != nil {
+		s.WriteTime(schemas.MetricAlarm_StateTransitionedTimestamp, *v.StateTransitionedTimestamp)
+	}
+	if v.StateUpdatedTimestamp != nil {
+		s.WriteTime(schemas.MetricAlarm_StateUpdatedTimestamp, *v.StateUpdatedTimestamp)
+	}
+	if v.StateValue != "" {
+		s.WriteString(schemas.MetricAlarm_StateValue, string(v.StateValue))
+	}
+	if v.Statistic != "" {
+		s.WriteString(schemas.MetricAlarm_Statistic, string(v.Statistic))
+	}
+	if v.Threshold != nil {
+		s.WriteFloat64(schemas.MetricAlarm_Threshold, *v.Threshold)
+	}
+	if v.ThresholdMetricId != nil {
+		s.WriteString(schemas.MetricAlarm_ThresholdMetricId, *v.ThresholdMetricId)
+	}
+	if v.TreatMissingData != nil {
+		s.WriteString(schemas.MetricAlarm_TreatMissingData, *v.TreatMissingData)
+	}
+	if v.Unit != "" {
+		s.WriteString(schemas.MetricAlarm_Unit, string(v.Unit))
+	}
+}
+func (v *MetricAlarm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricAlarm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricAlarm_ActionsEnabled:
+			v.ActionsEnabled = new(bool)
+			return d.ReadBool(schemas.MetricAlarm_ActionsEnabled, v.ActionsEnabled)
+		case schemas.MetricAlarm_AlarmActions:
+			return deserializeResourceList(d, schemas.MetricAlarm_AlarmActions, &v.AlarmActions)
+		case schemas.MetricAlarm_AlarmArn:
+			v.AlarmArn = new(string)
+			return d.ReadString(schemas.MetricAlarm_AlarmArn, v.AlarmArn)
+		case schemas.MetricAlarm_AlarmConfigurationUpdatedTimestamp:
+			v.AlarmConfigurationUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MetricAlarm_AlarmConfigurationUpdatedTimestamp, v.AlarmConfigurationUpdatedTimestamp)
+		case schemas.MetricAlarm_AlarmDescription:
+			v.AlarmDescription = new(string)
+			return d.ReadString(schemas.MetricAlarm_AlarmDescription, v.AlarmDescription)
+		case schemas.MetricAlarm_AlarmName:
+			v.AlarmName = new(string)
+			return d.ReadString(schemas.MetricAlarm_AlarmName, v.AlarmName)
+		case schemas.MetricAlarm_ComparisonOperator:
+			var ev string
+			if err := d.ReadString(schemas.MetricAlarm_ComparisonOperator, &ev); err != nil {
+				return err
+			}
+			v.ComparisonOperator = ComparisonOperator(ev)
+			return nil
+		case schemas.MetricAlarm_DatapointsToAlarm:
+			v.DatapointsToAlarm = new(int32)
+			return d.ReadInt32(schemas.MetricAlarm_DatapointsToAlarm, v.DatapointsToAlarm)
+		case schemas.MetricAlarm_Dimensions:
+			return deserializeDimensions(d, schemas.MetricAlarm_Dimensions, &v.Dimensions)
+		case schemas.MetricAlarm_EvaluateLowSampleCountPercentile:
+			v.EvaluateLowSampleCountPercentile = new(string)
+			return d.ReadString(schemas.MetricAlarm_EvaluateLowSampleCountPercentile, v.EvaluateLowSampleCountPercentile)
+		case schemas.MetricAlarm_EvaluationCriteria:
+			return deserializeEvaluationCriteria(d, schemas.MetricAlarm_EvaluationCriteria, &v.EvaluationCriteria)
+		case schemas.MetricAlarm_EvaluationInterval:
+			v.EvaluationInterval = new(int32)
+			return d.ReadInt32(schemas.MetricAlarm_EvaluationInterval, v.EvaluationInterval)
+		case schemas.MetricAlarm_EvaluationPeriods:
+			v.EvaluationPeriods = new(int32)
+			return d.ReadInt32(schemas.MetricAlarm_EvaluationPeriods, v.EvaluationPeriods)
+		case schemas.MetricAlarm_EvaluationState:
+			var ev string
+			if err := d.ReadString(schemas.MetricAlarm_EvaluationState, &ev); err != nil {
+				return err
+			}
+			v.EvaluationState = EvaluationState(ev)
+			return nil
+		case schemas.MetricAlarm_EvaluationWindow:
+			return deserializeEvaluationWindow(d, schemas.MetricAlarm_EvaluationWindow, &v.EvaluationWindow)
+		case schemas.MetricAlarm_ExtendedStatistic:
+			v.ExtendedStatistic = new(string)
+			return d.ReadString(schemas.MetricAlarm_ExtendedStatistic, v.ExtendedStatistic)
+		case schemas.MetricAlarm_InsufficientDataActions:
+			return deserializeResourceList(d, schemas.MetricAlarm_InsufficientDataActions, &v.InsufficientDataActions)
+		case schemas.MetricAlarm_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.MetricAlarm_MetricName, v.MetricName)
+		case schemas.MetricAlarm_Metrics:
+			return deserializeMetricDataQueries(d, schemas.MetricAlarm_Metrics, &v.Metrics)
+		case schemas.MetricAlarm_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.MetricAlarm_Namespace, v.Namespace)
+		case schemas.MetricAlarm_OKActions:
+			return deserializeResourceList(d, schemas.MetricAlarm_OKActions, &v.OKActions)
+		case schemas.MetricAlarm_Period:
+			v.Period = new(int32)
+			return d.ReadInt32(schemas.MetricAlarm_Period, v.Period)
+		case schemas.MetricAlarm_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.MetricAlarm_StateReason, v.StateReason)
+		case schemas.MetricAlarm_StateReasonData:
+			v.StateReasonData = new(string)
+			return d.ReadString(schemas.MetricAlarm_StateReasonData, v.StateReasonData)
+		case schemas.MetricAlarm_StateTransitionedTimestamp:
+			v.StateTransitionedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MetricAlarm_StateTransitionedTimestamp, v.StateTransitionedTimestamp)
+		case schemas.MetricAlarm_StateUpdatedTimestamp:
+			v.StateUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.MetricAlarm_StateUpdatedTimestamp, v.StateUpdatedTimestamp)
+		case schemas.MetricAlarm_StateValue:
+			var ev string
+			if err := d.ReadString(schemas.MetricAlarm_StateValue, &ev); err != nil {
+				return err
+			}
+			v.StateValue = StateValue(ev)
+			return nil
+		case schemas.MetricAlarm_Statistic:
+			var ev string
+			if err := d.ReadString(schemas.MetricAlarm_Statistic, &ev); err != nil {
+				return err
+			}
+			v.Statistic = Statistic(ev)
+			return nil
+		case schemas.MetricAlarm_Threshold:
+			v.Threshold = new(float64)
+			return d.ReadFloat64(schemas.MetricAlarm_Threshold, v.Threshold)
+		case schemas.MetricAlarm_ThresholdMetricId:
+			v.ThresholdMetricId = new(string)
+			return d.ReadString(schemas.MetricAlarm_ThresholdMetricId, v.ThresholdMetricId)
+		case schemas.MetricAlarm_TreatMissingData:
+			v.TreatMissingData = new(string)
+			return d.ReadString(schemas.MetricAlarm_TreatMissingData, v.TreatMissingData)
+		case schemas.MetricAlarm_Unit:
+			var ev string
+			if err := d.ReadString(schemas.MetricAlarm_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = StandardUnit(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This object includes parameters that you can use to provide information to
 // CloudWatch to help it build more accurate anomaly detection models.
 type MetricCharacteristics struct {
@@ -1024,6 +2425,28 @@ type MetricCharacteristics struct {
 	PeriodicSpikes *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetricCharacteristics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricCharacteristics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricCharacteristics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PeriodicSpikes != nil {
+		s.WriteBool(schemas.MetricCharacteristics_PeriodicSpikes, *v.PeriodicSpikes)
+	}
+}
+func (v *MetricCharacteristics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricCharacteristics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricCharacteristics_PeriodicSpikes:
+			v.PeriodicSpikes = new(bool)
+			return d.ReadBool(schemas.MetricCharacteristics_PeriodicSpikes, v.PeriodicSpikes)
+		}
+		return nil
+	})
 }
 
 // This structure is used in both GetMetricData and PutMetricAlarm . The supported
@@ -1129,6 +2552,66 @@ type MetricDataQuery struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricDataQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricDataQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricDataQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.MetricDataQuery_AccountId, *v.AccountId)
+	}
+	if v.Expression != nil {
+		s.WriteString(schemas.MetricDataQuery_Expression, *v.Expression)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.MetricDataQuery_Id, *v.Id)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.MetricDataQuery_Label, *v.Label)
+	}
+	if v.MetricStat != nil {
+		s.WriteStruct(schemas.MetricDataQuery_MetricStat)
+		v.MetricStat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.MetricDataQuery_Period, *v.Period)
+	}
+	if v.ReturnData != nil {
+		s.WriteBool(schemas.MetricDataQuery_ReturnData, *v.ReturnData)
+	}
+}
+func (v *MetricDataQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricDataQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricDataQuery_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.MetricDataQuery_AccountId, v.AccountId)
+		case schemas.MetricDataQuery_Expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.MetricDataQuery_Expression, v.Expression)
+		case schemas.MetricDataQuery_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MetricDataQuery_Id, v.Id)
+		case schemas.MetricDataQuery_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.MetricDataQuery_Label, v.Label)
+		case schemas.MetricDataQuery_MetricStat:
+			v.MetricStat = &MetricStat{}
+			return v.MetricStat.Deserialize(d)
+		case schemas.MetricDataQuery_Period:
+			v.Period = new(int32)
+			return d.ReadInt32(schemas.MetricDataQuery_Period, v.Period)
+		case schemas.MetricDataQuery_ReturnData:
+			v.ReturnData = new(bool)
+			return d.ReadBool(schemas.MetricDataQuery_ReturnData, v.ReturnData)
+		}
+		return nil
+	})
+}
+
 // A GetMetricData call returns an array of MetricDataResult structures. Each of
 // these structures includes the data points for that metric, along with the
 // timestamps of those data points and other identifying information.
@@ -1162,6 +2645,53 @@ type MetricDataResult struct {
 	Values []float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetricDataResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricDataResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricDataResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.MetricDataResult_Id, *v.Id)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.MetricDataResult_Label, *v.Label)
+	}
+	serializeMetricDataResultMessages(s, schemas.MetricDataResult_Messages, v.Messages)
+	if v.StatusCode != "" {
+		s.WriteString(schemas.MetricDataResult_StatusCode, string(v.StatusCode))
+	}
+	serializeTimestamps(s, schemas.MetricDataResult_Timestamps, v.Timestamps)
+	serializeDatapointValues(s, schemas.MetricDataResult_Values, v.Values)
+}
+func (v *MetricDataResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricDataResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricDataResult_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MetricDataResult_Id, v.Id)
+		case schemas.MetricDataResult_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.MetricDataResult_Label, v.Label)
+		case schemas.MetricDataResult_Messages:
+			return deserializeMetricDataResultMessages(d, schemas.MetricDataResult_Messages, &v.Messages)
+		case schemas.MetricDataResult_StatusCode:
+			var ev string
+			if err := d.ReadString(schemas.MetricDataResult_StatusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = StatusCode(ev)
+			return nil
+		case schemas.MetricDataResult_Timestamps:
+			return deserializeTimestamps(d, schemas.MetricDataResult_Timestamps, &v.Timestamps)
+		case schemas.MetricDataResult_Values:
+			return deserializeDatapointValues(d, schemas.MetricDataResult_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Encapsulates the information sent to either create a metric or add new values
@@ -1234,6 +2764,73 @@ type MetricDatum struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricDatum) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricDatum)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricDatum) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCounts(s, schemas.MetricDatum_Counts, v.Counts)
+	serializeDimensions(s, schemas.MetricDatum_Dimensions, v.Dimensions)
+	if v.MetricName != nil {
+		s.WriteString(schemas.MetricDatum_MetricName, *v.MetricName)
+	}
+	if v.StatisticValues != nil {
+		s.WriteStruct(schemas.MetricDatum_StatisticValues)
+		v.StatisticValues.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageResolution != nil {
+		s.WriteInt32(schemas.MetricDatum_StorageResolution, *v.StorageResolution)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.MetricDatum_Timestamp, *v.Timestamp)
+	}
+	if v.Unit != "" {
+		s.WriteString(schemas.MetricDatum_Unit, string(v.Unit))
+	}
+	if v.Value != nil {
+		s.WriteFloat64(schemas.MetricDatum_Value, *v.Value)
+	}
+	serializeValues(s, schemas.MetricDatum_Values, v.Values)
+}
+func (v *MetricDatum) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricDatum, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricDatum_Counts:
+			return deserializeCounts(d, schemas.MetricDatum_Counts, &v.Counts)
+		case schemas.MetricDatum_Dimensions:
+			return deserializeDimensions(d, schemas.MetricDatum_Dimensions, &v.Dimensions)
+		case schemas.MetricDatum_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.MetricDatum_MetricName, v.MetricName)
+		case schemas.MetricDatum_StatisticValues:
+			v.StatisticValues = &StatisticSet{}
+			return v.StatisticValues.Deserialize(d)
+		case schemas.MetricDatum_StorageResolution:
+			v.StorageResolution = new(int32)
+			return d.ReadInt32(schemas.MetricDatum_StorageResolution, v.StorageResolution)
+		case schemas.MetricDatum_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.MetricDatum_Timestamp, v.Timestamp)
+		case schemas.MetricDatum_Unit:
+			var ev string
+			if err := d.ReadString(schemas.MetricDatum_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = StandardUnit(ev)
+			return nil
+		case schemas.MetricDatum_Value:
+			v.Value = new(float64)
+			return d.ReadFloat64(schemas.MetricDatum_Value, v.Value)
+		case schemas.MetricDatum_Values:
+			return deserializeValues(d, schemas.MetricDatum_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Indicates the CloudWatch math expression that provides the time series the
 // anomaly detector uses as input. The designated math expression must return a
 // single time series.
@@ -1250,6 +2847,25 @@ type MetricMathAnomalyDetector struct {
 	MetricDataQueries []MetricDataQuery
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetricMathAnomalyDetector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricMathAnomalyDetector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricMathAnomalyDetector) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricDataQueries(s, schemas.MetricMathAnomalyDetector_MetricDataQueries, v.MetricDataQueries)
+}
+func (v *MetricMathAnomalyDetector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricMathAnomalyDetector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricMathAnomalyDetector_MetricDataQueries:
+			return deserializeMetricDataQueries(d, schemas.MetricMathAnomalyDetector_MetricDataQueries, &v.MetricDataQueries)
+		}
+		return nil
+	})
 }
 
 // This structure defines the metric to be returned, along with the statistics,
@@ -1304,6 +2920,52 @@ type MetricStat struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricStat) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricStat)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricStat) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Metric != nil {
+		s.WriteStruct(schemas.MetricStat_Metric)
+		v.Metric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.MetricStat_Period, *v.Period)
+	}
+	if v.Stat != nil {
+		s.WriteString(schemas.MetricStat_Stat, *v.Stat)
+	}
+	if v.Unit != "" {
+		s.WriteString(schemas.MetricStat_Unit, string(v.Unit))
+	}
+}
+func (v *MetricStat) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricStat, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricStat_Metric:
+			v.Metric = &Metric{}
+			return v.Metric.Deserialize(d)
+		case schemas.MetricStat_Period:
+			v.Period = new(int32)
+			return d.ReadInt32(schemas.MetricStat_Period, v.Period)
+		case schemas.MetricStat_Stat:
+			v.Stat = new(string)
+			return d.ReadString(schemas.MetricStat_Stat, v.Stat)
+		case schemas.MetricStat_Unit:
+			var ev string
+			if err := d.ReadString(schemas.MetricStat_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = StandardUnit(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This structure contains the configuration information about one metric stream.
 type MetricStreamEntry struct {
 
@@ -1333,6 +2995,68 @@ type MetricStreamEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricStreamEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricStreamEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricStreamEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.MetricStreamEntry_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.MetricStreamEntry_CreationDate, *v.CreationDate)
+	}
+	if v.FirehoseArn != nil {
+		s.WriteString(schemas.MetricStreamEntry_FirehoseArn, *v.FirehoseArn)
+	}
+	if v.LastUpdateDate != nil {
+		s.WriteTime(schemas.MetricStreamEntry_LastUpdateDate, *v.LastUpdateDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MetricStreamEntry_Name, *v.Name)
+	}
+	if v.OutputFormat != "" {
+		s.WriteString(schemas.MetricStreamEntry_OutputFormat, string(v.OutputFormat))
+	}
+	if v.State != nil {
+		s.WriteString(schemas.MetricStreamEntry_State, *v.State)
+	}
+}
+func (v *MetricStreamEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricStreamEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricStreamEntry_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.MetricStreamEntry_Arn, v.Arn)
+		case schemas.MetricStreamEntry_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.MetricStreamEntry_CreationDate, v.CreationDate)
+		case schemas.MetricStreamEntry_FirehoseArn:
+			v.FirehoseArn = new(string)
+			return d.ReadString(schemas.MetricStreamEntry_FirehoseArn, v.FirehoseArn)
+		case schemas.MetricStreamEntry_LastUpdateDate:
+			v.LastUpdateDate = new(time.Time)
+			return d.ReadTime(schemas.MetricStreamEntry_LastUpdateDate, v.LastUpdateDate)
+		case schemas.MetricStreamEntry_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MetricStreamEntry_Name, v.Name)
+		case schemas.MetricStreamEntry_OutputFormat:
+			var ev string
+			if err := d.ReadString(schemas.MetricStreamEntry_OutputFormat, &ev); err != nil {
+				return err
+			}
+			v.OutputFormat = MetricStreamOutputFormat(ev)
+			return nil
+		case schemas.MetricStreamEntry_State:
+			v.State = new(string)
+			return d.ReadString(schemas.MetricStreamEntry_State, v.State)
+		}
+		return nil
+	})
+}
+
 // This structure contains a metric namespace and optionally, a list of metric
 // names, to either include in a metric stream or exclude from a metric stream.
 //
@@ -1360,6 +3084,31 @@ type MetricStreamFilter struct {
 	Namespace *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetricStreamFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricStreamFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricStreamFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricStreamFilterMetricNames(s, schemas.MetricStreamFilter_MetricNames, v.MetricNames)
+	if v.Namespace != nil {
+		s.WriteString(schemas.MetricStreamFilter_Namespace, *v.Namespace)
+	}
+}
+func (v *MetricStreamFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricStreamFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricStreamFilter_MetricNames:
+			return deserializeMetricStreamFilterMetricNames(d, schemas.MetricStreamFilter_MetricNames, &v.MetricNames)
+		case schemas.MetricStreamFilter_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.MetricStreamFilter_Namespace, v.Namespace)
+		}
+		return nil
+	})
 }
 
 // By default, a metric stream always sends the MAX , MIN , SUM , and SAMPLECOUNT
@@ -1399,6 +3148,28 @@ type MetricStreamStatisticsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricStreamStatisticsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricStreamStatisticsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricStreamStatisticsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricStreamStatisticsAdditionalStatistics(s, schemas.MetricStreamStatisticsConfiguration_AdditionalStatistics, v.AdditionalStatistics)
+	serializeMetricStreamStatisticsIncludeMetrics(s, schemas.MetricStreamStatisticsConfiguration_IncludeMetrics, v.IncludeMetrics)
+}
+func (v *MetricStreamStatisticsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricStreamStatisticsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricStreamStatisticsConfiguration_AdditionalStatistics:
+			return deserializeMetricStreamStatisticsAdditionalStatistics(d, schemas.MetricStreamStatisticsConfiguration_AdditionalStatistics, &v.AdditionalStatistics)
+		case schemas.MetricStreamStatisticsConfiguration_IncludeMetrics:
+			return deserializeMetricStreamStatisticsIncludeMetrics(d, schemas.MetricStreamStatisticsConfiguration_IncludeMetrics, &v.IncludeMetrics)
+		}
+		return nil
+	})
+}
+
 // This object contains the information for one metric that is to be streamed with
 // additional statistics.
 type MetricStreamStatisticsMetric struct {
@@ -1414,6 +3185,34 @@ type MetricStreamStatisticsMetric struct {
 	Namespace *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetricStreamStatisticsMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricStreamStatisticsMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricStreamStatisticsMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricName != nil {
+		s.WriteString(schemas.MetricStreamStatisticsMetric_MetricName, *v.MetricName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.MetricStreamStatisticsMetric_Namespace, *v.Namespace)
+	}
+}
+func (v *MetricStreamStatisticsMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricStreamStatisticsMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricStreamStatisticsMetric_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.MetricStreamStatisticsMetric_MetricName, v.MetricName)
+		case schemas.MetricStreamStatisticsMetric_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.MetricStreamStatisticsMetric_Namespace, v.Namespace)
+		}
+		return nil
+	})
 }
 
 // Specifies which alarms an alarm mute rule applies to.
@@ -1433,6 +3232,25 @@ type MuteTargets struct {
 	AlarmNames []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MuteTargets) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MuteTargets)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MuteTargets) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMuteTargetAlarmNameList(s, schemas.MuteTargets_AlarmNames, v.AlarmNames)
+}
+func (v *MuteTargets) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MuteTargets, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MuteTargets_AlarmNames:
+			return deserializeMuteTargetAlarmNameList(d, schemas.MuteTargets_AlarmNames, &v.AlarmNames)
+		}
+		return nil
+	})
 }
 
 // This array is empty if the API operation was successful for all the rules
@@ -1455,6 +3273,46 @@ type PartialFailure struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PartialFailure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartialFailure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartialFailure) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExceptionType != nil {
+		s.WriteString(schemas.PartialFailure_ExceptionType, *v.ExceptionType)
+	}
+	if v.FailureCode != nil {
+		s.WriteString(schemas.PartialFailure_FailureCode, *v.FailureCode)
+	}
+	if v.FailureDescription != nil {
+		s.WriteString(schemas.PartialFailure_FailureDescription, *v.FailureDescription)
+	}
+	if v.FailureResource != nil {
+		s.WriteString(schemas.PartialFailure_FailureResource, *v.FailureResource)
+	}
+}
+func (v *PartialFailure) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartialFailure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartialFailure_ExceptionType:
+			v.ExceptionType = new(string)
+			return d.ReadString(schemas.PartialFailure_ExceptionType, v.ExceptionType)
+		case schemas.PartialFailure_FailureCode:
+			v.FailureCode = new(string)
+			return d.ReadString(schemas.PartialFailure_FailureCode, v.FailureCode)
+		case schemas.PartialFailure_FailureDescription:
+			v.FailureDescription = new(string)
+			return d.ReadString(schemas.PartialFailure_FailureDescription, v.FailureDescription)
+		case schemas.PartialFailure_FailureResource:
+			v.FailureResource = new(string)
+			return d.ReadString(schemas.PartialFailure_FailureResource, v.FailureResource)
+		}
+		return nil
+	})
+}
+
 // Specifies one range of days or times to exclude from use for training an
 // anomaly detection model.
 type Range struct {
@@ -1474,6 +3332,34 @@ type Range struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Range) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Range)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Range) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.Range_EndTime, *v.EndTime)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.Range_StartTime, *v.StartTime)
+	}
+}
+func (v *Range) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Range, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Range_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.Range_EndTime, v.EndTime)
+		case schemas.Range_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.Range_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // Defines the schedule configuration for an alarm mute rule.
 //
 // The rule contains a schedule that specifies when and how long alarms should be
@@ -1488,6 +3374,30 @@ type Rule struct {
 	Schedule *Schedule
 
 	noSmithyDocumentSerde
+}
+
+func (v *Rule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Rule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Rule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.Rule_Schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Rule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Rule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Rule_Schedule:
+			v.Schedule = &Schedule{}
+			return v.Schedule.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies when and how long an alarm mute rule is active.
@@ -1587,6 +3497,40 @@ type Schedule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Schedule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Schedule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Schedule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Duration != nil {
+		s.WriteString(schemas.Schedule_Duration, *v.Duration)
+	}
+	if v.Expression != nil {
+		s.WriteString(schemas.Schedule_Expression, *v.Expression)
+	}
+	if v.Timezone != nil {
+		s.WriteString(schemas.Schedule_Timezone, *v.Timezone)
+	}
+}
+func (v *Schedule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Schedule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Schedule_Duration:
+			v.Duration = new(string)
+			return d.ReadString(schemas.Schedule_Duration, v.Duration)
+		case schemas.Schedule_Expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.Schedule_Expression, v.Expression)
+		case schemas.Schedule_Timezone:
+			v.Timezone = new(string)
+			return d.ReadString(schemas.Schedule_Timezone, v.Timezone)
+		}
+		return nil
+	})
+}
+
 // Contains the schedule expression and time-range offsets that define when a
 // scheduled query runs and what time range each execution covers.
 type ScheduleConfiguration struct {
@@ -1610,6 +3554,40 @@ type ScheduleConfiguration struct {
 	EndTimeOffset *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScheduleConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduleConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTimeOffset != nil {
+		s.WriteInt64(schemas.ScheduleConfiguration_EndTimeOffset, *v.EndTimeOffset)
+	}
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.ScheduleConfiguration_ScheduleExpression, *v.ScheduleExpression)
+	}
+	if v.StartTimeOffset != nil {
+		s.WriteInt64(schemas.ScheduleConfiguration_StartTimeOffset, *v.StartTimeOffset)
+	}
+}
+func (v *ScheduleConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduleConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduleConfiguration_EndTimeOffset:
+			v.EndTimeOffset = new(int64)
+			return d.ReadInt64(schemas.ScheduleConfiguration_EndTimeOffset, v.EndTimeOffset)
+		case schemas.ScheduleConfiguration_ScheduleExpression:
+			v.ScheduleExpression = new(string)
+			return d.ReadString(schemas.ScheduleConfiguration_ScheduleExpression, v.ScheduleExpression)
+		case schemas.ScheduleConfiguration_StartTimeOffset:
+			v.StartTimeOffset = new(int64)
+			return d.ReadInt64(schemas.ScheduleConfiguration_StartTimeOffset, v.StartTimeOffset)
+		}
+		return nil
+	})
 }
 
 // The configuration of the CloudWatch Logs scheduled query that backs a log alarm.
@@ -1658,6 +3636,60 @@ type ScheduledQueryConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScheduledQueryConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduledQueryConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduledQueryConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationExpression != nil {
+		s.WriteString(schemas.ScheduledQueryConfiguration_AggregationExpression, *v.AggregationExpression)
+	}
+	serializeLogGroupIdentifiers(s, schemas.ScheduledQueryConfiguration_LogGroupIdentifiers, v.LogGroupIdentifiers)
+	if v.QueryARN != nil {
+		s.WriteString(schemas.ScheduledQueryConfiguration_QueryARN, *v.QueryARN)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.ScheduledQueryConfiguration_QueryString, *v.QueryString)
+	}
+	if v.ScheduleConfiguration != nil {
+		s.WriteStruct(schemas.ScheduledQueryConfiguration_ScheduleConfiguration)
+		v.ScheduleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScheduledQueryRoleARN != nil {
+		s.WriteString(schemas.ScheduledQueryConfiguration_ScheduledQueryRoleARN, *v.ScheduledQueryRoleARN)
+	}
+	serializeTagList(s, schemas.ScheduledQueryConfiguration_Tags, v.Tags)
+}
+func (v *ScheduledQueryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduledQueryConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduledQueryConfiguration_AggregationExpression:
+			v.AggregationExpression = new(string)
+			return d.ReadString(schemas.ScheduledQueryConfiguration_AggregationExpression, v.AggregationExpression)
+		case schemas.ScheduledQueryConfiguration_LogGroupIdentifiers:
+			return deserializeLogGroupIdentifiers(d, schemas.ScheduledQueryConfiguration_LogGroupIdentifiers, &v.LogGroupIdentifiers)
+		case schemas.ScheduledQueryConfiguration_QueryARN:
+			v.QueryARN = new(string)
+			return d.ReadString(schemas.ScheduledQueryConfiguration_QueryARN, v.QueryARN)
+		case schemas.ScheduledQueryConfiguration_QueryString:
+			v.QueryString = new(string)
+			return d.ReadString(schemas.ScheduledQueryConfiguration_QueryString, v.QueryString)
+		case schemas.ScheduledQueryConfiguration_ScheduleConfiguration:
+			v.ScheduleConfiguration = &ScheduleConfiguration{}
+			return v.ScheduleConfiguration.Deserialize(d)
+		case schemas.ScheduledQueryConfiguration_ScheduledQueryRoleARN:
+			v.ScheduledQueryRoleARN = new(string)
+			return d.ReadString(schemas.ScheduledQueryConfiguration_ScheduledQueryRoleARN, v.ScheduledQueryRoleARN)
+		case schemas.ScheduledQueryConfiguration_Tags:
+			return deserializeTagList(d, schemas.ScheduledQueryConfiguration_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Designates the CloudWatch metric and statistic that provides the time series
 // the anomaly detector uses as input. If you have enabled unified cross-account
 // observability, and this account is a monitoring account, the metric can be in
@@ -1684,6 +3716,49 @@ type SingleMetricAnomalyDetector struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SingleMetricAnomalyDetector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SingleMetricAnomalyDetector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SingleMetricAnomalyDetector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.SingleMetricAnomalyDetector_AccountId, *v.AccountId)
+	}
+	serializeDimensions(s, schemas.SingleMetricAnomalyDetector_Dimensions, v.Dimensions)
+	if v.MetricName != nil {
+		s.WriteString(schemas.SingleMetricAnomalyDetector_MetricName, *v.MetricName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.SingleMetricAnomalyDetector_Namespace, *v.Namespace)
+	}
+	if v.Stat != nil {
+		s.WriteString(schemas.SingleMetricAnomalyDetector_Stat, *v.Stat)
+	}
+}
+func (v *SingleMetricAnomalyDetector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SingleMetricAnomalyDetector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SingleMetricAnomalyDetector_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.SingleMetricAnomalyDetector_AccountId, v.AccountId)
+		case schemas.SingleMetricAnomalyDetector_Dimensions:
+			return deserializeDimensions(d, schemas.SingleMetricAnomalyDetector_Dimensions, &v.Dimensions)
+		case schemas.SingleMetricAnomalyDetector_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.SingleMetricAnomalyDetector_MetricName, v.MetricName)
+		case schemas.SingleMetricAnomalyDetector_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.SingleMetricAnomalyDetector_Namespace, v.Namespace)
+		case schemas.SingleMetricAnomalyDetector_Stat:
+			v.Stat = new(string)
+			return d.ReadString(schemas.SingleMetricAnomalyDetector_Stat, v.Stat)
+		}
+		return nil
+	})
+}
+
 // An evaluation window that advances each time the alarm is evaluated, forming a
 // rolling time window. This is the default evaluation window. A sliding window has
 // no additional configuration options.
@@ -1693,6 +3768,22 @@ type SingleMetricAnomalyDetector struct {
 // latency, or resource-exhaustion monitoring.
 type SlidingWindow struct {
 	noSmithyDocumentSerde
+}
+
+func (v *SlidingWindow) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SlidingWindow)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SlidingWindow) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SlidingWindow) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SlidingWindow, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Represents a set of statistics that describes a specific metric.
@@ -1721,6 +3812,46 @@ type StatisticSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StatisticSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StatisticSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StatisticSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Maximum != nil {
+		s.WriteFloat64(schemas.StatisticSet_Maximum, *v.Maximum)
+	}
+	if v.Minimum != nil {
+		s.WriteFloat64(schemas.StatisticSet_Minimum, *v.Minimum)
+	}
+	if v.SampleCount != nil {
+		s.WriteFloat64(schemas.StatisticSet_SampleCount, *v.SampleCount)
+	}
+	if v.Sum != nil {
+		s.WriteFloat64(schemas.StatisticSet_Sum, *v.Sum)
+	}
+}
+func (v *StatisticSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StatisticSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StatisticSet_Maximum:
+			v.Maximum = new(float64)
+			return d.ReadFloat64(schemas.StatisticSet_Maximum, v.Maximum)
+		case schemas.StatisticSet_Minimum:
+			v.Minimum = new(float64)
+			return d.ReadFloat64(schemas.StatisticSet_Minimum, v.Minimum)
+		case schemas.StatisticSet_SampleCount:
+			v.SampleCount = new(float64)
+			return d.ReadFloat64(schemas.StatisticSet_SampleCount, v.SampleCount)
+		case schemas.StatisticSet_Sum:
+			v.Sum = new(float64)
+			return d.ReadFloat64(schemas.StatisticSet_Sum, v.Sum)
+		}
+		return nil
+	})
+}
+
 // A key-value pair associated with a CloudWatch resource.
 type Tag struct {
 
@@ -1736,6 +3867,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // An evaluation window that aligns the evaluated range to fixed clock boundaries
@@ -1764,6 +3923,28 @@ type WallClockWindow struct {
 	Timezone *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WallClockWindow) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WallClockWindow)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WallClockWindow) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Timezone != nil {
+		s.WriteString(schemas.WallClockWindow_Timezone, *v.Timezone)
+	}
+}
+func (v *WallClockWindow) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WallClockWindow, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WallClockWindow_Timezone:
+			v.Timezone = new(string)
+			return d.ReadString(schemas.WallClockWindow_Timezone, v.Timezone)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

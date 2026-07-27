@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,18 @@ type DescribeContainerFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeContainerFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContainerFleetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContainerFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeContainerFleetInput_FleetId, *v.FleetId)
+	}
+}
+
 type DescribeContainerFleetOutput struct {
 
 	// The properties for the requested container fleet, including current status.
@@ -65,13 +79,34 @@ type DescribeContainerFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeContainerFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContainerFleetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContainerFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerFleet != nil {
+		s.WriteStruct(schemas.DescribeContainerFleetOutput_ContainerFleet)
+		v.ContainerFleet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeContainerFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeContainerFleetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeContainerFleetOutput_ContainerFleet:
+			v.ContainerFleet = &types.ContainerFleet{}
+			return v.ContainerFleet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeContainerFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeContainerFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContainerFleet, schemas.DescribeContainerFleetInput, schemas.DescribeContainerFleetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeContainerFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContainerFleet, schemas.DescribeContainerFleetInput, schemas.DescribeContainerFleetOutput), output: &DescribeContainerFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

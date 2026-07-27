@@ -5,7 +5,9 @@ package gamelift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -77,6 +79,25 @@ type DescribeFleetLocationAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetLocationAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetLocationAttributesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetLocationAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeFleetLocationAttributesInput_FleetId, *v.FleetId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeFleetLocationAttributesInput_Limit, *v.Limit)
+	}
+	serializeLocationList(s, schemas.DescribeFleetLocationAttributesInput_Locations, v.Locations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetLocationAttributesInput_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeFleetLocationAttributesOutput struct {
 
 	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift Servers fleet
@@ -103,13 +124,47 @@ type DescribeFleetLocationAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetLocationAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetLocationAttributesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetLocationAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetArn != nil {
+		s.WriteString(schemas.DescribeFleetLocationAttributesOutput_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeFleetLocationAttributesOutput_FleetId, *v.FleetId)
+	}
+	serializeLocationAttributesList(s, schemas.DescribeFleetLocationAttributesOutput_LocationAttributes, v.LocationAttributes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetLocationAttributesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeFleetLocationAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFleetLocationAttributesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFleetLocationAttributesOutput_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.DescribeFleetLocationAttributesOutput_FleetArn, v.FleetArn)
+		case schemas.DescribeFleetLocationAttributesOutput_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.DescribeFleetLocationAttributesOutput_FleetId, v.FleetId)
+		case schemas.DescribeFleetLocationAttributesOutput_LocationAttributes:
+			return deserializeLocationAttributesList(d, schemas.DescribeFleetLocationAttributesOutput_LocationAttributes, &v.LocationAttributes)
+		case schemas.DescribeFleetLocationAttributesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeFleetLocationAttributesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFleetLocationAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeFleetLocationAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetLocationAttributes, schemas.DescribeFleetLocationAttributesInput, schemas.DescribeFleetLocationAttributesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeFleetLocationAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetLocationAttributes, schemas.DescribeFleetLocationAttributesInput, schemas.DescribeFleetLocationAttributesOutput), output: &DescribeFleetLocationAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

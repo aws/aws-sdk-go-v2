@@ -4,6 +4,8 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,18 @@ type GetGameSessionLogUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGameSessionLogUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGameSessionLogUrlInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGameSessionLogUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSessionId != nil {
+		s.WriteString(schemas.GetGameSessionLogUrlInput_GameSessionId, *v.GameSessionId)
+	}
+}
+
 type GetGameSessionLogUrlOutput struct {
 
 	// Location of the requested game session logs, available for download. This URL
@@ -64,13 +78,32 @@ type GetGameSessionLogUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGameSessionLogUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGameSessionLogUrlOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGameSessionLogUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PreSignedUrl != nil {
+		s.WriteString(schemas.GetGameSessionLogUrlOutput_PreSignedUrl, *v.PreSignedUrl)
+	}
+}
+func (v *GetGameSessionLogUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGameSessionLogUrlOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGameSessionLogUrlOutput_PreSignedUrl:
+			v.PreSignedUrl = new(string)
+			return d.ReadString(schemas.GetGameSessionLogUrlOutput_PreSignedUrl, v.PreSignedUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGameSessionLogUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetGameSessionLogUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGameSessionLogUrl, schemas.GetGameSessionLogUrlInput, schemas.GetGameSessionLogUrlOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetGameSessionLogUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGameSessionLogUrl, schemas.GetGameSessionLogUrlInput, schemas.GetGameSessionLogUrlOutput), output: &GetGameSessionLogUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

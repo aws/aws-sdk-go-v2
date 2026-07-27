@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -195,6 +197,47 @@ type PutScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutScalingPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutScalingPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutScalingPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.PutScalingPolicyInput_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	if v.EvaluationPeriods != nil {
+		s.WriteInt32(schemas.PutScalingPolicyInput_EvaluationPeriods, *v.EvaluationPeriods)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.PutScalingPolicyInput_FleetId, *v.FleetId)
+	}
+	if v.MetricName != "" {
+		s.WriteString(schemas.PutScalingPolicyInput_MetricName, string(v.MetricName))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutScalingPolicyInput_Name, *v.Name)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.PutScalingPolicyInput_PolicyType, string(v.PolicyType))
+	}
+	if v.ScalingAdjustment != nil {
+		s.WriteInt32(schemas.PutScalingPolicyInput_ScalingAdjustment, *v.ScalingAdjustment)
+	}
+	if v.ScalingAdjustmentType != "" {
+		s.WriteString(schemas.PutScalingPolicyInput_ScalingAdjustmentType, string(v.ScalingAdjustmentType))
+	}
+	if v.TargetConfiguration != nil {
+		s.WriteStruct(schemas.PutScalingPolicyInput_TargetConfiguration)
+		v.TargetConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Threshold != nil {
+		s.WriteFloat64(schemas.PutScalingPolicyInput_Threshold, *v.Threshold)
+	}
+}
+
 type PutScalingPolicyOutput struct {
 
 	// A descriptive label that is associated with a fleet's scaling policy. Policy
@@ -207,13 +250,32 @@ type PutScalingPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutScalingPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutScalingPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutScalingPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.PutScalingPolicyOutput_Name, *v.Name)
+	}
+}
+func (v *PutScalingPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutScalingPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutScalingPolicyOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PutScalingPolicyOutput_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpPutScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutScalingPolicy, schemas.PutScalingPolicyInput, schemas.PutScalingPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpPutScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutScalingPolicy, schemas.PutScalingPolicyInput, schemas.PutScalingPolicyOutput), output: &PutScalingPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

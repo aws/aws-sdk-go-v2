@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -73,6 +75,20 @@ type CreatePlayerSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePlayerSessionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePlayerSessionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePlayerSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSessionId != nil {
+		s.WriteString(schemas.CreatePlayerSessionsInput_GameSessionId, *v.GameSessionId)
+	}
+	serializePlayerDataMap(s, schemas.CreatePlayerSessionsInput_PlayerDataMap, v.PlayerDataMap)
+	serializePlayerIdList(s, schemas.CreatePlayerSessionsInput_PlayerIds, v.PlayerIds)
+}
+
 type CreatePlayerSessionsOutput struct {
 
 	// A collection of player session objects created for the added players.
@@ -84,13 +100,29 @@ type CreatePlayerSessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePlayerSessionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePlayerSessionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePlayerSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePlayerSessionList(s, schemas.CreatePlayerSessionsOutput_PlayerSessions, v.PlayerSessions)
+}
+func (v *CreatePlayerSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePlayerSessionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePlayerSessionsOutput_PlayerSessions:
+			return deserializePlayerSessionList(d, schemas.CreatePlayerSessionsOutput_PlayerSessions, &v.PlayerSessions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePlayerSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreatePlayerSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePlayerSessions, schemas.CreatePlayerSessionsInput, schemas.CreatePlayerSessionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreatePlayerSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePlayerSessions, schemas.CreatePlayerSessionsInput, schemas.CreatePlayerSessionsOutput), output: &CreatePlayerSessionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

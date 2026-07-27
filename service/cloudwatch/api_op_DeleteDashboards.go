@@ -4,6 +4,8 @@ package cloudwatch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,16 @@ type DeleteDashboardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDashboardsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDashboardsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDashboardsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDashboardNames(s, schemas.DeleteDashboardsInput_DashboardNames, v.DashboardNames)
+}
+
 type DeleteDashboardsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +55,26 @@ type DeleteDashboardsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDashboardsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDashboardsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDashboardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDashboardsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDashboardsOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDashboardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteDashboards{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDashboards, schemas.DeleteDashboardsInput, schemas.DeleteDashboardsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteDashboards{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDashboards, schemas.DeleteDashboardsInput, schemas.DeleteDashboardsOutput), output: &DeleteDashboardsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

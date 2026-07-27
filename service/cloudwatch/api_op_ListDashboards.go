@@ -5,7 +5,9 @@ package cloudwatch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,21 @@ type ListDashboardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDashboardsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDashboardsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDashboardsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardNamePrefix != nil {
+		s.WriteString(schemas.ListDashboardsInput_DashboardNamePrefix, *v.DashboardNamePrefix)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDashboardsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListDashboardsOutput struct {
 
 	// The list of matching dashboards.
@@ -60,13 +77,35 @@ type ListDashboardsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDashboardsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDashboardsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDashboardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDashboardEntries(s, schemas.ListDashboardsOutput_DashboardEntries, v.DashboardEntries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDashboardsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDashboardsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDashboardsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDashboardsOutput_DashboardEntries:
+			return deserializeDashboardEntries(d, schemas.ListDashboardsOutput_DashboardEntries, &v.DashboardEntries)
+		case schemas.ListDashboardsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDashboardsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDashboardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListDashboards{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDashboards, schemas.ListDashboardsInput, schemas.ListDashboardsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListDashboards{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDashboards, schemas.ListDashboardsInput, schemas.ListDashboardsOutput), output: &ListDashboardsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

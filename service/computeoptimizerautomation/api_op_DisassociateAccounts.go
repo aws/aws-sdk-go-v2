@@ -5,6 +5,8 @@ package computeoptimizerautomation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,19 @@ type DisassociateAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAccountsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAccountsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.DisassociateAccountsRequest_accountIds, v.AccountIds)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DisassociateAccountsRequest_clientToken, *v.ClientToken)
+	}
+}
+
 type DisassociateAccountsOutput struct {
 
 	//  The IDs of the member accounts that were successfully disassociated.
@@ -59,13 +74,32 @@ type DisassociateAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAccountsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAccountsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.DisassociateAccountsResponse_accountIds, v.AccountIds)
+	serializeStringList(s, schemas.DisassociateAccountsResponse_errors, v.Errors)
+}
+func (v *DisassociateAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateAccountsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateAccountsResponse_accountIds:
+			return deserializeAccountIdList(d, schemas.DisassociateAccountsResponse_accountIds, &v.AccountIds)
+		case schemas.DisassociateAccountsResponse_errors:
+			return deserializeStringList(d, schemas.DisassociateAccountsResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDisassociateAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAccounts, schemas.DisassociateAccountsRequest, schemas.DisassociateAccountsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDisassociateAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAccounts, schemas.DisassociateAccountsRequest, schemas.DisassociateAccountsResponse), output: &DisassociateAccountsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

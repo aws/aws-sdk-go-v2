@@ -4,7 +4,9 @@ package cloudwatch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,16 @@ type DeleteInsightRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInsightRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInsightRulesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInsightRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInsightRuleNames(s, schemas.DeleteInsightRulesInput_RuleNames, v.RuleNames)
+}
+
 type DeleteInsightRulesOutput struct {
 
 	// An array listing the rules that could not be deleted. You cannot delete
@@ -53,13 +65,29 @@ type DeleteInsightRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInsightRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInsightRulesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInsightRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchFailures(s, schemas.DeleteInsightRulesOutput_Failures, v.Failures)
+}
+func (v *DeleteInsightRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteInsightRulesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteInsightRulesOutput_Failures:
+			return deserializeBatchFailures(d, schemas.DeleteInsightRulesOutput_Failures, &v.Failures)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInsightRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteInsightRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInsightRules, schemas.DeleteInsightRulesInput, schemas.DeleteInsightRulesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteInsightRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInsightRules, schemas.DeleteInsightRulesInput, schemas.DeleteInsightRulesOutput), output: &DeleteInsightRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
