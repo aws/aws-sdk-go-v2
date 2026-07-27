@@ -146,6 +146,25 @@ func TestCheckResponseSnapshot_GetStreamingResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_PutCompressedData(t *testing.T) {
+	want := &PutCompressedDataOutput{}
+	status, header, body, err := serdeRespReadSnapshot("PutCompressedData.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutCompressedData(context.Background(), &PutCompressedDataInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutCompressedData.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_ResourceNotFound(t *testing.T) {
 	want := &types.ResourceNotFound{}
 	status, header, body, err := serdeRespReadSnapshot("ResourceNotFound.error")

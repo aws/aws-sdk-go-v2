@@ -9,6 +9,7 @@
         "api_client.go",
         "api_client_test.go",
         "api_op_GetItem.go",
+        "api_op_PutCompressedData.go",
         "api_op_SubscribeEvents.go",
         "auth.go",
         "common_serde.go",

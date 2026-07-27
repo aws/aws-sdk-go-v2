@@ -13,6 +13,11 @@ var GetItem = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetItem",
 }, smithy.ShapeTypeOperation, 0)
 
+var PutCompressedData = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "PutCompressedData",
+}, smithy.ShapeTypeOperation, 0)
+
 var SubscribeEvents = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
 	Name:      "SubscribeEvents",
@@ -60,6 +65,17 @@ var GetItemOutput = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetItemOutput",
 }, smithy.ShapeTypeStructure, 0)
 
+var PutCompressedDataInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "PutCompressedDataInput",
+}, smithy.ShapeTypeStructure, 1)
+var PutCompressedDataInput_data *smithy.Schema
+
+var PutCompressedDataOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktest",
+	Name:      "PutCompressedDataOutput",
+}, smithy.ShapeTypeStructure, 0)
+
 var SubscribeEventsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktest",
 	Name:      "SubscribeEventsInput",
@@ -81,6 +97,8 @@ func init() {
 	GetItemInput_item = GetItemInput.AddMember("item", Item)
 
 	GetItemInput_id = GetItemInput.AddMember("id", smithyprelude.String, &smithytraits.ContextParam{})
+
+	PutCompressedDataInput_data = PutCompressedDataInput.AddMember("data", smithyprelude.String)
 
 	SubscribeEventsOutput_events = SubscribeEventsOutput.AddMember("events", Events)
 

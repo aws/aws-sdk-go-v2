@@ -85,6 +85,12 @@
   [modules."internal/kitchensinktestrestjsonlegacy"]
     no_tag = true
 
+  [modules."internal/kitchensinktestcbor"]
+    no_tag = true
+
+  [modules."internal/kitchensinktestcborlegacy"]
+    no_tag = true
+
   [modules."internal/repotools"]
     no_tag = true
 

@@ -630,17 +630,19 @@ func setResolvedDefaultsMode(o *Options) {
 // NewFromConfig returns a new client from the provided config.
 func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	opts := Options{
-		Region:                     cfg.Region,
-		DefaultsMode:               cfg.DefaultsMode,
-		RuntimeEnvironment:         cfg.RuntimeEnvironment,
-		HTTPClient:                 cfg.HTTPClient,
-		Credentials:                cfg.Credentials,
-		APIOptions:                 cfg.APIOptions,
-		Logger:                     cfg.Logger,
-		ClientLogMode:              cfg.ClientLogMode,
-		AppID:                      cfg.AppID,
-		DisableClockSkewCorrection: cfg.DisableClockSkewCorrection,
-		AuthSchemePreference:       cfg.AuthSchemePreference,
+		Region:                      cfg.Region,
+		DefaultsMode:                cfg.DefaultsMode,
+		RuntimeEnvironment:          cfg.RuntimeEnvironment,
+		HTTPClient:                  cfg.HTTPClient,
+		Credentials:                 cfg.Credentials,
+		APIOptions:                  cfg.APIOptions,
+		Logger:                      cfg.Logger,
+		ClientLogMode:               cfg.ClientLogMode,
+		AppID:                       cfg.AppID,
+		DisableRequestCompression:   cfg.DisableRequestCompression,
+		RequestMinCompressSizeBytes: cfg.RequestMinCompressSizeBytes,
+		DisableClockSkewCorrection:  cfg.DisableClockSkewCorrection,
+		AuthSchemePreference:        cfg.AuthSchemePreference,
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
@@ -967,6 +969,18 @@ func addUserAgentRetryMode(stack *middleware.Stack, options Options) error {
 		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureRetryModeStandard)
 	case *retry.AdaptiveMode:
 		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureRetryModeAdaptive)
+	}
+	return nil
+}
+
+func addIsRequestCompressionUserAgent(stack *middleware.Stack, options Options) error {
+	ua, err := getOrAddRequestUserAgent(stack)
+	if err != nil {
+		return err
+	}
+
+	if !options.DisableRequestCompression {
+		ua.AddUserAgentFeature(awsmiddleware.UserAgentFeatureGZIPRequestCompression)
 	}
 	return nil
 }
