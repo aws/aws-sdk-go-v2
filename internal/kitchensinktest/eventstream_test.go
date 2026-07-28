@@ -9,8 +9,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
+	"github.com/aws/smithy-go/eventstream"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -61,15 +60,15 @@ func TestSubscribeEvents_Close(t *testing.T) {
 	payload := encodeEventStream(t, []eventstream.Message{
 		{
 			Headers: eventstream.Headers{
-				{Name: eventstreamapi.MessageTypeHeader, Value: eventstream.StringValue(eventstreamapi.EventMessageType)},
-				{Name: eventstreamapi.EventTypeHeader, Value: eventstream.StringValue("initial-response")},
+				{Name: eventstream.MessageTypeHeader, Value: eventstream.StringValue(eventstream.EventMessageType)},
+				{Name: eventstream.EventTypeHeader, Value: eventstream.StringValue("initial-response")},
 			},
 			Payload: []byte(`{}`),
 		},
 		{
 			Headers: eventstream.Headers{
-				{Name: eventstreamapi.MessageTypeHeader, Value: eventstream.StringValue(eventstreamapi.EventMessageType)},
-				{Name: eventstreamapi.EventTypeHeader, Value: eventstream.StringValue("message")},
+				{Name: eventstream.MessageTypeHeader, Value: eventstream.StringValue(eventstream.EventMessageType)},
+				{Name: eventstream.EventTypeHeader, Value: eventstream.StringValue("message")},
 			},
 			Payload: []byte(`{"body":"hello"}`),
 		},
