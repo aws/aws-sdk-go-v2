@@ -1,0 +1,8 @@
+{
+    "id": "6a09123e-5a52-4d96-b33d-427c1efa0814",
+    "type": "feature",
+    "description": "Increases certificate string length for trust anchor source data to support new adjustable trust anchor limits.",
+    "modules": [
+        "service/rolesanywhere"
+    ]
+}

@@ -130,6 +130,26 @@ func (m *validateOpListRecommendationResources) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListRecommendationsForResource struct {
+}
+
+func (*validateOpListRecommendationsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRecommendationsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRecommendationsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRecommendationsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateOrganizationRecommendationLifecycle struct {
 }
 
@@ -192,6 +212,10 @@ func addOpListOrganizationRecommendationResourcesValidationMiddleware(stack *mid
 
 func addOpListRecommendationResourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRecommendationResources{}, middleware.After)
+}
+
+func addOpListRecommendationsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRecommendationsForResource{}, middleware.After)
 }
 
 func addOpUpdateOrganizationRecommendationLifecycleValidationMiddleware(stack *middleware.Stack) error {
@@ -323,6 +347,21 @@ func validateOpListRecommendationResourcesInput(v *ListRecommendationResourcesIn
 	invalidParams := smithy.InvalidParamsError{Context: "ListRecommendationResourcesInput"}
 	if v.RecommendationIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecommendationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRecommendationsForResourceInput(v *ListRecommendationsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRecommendationsForResourceInput"}
+	if v.AwsResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

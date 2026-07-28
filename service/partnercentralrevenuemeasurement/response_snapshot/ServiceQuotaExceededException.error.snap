@@ -3,4 +3,4 @@ Accept: application/cbor
 Content-Type: application/cbor
 Smithy-Protocol: rpc-v2-cbor
 
-£fReasonxATTRIBUTION_LIMIT_EXCEEDEDf__typexServiceQuotaExceededExceptiongMessagek__Message__
+£gMessagek__Message__fReasonxATTRIBUTION_LIMIT_EXCEEDEDf__typexServiceQuotaExceededException

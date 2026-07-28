@@ -1400,6 +1400,24 @@ func ExamplePrivateEndpoint_outputUsage() {
 var _ *types.ManagedVpcResource
 var _ types.SelfManagedLatticeResource
 
+func ExamplePrivateKeySource_outputUsage() {
+	var union types.PrivateKeySource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PrivateKeySourceMemberKmsKeySource:
+		_ = v.Value // Value is types.KmsKeySourceType
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.KmsKeySourceType
+
 func ExampleRatingScale_outputUsage() {
 	var union types.RatingScale
 	// type switches can be used to check the union value

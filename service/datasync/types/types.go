@@ -515,9 +515,13 @@ type Options struct {
 	//
 	//   - NONE - Ignores Atime .
 	//
+	// The following applies only to Basic mode tasks:
+	//
 	// If Atime is set to BEST_EFFORT , Mtime must be set to PRESERVE .
 	//
 	// If Atime is set to NONE , Mtime must also be NONE .
+	//
+	// Enhanced mode tasks support configuring Atime independently of Mtime .
 	Atime Atime
 
 	// Limits the bandwidth used by a DataSync task. For example, if you want DataSync
@@ -557,9 +561,13 @@ type Options struct {
 	//
 	//   - NONE - Ignores Mtime .
 	//
+	// The following applies only to Basic mode tasks:
+	//
 	// If Mtime is set to PRESERVE , Atime must be set to BEST_EFFORT .
 	//
 	// If Mtime is set to NONE , Atime must also be set to NONE .
+	//
+	// Enhanced mode tasks don't support Mtime set to NONE .
 	Mtime Mtime
 
 	// Specifies whether you want DataSync to PRESERVE object tags (default behavior)

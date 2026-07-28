@@ -45,8 +45,14 @@ type CreateLocationHdfsInput struct {
 
 	// The NameNode that manages the HDFS namespace. The NameNode performs operations
 	// such as opening, closing, and renaming files and directories. The NameNode
-	// contains the information to map blocks of data to the DataNodes. You can use
-	// only one NameNode.
+	// contains the information to map blocks of data to the DataNodes.
+	//
+	// The number of NameNodes you can specify depends on the task mode:
+	//
+	//   - Enhanced mode – You can specify multiple NameNodes for HDFS High
+	//   Availability (HA) configurations.
+	//
+	//   - Basic mode – You can specify only one NameNode.
 	//
 	// This member is required.
 	NameNodes []types.HdfsNameNode

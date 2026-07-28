@@ -68,8 +68,8 @@ type CreateRoutingProfileInput struct {
 	// per routing profile per instance that is listed in Connect Customer service
 	// quotas.
 	//
-	// Note: Use this config for chat, email, and task contacts. It does not support
-	// voice contacts.
+	// For voice contacts, manual assignment supports only agent-first callback
+	// contacts. Chat, email, and task contacts are fully supported.
 	ManualAssignmentQueueConfigs []types.RoutingProfileManualAssignmentQueueConfig
 
 	// The inbound queues associated with the routing profile. If no queue is added,

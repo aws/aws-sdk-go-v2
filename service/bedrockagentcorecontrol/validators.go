@@ -4396,6 +4396,11 @@ func validateCustomOauth2ProviderConfigInput(v *types.CustomOauth2ProviderConfig
 			invalidParams.AddNested("OnBehalfOfTokenExchangeConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.PrivateKeyJwtConfig != nil {
+		if err := validatePrivateKeyJwtConfig(v.PrivateKeyJwtConfig); err != nil {
+			invalidParams.AddNested("PrivateKeyJwtConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.PrivateEndpoint != nil {
 		if err := validatePrivateEndpoint(v.PrivateEndpoint); err != nil {
 			invalidParams.AddNested("PrivateEndpoint", err.(smithy.InvalidParamsError))
@@ -5822,6 +5827,21 @@ func validateKmsConfiguration(v *types.KmsConfiguration) error {
 	}
 }
 
+func validateKmsKeySourceType(v *types.KmsKeySourceType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KmsKeySourceType"}
+	if v.KmsKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLambdaEvaluatorConfig(v *types.LambdaEvaluatorConfig) error {
 	if v == nil {
 		return nil
@@ -6777,6 +6797,42 @@ func validatePrivateEndpointOverrides(v []types.PrivateEndpointOverride) error {
 		if err := validatePrivateEndpointOverride(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrivateKeyJwtConfig(v *types.PrivateKeyJwtConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrivateKeyJwtConfig"}
+	if v.PrivateKeySource != nil {
+		if err := validatePrivateKeySource(v.PrivateKeySource); err != nil {
+			invalidParams.AddNested("PrivateKeySource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrivateKeySource(v types.PrivateKeySource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrivateKeySource"}
+	switch uv := v.(type) {
+	case *types.PrivateKeySourceMemberKmsKeySource:
+		if err := validateKmsKeySourceType(&uv.Value); err != nil {
+			invalidParams.AddNested("[kmsKeySource]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1708,6 +1708,20 @@ func TestCheckRequestSnapshot_CreateOauth2CredentialProvider(t *testing.T) {
 					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
+				PrivateKeyJwtConfig: &types.PrivateKeyJwtConfig{
+					PrivateKeySource: &types.PrivateKeySourceMemberKmsKeySource{
+						Value: types.KmsKeySourceType{
+							KmsKeyArn: ptr.String("__KmsKeyArn__"),
+						},
+					},
+					SigningAlgorithm: types.SigningAlgorithm("RS256"),
+					AdditionalHeaderClaims: map[string]string{
+						"key0": "__Value__",
+					},
+					AdditionalPayloadClaims: map[string]string{
+						"key0": "__Value__",
+					},
+				},
 				PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
 					Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 						Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
@@ -6733,6 +6747,20 @@ func TestCheckRequestSnapshot_UpdateOauth2CredentialProvider(t *testing.T) {
 					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
+				PrivateKeyJwtConfig: &types.PrivateKeyJwtConfig{
+					PrivateKeySource: &types.PrivateKeySourceMemberKmsKeySource{
+						Value: types.KmsKeySourceType{
+							KmsKeyArn: ptr.String("__KmsKeyArn__"),
+						},
+					},
+					SigningAlgorithm: types.SigningAlgorithm("RS256"),
+					AdditionalHeaderClaims: map[string]string{
+						"key0": "__Value__",
+					},
+					AdditionalPayloadClaims: map[string]string{
+						"key0": "__Value__",
+					},
+				},
 				PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
 					Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 						Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
@@ -8966,6 +8994,20 @@ func TestUpdateRequestSnapshot_CreateOauth2CredentialProvider(t *testing.T) {
 					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
+				PrivateKeyJwtConfig: &types.PrivateKeyJwtConfig{
+					PrivateKeySource: &types.PrivateKeySourceMemberKmsKeySource{
+						Value: types.KmsKeySourceType{
+							KmsKeyArn: ptr.String("__KmsKeyArn__"),
+						},
+					},
+					SigningAlgorithm: types.SigningAlgorithm("RS256"),
+					AdditionalHeaderClaims: map[string]string{
+						"key0": "__Value__",
+					},
+					AdditionalPayloadClaims: map[string]string{
+						"key0": "__Value__",
+					},
+				},
 				PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
 					Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 						Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
@@ -13991,6 +14033,20 @@ func TestUpdateRequestSnapshot_UpdateOauth2CredentialProvider(t *testing.T) {
 					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
+				PrivateKeyJwtConfig: &types.PrivateKeyJwtConfig{
+					PrivateKeySource: &types.PrivateKeySourceMemberKmsKeySource{
+						Value: types.KmsKeySourceType{
+							KmsKeyArn: ptr.String("__KmsKeyArn__"),
+						},
+					},
+					SigningAlgorithm: types.SigningAlgorithm("RS256"),
+					AdditionalHeaderClaims: map[string]string{
+						"key0": "__Value__",
+					},
+					AdditionalPayloadClaims: map[string]string{
+						"key0": "__Value__",
+					},
+				},
 				PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
 					Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 						Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",

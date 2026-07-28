@@ -86,6 +86,21 @@ type CheckSummary struct {
 	// This member is required.
 	Source RecommendationSource
 
+	// The AWS resource types that this check evaluates (for example,
+	// AWS::EC2::Instance).
+	AwsResourceTypes []string
+
+	// The granularity level at which the check operates: resource, account, or
+	// account_region.
+	CheckGranularity *string
+
+	// The recommendation identifier associated with the check.
+	RecommendationId *string
+
+	// Indicates whether this check is supported by the ListRecommendationsForResource
+	// API.
+	ResourceArnQueryable bool
+
 	noSmithyDocumentSerde
 }
 
@@ -411,6 +426,52 @@ type RecommendationCostOptimizingAggregates struct {
 	//
 	// This member is required.
 	EstimatedPercentMonthlySavings *float64
+
+	noSmithyDocumentSerde
+}
+
+// Summary of a Recommendation for a specific AWS Resource
+type RecommendationForResourceSummary struct {
+
+	// The AWS Resource ARN
+	//
+	// This member is required.
+	AwsResourceArn *string
+
+	// The Check ARN
+	//
+	// This member is required.
+	CheckArn *string
+
+	// The exclusion status of the recommendation
+	//
+	// This member is required.
+	ExclusionStatus ExclusionStatus
+
+	// When the recommendation was last updated
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
+
+	// Metadata associated with the recommendation
+	//
+	// This member is required.
+	Metadata map[string]string
+
+	// The Pillars that the Recommendation is optimizing
+	//
+	// This member is required.
+	Pillars []RecommendationPillar
+
+	// The Recommendation ARN
+	//
+	// This member is required.
+	RecommendationArn *string
+
+	// The current status of the recommendation
+	//
+	// This member is required.
+	Status ResourceStatus
 
 	noSmithyDocumentSerde
 }

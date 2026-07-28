@@ -14310,6 +14310,17 @@ func awsRestjson1_serializeDocumentActions(v []types.Action, value smithyjson.Va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAdditionalClaims(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAdditionalModelRequestFields(v document.Interface, value smithyjson.Value) error {
 	if v == nil {
 		return nil
@@ -15824,6 +15835,13 @@ func awsRestjson1_serializeDocumentCustomOauth2ProviderConfigInput(v *types.Cust
 	if v.PrivateEndpointOverrides != nil {
 		ok := object.Key("privateEndpointOverrides")
 		if err := awsRestjson1_serializeDocumentPrivateEndpointOverrides(v.PrivateEndpointOverrides, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PrivateKeyJwtConfig != nil {
+		ok := object.Key("privateKeyJwtConfig")
+		if err := awsRestjson1_serializeDocumentPrivateKeyJwtConfig(v.PrivateKeyJwtConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -18157,6 +18175,18 @@ func awsRestjson1_serializeDocumentKmsConfiguration(v *types.KmsConfiguration, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentKmsKeySourceType(v *types.KmsKeySourceType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("kmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentLambdaEvaluatorConfig(v *types.LambdaEvaluatorConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19582,6 +19612,57 @@ func awsRestjson1_serializeDocumentPrivateEndpointOverrides(v []types.PrivateEnd
 		if err := awsRestjson1_serializeDocumentPrivateEndpointOverride(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPrivateKeyJwtConfig(v *types.PrivateKeyJwtConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalHeaderClaims != nil {
+		ok := object.Key("additionalHeaderClaims")
+		if err := awsRestjson1_serializeDocumentAdditionalClaims(v.AdditionalHeaderClaims, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AdditionalPayloadClaims != nil {
+		ok := object.Key("additionalPayloadClaims")
+		if err := awsRestjson1_serializeDocumentAdditionalClaims(v.AdditionalPayloadClaims, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PrivateKeySource != nil {
+		ok := object.Key("privateKeySource")
+		if err := awsRestjson1_serializeDocumentPrivateKeySource(v.PrivateKeySource, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.SigningAlgorithm) > 0 {
+		ok := object.Key("signingAlgorithm")
+		ok.String(string(v.SigningAlgorithm))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPrivateKeySource(v types.PrivateKeySource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.PrivateKeySourceMemberKmsKeySource:
+		av := object.Key("kmsKeySource")
+		if err := awsRestjson1_serializeDocumentKmsKeySourceType(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }

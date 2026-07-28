@@ -43,11 +43,18 @@ type UpdateTaskTemplateInput struct {
 	// This member is required.
 	TaskTemplateId *string
 
-	// Constraints that are applicable to the fields listed.
+	// Constraints that are applicable to the fields listed. Although this parameter
+	// is marked as optional in the API model, the service requires it when calling
+	// CreateTaskTemplate or UpdateTaskTemplate . The RequiredFields array must
+	// contain at least one element, and the field of type NAME must be included in
+	// RequiredFields .
 	Constraints *types.TaskTemplateConstraints
 
 	// The identifier of the flow that runs by default when a task is created by
 	// referencing this template.
+	//
+	// Although this parameter is marked as optional, the request must contain either
+	// a ContactFlowId or a field of type QUICK_CONNECT .
 	ContactFlowId *string
 
 	// The default values for fields when a task is created by referencing this
@@ -58,6 +65,9 @@ type UpdateTaskTemplateInput struct {
 	Description *string
 
 	// Fields that are part of the template.
+	//
+	// The request must contain exactly one field of type NAME . This field must also
+	// be listed in the RequiredFields array within the Constraints parameter.
 	Fields []types.TaskTemplateField
 
 	// The name of the task template.
@@ -70,6 +80,9 @@ type UpdateTaskTemplateInput struct {
 	// Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can
 	// only be created from ACTIVE templates. If a template is marked as INACTIVE ,
 	// then a task that refers to this template cannot be created.
+	//
+	// Although this parameter is marked as optional, the service requires it when
+	// calling UpdateTaskTemplate .
 	Status types.TaskTemplateStatus
 
 	noSmithyDocumentSerde
@@ -80,7 +93,11 @@ type UpdateTaskTemplateOutput struct {
 	// The Amazon Resource Name (ARN) for the task template resource.
 	Arn *string
 
-	// Constraints that are applicable to the fields listed.
+	// Constraints that are applicable to the fields listed. Although this parameter
+	// is marked as optional in the API model, the service requires it when calling
+	// CreateTaskTemplate or UpdateTaskTemplate . The RequiredFields array must
+	// contain at least one element, and the field of type NAME must be included in
+	// RequiredFields .
 	Constraints *types.TaskTemplateConstraints
 
 	// The identifier of the flow that runs by default when a task is created by

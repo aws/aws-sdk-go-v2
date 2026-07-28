@@ -17,6 +17,7 @@
         "api_op_ListOrganizationRecommendations.go",
         "api_op_ListRecommendationResources.go",
         "api_op_ListRecommendations.go",
+        "api_op_ListRecommendationsForResource.go",
         "api_op_UpdateOrganizationRecommendationLifecycle.go",
         "api_op_UpdateRecommendationLifecycle.go",
         "auth.go",

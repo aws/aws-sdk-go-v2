@@ -1374,6 +1374,17 @@ func TestCheckResponseSnapshot_CreateOauth2CredentialProvider(t *testing.T) {
 					Value: "__Oauth2DiscoveryMemberDiscoveryUrl__",
 				},
 				ClientId: ptr.String("__ClientId__"),
+				OnBehalfOfTokenExchangeConfig: &types.OnBehalfOfTokenExchangeConfigType{
+					GrantType: types.OnBehalfOfTokenExchangeGrantTypeType("TOKEN_EXCHANGE"),
+					TokenExchangeGrantTypeConfig: &types.TokenExchangeGrantTypeConfigType{
+						ActorTokenContent: types.ActorTokenContentType("NONE"),
+						ActorTokenScopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
 				PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
 					Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 						Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
@@ -1397,17 +1408,20 @@ func TestCheckResponseSnapshot_CreateOauth2CredentialProvider(t *testing.T) {
 						},
 					},
 				},
-				OnBehalfOfTokenExchangeConfig: &types.OnBehalfOfTokenExchangeConfigType{
-					GrantType: types.OnBehalfOfTokenExchangeGrantTypeType("TOKEN_EXCHANGE"),
-					TokenExchangeGrantTypeConfig: &types.TokenExchangeGrantTypeConfigType{
-						ActorTokenContent: types.ActorTokenContentType("NONE"),
-						ActorTokenScopes: []string{
-							"__Member__",
-							"__Member__",
+				PrivateKeyJwtConfig: &types.PrivateKeyJwtConfig{
+					PrivateKeySource: &types.PrivateKeySourceMemberKmsKeySource{
+						Value: types.KmsKeySourceType{
+							KmsKeyArn: ptr.String("__KmsKeyArn__"),
 						},
 					},
+					SigningAlgorithm: types.SigningAlgorithm("RS256"),
+					AdditionalHeaderClaims: map[string]string{
+						"key0": "__Value__",
+					},
+					AdditionalPayloadClaims: map[string]string{
+						"key0": "__Value__",
+					},
 				},
-				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
 			},
 		},
 		Status: types.Status("CREATING"),
@@ -4251,6 +4265,17 @@ func TestCheckResponseSnapshot_GetOauth2CredentialProvider(t *testing.T) {
 					Value: "__Oauth2DiscoveryMemberDiscoveryUrl__",
 				},
 				ClientId: ptr.String("__ClientId__"),
+				OnBehalfOfTokenExchangeConfig: &types.OnBehalfOfTokenExchangeConfigType{
+					GrantType: types.OnBehalfOfTokenExchangeGrantTypeType("TOKEN_EXCHANGE"),
+					TokenExchangeGrantTypeConfig: &types.TokenExchangeGrantTypeConfigType{
+						ActorTokenContent: types.ActorTokenContentType("NONE"),
+						ActorTokenScopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
 				PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
 					Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 						Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
@@ -4274,17 +4299,20 @@ func TestCheckResponseSnapshot_GetOauth2CredentialProvider(t *testing.T) {
 						},
 					},
 				},
-				OnBehalfOfTokenExchangeConfig: &types.OnBehalfOfTokenExchangeConfigType{
-					GrantType: types.OnBehalfOfTokenExchangeGrantTypeType("TOKEN_EXCHANGE"),
-					TokenExchangeGrantTypeConfig: &types.TokenExchangeGrantTypeConfigType{
-						ActorTokenContent: types.ActorTokenContentType("NONE"),
-						ActorTokenScopes: []string{
-							"__Member__",
-							"__Member__",
+				PrivateKeyJwtConfig: &types.PrivateKeyJwtConfig{
+					PrivateKeySource: &types.PrivateKeySourceMemberKmsKeySource{
+						Value: types.KmsKeySourceType{
+							KmsKeyArn: ptr.String("__KmsKeyArn__"),
 						},
 					},
+					SigningAlgorithm: types.SigningAlgorithm("RS256"),
+					AdditionalHeaderClaims: map[string]string{
+						"key0": "__Value__",
+					},
+					AdditionalPayloadClaims: map[string]string{
+						"key0": "__Value__",
+					},
 				},
-				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
 			},
 		},
 		CreatedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -8327,6 +8355,17 @@ func TestCheckResponseSnapshot_UpdateOauth2CredentialProvider(t *testing.T) {
 					Value: "__Oauth2DiscoveryMemberDiscoveryUrl__",
 				},
 				ClientId: ptr.String("__ClientId__"),
+				OnBehalfOfTokenExchangeConfig: &types.OnBehalfOfTokenExchangeConfigType{
+					GrantType: types.OnBehalfOfTokenExchangeGrantTypeType("TOKEN_EXCHANGE"),
+					TokenExchangeGrantTypeConfig: &types.TokenExchangeGrantTypeConfigType{
+						ActorTokenContent: types.ActorTokenContentType("NONE"),
+						ActorTokenScopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
 				PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
 					Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
 						Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
@@ -8350,17 +8389,20 @@ func TestCheckResponseSnapshot_UpdateOauth2CredentialProvider(t *testing.T) {
 						},
 					},
 				},
-				OnBehalfOfTokenExchangeConfig: &types.OnBehalfOfTokenExchangeConfigType{
-					GrantType: types.OnBehalfOfTokenExchangeGrantTypeType("TOKEN_EXCHANGE"),
-					TokenExchangeGrantTypeConfig: &types.TokenExchangeGrantTypeConfigType{
-						ActorTokenContent: types.ActorTokenContentType("NONE"),
-						ActorTokenScopes: []string{
-							"__Member__",
-							"__Member__",
+				PrivateKeyJwtConfig: &types.PrivateKeyJwtConfig{
+					PrivateKeySource: &types.PrivateKeySourceMemberKmsKeySource{
+						Value: types.KmsKeySourceType{
+							KmsKeyArn: ptr.String("__KmsKeyArn__"),
 						},
 					},
+					SigningAlgorithm: types.SigningAlgorithm("RS256"),
+					AdditionalHeaderClaims: map[string]string{
+						"key0": "__Value__",
+					},
+					AdditionalPayloadClaims: map[string]string{
+						"key0": "__Value__",
+					},
 				},
-				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
 			},
 		},
 		CreatedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),

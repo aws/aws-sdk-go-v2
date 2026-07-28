@@ -262,6 +262,7 @@ const (
 	ClientAuthenticationMethodTypeClientSecretBasic ClientAuthenticationMethodType = "CLIENT_SECRET_BASIC"
 	ClientAuthenticationMethodTypeClientSecretPost  ClientAuthenticationMethodType = "CLIENT_SECRET_POST"
 	ClientAuthenticationMethodTypeAwsIamIdTokenJwt  ClientAuthenticationMethodType = "AWS_IAM_ID_TOKEN_JWT"
+	ClientAuthenticationMethodTypePrivateKeyJwt     ClientAuthenticationMethodType = "PRIVATE_KEY_JWT"
 )
 
 // Values returns all known values for ClientAuthenticationMethodType. Note that
@@ -274,6 +275,7 @@ func (ClientAuthenticationMethodType) Values() []ClientAuthenticationMethodType 
 		"CLIENT_SECRET_BASIC",
 		"CLIENT_SECRET_POST",
 		"AWS_IAM_ID_TOKEN_JWT",
+		"PRIVATE_KEY_JWT",
 	}
 }
 
@@ -1944,6 +1946,27 @@ func (ServerProtocol) Values() []ServerProtocol {
 		"HTTP",
 		"A2A",
 		"AGUI",
+	}
+}
+
+type SigningAlgorithm string
+
+// Enum values for SigningAlgorithm
+const (
+	SigningAlgorithmRs256 SigningAlgorithm = "RS256"
+	SigningAlgorithmPs256 SigningAlgorithm = "PS256"
+	SigningAlgorithmEs256 SigningAlgorithm = "ES256"
+)
+
+// Values returns all known values for SigningAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SigningAlgorithm) Values() []SigningAlgorithm {
+	return []SigningAlgorithm{
+		"RS256",
+		"PS256",
+		"ES256",
 	}
 }
 

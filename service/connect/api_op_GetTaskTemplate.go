@@ -66,7 +66,11 @@ type GetTaskTemplateOutput struct {
 	// This member is required.
 	Name *string
 
-	// Constraints that are applicable to the fields listed.
+	// Constraints that are applicable to the fields listed. Although this parameter
+	// is marked as optional in the API model, the service requires it when calling
+	// CreateTaskTemplate or UpdateTaskTemplate . The RequiredFields array must
+	// contain at least one element, and the field of type NAME must be included in
+	// RequiredFields .
 	Constraints *types.TaskTemplateConstraints
 
 	// The identifier of the flow that runs by default when a task is created by

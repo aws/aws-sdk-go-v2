@@ -475,6 +475,39 @@ func TestCheckRequestSnapshot_ListRecommendations(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListRecommendationsForResource(t *testing.T) {
+	input := &ListRecommendationsForResourceInput{
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		AwsResourceArn: ptr.String("__AwsResourceArn__"),
+		Pillar:         types.RecommendationPillar("cost_optimizing"),
+		Status:         types.ResourceStatus("ok"),
+		CheckArn:       ptr.String("__CheckArn__"),
+		Language:       types.RecommendationLanguage("en"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRecommendationsForResource(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRecommendationsForResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateOrganizationRecommendationLifecycle(t *testing.T) {
 	input := &UpdateOrganizationRecommendationLifecycleInput{
 		LifecycleStage:                       types.UpdateRecommendationLifecycleStage("pending_response"),
@@ -822,6 +855,39 @@ func TestUpdateRequestSnapshot_ListRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRecommendations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListRecommendationsForResource(t *testing.T) {
+	input := &ListRecommendationsForResourceInput{
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		AwsResourceArn: ptr.String("__AwsResourceArn__"),
+		Pillar:         types.RecommendationPillar("cost_optimizing"),
+		Status:         types.ResourceStatus("ok"),
+		CheckArn:       ptr.String("__CheckArn__"),
+		Language:       types.RecommendationLanguage("en"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRecommendationsForResource(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRecommendationsForResource"); err != nil {
 		t.Fatal(err)
 	}
 }

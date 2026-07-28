@@ -1,0 +1,8 @@
+{
+    "id": "6c718dac-102e-4cbe-a82f-f5130b4d3ac2",
+    "type": "feature",
+    "description": "Adds ListRecommendationsForResource API and four CheckSummary fields (resourceArnQueryable, awsResourceTypes, checkGranularity, recommendationId) to retrieve recommendations for a given resource ARN.",
+    "modules": [
+        "service/trustedadvisor"
+    ]
+}

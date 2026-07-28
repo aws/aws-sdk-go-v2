@@ -279,6 +279,13 @@ func TestCheckResponseSnapshot_ListChecks(t *testing.T) {
 				Metadata: map[string]string{
 					"key0": "__Value__",
 				},
+				ResourceArnQueryable: true,
+				AwsResourceTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CheckGranularity: ptr.String("__CheckGranularity__"),
+				RecommendationId: ptr.String("__RecommendationId__"),
 			},
 			{
 				Id:          ptr.String("__Id__"),
@@ -297,6 +304,13 @@ func TestCheckResponseSnapshot_ListChecks(t *testing.T) {
 				Metadata: map[string]string{
 					"key0": "__Value__",
 				},
+				ResourceArnQueryable: true,
+				AwsResourceTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CheckGranularity: ptr.String("__CheckGranularity__"),
+				RecommendationId: ptr.String("__RecommendationId__"),
 			},
 		},
 	}
@@ -633,6 +647,59 @@ func TestCheckResponseSnapshot_ListRecommendations(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListRecommendations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListRecommendationsForResource(t *testing.T) {
+	want := &ListRecommendationsForResourceOutput{
+		NextToken: ptr.String("__NextToken__"),
+		RecommendationForResourceSummaries: []types.RecommendationForResourceSummary{
+			{
+				CheckArn:          ptr.String("__CheckArn__"),
+				RecommendationArn: ptr.String("__RecommendationArn__"),
+				AwsResourceArn:    ptr.String("__AwsResourceArn__"),
+				Status:            types.ResourceStatus("ok"),
+				LastUpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExclusionStatus:   types.ExclusionStatus("excluded"),
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
+				Pillars: []types.RecommendationPillar{
+					types.RecommendationPillar("cost_optimizing"),
+					types.RecommendationPillar("cost_optimizing"),
+				},
+			},
+			{
+				CheckArn:          ptr.String("__CheckArn__"),
+				RecommendationArn: ptr.String("__RecommendationArn__"),
+				AwsResourceArn:    ptr.String("__AwsResourceArn__"),
+				Status:            types.ResourceStatus("ok"),
+				LastUpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExclusionStatus:   types.ExclusionStatus("excluded"),
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
+				Pillars: []types.RecommendationPillar{
+					types.RecommendationPillar("cost_optimizing"),
+					types.RecommendationPillar("cost_optimizing"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListRecommendationsForResource.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListRecommendationsForResource(context.Background(), &ListRecommendationsForResourceInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListRecommendationsForResource.response", err)
 	}
 }
 
