@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -76,6 +78,22 @@ type CreateMatchmakingRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMatchmakingRuleSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMatchmakingRuleSetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMatchmakingRuleSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMatchmakingRuleSetInput_Name, *v.Name)
+	}
+	if v.RuleSetBody != nil {
+		s.WriteString(schemas.CreateMatchmakingRuleSetInput_RuleSetBody, *v.RuleSetBody)
+	}
+	serializeTagList(s, schemas.CreateMatchmakingRuleSetInput_Tags, v.Tags)
+}
+
 type CreateMatchmakingRuleSetOutput struct {
 
 	// The newly created matchmaking rule set.
@@ -89,13 +107,34 @@ type CreateMatchmakingRuleSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMatchmakingRuleSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMatchmakingRuleSetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMatchmakingRuleSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleSet != nil {
+		s.WriteStruct(schemas.CreateMatchmakingRuleSetOutput_RuleSet)
+		v.RuleSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateMatchmakingRuleSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMatchmakingRuleSetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMatchmakingRuleSetOutput_RuleSet:
+			v.RuleSet = &types.MatchmakingRuleSet{}
+			return v.RuleSet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMatchmakingRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateMatchmakingRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMatchmakingRuleSet, schemas.CreateMatchmakingRuleSetInput, schemas.CreateMatchmakingRuleSetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateMatchmakingRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMatchmakingRuleSet, schemas.CreateMatchmakingRuleSetInput, schemas.CreateMatchmakingRuleSetOutput), output: &CreateMatchmakingRuleSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

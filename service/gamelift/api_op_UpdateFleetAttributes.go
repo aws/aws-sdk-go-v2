@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -89,6 +91,38 @@ type UpdateFleetAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFleetAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFleetAttributesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFleetAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnywhereConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFleetAttributesInput_AnywhereConfiguration)
+		v.AnywhereConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFleetAttributesInput_Description, *v.Description)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.UpdateFleetAttributesInput_FleetId, *v.FleetId)
+	}
+	serializeMetricGroupList(s, schemas.UpdateFleetAttributesInput_MetricGroups, v.MetricGroups)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFleetAttributesInput_Name, *v.Name)
+	}
+	if v.NewGameSessionProtectionPolicy != "" {
+		s.WriteString(schemas.UpdateFleetAttributesInput_NewGameSessionProtectionPolicy, string(v.NewGameSessionProtectionPolicy))
+	}
+	if v.ResourceCreationLimitPolicy != nil {
+		s.WriteStruct(schemas.UpdateFleetAttributesInput_ResourceCreationLimitPolicy)
+		v.ResourceCreationLimitPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateFleetAttributesOutput struct {
 
 	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift Servers fleet
@@ -107,13 +141,38 @@ type UpdateFleetAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFleetAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFleetAttributesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFleetAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetArn != nil {
+		s.WriteString(schemas.UpdateFleetAttributesOutput_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.UpdateFleetAttributesOutput_FleetId, *v.FleetId)
+	}
+}
+func (v *UpdateFleetAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFleetAttributesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFleetAttributesOutput_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.UpdateFleetAttributesOutput_FleetArn, v.FleetArn)
+		case schemas.UpdateFleetAttributesOutput_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.UpdateFleetAttributesOutput_FleetId, v.FleetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFleetAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateFleetAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFleetAttributes, schemas.UpdateFleetAttributesInput, schemas.UpdateFleetAttributesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateFleetAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFleetAttributes, schemas.UpdateFleetAttributesInput, schemas.UpdateFleetAttributesOutput), output: &UpdateFleetAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

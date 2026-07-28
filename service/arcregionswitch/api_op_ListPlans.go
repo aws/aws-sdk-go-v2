@@ -5,7 +5,9 @@ package arcregionswitch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -41,6 +43,20 @@ type ListPlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlansInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlansRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlansInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPlansRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlansRequest_nextToken, *v.NextToken)
+	}
+}
 func (in *ListPlansInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.UseControlPlaneEndpoint = ptr.Bool(true)
@@ -63,13 +79,35 @@ type ListPlansOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlansOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlansResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlansResponse_nextToken, *v.NextToken)
+	}
+	serializePlanList(s, schemas.ListPlansResponse_plans, v.Plans)
+}
+func (v *ListPlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlansResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlansResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlansResponse_nextToken, v.NextToken)
+		case schemas.ListPlansResponse_plans:
+			return deserializePlanList(d, schemas.ListPlansResponse_plans, &v.Plans)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPlansMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListPlans{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlans, schemas.ListPlansRequest, schemas.ListPlansResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListPlans{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlans, schemas.ListPlansRequest, schemas.ListPlansResponse), output: &ListPlansOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

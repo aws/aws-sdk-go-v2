@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -93,6 +95,33 @@ type RegisterComputeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterComputeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterComputeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterComputeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificatePath != nil {
+		s.WriteString(schemas.RegisterComputeInput_CertificatePath, *v.CertificatePath)
+	}
+	if v.ComputeName != nil {
+		s.WriteString(schemas.RegisterComputeInput_ComputeName, *v.ComputeName)
+	}
+	if v.DnsName != nil {
+		s.WriteString(schemas.RegisterComputeInput_DnsName, *v.DnsName)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.RegisterComputeInput_FleetId, *v.FleetId)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.RegisterComputeInput_IpAddress, *v.IpAddress)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.RegisterComputeInput_Location, *v.Location)
+	}
+}
+
 type RegisterComputeOutput struct {
 
 	// The details of the compute resource you registered.
@@ -104,13 +133,34 @@ type RegisterComputeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterComputeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterComputeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterComputeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Compute != nil {
+		s.WriteStruct(schemas.RegisterComputeOutput_Compute)
+		v.Compute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegisterComputeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterComputeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterComputeOutput_Compute:
+			v.Compute = &types.Compute{}
+			return v.Compute.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterComputeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpRegisterCompute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCompute, schemas.RegisterComputeInput, schemas.RegisterComputeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpRegisterCompute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCompute, schemas.RegisterComputeInput, schemas.RegisterComputeOutput), output: &RegisterComputeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

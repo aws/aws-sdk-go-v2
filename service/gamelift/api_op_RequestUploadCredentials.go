@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,18 @@ type RequestUploadCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestUploadCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestUploadCredentialsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestUploadCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildId != nil {
+		s.WriteString(schemas.RequestUploadCredentialsInput_BuildId, *v.BuildId)
+	}
+}
+
 type RequestUploadCredentialsOutput struct {
 
 	// Amazon S3 path and key, identifying where the game build files are stored.
@@ -70,13 +84,42 @@ type RequestUploadCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestUploadCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestUploadCredentialsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestUploadCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageLocation != nil {
+		s.WriteStruct(schemas.RequestUploadCredentialsOutput_StorageLocation)
+		v.StorageLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UploadCredentials != nil {
+		s.WriteStruct(schemas.RequestUploadCredentialsOutput_UploadCredentials)
+		v.UploadCredentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RequestUploadCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestUploadCredentialsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestUploadCredentialsOutput_StorageLocation:
+			v.StorageLocation = &types.S3Location{}
+			return v.StorageLocation.Deserialize(d)
+		case schemas.RequestUploadCredentialsOutput_UploadCredentials:
+			v.UploadCredentials = &types.AwsCredentials{}
+			return v.UploadCredentials.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRequestUploadCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpRequestUploadCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestUploadCredentials, schemas.RequestUploadCredentialsInput, schemas.RequestUploadCredentialsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpRequestUploadCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestUploadCredentials, schemas.RequestUploadCredentialsInput, schemas.RequestUploadCredentialsOutput), output: &RequestUploadCredentialsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

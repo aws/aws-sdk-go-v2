@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,18 @@ type DescribeGameSessionPlacementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGameSessionPlacementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGameSessionPlacementInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGameSessionPlacementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PlacementId != nil {
+		s.WriteString(schemas.DescribeGameSessionPlacementInput_PlacementId, *v.PlacementId)
+	}
+}
+
 type DescribeGameSessionPlacementOutput struct {
 
 	// Object that describes the requested game session placement.
@@ -61,13 +75,34 @@ type DescribeGameSessionPlacementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGameSessionPlacementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGameSessionPlacementOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGameSessionPlacementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSessionPlacement != nil {
+		s.WriteStruct(schemas.DescribeGameSessionPlacementOutput_GameSessionPlacement)
+		v.GameSessionPlacement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeGameSessionPlacementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGameSessionPlacementOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGameSessionPlacementOutput_GameSessionPlacement:
+			v.GameSessionPlacement = &types.GameSessionPlacement{}
+			return v.GameSessionPlacement.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGameSessionPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeGameSessionPlacement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGameSessionPlacement, schemas.DescribeGameSessionPlacementInput, schemas.DescribeGameSessionPlacementOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeGameSessionPlacement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGameSessionPlacement, schemas.DescribeGameSessionPlacementInput, schemas.DescribeGameSessionPlacementOutput), output: &DescribeGameSessionPlacementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

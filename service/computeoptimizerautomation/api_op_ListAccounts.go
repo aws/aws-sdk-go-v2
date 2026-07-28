@@ -5,7 +5,9 @@ package computeoptimizerautomation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type ListAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAccountsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAccountsOutput struct {
 
 	//  The list of accounts in your organization enrolled in Compute Optimizer
@@ -58,13 +75,35 @@ type ListAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountInfoList(s, schemas.ListAccountsResponse_accounts, v.Accounts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccountsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccountsResponse_accounts:
+			return deserializeAccountInfoList(d, schemas.ListAccountsResponse_accounts, &v.Accounts)
+		case schemas.ListAccountsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccountsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccounts, schemas.ListAccountsRequest, schemas.ListAccountsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccounts, schemas.ListAccountsRequest, schemas.ListAccountsResponse), output: &ListAccountsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

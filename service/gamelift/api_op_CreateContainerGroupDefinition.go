@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -200,6 +202,40 @@ type CreateContainerGroupDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerGroupDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerGroupDefinitionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerGroupDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerGroupType != "" {
+		s.WriteString(schemas.CreateContainerGroupDefinitionInput_ContainerGroupType, string(v.ContainerGroupType))
+	}
+	if v.GameServerContainerDefinition != nil {
+		s.WriteStruct(schemas.CreateContainerGroupDefinitionInput_GameServerContainerDefinition)
+		v.GameServerContainerDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateContainerGroupDefinitionInput_Name, *v.Name)
+	}
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.CreateContainerGroupDefinitionInput_OperatingSystem, string(v.OperatingSystem))
+	}
+	serializeSupportContainerDefinitionInputList(s, schemas.CreateContainerGroupDefinitionInput_SupportContainerDefinitions, v.SupportContainerDefinitions)
+	serializeTagList(s, schemas.CreateContainerGroupDefinitionInput_Tags, v.Tags)
+	if v.TotalMemoryLimitMebibytes != nil {
+		s.WriteInt32(schemas.CreateContainerGroupDefinitionInput_TotalMemoryLimitMebibytes, *v.TotalMemoryLimitMebibytes)
+	}
+	if v.TotalVcpuLimit != nil {
+		s.WriteFloat64(schemas.CreateContainerGroupDefinitionInput_TotalVcpuLimit, *v.TotalVcpuLimit)
+	}
+	if v.VersionDescription != nil {
+		s.WriteString(schemas.CreateContainerGroupDefinitionInput_VersionDescription, *v.VersionDescription)
+	}
+}
+
 type CreateContainerGroupDefinitionOutput struct {
 
 	// The properties of the new container group definition resource. You can use this
@@ -212,13 +248,34 @@ type CreateContainerGroupDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerGroupDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerGroupDefinitionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerGroupDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerGroupDefinition != nil {
+		s.WriteStruct(schemas.CreateContainerGroupDefinitionOutput_ContainerGroupDefinition)
+		v.ContainerGroupDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateContainerGroupDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContainerGroupDefinitionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContainerGroupDefinitionOutput_ContainerGroupDefinition:
+			v.ContainerGroupDefinition = &types.ContainerGroupDefinition{}
+			return v.ContainerGroupDefinition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateContainerGroupDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateContainerGroupDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerGroupDefinition, schemas.CreateContainerGroupDefinitionInput, schemas.CreateContainerGroupDefinitionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateContainerGroupDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerGroupDefinition, schemas.CreateContainerGroupDefinitionInput, schemas.CreateContainerGroupDefinitionOutput), output: &CreateContainerGroupDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

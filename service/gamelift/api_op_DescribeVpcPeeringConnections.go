@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,18 @@ type DescribeVpcPeeringConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVpcPeeringConnectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVpcPeeringConnectionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVpcPeeringConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeVpcPeeringConnectionsInput_FleetId, *v.FleetId)
+	}
+}
+
 type DescribeVpcPeeringConnectionsOutput struct {
 
 	// A collection of VPC peering connection records that match the request.
@@ -60,13 +74,29 @@ type DescribeVpcPeeringConnectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVpcPeeringConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVpcPeeringConnectionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVpcPeeringConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVpcPeeringConnectionList(s, schemas.DescribeVpcPeeringConnectionsOutput_VpcPeeringConnections, v.VpcPeeringConnections)
+}
+func (v *DescribeVpcPeeringConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVpcPeeringConnectionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVpcPeeringConnectionsOutput_VpcPeeringConnections:
+			return deserializeVpcPeeringConnectionList(d, schemas.DescribeVpcPeeringConnectionsOutput_VpcPeeringConnections, &v.VpcPeeringConnections)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVpcPeeringConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeVpcPeeringConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVpcPeeringConnections, schemas.DescribeVpcPeeringConnectionsInput, schemas.DescribeVpcPeeringConnectionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeVpcPeeringConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVpcPeeringConnections, schemas.DescribeVpcPeeringConnectionsInput, schemas.DescribeVpcPeeringConnectionsOutput), output: &DescribeVpcPeeringConnectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

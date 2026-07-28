@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -78,6 +80,21 @@ type DeleteGameServerGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGameServerGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGameServerGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGameServerGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteOption != "" {
+		s.WriteString(schemas.DeleteGameServerGroupInput_DeleteOption, string(v.DeleteOption))
+	}
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.DeleteGameServerGroupInput_GameServerGroupName, *v.GameServerGroupName)
+	}
+}
+
 type DeleteGameServerGroupOutput struct {
 
 	// An object that describes the deleted game server group resource, with status
@@ -90,13 +107,34 @@ type DeleteGameServerGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGameServerGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGameServerGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGameServerGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerGroup != nil {
+		s.WriteStruct(schemas.DeleteGameServerGroupOutput_GameServerGroup)
+		v.GameServerGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteGameServerGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGameServerGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteGameServerGroupOutput_GameServerGroup:
+			v.GameServerGroup = &types.GameServerGroup{}
+			return v.GameServerGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteGameServerGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGameServerGroup, schemas.DeleteGameServerGroupInput, schemas.DeleteGameServerGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteGameServerGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGameServerGroup, schemas.DeleteGameServerGroupInput, schemas.DeleteGameServerGroupOutput), output: &DeleteGameServerGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

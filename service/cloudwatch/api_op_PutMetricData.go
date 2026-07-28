@@ -4,7 +4,9 @@ package cloudwatch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyrequestcompression "github.com/aws/smithy-go/private/requestcompression"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -148,6 +150,23 @@ type PutMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMetricDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutMetricDataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMetricDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityMetricDataList(s, schemas.PutMetricDataInput_EntityMetricData, v.EntityMetricData)
+	serializeMetricData(s, schemas.PutMetricDataInput_MetricData, v.MetricData)
+	if v.Namespace != nil {
+		s.WriteString(schemas.PutMetricDataInput_Namespace, *v.Namespace)
+	}
+	if v.StrictEntityValidation != nil {
+		s.WriteBool(schemas.PutMetricDataInput_StrictEntityValidation, *v.StrictEntityValidation)
+	}
+}
+
 type PutMetricDataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -155,13 +174,26 @@ type PutMetricDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMetricDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutMetricDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpPutMetricData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMetricData, schemas.PutMetricDataInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpPutMetricData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMetricData, schemas.PutMetricDataInput, nil), output: &PutMetricDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

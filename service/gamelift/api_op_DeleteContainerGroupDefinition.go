@@ -4,6 +4,8 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -77,6 +79,24 @@ type DeleteContainerGroupDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContainerGroupDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContainerGroupDefinitionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContainerGroupDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteContainerGroupDefinitionInput_Name, *v.Name)
+	}
+	if v.VersionCountToRetain != nil {
+		s.WriteInt32(schemas.DeleteContainerGroupDefinitionInput_VersionCountToRetain, *v.VersionCountToRetain)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt32(schemas.DeleteContainerGroupDefinitionInput_VersionNumber, *v.VersionNumber)
+	}
+}
+
 type DeleteContainerGroupDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -84,13 +104,26 @@ type DeleteContainerGroupDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContainerGroupDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContainerGroupDefinitionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContainerGroupDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteContainerGroupDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteContainerGroupDefinitionOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteContainerGroupDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteContainerGroupDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContainerGroupDefinition, schemas.DeleteContainerGroupDefinitionInput, schemas.DeleteContainerGroupDefinitionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteContainerGroupDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContainerGroupDefinition, schemas.DeleteContainerGroupDefinitionInput, schemas.DeleteContainerGroupDefinitionOutput), output: &DeleteContainerGroupDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

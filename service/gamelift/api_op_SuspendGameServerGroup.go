@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,6 +65,19 @@ type SuspendGameServerGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SuspendGameServerGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuspendGameServerGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuspendGameServerGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.SuspendGameServerGroupInput_GameServerGroupName, *v.GameServerGroupName)
+	}
+	serializeGameServerGroupActions(s, schemas.SuspendGameServerGroupInput_SuspendActions, v.SuspendActions)
+}
+
 type SuspendGameServerGroupOutput struct {
 
 	// An object that describes the game server group resource, with the
@@ -75,13 +90,34 @@ type SuspendGameServerGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SuspendGameServerGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuspendGameServerGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuspendGameServerGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerGroup != nil {
+		s.WriteStruct(schemas.SuspendGameServerGroupOutput_GameServerGroup)
+		v.GameServerGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SuspendGameServerGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuspendGameServerGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuspendGameServerGroupOutput_GameServerGroup:
+			v.GameServerGroup = &types.GameServerGroup{}
+			return v.GameServerGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSuspendGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpSuspendGameServerGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SuspendGameServerGroup, schemas.SuspendGameServerGroupInput, schemas.SuspendGameServerGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpSuspendGameServerGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SuspendGameServerGroup, schemas.SuspendGameServerGroupInput, schemas.SuspendGameServerGroupOutput), output: &SuspendGameServerGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

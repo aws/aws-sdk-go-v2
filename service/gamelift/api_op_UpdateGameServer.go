@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -85,6 +87,30 @@ type UpdateGameServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGameServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGameServerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGameServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerData != nil {
+		s.WriteString(schemas.UpdateGameServerInput_GameServerData, *v.GameServerData)
+	}
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.UpdateGameServerInput_GameServerGroupName, *v.GameServerGroupName)
+	}
+	if v.GameServerId != nil {
+		s.WriteString(schemas.UpdateGameServerInput_GameServerId, *v.GameServerId)
+	}
+	if v.HealthCheck != "" {
+		s.WriteString(schemas.UpdateGameServerInput_HealthCheck, string(v.HealthCheck))
+	}
+	if v.UtilizationStatus != "" {
+		s.WriteString(schemas.UpdateGameServerInput_UtilizationStatus, string(v.UtilizationStatus))
+	}
+}
+
 type UpdateGameServerOutput struct {
 
 	// Object that describes the newly updated game server.
@@ -96,13 +122,34 @@ type UpdateGameServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGameServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGameServerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGameServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServer != nil {
+		s.WriteStruct(schemas.UpdateGameServerOutput_GameServer)
+		v.GameServer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateGameServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGameServerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGameServerOutput_GameServer:
+			v.GameServer = &types.GameServer{}
+			return v.GameServer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateGameServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGameServer, schemas.UpdateGameServerInput, schemas.UpdateGameServerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateGameServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGameServer, schemas.UpdateGameServerInput, schemas.UpdateGameServerOutput), output: &UpdateGameServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

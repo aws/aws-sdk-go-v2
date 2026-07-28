@@ -4,7 +4,9 @@ package arcregionswitch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type GetPlanInRegionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlanInRegionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlanInRegionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlanInRegionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetPlanInRegionRequest_arn, *v.Arn)
+	}
+}
+
 type GetPlanInRegionOutput struct {
 
 	// The details of the Region switch plan.
@@ -48,13 +62,34 @@ type GetPlanInRegionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlanInRegionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlanInRegionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlanInRegionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Plan != nil {
+		s.WriteStruct(schemas.GetPlanInRegionResponse_plan)
+		v.Plan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPlanInRegionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPlanInRegionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPlanInRegionResponse_plan:
+			v.Plan = &types.Plan{}
+			return v.Plan.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPlanInRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetPlanInRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlanInRegion, schemas.GetPlanInRegionRequest, schemas.GetPlanInRegionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetPlanInRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlanInRegion, schemas.GetPlanInRegionRequest, schemas.GetPlanInRegionResponse), output: &GetPlanInRegionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,18 @@ type DeleteGameSessionQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGameSessionQueueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGameSessionQueueInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGameSessionQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteGameSessionQueueInput_Name, *v.Name)
+	}
+}
+
 type DeleteGameSessionQueueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +62,26 @@ type DeleteGameSessionQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGameSessionQueueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGameSessionQueueOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGameSessionQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteGameSessionQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGameSessionQueueOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGameSessionQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteGameSessionQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGameSessionQueue, schemas.DeleteGameSessionQueueInput, schemas.DeleteGameSessionQueueOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteGameSessionQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGameSessionQueue, schemas.DeleteGameSessionQueueInput, schemas.DeleteGameSessionQueueOutput), output: &DeleteGameSessionQueueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

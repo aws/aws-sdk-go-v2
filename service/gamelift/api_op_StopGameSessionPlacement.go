@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,18 @@ type StopGameSessionPlacementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopGameSessionPlacementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopGameSessionPlacementInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopGameSessionPlacementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PlacementId != nil {
+		s.WriteString(schemas.StopGameSessionPlacementInput_PlacementId, *v.PlacementId)
+	}
+}
+
 type StopGameSessionPlacementOutput struct {
 
 	// Object that describes the canceled game session placement, with CANCELLED
@@ -61,13 +75,34 @@ type StopGameSessionPlacementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopGameSessionPlacementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopGameSessionPlacementOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopGameSessionPlacementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSessionPlacement != nil {
+		s.WriteStruct(schemas.StopGameSessionPlacementOutput_GameSessionPlacement)
+		v.GameSessionPlacement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopGameSessionPlacementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopGameSessionPlacementOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopGameSessionPlacementOutput_GameSessionPlacement:
+			v.GameSessionPlacement = &types.GameSessionPlacement{}
+			return v.GameSessionPlacement.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopGameSessionPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStopGameSessionPlacement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopGameSessionPlacement, schemas.StopGameSessionPlacementInput, schemas.StopGameSessionPlacementOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStopGameSessionPlacement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopGameSessionPlacement, schemas.StopGameSessionPlacementInput, schemas.StopGameSessionPlacementOutput), output: &StopGameSessionPlacementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

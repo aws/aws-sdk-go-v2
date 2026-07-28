@@ -4,7 +4,9 @@ package cloudwatch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,16 @@ type DisableInsightRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableInsightRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableInsightRulesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableInsightRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInsightRuleNames(s, schemas.DisableInsightRulesInput_RuleNames, v.RuleNames)
+}
+
 type DisableInsightRulesOutput struct {
 
 	// An array listing the rules that could not be disabled. You cannot disable
@@ -51,13 +63,29 @@ type DisableInsightRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableInsightRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableInsightRulesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableInsightRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchFailures(s, schemas.DisableInsightRulesOutput_Failures, v.Failures)
+}
+func (v *DisableInsightRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableInsightRulesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisableInsightRulesOutput_Failures:
+			return deserializeBatchFailures(d, schemas.DisableInsightRulesOutput_Failures, &v.Failures)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableInsightRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDisableInsightRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableInsightRules, schemas.DisableInsightRulesInput, schemas.DisableInsightRulesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDisableInsightRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableInsightRules, schemas.DisableInsightRulesInput, schemas.DisableInsightRulesOutput), output: &DisableInsightRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package gamelift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -79,6 +81,30 @@ type DescribeScalingPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScalingPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScalingPoliciesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScalingPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeScalingPoliciesInput_FleetId, *v.FleetId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeScalingPoliciesInput_Limit, *v.Limit)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.DescribeScalingPoliciesInput_Location, *v.Location)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeScalingPoliciesInput_NextToken, *v.NextToken)
+	}
+	if v.StatusFilter != "" {
+		s.WriteString(schemas.DescribeScalingPoliciesInput_StatusFilter, string(v.StatusFilter))
+	}
+}
+
 type DescribeScalingPoliciesOutput struct {
 
 	// A token that indicates where to resume retrieving results on the next call to
@@ -95,13 +121,35 @@ type DescribeScalingPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScalingPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScalingPoliciesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScalingPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeScalingPoliciesOutput_NextToken, *v.NextToken)
+	}
+	serializeScalingPolicyList(s, schemas.DescribeScalingPoliciesOutput_ScalingPolicies, v.ScalingPolicies)
+}
+func (v *DescribeScalingPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeScalingPoliciesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeScalingPoliciesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeScalingPoliciesOutput_NextToken, v.NextToken)
+		case schemas.DescribeScalingPoliciesOutput_ScalingPolicies:
+			return deserializeScalingPolicyList(d, schemas.DescribeScalingPoliciesOutput_ScalingPolicies, &v.ScalingPolicies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeScalingPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeScalingPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScalingPolicies, schemas.DescribeScalingPoliciesInput, schemas.DescribeScalingPoliciesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeScalingPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScalingPolicies, schemas.DescribeScalingPoliciesInput, schemas.DescribeScalingPoliciesOutput), output: &DescribeScalingPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

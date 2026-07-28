@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -133,6 +135,33 @@ type CreateBuildInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBuildInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBuildInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBuildInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateBuildInput_Name, *v.Name)
+	}
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.CreateBuildInput_OperatingSystem, string(v.OperatingSystem))
+	}
+	if v.ServerSdkVersion != nil {
+		s.WriteString(schemas.CreateBuildInput_ServerSdkVersion, *v.ServerSdkVersion)
+	}
+	if v.StorageLocation != nil {
+		s.WriteStruct(schemas.CreateBuildInput_StorageLocation)
+		v.StorageLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateBuildInput_Tags, v.Tags)
+	if v.Version != nil {
+		s.WriteString(schemas.CreateBuildInput_Version, *v.Version)
+	}
+}
+
 type CreateBuildOutput struct {
 
 	// The newly created build resource, including a unique build IDs and status.
@@ -155,13 +184,50 @@ type CreateBuildOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBuildOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBuildOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBuildOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Build != nil {
+		s.WriteStruct(schemas.CreateBuildOutput_Build)
+		v.Build.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageLocation != nil {
+		s.WriteStruct(schemas.CreateBuildOutput_StorageLocation)
+		v.StorageLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UploadCredentials != nil {
+		s.WriteStruct(schemas.CreateBuildOutput_UploadCredentials)
+		v.UploadCredentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateBuildOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBuildOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBuildOutput_Build:
+			v.Build = &types.Build{}
+			return v.Build.Deserialize(d)
+		case schemas.CreateBuildOutput_StorageLocation:
+			v.StorageLocation = &types.S3Location{}
+			return v.StorageLocation.Deserialize(d)
+		case schemas.CreateBuildOutput_UploadCredentials:
+			v.UploadCredentials = &types.AwsCredentials{}
+			return v.UploadCredentials.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateBuild{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBuild, schemas.CreateBuildInput, schemas.CreateBuildOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateBuild{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBuild, schemas.CreateBuildInput, schemas.CreateBuildOutput), output: &CreateBuildOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

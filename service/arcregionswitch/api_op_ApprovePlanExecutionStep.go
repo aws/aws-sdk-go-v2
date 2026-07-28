@@ -4,7 +4,9 @@ package arcregionswitch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,30 @@ type ApprovePlanExecutionStepInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApprovePlanExecutionStepInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApprovePlanExecutionStepRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApprovePlanExecutionStepInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Approval != "" {
+		s.WriteString(schemas.ApprovePlanExecutionStepRequest_approval, string(v.Approval))
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.ApprovePlanExecutionStepRequest_comment, *v.Comment)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.ApprovePlanExecutionStepRequest_executionId, *v.ExecutionId)
+	}
+	if v.PlanArn != nil {
+		s.WriteString(schemas.ApprovePlanExecutionStepRequest_planArn, *v.PlanArn)
+	}
+	if v.StepName != nil {
+		s.WriteString(schemas.ApprovePlanExecutionStepRequest_stepName, *v.StepName)
+	}
+}
+
 type ApprovePlanExecutionStepOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,13 +92,26 @@ type ApprovePlanExecutionStepOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApprovePlanExecutionStepOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApprovePlanExecutionStepResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApprovePlanExecutionStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ApprovePlanExecutionStepOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApprovePlanExecutionStepResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationApprovePlanExecutionStepMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpApprovePlanExecutionStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApprovePlanExecutionStep, schemas.ApprovePlanExecutionStepRequest, schemas.ApprovePlanExecutionStepResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpApprovePlanExecutionStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApprovePlanExecutionStep, schemas.ApprovePlanExecutionStepRequest, schemas.ApprovePlanExecutionStepResponse), output: &ApprovePlanExecutionStepOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

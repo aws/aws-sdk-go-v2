@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -116,6 +118,25 @@ type StartMatchBackfillInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMatchBackfillInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMatchBackfillInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMatchBackfillInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationName != nil {
+		s.WriteString(schemas.StartMatchBackfillInput_ConfigurationName, *v.ConfigurationName)
+	}
+	if v.GameSessionArn != nil {
+		s.WriteString(schemas.StartMatchBackfillInput_GameSessionArn, *v.GameSessionArn)
+	}
+	serializePlayerList(s, schemas.StartMatchBackfillInput_Players, v.Players)
+	if v.TicketId != nil {
+		s.WriteString(schemas.StartMatchBackfillInput_TicketId, *v.TicketId)
+	}
+}
+
 type StartMatchBackfillOutput struct {
 
 	// Ticket representing the backfill matchmaking request. This object includes the
@@ -129,13 +150,34 @@ type StartMatchBackfillOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMatchBackfillOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMatchBackfillOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMatchBackfillOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MatchmakingTicket != nil {
+		s.WriteStruct(schemas.StartMatchBackfillOutput_MatchmakingTicket)
+		v.MatchmakingTicket.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartMatchBackfillOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMatchBackfillOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMatchBackfillOutput_MatchmakingTicket:
+			v.MatchmakingTicket = &types.MatchmakingTicket{}
+			return v.MatchmakingTicket.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMatchBackfillMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartMatchBackfill{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMatchBackfill, schemas.StartMatchBackfillInput, schemas.StartMatchBackfillOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartMatchBackfill{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMatchBackfill, schemas.StartMatchBackfillInput, schemas.StartMatchBackfillOutput), output: &StartMatchBackfillOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

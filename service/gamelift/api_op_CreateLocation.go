@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,19 @@ type CreateLocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationName != nil {
+		s.WriteString(schemas.CreateLocationInput_LocationName, *v.LocationName)
+	}
+	serializeTagList(s, schemas.CreateLocationInput_Tags, v.Tags)
+}
+
 type CreateLocationOutput struct {
 
 	// The details of the custom location you created.
@@ -56,13 +71,34 @@ type CreateLocationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Location != nil {
+		s.WriteStruct(schemas.CreateLocationOutput_Location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateLocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLocationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLocationOutput_Location:
+			v.Location = &types.LocationModel{}
+			return v.Location.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateLocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocation, schemas.CreateLocationInput, schemas.CreateLocationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateLocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocation, schemas.CreateLocationInput, schemas.CreateLocationOutput), output: &CreateLocationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

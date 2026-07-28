@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -142,6 +144,53 @@ type UpdateMatchmakingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMatchmakingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMatchmakingConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMatchmakingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptanceRequired != nil {
+		s.WriteBool(schemas.UpdateMatchmakingConfigurationInput_AcceptanceRequired, *v.AcceptanceRequired)
+	}
+	if v.AcceptanceTimeoutSeconds != nil {
+		s.WriteInt32(schemas.UpdateMatchmakingConfigurationInput_AcceptanceTimeoutSeconds, *v.AcceptanceTimeoutSeconds)
+	}
+	if v.AdditionalPlayerCount != nil {
+		s.WriteInt32(schemas.UpdateMatchmakingConfigurationInput_AdditionalPlayerCount, *v.AdditionalPlayerCount)
+	}
+	if v.BackfillMode != "" {
+		s.WriteString(schemas.UpdateMatchmakingConfigurationInput_BackfillMode, string(v.BackfillMode))
+	}
+	if v.CustomEventData != nil {
+		s.WriteString(schemas.UpdateMatchmakingConfigurationInput_CustomEventData, *v.CustomEventData)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateMatchmakingConfigurationInput_Description, *v.Description)
+	}
+	if v.FlexMatchMode != "" {
+		s.WriteString(schemas.UpdateMatchmakingConfigurationInput_FlexMatchMode, string(v.FlexMatchMode))
+	}
+	serializeGamePropertyList(s, schemas.UpdateMatchmakingConfigurationInput_GameProperties, v.GameProperties)
+	if v.GameSessionData != nil {
+		s.WriteString(schemas.UpdateMatchmakingConfigurationInput_GameSessionData, *v.GameSessionData)
+	}
+	serializeQueueArnsList(s, schemas.UpdateMatchmakingConfigurationInput_GameSessionQueueArns, v.GameSessionQueueArns)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateMatchmakingConfigurationInput_Name, *v.Name)
+	}
+	if v.NotificationTarget != nil {
+		s.WriteString(schemas.UpdateMatchmakingConfigurationInput_NotificationTarget, *v.NotificationTarget)
+	}
+	if v.RequestTimeoutSeconds != nil {
+		s.WriteInt32(schemas.UpdateMatchmakingConfigurationInput_RequestTimeoutSeconds, *v.RequestTimeoutSeconds)
+	}
+	if v.RuleSetName != nil {
+		s.WriteString(schemas.UpdateMatchmakingConfigurationInput_RuleSetName, *v.RuleSetName)
+	}
+}
+
 type UpdateMatchmakingConfigurationOutput struct {
 
 	// The updated matchmaking configuration.
@@ -153,13 +202,34 @@ type UpdateMatchmakingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMatchmakingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMatchmakingConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMatchmakingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.UpdateMatchmakingConfigurationOutput_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateMatchmakingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMatchmakingConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMatchmakingConfigurationOutput_Configuration:
+			v.Configuration = &types.MatchmakingConfiguration{}
+			return v.Configuration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMatchmakingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateMatchmakingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMatchmakingConfiguration, schemas.UpdateMatchmakingConfigurationInput, schemas.UpdateMatchmakingConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateMatchmakingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMatchmakingConfiguration, schemas.UpdateMatchmakingConfigurationInput, schemas.UpdateMatchmakingConfigurationOutput), output: &UpdateMatchmakingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,6 +71,19 @@ type GetPlayerConnectionDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlayerConnectionDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlayerConnectionDetailsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlayerConnectionDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSessionId != nil {
+		s.WriteString(schemas.GetPlayerConnectionDetailsInput_GameSessionId, *v.GameSessionId)
+	}
+	serializePlayerIdList(s, schemas.GetPlayerConnectionDetailsInput_PlayerIds, v.PlayerIds)
+}
+
 type GetPlayerConnectionDetailsOutput struct {
 
 	// An identifier for the game session that is unique across all regions for which
@@ -87,13 +102,35 @@ type GetPlayerConnectionDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlayerConnectionDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlayerConnectionDetailsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlayerConnectionDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSessionId != nil {
+		s.WriteString(schemas.GetPlayerConnectionDetailsOutput_GameSessionId, *v.GameSessionId)
+	}
+	serializePlayerConnectionDetailList(s, schemas.GetPlayerConnectionDetailsOutput_PlayerConnectionDetails, v.PlayerConnectionDetails)
+}
+func (v *GetPlayerConnectionDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPlayerConnectionDetailsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPlayerConnectionDetailsOutput_GameSessionId:
+			v.GameSessionId = new(string)
+			return d.ReadString(schemas.GetPlayerConnectionDetailsOutput_GameSessionId, v.GameSessionId)
+		case schemas.GetPlayerConnectionDetailsOutput_PlayerConnectionDetails:
+			return deserializePlayerConnectionDetailList(d, schemas.GetPlayerConnectionDetailsOutput_PlayerConnectionDetails, &v.PlayerConnectionDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPlayerConnectionDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetPlayerConnectionDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlayerConnectionDetails, schemas.GetPlayerConnectionDetailsInput, schemas.GetPlayerConnectionDetailsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetPlayerConnectionDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlayerConnectionDetails, schemas.GetPlayerConnectionDetailsInput, schemas.GetPlayerConnectionDetailsOutput), output: &GetPlayerConnectionDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

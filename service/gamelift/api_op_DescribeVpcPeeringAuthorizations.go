@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,15 @@ type DescribeVpcPeeringAuthorizationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVpcPeeringAuthorizationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVpcPeeringAuthorizationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVpcPeeringAuthorizationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DescribeVpcPeeringAuthorizationsOutput struct {
 
 	// A collection of objects that describe all valid VPC peering operations for the
@@ -52,13 +63,29 @@ type DescribeVpcPeeringAuthorizationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVpcPeeringAuthorizationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVpcPeeringAuthorizationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVpcPeeringAuthorizationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVpcPeeringAuthorizationList(s, schemas.DescribeVpcPeeringAuthorizationsOutput_VpcPeeringAuthorizations, v.VpcPeeringAuthorizations)
+}
+func (v *DescribeVpcPeeringAuthorizationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVpcPeeringAuthorizationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVpcPeeringAuthorizationsOutput_VpcPeeringAuthorizations:
+			return deserializeVpcPeeringAuthorizationList(d, schemas.DescribeVpcPeeringAuthorizationsOutput_VpcPeeringAuthorizations, &v.VpcPeeringAuthorizations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVpcPeeringAuthorizationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeVpcPeeringAuthorizations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVpcPeeringAuthorizations, schemas.DescribeVpcPeeringAuthorizationsInput, schemas.DescribeVpcPeeringAuthorizationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeVpcPeeringAuthorizations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVpcPeeringAuthorizations, schemas.DescribeVpcPeeringAuthorizationsInput, schemas.DescribeVpcPeeringAuthorizationsOutput), output: &DescribeVpcPeeringAuthorizationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

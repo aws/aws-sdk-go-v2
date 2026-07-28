@@ -5,7 +5,9 @@ package cloudwatch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -86,6 +88,34 @@ type ListMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMetricsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensionFilters(s, schemas.ListMetricsInput_Dimensions, v.Dimensions)
+	if v.IncludeLinkedAccounts != nil {
+		s.WriteBool(schemas.ListMetricsInput_IncludeLinkedAccounts, *v.IncludeLinkedAccounts)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.ListMetricsInput_MetricName, *v.MetricName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.ListMetricsInput_Namespace, *v.Namespace)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMetricsInput_NextToken, *v.NextToken)
+	}
+	if v.OwningAccount != nil {
+		s.WriteString(schemas.ListMetricsInput_OwningAccount, *v.OwningAccount)
+	}
+	if v.RecentlyActive != "" {
+		s.WriteString(schemas.ListMetricsInput_RecentlyActive, string(v.RecentlyActive))
+	}
+}
+
 type ListMetricsOutput struct {
 
 	// The metrics that match your request.
@@ -108,13 +138,38 @@ type ListMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMetricsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetrics(s, schemas.ListMetricsOutput_Metrics, v.Metrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMetricsOutput_NextToken, *v.NextToken)
+	}
+	serializeOwningAccounts(s, schemas.ListMetricsOutput_OwningAccounts, v.OwningAccounts)
+}
+func (v *ListMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMetricsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMetricsOutput_Metrics:
+			return deserializeMetrics(d, schemas.ListMetricsOutput_Metrics, &v.Metrics)
+		case schemas.ListMetricsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMetricsOutput_NextToken, v.NextToken)
+		case schemas.ListMetricsOutput_OwningAccounts:
+			return deserializeOwningAccounts(d, schemas.ListMetricsOutput_OwningAccounts, &v.OwningAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMetrics, schemas.ListMetricsInput, schemas.ListMetricsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMetrics, schemas.ListMetricsInput, schemas.ListMetricsOutput), output: &ListMetricsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

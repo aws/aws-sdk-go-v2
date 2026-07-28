@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -84,6 +86,21 @@ type GetInstanceAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstanceAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstanceAccessInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstanceAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.GetInstanceAccessInput_FleetId, *v.FleetId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetInstanceAccessInput_InstanceId, *v.InstanceId)
+	}
+}
+
 type GetInstanceAccessOutput struct {
 
 	// The connection information for a fleet instance, including IP address and
@@ -96,13 +113,34 @@ type GetInstanceAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstanceAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstanceAccessOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstanceAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceAccess != nil {
+		s.WriteStruct(schemas.GetInstanceAccessOutput_InstanceAccess)
+		v.InstanceAccess.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetInstanceAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInstanceAccessOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInstanceAccessOutput_InstanceAccess:
+			v.InstanceAccess = &types.InstanceAccess{}
+			return v.InstanceAccess.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInstanceAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetInstanceAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstanceAccess, schemas.GetInstanceAccessInput, schemas.GetInstanceAccessOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetInstanceAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstanceAccess, schemas.GetInstanceAccessInput, schemas.GetInstanceAccessOutput), output: &GetInstanceAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

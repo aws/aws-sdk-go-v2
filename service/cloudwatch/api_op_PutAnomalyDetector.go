@@ -4,7 +4,9 @@ package cloudwatch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -110,6 +112,45 @@ type PutAnomalyDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAnomalyDetectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAnomalyDetectorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAnomalyDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.PutAnomalyDetectorInput_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDimensions(s, schemas.PutAnomalyDetectorInput_Dimensions, v.Dimensions)
+	if v.MetricCharacteristics != nil {
+		s.WriteStruct(schemas.PutAnomalyDetectorInput_MetricCharacteristics)
+		v.MetricCharacteristics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetricMathAnomalyDetector != nil {
+		s.WriteStruct(schemas.PutAnomalyDetectorInput_MetricMathAnomalyDetector)
+		v.MetricMathAnomalyDetector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.PutAnomalyDetectorInput_MetricName, *v.MetricName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.PutAnomalyDetectorInput_Namespace, *v.Namespace)
+	}
+	if v.SingleMetricAnomalyDetector != nil {
+		s.WriteStruct(schemas.PutAnomalyDetectorInput_SingleMetricAnomalyDetector)
+		v.SingleMetricAnomalyDetector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Stat != nil {
+		s.WriteString(schemas.PutAnomalyDetectorInput_Stat, *v.Stat)
+	}
+}
+
 type PutAnomalyDetectorOutput struct {
 
 	// The unique identifier of the anomaly detector that you created or updated.
@@ -121,13 +162,32 @@ type PutAnomalyDetectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAnomalyDetectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAnomalyDetectorOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAnomalyDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyDetectorId != nil {
+		s.WriteString(schemas.PutAnomalyDetectorOutput_AnomalyDetectorId, *v.AnomalyDetectorId)
+	}
+}
+func (v *PutAnomalyDetectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAnomalyDetectorOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAnomalyDetectorOutput_AnomalyDetectorId:
+			v.AnomalyDetectorId = new(string)
+			return d.ReadString(schemas.PutAnomalyDetectorOutput_AnomalyDetectorId, v.AnomalyDetectorId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpPutAnomalyDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAnomalyDetector, schemas.PutAnomalyDetectorInput, schemas.PutAnomalyDetectorOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpPutAnomalyDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAnomalyDetector, schemas.PutAnomalyDetectorInput, schemas.PutAnomalyDetectorOutput), output: &PutAnomalyDetectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

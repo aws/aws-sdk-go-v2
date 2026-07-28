@@ -5,7 +5,9 @@ package cloudwatch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,21 @@ type ListMetricStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMetricStreamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMetricStreamsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMetricStreamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMetricStreamsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMetricStreamsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListMetricStreamsOutput struct {
 
 	// The array of metric stream information.
@@ -53,13 +70,35 @@ type ListMetricStreamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMetricStreamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMetricStreamsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMetricStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricStreamEntries(s, schemas.ListMetricStreamsOutput_Entries, v.Entries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMetricStreamsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMetricStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMetricStreamsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMetricStreamsOutput_Entries:
+			return deserializeMetricStreamEntries(d, schemas.ListMetricStreamsOutput_Entries, &v.Entries)
+		case schemas.ListMetricStreamsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMetricStreamsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMetricStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListMetricStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMetricStreams, schemas.ListMetricStreamsInput, schemas.ListMetricStreamsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListMetricStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMetricStreams, schemas.ListMetricStreamsInput, schemas.ListMetricStreamsOutput), output: &ListMetricStreamsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

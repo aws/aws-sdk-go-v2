@@ -5,7 +5,9 @@ package gamelift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,6 +66,24 @@ type ListFleetDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFleetDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFleetDeploymentsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFleetDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.ListFleetDeploymentsInput_FleetId, *v.FleetId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListFleetDeploymentsInput_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFleetDeploymentsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListFleetDeploymentsOutput struct {
 
 	// The requested deployment information.
@@ -80,13 +100,35 @@ type ListFleetDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFleetDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFleetDeploymentsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFleetDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFleetDeployments(s, schemas.ListFleetDeploymentsOutput_FleetDeployments, v.FleetDeployments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFleetDeploymentsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFleetDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFleetDeploymentsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFleetDeploymentsOutput_FleetDeployments:
+			return deserializeFleetDeployments(d, schemas.ListFleetDeploymentsOutput_FleetDeployments, &v.FleetDeployments)
+		case schemas.ListFleetDeploymentsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFleetDeploymentsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFleetDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListFleetDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFleetDeployments, schemas.ListFleetDeploymentsInput, schemas.ListFleetDeploymentsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListFleetDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFleetDeployments, schemas.ListFleetDeploymentsInput, schemas.ListFleetDeploymentsOutput), output: &ListFleetDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

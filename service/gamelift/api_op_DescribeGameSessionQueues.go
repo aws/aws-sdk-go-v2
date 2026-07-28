@@ -5,7 +5,9 @@ package gamelift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,22 @@ type DescribeGameSessionQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGameSessionQueuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGameSessionQueuesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGameSessionQueuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeGameSessionQueuesInput_Limit, *v.Limit)
+	}
+	serializeGameSessionQueueNameOrArnList(s, schemas.DescribeGameSessionQueuesInput_Names, v.Names)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeGameSessionQueuesInput_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeGameSessionQueuesOutput struct {
 
 	// A collection of objects that describe the requested game session queues.
@@ -71,13 +89,35 @@ type DescribeGameSessionQueuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGameSessionQueuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGameSessionQueuesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGameSessionQueuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGameSessionQueueList(s, schemas.DescribeGameSessionQueuesOutput_GameSessionQueues, v.GameSessionQueues)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeGameSessionQueuesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeGameSessionQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGameSessionQueuesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGameSessionQueuesOutput_GameSessionQueues:
+			return deserializeGameSessionQueueList(d, schemas.DescribeGameSessionQueuesOutput_GameSessionQueues, &v.GameSessionQueues)
+		case schemas.DescribeGameSessionQueuesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeGameSessionQueuesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGameSessionQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeGameSessionQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGameSessionQueues, schemas.DescribeGameSessionQueuesInput, schemas.DescribeGameSessionQueuesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeGameSessionQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGameSessionQueues, schemas.DescribeGameSessionQueuesInput, schemas.DescribeGameSessionQueuesOutput), output: &DescribeGameSessionQueuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

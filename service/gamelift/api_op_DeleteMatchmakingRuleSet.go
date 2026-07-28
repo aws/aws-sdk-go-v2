@@ -4,6 +4,8 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,18 @@ type DeleteMatchmakingRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMatchmakingRuleSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMatchmakingRuleSetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMatchmakingRuleSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteMatchmakingRuleSetInput_Name, *v.Name)
+	}
+}
+
 type DeleteMatchmakingRuleSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +67,26 @@ type DeleteMatchmakingRuleSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMatchmakingRuleSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMatchmakingRuleSetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMatchmakingRuleSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteMatchmakingRuleSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMatchmakingRuleSetOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMatchmakingRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteMatchmakingRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMatchmakingRuleSet, schemas.DeleteMatchmakingRuleSetInput, schemas.DeleteMatchmakingRuleSetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteMatchmakingRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMatchmakingRuleSet, schemas.DeleteMatchmakingRuleSetInput, schemas.DeleteMatchmakingRuleSetOutput), output: &DeleteMatchmakingRuleSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

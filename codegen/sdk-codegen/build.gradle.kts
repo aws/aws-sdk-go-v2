@@ -547,7 +547,6 @@ tasks.register("generate-smithy-build") {
 
         @OptIn(ExperimentalStdlibApi::class)
         val useLegacySerdeServices = buildList {
-            addAll(w02_rpcv2Cbor)
             addAll(w03_awsJson)
             addAll(w04_awsJson)
             addAll(w05_awsJson)

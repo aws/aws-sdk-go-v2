@@ -5,7 +5,9 @@ package gamelift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,21 @@ type ListGameServerGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGameServerGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGameServerGroupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGameServerGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListGameServerGroupsInput_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGameServerGroupsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListGameServerGroupsOutput struct {
 
 	// The game server groups' game server groups.
@@ -55,13 +72,35 @@ type ListGameServerGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGameServerGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGameServerGroupsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGameServerGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGameServerGroups(s, schemas.ListGameServerGroupsOutput_GameServerGroups, v.GameServerGroups)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGameServerGroupsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGameServerGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGameServerGroupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGameServerGroupsOutput_GameServerGroups:
+			return deserializeGameServerGroups(d, schemas.ListGameServerGroupsOutput_GameServerGroups, &v.GameServerGroups)
+		case schemas.ListGameServerGroupsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGameServerGroupsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGameServerGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListGameServerGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGameServerGroups, schemas.ListGameServerGroupsInput, schemas.ListGameServerGroupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListGameServerGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGameServerGroups, schemas.ListGameServerGroupsInput, schemas.ListGameServerGroupsOutput), output: &ListGameServerGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

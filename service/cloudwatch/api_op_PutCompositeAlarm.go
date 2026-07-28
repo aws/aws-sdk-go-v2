@@ -4,7 +4,9 @@ package cloudwatch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -259,6 +261,40 @@ type PutCompositeAlarmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutCompositeAlarmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutCompositeAlarmInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutCompositeAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionsEnabled != nil {
+		s.WriteBool(schemas.PutCompositeAlarmInput_ActionsEnabled, *v.ActionsEnabled)
+	}
+	if v.ActionsSuppressor != nil {
+		s.WriteString(schemas.PutCompositeAlarmInput_ActionsSuppressor, *v.ActionsSuppressor)
+	}
+	if v.ActionsSuppressorExtensionPeriod != nil {
+		s.WriteInt32(schemas.PutCompositeAlarmInput_ActionsSuppressorExtensionPeriod, *v.ActionsSuppressorExtensionPeriod)
+	}
+	if v.ActionsSuppressorWaitPeriod != nil {
+		s.WriteInt32(schemas.PutCompositeAlarmInput_ActionsSuppressorWaitPeriod, *v.ActionsSuppressorWaitPeriod)
+	}
+	serializeResourceList(s, schemas.PutCompositeAlarmInput_AlarmActions, v.AlarmActions)
+	if v.AlarmDescription != nil {
+		s.WriteString(schemas.PutCompositeAlarmInput_AlarmDescription, *v.AlarmDescription)
+	}
+	if v.AlarmName != nil {
+		s.WriteString(schemas.PutCompositeAlarmInput_AlarmName, *v.AlarmName)
+	}
+	if v.AlarmRule != nil {
+		s.WriteString(schemas.PutCompositeAlarmInput_AlarmRule, *v.AlarmRule)
+	}
+	serializeResourceList(s, schemas.PutCompositeAlarmInput_InsufficientDataActions, v.InsufficientDataActions)
+	serializeResourceList(s, schemas.PutCompositeAlarmInput_OKActions, v.OKActions)
+	serializeTagList(s, schemas.PutCompositeAlarmInput_Tags, v.Tags)
+}
+
 type PutCompositeAlarmOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -266,13 +302,26 @@ type PutCompositeAlarmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutCompositeAlarmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutCompositeAlarmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutCompositeAlarmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutCompositeAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpPutCompositeAlarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutCompositeAlarm, schemas.PutCompositeAlarmInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpPutCompositeAlarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutCompositeAlarm, schemas.PutCompositeAlarmInput, nil), output: &PutCompositeAlarmOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

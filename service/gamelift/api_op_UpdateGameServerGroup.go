@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -108,6 +110,28 @@ type UpdateGameServerGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGameServerGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGameServerGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGameServerGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BalancingStrategy != "" {
+		s.WriteString(schemas.UpdateGameServerGroupInput_BalancingStrategy, string(v.BalancingStrategy))
+	}
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.UpdateGameServerGroupInput_GameServerGroupName, *v.GameServerGroupName)
+	}
+	if v.GameServerProtectionPolicy != "" {
+		s.WriteString(schemas.UpdateGameServerGroupInput_GameServerProtectionPolicy, string(v.GameServerProtectionPolicy))
+	}
+	serializeInstanceDefinitions(s, schemas.UpdateGameServerGroupInput_InstanceDefinitions, v.InstanceDefinitions)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateGameServerGroupInput_RoleArn, *v.RoleArn)
+	}
+}
+
 type UpdateGameServerGroupOutput struct {
 
 	// An object that describes the game server group resource with updated
@@ -120,13 +144,34 @@ type UpdateGameServerGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGameServerGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGameServerGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGameServerGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerGroup != nil {
+		s.WriteStruct(schemas.UpdateGameServerGroupOutput_GameServerGroup)
+		v.GameServerGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateGameServerGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGameServerGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGameServerGroupOutput_GameServerGroup:
+			v.GameServerGroup = &types.GameServerGroup{}
+			return v.GameServerGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateGameServerGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGameServerGroup, schemas.UpdateGameServerGroupInput, schemas.UpdateGameServerGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateGameServerGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGameServerGroup, schemas.UpdateGameServerGroupInput, schemas.UpdateGameServerGroupOutput), output: &UpdateGameServerGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

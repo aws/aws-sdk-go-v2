@@ -5,7 +5,9 @@ package gamelift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,22 @@ type ListLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLocationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLocationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLocationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLocationFilterList(s, schemas.ListLocationsInput_Filters, v.Filters)
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListLocationsInput_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLocationsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListLocationsOutput struct {
 
 	// A collection of locations, including both Amazon Web Services and custom
@@ -75,13 +93,35 @@ type ListLocationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLocationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLocationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLocationModelList(s, schemas.ListLocationsOutput_Locations, v.Locations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLocationsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLocationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLocationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLocationsOutput_Locations:
+			return deserializeLocationModelList(d, schemas.ListLocationsOutput_Locations, &v.Locations)
+		case schemas.ListLocationsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLocationsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListLocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLocations, schemas.ListLocationsInput, schemas.ListLocationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListLocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLocations, schemas.ListLocationsInput, schemas.ListLocationsOutput), output: &ListLocationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,18 @@ type ResolveAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResolveAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResolveAliasInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResolveAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasId != nil {
+		s.WriteString(schemas.ResolveAliasInput_AliasId, *v.AliasId)
+	}
+}
+
 type ResolveAliasOutput struct {
 
 	//  The Amazon Resource Name ([ARN] ) associated with the GameLift fleet resource that
@@ -65,13 +79,38 @@ type ResolveAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResolveAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResolveAliasOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResolveAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetArn != nil {
+		s.WriteString(schemas.ResolveAliasOutput_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.ResolveAliasOutput_FleetId, *v.FleetId)
+	}
+}
+func (v *ResolveAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResolveAliasOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResolveAliasOutput_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.ResolveAliasOutput_FleetArn, v.FleetArn)
+		case schemas.ResolveAliasOutput_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.ResolveAliasOutput_FleetId, v.FleetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResolveAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpResolveAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResolveAlias, schemas.ResolveAliasInput, schemas.ResolveAliasOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpResolveAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResolveAlias, schemas.ResolveAliasInput, schemas.ResolveAliasOutput), output: &ResolveAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

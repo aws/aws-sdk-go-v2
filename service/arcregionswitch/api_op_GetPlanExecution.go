@@ -5,7 +5,9 @@ package arcregionswitch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -52,6 +54,27 @@ type GetPlanExecutionInput struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPlanExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlanExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlanExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.GetPlanExecutionRequest_executionId, *v.ExecutionId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetPlanExecutionRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetPlanExecutionRequest_nextToken, *v.NextToken)
+	}
+	if v.PlanArn != nil {
+		s.WriteString(schemas.GetPlanExecutionRequest_planArn, *v.PlanArn)
+	}
 }
 
 type GetPlanExecutionOutput struct {
@@ -138,13 +161,136 @@ type GetPlanExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlanExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlanExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlanExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActualRecoveryTime != nil {
+		s.WriteString(schemas.GetPlanExecutionResponse_actualRecoveryTime, *v.ActualRecoveryTime)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.GetPlanExecutionResponse_comment, *v.Comment)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetPlanExecutionResponse_endTime, *v.EndTime)
+	}
+	if v.ExecutionAction != "" {
+		s.WriteString(schemas.GetPlanExecutionResponse_executionAction, string(v.ExecutionAction))
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.GetPlanExecutionResponse_executionId, *v.ExecutionId)
+	}
+	if v.ExecutionRegion != nil {
+		s.WriteString(schemas.GetPlanExecutionResponse_executionRegion, *v.ExecutionRegion)
+	}
+	if v.ExecutionState != "" {
+		s.WriteString(schemas.GetPlanExecutionResponse_executionState, string(v.ExecutionState))
+	}
+	serializeGeneratedReportDetails(s, schemas.GetPlanExecutionResponse_generatedReportDetails, v.GeneratedReportDetails)
+	if v.Mode != "" {
+		s.WriteString(schemas.GetPlanExecutionResponse_mode, string(v.Mode))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetPlanExecutionResponse_nextToken, *v.NextToken)
+	}
+	if v.Plan != nil {
+		s.WriteStruct(schemas.GetPlanExecutionResponse_plan)
+		v.Plan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlanArn != nil {
+		s.WriteString(schemas.GetPlanExecutionResponse_planArn, *v.PlanArn)
+	}
+	if v.RecoveryExecutionId != nil {
+		s.WriteString(schemas.GetPlanExecutionResponse_recoveryExecutionId, *v.RecoveryExecutionId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetPlanExecutionResponse_startTime, *v.StartTime)
+	}
+	serializeStepStates(s, schemas.GetPlanExecutionResponse_stepStates, v.StepStates)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetPlanExecutionResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetPlanExecutionResponse_version, *v.Version)
+	}
+}
+func (v *GetPlanExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPlanExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPlanExecutionResponse_actualRecoveryTime:
+			v.ActualRecoveryTime = new(string)
+			return d.ReadString(schemas.GetPlanExecutionResponse_actualRecoveryTime, v.ActualRecoveryTime)
+		case schemas.GetPlanExecutionResponse_comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.GetPlanExecutionResponse_comment, v.Comment)
+		case schemas.GetPlanExecutionResponse_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetPlanExecutionResponse_endTime, v.EndTime)
+		case schemas.GetPlanExecutionResponse_executionAction:
+			var ev string
+			if err := d.ReadString(schemas.GetPlanExecutionResponse_executionAction, &ev); err != nil {
+				return err
+			}
+			v.ExecutionAction = types.ExecutionAction(ev)
+			return nil
+		case schemas.GetPlanExecutionResponse_executionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.GetPlanExecutionResponse_executionId, v.ExecutionId)
+		case schemas.GetPlanExecutionResponse_executionRegion:
+			v.ExecutionRegion = new(string)
+			return d.ReadString(schemas.GetPlanExecutionResponse_executionRegion, v.ExecutionRegion)
+		case schemas.GetPlanExecutionResponse_executionState:
+			var ev string
+			if err := d.ReadString(schemas.GetPlanExecutionResponse_executionState, &ev); err != nil {
+				return err
+			}
+			v.ExecutionState = types.ExecutionState(ev)
+			return nil
+		case schemas.GetPlanExecutionResponse_generatedReportDetails:
+			return deserializeGeneratedReportDetails(d, schemas.GetPlanExecutionResponse_generatedReportDetails, &v.GeneratedReportDetails)
+		case schemas.GetPlanExecutionResponse_mode:
+			var ev string
+			if err := d.ReadString(schemas.GetPlanExecutionResponse_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = types.ExecutionMode(ev)
+			return nil
+		case schemas.GetPlanExecutionResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetPlanExecutionResponse_nextToken, v.NextToken)
+		case schemas.GetPlanExecutionResponse_plan:
+			v.Plan = &types.Plan{}
+			return v.Plan.Deserialize(d)
+		case schemas.GetPlanExecutionResponse_planArn:
+			v.PlanArn = new(string)
+			return d.ReadString(schemas.GetPlanExecutionResponse_planArn, v.PlanArn)
+		case schemas.GetPlanExecutionResponse_recoveryExecutionId:
+			v.RecoveryExecutionId = new(string)
+			return d.ReadString(schemas.GetPlanExecutionResponse_recoveryExecutionId, v.RecoveryExecutionId)
+		case schemas.GetPlanExecutionResponse_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetPlanExecutionResponse_startTime, v.StartTime)
+		case schemas.GetPlanExecutionResponse_stepStates:
+			return deserializeStepStates(d, schemas.GetPlanExecutionResponse_stepStates, &v.StepStates)
+		case schemas.GetPlanExecutionResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPlanExecutionResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetPlanExecutionResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GetPlanExecutionResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPlanExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetPlanExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlanExecution, schemas.GetPlanExecutionRequest, schemas.GetPlanExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetPlanExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlanExecution, schemas.GetPlanExecutionRequest, schemas.GetPlanExecutionResponse), output: &GetPlanExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

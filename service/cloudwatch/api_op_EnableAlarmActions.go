@@ -4,6 +4,8 @@ package cloudwatch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,6 +36,16 @@ type EnableAlarmActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableAlarmActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableAlarmActionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableAlarmActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAlarmNames(s, schemas.EnableAlarmActionsInput_AlarmNames, v.AlarmNames)
+}
+
 type EnableAlarmActionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +53,26 @@ type EnableAlarmActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableAlarmActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableAlarmActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *EnableAlarmActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableAlarmActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpEnableAlarmActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableAlarmActions, schemas.EnableAlarmActionsInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpEnableAlarmActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableAlarmActions, schemas.EnableAlarmActionsInput, nil), output: &EnableAlarmActionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

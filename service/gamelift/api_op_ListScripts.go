@@ -5,7 +5,9 @@ package gamelift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,21 @@ type ListScriptsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScriptsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListScriptsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListScriptsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListScriptsInput_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListScriptsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListScriptsOutput struct {
 
 	// A token that indicates where to resume retrieving results on the next call to
@@ -70,13 +87,35 @@ type ListScriptsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScriptsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListScriptsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListScriptsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListScriptsOutput_NextToken, *v.NextToken)
+	}
+	serializeScriptList(s, schemas.ListScriptsOutput_Scripts, v.Scripts)
+}
+func (v *ListScriptsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListScriptsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListScriptsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListScriptsOutput_NextToken, v.NextToken)
+		case schemas.ListScriptsOutput_Scripts:
+			return deserializeScriptList(d, schemas.ListScriptsOutput_Scripts, &v.Scripts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListScriptsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListScripts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScripts, schemas.ListScriptsInput, schemas.ListScriptsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListScripts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScripts, schemas.ListScriptsInput, schemas.ListScriptsOutput), output: &ListScriptsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

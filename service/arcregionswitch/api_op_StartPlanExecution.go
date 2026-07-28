@@ -5,7 +5,9 @@ package arcregionswitch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -77,6 +79,39 @@ type StartPlanExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPlanExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPlanExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPlanExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.StartPlanExecutionRequest_action, string(v.Action))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartPlanExecutionRequest_clientToken, *v.ClientToken)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.StartPlanExecutionRequest_comment, *v.Comment)
+	}
+	if v.LatestVersion != nil {
+		s.WriteString(schemas.StartPlanExecutionRequest_latestVersion, *v.LatestVersion)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.StartPlanExecutionRequest_mode, string(v.Mode))
+	}
+	if v.PlanArn != nil {
+		s.WriteString(schemas.StartPlanExecutionRequest_planArn, *v.PlanArn)
+	}
+	if v.RecoveryExecutionId != nil {
+		s.WriteString(schemas.StartPlanExecutionRequest_recoveryExecutionId, *v.RecoveryExecutionId)
+	}
+	if v.TargetRegion != nil {
+		s.WriteString(schemas.StartPlanExecutionRequest_targetRegion, *v.TargetRegion)
+	}
+}
+
 type StartPlanExecutionOutput struct {
 
 	// The Amazon Web Services Region to activate.
@@ -100,13 +135,56 @@ type StartPlanExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPlanExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPlanExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPlanExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivateRegion != nil {
+		s.WriteString(schemas.StartPlanExecutionResponse_activateRegion, *v.ActivateRegion)
+	}
+	if v.DeactivateRegion != nil {
+		s.WriteString(schemas.StartPlanExecutionResponse_deactivateRegion, *v.DeactivateRegion)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.StartPlanExecutionResponse_executionId, *v.ExecutionId)
+	}
+	if v.Plan != nil {
+		s.WriteString(schemas.StartPlanExecutionResponse_plan, *v.Plan)
+	}
+	if v.PlanVersion != nil {
+		s.WriteString(schemas.StartPlanExecutionResponse_planVersion, *v.PlanVersion)
+	}
+}
+func (v *StartPlanExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartPlanExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartPlanExecutionResponse_activateRegion:
+			v.ActivateRegion = new(string)
+			return d.ReadString(schemas.StartPlanExecutionResponse_activateRegion, v.ActivateRegion)
+		case schemas.StartPlanExecutionResponse_deactivateRegion:
+			v.DeactivateRegion = new(string)
+			return d.ReadString(schemas.StartPlanExecutionResponse_deactivateRegion, v.DeactivateRegion)
+		case schemas.StartPlanExecutionResponse_executionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.StartPlanExecutionResponse_executionId, v.ExecutionId)
+		case schemas.StartPlanExecutionResponse_plan:
+			v.Plan = new(string)
+			return d.ReadString(schemas.StartPlanExecutionResponse_plan, v.Plan)
+		case schemas.StartPlanExecutionResponse_planVersion:
+			v.PlanVersion = new(string)
+			return d.ReadString(schemas.StartPlanExecutionResponse_planVersion, v.PlanVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartPlanExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartPlanExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPlanExecution, schemas.StartPlanExecutionRequest, schemas.StartPlanExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartPlanExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPlanExecution, schemas.StartPlanExecutionRequest, schemas.StartPlanExecutionResponse), output: &StartPlanExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

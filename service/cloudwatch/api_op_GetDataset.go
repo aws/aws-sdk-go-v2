@@ -4,6 +4,8 @@ package cloudwatch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,18 @@ type GetDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDatasetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetIdentifier != nil {
+		s.WriteString(schemas.GetDatasetInput_DatasetIdentifier, *v.DatasetIdentifier)
+	}
+}
+
 type GetDatasetOutput struct {
 
 	// Returns the Amazon Resource Name (ARN) of the dataset, in the format
@@ -78,13 +92,44 @@ type GetDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDatasetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetDatasetOutput_Arn, *v.Arn)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.GetDatasetOutput_DatasetId, *v.DatasetId)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.GetDatasetOutput_KmsKeyArn, *v.KmsKeyArn)
+	}
+}
+func (v *GetDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDatasetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDatasetOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetDatasetOutput_Arn, v.Arn)
+		case schemas.GetDatasetOutput_DatasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.GetDatasetOutput_DatasetId, v.DatasetId)
+		case schemas.GetDatasetOutput_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.GetDatasetOutput_KmsKeyArn, v.KmsKeyArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataset, schemas.GetDatasetInput, schemas.GetDatasetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataset, schemas.GetDatasetInput, schemas.GetDatasetOutput), output: &GetDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

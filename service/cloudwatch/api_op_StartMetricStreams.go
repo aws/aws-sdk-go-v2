@@ -4,6 +4,8 @@ package cloudwatch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,16 @@ type StartMetricStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetricStreamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetricStreamsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetricStreamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricStreamNames(s, schemas.StartMetricStreamsInput_Names, v.Names)
+}
+
 type StartMetricStreamsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +57,26 @@ type StartMetricStreamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetricStreamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetricStreamsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetricStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartMetricStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMetricStreamsOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMetricStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartMetricStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetricStreams, schemas.StartMetricStreamsInput, schemas.StartMetricStreamsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartMetricStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetricStreams, schemas.StartMetricStreamsInput, schemas.StartMetricStreamsOutput), output: &StartMetricStreamsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

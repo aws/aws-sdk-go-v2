@@ -5,7 +5,9 @@ package gamelift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -93,6 +95,30 @@ type DescribeInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstancesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeInstancesInput_FleetId, *v.FleetId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeInstancesInput_InstanceId, *v.InstanceId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeInstancesInput_Limit, *v.Limit)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.DescribeInstancesInput_Location, *v.Location)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeInstancesInput_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeInstancesOutput struct {
 
 	// A collection of objects containing properties for each instance returned.
@@ -109,13 +135,35 @@ type DescribeInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstancesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceList(s, schemas.DescribeInstancesOutput_Instances, v.Instances)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeInstancesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInstancesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInstancesOutput_Instances:
+			return deserializeInstanceList(d, schemas.DescribeInstancesOutput_Instances, &v.Instances)
+		case schemas.DescribeInstancesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeInstancesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstances, schemas.DescribeInstancesInput, schemas.DescribeInstancesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstances, schemas.DescribeInstancesInput, schemas.DescribeInstancesOutput), output: &DescribeInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

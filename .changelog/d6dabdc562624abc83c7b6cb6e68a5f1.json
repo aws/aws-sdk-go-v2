@@ -1,0 +1,12 @@
+{
+    "id": "d6dabdc5-6262-4abc-83c7-b6cb6e68a5f1",
+    "type": "feature",
+    "description": "Enable schema-based (de)serialization for this service.",
+    "modules": [
+        "service/arcregionswitch",
+        "service/cloudwatch",
+        "service/computeoptimizerautomation",
+        "service/gamelift",
+        "service/interconnect"
+    ]
+}

@@ -5,7 +5,9 @@ package gamelift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -76,6 +78,30 @@ type DescribeFleetEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetEventsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeFleetEventsInput_EndTime, *v.EndTime)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeFleetEventsInput_FleetId, *v.FleetId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeFleetEventsInput_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetEventsInput_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeFleetEventsInput_StartTime, *v.StartTime)
+	}
+}
+
 type DescribeFleetEventsOutput struct {
 
 	// A collection of objects containing event log entries for the specified fleet.
@@ -92,13 +118,35 @@ type DescribeFleetEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetEventsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventList(s, schemas.DescribeFleetEventsOutput_Events, v.Events)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetEventsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeFleetEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFleetEventsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFleetEventsOutput_Events:
+			return deserializeEventList(d, schemas.DescribeFleetEventsOutput_Events, &v.Events)
+		case schemas.DescribeFleetEventsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeFleetEventsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFleetEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeFleetEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetEvents, schemas.DescribeFleetEventsInput, schemas.DescribeFleetEventsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeFleetEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetEvents, schemas.DescribeFleetEventsInput, schemas.DescribeFleetEventsOutput), output: &DescribeFleetEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

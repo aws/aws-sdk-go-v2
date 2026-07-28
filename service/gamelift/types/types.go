@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -49,6 +51,66 @@ type Alias struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Alias) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Alias)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Alias) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasArn != nil {
+		s.WriteString(schemas.Alias_AliasArn, *v.AliasArn)
+	}
+	if v.AliasId != nil {
+		s.WriteString(schemas.Alias_AliasId, *v.AliasId)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Alias_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Alias_Description, *v.Description)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.Alias_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Alias_Name, *v.Name)
+	}
+	if v.RoutingStrategy != nil {
+		s.WriteStruct(schemas.Alias_RoutingStrategy)
+		v.RoutingStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Alias) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Alias, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Alias_AliasArn:
+			v.AliasArn = new(string)
+			return d.ReadString(schemas.Alias_AliasArn, v.AliasArn)
+		case schemas.Alias_AliasId:
+			v.AliasId = new(string)
+			return d.ReadString(schemas.Alias_AliasId, v.AliasId)
+		case schemas.Alias_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Alias_CreationTime, v.CreationTime)
+		case schemas.Alias_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Alias_Description, v.Description)
+		case schemas.Alias_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.Alias_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.Alias_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Alias_Name, v.Name)
+		case schemas.Alias_RoutingStrategy:
+			v.RoutingStrategy = &RoutingStrategy{}
+			return v.RoutingStrategy.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Amazon GameLift Servers configuration options for your Anywhere fleets.
 type AnywhereConfiguration struct {
 
@@ -62,6 +124,28 @@ type AnywhereConfiguration struct {
 	Cost *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AnywhereConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnywhereConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnywhereConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cost != nil {
+		s.WriteString(schemas.AnywhereConfiguration_Cost, *v.Cost)
+	}
+}
+func (v *AnywhereConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnywhereConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnywhereConfiguration_Cost:
+			v.Cost = new(string)
+			return d.ReadString(schemas.AnywhereConfiguration_Cost, v.Cost)
+		}
+		return nil
+	})
 }
 
 // Values for use in player attribute key-value pairs. This object lets you
@@ -86,6 +170,40 @@ type AttributeValue struct {
 	SL []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AttributeValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttributeValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttributeValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.N != nil {
+		s.WriteFloat64(schemas.AttributeValue_N, *v.N)
+	}
+	if v.S != nil {
+		s.WriteString(schemas.AttributeValue_S, *v.S)
+	}
+	serializePlayerAttributeStringDoubleMap(s, schemas.AttributeValue_SDM, v.SDM)
+	serializePlayerAttributeStringList(s, schemas.AttributeValue_SL, v.SL)
+}
+func (v *AttributeValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttributeValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttributeValue_N:
+			v.N = new(float64)
+			return d.ReadFloat64(schemas.AttributeValue_N, v.N)
+		case schemas.AttributeValue_S:
+			v.S = new(string)
+			return d.ReadString(schemas.AttributeValue_S, v.S)
+		case schemas.AttributeValue_SDM:
+			return deserializePlayerAttributeStringDoubleMap(d, schemas.AttributeValue_SDM, &v.SDM)
+		case schemas.AttributeValue_SL:
+			return deserializePlayerAttributeStringList(d, schemas.AttributeValue_SL, &v.SL)
+		}
+		return nil
+	})
 }
 
 // Amazon Web Services account security credentials that allow interactions with
@@ -119,6 +237,40 @@ type AwsCredentials struct {
 	SessionToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AwsCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessKeyId != nil {
+		s.WriteString(schemas.AwsCredentials_AccessKeyId, *v.AccessKeyId)
+	}
+	if v.SecretAccessKey != nil {
+		s.WriteString(schemas.AwsCredentials_SecretAccessKey, *v.SecretAccessKey)
+	}
+	if v.SessionToken != nil {
+		s.WriteString(schemas.AwsCredentials_SessionToken, *v.SessionToken)
+	}
+}
+func (v *AwsCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsCredentials_AccessKeyId:
+			v.AccessKeyId = new(string)
+			return d.ReadString(schemas.AwsCredentials_AccessKeyId, v.AccessKeyId)
+		case schemas.AwsCredentials_SecretAccessKey:
+			v.SecretAccessKey = new(string)
+			return d.ReadString(schemas.AwsCredentials_SecretAccessKey, v.SecretAccessKey)
+		case schemas.AwsCredentials_SessionToken:
+			v.SessionToken = new(string)
+			return d.ReadString(schemas.AwsCredentials_SessionToken, v.SessionToken)
+		}
+		return nil
+	})
 }
 
 // Properties describing a custom game build.
@@ -192,6 +344,84 @@ type Build struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Build) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Build)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Build) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildArn != nil {
+		s.WriteString(schemas.Build_BuildArn, *v.BuildArn)
+	}
+	if v.BuildId != nil {
+		s.WriteString(schemas.Build_BuildId, *v.BuildId)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Build_CreationTime, *v.CreationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Build_Name, *v.Name)
+	}
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.Build_OperatingSystem, string(v.OperatingSystem))
+	}
+	if v.ServerSdkVersion != nil {
+		s.WriteString(schemas.Build_ServerSdkVersion, *v.ServerSdkVersion)
+	}
+	if v.SizeOnDisk != nil {
+		s.WriteInt64(schemas.Build_SizeOnDisk, *v.SizeOnDisk)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Build_Status, string(v.Status))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.Build_Version, *v.Version)
+	}
+}
+func (v *Build) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Build, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Build_BuildArn:
+			v.BuildArn = new(string)
+			return d.ReadString(schemas.Build_BuildArn, v.BuildArn)
+		case schemas.Build_BuildId:
+			v.BuildId = new(string)
+			return d.ReadString(schemas.Build_BuildId, v.BuildId)
+		case schemas.Build_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Build_CreationTime, v.CreationTime)
+		case schemas.Build_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Build_Name, v.Name)
+		case schemas.Build_OperatingSystem:
+			var ev string
+			if err := d.ReadString(schemas.Build_OperatingSystem, &ev); err != nil {
+				return err
+			}
+			v.OperatingSystem = OperatingSystem(ev)
+			return nil
+		case schemas.Build_ServerSdkVersion:
+			v.ServerSdkVersion = new(string)
+			return d.ReadString(schemas.Build_ServerSdkVersion, v.ServerSdkVersion)
+		case schemas.Build_SizeOnDisk:
+			v.SizeOnDisk = new(int64)
+			return d.ReadInt64(schemas.Build_SizeOnDisk, v.SizeOnDisk)
+		case schemas.Build_Status:
+			var ev string
+			if err := d.ReadString(schemas.Build_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = BuildStatus(ev)
+			return nil
+		case schemas.Build_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.Build_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Determines whether a TLS/SSL certificate is generated for a fleet. This feature
 // must be enabled when creating the fleet. All instances in a fleet share the same
 // certificate. The certificate can be retrieved by calling the [Amazon GameLift Servers Server SDK]operation
@@ -214,6 +444,32 @@ type CertificateConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CertificateConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CertificateConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CertificateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateType != "" {
+		s.WriteString(schemas.CertificateConfiguration_CertificateType, string(v.CertificateType))
+	}
+}
+func (v *CertificateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CertificateConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CertificateConfiguration_CertificateType:
+			var ev string
+			if err := d.ReadString(schemas.CertificateConfiguration_CertificateType, &ev); err != nil {
+				return err
+			}
+			v.CertificateType = CertificateType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Filters which game servers may be claimed when calling ClaimGameServer .
 type ClaimFilterOption struct {
 
@@ -222,6 +478,25 @@ type ClaimFilterOption struct {
 	InstanceStatuses []FilterInstanceStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClaimFilterOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClaimFilterOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClaimFilterOption) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterInstanceStatuses(s, schemas.ClaimFilterOption_InstanceStatuses, v.InstanceStatuses)
+}
+func (v *ClaimFilterOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClaimFilterOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClaimFilterOption_InstanceStatuses:
+			return deserializeFilterInstanceStatuses(d, schemas.ClaimFilterOption_InstanceStatuses, &v.InstanceStatuses)
+		}
+		return nil
+	})
 }
 
 // An Amazon GameLift Servers compute resource for hosting your game servers.
@@ -309,6 +584,127 @@ type Compute struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Compute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Compute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Compute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeArn != nil {
+		s.WriteString(schemas.Compute_ComputeArn, *v.ComputeArn)
+	}
+	if v.ComputeName != nil {
+		s.WriteString(schemas.Compute_ComputeName, *v.ComputeName)
+	}
+	if v.ComputeStatus != "" {
+		s.WriteString(schemas.Compute_ComputeStatus, string(v.ComputeStatus))
+	}
+	serializeContainerAttributes(s, schemas.Compute_ContainerAttributes, v.ContainerAttributes)
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Compute_CreationTime, *v.CreationTime)
+	}
+	if v.DnsName != nil {
+		s.WriteString(schemas.Compute_DnsName, *v.DnsName)
+	}
+	if v.FleetArn != nil {
+		s.WriteString(schemas.Compute_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.Compute_FleetId, *v.FleetId)
+	}
+	if v.GameLiftAgentEndpoint != nil {
+		s.WriteString(schemas.Compute_GameLiftAgentEndpoint, *v.GameLiftAgentEndpoint)
+	}
+	if v.GameLiftServiceSdkEndpoint != nil {
+		s.WriteString(schemas.Compute_GameLiftServiceSdkEndpoint, *v.GameLiftServiceSdkEndpoint)
+	}
+	if v.GameServerContainerGroupDefinitionArn != nil {
+		s.WriteString(schemas.Compute_GameServerContainerGroupDefinitionArn, *v.GameServerContainerGroupDefinitionArn)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.Compute_InstanceId, *v.InstanceId)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.Compute_IpAddress, *v.IpAddress)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.Compute_Location, *v.Location)
+	}
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.Compute_OperatingSystem, string(v.OperatingSystem))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Compute_Type, string(v.Type))
+	}
+}
+func (v *Compute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Compute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Compute_ComputeArn:
+			v.ComputeArn = new(string)
+			return d.ReadString(schemas.Compute_ComputeArn, v.ComputeArn)
+		case schemas.Compute_ComputeName:
+			v.ComputeName = new(string)
+			return d.ReadString(schemas.Compute_ComputeName, v.ComputeName)
+		case schemas.Compute_ComputeStatus:
+			var ev string
+			if err := d.ReadString(schemas.Compute_ComputeStatus, &ev); err != nil {
+				return err
+			}
+			v.ComputeStatus = ComputeStatus(ev)
+			return nil
+		case schemas.Compute_ContainerAttributes:
+			return deserializeContainerAttributes(d, schemas.Compute_ContainerAttributes, &v.ContainerAttributes)
+		case schemas.Compute_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Compute_CreationTime, v.CreationTime)
+		case schemas.Compute_DnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.Compute_DnsName, v.DnsName)
+		case schemas.Compute_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.Compute_FleetArn, v.FleetArn)
+		case schemas.Compute_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.Compute_FleetId, v.FleetId)
+		case schemas.Compute_GameLiftAgentEndpoint:
+			v.GameLiftAgentEndpoint = new(string)
+			return d.ReadString(schemas.Compute_GameLiftAgentEndpoint, v.GameLiftAgentEndpoint)
+		case schemas.Compute_GameLiftServiceSdkEndpoint:
+			v.GameLiftServiceSdkEndpoint = new(string)
+			return d.ReadString(schemas.Compute_GameLiftServiceSdkEndpoint, v.GameLiftServiceSdkEndpoint)
+		case schemas.Compute_GameServerContainerGroupDefinitionArn:
+			v.GameServerContainerGroupDefinitionArn = new(string)
+			return d.ReadString(schemas.Compute_GameServerContainerGroupDefinitionArn, v.GameServerContainerGroupDefinitionArn)
+		case schemas.Compute_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.Compute_InstanceId, v.InstanceId)
+		case schemas.Compute_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.Compute_IpAddress, v.IpAddress)
+		case schemas.Compute_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.Compute_Location, v.Location)
+		case schemas.Compute_OperatingSystem:
+			var ev string
+			if err := d.ReadString(schemas.Compute_OperatingSystem, &ev); err != nil {
+				return err
+			}
+			v.OperatingSystem = OperatingSystem(ev)
+			return nil
+		case schemas.Compute_Type:
+			var ev string
+			if err := d.ReadString(schemas.Compute_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = EC2InstanceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The set of port numbers to open on each instance in a container fleet.
 // Connection ports are used by inbound traffic to connect with processes that are
 // running in containers on the fleet.
@@ -332,6 +728,34 @@ type ConnectionPortRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectionPortRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionPortRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionPortRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FromPort != nil {
+		s.WriteInt32(schemas.ConnectionPortRange_FromPort, *v.FromPort)
+	}
+	if v.ToPort != nil {
+		s.WriteInt32(schemas.ConnectionPortRange_ToPort, *v.ToPort)
+	}
+}
+func (v *ConnectionPortRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionPortRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionPortRange_FromPort:
+			v.FromPort = new(int32)
+			return d.ReadInt32(schemas.ConnectionPortRange_FromPort, v.FromPort)
+		case schemas.ConnectionPortRange_ToPort:
+			v.ToPort = new(int32)
+			return d.ReadInt32(schemas.ConnectionPortRange_ToPort, v.ToPort)
+		}
+		return nil
+	})
+}
+
 // A unique identifier for a container in a container fleet compute.
 //
 // Returned by: [DescribeCompute]
@@ -347,6 +771,34 @@ type ContainerAttribute struct {
 	ContainerRuntimeId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContainerAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.ContainerAttribute_ContainerName, *v.ContainerName)
+	}
+	if v.ContainerRuntimeId != nil {
+		s.WriteString(schemas.ContainerAttribute_ContainerRuntimeId, *v.ContainerRuntimeId)
+	}
+}
+func (v *ContainerAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerAttribute_ContainerName:
+			v.ContainerName = new(string)
+			return d.ReadString(schemas.ContainerAttribute_ContainerName, v.ContainerName)
+		case schemas.ContainerAttribute_ContainerRuntimeId:
+			v.ContainerRuntimeId = new(string)
+			return d.ReadString(schemas.ContainerAttribute_ContainerRuntimeId, v.ContainerRuntimeId)
+		}
+		return nil
+	})
 }
 
 // A container's dependency on another container in the same container group. The
@@ -393,6 +845,38 @@ type ContainerDependency struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContainerDependency) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerDependency)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerDependency) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Condition != "" {
+		s.WriteString(schemas.ContainerDependency_Condition, string(v.Condition))
+	}
+	if v.ContainerName != nil {
+		s.WriteString(schemas.ContainerDependency_ContainerName, *v.ContainerName)
+	}
+}
+func (v *ContainerDependency) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerDependency, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerDependency_Condition:
+			var ev string
+			if err := d.ReadString(schemas.ContainerDependency_Condition, &ev); err != nil {
+				return err
+			}
+			v.Condition = ContainerDependencyCondition(ev)
+			return nil
+		case schemas.ContainerDependency_ContainerName:
+			v.ContainerName = new(string)
+			return d.ReadString(schemas.ContainerDependency_ContainerName, v.ContainerName)
+		}
+		return nil
+	})
+}
+
 // An environment variable to set inside a container, in the form of a key-value
 // pair.
 //
@@ -415,6 +899,34 @@ type ContainerEnvironment struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContainerEnvironment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerEnvironment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerEnvironment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ContainerEnvironment_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ContainerEnvironment_Value, *v.Value)
+	}
+}
+func (v *ContainerEnvironment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerEnvironment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerEnvironment_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ContainerEnvironment_Name, v.Name)
+		case schemas.ContainerEnvironment_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ContainerEnvironment_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes an Amazon GameLift Servers managed container fleet.
@@ -576,6 +1088,175 @@ type ContainerFleet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContainerFleet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerFleet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerFleet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingType != "" {
+		s.WriteString(schemas.ContainerFleet_BillingType, string(v.BillingType))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ContainerFleet_CreationTime, *v.CreationTime)
+	}
+	if v.DeploymentDetails != nil {
+		s.WriteStruct(schemas.ContainerFleet_DeploymentDetails)
+		v.DeploymentDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ContainerFleet_Description, *v.Description)
+	}
+	if v.FleetArn != nil {
+		s.WriteString(schemas.ContainerFleet_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.ContainerFleet_FleetId, *v.FleetId)
+	}
+	if v.FleetRoleArn != nil {
+		s.WriteString(schemas.ContainerFleet_FleetRoleArn, *v.FleetRoleArn)
+	}
+	if v.GameServerContainerGroupDefinitionArn != nil {
+		s.WriteString(schemas.ContainerFleet_GameServerContainerGroupDefinitionArn, *v.GameServerContainerGroupDefinitionArn)
+	}
+	if v.GameServerContainerGroupDefinitionName != nil {
+		s.WriteString(schemas.ContainerFleet_GameServerContainerGroupDefinitionName, *v.GameServerContainerGroupDefinitionName)
+	}
+	if v.GameServerContainerGroupsPerInstance != nil {
+		s.WriteInt32(schemas.ContainerFleet_GameServerContainerGroupsPerInstance, *v.GameServerContainerGroupsPerInstance)
+	}
+	if v.GameSessionCreationLimitPolicy != nil {
+		s.WriteStruct(schemas.ContainerFleet_GameSessionCreationLimitPolicy)
+		v.GameSessionCreationLimitPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceConnectionPortRange != nil {
+		s.WriteStruct(schemas.ContainerFleet_InstanceConnectionPortRange)
+		v.InstanceConnectionPortRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIpPermissionsList(s, schemas.ContainerFleet_InstanceInboundPermissions, v.InstanceInboundPermissions)
+	if v.InstanceType != nil {
+		s.WriteString(schemas.ContainerFleet_InstanceType, *v.InstanceType)
+	}
+	serializeContainerFleetLocationAttributesList(s, schemas.ContainerFleet_LocationAttributes, v.LocationAttributes)
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.ContainerFleet_LogConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaximumGameServerContainerGroupsPerInstance != nil {
+		s.WriteInt32(schemas.ContainerFleet_MaximumGameServerContainerGroupsPerInstance, *v.MaximumGameServerContainerGroupsPerInstance)
+	}
+	serializeMetricGroupList(s, schemas.ContainerFleet_MetricGroups, v.MetricGroups)
+	if v.NewGameSessionProtectionPolicy != "" {
+		s.WriteString(schemas.ContainerFleet_NewGameSessionProtectionPolicy, string(v.NewGameSessionProtectionPolicy))
+	}
+	if v.PerInstanceContainerGroupDefinitionArn != nil {
+		s.WriteString(schemas.ContainerFleet_PerInstanceContainerGroupDefinitionArn, *v.PerInstanceContainerGroupDefinitionArn)
+	}
+	if v.PerInstanceContainerGroupDefinitionName != nil {
+		s.WriteString(schemas.ContainerFleet_PerInstanceContainerGroupDefinitionName, *v.PerInstanceContainerGroupDefinitionName)
+	}
+	if v.PlayerGatewayMode != "" {
+		s.WriteString(schemas.ContainerFleet_PlayerGatewayMode, string(v.PlayerGatewayMode))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ContainerFleet_Status, string(v.Status))
+	}
+}
+func (v *ContainerFleet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerFleet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerFleet_BillingType:
+			var ev string
+			if err := d.ReadString(schemas.ContainerFleet_BillingType, &ev); err != nil {
+				return err
+			}
+			v.BillingType = ContainerFleetBillingType(ev)
+			return nil
+		case schemas.ContainerFleet_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ContainerFleet_CreationTime, v.CreationTime)
+		case schemas.ContainerFleet_DeploymentDetails:
+			v.DeploymentDetails = &DeploymentDetails{}
+			return v.DeploymentDetails.Deserialize(d)
+		case schemas.ContainerFleet_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ContainerFleet_Description, v.Description)
+		case schemas.ContainerFleet_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.ContainerFleet_FleetArn, v.FleetArn)
+		case schemas.ContainerFleet_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.ContainerFleet_FleetId, v.FleetId)
+		case schemas.ContainerFleet_FleetRoleArn:
+			v.FleetRoleArn = new(string)
+			return d.ReadString(schemas.ContainerFleet_FleetRoleArn, v.FleetRoleArn)
+		case schemas.ContainerFleet_GameServerContainerGroupDefinitionArn:
+			v.GameServerContainerGroupDefinitionArn = new(string)
+			return d.ReadString(schemas.ContainerFleet_GameServerContainerGroupDefinitionArn, v.GameServerContainerGroupDefinitionArn)
+		case schemas.ContainerFleet_GameServerContainerGroupDefinitionName:
+			v.GameServerContainerGroupDefinitionName = new(string)
+			return d.ReadString(schemas.ContainerFleet_GameServerContainerGroupDefinitionName, v.GameServerContainerGroupDefinitionName)
+		case schemas.ContainerFleet_GameServerContainerGroupsPerInstance:
+			v.GameServerContainerGroupsPerInstance = new(int32)
+			return d.ReadInt32(schemas.ContainerFleet_GameServerContainerGroupsPerInstance, v.GameServerContainerGroupsPerInstance)
+		case schemas.ContainerFleet_GameSessionCreationLimitPolicy:
+			v.GameSessionCreationLimitPolicy = &GameSessionCreationLimitPolicy{}
+			return v.GameSessionCreationLimitPolicy.Deserialize(d)
+		case schemas.ContainerFleet_InstanceConnectionPortRange:
+			v.InstanceConnectionPortRange = &ConnectionPortRange{}
+			return v.InstanceConnectionPortRange.Deserialize(d)
+		case schemas.ContainerFleet_InstanceInboundPermissions:
+			return deserializeIpPermissionsList(d, schemas.ContainerFleet_InstanceInboundPermissions, &v.InstanceInboundPermissions)
+		case schemas.ContainerFleet_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.ContainerFleet_InstanceType, v.InstanceType)
+		case schemas.ContainerFleet_LocationAttributes:
+			return deserializeContainerFleetLocationAttributesList(d, schemas.ContainerFleet_LocationAttributes, &v.LocationAttributes)
+		case schemas.ContainerFleet_LogConfiguration:
+			v.LogConfiguration = &LogConfiguration{}
+			return v.LogConfiguration.Deserialize(d)
+		case schemas.ContainerFleet_MaximumGameServerContainerGroupsPerInstance:
+			v.MaximumGameServerContainerGroupsPerInstance = new(int32)
+			return d.ReadInt32(schemas.ContainerFleet_MaximumGameServerContainerGroupsPerInstance, v.MaximumGameServerContainerGroupsPerInstance)
+		case schemas.ContainerFleet_MetricGroups:
+			return deserializeMetricGroupList(d, schemas.ContainerFleet_MetricGroups, &v.MetricGroups)
+		case schemas.ContainerFleet_NewGameSessionProtectionPolicy:
+			var ev string
+			if err := d.ReadString(schemas.ContainerFleet_NewGameSessionProtectionPolicy, &ev); err != nil {
+				return err
+			}
+			v.NewGameSessionProtectionPolicy = ProtectionPolicy(ev)
+			return nil
+		case schemas.ContainerFleet_PerInstanceContainerGroupDefinitionArn:
+			v.PerInstanceContainerGroupDefinitionArn = new(string)
+			return d.ReadString(schemas.ContainerFleet_PerInstanceContainerGroupDefinitionArn, v.PerInstanceContainerGroupDefinitionArn)
+		case schemas.ContainerFleet_PerInstanceContainerGroupDefinitionName:
+			v.PerInstanceContainerGroupDefinitionName = new(string)
+			return d.ReadString(schemas.ContainerFleet_PerInstanceContainerGroupDefinitionName, v.PerInstanceContainerGroupDefinitionName)
+		case schemas.ContainerFleet_PlayerGatewayMode:
+			var ev string
+			if err := d.ReadString(schemas.ContainerFleet_PlayerGatewayMode, &ev); err != nil {
+				return err
+			}
+			v.PlayerGatewayMode = PlayerGatewayMode(ev)
+			return nil
+		case schemas.ContainerFleet_Status:
+			var ev string
+			if err := d.ReadString(schemas.ContainerFleet_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ContainerFleetStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Details about a location in a multi-location container fleet.
 type ContainerFleetLocationAttributes struct {
 
@@ -619,6 +1300,48 @@ type ContainerFleetLocationAttributes struct {
 	Status ContainerFleetLocationStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContainerFleetLocationAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerFleetLocationAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerFleetLocationAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Location != nil {
+		s.WriteString(schemas.ContainerFleetLocationAttributes_Location, *v.Location)
+	}
+	if v.PlayerGatewayStatus != "" {
+		s.WriteString(schemas.ContainerFleetLocationAttributes_PlayerGatewayStatus, string(v.PlayerGatewayStatus))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ContainerFleetLocationAttributes_Status, string(v.Status))
+	}
+}
+func (v *ContainerFleetLocationAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerFleetLocationAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerFleetLocationAttributes_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.ContainerFleetLocationAttributes_Location, v.Location)
+		case schemas.ContainerFleetLocationAttributes_PlayerGatewayStatus:
+			var ev string
+			if err := d.ReadString(schemas.ContainerFleetLocationAttributes_PlayerGatewayStatus, &ev); err != nil {
+				return err
+			}
+			v.PlayerGatewayStatus = PlayerGatewayStatus(ev)
+			return nil
+		case schemas.ContainerFleetLocationAttributes_Status:
+			var ev string
+			if err := d.ReadString(schemas.ContainerFleetLocationAttributes_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ContainerFleetLocationStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The properties that describe a container group resource. You can update all
@@ -749,6 +1472,111 @@ type ContainerGroupDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContainerGroupDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerGroupDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerGroupDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerGroupDefinitionArn != nil {
+		s.WriteString(schemas.ContainerGroupDefinition_ContainerGroupDefinitionArn, *v.ContainerGroupDefinitionArn)
+	}
+	if v.ContainerGroupType != "" {
+		s.WriteString(schemas.ContainerGroupDefinition_ContainerGroupType, string(v.ContainerGroupType))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ContainerGroupDefinition_CreationTime, *v.CreationTime)
+	}
+	if v.GameServerContainerDefinition != nil {
+		s.WriteStruct(schemas.ContainerGroupDefinition_GameServerContainerDefinition)
+		v.GameServerContainerDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ContainerGroupDefinition_Name, *v.Name)
+	}
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.ContainerGroupDefinition_OperatingSystem, string(v.OperatingSystem))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ContainerGroupDefinition_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.ContainerGroupDefinition_StatusReason, *v.StatusReason)
+	}
+	serializeSupportContainerDefinitionList(s, schemas.ContainerGroupDefinition_SupportContainerDefinitions, v.SupportContainerDefinitions)
+	if v.TotalMemoryLimitMebibytes != nil {
+		s.WriteInt32(schemas.ContainerGroupDefinition_TotalMemoryLimitMebibytes, *v.TotalMemoryLimitMebibytes)
+	}
+	if v.TotalVcpuLimit != nil {
+		s.WriteFloat64(schemas.ContainerGroupDefinition_TotalVcpuLimit, *v.TotalVcpuLimit)
+	}
+	if v.VersionDescription != nil {
+		s.WriteString(schemas.ContainerGroupDefinition_VersionDescription, *v.VersionDescription)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt32(schemas.ContainerGroupDefinition_VersionNumber, *v.VersionNumber)
+	}
+}
+func (v *ContainerGroupDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerGroupDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerGroupDefinition_ContainerGroupDefinitionArn:
+			v.ContainerGroupDefinitionArn = new(string)
+			return d.ReadString(schemas.ContainerGroupDefinition_ContainerGroupDefinitionArn, v.ContainerGroupDefinitionArn)
+		case schemas.ContainerGroupDefinition_ContainerGroupType:
+			var ev string
+			if err := d.ReadString(schemas.ContainerGroupDefinition_ContainerGroupType, &ev); err != nil {
+				return err
+			}
+			v.ContainerGroupType = ContainerGroupType(ev)
+			return nil
+		case schemas.ContainerGroupDefinition_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ContainerGroupDefinition_CreationTime, v.CreationTime)
+		case schemas.ContainerGroupDefinition_GameServerContainerDefinition:
+			v.GameServerContainerDefinition = &GameServerContainerDefinition{}
+			return v.GameServerContainerDefinition.Deserialize(d)
+		case schemas.ContainerGroupDefinition_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ContainerGroupDefinition_Name, v.Name)
+		case schemas.ContainerGroupDefinition_OperatingSystem:
+			var ev string
+			if err := d.ReadString(schemas.ContainerGroupDefinition_OperatingSystem, &ev); err != nil {
+				return err
+			}
+			v.OperatingSystem = ContainerOperatingSystem(ev)
+			return nil
+		case schemas.ContainerGroupDefinition_Status:
+			var ev string
+			if err := d.ReadString(schemas.ContainerGroupDefinition_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ContainerGroupDefinitionStatus(ev)
+			return nil
+		case schemas.ContainerGroupDefinition_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.ContainerGroupDefinition_StatusReason, v.StatusReason)
+		case schemas.ContainerGroupDefinition_SupportContainerDefinitions:
+			return deserializeSupportContainerDefinitionList(d, schemas.ContainerGroupDefinition_SupportContainerDefinitions, &v.SupportContainerDefinitions)
+		case schemas.ContainerGroupDefinition_TotalMemoryLimitMebibytes:
+			v.TotalMemoryLimitMebibytes = new(int32)
+			return d.ReadInt32(schemas.ContainerGroupDefinition_TotalMemoryLimitMebibytes, v.TotalMemoryLimitMebibytes)
+		case schemas.ContainerGroupDefinition_TotalVcpuLimit:
+			v.TotalVcpuLimit = new(float64)
+			return d.ReadFloat64(schemas.ContainerGroupDefinition_TotalVcpuLimit, v.TotalVcpuLimit)
+		case schemas.ContainerGroupDefinition_VersionDescription:
+			v.VersionDescription = new(string)
+			return d.ReadString(schemas.ContainerGroupDefinition_VersionDescription, v.VersionDescription)
+		case schemas.ContainerGroupDefinition_VersionNumber:
+			v.VersionNumber = new(int32)
+			return d.ReadInt32(schemas.ContainerGroupDefinition_VersionNumber, v.VersionNumber)
+		}
+		return nil
+	})
+}
+
 // Describes the port mappings for a single container in a container group. Each
 // mapping shows how a container port maps to a connection port on the fleet
 // instance.
@@ -770,6 +1598,37 @@ type ContainerGroupPortMapping struct {
 	ContainerRuntimeId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContainerGroupPortMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerGroupPortMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerGroupPortMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.ContainerGroupPortMapping_ContainerName, *v.ContainerName)
+	}
+	serializeContainerPortMappingList(s, schemas.ContainerGroupPortMapping_ContainerPortMappings, v.ContainerPortMappings)
+	if v.ContainerRuntimeId != nil {
+		s.WriteString(schemas.ContainerGroupPortMapping_ContainerRuntimeId, *v.ContainerRuntimeId)
+	}
+}
+func (v *ContainerGroupPortMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerGroupPortMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerGroupPortMapping_ContainerName:
+			v.ContainerName = new(string)
+			return d.ReadString(schemas.ContainerGroupPortMapping_ContainerName, v.ContainerName)
+		case schemas.ContainerGroupPortMapping_ContainerPortMappings:
+			return deserializeContainerPortMappingList(d, schemas.ContainerGroupPortMapping_ContainerPortMappings, &v.ContainerPortMappings)
+		case schemas.ContainerGroupPortMapping_ContainerRuntimeId:
+			v.ContainerRuntimeId = new(string)
+			return d.ReadString(schemas.ContainerGroupPortMapping_ContainerRuntimeId, v.ContainerRuntimeId)
+		}
+		return nil
+	})
 }
 
 // Instructions on when and how to check the health of a support container in a
@@ -819,6 +1678,49 @@ type ContainerHealthCheck struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContainerHealthCheck) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerHealthCheck)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerHealthCheck) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerCommandStringList(s, schemas.ContainerHealthCheck_Command, v.Command)
+	if v.Interval != nil {
+		s.WriteInt32(schemas.ContainerHealthCheck_Interval, *v.Interval)
+	}
+	if v.Retries != nil {
+		s.WriteInt32(schemas.ContainerHealthCheck_Retries, *v.Retries)
+	}
+	if v.StartPeriod != nil {
+		s.WriteInt32(schemas.ContainerHealthCheck_StartPeriod, *v.StartPeriod)
+	}
+	if v.Timeout != nil {
+		s.WriteInt32(schemas.ContainerHealthCheck_Timeout, *v.Timeout)
+	}
+}
+func (v *ContainerHealthCheck) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerHealthCheck, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerHealthCheck_Command:
+			return deserializeContainerCommandStringList(d, schemas.ContainerHealthCheck_Command, &v.Command)
+		case schemas.ContainerHealthCheck_Interval:
+			v.Interval = new(int32)
+			return d.ReadInt32(schemas.ContainerHealthCheck_Interval, v.Interval)
+		case schemas.ContainerHealthCheck_Retries:
+			v.Retries = new(int32)
+			return d.ReadInt32(schemas.ContainerHealthCheck_Retries, v.Retries)
+		case schemas.ContainerHealthCheck_StartPeriod:
+			v.StartPeriod = new(int32)
+			return d.ReadInt32(schemas.ContainerHealthCheck_StartPeriod, v.StartPeriod)
+		case schemas.ContainerHealthCheck_Timeout:
+			v.Timeout = new(int32)
+			return d.ReadInt32(schemas.ContainerHealthCheck_Timeout, v.Timeout)
+		}
+		return nil
+	})
+}
+
 // A unique identifier for a container in a compute on a managed container fleet
 // instance. This information makes it possible to remotely connect to a specific
 // container on a fleet instance.
@@ -840,6 +1742,34 @@ type ContainerIdentifier struct {
 	ContainerRuntimeId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContainerIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.ContainerIdentifier_ContainerName, *v.ContainerName)
+	}
+	if v.ContainerRuntimeId != nil {
+		s.WriteString(schemas.ContainerIdentifier_ContainerRuntimeId, *v.ContainerRuntimeId)
+	}
+}
+func (v *ContainerIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerIdentifier_ContainerName:
+			v.ContainerName = new(string)
+			return d.ReadString(schemas.ContainerIdentifier_ContainerName, v.ContainerName)
+		case schemas.ContainerIdentifier_ContainerRuntimeId:
+			v.ContainerRuntimeId = new(string)
+			return d.ReadString(schemas.ContainerIdentifier_ContainerRuntimeId, v.ContainerRuntimeId)
+		}
+		return nil
+	})
 }
 
 // A mount point that binds a container to a file or directory on the host system.
@@ -865,6 +1795,44 @@ type ContainerMountPoint struct {
 	ContainerPath *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContainerMountPoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerMountPoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerMountPoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessLevel != "" {
+		s.WriteString(schemas.ContainerMountPoint_AccessLevel, string(v.AccessLevel))
+	}
+	if v.ContainerPath != nil {
+		s.WriteString(schemas.ContainerMountPoint_ContainerPath, *v.ContainerPath)
+	}
+	if v.InstancePath != nil {
+		s.WriteString(schemas.ContainerMountPoint_InstancePath, *v.InstancePath)
+	}
+}
+func (v *ContainerMountPoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerMountPoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerMountPoint_AccessLevel:
+			var ev string
+			if err := d.ReadString(schemas.ContainerMountPoint_AccessLevel, &ev); err != nil {
+				return err
+			}
+			v.AccessLevel = ContainerMountPointAccessLevel(ev)
+			return nil
+		case schemas.ContainerMountPoint_ContainerPath:
+			v.ContainerPath = new(string)
+			return d.ReadString(schemas.ContainerMountPoint_ContainerPath, v.ContainerPath)
+		case schemas.ContainerMountPoint_InstancePath:
+			v.InstancePath = new(string)
+			return d.ReadString(schemas.ContainerMountPoint_InstancePath, v.InstancePath)
+		}
+		return nil
+	})
 }
 
 // A set of port ranges that can be opened on the container. A process that's
@@ -900,6 +1868,25 @@ type ContainerPortConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContainerPortConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerPortConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerPortConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerPortRangeList(s, schemas.ContainerPortConfiguration_ContainerPortRanges, v.ContainerPortRanges)
+}
+func (v *ContainerPortConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerPortConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerPortConfiguration_ContainerPortRanges:
+			return deserializeContainerPortRangeList(d, schemas.ContainerPortConfiguration_ContainerPortRanges, &v.ContainerPortRanges)
+		}
+		return nil
+	})
+}
+
 // Describes a mapping between a container port and a connection port on a fleet
 // instance. You define container ports in a container group definition. Amazon
 // GameLift Servers assigns connection ports when it deploys the container group to
@@ -924,6 +1911,44 @@ type ContainerPortMapping struct {
 	Protocol IpProtocol
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContainerPortMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerPortMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerPortMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionPort != nil {
+		s.WriteInt32(schemas.ContainerPortMapping_ConnectionPort, *v.ConnectionPort)
+	}
+	if v.ContainerPort != nil {
+		s.WriteInt32(schemas.ContainerPortMapping_ContainerPort, *v.ContainerPort)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.ContainerPortMapping_Protocol, string(v.Protocol))
+	}
+}
+func (v *ContainerPortMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerPortMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerPortMapping_ConnectionPort:
+			v.ConnectionPort = new(int32)
+			return d.ReadInt32(schemas.ContainerPortMapping_ConnectionPort, v.ConnectionPort)
+		case schemas.ContainerPortMapping_ContainerPort:
+			v.ContainerPort = new(int32)
+			return d.ReadInt32(schemas.ContainerPortMapping_ContainerPort, v.ContainerPort)
+		case schemas.ContainerPortMapping_Protocol:
+			var ev string
+			if err := d.ReadString(schemas.ContainerPortMapping_Protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = IpProtocol(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A set of one or more port numbers that can be opened on the container, and the
@@ -953,6 +1978,44 @@ type ContainerPortRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContainerPortRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerPortRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerPortRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FromPort != nil {
+		s.WriteInt32(schemas.ContainerPortRange_FromPort, *v.FromPort)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.ContainerPortRange_Protocol, string(v.Protocol))
+	}
+	if v.ToPort != nil {
+		s.WriteInt32(schemas.ContainerPortRange_ToPort, *v.ToPort)
+	}
+}
+func (v *ContainerPortRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerPortRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerPortRange_FromPort:
+			v.FromPort = new(int32)
+			return d.ReadInt32(schemas.ContainerPortRange_FromPort, v.FromPort)
+		case schemas.ContainerPortRange_Protocol:
+			var ev string
+			if err := d.ReadString(schemas.ContainerPortRange_Protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = IpProtocol(ev)
+			return nil
+		case schemas.ContainerPortRange_ToPort:
+			v.ToPort = new(int32)
+			return d.ReadInt32(schemas.ContainerPortRange_ToPort, v.ToPort)
+		}
+		return nil
+	})
+}
+
 // Set of rules for processing a deployment for a container fleet update.
 type DeploymentConfiguration struct {
 
@@ -977,6 +2040,48 @@ type DeploymentConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeploymentConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeploymentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImpairmentStrategy != "" {
+		s.WriteString(schemas.DeploymentConfiguration_ImpairmentStrategy, string(v.ImpairmentStrategy))
+	}
+	if v.MinimumHealthyPercentage != nil {
+		s.WriteInt32(schemas.DeploymentConfiguration_MinimumHealthyPercentage, *v.MinimumHealthyPercentage)
+	}
+	if v.ProtectionStrategy != "" {
+		s.WriteString(schemas.DeploymentConfiguration_ProtectionStrategy, string(v.ProtectionStrategy))
+	}
+}
+func (v *DeploymentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeploymentConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeploymentConfiguration_ImpairmentStrategy:
+			var ev string
+			if err := d.ReadString(schemas.DeploymentConfiguration_ImpairmentStrategy, &ev); err != nil {
+				return err
+			}
+			v.ImpairmentStrategy = DeploymentImpairmentStrategy(ev)
+			return nil
+		case schemas.DeploymentConfiguration_MinimumHealthyPercentage:
+			v.MinimumHealthyPercentage = new(int32)
+			return d.ReadInt32(schemas.DeploymentConfiguration_MinimumHealthyPercentage, v.MinimumHealthyPercentage)
+		case schemas.DeploymentConfiguration_ProtectionStrategy:
+			var ev string
+			if err := d.ReadString(schemas.DeploymentConfiguration_ProtectionStrategy, &ev); err != nil {
+				return err
+			}
+			v.ProtectionStrategy = DeploymentProtectionStrategy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about the most recent deployment for the container fleet.
 type DeploymentDetails struct {
 
@@ -984,6 +2089,28 @@ type DeploymentDetails struct {
 	LatestDeploymentId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeploymentDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeploymentDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LatestDeploymentId != nil {
+		s.WriteString(schemas.DeploymentDetails_LatestDeploymentId, *v.LatestDeploymentId)
+	}
+}
+func (v *DeploymentDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeploymentDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeploymentDetails_LatestDeploymentId:
+			v.LatestDeploymentId = new(string)
+			return d.ReadString(schemas.DeploymentDetails_LatestDeploymentId, v.LatestDeploymentId)
+		}
+		return nil
+	})
 }
 
 // Player information for use when creating player sessions using a game session
@@ -998,6 +2125,34 @@ type DesiredPlayerSession struct {
 	PlayerId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DesiredPlayerSession) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DesiredPlayerSession)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DesiredPlayerSession) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PlayerData != nil {
+		s.WriteString(schemas.DesiredPlayerSession_PlayerData, *v.PlayerData)
+	}
+	if v.PlayerId != nil {
+		s.WriteString(schemas.DesiredPlayerSession_PlayerId, *v.PlayerId)
+	}
+}
+func (v *DesiredPlayerSession) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DesiredPlayerSession, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DesiredPlayerSession_PlayerData:
+			v.PlayerData = new(string)
+			return d.ReadString(schemas.DesiredPlayerSession_PlayerData, v.PlayerData)
+		case schemas.DesiredPlayerSession_PlayerId:
+			v.PlayerId = new(string)
+			return d.ReadString(schemas.DesiredPlayerSession_PlayerId, v.PlayerId)
+		}
+		return nil
+	})
 }
 
 // Resource capacity settings. Fleet capacity is measured in Amazon EC2 instances.
@@ -1033,6 +2188,64 @@ type EC2InstanceCounts struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EC2InstanceCounts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2InstanceCounts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2InstanceCounts) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ACTIVE != nil {
+		s.WriteInt32(schemas.EC2InstanceCounts_ACTIVE, *v.ACTIVE)
+	}
+	if v.DESIRED != nil {
+		s.WriteInt32(schemas.EC2InstanceCounts_DESIRED, *v.DESIRED)
+	}
+	if v.IDLE != nil {
+		s.WriteInt32(schemas.EC2InstanceCounts_IDLE, *v.IDLE)
+	}
+	if v.MAXIMUM != nil {
+		s.WriteInt32(schemas.EC2InstanceCounts_MAXIMUM, *v.MAXIMUM)
+	}
+	if v.MINIMUM != nil {
+		s.WriteInt32(schemas.EC2InstanceCounts_MINIMUM, *v.MINIMUM)
+	}
+	if v.PENDING != nil {
+		s.WriteInt32(schemas.EC2InstanceCounts_PENDING, *v.PENDING)
+	}
+	if v.TERMINATING != nil {
+		s.WriteInt32(schemas.EC2InstanceCounts_TERMINATING, *v.TERMINATING)
+	}
+}
+func (v *EC2InstanceCounts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2InstanceCounts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2InstanceCounts_ACTIVE:
+			v.ACTIVE = new(int32)
+			return d.ReadInt32(schemas.EC2InstanceCounts_ACTIVE, v.ACTIVE)
+		case schemas.EC2InstanceCounts_DESIRED:
+			v.DESIRED = new(int32)
+			return d.ReadInt32(schemas.EC2InstanceCounts_DESIRED, v.DESIRED)
+		case schemas.EC2InstanceCounts_IDLE:
+			v.IDLE = new(int32)
+			return d.ReadInt32(schemas.EC2InstanceCounts_IDLE, v.IDLE)
+		case schemas.EC2InstanceCounts_MAXIMUM:
+			v.MAXIMUM = new(int32)
+			return d.ReadInt32(schemas.EC2InstanceCounts_MAXIMUM, v.MAXIMUM)
+		case schemas.EC2InstanceCounts_MINIMUM:
+			v.MINIMUM = new(int32)
+			return d.ReadInt32(schemas.EC2InstanceCounts_MINIMUM, v.MINIMUM)
+		case schemas.EC2InstanceCounts_PENDING:
+			v.PENDING = new(int32)
+			return d.ReadInt32(schemas.EC2InstanceCounts_PENDING, v.PENDING)
+		case schemas.EC2InstanceCounts_TERMINATING:
+			v.TERMINATING = new(int32)
+			return d.ReadInt32(schemas.EC2InstanceCounts_TERMINATING, v.TERMINATING)
+		}
+		return nil
+	})
+}
+
 // The Amazon GameLift Servers service limits for an Amazon EC2 instance type and
 // current utilization. Amazon GameLift Servers allows Amazon Web Services accounts
 // a maximum number of instances, per instance type, per Amazon Web Services Region
@@ -1058,6 +2271,50 @@ type EC2InstanceLimit struct {
 	Location *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EC2InstanceLimit) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2InstanceLimit)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2InstanceLimit) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentInstances != nil {
+		s.WriteInt32(schemas.EC2InstanceLimit_CurrentInstances, *v.CurrentInstances)
+	}
+	if v.EC2InstanceType != "" {
+		s.WriteString(schemas.EC2InstanceLimit_EC2InstanceType, string(v.EC2InstanceType))
+	}
+	if v.InstanceLimit != nil {
+		s.WriteInt32(schemas.EC2InstanceLimit_InstanceLimit, *v.InstanceLimit)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.EC2InstanceLimit_Location, *v.Location)
+	}
+}
+func (v *EC2InstanceLimit) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2InstanceLimit, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2InstanceLimit_CurrentInstances:
+			v.CurrentInstances = new(int32)
+			return d.ReadInt32(schemas.EC2InstanceLimit_CurrentInstances, v.CurrentInstances)
+		case schemas.EC2InstanceLimit_EC2InstanceType:
+			var ev string
+			if err := d.ReadString(schemas.EC2InstanceLimit_EC2InstanceType, &ev); err != nil {
+				return err
+			}
+			v.EC2InstanceType = EC2InstanceType(ev)
+			return nil
+		case schemas.EC2InstanceLimit_InstanceLimit:
+			v.InstanceLimit = new(int32)
+			return d.ReadInt32(schemas.EC2InstanceLimit_InstanceLimit, v.InstanceLimit)
+		case schemas.EC2InstanceLimit_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.EC2InstanceLimit_Location, v.Location)
+		}
+		return nil
+	})
 }
 
 // Log entry describing an event that involves Amazon GameLift Servers resources
@@ -1262,6 +2519,68 @@ type Event struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Event) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Event)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Event) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt64(schemas.Event_Count, *v.Count)
+	}
+	if v.EventCode != "" {
+		s.WriteString(schemas.Event_EventCode, string(v.EventCode))
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.Event_EventId, *v.EventId)
+	}
+	if v.EventTime != nil {
+		s.WriteTime(schemas.Event_EventTime, *v.EventTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.Event_Message, *v.Message)
+	}
+	if v.PreSignedLogUrl != nil {
+		s.WriteString(schemas.Event_PreSignedLogUrl, *v.PreSignedLogUrl)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.Event_ResourceId, *v.ResourceId)
+	}
+}
+func (v *Event) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Event, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Event_Count:
+			v.Count = new(int64)
+			return d.ReadInt64(schemas.Event_Count, v.Count)
+		case schemas.Event_EventCode:
+			var ev string
+			if err := d.ReadString(schemas.Event_EventCode, &ev); err != nil {
+				return err
+			}
+			v.EventCode = EventCode(ev)
+			return nil
+		case schemas.Event_EventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.Event_EventId, v.EventId)
+		case schemas.Event_EventTime:
+			v.EventTime = new(time.Time)
+			return d.ReadTime(schemas.Event_EventTime, v.EventTime)
+		case schemas.Event_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.Event_Message, v.Message)
+		case schemas.Event_PreSignedLogUrl:
+			v.PreSignedLogUrl = new(string)
+			return d.ReadString(schemas.Event_PreSignedLogUrl, v.PreSignedLogUrl)
+		case schemas.Event_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.Event_ResourceId, v.ResourceId)
+		}
+		return nil
+	})
+}
+
 // A list of fleet locations where a game session queue can place new game
 // sessions. You can use a filter to temporarily exclude specific locations from
 // receiving placements. For queues that have multi-location fleets, you can use a
@@ -1274,6 +2593,25 @@ type FilterConfiguration struct {
 	AllowedLocations []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FilterConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FilterConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FilterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLocationList(s, schemas.FilterConfiguration_AllowedLocations, v.AllowedLocations)
+}
+func (v *FilterConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FilterConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FilterConfiguration_AllowedLocations:
+			return deserializeLocationList(d, schemas.FilterConfiguration_AllowedLocations, &v.AllowedLocations)
+		}
+		return nil
+	})
 }
 
 // Describes an Amazon GameLift Servers fleet of game hosting resources.
@@ -1504,6 +2842,221 @@ type FleetAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FleetAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FleetAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FleetAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnywhereConfiguration != nil {
+		s.WriteStruct(schemas.FleetAttributes_AnywhereConfiguration)
+		v.AnywhereConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BuildArn != nil {
+		s.WriteString(schemas.FleetAttributes_BuildArn, *v.BuildArn)
+	}
+	if v.BuildId != nil {
+		s.WriteString(schemas.FleetAttributes_BuildId, *v.BuildId)
+	}
+	if v.CertificateConfiguration != nil {
+		s.WriteStruct(schemas.FleetAttributes_CertificateConfiguration)
+		v.CertificateConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ComputeType != "" {
+		s.WriteString(schemas.FleetAttributes_ComputeType, string(v.ComputeType))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.FleetAttributes_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.FleetAttributes_Description, *v.Description)
+	}
+	if v.FleetArn != nil {
+		s.WriteString(schemas.FleetAttributes_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.FleetAttributes_FleetId, *v.FleetId)
+	}
+	if v.FleetType != "" {
+		s.WriteString(schemas.FleetAttributes_FleetType, string(v.FleetType))
+	}
+	if v.InstanceRoleArn != nil {
+		s.WriteString(schemas.FleetAttributes_InstanceRoleArn, *v.InstanceRoleArn)
+	}
+	if v.InstanceRoleCredentialsProvider != "" {
+		s.WriteString(schemas.FleetAttributes_InstanceRoleCredentialsProvider, string(v.InstanceRoleCredentialsProvider))
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.FleetAttributes_InstanceType, string(v.InstanceType))
+	}
+	serializeStringList(s, schemas.FleetAttributes_LogPaths, v.LogPaths)
+	serializeMetricGroupList(s, schemas.FleetAttributes_MetricGroups, v.MetricGroups)
+	if v.Name != nil {
+		s.WriteString(schemas.FleetAttributes_Name, *v.Name)
+	}
+	if v.NewGameSessionProtectionPolicy != "" {
+		s.WriteString(schemas.FleetAttributes_NewGameSessionProtectionPolicy, string(v.NewGameSessionProtectionPolicy))
+	}
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.FleetAttributes_OperatingSystem, string(v.OperatingSystem))
+	}
+	if v.PlayerGatewayConfiguration != nil {
+		s.WriteStruct(schemas.FleetAttributes_PlayerGatewayConfiguration)
+		v.PlayerGatewayConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlayerGatewayMode != "" {
+		s.WriteString(schemas.FleetAttributes_PlayerGatewayMode, string(v.PlayerGatewayMode))
+	}
+	if v.ResourceCreationLimitPolicy != nil {
+		s.WriteStruct(schemas.FleetAttributes_ResourceCreationLimitPolicy)
+		v.ResourceCreationLimitPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScriptArn != nil {
+		s.WriteString(schemas.FleetAttributes_ScriptArn, *v.ScriptArn)
+	}
+	if v.ScriptId != nil {
+		s.WriteString(schemas.FleetAttributes_ScriptId, *v.ScriptId)
+	}
+	if v.ServerLaunchParameters != nil {
+		s.WriteString(schemas.FleetAttributes_ServerLaunchParameters, *v.ServerLaunchParameters)
+	}
+	if v.ServerLaunchPath != nil {
+		s.WriteString(schemas.FleetAttributes_ServerLaunchPath, *v.ServerLaunchPath)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.FleetAttributes_Status, string(v.Status))
+	}
+	serializeFleetActionList(s, schemas.FleetAttributes_StoppedActions, v.StoppedActions)
+	if v.TerminationTime != nil {
+		s.WriteTime(schemas.FleetAttributes_TerminationTime, *v.TerminationTime)
+	}
+}
+func (v *FleetAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FleetAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FleetAttributes_AnywhereConfiguration:
+			v.AnywhereConfiguration = &AnywhereConfiguration{}
+			return v.AnywhereConfiguration.Deserialize(d)
+		case schemas.FleetAttributes_BuildArn:
+			v.BuildArn = new(string)
+			return d.ReadString(schemas.FleetAttributes_BuildArn, v.BuildArn)
+		case schemas.FleetAttributes_BuildId:
+			v.BuildId = new(string)
+			return d.ReadString(schemas.FleetAttributes_BuildId, v.BuildId)
+		case schemas.FleetAttributes_CertificateConfiguration:
+			v.CertificateConfiguration = &CertificateConfiguration{}
+			return v.CertificateConfiguration.Deserialize(d)
+		case schemas.FleetAttributes_ComputeType:
+			var ev string
+			if err := d.ReadString(schemas.FleetAttributes_ComputeType, &ev); err != nil {
+				return err
+			}
+			v.ComputeType = ComputeType(ev)
+			return nil
+		case schemas.FleetAttributes_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.FleetAttributes_CreationTime, v.CreationTime)
+		case schemas.FleetAttributes_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.FleetAttributes_Description, v.Description)
+		case schemas.FleetAttributes_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.FleetAttributes_FleetArn, v.FleetArn)
+		case schemas.FleetAttributes_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.FleetAttributes_FleetId, v.FleetId)
+		case schemas.FleetAttributes_FleetType:
+			var ev string
+			if err := d.ReadString(schemas.FleetAttributes_FleetType, &ev); err != nil {
+				return err
+			}
+			v.FleetType = FleetType(ev)
+			return nil
+		case schemas.FleetAttributes_InstanceRoleArn:
+			v.InstanceRoleArn = new(string)
+			return d.ReadString(schemas.FleetAttributes_InstanceRoleArn, v.InstanceRoleArn)
+		case schemas.FleetAttributes_InstanceRoleCredentialsProvider:
+			var ev string
+			if err := d.ReadString(schemas.FleetAttributes_InstanceRoleCredentialsProvider, &ev); err != nil {
+				return err
+			}
+			v.InstanceRoleCredentialsProvider = InstanceRoleCredentialsProvider(ev)
+			return nil
+		case schemas.FleetAttributes_InstanceType:
+			var ev string
+			if err := d.ReadString(schemas.FleetAttributes_InstanceType, &ev); err != nil {
+				return err
+			}
+			v.InstanceType = EC2InstanceType(ev)
+			return nil
+		case schemas.FleetAttributes_LogPaths:
+			return deserializeStringList(d, schemas.FleetAttributes_LogPaths, &v.LogPaths)
+		case schemas.FleetAttributes_MetricGroups:
+			return deserializeMetricGroupList(d, schemas.FleetAttributes_MetricGroups, &v.MetricGroups)
+		case schemas.FleetAttributes_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FleetAttributes_Name, v.Name)
+		case schemas.FleetAttributes_NewGameSessionProtectionPolicy:
+			var ev string
+			if err := d.ReadString(schemas.FleetAttributes_NewGameSessionProtectionPolicy, &ev); err != nil {
+				return err
+			}
+			v.NewGameSessionProtectionPolicy = ProtectionPolicy(ev)
+			return nil
+		case schemas.FleetAttributes_OperatingSystem:
+			var ev string
+			if err := d.ReadString(schemas.FleetAttributes_OperatingSystem, &ev); err != nil {
+				return err
+			}
+			v.OperatingSystem = OperatingSystem(ev)
+			return nil
+		case schemas.FleetAttributes_PlayerGatewayConfiguration:
+			v.PlayerGatewayConfiguration = &PlayerGatewayConfiguration{}
+			return v.PlayerGatewayConfiguration.Deserialize(d)
+		case schemas.FleetAttributes_PlayerGatewayMode:
+			var ev string
+			if err := d.ReadString(schemas.FleetAttributes_PlayerGatewayMode, &ev); err != nil {
+				return err
+			}
+			v.PlayerGatewayMode = PlayerGatewayMode(ev)
+			return nil
+		case schemas.FleetAttributes_ResourceCreationLimitPolicy:
+			v.ResourceCreationLimitPolicy = &ResourceCreationLimitPolicy{}
+			return v.ResourceCreationLimitPolicy.Deserialize(d)
+		case schemas.FleetAttributes_ScriptArn:
+			v.ScriptArn = new(string)
+			return d.ReadString(schemas.FleetAttributes_ScriptArn, v.ScriptArn)
+		case schemas.FleetAttributes_ScriptId:
+			v.ScriptId = new(string)
+			return d.ReadString(schemas.FleetAttributes_ScriptId, v.ScriptId)
+		case schemas.FleetAttributes_ServerLaunchParameters:
+			v.ServerLaunchParameters = new(string)
+			return d.ReadString(schemas.FleetAttributes_ServerLaunchParameters, v.ServerLaunchParameters)
+		case schemas.FleetAttributes_ServerLaunchPath:
+			v.ServerLaunchPath = new(string)
+			return d.ReadString(schemas.FleetAttributes_ServerLaunchPath, v.ServerLaunchPath)
+		case schemas.FleetAttributes_Status:
+			var ev string
+			if err := d.ReadString(schemas.FleetAttributes_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = FleetStatus(ev)
+			return nil
+		case schemas.FleetAttributes_StoppedActions:
+			return deserializeFleetActionList(d, schemas.FleetAttributes_StoppedActions, &v.StoppedActions)
+		case schemas.FleetAttributes_TerminationTime:
+			v.TerminationTime = new(time.Time)
+			return d.ReadTime(schemas.FleetAttributes_TerminationTime, v.TerminationTime)
+		}
+		return nil
+	})
+}
+
 // Current resource capacity settings for managed EC2 fleets and managed container
 // fleets. For multi-location fleets, location values might refer to a fleet's
 // remote location or its home Region.
@@ -1549,6 +3102,74 @@ type FleetCapacity struct {
 	ManagedCapacityConfiguration *ManagedCapacityConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *FleetCapacity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FleetCapacity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FleetCapacity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetArn != nil {
+		s.WriteString(schemas.FleetCapacity_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.FleetCapacity_FleetId, *v.FleetId)
+	}
+	if v.GameServerContainerGroupCounts != nil {
+		s.WriteStruct(schemas.FleetCapacity_GameServerContainerGroupCounts)
+		v.GameServerContainerGroupCounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceCounts != nil {
+		s.WriteStruct(schemas.FleetCapacity_InstanceCounts)
+		v.InstanceCounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.FleetCapacity_InstanceType, string(v.InstanceType))
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.FleetCapacity_Location, *v.Location)
+	}
+	if v.ManagedCapacityConfiguration != nil {
+		s.WriteStruct(schemas.FleetCapacity_ManagedCapacityConfiguration)
+		v.ManagedCapacityConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FleetCapacity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FleetCapacity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FleetCapacity_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.FleetCapacity_FleetArn, v.FleetArn)
+		case schemas.FleetCapacity_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.FleetCapacity_FleetId, v.FleetId)
+		case schemas.FleetCapacity_GameServerContainerGroupCounts:
+			v.GameServerContainerGroupCounts = &GameServerContainerGroupCounts{}
+			return v.GameServerContainerGroupCounts.Deserialize(d)
+		case schemas.FleetCapacity_InstanceCounts:
+			v.InstanceCounts = &EC2InstanceCounts{}
+			return v.InstanceCounts.Deserialize(d)
+		case schemas.FleetCapacity_InstanceType:
+			var ev string
+			if err := d.ReadString(schemas.FleetCapacity_InstanceType, &ev); err != nil {
+				return err
+			}
+			v.InstanceType = EC2InstanceType(ev)
+			return nil
+		case schemas.FleetCapacity_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.FleetCapacity_Location, v.Location)
+		case schemas.FleetCapacity_ManagedCapacityConfiguration:
+			v.ManagedCapacityConfiguration = &ManagedCapacityConfiguration{}
+			return v.ManagedCapacityConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes a container fleet deployment with updates to the fleet.
@@ -1609,6 +3230,82 @@ type FleetDeployment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FleetDeployment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FleetDeployment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FleetDeployment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.FleetDeployment_CreationTime, *v.CreationTime)
+	}
+	if v.DeploymentConfiguration != nil {
+		s.WriteStruct(schemas.FleetDeployment_DeploymentConfiguration)
+		v.DeploymentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.FleetDeployment_DeploymentId, *v.DeploymentId)
+	}
+	if v.DeploymentStatus != "" {
+		s.WriteString(schemas.FleetDeployment_DeploymentStatus, string(v.DeploymentStatus))
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.FleetDeployment_FleetId, *v.FleetId)
+	}
+	if v.GameServerBinaryArn != nil {
+		s.WriteString(schemas.FleetDeployment_GameServerBinaryArn, *v.GameServerBinaryArn)
+	}
+	if v.PerInstanceBinaryArn != nil {
+		s.WriteString(schemas.FleetDeployment_PerInstanceBinaryArn, *v.PerInstanceBinaryArn)
+	}
+	if v.RollbackGameServerBinaryArn != nil {
+		s.WriteString(schemas.FleetDeployment_RollbackGameServerBinaryArn, *v.RollbackGameServerBinaryArn)
+	}
+	if v.RollbackPerInstanceBinaryArn != nil {
+		s.WriteString(schemas.FleetDeployment_RollbackPerInstanceBinaryArn, *v.RollbackPerInstanceBinaryArn)
+	}
+}
+func (v *FleetDeployment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FleetDeployment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FleetDeployment_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.FleetDeployment_CreationTime, v.CreationTime)
+		case schemas.FleetDeployment_DeploymentConfiguration:
+			v.DeploymentConfiguration = &DeploymentConfiguration{}
+			return v.DeploymentConfiguration.Deserialize(d)
+		case schemas.FleetDeployment_DeploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.FleetDeployment_DeploymentId, v.DeploymentId)
+		case schemas.FleetDeployment_DeploymentStatus:
+			var ev string
+			if err := d.ReadString(schemas.FleetDeployment_DeploymentStatus, &ev); err != nil {
+				return err
+			}
+			v.DeploymentStatus = DeploymentStatus(ev)
+			return nil
+		case schemas.FleetDeployment_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.FleetDeployment_FleetId, v.FleetId)
+		case schemas.FleetDeployment_GameServerBinaryArn:
+			v.GameServerBinaryArn = new(string)
+			return d.ReadString(schemas.FleetDeployment_GameServerBinaryArn, v.GameServerBinaryArn)
+		case schemas.FleetDeployment_PerInstanceBinaryArn:
+			v.PerInstanceBinaryArn = new(string)
+			return d.ReadString(schemas.FleetDeployment_PerInstanceBinaryArn, v.PerInstanceBinaryArn)
+		case schemas.FleetDeployment_RollbackGameServerBinaryArn:
+			v.RollbackGameServerBinaryArn = new(string)
+			return d.ReadString(schemas.FleetDeployment_RollbackGameServerBinaryArn, v.RollbackGameServerBinaryArn)
+		case schemas.FleetDeployment_RollbackPerInstanceBinaryArn:
+			v.RollbackPerInstanceBinaryArn = new(string)
+			return d.ReadString(schemas.FleetDeployment_RollbackPerInstanceBinaryArn, v.RollbackPerInstanceBinaryArn)
+		}
+		return nil
+	})
+}
+
 // Current resource utilization statistics in a specified fleet or location. The
 // location value might refer to a fleet's remote location or its home region.
 type FleetUtilization struct {
@@ -1646,6 +3343,64 @@ type FleetUtilization struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FleetUtilization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FleetUtilization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FleetUtilization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveGameSessionCount != nil {
+		s.WriteInt32(schemas.FleetUtilization_ActiveGameSessionCount, *v.ActiveGameSessionCount)
+	}
+	if v.ActiveServerProcessCount != nil {
+		s.WriteInt32(schemas.FleetUtilization_ActiveServerProcessCount, *v.ActiveServerProcessCount)
+	}
+	if v.CurrentPlayerSessionCount != nil {
+		s.WriteInt32(schemas.FleetUtilization_CurrentPlayerSessionCount, *v.CurrentPlayerSessionCount)
+	}
+	if v.FleetArn != nil {
+		s.WriteString(schemas.FleetUtilization_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.FleetUtilization_FleetId, *v.FleetId)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.FleetUtilization_Location, *v.Location)
+	}
+	if v.MaximumPlayerSessionCount != nil {
+		s.WriteInt32(schemas.FleetUtilization_MaximumPlayerSessionCount, *v.MaximumPlayerSessionCount)
+	}
+}
+func (v *FleetUtilization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FleetUtilization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FleetUtilization_ActiveGameSessionCount:
+			v.ActiveGameSessionCount = new(int32)
+			return d.ReadInt32(schemas.FleetUtilization_ActiveGameSessionCount, v.ActiveGameSessionCount)
+		case schemas.FleetUtilization_ActiveServerProcessCount:
+			v.ActiveServerProcessCount = new(int32)
+			return d.ReadInt32(schemas.FleetUtilization_ActiveServerProcessCount, v.ActiveServerProcessCount)
+		case schemas.FleetUtilization_CurrentPlayerSessionCount:
+			v.CurrentPlayerSessionCount = new(int32)
+			return d.ReadInt32(schemas.FleetUtilization_CurrentPlayerSessionCount, v.CurrentPlayerSessionCount)
+		case schemas.FleetUtilization_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.FleetUtilization_FleetArn, v.FleetArn)
+		case schemas.FleetUtilization_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.FleetUtilization_FleetId, v.FleetId)
+		case schemas.FleetUtilization_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.FleetUtilization_Location, v.Location)
+		case schemas.FleetUtilization_MaximumPlayerSessionCount:
+			v.MaximumPlayerSessionCount = new(int32)
+			return d.ReadInt32(schemas.FleetUtilization_MaximumPlayerSessionCount, v.MaximumPlayerSessionCount)
+		}
+		return nil
+	})
+}
+
 // This key-value pair can store custom data about a game session. For example,
 // you might use a GameProperty to track a game session's map, level of
 // difficulty, or remaining time. The difficulty level could be specified like
@@ -1681,6 +3436,34 @@ type GameProperty struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GameProperty) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameProperty)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameProperty) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.GameProperty_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.GameProperty_Value, *v.Value)
+	}
+}
+func (v *GameProperty) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameProperty, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameProperty_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.GameProperty_Key, v.Key)
+		case schemas.GameProperty_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.GameProperty_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Properties describing a game server that is running on an instance in a game
@@ -1750,6 +3533,96 @@ type GameServer struct {
 	UtilizationStatus GameServerUtilizationStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *GameServer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameServer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameServer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClaimStatus != "" {
+		s.WriteString(schemas.GameServer_ClaimStatus, string(v.ClaimStatus))
+	}
+	if v.ConnectionInfo != nil {
+		s.WriteString(schemas.GameServer_ConnectionInfo, *v.ConnectionInfo)
+	}
+	if v.GameServerData != nil {
+		s.WriteString(schemas.GameServer_GameServerData, *v.GameServerData)
+	}
+	if v.GameServerGroupArn != nil {
+		s.WriteString(schemas.GameServer_GameServerGroupArn, *v.GameServerGroupArn)
+	}
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.GameServer_GameServerGroupName, *v.GameServerGroupName)
+	}
+	if v.GameServerId != nil {
+		s.WriteString(schemas.GameServer_GameServerId, *v.GameServerId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GameServer_InstanceId, *v.InstanceId)
+	}
+	if v.LastClaimTime != nil {
+		s.WriteTime(schemas.GameServer_LastClaimTime, *v.LastClaimTime)
+	}
+	if v.LastHealthCheckTime != nil {
+		s.WriteTime(schemas.GameServer_LastHealthCheckTime, *v.LastHealthCheckTime)
+	}
+	if v.RegistrationTime != nil {
+		s.WriteTime(schemas.GameServer_RegistrationTime, *v.RegistrationTime)
+	}
+	if v.UtilizationStatus != "" {
+		s.WriteString(schemas.GameServer_UtilizationStatus, string(v.UtilizationStatus))
+	}
+}
+func (v *GameServer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameServer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameServer_ClaimStatus:
+			var ev string
+			if err := d.ReadString(schemas.GameServer_ClaimStatus, &ev); err != nil {
+				return err
+			}
+			v.ClaimStatus = GameServerClaimStatus(ev)
+			return nil
+		case schemas.GameServer_ConnectionInfo:
+			v.ConnectionInfo = new(string)
+			return d.ReadString(schemas.GameServer_ConnectionInfo, v.ConnectionInfo)
+		case schemas.GameServer_GameServerData:
+			v.GameServerData = new(string)
+			return d.ReadString(schemas.GameServer_GameServerData, v.GameServerData)
+		case schemas.GameServer_GameServerGroupArn:
+			v.GameServerGroupArn = new(string)
+			return d.ReadString(schemas.GameServer_GameServerGroupArn, v.GameServerGroupArn)
+		case schemas.GameServer_GameServerGroupName:
+			v.GameServerGroupName = new(string)
+			return d.ReadString(schemas.GameServer_GameServerGroupName, v.GameServerGroupName)
+		case schemas.GameServer_GameServerId:
+			v.GameServerId = new(string)
+			return d.ReadString(schemas.GameServer_GameServerId, v.GameServerId)
+		case schemas.GameServer_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.GameServer_InstanceId, v.InstanceId)
+		case schemas.GameServer_LastClaimTime:
+			v.LastClaimTime = new(time.Time)
+			return d.ReadTime(schemas.GameServer_LastClaimTime, v.LastClaimTime)
+		case schemas.GameServer_LastHealthCheckTime:
+			v.LastHealthCheckTime = new(time.Time)
+			return d.ReadTime(schemas.GameServer_LastHealthCheckTime, v.LastHealthCheckTime)
+		case schemas.GameServer_RegistrationTime:
+			v.RegistrationTime = new(time.Time)
+			return d.ReadTime(schemas.GameServer_RegistrationTime, v.RegistrationTime)
+		case schemas.GameServer_UtilizationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GameServer_UtilizationStatus, &ev); err != nil {
+				return err
+			}
+			v.UtilizationStatus = GameServerUtilizationStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the game server container in an existing game server container group.
@@ -1822,6 +3695,71 @@ type GameServerContainerDefinition struct {
 	ServerSdkVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GameServerContainerDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameServerContainerDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameServerContainerDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.GameServerContainerDefinition_ContainerName, *v.ContainerName)
+	}
+	serializeContainerDependencyList(s, schemas.GameServerContainerDefinition_DependsOn, v.DependsOn)
+	serializeContainerEnvironmentList(s, schemas.GameServerContainerDefinition_EnvironmentOverride, v.EnvironmentOverride)
+	if v.ImageUri != nil {
+		s.WriteString(schemas.GameServerContainerDefinition_ImageUri, *v.ImageUri)
+	}
+	if v.LinuxCapabilities != nil {
+		s.WriteStruct(schemas.GameServerContainerDefinition_LinuxCapabilities)
+		v.LinuxCapabilities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeContainerMountPointList(s, schemas.GameServerContainerDefinition_MountPoints, v.MountPoints)
+	if v.PortConfiguration != nil {
+		s.WriteStruct(schemas.GameServerContainerDefinition_PortConfiguration)
+		v.PortConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResolvedImageDigest != nil {
+		s.WriteString(schemas.GameServerContainerDefinition_ResolvedImageDigest, *v.ResolvedImageDigest)
+	}
+	if v.ServerSdkVersion != nil {
+		s.WriteString(schemas.GameServerContainerDefinition_ServerSdkVersion, *v.ServerSdkVersion)
+	}
+}
+func (v *GameServerContainerDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameServerContainerDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameServerContainerDefinition_ContainerName:
+			v.ContainerName = new(string)
+			return d.ReadString(schemas.GameServerContainerDefinition_ContainerName, v.ContainerName)
+		case schemas.GameServerContainerDefinition_DependsOn:
+			return deserializeContainerDependencyList(d, schemas.GameServerContainerDefinition_DependsOn, &v.DependsOn)
+		case schemas.GameServerContainerDefinition_EnvironmentOverride:
+			return deserializeContainerEnvironmentList(d, schemas.GameServerContainerDefinition_EnvironmentOverride, &v.EnvironmentOverride)
+		case schemas.GameServerContainerDefinition_ImageUri:
+			v.ImageUri = new(string)
+			return d.ReadString(schemas.GameServerContainerDefinition_ImageUri, v.ImageUri)
+		case schemas.GameServerContainerDefinition_LinuxCapabilities:
+			v.LinuxCapabilities = &LinuxCapabilities{}
+			return v.LinuxCapabilities.Deserialize(d)
+		case schemas.GameServerContainerDefinition_MountPoints:
+			return deserializeContainerMountPointList(d, schemas.GameServerContainerDefinition_MountPoints, &v.MountPoints)
+		case schemas.GameServerContainerDefinition_PortConfiguration:
+			v.PortConfiguration = &ContainerPortConfiguration{}
+			return v.PortConfiguration.Deserialize(d)
+		case schemas.GameServerContainerDefinition_ResolvedImageDigest:
+			v.ResolvedImageDigest = new(string)
+			return d.ReadString(schemas.GameServerContainerDefinition_ResolvedImageDigest, v.ResolvedImageDigest)
+		case schemas.GameServerContainerDefinition_ServerSdkVersion:
+			v.ServerSdkVersion = new(string)
+			return d.ReadString(schemas.GameServerContainerDefinition_ServerSdkVersion, v.ServerSdkVersion)
+		}
+		return nil
+	})
 }
 
 // Describes the configuration for a container that runs your game server
@@ -1916,6 +3854,65 @@ type GameServerContainerDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GameServerContainerDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameServerContainerDefinitionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameServerContainerDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.GameServerContainerDefinitionInput_ContainerName, *v.ContainerName)
+	}
+	serializeContainerDependencyList(s, schemas.GameServerContainerDefinitionInput_DependsOn, v.DependsOn)
+	serializeContainerEnvironmentList(s, schemas.GameServerContainerDefinitionInput_EnvironmentOverride, v.EnvironmentOverride)
+	if v.ImageUri != nil {
+		s.WriteString(schemas.GameServerContainerDefinitionInput_ImageUri, *v.ImageUri)
+	}
+	if v.LinuxCapabilities != nil {
+		s.WriteStruct(schemas.GameServerContainerDefinitionInput_LinuxCapabilities)
+		v.LinuxCapabilities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeContainerMountPointList(s, schemas.GameServerContainerDefinitionInput_MountPoints, v.MountPoints)
+	if v.PortConfiguration != nil {
+		s.WriteStruct(schemas.GameServerContainerDefinitionInput_PortConfiguration)
+		v.PortConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServerSdkVersion != nil {
+		s.WriteString(schemas.GameServerContainerDefinitionInput_ServerSdkVersion, *v.ServerSdkVersion)
+	}
+}
+func (v *GameServerContainerDefinitionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameServerContainerDefinitionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameServerContainerDefinitionInput_ContainerName:
+			v.ContainerName = new(string)
+			return d.ReadString(schemas.GameServerContainerDefinitionInput_ContainerName, v.ContainerName)
+		case schemas.GameServerContainerDefinitionInput_DependsOn:
+			return deserializeContainerDependencyList(d, schemas.GameServerContainerDefinitionInput_DependsOn, &v.DependsOn)
+		case schemas.GameServerContainerDefinitionInput_EnvironmentOverride:
+			return deserializeContainerEnvironmentList(d, schemas.GameServerContainerDefinitionInput_EnvironmentOverride, &v.EnvironmentOverride)
+		case schemas.GameServerContainerDefinitionInput_ImageUri:
+			v.ImageUri = new(string)
+			return d.ReadString(schemas.GameServerContainerDefinitionInput_ImageUri, v.ImageUri)
+		case schemas.GameServerContainerDefinitionInput_LinuxCapabilities:
+			v.LinuxCapabilities = &LinuxCapabilities{}
+			return v.LinuxCapabilities.Deserialize(d)
+		case schemas.GameServerContainerDefinitionInput_MountPoints:
+			return deserializeContainerMountPointList(d, schemas.GameServerContainerDefinitionInput_MountPoints, &v.MountPoints)
+		case schemas.GameServerContainerDefinitionInput_PortConfiguration:
+			v.PortConfiguration = &ContainerPortConfiguration{}
+			return v.PortConfiguration.Deserialize(d)
+		case schemas.GameServerContainerDefinitionInput_ServerSdkVersion:
+			v.ServerSdkVersion = new(string)
+			return d.ReadString(schemas.GameServerContainerDefinitionInput_ServerSdkVersion, v.ServerSdkVersion)
+		}
+		return nil
+	})
+}
+
 // The number and status of game server container groups that are deployed across
 // a container fleet. Combine this count with the number of server processes that
 // each game server container group runs to learn how many game sessions the fleet
@@ -1943,6 +3940,46 @@ type GameServerContainerGroupCounts struct {
 	TERMINATING *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *GameServerContainerGroupCounts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameServerContainerGroupCounts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameServerContainerGroupCounts) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ACTIVE != nil {
+		s.WriteInt32(schemas.GameServerContainerGroupCounts_ACTIVE, *v.ACTIVE)
+	}
+	if v.IDLE != nil {
+		s.WriteInt32(schemas.GameServerContainerGroupCounts_IDLE, *v.IDLE)
+	}
+	if v.PENDING != nil {
+		s.WriteInt32(schemas.GameServerContainerGroupCounts_PENDING, *v.PENDING)
+	}
+	if v.TERMINATING != nil {
+		s.WriteInt32(schemas.GameServerContainerGroupCounts_TERMINATING, *v.TERMINATING)
+	}
+}
+func (v *GameServerContainerGroupCounts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameServerContainerGroupCounts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameServerContainerGroupCounts_ACTIVE:
+			v.ACTIVE = new(int32)
+			return d.ReadInt32(schemas.GameServerContainerGroupCounts_ACTIVE, v.ACTIVE)
+		case schemas.GameServerContainerGroupCounts_IDLE:
+			v.IDLE = new(int32)
+			return d.ReadInt32(schemas.GameServerContainerGroupCounts_IDLE, v.IDLE)
+		case schemas.GameServerContainerGroupCounts_PENDING:
+			v.PENDING = new(int32)
+			return d.ReadInt32(schemas.GameServerContainerGroupCounts_PENDING, v.PENDING)
+		case schemas.GameServerContainerGroupCounts_TERMINATING:
+			v.TERMINATING = new(int32)
+			return d.ReadInt32(schemas.GameServerContainerGroupCounts_TERMINATING, v.TERMINATING)
+		}
+		return nil
+	})
 }
 
 // Properties that describe a game server group resource. A game server group
@@ -2050,6 +4087,100 @@ type GameServerGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GameServerGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameServerGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameServerGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingGroupArn != nil {
+		s.WriteString(schemas.GameServerGroup_AutoScalingGroupArn, *v.AutoScalingGroupArn)
+	}
+	if v.BalancingStrategy != "" {
+		s.WriteString(schemas.GameServerGroup_BalancingStrategy, string(v.BalancingStrategy))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GameServerGroup_CreationTime, *v.CreationTime)
+	}
+	if v.GameServerGroupArn != nil {
+		s.WriteString(schemas.GameServerGroup_GameServerGroupArn, *v.GameServerGroupArn)
+	}
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.GameServerGroup_GameServerGroupName, *v.GameServerGroupName)
+	}
+	if v.GameServerProtectionPolicy != "" {
+		s.WriteString(schemas.GameServerGroup_GameServerProtectionPolicy, string(v.GameServerProtectionPolicy))
+	}
+	serializeInstanceDefinitions(s, schemas.GameServerGroup_InstanceDefinitions, v.InstanceDefinitions)
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.GameServerGroup_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GameServerGroup_RoleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GameServerGroup_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GameServerGroup_StatusReason, *v.StatusReason)
+	}
+	serializeGameServerGroupActions(s, schemas.GameServerGroup_SuspendedActions, v.SuspendedActions)
+}
+func (v *GameServerGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameServerGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameServerGroup_AutoScalingGroupArn:
+			v.AutoScalingGroupArn = new(string)
+			return d.ReadString(schemas.GameServerGroup_AutoScalingGroupArn, v.AutoScalingGroupArn)
+		case schemas.GameServerGroup_BalancingStrategy:
+			var ev string
+			if err := d.ReadString(schemas.GameServerGroup_BalancingStrategy, &ev); err != nil {
+				return err
+			}
+			v.BalancingStrategy = BalancingStrategy(ev)
+			return nil
+		case schemas.GameServerGroup_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GameServerGroup_CreationTime, v.CreationTime)
+		case schemas.GameServerGroup_GameServerGroupArn:
+			v.GameServerGroupArn = new(string)
+			return d.ReadString(schemas.GameServerGroup_GameServerGroupArn, v.GameServerGroupArn)
+		case schemas.GameServerGroup_GameServerGroupName:
+			v.GameServerGroupName = new(string)
+			return d.ReadString(schemas.GameServerGroup_GameServerGroupName, v.GameServerGroupName)
+		case schemas.GameServerGroup_GameServerProtectionPolicy:
+			var ev string
+			if err := d.ReadString(schemas.GameServerGroup_GameServerProtectionPolicy, &ev); err != nil {
+				return err
+			}
+			v.GameServerProtectionPolicy = GameServerProtectionPolicy(ev)
+			return nil
+		case schemas.GameServerGroup_InstanceDefinitions:
+			return deserializeInstanceDefinitions(d, schemas.GameServerGroup_InstanceDefinitions, &v.InstanceDefinitions)
+		case schemas.GameServerGroup_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.GameServerGroup_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.GameServerGroup_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GameServerGroup_RoleArn, v.RoleArn)
+		case schemas.GameServerGroup_Status:
+			var ev string
+			if err := d.ReadString(schemas.GameServerGroup_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = GameServerGroupStatus(ev)
+			return nil
+		case schemas.GameServerGroup_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GameServerGroup_StatusReason, v.StatusReason)
+		case schemas.GameServerGroup_SuspendedActions:
+			return deserializeGameServerGroupActions(d, schemas.GameServerGroup_SuspendedActions, &v.SuspendedActions)
+		}
+		return nil
+	})
+}
+
 // Configuration settings for intelligent automatic scaling that uses target
 // tracking. These settings are used to add an Auto Scaling policy when creating
 // the corresponding Auto Scaling group. After the Auto Scaling group is created,
@@ -2074,6 +4205,36 @@ type GameServerGroupAutoScalingPolicy struct {
 	EstimatedInstanceWarmup *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *GameServerGroupAutoScalingPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameServerGroupAutoScalingPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameServerGroupAutoScalingPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedInstanceWarmup != nil {
+		s.WriteInt32(schemas.GameServerGroupAutoScalingPolicy_EstimatedInstanceWarmup, *v.EstimatedInstanceWarmup)
+	}
+	if v.TargetTrackingConfiguration != nil {
+		s.WriteStruct(schemas.GameServerGroupAutoScalingPolicy_TargetTrackingConfiguration)
+		v.TargetTrackingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GameServerGroupAutoScalingPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameServerGroupAutoScalingPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameServerGroupAutoScalingPolicy_EstimatedInstanceWarmup:
+			v.EstimatedInstanceWarmup = new(int32)
+			return d.ReadInt32(schemas.GameServerGroupAutoScalingPolicy_EstimatedInstanceWarmup, v.EstimatedInstanceWarmup)
+		case schemas.GameServerGroupAutoScalingPolicy_TargetTrackingConfiguration:
+			v.TargetTrackingConfiguration = &TargetTrackingConfiguration{}
+			return v.TargetTrackingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	Additional properties, including status, that describe an EC2 instance in a
@@ -2104,6 +4265,50 @@ type GameServerInstance struct {
 	InstanceStatus GameServerInstanceStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *GameServerInstance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameServerInstance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameServerInstance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerGroupArn != nil {
+		s.WriteString(schemas.GameServerInstance_GameServerGroupArn, *v.GameServerGroupArn)
+	}
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.GameServerInstance_GameServerGroupName, *v.GameServerGroupName)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GameServerInstance_InstanceId, *v.InstanceId)
+	}
+	if v.InstanceStatus != "" {
+		s.WriteString(schemas.GameServerInstance_InstanceStatus, string(v.InstanceStatus))
+	}
+}
+func (v *GameServerInstance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameServerInstance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameServerInstance_GameServerGroupArn:
+			v.GameServerGroupArn = new(string)
+			return d.ReadString(schemas.GameServerInstance_GameServerGroupArn, v.GameServerGroupArn)
+		case schemas.GameServerInstance_GameServerGroupName:
+			v.GameServerGroupName = new(string)
+			return d.ReadString(schemas.GameServerInstance_GameServerGroupName, v.GameServerGroupName)
+		case schemas.GameServerInstance_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.GameServerInstance_InstanceId, v.InstanceId)
+		case schemas.GameServerInstance_InstanceStatus:
+			var ev string
+			if err := d.ReadString(schemas.GameServerInstance_InstanceStatus, &ev); err != nil {
+				return err
+			}
+			v.InstanceStatus = GameServerInstanceStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Properties describing a game session.
@@ -2258,6 +4463,161 @@ type GameSession struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GameSession) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameSession)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameSession) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeName != nil {
+		s.WriteString(schemas.GameSession_ComputeName, *v.ComputeName)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GameSession_CreationTime, *v.CreationTime)
+	}
+	if v.CreatorId != nil {
+		s.WriteString(schemas.GameSession_CreatorId, *v.CreatorId)
+	}
+	if v.CurrentPlayerSessionCount != nil {
+		s.WriteInt32(schemas.GameSession_CurrentPlayerSessionCount, *v.CurrentPlayerSessionCount)
+	}
+	if v.DnsName != nil {
+		s.WriteString(schemas.GameSession_DnsName, *v.DnsName)
+	}
+	if v.FleetArn != nil {
+		s.WriteString(schemas.GameSession_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.GameSession_FleetId, *v.FleetId)
+	}
+	serializeGamePropertyList(s, schemas.GameSession_GameProperties, v.GameProperties)
+	if v.GameSessionData != nil {
+		s.WriteString(schemas.GameSession_GameSessionData, *v.GameSessionData)
+	}
+	if v.GameSessionId != nil {
+		s.WriteString(schemas.GameSession_GameSessionId, *v.GameSessionId)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.GameSession_IpAddress, *v.IpAddress)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.GameSession_Location, *v.Location)
+	}
+	if v.MatchmakerData != nil {
+		s.WriteString(schemas.GameSession_MatchmakerData, *v.MatchmakerData)
+	}
+	if v.MaximumPlayerSessionCount != nil {
+		s.WriteInt32(schemas.GameSession_MaximumPlayerSessionCount, *v.MaximumPlayerSessionCount)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GameSession_Name, *v.Name)
+	}
+	if v.PlayerGatewayStatus != "" {
+		s.WriteString(schemas.GameSession_PlayerGatewayStatus, string(v.PlayerGatewayStatus))
+	}
+	if v.PlayerSessionCreationPolicy != "" {
+		s.WriteString(schemas.GameSession_PlayerSessionCreationPolicy, string(v.PlayerSessionCreationPolicy))
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.GameSession_Port, *v.Port)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GameSession_Status, string(v.Status))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.GameSession_StatusReason, string(v.StatusReason))
+	}
+	if v.TerminationTime != nil {
+		s.WriteTime(schemas.GameSession_TerminationTime, *v.TerminationTime)
+	}
+}
+func (v *GameSession) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameSession, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameSession_ComputeName:
+			v.ComputeName = new(string)
+			return d.ReadString(schemas.GameSession_ComputeName, v.ComputeName)
+		case schemas.GameSession_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GameSession_CreationTime, v.CreationTime)
+		case schemas.GameSession_CreatorId:
+			v.CreatorId = new(string)
+			return d.ReadString(schemas.GameSession_CreatorId, v.CreatorId)
+		case schemas.GameSession_CurrentPlayerSessionCount:
+			v.CurrentPlayerSessionCount = new(int32)
+			return d.ReadInt32(schemas.GameSession_CurrentPlayerSessionCount, v.CurrentPlayerSessionCount)
+		case schemas.GameSession_DnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.GameSession_DnsName, v.DnsName)
+		case schemas.GameSession_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.GameSession_FleetArn, v.FleetArn)
+		case schemas.GameSession_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.GameSession_FleetId, v.FleetId)
+		case schemas.GameSession_GameProperties:
+			return deserializeGamePropertyList(d, schemas.GameSession_GameProperties, &v.GameProperties)
+		case schemas.GameSession_GameSessionData:
+			v.GameSessionData = new(string)
+			return d.ReadString(schemas.GameSession_GameSessionData, v.GameSessionData)
+		case schemas.GameSession_GameSessionId:
+			v.GameSessionId = new(string)
+			return d.ReadString(schemas.GameSession_GameSessionId, v.GameSessionId)
+		case schemas.GameSession_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.GameSession_IpAddress, v.IpAddress)
+		case schemas.GameSession_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.GameSession_Location, v.Location)
+		case schemas.GameSession_MatchmakerData:
+			v.MatchmakerData = new(string)
+			return d.ReadString(schemas.GameSession_MatchmakerData, v.MatchmakerData)
+		case schemas.GameSession_MaximumPlayerSessionCount:
+			v.MaximumPlayerSessionCount = new(int32)
+			return d.ReadInt32(schemas.GameSession_MaximumPlayerSessionCount, v.MaximumPlayerSessionCount)
+		case schemas.GameSession_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GameSession_Name, v.Name)
+		case schemas.GameSession_PlayerGatewayStatus:
+			var ev string
+			if err := d.ReadString(schemas.GameSession_PlayerGatewayStatus, &ev); err != nil {
+				return err
+			}
+			v.PlayerGatewayStatus = PlayerGatewayStatus(ev)
+			return nil
+		case schemas.GameSession_PlayerSessionCreationPolicy:
+			var ev string
+			if err := d.ReadString(schemas.GameSession_PlayerSessionCreationPolicy, &ev); err != nil {
+				return err
+			}
+			v.PlayerSessionCreationPolicy = PlayerSessionCreationPolicy(ev)
+			return nil
+		case schemas.GameSession_Port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.GameSession_Port, v.Port)
+		case schemas.GameSession_Status:
+			var ev string
+			if err := d.ReadString(schemas.GameSession_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = GameSessionStatus(ev)
+			return nil
+		case schemas.GameSession_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.GameSession_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = GameSessionStatusReason(ev)
+			return nil
+		case schemas.GameSession_TerminationTime:
+			v.TerminationTime = new(time.Time)
+			return d.ReadTime(schemas.GameSession_TerminationTime, v.TerminationTime)
+		}
+		return nil
+	})
+}
+
 // Connection information for a new game session that is created in response to a
 // start matchmaking request. Once a match is made, the FlexMatch engine creates a
 // new game session for it. This information, including the game session endpoint
@@ -2313,6 +4673,59 @@ type GameSessionConnectionInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GameSessionConnectionInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameSessionConnectionInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameSessionConnectionInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsName != nil {
+		s.WriteString(schemas.GameSessionConnectionInfo_DnsName, *v.DnsName)
+	}
+	if v.GameSessionArn != nil {
+		s.WriteString(schemas.GameSessionConnectionInfo_GameSessionArn, *v.GameSessionArn)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.GameSessionConnectionInfo_IpAddress, *v.IpAddress)
+	}
+	serializeMatchedPlayerSessionList(s, schemas.GameSessionConnectionInfo_MatchedPlayerSessions, v.MatchedPlayerSessions)
+	if v.PlayerGatewayStatus != "" {
+		s.WriteString(schemas.GameSessionConnectionInfo_PlayerGatewayStatus, string(v.PlayerGatewayStatus))
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.GameSessionConnectionInfo_Port, *v.Port)
+	}
+}
+func (v *GameSessionConnectionInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameSessionConnectionInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameSessionConnectionInfo_DnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.GameSessionConnectionInfo_DnsName, v.DnsName)
+		case schemas.GameSessionConnectionInfo_GameSessionArn:
+			v.GameSessionArn = new(string)
+			return d.ReadString(schemas.GameSessionConnectionInfo_GameSessionArn, v.GameSessionArn)
+		case schemas.GameSessionConnectionInfo_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.GameSessionConnectionInfo_IpAddress, v.IpAddress)
+		case schemas.GameSessionConnectionInfo_MatchedPlayerSessions:
+			return deserializeMatchedPlayerSessionList(d, schemas.GameSessionConnectionInfo_MatchedPlayerSessions, &v.MatchedPlayerSessions)
+		case schemas.GameSessionConnectionInfo_PlayerGatewayStatus:
+			var ev string
+			if err := d.ReadString(schemas.GameSessionConnectionInfo_PlayerGatewayStatus, &ev); err != nil {
+				return err
+			}
+			v.PlayerGatewayStatus = PlayerGatewayStatus(ev)
+			return nil
+		case schemas.GameSessionConnectionInfo_Port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.GameSessionConnectionInfo_Port, v.Port)
+		}
+		return nil
+	})
+}
+
 // A policy that puts limits on the number of game sessions that a player can
 // create within a specified span of time. With this policy, you can control
 // players' ability to consume available resources.
@@ -2339,6 +4752,34 @@ type GameSessionCreationLimitPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GameSessionCreationLimitPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameSessionCreationLimitPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameSessionCreationLimitPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NewGameSessionsPerCreator != nil {
+		s.WriteInt32(schemas.GameSessionCreationLimitPolicy_NewGameSessionsPerCreator, *v.NewGameSessionsPerCreator)
+	}
+	if v.PolicyPeriodInMinutes != nil {
+		s.WriteInt32(schemas.GameSessionCreationLimitPolicy_PolicyPeriodInMinutes, *v.PolicyPeriodInMinutes)
+	}
+}
+func (v *GameSessionCreationLimitPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameSessionCreationLimitPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameSessionCreationLimitPolicy_NewGameSessionsPerCreator:
+			v.NewGameSessionsPerCreator = new(int32)
+			return d.ReadInt32(schemas.GameSessionCreationLimitPolicy_NewGameSessionsPerCreator, v.NewGameSessionsPerCreator)
+		case schemas.GameSessionCreationLimitPolicy_PolicyPeriodInMinutes:
+			v.PolicyPeriodInMinutes = new(int32)
+			return d.ReadInt32(schemas.GameSessionCreationLimitPolicy_PolicyPeriodInMinutes, v.PolicyPeriodInMinutes)
+		}
+		return nil
+	})
+}
+
 // A game session's properties plus the protection policy currently in force.
 type GameSessionDetail struct {
 
@@ -2355,6 +4796,40 @@ type GameSessionDetail struct {
 	ProtectionPolicy ProtectionPolicy
 
 	noSmithyDocumentSerde
+}
+
+func (v *GameSessionDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameSessionDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameSessionDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSession != nil {
+		s.WriteStruct(schemas.GameSessionDetail_GameSession)
+		v.GameSession.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProtectionPolicy != "" {
+		s.WriteString(schemas.GameSessionDetail_ProtectionPolicy, string(v.ProtectionPolicy))
+	}
+}
+func (v *GameSessionDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameSessionDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameSessionDetail_GameSession:
+			v.GameSession = &GameSession{}
+			return v.GameSession.Deserialize(d)
+		case schemas.GameSessionDetail_ProtectionPolicy:
+			var ev string
+			if err := d.ReadString(schemas.GameSessionDetail_ProtectionPolicy, &ev); err != nil {
+				return err
+			}
+			v.ProtectionPolicy = ProtectionPolicy(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Represents a potential game session placement, including the full details of
@@ -2519,6 +4994,143 @@ type GameSessionPlacement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GameSessionPlacement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameSessionPlacement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameSessionPlacement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsName != nil {
+		s.WriteString(schemas.GameSessionPlacement_DnsName, *v.DnsName)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GameSessionPlacement_EndTime, *v.EndTime)
+	}
+	serializeGamePropertyList(s, schemas.GameSessionPlacement_GameProperties, v.GameProperties)
+	if v.GameSessionArn != nil {
+		s.WriteString(schemas.GameSessionPlacement_GameSessionArn, *v.GameSessionArn)
+	}
+	if v.GameSessionData != nil {
+		s.WriteString(schemas.GameSessionPlacement_GameSessionData, *v.GameSessionData)
+	}
+	if v.GameSessionId != nil {
+		s.WriteString(schemas.GameSessionPlacement_GameSessionId, *v.GameSessionId)
+	}
+	if v.GameSessionName != nil {
+		s.WriteString(schemas.GameSessionPlacement_GameSessionName, *v.GameSessionName)
+	}
+	if v.GameSessionQueueName != nil {
+		s.WriteString(schemas.GameSessionPlacement_GameSessionQueueName, *v.GameSessionQueueName)
+	}
+	if v.GameSessionRegion != nil {
+		s.WriteString(schemas.GameSessionPlacement_GameSessionRegion, *v.GameSessionRegion)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.GameSessionPlacement_IpAddress, *v.IpAddress)
+	}
+	if v.MatchmakerData != nil {
+		s.WriteString(schemas.GameSessionPlacement_MatchmakerData, *v.MatchmakerData)
+	}
+	if v.MaximumPlayerSessionCount != nil {
+		s.WriteInt32(schemas.GameSessionPlacement_MaximumPlayerSessionCount, *v.MaximumPlayerSessionCount)
+	}
+	serializePlacedPlayerSessionList(s, schemas.GameSessionPlacement_PlacedPlayerSessions, v.PlacedPlayerSessions)
+	if v.PlacementId != nil {
+		s.WriteString(schemas.GameSessionPlacement_PlacementId, *v.PlacementId)
+	}
+	if v.PlayerGatewayStatus != "" {
+		s.WriteString(schemas.GameSessionPlacement_PlayerGatewayStatus, string(v.PlayerGatewayStatus))
+	}
+	serializePlayerLatencyList(s, schemas.GameSessionPlacement_PlayerLatencies, v.PlayerLatencies)
+	if v.Port != nil {
+		s.WriteInt32(schemas.GameSessionPlacement_Port, *v.Port)
+	}
+	if v.PriorityConfigurationOverride != nil {
+		s.WriteStruct(schemas.GameSessionPlacement_PriorityConfigurationOverride)
+		v.PriorityConfigurationOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GameSessionPlacement_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GameSessionPlacement_Status, string(v.Status))
+	}
+}
+func (v *GameSessionPlacement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameSessionPlacement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameSessionPlacement_DnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.GameSessionPlacement_DnsName, v.DnsName)
+		case schemas.GameSessionPlacement_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GameSessionPlacement_EndTime, v.EndTime)
+		case schemas.GameSessionPlacement_GameProperties:
+			return deserializeGamePropertyList(d, schemas.GameSessionPlacement_GameProperties, &v.GameProperties)
+		case schemas.GameSessionPlacement_GameSessionArn:
+			v.GameSessionArn = new(string)
+			return d.ReadString(schemas.GameSessionPlacement_GameSessionArn, v.GameSessionArn)
+		case schemas.GameSessionPlacement_GameSessionData:
+			v.GameSessionData = new(string)
+			return d.ReadString(schemas.GameSessionPlacement_GameSessionData, v.GameSessionData)
+		case schemas.GameSessionPlacement_GameSessionId:
+			v.GameSessionId = new(string)
+			return d.ReadString(schemas.GameSessionPlacement_GameSessionId, v.GameSessionId)
+		case schemas.GameSessionPlacement_GameSessionName:
+			v.GameSessionName = new(string)
+			return d.ReadString(schemas.GameSessionPlacement_GameSessionName, v.GameSessionName)
+		case schemas.GameSessionPlacement_GameSessionQueueName:
+			v.GameSessionQueueName = new(string)
+			return d.ReadString(schemas.GameSessionPlacement_GameSessionQueueName, v.GameSessionQueueName)
+		case schemas.GameSessionPlacement_GameSessionRegion:
+			v.GameSessionRegion = new(string)
+			return d.ReadString(schemas.GameSessionPlacement_GameSessionRegion, v.GameSessionRegion)
+		case schemas.GameSessionPlacement_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.GameSessionPlacement_IpAddress, v.IpAddress)
+		case schemas.GameSessionPlacement_MatchmakerData:
+			v.MatchmakerData = new(string)
+			return d.ReadString(schemas.GameSessionPlacement_MatchmakerData, v.MatchmakerData)
+		case schemas.GameSessionPlacement_MaximumPlayerSessionCount:
+			v.MaximumPlayerSessionCount = new(int32)
+			return d.ReadInt32(schemas.GameSessionPlacement_MaximumPlayerSessionCount, v.MaximumPlayerSessionCount)
+		case schemas.GameSessionPlacement_PlacedPlayerSessions:
+			return deserializePlacedPlayerSessionList(d, schemas.GameSessionPlacement_PlacedPlayerSessions, &v.PlacedPlayerSessions)
+		case schemas.GameSessionPlacement_PlacementId:
+			v.PlacementId = new(string)
+			return d.ReadString(schemas.GameSessionPlacement_PlacementId, v.PlacementId)
+		case schemas.GameSessionPlacement_PlayerGatewayStatus:
+			var ev string
+			if err := d.ReadString(schemas.GameSessionPlacement_PlayerGatewayStatus, &ev); err != nil {
+				return err
+			}
+			v.PlayerGatewayStatus = PlayerGatewayStatus(ev)
+			return nil
+		case schemas.GameSessionPlacement_PlayerLatencies:
+			return deserializePlayerLatencyList(d, schemas.GameSessionPlacement_PlayerLatencies, &v.PlayerLatencies)
+		case schemas.GameSessionPlacement_Port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.GameSessionPlacement_Port, v.Port)
+		case schemas.GameSessionPlacement_PriorityConfigurationOverride:
+			v.PriorityConfigurationOverride = &PriorityConfigurationOverride{}
+			return v.PriorityConfigurationOverride.Deserialize(d)
+		case schemas.GameSessionPlacement_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GameSessionPlacement_StartTime, v.StartTime)
+		case schemas.GameSessionPlacement_Status:
+			var ev string
+			if err := d.ReadString(schemas.GameSessionPlacement_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = GameSessionPlacementState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Configuration for a game session placement mechanism that processes requests
 // for new game sessions. A queue can be used on its own or as part of a
 // matchmaking solution.
@@ -2579,6 +5191,74 @@ type GameSessionQueue struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GameSessionQueue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameSessionQueue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameSessionQueue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomEventData != nil {
+		s.WriteString(schemas.GameSessionQueue_CustomEventData, *v.CustomEventData)
+	}
+	serializeGameSessionQueueDestinationList(s, schemas.GameSessionQueue_Destinations, v.Destinations)
+	if v.FilterConfiguration != nil {
+		s.WriteStruct(schemas.GameSessionQueue_FilterConfiguration)
+		v.FilterConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GameSessionQueueArn != nil {
+		s.WriteString(schemas.GameSessionQueue_GameSessionQueueArn, *v.GameSessionQueueArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GameSessionQueue_Name, *v.Name)
+	}
+	if v.NotificationTarget != nil {
+		s.WriteString(schemas.GameSessionQueue_NotificationTarget, *v.NotificationTarget)
+	}
+	serializePlayerLatencyPolicyList(s, schemas.GameSessionQueue_PlayerLatencyPolicies, v.PlayerLatencyPolicies)
+	if v.PriorityConfiguration != nil {
+		s.WriteStruct(schemas.GameSessionQueue_PriorityConfiguration)
+		v.PriorityConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimeoutInSeconds != nil {
+		s.WriteInt32(schemas.GameSessionQueue_TimeoutInSeconds, *v.TimeoutInSeconds)
+	}
+}
+func (v *GameSessionQueue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameSessionQueue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameSessionQueue_CustomEventData:
+			v.CustomEventData = new(string)
+			return d.ReadString(schemas.GameSessionQueue_CustomEventData, v.CustomEventData)
+		case schemas.GameSessionQueue_Destinations:
+			return deserializeGameSessionQueueDestinationList(d, schemas.GameSessionQueue_Destinations, &v.Destinations)
+		case schemas.GameSessionQueue_FilterConfiguration:
+			v.FilterConfiguration = &FilterConfiguration{}
+			return v.FilterConfiguration.Deserialize(d)
+		case schemas.GameSessionQueue_GameSessionQueueArn:
+			v.GameSessionQueueArn = new(string)
+			return d.ReadString(schemas.GameSessionQueue_GameSessionQueueArn, v.GameSessionQueueArn)
+		case schemas.GameSessionQueue_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GameSessionQueue_Name, v.Name)
+		case schemas.GameSessionQueue_NotificationTarget:
+			v.NotificationTarget = new(string)
+			return d.ReadString(schemas.GameSessionQueue_NotificationTarget, v.NotificationTarget)
+		case schemas.GameSessionQueue_PlayerLatencyPolicies:
+			return deserializePlayerLatencyPolicyList(d, schemas.GameSessionQueue_PlayerLatencyPolicies, &v.PlayerLatencyPolicies)
+		case schemas.GameSessionQueue_PriorityConfiguration:
+			v.PriorityConfiguration = &PriorityConfiguration{}
+			return v.PriorityConfiguration.Deserialize(d)
+		case schemas.GameSessionQueue_TimeoutInSeconds:
+			v.TimeoutInSeconds = new(int32)
+			return d.ReadInt32(schemas.GameSessionQueue_TimeoutInSeconds, v.TimeoutInSeconds)
+		}
+		return nil
+	})
+}
+
 // A fleet or alias designated in a game session queue. Queues fulfill requests
 // for new game sessions by placing a new game session on any of the queue's
 // destinations.
@@ -2590,6 +5270,28 @@ type GameSessionQueueDestination struct {
 	DestinationArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GameSessionQueueDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GameSessionQueueDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GameSessionQueueDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationArn != nil {
+		s.WriteString(schemas.GameSessionQueueDestination_DestinationArn, *v.DestinationArn)
+	}
+}
+func (v *GameSessionQueueDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GameSessionQueueDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GameSessionQueueDestination_DestinationArn:
+			v.DestinationArn = new(string)
+			return d.ReadString(schemas.GameSessionQueueDestination_DestinationArn, v.DestinationArn)
+		}
+		return nil
+	})
 }
 
 // Represents a virtual computing instance that runs game server processes and
@@ -2666,6 +5368,94 @@ type Instance struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Instance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Instance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Instance_CreationTime, *v.CreationTime)
+	}
+	if v.DnsName != nil {
+		s.WriteString(schemas.Instance_DnsName, *v.DnsName)
+	}
+	if v.FleetArn != nil {
+		s.WriteString(schemas.Instance_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.Instance_FleetId, *v.FleetId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.Instance_InstanceId, *v.InstanceId)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.Instance_IpAddress, *v.IpAddress)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.Instance_Location, *v.Location)
+	}
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.Instance_OperatingSystem, string(v.OperatingSystem))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Instance_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Instance_Type, string(v.Type))
+	}
+}
+func (v *Instance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Instance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Instance_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Instance_CreationTime, v.CreationTime)
+		case schemas.Instance_DnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.Instance_DnsName, v.DnsName)
+		case schemas.Instance_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.Instance_FleetArn, v.FleetArn)
+		case schemas.Instance_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.Instance_FleetId, v.FleetId)
+		case schemas.Instance_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.Instance_InstanceId, v.InstanceId)
+		case schemas.Instance_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.Instance_IpAddress, v.IpAddress)
+		case schemas.Instance_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.Instance_Location, v.Location)
+		case schemas.Instance_OperatingSystem:
+			var ev string
+			if err := d.ReadString(schemas.Instance_OperatingSystem, &ev); err != nil {
+				return err
+			}
+			v.OperatingSystem = OperatingSystem(ev)
+			return nil
+		case schemas.Instance_Status:
+			var ev string
+			if err := d.ReadString(schemas.Instance_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = InstanceStatus(ev)
+			return nil
+		case schemas.Instance_Type:
+			var ev string
+			if err := d.ReadString(schemas.Instance_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = EC2InstanceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information and credentials that you can use to remotely connect to an instance
 // in an EC2 managed fleet. This data type is returned in response to a call to [https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetInstanceAccess].
 //
@@ -2690,6 +5480,58 @@ type InstanceAccess struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceAccess) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceAccess)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceAccess) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Credentials != nil {
+		s.WriteStruct(schemas.InstanceAccess_Credentials)
+		v.Credentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.InstanceAccess_FleetId, *v.FleetId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.InstanceAccess_InstanceId, *v.InstanceId)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.InstanceAccess_IpAddress, *v.IpAddress)
+	}
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.InstanceAccess_OperatingSystem, string(v.OperatingSystem))
+	}
+}
+func (v *InstanceAccess) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceAccess, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceAccess_Credentials:
+			v.Credentials = &InstanceCredentials{}
+			return v.Credentials.Deserialize(d)
+		case schemas.InstanceAccess_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.InstanceAccess_FleetId, v.FleetId)
+		case schemas.InstanceAccess_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.InstanceAccess_InstanceId, v.InstanceId)
+		case schemas.InstanceAccess_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.InstanceAccess_IpAddress, v.IpAddress)
+		case schemas.InstanceAccess_OperatingSystem:
+			var ev string
+			if err := d.ReadString(schemas.InstanceAccess_OperatingSystem, &ev); err != nil {
+				return err
+			}
+			v.OperatingSystem = OperatingSystem(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A set of credentials that allow remote access to an instance in an EC2 managed
 // fleet. These credentials are returned in response to a call to [https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetInstanceAccess], which requests
 // access for instances that are running game servers with the Amazon GameLift
@@ -2707,6 +5549,34 @@ type InstanceCredentials struct {
 	UserName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Secret != nil {
+		s.WriteString(schemas.InstanceCredentials_Secret, *v.Secret)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.InstanceCredentials_UserName, *v.UserName)
+	}
+}
+func (v *InstanceCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceCredentials_Secret:
+			v.Secret = new(string)
+			return d.ReadString(schemas.InstanceCredentials_Secret, v.Secret)
+		case schemas.InstanceCredentials_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.InstanceCredentials_UserName, v.UserName)
+		}
+		return nil
+	})
 }
 
 // An allowed instance type for a game server group. All game server groups must
@@ -2731,6 +5601,38 @@ type InstanceDefinition struct {
 	WeightedCapacity *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceType != "" {
+		s.WriteString(schemas.InstanceDefinition_InstanceType, string(v.InstanceType))
+	}
+	if v.WeightedCapacity != nil {
+		s.WriteString(schemas.InstanceDefinition_WeightedCapacity, *v.WeightedCapacity)
+	}
+}
+func (v *InstanceDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceDefinition_InstanceType:
+			var ev string
+			if err := d.ReadString(schemas.InstanceDefinition_InstanceType, &ev); err != nil {
+				return err
+			}
+			v.InstanceType = GameServerGroupInstanceType(ev)
+			return nil
+		case schemas.InstanceDefinition_WeightedCapacity:
+			v.WeightedCapacity = new(string)
+			return d.ReadString(schemas.InstanceDefinition_WeightedCapacity, v.WeightedCapacity)
+		}
+		return nil
+	})
 }
 
 // A range of IP addresses and port settings that allow inbound traffic to connect
@@ -2776,6 +5678,50 @@ type IpPermission struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IpPermission) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IpPermission)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IpPermission) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FromPort != nil {
+		s.WriteInt32(schemas.IpPermission_FromPort, *v.FromPort)
+	}
+	if v.IpRange != nil {
+		s.WriteString(schemas.IpPermission_IpRange, *v.IpRange)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.IpPermission_Protocol, string(v.Protocol))
+	}
+	if v.ToPort != nil {
+		s.WriteInt32(schemas.IpPermission_ToPort, *v.ToPort)
+	}
+}
+func (v *IpPermission) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IpPermission, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IpPermission_FromPort:
+			v.FromPort = new(int32)
+			return d.ReadInt32(schemas.IpPermission_FromPort, v.FromPort)
+		case schemas.IpPermission_IpRange:
+			v.IpRange = new(string)
+			return d.ReadString(schemas.IpPermission_IpRange, v.IpRange)
+		case schemas.IpPermission_Protocol:
+			var ev string
+			if err := d.ReadString(schemas.IpPermission_Protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = IpProtocol(ev)
+			return nil
+		case schemas.IpPermission_ToPort:
+			v.ToPort = new(int32)
+			return d.ReadInt32(schemas.IpPermission_ToPort, v.ToPort)
+		}
+		return nil
+	})
+}
+
 // An Amazon Elastic Compute Cloud launch template that contains configuration
 // settings and game server code to be deployed to all instances in a game server
 // group. The launch template is specified when creating a new game server group.
@@ -2794,6 +5740,40 @@ type LaunchTemplateSpecification struct {
 	Version *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LaunchTemplateSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LaunchTemplateSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LaunchTemplateSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LaunchTemplateId != nil {
+		s.WriteString(schemas.LaunchTemplateSpecification_LaunchTemplateId, *v.LaunchTemplateId)
+	}
+	if v.LaunchTemplateName != nil {
+		s.WriteString(schemas.LaunchTemplateSpecification_LaunchTemplateName, *v.LaunchTemplateName)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.LaunchTemplateSpecification_Version, *v.Version)
+	}
+}
+func (v *LaunchTemplateSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LaunchTemplateSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LaunchTemplateSpecification_LaunchTemplateId:
+			v.LaunchTemplateId = new(string)
+			return d.ReadString(schemas.LaunchTemplateSpecification_LaunchTemplateId, v.LaunchTemplateId)
+		case schemas.LaunchTemplateSpecification_LaunchTemplateName:
+			v.LaunchTemplateName = new(string)
+			return d.ReadString(schemas.LaunchTemplateSpecification_LaunchTemplateName, v.LaunchTemplateName)
+		case schemas.LaunchTemplateSpecification_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.LaunchTemplateSpecification_Version, v.Version)
+		}
+		return nil
+	})
 }
 
 // A set of Linux capabilities that are added to a container's default Docker
@@ -2829,6 +5809,25 @@ type LinuxCapabilities struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LinuxCapabilities) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LinuxCapabilities)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LinuxCapabilities) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLinuxCapabilityList(s, schemas.LinuxCapabilities_Include, v.Include)
+}
+func (v *LinuxCapabilities) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LinuxCapabilities, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LinuxCapabilities_Include:
+			return deserializeLinuxCapabilityList(d, schemas.LinuxCapabilities_Include, &v.Include)
+		}
+		return nil
+	})
+}
+
 // For a multi-location container fleet, describes the progress of a deployment
 // across all fleet locations.
 type LocationalDeployment struct {
@@ -2854,6 +5853,32 @@ type LocationalDeployment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LocationalDeployment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LocationalDeployment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LocationalDeployment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentStatus != "" {
+		s.WriteString(schemas.LocationalDeployment_DeploymentStatus, string(v.DeploymentStatus))
+	}
+}
+func (v *LocationalDeployment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LocationalDeployment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LocationalDeployment_DeploymentStatus:
+			var ev string
+			if err := d.ReadString(schemas.LocationalDeployment_DeploymentStatus, &ev); err != nil {
+				return err
+			}
+			v.DeploymentStatus = DeploymentStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Details about a location in a multi-location fleet.
 type LocationAttributes struct {
 
@@ -2871,6 +5896,43 @@ type LocationAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LocationAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LocationAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LocationAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationState != nil {
+		s.WriteStruct(schemas.LocationAttributes_LocationState)
+		v.LocationState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFleetActionList(s, schemas.LocationAttributes_StoppedActions, v.StoppedActions)
+	if v.UpdateStatus != "" {
+		s.WriteString(schemas.LocationAttributes_UpdateStatus, string(v.UpdateStatus))
+	}
+}
+func (v *LocationAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LocationAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LocationAttributes_LocationState:
+			v.LocationState = &LocationState{}
+			return v.LocationState.Deserialize(d)
+		case schemas.LocationAttributes_StoppedActions:
+			return deserializeFleetActionList(d, schemas.LocationAttributes_StoppedActions, &v.StoppedActions)
+		case schemas.LocationAttributes_UpdateStatus:
+			var ev string
+			if err := d.ReadString(schemas.LocationAttributes_UpdateStatus, &ev); err != nil {
+				return err
+			}
+			v.UpdateStatus = LocationUpdateStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A remote location where a multi-location fleet can deploy game servers for game
 // hosting.
 type LocationConfiguration struct {
@@ -2884,6 +5946,28 @@ type LocationConfiguration struct {
 	Location *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LocationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LocationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LocationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Location != nil {
+		s.WriteString(schemas.LocationConfiguration_Location, *v.Location)
+	}
+}
+func (v *LocationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LocationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LocationConfiguration_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.LocationConfiguration_Location, v.Location)
+		}
+		return nil
+	})
 }
 
 // Properties of a location, which can include its name, ARN (for custom
@@ -2906,6 +5990,42 @@ type LocationModel struct {
 	PingBeacon *PingBeacon
 
 	noSmithyDocumentSerde
+}
+
+func (v *LocationModel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LocationModel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LocationModel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.LocationModel_LocationArn, *v.LocationArn)
+	}
+	if v.LocationName != nil {
+		s.WriteString(schemas.LocationModel_LocationName, *v.LocationName)
+	}
+	if v.PingBeacon != nil {
+		s.WriteStruct(schemas.LocationModel_PingBeacon)
+		v.PingBeacon.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LocationModel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LocationModel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LocationModel_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.LocationModel_LocationArn, v.LocationArn)
+		case schemas.LocationModel_LocationName:
+			v.LocationName = new(string)
+			return d.ReadString(schemas.LocationModel_LocationName, v.LocationName)
+		case schemas.LocationModel_PingBeacon:
+			v.PingBeacon = &PingBeacon{}
+			return v.PingBeacon.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A fleet location and its life-cycle state. A location state object might be
@@ -2958,6 +6078,48 @@ type LocationState struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LocationState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LocationState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LocationState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Location != nil {
+		s.WriteString(schemas.LocationState_Location, *v.Location)
+	}
+	if v.PlayerGatewayStatus != "" {
+		s.WriteString(schemas.LocationState_PlayerGatewayStatus, string(v.PlayerGatewayStatus))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.LocationState_Status, string(v.Status))
+	}
+}
+func (v *LocationState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LocationState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LocationState_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.LocationState_Location, v.Location)
+		case schemas.LocationState_PlayerGatewayStatus:
+			var ev string
+			if err := d.ReadString(schemas.LocationState_PlayerGatewayStatus, &ev); err != nil {
+				return err
+			}
+			v.PlayerGatewayStatus = PlayerGatewayStatus(ev)
+			return nil
+		case schemas.LocationState_Status:
+			var ev string
+			if err := d.ReadString(schemas.LocationState_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = FleetStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A method for collecting container logs for the fleet. Amazon GameLift Servers
 // saves all standard output for each container in logs, including game session
 // logs. You can select from the following methods:
@@ -2983,6 +6145,44 @@ type LogConfiguration struct {
 	S3BucketName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LogConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogDestination != "" {
+		s.WriteString(schemas.LogConfiguration_LogDestination, string(v.LogDestination))
+	}
+	if v.LogGroupArn != nil {
+		s.WriteString(schemas.LogConfiguration_LogGroupArn, *v.LogGroupArn)
+	}
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.LogConfiguration_S3BucketName, *v.S3BucketName)
+	}
+}
+func (v *LogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LogConfiguration_LogDestination:
+			var ev string
+			if err := d.ReadString(schemas.LogConfiguration_LogDestination, &ev); err != nil {
+				return err
+			}
+			v.LogDestination = LogDestination(ev)
+			return nil
+		case schemas.LogConfiguration_LogGroupArn:
+			v.LogGroupArn = new(string)
+			return d.ReadString(schemas.LogConfiguration_LogGroupArn, v.LogGroupArn)
+		case schemas.LogConfiguration_S3BucketName:
+			v.S3BucketName = new(string)
+			return d.ReadString(schemas.LogConfiguration_S3BucketName, v.S3BucketName)
+		}
+		return nil
+	})
 }
 
 // Use ManagedCapacityConfiguration with the "SCALE_TO_AND_FROM_ZERO"
@@ -3026,6 +6226,38 @@ type ManagedCapacityConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedCapacityConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedCapacityConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedCapacityConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScaleInAfterInactivityMinutes != nil {
+		s.WriteInt32(schemas.ManagedCapacityConfiguration_ScaleInAfterInactivityMinutes, *v.ScaleInAfterInactivityMinutes)
+	}
+	if v.ZeroCapacityStrategy != "" {
+		s.WriteString(schemas.ManagedCapacityConfiguration_ZeroCapacityStrategy, string(v.ZeroCapacityStrategy))
+	}
+}
+func (v *ManagedCapacityConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedCapacityConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedCapacityConfiguration_ScaleInAfterInactivityMinutes:
+			v.ScaleInAfterInactivityMinutes = new(int32)
+			return d.ReadInt32(schemas.ManagedCapacityConfiguration_ScaleInAfterInactivityMinutes, v.ScaleInAfterInactivityMinutes)
+		case schemas.ManagedCapacityConfiguration_ZeroCapacityStrategy:
+			var ev string
+			if err := d.ReadString(schemas.ManagedCapacityConfiguration_ZeroCapacityStrategy, &ev); err != nil {
+				return err
+			}
+			v.ZeroCapacityStrategy = ZeroCapacityStrategy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents a new player session that is created as a result of a successful
 // FlexMatch match. A successful match automatically creates new player sessions
 // for every player ID in the original matchmaking request.
@@ -3043,6 +6275,34 @@ type MatchedPlayerSession struct {
 	PlayerSessionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MatchedPlayerSession) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MatchedPlayerSession)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MatchedPlayerSession) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PlayerId != nil {
+		s.WriteString(schemas.MatchedPlayerSession_PlayerId, *v.PlayerId)
+	}
+	if v.PlayerSessionId != nil {
+		s.WriteString(schemas.MatchedPlayerSession_PlayerSessionId, *v.PlayerSessionId)
+	}
+}
+func (v *MatchedPlayerSession) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MatchedPlayerSession, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MatchedPlayerSession_PlayerId:
+			v.PlayerId = new(string)
+			return d.ReadString(schemas.MatchedPlayerSession_PlayerId, v.PlayerId)
+		case schemas.MatchedPlayerSession_PlayerSessionId:
+			v.PlayerSessionId = new(string)
+			return d.ReadString(schemas.MatchedPlayerSession_PlayerSessionId, v.PlayerSessionId)
+		}
+		return nil
+	})
 }
 
 // Guidelines for use with FlexMatch to match players into games. All matchmaking
@@ -3169,6 +6429,126 @@ type MatchmakingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MatchmakingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MatchmakingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MatchmakingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptanceRequired != nil {
+		s.WriteBool(schemas.MatchmakingConfiguration_AcceptanceRequired, *v.AcceptanceRequired)
+	}
+	if v.AcceptanceTimeoutSeconds != nil {
+		s.WriteInt32(schemas.MatchmakingConfiguration_AcceptanceTimeoutSeconds, *v.AcceptanceTimeoutSeconds)
+	}
+	if v.AdditionalPlayerCount != nil {
+		s.WriteInt32(schemas.MatchmakingConfiguration_AdditionalPlayerCount, *v.AdditionalPlayerCount)
+	}
+	if v.BackfillMode != "" {
+		s.WriteString(schemas.MatchmakingConfiguration_BackfillMode, string(v.BackfillMode))
+	}
+	if v.ConfigurationArn != nil {
+		s.WriteString(schemas.MatchmakingConfiguration_ConfigurationArn, *v.ConfigurationArn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.MatchmakingConfiguration_CreationTime, *v.CreationTime)
+	}
+	if v.CustomEventData != nil {
+		s.WriteString(schemas.MatchmakingConfiguration_CustomEventData, *v.CustomEventData)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.MatchmakingConfiguration_Description, *v.Description)
+	}
+	if v.FlexMatchMode != "" {
+		s.WriteString(schemas.MatchmakingConfiguration_FlexMatchMode, string(v.FlexMatchMode))
+	}
+	serializeGamePropertyList(s, schemas.MatchmakingConfiguration_GameProperties, v.GameProperties)
+	if v.GameSessionData != nil {
+		s.WriteString(schemas.MatchmakingConfiguration_GameSessionData, *v.GameSessionData)
+	}
+	serializeQueueArnsList(s, schemas.MatchmakingConfiguration_GameSessionQueueArns, v.GameSessionQueueArns)
+	if v.Name != nil {
+		s.WriteString(schemas.MatchmakingConfiguration_Name, *v.Name)
+	}
+	if v.NotificationTarget != nil {
+		s.WriteString(schemas.MatchmakingConfiguration_NotificationTarget, *v.NotificationTarget)
+	}
+	if v.RequestTimeoutSeconds != nil {
+		s.WriteInt32(schemas.MatchmakingConfiguration_RequestTimeoutSeconds, *v.RequestTimeoutSeconds)
+	}
+	if v.RuleSetArn != nil {
+		s.WriteString(schemas.MatchmakingConfiguration_RuleSetArn, *v.RuleSetArn)
+	}
+	if v.RuleSetName != nil {
+		s.WriteString(schemas.MatchmakingConfiguration_RuleSetName, *v.RuleSetName)
+	}
+}
+func (v *MatchmakingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MatchmakingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MatchmakingConfiguration_AcceptanceRequired:
+			v.AcceptanceRequired = new(bool)
+			return d.ReadBool(schemas.MatchmakingConfiguration_AcceptanceRequired, v.AcceptanceRequired)
+		case schemas.MatchmakingConfiguration_AcceptanceTimeoutSeconds:
+			v.AcceptanceTimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.MatchmakingConfiguration_AcceptanceTimeoutSeconds, v.AcceptanceTimeoutSeconds)
+		case schemas.MatchmakingConfiguration_AdditionalPlayerCount:
+			v.AdditionalPlayerCount = new(int32)
+			return d.ReadInt32(schemas.MatchmakingConfiguration_AdditionalPlayerCount, v.AdditionalPlayerCount)
+		case schemas.MatchmakingConfiguration_BackfillMode:
+			var ev string
+			if err := d.ReadString(schemas.MatchmakingConfiguration_BackfillMode, &ev); err != nil {
+				return err
+			}
+			v.BackfillMode = BackfillMode(ev)
+			return nil
+		case schemas.MatchmakingConfiguration_ConfigurationArn:
+			v.ConfigurationArn = new(string)
+			return d.ReadString(schemas.MatchmakingConfiguration_ConfigurationArn, v.ConfigurationArn)
+		case schemas.MatchmakingConfiguration_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.MatchmakingConfiguration_CreationTime, v.CreationTime)
+		case schemas.MatchmakingConfiguration_CustomEventData:
+			v.CustomEventData = new(string)
+			return d.ReadString(schemas.MatchmakingConfiguration_CustomEventData, v.CustomEventData)
+		case schemas.MatchmakingConfiguration_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.MatchmakingConfiguration_Description, v.Description)
+		case schemas.MatchmakingConfiguration_FlexMatchMode:
+			var ev string
+			if err := d.ReadString(schemas.MatchmakingConfiguration_FlexMatchMode, &ev); err != nil {
+				return err
+			}
+			v.FlexMatchMode = FlexMatchMode(ev)
+			return nil
+		case schemas.MatchmakingConfiguration_GameProperties:
+			return deserializeGamePropertyList(d, schemas.MatchmakingConfiguration_GameProperties, &v.GameProperties)
+		case schemas.MatchmakingConfiguration_GameSessionData:
+			v.GameSessionData = new(string)
+			return d.ReadString(schemas.MatchmakingConfiguration_GameSessionData, v.GameSessionData)
+		case schemas.MatchmakingConfiguration_GameSessionQueueArns:
+			return deserializeQueueArnsList(d, schemas.MatchmakingConfiguration_GameSessionQueueArns, &v.GameSessionQueueArns)
+		case schemas.MatchmakingConfiguration_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MatchmakingConfiguration_Name, v.Name)
+		case schemas.MatchmakingConfiguration_NotificationTarget:
+			v.NotificationTarget = new(string)
+			return d.ReadString(schemas.MatchmakingConfiguration_NotificationTarget, v.NotificationTarget)
+		case schemas.MatchmakingConfiguration_RequestTimeoutSeconds:
+			v.RequestTimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.MatchmakingConfiguration_RequestTimeoutSeconds, v.RequestTimeoutSeconds)
+		case schemas.MatchmakingConfiguration_RuleSetArn:
+			v.RuleSetArn = new(string)
+			return d.ReadString(schemas.MatchmakingConfiguration_RuleSetArn, v.RuleSetArn)
+		case schemas.MatchmakingConfiguration_RuleSetName:
+			v.RuleSetName = new(string)
+			return d.ReadString(schemas.MatchmakingConfiguration_RuleSetName, v.RuleSetName)
+		}
+		return nil
+	})
+}
+
 // Set of rule statements, used with FlexMatch, that determine how to build your
 // player matches. Each rule set describes a type of group to be created and
 // defines the parameters for acceptable player matches.
@@ -3225,6 +6605,46 @@ type MatchmakingRuleSet struct {
 	RuleSetName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MatchmakingRuleSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MatchmakingRuleSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MatchmakingRuleSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.MatchmakingRuleSet_CreationTime, *v.CreationTime)
+	}
+	if v.RuleSetArn != nil {
+		s.WriteString(schemas.MatchmakingRuleSet_RuleSetArn, *v.RuleSetArn)
+	}
+	if v.RuleSetBody != nil {
+		s.WriteString(schemas.MatchmakingRuleSet_RuleSetBody, *v.RuleSetBody)
+	}
+	if v.RuleSetName != nil {
+		s.WriteString(schemas.MatchmakingRuleSet_RuleSetName, *v.RuleSetName)
+	}
+}
+func (v *MatchmakingRuleSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MatchmakingRuleSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MatchmakingRuleSet_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.MatchmakingRuleSet_CreationTime, v.CreationTime)
+		case schemas.MatchmakingRuleSet_RuleSetArn:
+			v.RuleSetArn = new(string)
+			return d.ReadString(schemas.MatchmakingRuleSet_RuleSetArn, v.RuleSetArn)
+		case schemas.MatchmakingRuleSet_RuleSetBody:
+			v.RuleSetBody = new(string)
+			return d.ReadString(schemas.MatchmakingRuleSet_RuleSetBody, v.RuleSetBody)
+		case schemas.MatchmakingRuleSet_RuleSetName:
+			v.RuleSetName = new(string)
+			return d.ReadString(schemas.MatchmakingRuleSet_RuleSetName, v.RuleSetName)
+		}
+		return nil
+	})
 }
 
 // Ticket generated to track the progress of a matchmaking request. Each ticket is
@@ -3314,6 +6734,91 @@ type MatchmakingTicket struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MatchmakingTicket) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MatchmakingTicket)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MatchmakingTicket) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationArn != nil {
+		s.WriteString(schemas.MatchmakingTicket_ConfigurationArn, *v.ConfigurationArn)
+	}
+	if v.ConfigurationName != nil {
+		s.WriteString(schemas.MatchmakingTicket_ConfigurationName, *v.ConfigurationName)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.MatchmakingTicket_EndTime, *v.EndTime)
+	}
+	if v.EstimatedWaitTime != nil {
+		s.WriteInt32(schemas.MatchmakingTicket_EstimatedWaitTime, *v.EstimatedWaitTime)
+	}
+	if v.GameSessionConnectionInfo != nil {
+		s.WriteStruct(schemas.MatchmakingTicket_GameSessionConnectionInfo)
+		v.GameSessionConnectionInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePlayerList(s, schemas.MatchmakingTicket_Players, v.Players)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.MatchmakingTicket_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.MatchmakingTicket_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.MatchmakingTicket_StatusMessage, *v.StatusMessage)
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.MatchmakingTicket_StatusReason, *v.StatusReason)
+	}
+	if v.TicketId != nil {
+		s.WriteString(schemas.MatchmakingTicket_TicketId, *v.TicketId)
+	}
+}
+func (v *MatchmakingTicket) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MatchmakingTicket, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MatchmakingTicket_ConfigurationArn:
+			v.ConfigurationArn = new(string)
+			return d.ReadString(schemas.MatchmakingTicket_ConfigurationArn, v.ConfigurationArn)
+		case schemas.MatchmakingTicket_ConfigurationName:
+			v.ConfigurationName = new(string)
+			return d.ReadString(schemas.MatchmakingTicket_ConfigurationName, v.ConfigurationName)
+		case schemas.MatchmakingTicket_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.MatchmakingTicket_EndTime, v.EndTime)
+		case schemas.MatchmakingTicket_EstimatedWaitTime:
+			v.EstimatedWaitTime = new(int32)
+			return d.ReadInt32(schemas.MatchmakingTicket_EstimatedWaitTime, v.EstimatedWaitTime)
+		case schemas.MatchmakingTicket_GameSessionConnectionInfo:
+			v.GameSessionConnectionInfo = &GameSessionConnectionInfo{}
+			return v.GameSessionConnectionInfo.Deserialize(d)
+		case schemas.MatchmakingTicket_Players:
+			return deserializePlayerList(d, schemas.MatchmakingTicket_Players, &v.Players)
+		case schemas.MatchmakingTicket_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.MatchmakingTicket_StartTime, v.StartTime)
+		case schemas.MatchmakingTicket_Status:
+			var ev string
+			if err := d.ReadString(schemas.MatchmakingTicket_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = MatchmakingConfigurationStatus(ev)
+			return nil
+		case schemas.MatchmakingTicket_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.MatchmakingTicket_StatusMessage, v.StatusMessage)
+		case schemas.MatchmakingTicket_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.MatchmakingTicket_StatusReason, v.StatusReason)
+		case schemas.MatchmakingTicket_TicketId:
+			v.TicketId = new(string)
+			return d.ReadString(schemas.MatchmakingTicket_TicketId, v.TicketId)
+		}
+		return nil
+	})
+}
+
 // Information about a UDP ping beacon that can be used to measure network latency
 // between a player device and an Amazon GameLift Servers hosting location.
 type PingBeacon struct {
@@ -3323,6 +6828,30 @@ type PingBeacon struct {
 	UDPEndpoint *UDPEndpoint
 
 	noSmithyDocumentSerde
+}
+
+func (v *PingBeacon) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PingBeacon)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PingBeacon) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UDPEndpoint != nil {
+		s.WriteStruct(schemas.PingBeacon_UDPEndpoint)
+		v.UDPEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PingBeacon) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PingBeacon, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PingBeacon_UDPEndpoint:
+			v.UDPEndpoint = &UDPEndpoint{}
+			return v.UDPEndpoint.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Information about a player session. This object contains only the player ID and
@@ -3339,6 +6868,34 @@ type PlacedPlayerSession struct {
 	PlayerSessionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PlacedPlayerSession) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlacedPlayerSession)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlacedPlayerSession) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PlayerId != nil {
+		s.WriteString(schemas.PlacedPlayerSession_PlayerId, *v.PlayerId)
+	}
+	if v.PlayerSessionId != nil {
+		s.WriteString(schemas.PlacedPlayerSession_PlayerSessionId, *v.PlayerSessionId)
+	}
+}
+func (v *PlacedPlayerSession) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlacedPlayerSession, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlacedPlayerSession_PlayerId:
+			v.PlayerId = new(string)
+			return d.ReadString(schemas.PlacedPlayerSession_PlayerId, v.PlayerId)
+		case schemas.PlacedPlayerSession_PlayerSessionId:
+			v.PlayerSessionId = new(string)
+			return d.ReadString(schemas.PlacedPlayerSession_PlayerSessionId, v.PlayerSessionId)
+		}
+		return nil
+	})
 }
 
 // Represents a player in matchmaking. When starting a matchmaking request, a
@@ -3374,6 +6931,40 @@ type Player struct {
 	Team *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Player) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Player)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Player) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLatencyMap(s, schemas.Player_LatencyInMs, v.LatencyInMs)
+	serializePlayerAttributeMap(s, schemas.Player_PlayerAttributes, v.PlayerAttributes)
+	if v.PlayerId != nil {
+		s.WriteString(schemas.Player_PlayerId, *v.PlayerId)
+	}
+	if v.Team != nil {
+		s.WriteString(schemas.Player_Team, *v.Team)
+	}
+}
+func (v *Player) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Player, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Player_LatencyInMs:
+			return deserializeLatencyMap(d, schemas.Player_LatencyInMs, &v.LatencyInMs)
+		case schemas.Player_PlayerAttributes:
+			return deserializePlayerAttributeMap(d, schemas.Player_PlayerAttributes, &v.PlayerAttributes)
+		case schemas.Player_PlayerId:
+			v.PlayerId = new(string)
+			return d.ReadString(schemas.Player_PlayerId, v.PlayerId)
+		case schemas.Player_Team:
+			v.Team = new(string)
+			return d.ReadString(schemas.Player_Team, v.Team)
+		}
+		return nil
+	})
 }
 
 // Connection information for a game client to connect to a game session. This
@@ -3418,6 +7009,43 @@ type PlayerConnectionDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PlayerConnectionDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlayerConnectionDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlayerConnectionDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePlayerConnectionEndpointList(s, schemas.PlayerConnectionDetail_Endpoints, v.Endpoints)
+	if v.Expiration != nil {
+		s.WriteTime(schemas.PlayerConnectionDetail_Expiration, *v.Expiration)
+	}
+	if v.PlayerGatewayToken != nil {
+		s.WriteString(schemas.PlayerConnectionDetail_PlayerGatewayToken, *v.PlayerGatewayToken)
+	}
+	if v.PlayerId != nil {
+		s.WriteString(schemas.PlayerConnectionDetail_PlayerId, *v.PlayerId)
+	}
+}
+func (v *PlayerConnectionDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlayerConnectionDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlayerConnectionDetail_Endpoints:
+			return deserializePlayerConnectionEndpointList(d, schemas.PlayerConnectionDetail_Endpoints, &v.Endpoints)
+		case schemas.PlayerConnectionDetail_Expiration:
+			v.Expiration = new(time.Time)
+			return d.ReadTime(schemas.PlayerConnectionDetail_Expiration, v.Expiration)
+		case schemas.PlayerConnectionDetail_PlayerGatewayToken:
+			v.PlayerGatewayToken = new(string)
+			return d.ReadString(schemas.PlayerConnectionDetail_PlayerGatewayToken, v.PlayerGatewayToken)
+		case schemas.PlayerConnectionDetail_PlayerId:
+			v.PlayerId = new(string)
+			return d.ReadString(schemas.PlayerConnectionDetail_PlayerId, v.PlayerId)
+		}
+		return nil
+	})
+}
+
 // Network address(es) and port(s) for connecting to a game session.
 type PlayerConnectionEndpoint struct {
 
@@ -3434,6 +7062,34 @@ type PlayerConnectionEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PlayerConnectionEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlayerConnectionEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlayerConnectionEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAddress != nil {
+		s.WriteString(schemas.PlayerConnectionEndpoint_IpAddress, *v.IpAddress)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.PlayerConnectionEndpoint_Port, *v.Port)
+	}
+}
+func (v *PlayerConnectionEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlayerConnectionEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlayerConnectionEndpoint_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.PlayerConnectionEndpoint_IpAddress, v.IpAddress)
+		case schemas.PlayerConnectionEndpoint_Port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.PlayerConnectionEndpoint_Port, v.Port)
+		}
+		return nil
+	})
+}
+
 // Configuration settings for player gateway. Use these settings to specify
 // advanced options for how player gateway handles connections.
 type PlayerGatewayConfiguration struct {
@@ -3447,6 +7103,32 @@ type PlayerGatewayConfiguration struct {
 	GameServerIpProtocolSupported GameServerIpProtocolSupported
 
 	noSmithyDocumentSerde
+}
+
+func (v *PlayerGatewayConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlayerGatewayConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlayerGatewayConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerIpProtocolSupported != "" {
+		s.WriteString(schemas.PlayerGatewayConfiguration_GameServerIpProtocolSupported, string(v.GameServerIpProtocolSupported))
+	}
+}
+func (v *PlayerGatewayConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlayerGatewayConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlayerGatewayConfiguration_GameServerIpProtocolSupported:
+			var ev string
+			if err := d.ReadString(schemas.PlayerGatewayConfiguration_GameServerIpProtocolSupported, &ev); err != nil {
+				return err
+			}
+			v.GameServerIpProtocolSupported = GameServerIpProtocolSupported(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Regional latency information for a player, used when requesting a new game
@@ -3473,6 +7155,40 @@ type PlayerLatency struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PlayerLatency) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlayerLatency)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlayerLatency) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LatencyInMilliseconds != nil {
+		s.WriteFloat32(schemas.PlayerLatency_LatencyInMilliseconds, *v.LatencyInMilliseconds)
+	}
+	if v.PlayerId != nil {
+		s.WriteString(schemas.PlayerLatency_PlayerId, *v.PlayerId)
+	}
+	if v.RegionIdentifier != nil {
+		s.WriteString(schemas.PlayerLatency_RegionIdentifier, *v.RegionIdentifier)
+	}
+}
+func (v *PlayerLatency) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlayerLatency, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlayerLatency_LatencyInMilliseconds:
+			v.LatencyInMilliseconds = new(float32)
+			return d.ReadFloat32(schemas.PlayerLatency_LatencyInMilliseconds, v.LatencyInMilliseconds)
+		case schemas.PlayerLatency_PlayerId:
+			v.PlayerId = new(string)
+			return d.ReadString(schemas.PlayerLatency_PlayerId, v.PlayerId)
+		case schemas.PlayerLatency_RegionIdentifier:
+			v.RegionIdentifier = new(string)
+			return d.ReadString(schemas.PlayerLatency_RegionIdentifier, v.RegionIdentifier)
+		}
+		return nil
+	})
+}
+
 // Sets a latency cap for individual players when placing a game session. With a
 // latency policy in force, a game session cannot be placed in a fleet location
 // where a player reports latency higher than the cap. Latency policies are used
@@ -3491,6 +7207,34 @@ type PlayerLatencyPolicy struct {
 	PolicyDurationSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *PlayerLatencyPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlayerLatencyPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlayerLatencyPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaximumIndividualPlayerLatencyMilliseconds != nil {
+		s.WriteInt32(schemas.PlayerLatencyPolicy_MaximumIndividualPlayerLatencyMilliseconds, *v.MaximumIndividualPlayerLatencyMilliseconds)
+	}
+	if v.PolicyDurationSeconds != nil {
+		s.WriteInt32(schemas.PlayerLatencyPolicy_PolicyDurationSeconds, *v.PolicyDurationSeconds)
+	}
+}
+func (v *PlayerLatencyPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlayerLatencyPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlayerLatencyPolicy_MaximumIndividualPlayerLatencyMilliseconds:
+			v.MaximumIndividualPlayerLatencyMilliseconds = new(int32)
+			return d.ReadInt32(schemas.PlayerLatencyPolicy_MaximumIndividualPlayerLatencyMilliseconds, v.MaximumIndividualPlayerLatencyMilliseconds)
+		case schemas.PlayerLatencyPolicy_PolicyDurationSeconds:
+			v.PolicyDurationSeconds = new(int32)
+			return d.ReadInt32(schemas.PlayerLatencyPolicy_PolicyDurationSeconds, v.PolicyDurationSeconds)
+		}
+		return nil
+	})
 }
 
 // Represents a player session. Player sessions are created either for a specific
@@ -3582,6 +7326,98 @@ type PlayerSession struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PlayerSession) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlayerSession)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlayerSession) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.PlayerSession_CreationTime, *v.CreationTime)
+	}
+	if v.DnsName != nil {
+		s.WriteString(schemas.PlayerSession_DnsName, *v.DnsName)
+	}
+	if v.FleetArn != nil {
+		s.WriteString(schemas.PlayerSession_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.PlayerSession_FleetId, *v.FleetId)
+	}
+	if v.GameSessionId != nil {
+		s.WriteString(schemas.PlayerSession_GameSessionId, *v.GameSessionId)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.PlayerSession_IpAddress, *v.IpAddress)
+	}
+	if v.PlayerData != nil {
+		s.WriteString(schemas.PlayerSession_PlayerData, *v.PlayerData)
+	}
+	if v.PlayerId != nil {
+		s.WriteString(schemas.PlayerSession_PlayerId, *v.PlayerId)
+	}
+	if v.PlayerSessionId != nil {
+		s.WriteString(schemas.PlayerSession_PlayerSessionId, *v.PlayerSessionId)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.PlayerSession_Port, *v.Port)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PlayerSession_Status, string(v.Status))
+	}
+	if v.TerminationTime != nil {
+		s.WriteTime(schemas.PlayerSession_TerminationTime, *v.TerminationTime)
+	}
+}
+func (v *PlayerSession) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlayerSession, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlayerSession_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.PlayerSession_CreationTime, v.CreationTime)
+		case schemas.PlayerSession_DnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.PlayerSession_DnsName, v.DnsName)
+		case schemas.PlayerSession_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.PlayerSession_FleetArn, v.FleetArn)
+		case schemas.PlayerSession_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.PlayerSession_FleetId, v.FleetId)
+		case schemas.PlayerSession_GameSessionId:
+			v.GameSessionId = new(string)
+			return d.ReadString(schemas.PlayerSession_GameSessionId, v.GameSessionId)
+		case schemas.PlayerSession_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.PlayerSession_IpAddress, v.IpAddress)
+		case schemas.PlayerSession_PlayerData:
+			v.PlayerData = new(string)
+			return d.ReadString(schemas.PlayerSession_PlayerData, v.PlayerData)
+		case schemas.PlayerSession_PlayerId:
+			v.PlayerId = new(string)
+			return d.ReadString(schemas.PlayerSession_PlayerId, v.PlayerId)
+		case schemas.PlayerSession_PlayerSessionId:
+			v.PlayerSessionId = new(string)
+			return d.ReadString(schemas.PlayerSession_PlayerSessionId, v.PlayerSessionId)
+		case schemas.PlayerSession_Port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.PlayerSession_Port, v.Port)
+		case schemas.PlayerSession_Status:
+			var ev string
+			if err := d.ReadString(schemas.PlayerSession_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = PlayerSessionStatus(ev)
+			return nil
+		case schemas.PlayerSession_TerminationTime:
+			v.TerminationTime = new(time.Time)
+			return d.ReadTime(schemas.PlayerSession_TerminationTime, v.TerminationTime)
+		}
+		return nil
+	})
+}
+
 // Custom prioritization settings to use with a game session queue. Prioritization
 // settings determine how the queue selects a game hosting resource to start a new
 // game session. This configuration replaces the default prioritization process for
@@ -3632,6 +7468,28 @@ type PriorityConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PriorityConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PriorityConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PriorityConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLocationList(s, schemas.PriorityConfiguration_LocationOrder, v.LocationOrder)
+	serializePriorityTypeList(s, schemas.PriorityConfiguration_PriorityOrder, v.PriorityOrder)
+}
+func (v *PriorityConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PriorityConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PriorityConfiguration_LocationOrder:
+			return deserializeLocationList(d, schemas.PriorityConfiguration_LocationOrder, &v.LocationOrder)
+		case schemas.PriorityConfiguration_PriorityOrder:
+			return deserializePriorityTypeList(d, schemas.PriorityConfiguration_PriorityOrder, &v.PriorityOrder)
+		}
+		return nil
+	})
+}
+
 // An alternate list of prioritized locations for use with a game session queue.
 // When this property is included in a [StartGameSessionPlacement]request, the alternate list overrides the
 // queue's default location priorities, as defined in the queue's PriorityConfigurationsetting
@@ -3671,6 +7529,35 @@ type PriorityConfigurationOverride struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PriorityConfigurationOverride) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PriorityConfigurationOverride)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PriorityConfigurationOverride) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLocationOrderOverrideList(s, schemas.PriorityConfigurationOverride_LocationOrder, v.LocationOrder)
+	if v.PlacementFallbackStrategy != "" {
+		s.WriteString(schemas.PriorityConfigurationOverride_PlacementFallbackStrategy, string(v.PlacementFallbackStrategy))
+	}
+}
+func (v *PriorityConfigurationOverride) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PriorityConfigurationOverride, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PriorityConfigurationOverride_LocationOrder:
+			return deserializeLocationOrderOverrideList(d, schemas.PriorityConfigurationOverride_LocationOrder, &v.LocationOrder)
+		case schemas.PriorityConfigurationOverride_PlacementFallbackStrategy:
+			var ev string
+			if err := d.ReadString(schemas.PriorityConfigurationOverride_PlacementFallbackStrategy, &ev); err != nil {
+				return err
+			}
+			v.PlacementFallbackStrategy = PlacementFallbackStrategy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A policy that puts limits on the number of game sessions that a player can
 // create within a specified span of time. With this policy, you can control
 // players' ability to consume available resources.
@@ -3704,6 +7591,34 @@ type ResourceCreationLimitPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceCreationLimitPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceCreationLimitPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceCreationLimitPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NewGameSessionsPerCreator != nil {
+		s.WriteInt32(schemas.ResourceCreationLimitPolicy_NewGameSessionsPerCreator, *v.NewGameSessionsPerCreator)
+	}
+	if v.PolicyPeriodInMinutes != nil {
+		s.WriteInt32(schemas.ResourceCreationLimitPolicy_PolicyPeriodInMinutes, *v.PolicyPeriodInMinutes)
+	}
+}
+func (v *ResourceCreationLimitPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceCreationLimitPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceCreationLimitPolicy_NewGameSessionsPerCreator:
+			v.NewGameSessionsPerCreator = new(int32)
+			return d.ReadInt32(schemas.ResourceCreationLimitPolicy_NewGameSessionsPerCreator, v.NewGameSessionsPerCreator)
+		case schemas.ResourceCreationLimitPolicy_PolicyPeriodInMinutes:
+			v.PolicyPeriodInMinutes = new(int32)
+			return d.ReadInt32(schemas.ResourceCreationLimitPolicy_PolicyPeriodInMinutes, v.PolicyPeriodInMinutes)
+		}
+		return nil
+	})
+}
+
 // The routing configuration for a fleet alias.
 //
 // # Related actions
@@ -3733,6 +7648,44 @@ type RoutingStrategy struct {
 	Type RoutingStrategyType
 
 	noSmithyDocumentSerde
+}
+
+func (v *RoutingStrategy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoutingStrategy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoutingStrategy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.RoutingStrategy_FleetId, *v.FleetId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.RoutingStrategy_Message, *v.Message)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.RoutingStrategy_Type, string(v.Type))
+	}
+}
+func (v *RoutingStrategy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoutingStrategy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoutingStrategy_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.RoutingStrategy_FleetId, v.FleetId)
+		case schemas.RoutingStrategy_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RoutingStrategy_Message, v.Message)
+		case schemas.RoutingStrategy_Type:
+			var ev string
+			if err := d.ReadString(schemas.RoutingStrategy_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = RoutingStrategyType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A set of instructions that define the set of server processes to run on
@@ -3767,6 +7720,37 @@ type RuntimeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RuntimeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSessionActivationTimeoutSeconds != nil {
+		s.WriteInt32(schemas.RuntimeConfiguration_GameSessionActivationTimeoutSeconds, *v.GameSessionActivationTimeoutSeconds)
+	}
+	if v.MaxConcurrentGameSessionActivations != nil {
+		s.WriteInt32(schemas.RuntimeConfiguration_MaxConcurrentGameSessionActivations, *v.MaxConcurrentGameSessionActivations)
+	}
+	serializeServerProcessList(s, schemas.RuntimeConfiguration_ServerProcesses, v.ServerProcesses)
+}
+func (v *RuntimeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeConfiguration_GameSessionActivationTimeoutSeconds:
+			v.GameSessionActivationTimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.RuntimeConfiguration_GameSessionActivationTimeoutSeconds, v.GameSessionActivationTimeoutSeconds)
+		case schemas.RuntimeConfiguration_MaxConcurrentGameSessionActivations:
+			v.MaxConcurrentGameSessionActivations = new(int32)
+			return d.ReadInt32(schemas.RuntimeConfiguration_MaxConcurrentGameSessionActivations, v.MaxConcurrentGameSessionActivations)
+		case schemas.RuntimeConfiguration_ServerProcesses:
+			return deserializeServerProcessList(d, schemas.RuntimeConfiguration_ServerProcesses, &v.ServerProcesses)
+		}
+		return nil
+	})
+}
+
 // The location in Amazon S3 where build or script files are stored for access by
 // Amazon GameLift Servers.
 type S3Location struct {
@@ -3793,6 +7777,46 @@ type S3Location struct {
 	RoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3Location) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Location)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Location) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.S3Location_Bucket, *v.Bucket)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.S3Location_Key, *v.Key)
+	}
+	if v.ObjectVersion != nil {
+		s.WriteString(schemas.S3Location_ObjectVersion, *v.ObjectVersion)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.S3Location_RoleArn, *v.RoleArn)
+	}
+}
+func (v *S3Location) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Location, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Location_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.S3Location_Bucket, v.Bucket)
+		case schemas.S3Location_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.S3Location_Key, v.Key)
+		case schemas.S3Location_ObjectVersion:
+			v.ObjectVersion = new(string)
+			return d.ReadString(schemas.S3Location_ObjectVersion, v.ObjectVersion)
+		case schemas.S3Location_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.S3Location_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
 }
 
 // Rule that controls how a fleet is scaled. Scaling policies are uniquely
@@ -3922,6 +7946,132 @@ type ScalingPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScalingPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScalingPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScalingPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.ScalingPolicy_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	if v.EvaluationPeriods != nil {
+		s.WriteInt32(schemas.ScalingPolicy_EvaluationPeriods, *v.EvaluationPeriods)
+	}
+	if v.FleetArn != nil {
+		s.WriteString(schemas.ScalingPolicy_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.ScalingPolicy_FleetId, *v.FleetId)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.ScalingPolicy_Location, *v.Location)
+	}
+	if v.MetricName != "" {
+		s.WriteString(schemas.ScalingPolicy_MetricName, string(v.MetricName))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ScalingPolicy_Name, *v.Name)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.ScalingPolicy_PolicyType, string(v.PolicyType))
+	}
+	if v.ScalingAdjustment != nil {
+		s.WriteInt32(schemas.ScalingPolicy_ScalingAdjustment, *v.ScalingAdjustment)
+	}
+	if v.ScalingAdjustmentType != "" {
+		s.WriteString(schemas.ScalingPolicy_ScalingAdjustmentType, string(v.ScalingAdjustmentType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ScalingPolicy_Status, string(v.Status))
+	}
+	if v.TargetConfiguration != nil {
+		s.WriteStruct(schemas.ScalingPolicy_TargetConfiguration)
+		v.TargetConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Threshold != nil {
+		s.WriteFloat64(schemas.ScalingPolicy_Threshold, *v.Threshold)
+	}
+	if v.UpdateStatus != "" {
+		s.WriteString(schemas.ScalingPolicy_UpdateStatus, string(v.UpdateStatus))
+	}
+}
+func (v *ScalingPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScalingPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScalingPolicy_ComparisonOperator:
+			var ev string
+			if err := d.ReadString(schemas.ScalingPolicy_ComparisonOperator, &ev); err != nil {
+				return err
+			}
+			v.ComparisonOperator = ComparisonOperatorType(ev)
+			return nil
+		case schemas.ScalingPolicy_EvaluationPeriods:
+			v.EvaluationPeriods = new(int32)
+			return d.ReadInt32(schemas.ScalingPolicy_EvaluationPeriods, v.EvaluationPeriods)
+		case schemas.ScalingPolicy_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.ScalingPolicy_FleetArn, v.FleetArn)
+		case schemas.ScalingPolicy_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.ScalingPolicy_FleetId, v.FleetId)
+		case schemas.ScalingPolicy_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.ScalingPolicy_Location, v.Location)
+		case schemas.ScalingPolicy_MetricName:
+			var ev string
+			if err := d.ReadString(schemas.ScalingPolicy_MetricName, &ev); err != nil {
+				return err
+			}
+			v.MetricName = MetricName(ev)
+			return nil
+		case schemas.ScalingPolicy_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ScalingPolicy_Name, v.Name)
+		case schemas.ScalingPolicy_PolicyType:
+			var ev string
+			if err := d.ReadString(schemas.ScalingPolicy_PolicyType, &ev); err != nil {
+				return err
+			}
+			v.PolicyType = PolicyType(ev)
+			return nil
+		case schemas.ScalingPolicy_ScalingAdjustment:
+			v.ScalingAdjustment = new(int32)
+			return d.ReadInt32(schemas.ScalingPolicy_ScalingAdjustment, v.ScalingAdjustment)
+		case schemas.ScalingPolicy_ScalingAdjustmentType:
+			var ev string
+			if err := d.ReadString(schemas.ScalingPolicy_ScalingAdjustmentType, &ev); err != nil {
+				return err
+			}
+			v.ScalingAdjustmentType = ScalingAdjustmentType(ev)
+			return nil
+		case schemas.ScalingPolicy_Status:
+			var ev string
+			if err := d.ReadString(schemas.ScalingPolicy_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ScalingStatusType(ev)
+			return nil
+		case schemas.ScalingPolicy_TargetConfiguration:
+			v.TargetConfiguration = &TargetConfiguration{}
+			return v.TargetConfiguration.Deserialize(d)
+		case schemas.ScalingPolicy_Threshold:
+			v.Threshold = new(float64)
+			return d.ReadFloat64(schemas.ScalingPolicy_Threshold, v.Threshold)
+		case schemas.ScalingPolicy_UpdateStatus:
+			var ev string
+			if err := d.ReadString(schemas.ScalingPolicy_UpdateStatus, &ev); err != nil {
+				return err
+			}
+			v.UpdateStatus = LocationUpdateStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Properties describing a Realtime script.
 //
 // # Related actions
@@ -3981,6 +8131,72 @@ type Script struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Script) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Script)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Script) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Script_CreationTime, *v.CreationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Script_Name, *v.Name)
+	}
+	if v.NodeJsVersion != nil {
+		s.WriteString(schemas.Script_NodeJsVersion, *v.NodeJsVersion)
+	}
+	if v.ScriptArn != nil {
+		s.WriteString(schemas.Script_ScriptArn, *v.ScriptArn)
+	}
+	if v.ScriptId != nil {
+		s.WriteString(schemas.Script_ScriptId, *v.ScriptId)
+	}
+	if v.SizeOnDisk != nil {
+		s.WriteInt64(schemas.Script_SizeOnDisk, *v.SizeOnDisk)
+	}
+	if v.StorageLocation != nil {
+		s.WriteStruct(schemas.Script_StorageLocation)
+		v.StorageLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.Script_Version, *v.Version)
+	}
+}
+func (v *Script) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Script, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Script_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Script_CreationTime, v.CreationTime)
+		case schemas.Script_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Script_Name, v.Name)
+		case schemas.Script_NodeJsVersion:
+			v.NodeJsVersion = new(string)
+			return d.ReadString(schemas.Script_NodeJsVersion, v.NodeJsVersion)
+		case schemas.Script_ScriptArn:
+			v.ScriptArn = new(string)
+			return d.ReadString(schemas.Script_ScriptArn, v.ScriptArn)
+		case schemas.Script_ScriptId:
+			v.ScriptId = new(string)
+			return d.ReadString(schemas.Script_ScriptId, v.ScriptId)
+		case schemas.Script_SizeOnDisk:
+			v.SizeOnDisk = new(int64)
+			return d.ReadInt64(schemas.Script_SizeOnDisk, v.SizeOnDisk)
+		case schemas.Script_StorageLocation:
+			v.StorageLocation = &S3Location{}
+			return v.StorageLocation.Deserialize(d)
+		case schemas.Script_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.Script_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // A set of instructions for launching server processes on fleet computes. Server
 // processes run either an executable in a custom game build or a Amazon GameLift
 // Servers Realtime script. Server process configurations are part of a fleet's
@@ -4014,6 +8230,40 @@ type ServerProcess struct {
 	Parameters *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServerProcess) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServerProcess)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServerProcess) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConcurrentExecutions != nil {
+		s.WriteInt32(schemas.ServerProcess_ConcurrentExecutions, *v.ConcurrentExecutions)
+	}
+	if v.LaunchPath != nil {
+		s.WriteString(schemas.ServerProcess_LaunchPath, *v.LaunchPath)
+	}
+	if v.Parameters != nil {
+		s.WriteString(schemas.ServerProcess_Parameters, *v.Parameters)
+	}
+}
+func (v *ServerProcess) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServerProcess, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServerProcess_ConcurrentExecutions:
+			v.ConcurrentExecutions = new(int32)
+			return d.ReadInt32(schemas.ServerProcess_ConcurrentExecutions, v.ConcurrentExecutions)
+		case schemas.ServerProcess_LaunchPath:
+			v.LaunchPath = new(string)
+			return d.ReadString(schemas.ServerProcess_LaunchPath, v.LaunchPath)
+		case schemas.ServerProcess_Parameters:
+			v.Parameters = new(string)
+			return d.ReadString(schemas.ServerProcess_Parameters, v.Parameters)
+		}
+		return nil
+	})
 }
 
 // Describes a support container in a container group. A support container might
@@ -4103,6 +8353,91 @@ type SupportContainerDefinition struct {
 	Vcpu *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *SupportContainerDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportContainerDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupportContainerDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.SupportContainerDefinition_ContainerName, *v.ContainerName)
+	}
+	serializeContainerDependencyList(s, schemas.SupportContainerDefinition_DependsOn, v.DependsOn)
+	serializeContainerEnvironmentList(s, schemas.SupportContainerDefinition_EnvironmentOverride, v.EnvironmentOverride)
+	if v.Essential != nil {
+		s.WriteBool(schemas.SupportContainerDefinition_Essential, *v.Essential)
+	}
+	if v.HealthCheck != nil {
+		s.WriteStruct(schemas.SupportContainerDefinition_HealthCheck)
+		v.HealthCheck.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageUri != nil {
+		s.WriteString(schemas.SupportContainerDefinition_ImageUri, *v.ImageUri)
+	}
+	if v.LinuxCapabilities != nil {
+		s.WriteStruct(schemas.SupportContainerDefinition_LinuxCapabilities)
+		v.LinuxCapabilities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MemoryHardLimitMebibytes != nil {
+		s.WriteInt32(schemas.SupportContainerDefinition_MemoryHardLimitMebibytes, *v.MemoryHardLimitMebibytes)
+	}
+	serializeContainerMountPointList(s, schemas.SupportContainerDefinition_MountPoints, v.MountPoints)
+	if v.PortConfiguration != nil {
+		s.WriteStruct(schemas.SupportContainerDefinition_PortConfiguration)
+		v.PortConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResolvedImageDigest != nil {
+		s.WriteString(schemas.SupportContainerDefinition_ResolvedImageDigest, *v.ResolvedImageDigest)
+	}
+	if v.Vcpu != nil {
+		s.WriteFloat64(schemas.SupportContainerDefinition_Vcpu, *v.Vcpu)
+	}
+}
+func (v *SupportContainerDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupportContainerDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupportContainerDefinition_ContainerName:
+			v.ContainerName = new(string)
+			return d.ReadString(schemas.SupportContainerDefinition_ContainerName, v.ContainerName)
+		case schemas.SupportContainerDefinition_DependsOn:
+			return deserializeContainerDependencyList(d, schemas.SupportContainerDefinition_DependsOn, &v.DependsOn)
+		case schemas.SupportContainerDefinition_EnvironmentOverride:
+			return deserializeContainerEnvironmentList(d, schemas.SupportContainerDefinition_EnvironmentOverride, &v.EnvironmentOverride)
+		case schemas.SupportContainerDefinition_Essential:
+			v.Essential = new(bool)
+			return d.ReadBool(schemas.SupportContainerDefinition_Essential, v.Essential)
+		case schemas.SupportContainerDefinition_HealthCheck:
+			v.HealthCheck = &ContainerHealthCheck{}
+			return v.HealthCheck.Deserialize(d)
+		case schemas.SupportContainerDefinition_ImageUri:
+			v.ImageUri = new(string)
+			return d.ReadString(schemas.SupportContainerDefinition_ImageUri, v.ImageUri)
+		case schemas.SupportContainerDefinition_LinuxCapabilities:
+			v.LinuxCapabilities = &LinuxCapabilities{}
+			return v.LinuxCapabilities.Deserialize(d)
+		case schemas.SupportContainerDefinition_MemoryHardLimitMebibytes:
+			v.MemoryHardLimitMebibytes = new(int32)
+			return d.ReadInt32(schemas.SupportContainerDefinition_MemoryHardLimitMebibytes, v.MemoryHardLimitMebibytes)
+		case schemas.SupportContainerDefinition_MountPoints:
+			return deserializeContainerMountPointList(d, schemas.SupportContainerDefinition_MountPoints, &v.MountPoints)
+		case schemas.SupportContainerDefinition_PortConfiguration:
+			v.PortConfiguration = &ContainerPortConfiguration{}
+			return v.PortConfiguration.Deserialize(d)
+		case schemas.SupportContainerDefinition_ResolvedImageDigest:
+			v.ResolvedImageDigest = new(string)
+			return d.ReadString(schemas.SupportContainerDefinition_ResolvedImageDigest, v.ResolvedImageDigest)
+		case schemas.SupportContainerDefinition_Vcpu:
+			v.Vcpu = new(float64)
+			return d.ReadFloat64(schemas.SupportContainerDefinition_Vcpu, v.Vcpu)
+		}
+		return nil
+	})
 }
 
 // Describes a support container in a container group. You can define a support
@@ -4220,6 +8555,85 @@ type SupportContainerDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SupportContainerDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportContainerDefinitionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupportContainerDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.SupportContainerDefinitionInput_ContainerName, *v.ContainerName)
+	}
+	serializeContainerDependencyList(s, schemas.SupportContainerDefinitionInput_DependsOn, v.DependsOn)
+	serializeContainerEnvironmentList(s, schemas.SupportContainerDefinitionInput_EnvironmentOverride, v.EnvironmentOverride)
+	if v.Essential != nil {
+		s.WriteBool(schemas.SupportContainerDefinitionInput_Essential, *v.Essential)
+	}
+	if v.HealthCheck != nil {
+		s.WriteStruct(schemas.SupportContainerDefinitionInput_HealthCheck)
+		v.HealthCheck.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageUri != nil {
+		s.WriteString(schemas.SupportContainerDefinitionInput_ImageUri, *v.ImageUri)
+	}
+	if v.LinuxCapabilities != nil {
+		s.WriteStruct(schemas.SupportContainerDefinitionInput_LinuxCapabilities)
+		v.LinuxCapabilities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MemoryHardLimitMebibytes != nil {
+		s.WriteInt32(schemas.SupportContainerDefinitionInput_MemoryHardLimitMebibytes, *v.MemoryHardLimitMebibytes)
+	}
+	serializeContainerMountPointList(s, schemas.SupportContainerDefinitionInput_MountPoints, v.MountPoints)
+	if v.PortConfiguration != nil {
+		s.WriteStruct(schemas.SupportContainerDefinitionInput_PortConfiguration)
+		v.PortConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Vcpu != nil {
+		s.WriteFloat64(schemas.SupportContainerDefinitionInput_Vcpu, *v.Vcpu)
+	}
+}
+func (v *SupportContainerDefinitionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupportContainerDefinitionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupportContainerDefinitionInput_ContainerName:
+			v.ContainerName = new(string)
+			return d.ReadString(schemas.SupportContainerDefinitionInput_ContainerName, v.ContainerName)
+		case schemas.SupportContainerDefinitionInput_DependsOn:
+			return deserializeContainerDependencyList(d, schemas.SupportContainerDefinitionInput_DependsOn, &v.DependsOn)
+		case schemas.SupportContainerDefinitionInput_EnvironmentOverride:
+			return deserializeContainerEnvironmentList(d, schemas.SupportContainerDefinitionInput_EnvironmentOverride, &v.EnvironmentOverride)
+		case schemas.SupportContainerDefinitionInput_Essential:
+			v.Essential = new(bool)
+			return d.ReadBool(schemas.SupportContainerDefinitionInput_Essential, v.Essential)
+		case schemas.SupportContainerDefinitionInput_HealthCheck:
+			v.HealthCheck = &ContainerHealthCheck{}
+			return v.HealthCheck.Deserialize(d)
+		case schemas.SupportContainerDefinitionInput_ImageUri:
+			v.ImageUri = new(string)
+			return d.ReadString(schemas.SupportContainerDefinitionInput_ImageUri, v.ImageUri)
+		case schemas.SupportContainerDefinitionInput_LinuxCapabilities:
+			v.LinuxCapabilities = &LinuxCapabilities{}
+			return v.LinuxCapabilities.Deserialize(d)
+		case schemas.SupportContainerDefinitionInput_MemoryHardLimitMebibytes:
+			v.MemoryHardLimitMebibytes = new(int32)
+			return d.ReadInt32(schemas.SupportContainerDefinitionInput_MemoryHardLimitMebibytes, v.MemoryHardLimitMebibytes)
+		case schemas.SupportContainerDefinitionInput_MountPoints:
+			return deserializeContainerMountPointList(d, schemas.SupportContainerDefinitionInput_MountPoints, &v.MountPoints)
+		case schemas.SupportContainerDefinitionInput_PortConfiguration:
+			v.PortConfiguration = &ContainerPortConfiguration{}
+			return v.PortConfiguration.Deserialize(d)
+		case schemas.SupportContainerDefinitionInput_Vcpu:
+			v.Vcpu = new(float64)
+			return d.ReadFloat64(schemas.SupportContainerDefinitionInput_Vcpu, v.Vcpu)
+		}
+		return nil
+	})
+}
+
 // A label that you can assign to a Amazon GameLift Servers resource.
 //
 // # Learn more
@@ -4252,6 +8666,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Settings for a target-based scaling policy. A target-based policy tracks a
 // particular fleet metric specifies a target value for the metric. As player usage
 // changes, the policy triggers Amazon GameLift Servers to adjust capacity so that
@@ -4271,6 +8713,28 @@ type TargetConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TargetConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetValue != nil {
+		s.WriteFloat64(schemas.TargetConfiguration_TargetValue, *v.TargetValue)
+	}
+}
+func (v *TargetConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetConfiguration_TargetValue:
+			v.TargetValue = new(float64)
+			return d.ReadFloat64(schemas.TargetConfiguration_TargetValue, v.TargetValue)
+		}
+		return nil
+	})
+}
+
 // Settings for a target-based scaling policy as part of a [GameServerGroupAutoScalingPolicy] . These settings are
 // used to create a target-based policy that tracks the Amazon GameLift Servers
 // FleetIQ metric "PercentUtilizedGameServers" and specifies a target value for
@@ -4288,6 +8752,28 @@ type TargetTrackingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TargetTrackingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetTrackingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetTrackingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetValue != nil {
+		s.WriteFloat64(schemas.TargetTrackingConfiguration_TargetValue, *v.TargetValue)
+	}
+}
+func (v *TargetTrackingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetTrackingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetTrackingConfiguration_TargetValue:
+			v.TargetValue = new(float64)
+			return d.ReadFloat64(schemas.TargetTrackingConfiguration_TargetValue, v.TargetValue)
+		}
+		return nil
+	})
+}
+
 // The domain name and port information for a UDP endpoint.
 type UDPEndpoint struct {
 
@@ -4299,6 +8785,34 @@ type UDPEndpoint struct {
 	Port *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *UDPEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UDPEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UDPEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.UDPEndpoint_Domain, *v.Domain)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.UDPEndpoint_Port, *v.Port)
+	}
+}
+func (v *UDPEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UDPEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UDPEndpoint_Domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.UDPEndpoint_Domain, v.Domain)
+		case schemas.UDPEndpoint_Port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.UDPEndpoint_Port, v.Port)
+		}
+		return nil
+	})
 }
 
 // Represents an authorization for a VPC peering connection between the VPC for an
@@ -4340,6 +8854,52 @@ type VpcPeeringAuthorization struct {
 	PeerVpcId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcPeeringAuthorization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcPeeringAuthorization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcPeeringAuthorization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.VpcPeeringAuthorization_CreationTime, *v.CreationTime)
+	}
+	if v.ExpirationTime != nil {
+		s.WriteTime(schemas.VpcPeeringAuthorization_ExpirationTime, *v.ExpirationTime)
+	}
+	if v.GameLiftAwsAccountId != nil {
+		s.WriteString(schemas.VpcPeeringAuthorization_GameLiftAwsAccountId, *v.GameLiftAwsAccountId)
+	}
+	if v.PeerVpcAwsAccountId != nil {
+		s.WriteString(schemas.VpcPeeringAuthorization_PeerVpcAwsAccountId, *v.PeerVpcAwsAccountId)
+	}
+	if v.PeerVpcId != nil {
+		s.WriteString(schemas.VpcPeeringAuthorization_PeerVpcId, *v.PeerVpcId)
+	}
+}
+func (v *VpcPeeringAuthorization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcPeeringAuthorization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcPeeringAuthorization_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.VpcPeeringAuthorization_CreationTime, v.CreationTime)
+		case schemas.VpcPeeringAuthorization_ExpirationTime:
+			v.ExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.VpcPeeringAuthorization_ExpirationTime, v.ExpirationTime)
+		case schemas.VpcPeeringAuthorization_GameLiftAwsAccountId:
+			v.GameLiftAwsAccountId = new(string)
+			return d.ReadString(schemas.VpcPeeringAuthorization_GameLiftAwsAccountId, v.GameLiftAwsAccountId)
+		case schemas.VpcPeeringAuthorization_PeerVpcAwsAccountId:
+			v.PeerVpcAwsAccountId = new(string)
+			return d.ReadString(schemas.VpcPeeringAuthorization_PeerVpcAwsAccountId, v.PeerVpcAwsAccountId)
+		case schemas.VpcPeeringAuthorization_PeerVpcId:
+			v.PeerVpcId = new(string)
+			return d.ReadString(schemas.VpcPeeringAuthorization_PeerVpcId, v.PeerVpcId)
+		}
+		return nil
+	})
 }
 
 // Represents a peering connection between a VPC on one of your Amazon Web
@@ -4395,6 +8955,66 @@ type VpcPeeringConnection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VpcPeeringConnection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcPeeringConnection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcPeeringConnection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetArn != nil {
+		s.WriteString(schemas.VpcPeeringConnection_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.VpcPeeringConnection_FleetId, *v.FleetId)
+	}
+	if v.GameLiftVpcId != nil {
+		s.WriteString(schemas.VpcPeeringConnection_GameLiftVpcId, *v.GameLiftVpcId)
+	}
+	if v.IpV4CidrBlock != nil {
+		s.WriteString(schemas.VpcPeeringConnection_IpV4CidrBlock, *v.IpV4CidrBlock)
+	}
+	if v.PeerVpcId != nil {
+		s.WriteString(schemas.VpcPeeringConnection_PeerVpcId, *v.PeerVpcId)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.VpcPeeringConnection_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcPeeringConnectionId != nil {
+		s.WriteString(schemas.VpcPeeringConnection_VpcPeeringConnectionId, *v.VpcPeeringConnectionId)
+	}
+}
+func (v *VpcPeeringConnection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcPeeringConnection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcPeeringConnection_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.VpcPeeringConnection_FleetArn, v.FleetArn)
+		case schemas.VpcPeeringConnection_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.VpcPeeringConnection_FleetId, v.FleetId)
+		case schemas.VpcPeeringConnection_GameLiftVpcId:
+			v.GameLiftVpcId = new(string)
+			return d.ReadString(schemas.VpcPeeringConnection_GameLiftVpcId, v.GameLiftVpcId)
+		case schemas.VpcPeeringConnection_IpV4CidrBlock:
+			v.IpV4CidrBlock = new(string)
+			return d.ReadString(schemas.VpcPeeringConnection_IpV4CidrBlock, v.IpV4CidrBlock)
+		case schemas.VpcPeeringConnection_PeerVpcId:
+			v.PeerVpcId = new(string)
+			return d.ReadString(schemas.VpcPeeringConnection_PeerVpcId, v.PeerVpcId)
+		case schemas.VpcPeeringConnection_Status:
+			v.Status = &VpcPeeringConnectionStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.VpcPeeringConnection_VpcPeeringConnectionId:
+			v.VpcPeeringConnectionId = new(string)
+			return d.ReadString(schemas.VpcPeeringConnection_VpcPeeringConnectionId, v.VpcPeeringConnectionId)
+		}
+		return nil
+	})
+}
+
 // Represents status information for a VPC peering connection. Status codes and
 // messages are provided from EC2 (see [VpcPeeringConnectionStateReason]). Connection status information is also
 // communicated as a fleet event.
@@ -4409,6 +9029,34 @@ type VpcPeeringConnectionStatus struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcPeeringConnectionStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcPeeringConnectionStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcPeeringConnectionStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.VpcPeeringConnectionStatus_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.VpcPeeringConnectionStatus_Message, *v.Message)
+	}
+}
+func (v *VpcPeeringConnectionStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcPeeringConnectionStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcPeeringConnectionStatus_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.VpcPeeringConnectionStatus_Code, v.Code)
+		case schemas.VpcPeeringConnectionStatus_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.VpcPeeringConnectionStatus_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

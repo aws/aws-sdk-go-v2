@@ -4,6 +4,8 @@ package cloudwatch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -76,6 +78,21 @@ type GetMetricWidgetImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMetricWidgetImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetricWidgetImageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetricWidgetImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricWidget != nil {
+		s.WriteString(schemas.GetMetricWidgetImageInput_MetricWidget, *v.MetricWidget)
+	}
+	if v.OutputFormat != nil {
+		s.WriteString(schemas.GetMetricWidgetImageInput_OutputFormat, *v.OutputFormat)
+	}
+}
+
 type GetMetricWidgetImageOutput struct {
 
 	// The image of the graph, in the output format specified. The output is
@@ -88,13 +105,31 @@ type GetMetricWidgetImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMetricWidgetImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetricWidgetImageOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetricWidgetImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricWidgetImage != nil {
+		s.WriteBlob(schemas.GetMetricWidgetImageOutput_MetricWidgetImage, v.MetricWidgetImage)
+	}
+}
+func (v *GetMetricWidgetImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMetricWidgetImageOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMetricWidgetImageOutput_MetricWidgetImage:
+			return d.ReadBlob(schemas.GetMetricWidgetImageOutput_MetricWidgetImage, &v.MetricWidgetImage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMetricWidgetImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetMetricWidgetImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetricWidgetImage, schemas.GetMetricWidgetImageInput, schemas.GetMetricWidgetImageOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetMetricWidgetImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetricWidgetImage, schemas.GetMetricWidgetImageInput, schemas.GetMetricWidgetImageOutput), output: &GetMetricWidgetImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

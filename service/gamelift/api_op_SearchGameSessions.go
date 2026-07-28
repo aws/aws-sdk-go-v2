@@ -5,7 +5,9 @@ package gamelift
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -198,6 +200,36 @@ type SearchGameSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchGameSessionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchGameSessionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchGameSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasId != nil {
+		s.WriteString(schemas.SearchGameSessionsInput_AliasId, *v.AliasId)
+	}
+	if v.FilterExpression != nil {
+		s.WriteString(schemas.SearchGameSessionsInput_FilterExpression, *v.FilterExpression)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.SearchGameSessionsInput_FleetId, *v.FleetId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.SearchGameSessionsInput_Limit, *v.Limit)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.SearchGameSessionsInput_Location, *v.Location)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchGameSessionsInput_NextToken, *v.NextToken)
+	}
+	if v.SortExpression != nil {
+		s.WriteString(schemas.SearchGameSessionsInput_SortExpression, *v.SortExpression)
+	}
+}
+
 type SearchGameSessionsOutput struct {
 
 	// A collection of objects containing game session properties for each session
@@ -215,13 +247,35 @@ type SearchGameSessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchGameSessionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchGameSessionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchGameSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGameSessionList(s, schemas.SearchGameSessionsOutput_GameSessions, v.GameSessions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchGameSessionsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *SearchGameSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchGameSessionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchGameSessionsOutput_GameSessions:
+			return deserializeGameSessionList(d, schemas.SearchGameSessionsOutput_GameSessions, &v.GameSessions)
+		case schemas.SearchGameSessionsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchGameSessionsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchGameSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpSearchGameSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchGameSessions, schemas.SearchGameSessionsInput, schemas.SearchGameSessionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpSearchGameSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchGameSessions, schemas.SearchGameSessionsInput, schemas.SearchGameSessionsOutput), output: &SearchGameSessionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

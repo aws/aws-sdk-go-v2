@@ -4,6 +4,8 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,21 @@ type DeregisterComputeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterComputeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterComputeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterComputeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeName != nil {
+		s.WriteString(schemas.DeregisterComputeInput_ComputeName, *v.ComputeName)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.DeregisterComputeInput_FleetId, *v.FleetId)
+	}
+}
+
 type DeregisterComputeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +74,26 @@ type DeregisterComputeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterComputeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterComputeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterComputeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeregisterComputeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterComputeOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterComputeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeregisterCompute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterCompute, schemas.DeregisterComputeInput, schemas.DeregisterComputeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeregisterCompute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterCompute, schemas.DeregisterComputeInput, schemas.DeregisterComputeOutput), output: &DeregisterComputeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

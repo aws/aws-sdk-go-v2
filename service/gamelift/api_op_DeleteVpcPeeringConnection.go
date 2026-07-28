@@ -4,6 +4,8 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,21 @@ type DeleteVpcPeeringConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcPeeringConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcPeeringConnectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcPeeringConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.DeleteVpcPeeringConnectionInput_FleetId, *v.FleetId)
+	}
+	if v.VpcPeeringConnectionId != nil {
+		s.WriteString(schemas.DeleteVpcPeeringConnectionInput_VpcPeeringConnectionId, *v.VpcPeeringConnectionId)
+	}
+}
+
 type DeleteVpcPeeringConnectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +79,26 @@ type DeleteVpcPeeringConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcPeeringConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcPeeringConnectionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcPeeringConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteVpcPeeringConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVpcPeeringConnectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVpcPeeringConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteVpcPeeringConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcPeeringConnection, schemas.DeleteVpcPeeringConnectionInput, schemas.DeleteVpcPeeringConnectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteVpcPeeringConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcPeeringConnection, schemas.DeleteVpcPeeringConnectionInput, schemas.DeleteVpcPeeringConnectionOutput), output: &DeleteVpcPeeringConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

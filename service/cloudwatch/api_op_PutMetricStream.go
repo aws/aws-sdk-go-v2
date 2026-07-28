@@ -4,7 +4,9 @@ package cloudwatch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -153,6 +155,34 @@ type PutMetricStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMetricStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutMetricStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMetricStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricStreamFilters(s, schemas.PutMetricStreamInput_ExcludeFilters, v.ExcludeFilters)
+	if v.FirehoseArn != nil {
+		s.WriteString(schemas.PutMetricStreamInput_FirehoseArn, *v.FirehoseArn)
+	}
+	serializeMetricStreamFilters(s, schemas.PutMetricStreamInput_IncludeFilters, v.IncludeFilters)
+	if v.IncludeLinkedAccountsMetrics != nil {
+		s.WriteBool(schemas.PutMetricStreamInput_IncludeLinkedAccountsMetrics, *v.IncludeLinkedAccountsMetrics)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutMetricStreamInput_Name, *v.Name)
+	}
+	if v.OutputFormat != "" {
+		s.WriteString(schemas.PutMetricStreamInput_OutputFormat, string(v.OutputFormat))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.PutMetricStreamInput_RoleArn, *v.RoleArn)
+	}
+	serializeMetricStreamStatisticsConfigurations(s, schemas.PutMetricStreamInput_StatisticsConfigurations, v.StatisticsConfigurations)
+	serializeTagList(s, schemas.PutMetricStreamInput_Tags, v.Tags)
+}
+
 type PutMetricStreamOutput struct {
 
 	// The ARN of the metric stream.
@@ -164,13 +194,32 @@ type PutMetricStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMetricStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutMetricStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMetricStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PutMetricStreamOutput_Arn, *v.Arn)
+	}
+}
+func (v *PutMetricStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutMetricStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutMetricStreamOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PutMetricStreamOutput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutMetricStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpPutMetricStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMetricStream, schemas.PutMetricStreamInput, schemas.PutMetricStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpPutMetricStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMetricStream, schemas.PutMetricStreamInput, schemas.PutMetricStreamOutput), output: &PutMetricStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

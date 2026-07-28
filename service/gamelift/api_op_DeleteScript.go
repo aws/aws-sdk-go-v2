@@ -4,6 +4,8 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,18 @@ type DeleteScriptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScriptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteScriptInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteScriptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScriptId != nil {
+		s.WriteString(schemas.DeleteScriptInput_ScriptId, *v.ScriptId)
+	}
+}
+
 type DeleteScriptOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -63,13 +77,26 @@ type DeleteScriptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScriptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteScriptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteScriptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteScript{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScript, schemas.DeleteScriptInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteScript{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScript, schemas.DeleteScriptInput, nil), output: &DeleteScriptOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,19 @@ type ResumeGameServerGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResumeGameServerGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResumeGameServerGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResumeGameServerGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.ResumeGameServerGroupInput_GameServerGroupName, *v.GameServerGroupName)
+	}
+	serializeGameServerGroupActions(s, schemas.ResumeGameServerGroupInput_ResumeActions, v.ResumeActions)
+}
+
 type ResumeGameServerGroupOutput struct {
 
 	// An object that describes the game server group resource, with the
@@ -69,13 +84,34 @@ type ResumeGameServerGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResumeGameServerGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResumeGameServerGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResumeGameServerGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerGroup != nil {
+		s.WriteStruct(schemas.ResumeGameServerGroupOutput_GameServerGroup)
+		v.GameServerGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResumeGameServerGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResumeGameServerGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResumeGameServerGroupOutput_GameServerGroup:
+			v.GameServerGroup = &types.GameServerGroup{}
+			return v.GameServerGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResumeGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpResumeGameServerGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResumeGameServerGroup, schemas.ResumeGameServerGroupInput, schemas.ResumeGameServerGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpResumeGameServerGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResumeGameServerGroup, schemas.ResumeGameServerGroupInput, schemas.ResumeGameServerGroupOutput), output: &ResumeGameServerGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,18 @@ type StopMatchmakingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopMatchmakingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMatchmakingInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopMatchmakingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TicketId != nil {
+		s.WriteString(schemas.StopMatchmakingInput_TicketId, *v.TicketId)
+	}
+}
+
 type StopMatchmakingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,13 +75,26 @@ type StopMatchmakingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopMatchmakingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMatchmakingOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopMatchmakingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopMatchmakingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopMatchmakingOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopMatchmakingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStopMatchmaking{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopMatchmaking, schemas.StopMatchmakingInput, schemas.StopMatchmakingOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStopMatchmaking{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopMatchmaking, schemas.StopMatchmakingInput, schemas.StopMatchmakingOutput), output: &StopMatchmakingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

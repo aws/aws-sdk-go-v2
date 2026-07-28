@@ -4,7 +4,9 @@ package gamelift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -95,6 +97,21 @@ type DescribeEC2InstanceLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEC2InstanceLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEC2InstanceLimitsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEC2InstanceLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EC2InstanceType != "" {
+		s.WriteString(schemas.DescribeEC2InstanceLimitsInput_EC2InstanceType, string(v.EC2InstanceType))
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.DescribeEC2InstanceLimitsInput_Location, *v.Location)
+	}
+}
+
 type DescribeEC2InstanceLimitsOutput struct {
 
 	// The maximum number of instances for the specified instance type.
@@ -106,13 +123,29 @@ type DescribeEC2InstanceLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEC2InstanceLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEC2InstanceLimitsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEC2InstanceLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEC2InstanceLimitList(s, schemas.DescribeEC2InstanceLimitsOutput_EC2InstanceLimits, v.EC2InstanceLimits)
+}
+func (v *DescribeEC2InstanceLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEC2InstanceLimitsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEC2InstanceLimitsOutput_EC2InstanceLimits:
+			return deserializeEC2InstanceLimitList(d, schemas.DescribeEC2InstanceLimitsOutput_EC2InstanceLimits, &v.EC2InstanceLimits)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEC2InstanceLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeEC2InstanceLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEC2InstanceLimits, schemas.DescribeEC2InstanceLimitsInput, schemas.DescribeEC2InstanceLimitsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeEC2InstanceLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEC2InstanceLimits, schemas.DescribeEC2InstanceLimitsInput, schemas.DescribeEC2InstanceLimitsOutput), output: &DescribeEC2InstanceLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
