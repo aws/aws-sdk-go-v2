@@ -1,8 +1,0 @@
-{
-    "id": "d51cc8ca-c89e-4bd8-b9c8-d3eb92109dab",
-    "type": "documentation",
-    "description": "Documentation updates for SearchRules, AssociateRoutingProfileQueues, CreateRoutingProfile, AssociateContactWithUser CreateTaskTemplate, and UpdateTaskTemplate",
-    "modules": [
-        "service/connect"
-    ]
-}

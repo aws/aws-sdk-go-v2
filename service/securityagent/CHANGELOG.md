@@ -1,3 +1,8 @@
+# v1.8.1 (2026-07-28)
+
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2026-07-27)
 
 * **Feature**: AWS Security Agent adds a new task hours field that reflects the active work done for a task.

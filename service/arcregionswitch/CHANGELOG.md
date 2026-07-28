@@ -1,3 +1,9 @@
+# v1.13.0 (2026-07-28)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2026-07-22)
 
 * **Feature**: Adds support for a client token in StartPlanExecution to make plan execution requests idempotent for safe retries.

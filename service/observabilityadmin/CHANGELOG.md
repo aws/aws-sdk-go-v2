@@ -1,3 +1,8 @@
+# v1.21.1 (2026-07-28)
+
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2026-07-22)
 
 * **Feature**: Enablement for ALB and Bedrock Knowledge Base logs via Observability Admin Telemetry Rule for account and organization level

@@ -1,3 +1,8 @@
+# v1.15.2 (2026-07-28)
+
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.1 (2026-07-24)
 
 * **Documentation**: Documentation-only update to clarify the operation-specific valid values for the externalIdType field.

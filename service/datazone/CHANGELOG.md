@@ -1,3 +1,8 @@
+# v1.67.1 (2026-07-28)
+
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.67.0 (2026-07-23)
 
 * **Feature**: Adds support for notebook sync with S3 ipynb files

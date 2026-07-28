@@ -1,8 +1,0 @@
-{
-    "id": "8c471aae-36dc-4a9b-9ad7-63245eb86154",
-    "type": "documentation",
-    "description": "Adds Enhanced mode support for EFS and FSx Lustre locations without an agent, and for HDFS (TDE), Azure Blob, and object storage locations with an agent. HDFS Enhanced mode supports multiple NameNodes for High Availability. Enhanced mode agents can now be deployed on Microsoft Hyper-V.",
-    "modules": [
-        "service/datasync"
-    ]
-}

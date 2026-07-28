@@ -1,3 +1,8 @@
+# v1.43.1 (2026-07-28)
+
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.0 (2026-07-23)
 
 * **Feature**: This release adds support for non-epoch-locked CMAF ingest in MediaPackageV2 channels.

@@ -1,3 +1,9 @@
+# v1.66.0 (2026-07-28)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.65.0 (2026-07-22)
 
 * **Feature**: Adds documented value constraints for CloudWatch Log Alarm scheduled query configuration fields, and makes LogGroupIdentifiers optional for log alarms.

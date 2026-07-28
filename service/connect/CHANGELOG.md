@@ -1,3 +1,9 @@
+# v1.184.1 (2026-07-28)
+
+* **Documentation**: Documentation updates for SearchRules, AssociateRoutingProfileQueues, CreateRoutingProfile, AssociateContactWithUser CreateTaskTemplate, and UpdateTaskTemplate
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.184.0 (2026-07-21)
 
 * **Feature**: Add an option to clients to disable clock skew

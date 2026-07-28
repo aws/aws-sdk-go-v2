@@ -1,3 +1,8 @@
+# v1.122.1 (2026-07-28)
+
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.122.0 (2026-07-27)
 
 * **Feature**: Added new Governance fields to Custom Permissions API to support Deny By Default functionality.

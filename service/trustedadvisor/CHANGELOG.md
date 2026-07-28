@@ -1,3 +1,9 @@
+# v1.18.0 (2026-07-28)
+
+* **Feature**: Adds ListRecommendationsForResource API and four CheckSummary fields (resourceArnQueryable, awsResourceTypes, checkGranularity, recommendationId) to retrieve recommendations for a given resource ARN.
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2026-07-21)
 
 * **Feature**: Add an option to clients to disable clock skew

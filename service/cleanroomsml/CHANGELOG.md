@@ -1,3 +1,8 @@
+# v1.27.1 (2026-07-28)
+
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.0 (2026-07-27)
 
 * **Feature**: This release adds support for the CR.8X worker type for SQL (32 vCPU)

@@ -1,3 +1,34 @@
+# Release (2026-07-28)
+
+## General Highlights
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.3.6](feature/s3/transfermanager/CHANGELOG.md#v036-2026-07-28)
+  * **Bug Fix**: Fix flaky test from feature/s3/transfermanager upload retry
+  * **Bug Fix**: Forward SSE-C, VersionId, RequestPayer and other fields to HeadObject call when using transfer manager
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.13.0](service/arcregionswitch/CHANGELOG.md#v1130-2026-07-28)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.52.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1520-2026-07-28)
+  * **Feature**: AgentCore Identity now supports Private Key JWT client authentication for OAuth 2.0 credential providers. Agents can authenticate to identity provider token endpoints with a JWT client assertion signed by a customer-managed AWS KMS asymmetric key, eliminating the need for client secrets.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.66.0](service/cloudwatch/CHANGELOG.md#v1660-2026-07-28)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation`: [v1.6.0](service/computeoptimizerautomation/CHANGELOG.md#v160-2026-07-28)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.184.1](service/connect/CHANGELOG.md#v11841-2026-07-28)
+  * **Documentation**: Documentation updates for SearchRules, AssociateRoutingProfileQueues, CreateRoutingProfile, AssociateContactWithUser CreateTaskTemplate, and UpdateTaskTemplate
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.61.1](service/datasync/CHANGELOG.md#v1611-2026-07-28)
+  * **Documentation**: Adds Enhanced mode support for EFS and FSx Lustre locations without an agent, and for HDFS (TDE), Azure Blob, and object storage locations with an agent. HDFS Enhanced mode supports multiple NameNodes for High Availability. Enhanced mode agents can now be deployed on Microsoft Hyper-V.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.60.0](service/gamelift/CHANGELOG.md#v1600-2026-07-28)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/interconnect`: [v1.4.0](service/interconnect/CHANGELOG.md#v140-2026-07-28)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.26.0](service/rolesanywhere/CHANGELOG.md#v1260-2026-07-28)
+  * **Feature**: Increases certificate string length for trust anchor source data to support new adjustable trust anchor limits.
+* `github.com/aws/aws-sdk-go-v2/service/trustedadvisor`: [v1.18.0](service/trustedadvisor/CHANGELOG.md#v1180-2026-07-28)
+  * **Feature**: Adds ListRecommendationsForResource API and four CheckSummary fields (resourceArnQueryable, awsResourceTypes, checkGranularity, recommendationId) to retrieve recommendations for a given resource ARN.
+
 # Release (2026-07-27)
 
 ## Module Highlights

@@ -1,3 +1,8 @@
+# v1.19.1 (2026-07-28)
+
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2026-07-27)
 
 * **Feature**: With this release, customers can configure their data exports to deliver CSV reports in ZIP compressed format.
