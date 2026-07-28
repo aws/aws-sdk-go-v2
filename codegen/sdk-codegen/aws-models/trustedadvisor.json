@@ -110,6 +110,16 @@
                 "target": "com.amazonaws.trustedadvisor#AccountRecommendationLifecycleSummary"
             }
         },
+        "com.amazonaws.trustedadvisor#AwsResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-\\w+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"
+            }
+        },
         "com.amazonaws.trustedadvisor#BatchUpdateRecommendationResourceExclusion": {
             "type": "operation",
             "input": {
@@ -278,6 +288,32 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The column headings for the metadata returned in the resource</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "resourceArnQueryable": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether this check is supported by the ListRecommendationsForResource API.</p>"
+                    }
+                },
+                "awsResourceTypes": {
+                    "target": "com.amazonaws.trustedadvisor#StringList",
+                    "traits": {
+                        "smithy.api#default": [],
+                        "smithy.api#documentation": "<p>The AWS resource types that this check evaluates (for example, AWS::EC2::Instance).</p>"
+                    }
+                },
+                "checkGranularity": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The granularity level at which the check operates: resource, account, or account_region.</p>"
+                    }
+                },
+                "recommendationId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation identifier associated with the check.</p>"
                     }
                 }
             },
@@ -600,7 +636,13 @@
                                     "pillars": [
                                         "security"
                                     ],
-                                    "source": "ta_check"
+                                    "source": "ta_check",
+                                    "resourceArnQueryable": true,
+                                    "awsResourceTypes": [
+                                        "AWS::EC2::SecurityGroup"
+                                    ],
+                                    "checkGranularity": "resource",
+                                    "recommendationId": "9534ec9b-bf3a-44e8-8213-2ed68b39d9d5"
                                 },
                                 {
                                     "arn": "arn:aws:trustedadvisor:::check/1qazXsw23e",
@@ -631,7 +673,11 @@
                                     "pillars": [
                                         "cost_optimizing"
                                     ],
-                                    "source": "ta_check"
+                                    "source": "ta_check",
+                                    "resourceArnQueryable": false,
+                                    "awsResourceTypes": [],
+                                    "checkGranularity": "account",
+                                    "recommendationId": "8b602b6f-452d-4cb2-8a9e-c7650955d9cd"
                                 },
                                 {
                                     "arn": "arn:aws:trustedadvisor:::check/1qw23er45t",
@@ -658,7 +704,11 @@
                                     "pillars": [
                                         "cost_optimizing"
                                     ],
-                                    "source": "ta_check"
+                                    "source": "ta_check",
+                                    "resourceArnQueryable": false,
+                                    "awsResourceTypes": [],
+                                    "checkGranularity": "account",
+                                    "recommendationId": "4ecff4d4-1bc1-4c99-a5b8-0fff9ee500d6"
                                 }
                             ],
                             "nextToken": "<REDACTED>"
@@ -1759,6 +1809,168 @@
                 "smithy.api#tags": []
             }
         },
+        "com.amazonaws.trustedadvisor#ListRecommendationsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.trustedadvisor#ListRecommendationsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.trustedadvisor#ListRecommendationsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.trustedadvisor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.trustedadvisor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.trustedadvisor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.trustedadvisor#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all Trusted Advisor recommendations for a given AWS resource ARN.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List all Trusted Advisor Recommendations for an AWS Resource",
+                        "input": {
+                            "awsResourceArn": "arn:aws:ec2:us-east-1:000000000000:instance/i-0abcd1234efgh5678"
+                        },
+                        "output": {
+                            "recommendationForResourceSummaries": [
+                                {
+                                    "checkArn": "arn:aws:trustedadvisor:::check/Qch7DwouX1",
+                                    "recommendationArn": "arn:aws:trustedadvisor::000000000000:recommendation/55fa4d2e-bbb7-491a-833b-5773e9589578",
+                                    "awsResourceArn": "arn:aws:ec2:us-east-1:000000000000:instance/i-0abcd1234efgh5678",
+                                    "status": "warning",
+                                    "lastUpdatedAt": "2026-05-21T15:09:51.891Z",
+                                    "exclusionStatus": "included",
+                                    "metadata": {
+                                        "Region": "us-east-1",
+                                        "Resource": "i-0abcd1234efgh5678",
+                                        "Status": "Yellow"
+                                    },
+                                    "pillars": [
+                                        "cost_optimizing"
+                                    ]
+                                }
+                            ],
+                            "nextToken": "<REDACTED>"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/recommendations-for-resource/{awsResourceArn}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "recommendationForResourceSummaries"
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "not_aws-iso-f",
+                    "not_aws-iso-e"
+                ]
+            }
+        },
+        "com.amazonaws.trustedadvisor#ListRecommendationsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>",
+                        "smithy.api#httpQuery": "nextToken",
+                        "smithy.api#length": {
+                            "min": 4,
+                            "max": 10000
+                        }
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 600
+                        }
+                    }
+                },
+                "awsResourceArn": {
+                    "target": "com.amazonaws.trustedadvisor#AwsResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the AWS resource to query recommendations for</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "pillar": {
+                    "target": "com.amazonaws.trustedadvisor#RecommendationPillar",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pillar that the recommendation belongs to</p>",
+                        "smithy.api#httpQuery": "pillar"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.trustedadvisor#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Recommendation Resource</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                },
+                "checkArn": {
+                    "target": "com.amazonaws.trustedadvisor#CheckArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Trusted Advisor Check ARN that relates to the Recommendation</p>",
+                        "smithy.api#httpQuery": "checkArn"
+                    }
+                },
+                "language": {
+                    "target": "com.amazonaws.trustedadvisor#RecommendationLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ISO 639-1 code for the language that you want your recommendations to appear in.</p>",
+                        "smithy.api#httpQuery": "language"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.trustedadvisor#ListRecommendationsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. </p>",
+                        "smithy.api#length": {
+                            "min": 4,
+                            "max": 10000
+                        }
+                    }
+                },
+                "recommendationForResourceSummaries": {
+                    "target": "com.amazonaws.trustedadvisor#RecommendationForResourceSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of Trusted Advisor recommendations associated with the given AWS resource</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.trustedadvisor#ListRecommendationsRequest": {
             "type": "structure",
             "members": {
@@ -2427,6 +2639,77 @@
                 "smithy.api#documentation": "<p>Cost optimizing aggregates for a Recommendation</p>"
             }
         },
+        "com.amazonaws.trustedadvisor#RecommendationForResourceSummary": {
+            "type": "structure",
+            "members": {
+                "checkArn": {
+                    "target": "com.amazonaws.trustedadvisor#CheckArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Check ARN</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "recommendationArn": {
+                    "target": "com.amazonaws.trustedadvisor#AccountRecommendationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Recommendation ARN</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "awsResourceArn": {
+                    "target": "com.amazonaws.trustedadvisor#AwsResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Resource ARN</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.trustedadvisor#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the recommendation</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the recommendation was last updated</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "exclusionStatus": {
+                    "target": "com.amazonaws.trustedadvisor#ExclusionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exclusion status of the recommendation</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.trustedadvisor#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata associated with the recommendation</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "pillars": {
+                    "target": "com.amazonaws.trustedadvisor#RecommendationPillarList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Pillars that the Recommendation is optimizing</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary of a Recommendation for a specific AWS Resource</p>"
+            }
+        },
+        "com.amazonaws.trustedadvisor#RecommendationForResourceSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.trustedadvisor#RecommendationForResourceSummary"
+            }
+        },
         "com.amazonaws.trustedadvisor#RecommendationLanguage": {
             "type": "enum",
             "members": {
@@ -3066,6 +3349,12 @@
                 }
             }
         },
+        "com.amazonaws.trustedadvisor#StringList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
         "com.amazonaws.trustedadvisor#StringMap": {
             "type": "map",
             "key": {
@@ -3124,6 +3413,9 @@
                 },
                 {
                     "target": "com.amazonaws.trustedadvisor#ListRecommendations"
+                },
+                {
+                    "target": "com.amazonaws.trustedadvisor#ListRecommendationsForResource"
                 },
                 {
                     "target": "com.amazonaws.trustedadvisor#UpdateOrganizationRecommendationLifecycle"

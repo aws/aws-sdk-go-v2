@@ -203,6 +203,41 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#AdditionalClaimName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_.:#-]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#AdditionalClaimValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#AdditionalClaims": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#AdditionalClaimName"
+            },
+            "value": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#AdditionalClaimValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#AdditionalModelRequestFields": {
             "type": "document"
         },
@@ -2816,6 +2851,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AWS_IAM_ID_TOKEN_JWT"
+                    }
+                },
+                "PRIVATE_KEY_JWT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVATE_KEY_JWT"
                     }
                 }
             }
@@ -8413,6 +8454,9 @@
                         "smithy.api#documentation": "<p>The client authentication method to use when authenticating with the token endpoint.</p>"
                     }
                 },
+                "privateKeyJwtConfig": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PrivateKeyJwtConfig"
+                },
                 "privateEndpoint": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PrivateEndpoint",
                     "traits": {
@@ -8446,6 +8490,18 @@
                         "smithy.api#documentation": "<p>The client ID for the custom OAuth2 provider.</p>"
                     }
                 },
+                "onBehalfOfTokenExchangeConfig": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#OnBehalfOfTokenExchangeConfigType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for on-behalf-of token exchange.</p>"
+                    }
+                },
+                "clientAuthenticationMethod": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientAuthenticationMethodType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client authentication method used when authenticating with the token endpoint.</p>"
+                    }
+                },
                 "privateEndpoint": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#PrivateEndpoint",
                     "traits": {
@@ -8458,17 +8514,8 @@
                         "smithy.api#documentation": "<p>The private endpoint overrides for the custom OAuth2 provider configuration.</p>"
                     }
                 },
-                "onBehalfOfTokenExchangeConfig": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#OnBehalfOfTokenExchangeConfigType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The configuration for on-behalf-of token exchange.</p>"
-                    }
-                },
-                "clientAuthenticationMethod": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientAuthenticationMethodType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The client authentication method used when authenticating with the token endpoint.</p>"
-                    }
+                "privateKeyJwtConfig": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PrivateKeyJwtConfig"
                 }
             },
             "traits": {
@@ -20301,6 +20348,21 @@
                 "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#KmsKeySourceType": {
+            "type": "structure",
+            "members": {
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to sign the JWT client assertion. The key must be an asymmetric key with key usage SIGN_VERIFY and a key spec compatible with the configured signing algorithm.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the KMS key configuration for a JWT client assertion.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#LambdaArn": {
             "type": "string",
             "traits": {
@@ -27717,6 +27779,52 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#PrivateKeyJwtConfig": {
+            "type": "structure",
+            "members": {
+                "privateKeySource": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PrivateKeySource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private key source for the JWT client assertion.</p>"
+                    }
+                },
+                "signingAlgorithm": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#SigningAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The algorithm used to sign the JWT client assertion. Valid values are <code>RS256</code>, <code>PS256</code>, and <code>ES256</code>.</p>"
+                    }
+                },
+                "additionalHeaderClaims": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AdditionalClaims",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of additional claims to include in the JWT client assertion header. Standard header claims such as <code>alg</code> and <code>typ</code> cannot be added.</p>"
+                    }
+                },
+                "additionalPayloadClaims": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AdditionalClaims",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of additional claims to include in the JWT client assertion payload. Payload claims generated by the service, such as <code>iss</code>, <code>sub</code>, <code>jti</code>, and <code>exp</code>, cannot be added.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configuration for private_key_jwt client authentication (RFC 7523).\nOn Create: privateKeySource and signingAlgorithm are required (enforced server-side).\nOn Update: all fields are optional — only provided fields are updated."
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#PrivateKeySource": {
+            "type": "union",
+            "members": {
+                "kmsKeySource": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeySourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key source for the JWT client assertion.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the private key source configuration for a JWT client assertion.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#Prompt": {
             "type": "string",
             "traits": {
@@ -29796,6 +29904,29 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#SigningAlgorithm": {
+            "type": "enum",
+            "members": {
+                "RS256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RS256"
+                    }
+                },
+                "PS256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PS256"
+                    }
+                },
+                "ES256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ES256"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#SkillDefinition": {
