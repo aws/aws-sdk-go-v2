@@ -11,6 +11,7 @@ BUILD_TAGS=-tags "example,codegen,integration,ec2env,perftest"
 SNAPSHOT_TAGS=-tags "snapshot"
 REQUEST_SNAPSHOT_TAGS=-tags "request_snapshot"
 RESPONSE_SNAPSHOT_TAGS=-tags "response_snapshot"
+SERDEBENCHMARK_TAGS=-tags "serdebenchmark"
 
 SMITHY_GO_SRC ?= $(abspath $(shell pwd)/..)/smithy-go
 
@@ -254,7 +255,8 @@ update-module-metadata:
 # Unit Testing #
 ################
 .PHONY: unit unit-race unit-test unit-race-test unit-race-modules-% unit-modules-% build build-modules-% \
-go-build-modules-% test test-race-modules-% test-modules-% cachedep cachedep-modules-% api-diff-modules-%
+go-build-modules-% test test-race-modules-% test-modules-% cachedep cachedep-modules-% api-diff-modules-% \
+test-serdebenchmark test-serdebenchmark-modules-%
 
 unit: lint unit-modules-.
 unit-race: lint unit-race-modules-.
@@ -353,6 +355,14 @@ test-ci-check-response-snapshot-%:
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst test-ci-check-response-snapshot-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test ${RESPONSE_SNAPSHOT_TAGS} -run TestCheckResponseSnapshot -failfast ."
+
+test-serdebenchmark: test-serdebenchmark-modules-service_internal_serdebenchmark
+
+test-serdebenchmark-modules-%:
+	@# See suffix-to-path pattern. Runs `go test` on modules with the `serdebenchmark` tag
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-serdebenchmark-modules-,,$@)) ${EACHMODULE_FLAGS} \
+		"go test ${SERDEBENCHMARK_TAGS} ./..."
 
 cachedep: cachedep-modules-.
 

@@ -3,14 +3,14 @@ module github.com/aws/aws-sdk-go-v2/service/internal/serdebenchmark/restjsondata
 go 1.24
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.43.0
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.31
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.31
-	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.9.24
-	github.com/aws/smithy-go v1.27.3
+	github.com/aws/aws-sdk-go-v2 v1.43.1
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.32
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.32
+	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.9.25
+	github.com/aws/smithy-go v1.27.5
 )
 
-require github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.31 // indirect
+require github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.32 // indirect
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../../
 
