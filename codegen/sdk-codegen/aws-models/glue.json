@@ -5165,6 +5165,32 @@
                 }
             }
         },
+        "com.amazonaws.glue#BetweenConfiguration": {
+            "type": "structure",
+            "members": {
+                "LowBoundKey": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter name used for the lower bound value in a BETWEEN filter operation.</p>"
+                    }
+                },
+                "HighBoundKey": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter name used for the upper bound value in a BETWEEN filter operation.</p>"
+                    }
+                },
+                "Template": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A template string for constructing the BETWEEN filter expression.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that defines how BETWEEN range filter operations are translated into REST API request parameters.</p>"
+            }
+        },
         "com.amazonaws.glue#BinEdges": {
             "type": "list",
             "member": {
@@ -9174,6 +9200,15 @@
                 }
             }
         },
+        "com.amazonaws.glue#ConnectionStringToStringMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            }
+        },
         "com.amazonaws.glue#ConnectionType": {
             "type": "enum",
             "members": {
@@ -10124,6 +10159,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The data type of this property</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Format": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A format template for the property value that defines how the value should be formatted before sending it in API requests. Use <code>{value}</code> as a placeholder for the actual property value (for example, <code>SSWS {value}</code>).</p>"
                     }
                 }
             },
@@ -21518,6 +21559,42 @@
                         "smithy.api#documentation": "<p>The data type of the field.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ResponseDateFormat": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format pattern for parsing date values from API responses. Required when the API uses a non-ISO-8601 format. Accepts Java <code>DateTimeFormatter</code> patterns (for example, <code>EEE, d MMM yyyy HH:mm:ss Z</code>), <code>EPOCH_SECONDS</code> for Unix epoch seconds, or <code>EPOCH_MILLIS</code> for Unix epoch milliseconds.</p>"
+                    }
+                },
+                "IsPartitionable": {
+                    "target": "com.amazonaws.glue#Bool",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether this field can be used for partitioning queries to the data source.</p>"
+                    }
+                },
+                "IsNullable": {
+                    "target": "com.amazonaws.glue#Bool",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether this field can contain null values.</p>"
+                    }
+                },
+                "IsQueryable": {
+                    "target": "com.amazonaws.glue#Bool",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether this field can be used in filter predicates when querying data.</p>"
+                    }
+                },
+                "IsOrderable": {
+                    "target": "com.amazonaws.glue#Bool",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether this field can be used for ordering results.</p>"
+                    }
+                },
+                "FilterOverrides": {
+                    "target": "com.amazonaws.glue#FilterOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Per-field overrides for filter behavior, allowing customization of how filters are applied to this specific field.</p>"
+                    }
                 }
             },
             "traits": {
@@ -21730,6 +21807,51 @@
                 "smithy.api#documentation": "<p>Specifies a transform that splits a dataset into two, based on a filter condition.</p>"
             }
         },
+        "com.amazonaws.glue#FilterConfiguration": {
+            "type": "structure",
+            "members": {
+                "FilterMode": {
+                    "target": "com.amazonaws.glue#FilterMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strategy for applying filters to requests. Use <code>QUERY_PARAMS</code> to pass filters as individual query parameters, or <code>FILTER_STRING</code> to construct a single filter expression string.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OperatorMappings": {
+                    "target": "com.amazonaws.glue#ConnectionStringToStringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of logical filter operators to their API-specific string representations. Supported operator keys are: <code>EQUAL_TO</code>, <code>NOT_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>GREATER_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>CONTAINS</code>, <code>BETWEEN</code>, <code>AND</code>, and <code>OR</code>.</p>"
+                    }
+                },
+                "DateTimeFormat": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The global date and time format for filter expressions. Accepts Java <code>DateTimeFormatter</code> patterns (for example, <code>EEE, d MMM yyyy HH:mm:ss Z</code>), <code>EPOCH_SECONDS</code> for Unix epoch seconds, or <code>EPOCH_MILLIS</code> for Unix epoch milliseconds. If not specified, values are passed as-is in ISO-8601 format.</p>"
+                    }
+                },
+                "StripQuotes": {
+                    "target": "com.amazonaws.glue#Bool",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether surrounding double quotes should be stripped from filter values before processing.</p>"
+                    }
+                },
+                "BetweenConfiguration": {
+                    "target": "com.amazonaws.glue#BetweenConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for handling BETWEEN range filter operations.</p>"
+                    }
+                },
+                "FilterStringConfiguration": {
+                    "target": "com.amazonaws.glue#FilterStringConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for constructing filter expressions when <code>FilterMode</code> is set to <code>FILTER_STRING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that defines how filter predicates are applied to REST API requests, supporting both query parameter and filter string strategies.</p>"
+            }
+        },
         "com.amazonaws.glue#FilterExpression": {
             "type": "structure",
             "members": {
@@ -21779,6 +21901,26 @@
                         "smithy.api#enumValue": "OR"
                     }
                 }
+            }
+        },
+        "com.amazonaws.glue#FilterMode": {
+            "type": "enum",
+            "members": {
+                "QUERY_PARAMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUERY_PARAMS"
+                    }
+                },
+                "FILTER_STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILTER_STRING"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The strategy used to apply filter predicates to REST API requests.</p>"
             }
         },
         "com.amazonaws.glue#FilterOperation": {
@@ -21869,6 +22011,38 @@
                 }
             }
         },
+        "com.amazonaws.glue#FilterOverrides": {
+            "type": "structure",
+            "members": {
+                "FieldName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An override for the field name to use in filter expressions, if different from the schema field name.</p>"
+                    }
+                },
+                "OperatorMappings": {
+                    "target": "com.amazonaws.glue#ConnectionStringToStringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of logical filter operators to their field-specific API representations, overriding the global operator mappings. Supported operator keys are: <code>EQUAL_TO</code>, <code>NOT_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>GREATER_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>CONTAINS</code>, <code>BETWEEN</code>, <code>AND</code>, and <code>OR</code>.</p>"
+                    }
+                },
+                "BetweenConfiguration": {
+                    "target": "com.amazonaws.glue#BetweenConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Field-specific configuration for handling BETWEEN range filter operations.</p>"
+                    }
+                },
+                "DateTimeFormat": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time format for filter expressions on this field, overriding the global <code>DateTimeFormat</code>. Accepts Java <code>DateTimeFormatter</code> patterns (for example, <code>EEE, d MMM yyyy HH:mm:ss Z</code>), <code>EPOCH_SECONDS</code> for Unix epoch seconds, or <code>EPOCH_MILLIS</code> for Unix epoch milliseconds.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that defines per-field overrides for filter behavior, allowing individual fields to customize how filter operations are applied.</p>"
+            }
+        },
         "com.amazonaws.glue#FilterPredicate": {
             "type": "string",
             "traits": {
@@ -21886,6 +22060,33 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
+            }
+        },
+        "com.amazonaws.glue#FilterStringConfiguration": {
+            "type": "structure",
+            "members": {
+                "QueryParameterName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query parameter name used to send the constructed filter expression string in API requests.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "QuoteStringValues": {
+                    "target": "com.amazonaws.glue#Bool",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether string and date values should be wrapped with a quote character in the filter expression.</p>"
+                    }
+                },
+                "QuoteCharacter": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The character used to quote values when <code>QuoteStringValues</code> is true. Defaults to double quotes if not specified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for constructing filter expression strings when using the <code>FILTER_STRING</code> filter mode.</p>"
             }
         },
         "com.amazonaws.glue#FilterValue": {
@@ -45834,6 +46035,12 @@
                     "target": "com.amazonaws.glue#PaginationConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for handling paginated responses from the REST API, supporting both cursor-based and offset-based pagination strategies.</p>"
+                    }
+                },
+                "FilterConfiguration": {
+                    "target": "com.amazonaws.glue#FilterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for applying filter pushdown to REST API requests, defining how filter predicates are translated into query parameters or filter strings.</p>"
                     }
                 }
             },

@@ -3107,6 +3107,9 @@
                     "target": "com.amazonaws.ec2#CreateTransitGatewayPolicyTable"
                 },
                 {
+                    "target": "com.amazonaws.ec2#CreateTransitGatewayPolicyTableEntry"
+                },
+                {
                     "target": "com.amazonaws.ec2#CreateTransitGatewayPrefixListReference"
                 },
                 {
@@ -3384,6 +3387,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#DeleteTransitGatewayPolicyTable"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DeleteTransitGatewayPolicyTableEntry"
                 },
                 {
                     "target": "com.amazonaws.ec2#DeleteTransitGatewayPrefixListReference"
@@ -4659,6 +4665,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyTransitGatewayMeteringPolicy"
+                },
+                {
+                    "target": "com.amazonaws.ec2#ModifyTransitGatewayPolicyTableEntry"
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyTransitGatewayPrefixListReference"
@@ -25844,6 +25853,77 @@
                 "smithy.api#documentation": "<p>Creates a transit gateway policy table.</p>"
             }
         },
+        "com.amazonaws.ec2#CreateTransitGatewayPolicyTableEntry": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#CreateTransitGatewayPolicyTableEntryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#CreateTransitGatewayPolicyTableEntryResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an entry in a transit gateway policy table to route matching traffic to a specified route table.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CreateTransitGatewayPolicyTableEntryRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayPolicyTableId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayPolicyTableId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the transit gateway policy table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyRuleNumber": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The rule number for the policy table entry. Lower rule numbers are evaluated first and take precedence.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyRule": {
+                    "target": "com.amazonaws.ec2#TransitGatewayRequestPolicyRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The matching criteria for the policy table entry.</p>"
+                    }
+                },
+                "TargetRouteTableId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayRouteTableId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the transit gateway route table to use for traffic matching this rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#CreateTransitGatewayPolicyTableEntryResult": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayPolicyTableEntry": {
+                    "target": "com.amazonaws.ec2#TransitGatewayPolicyTableEntry",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayPolicyTableEntry",
+                        "smithy.api#xmlName": "transitGatewayPolicyTableEntry"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#CreateTransitGatewayPolicyTableRequest": {
             "type": "structure",
             "members": {
@@ -26278,7 +26358,7 @@
                 "Ipv6Support": {
                     "target": "com.amazonaws.ec2#Ipv6SupportValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enable or disable IPv6 support.  The default is <code>disable</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether IPv6 support is enabled for the attachment. When enabled, the transit gateway network interface receives an IPv6 address. When you enable route propagation, IPv6 VPC CIDRs propagate to the transit gateway route tables. When disabled, the network interface does not receive an IPv6 address, and IPv6 routes do not propagate. The setting does not filter IPv6 traffic. The default is <code>disable</code>.</p>"
                     }
                 },
                 "ApplianceModeSupport": {
@@ -33023,6 +33103,63 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Deletes the specified transit gateway policy table.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DeleteTransitGatewayPolicyTableEntry": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DeleteTransitGatewayPolicyTableEntryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DeleteTransitGatewayPolicyTableEntryResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified transit gateway policy table entry.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DeleteTransitGatewayPolicyTableEntryRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayPolicyTableId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayPolicyTableId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the transit gateway policy table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyRuleNumber": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The rule number of the policy table entry to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DeleteTransitGatewayPolicyTableEntryResult": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayPolicyTableEntry": {
+                    "target": "com.amazonaws.ec2#TransitGatewayPolicyTableEntry",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayPolicyTableEntry",
+                        "smithy.api#xmlName": "transitGatewayPolicyTableEntry"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ec2#DeleteTransitGatewayPolicyTableRequest": {
@@ -69060,7 +69197,13 @@
                 "target": "com.amazonaws.ec2#GetTransitGatewayPolicyTableEntriesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of transit gateway policy table entries.</p>"
+                "smithy.api#documentation": "<p>Returns a list of transit gateway policy table entries.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "TransitGatewayPolicyTableEntries",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.ec2#GetTransitGatewayPolicyTableEntriesRequest": {
@@ -69077,7 +69220,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters associated with the transit gateway policy table.</p>",
+                        "smithy.api#documentation": "<p>One or more filters. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>policy-rule-number</code> - The rule number for the transit gateway policy table entry.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target-route-table-id</code> - The ID of the target route table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>policy-rule.source-ip</code> - The source CIDR block for the policy rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>policy-rule.destination-ip</code> - The destination CIDR block for the policy rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>policy-rule.source-port</code> - The source port or port range for the policy rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>policy-rule.destination-port</code> - The destination port or port range for the policy rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>policy-rule.protocol</code> - The protocol for the policy rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>policy-rule.meta-data.key</code> - The metadata key for the policy rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>policy-rule.meta-data.value</code> - The metadata value for the policy rule.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -69113,6 +69256,14 @@
                         "aws.protocols#ec2QueryName": "TransitGatewayPolicyTableEntries",
                         "smithy.api#documentation": "<p>The entries for the transit gateway policy table.</p>",
                         "smithy.api#xmlName": "transitGatewayPolicyTableEntries"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
                     }
                 }
             },
@@ -102163,6 +102314,75 @@
                 "smithy.api#documentation": "<p>The transit gateway options.</p>"
             }
         },
+        "com.amazonaws.ec2#ModifyTransitGatewayPolicyTableEntry": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifyTransitGatewayPolicyTableEntryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifyTransitGatewayPolicyTableEntryResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the specified transit gateway policy table entry.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyTransitGatewayPolicyTableEntryRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayPolicyTableId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayPolicyTableId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the transit gateway policy table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyRuleNumber": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The rule number of the policy table entry to modify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyRule": {
+                    "target": "com.amazonaws.ec2#TransitGatewayRequestPolicyRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated matching criteria for the policy table entry. Unspecified fields retain their current values.</p>"
+                    }
+                },
+                "TargetRouteTableId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayRouteTableId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the transit gateway route table to use for traffic matching this rule.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#ModifyTransitGatewayPolicyTableEntryResult": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayPolicyTableEntry": {
+                    "target": "com.amazonaws.ec2#TransitGatewayPolicyTableEntry",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayPolicyTableEntry",
+                        "smithy.api#xmlName": "transitGatewayPolicyTableEntry"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#ModifyTransitGatewayPrefixListReference": {
             "type": "operation",
             "input": {
@@ -102353,7 +102573,7 @@
                 "Ipv6Support": {
                     "target": "com.amazonaws.ec2#Ipv6SupportValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enable or disable IPv6 support. The default is <code>enable</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether IPv6 support is enabled for the attachment. When enabled, the transit gateway network interface receives an IPv6 address. When you enable route propagation, IPv6 VPC CIDRs propagate to the transit gateway route tables. When disabled, the network interface does not receive an IPv6 address, and IPv6 routes do not propagate. The setting does not filter IPv6 traffic.</p>"
                     }
                 },
                 "ApplianceModeSupport": {
@@ -129793,6 +130013,14 @@
                         "smithy.api#xmlName": "transitGatewayRouteTableId"
                     }
                 },
+                "TransitGatewayPolicyTableId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayPolicyTableId",
+                        "smithy.api#documentation": "<p>The ID of the transit gateway policy table associated with the attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayPolicyTableId"
+                    }
+                },
                 "State": {
                     "target": "com.amazonaws.ec2#TransitGatewayAssociationState",
                     "traits": {
@@ -131594,7 +131822,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "SourcePortRange",
-                        "smithy.api#documentation": "<p>The port range for the transit gateway policy rule. Currently this is set to * (all).</p>",
+                        "smithy.api#documentation": "<p>The source port or port range for the transit gateway policy rule.</p>",
                         "smithy.api#xmlName": "sourcePortRange"
                     }
                 },
@@ -131610,7 +131838,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "DestinationPortRange",
-                        "smithy.api#documentation": "<p>The port range for the transit gateway policy rule. Currently this is set to * (all).</p>",
+                        "smithy.api#documentation": "<p>The destination port or port range for the transit gateway policy rule.</p>",
                         "smithy.api#xmlName": "destinationPortRange"
                     }
                 },
@@ -131790,6 +132018,14 @@
                         "smithy.api#documentation": "<p>The ID of the target route table.</p>",
                         "smithy.api#xmlName": "targetRouteTableId"
                     }
+                },
+                "State": {
+                    "target": "com.amazonaws.ec2#TransitGatewayPolicyTableEntryState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "State",
+                        "smithy.api#documentation": "<p>The state of the transit gateway policy table entry.</p>",
+                        "smithy.api#xmlName": "state"
+                    }
                 }
             },
             "traits": {
@@ -131802,6 +132038,23 @@
                 "target": "com.amazonaws.ec2#TransitGatewayPolicyTableEntry",
                 "traits": {
                     "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayPolicyTableEntryState": {
+            "type": "enum",
+            "members": {
+                "active": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "active"
+                    }
+                },
+                "deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleted"
+                    }
                 }
             }
         },
@@ -132126,6 +132379,70 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the options for a transit gateway.</p>"
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayRequestPolicyRule": {
+            "type": "structure",
+            "members": {
+                "SourceCidrBlock": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source CIDR block for the policy rule.</p>"
+                    }
+                },
+                "SourcePortRange": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source port or port range for the policy rule. You can specify a port range only when <code>Protocol</code> is <code>6</code> (TCP) or <code>17</code> (UDP); for all other protocols, this value must be <code>*</code>.</p>"
+                    }
+                },
+                "DestinationCidrBlock": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination CIDR block for the policy rule.</p>"
+                    }
+                },
+                "DestinationPortRange": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination port or port range for the policy rule. You can specify a port range only when <code>Protocol</code> is <code>6</code> (TCP) or <code>17</code> (UDP); for all other protocols, this value must be <code>*</code>.</p>"
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol for the policy rule. Valid values are <code>1</code> (ICMP), <code>6</code> (TCP), <code>17</code> (UDP), <code>47</code> (GRE), or <code>*</code> for all protocols.</p>"
+                    }
+                },
+                "MetaData": {
+                    "target": "com.amazonaws.ec2#TransitGatewayRequestPolicyRuleMetaData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata key-value pair for the policy rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The matching criteria for a transit gateway policy table entry.</p>"
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayRequestPolicyRuleMetaData": {
+            "type": "structure",
+            "members": {
+                "MetaDataKey": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the metadata pair for the policy rule.</p>"
+                    }
+                },
+                "MetaDataValue": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the metadata pair for the policy rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A metadata key-value pair for a transit gateway policy rule.</p>"
             }
         },
         "com.amazonaws.ec2#TransitGatewayRoute": {

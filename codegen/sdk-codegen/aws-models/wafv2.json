@@ -2303,6 +2303,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "PreParseTextTransformations": {
+                    "target": "com.amazonaws.wafv2#PreParseTextTransformations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 3 pre-parse text transformations per rule statement.</p>"
+                    }
+                },
                 "PositionalConstraint": {
                     "target": "com.amazonaws.wafv2#PositionalConstraint",
                     "traits": {
@@ -4667,7 +4673,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <a>WebACL</a> per the specifications provided.</p>\n         <p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has a statement that defines what to look for in web requests and an action that WAF applies to requests that match the statement. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resource types include Amazon CloudFront distribution, Amazon API Gateway REST API, Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App Runner service, Amplify application, and Amazon Web Services Verified Access instance.  </p>"
+                "smithy.api#documentation": "<p>Creates a <a>WebACL</a> per the specifications provided.</p>\n         <p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has a statement that defines what to look for in web requests and an action that WAF applies to requests that match the statement. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resource types include Amazon CloudFront distribution, Amazon API Gateway REST API, Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App Runner service, Amplify application, Amazon Web Services Verified Access instance, and Amazon Bedrock AgentCore Gateway.  </p>"
             }
         },
         "com.amazonaws.wafv2#CreateWebACLRequest": {
@@ -11038,6 +11044,12 @@
                     "traits": {
                         "smithy.api#enumValue": "PAYMENT_NETWORK"
                     }
+                },
+                "PRE_PARSE_TEXT_TRANSFORMATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRE_PARSE_TEXT_TRANSFORMATION"
+                    }
                 }
             }
         },
@@ -11286,6 +11298,79 @@
                         "smithy.api#enumValue": "CONTAINS_WORD"
                     }
                 }
+            }
+        },
+        "com.amazonaws.wafv2#PreParseTextTransformation": {
+            "type": "structure",
+            "members": {
+                "Priority": {
+                    "target": "com.amazonaws.wafv2#PreParseTextTransformationPriority",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Sets the relative processing order for the pre-parse text transformations that you define.\n         WAF processes all transformations, from lowest priority value to highest,\n         before inspecting the transformed content. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.wafv2#PreParseTextTransformationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of pre-parse text transformation to apply to the raw query string.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A pre-parse text transformation that normalizes the raw query string before WAF parses\n         it into individual query arguments. Pre-parse text transformations are only supported when\n         <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or <code>AllQueryArguments</code>. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#PreParseTextTransformationPriority": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.wafv2#PreParseTextTransformationType": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "URL_DECODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "URL_DECODE"
+                    }
+                },
+                "URL_DECODE_UNI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "URL_DECODE_UNI"
+                    }
+                },
+                "COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA"
+                    }
+                },
+                "REPLACE_SEMICOLONS_WITH_AMPERSANDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLACE_SEMICOLONS_WITH_AMPERSANDS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wafv2#PreParseTextTransformations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#PreParseTextTransformation"
             }
         },
         "com.amazonaws.wafv2#Price": {
@@ -12046,7 +12131,7 @@
                 "RegexString": {
                     "target": "com.amazonaws.wafv2#RegexPatternString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The string representing the regular expression.</p>"
+                        "smithy.api#documentation": "<p>The string representing the regular expression. WAF enforces a quota on the maximum number of characters in a regex pattern. For the current limit, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/limits.html\">WAF quotas</a> in the <i>WAF Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -12060,7 +12145,7 @@
                 "RegexString": {
                     "target": "com.amazonaws.wafv2#RegexPatternString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The string representing the regular expression.</p>",
+                        "smithy.api#documentation": "<p>The string representing the regular expression. WAF enforces a quota on the maximum number of characters in a regex pattern. For the current limit, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/limits.html\">WAF quotas</a> in the <i>WAF Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12076,6 +12161,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. Text transformations are used in rule match statements, to transform the <code>FieldToMatch</code> request component before inspecting it, and they're used in rate-based rule statements, to transform request components before using them as custom aggregation keys. If you specify one or more transformations to apply, WAF performs all transformations on the specified content, starting from the lowest priority setting, and then uses the transformed component contents. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "PreParseTextTransformations": {
+                    "target": "com.amazonaws.wafv2#PreParseTextTransformations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 3 pre-parse text transformations per rule statement.</p>"
                     }
                 }
             },
@@ -12143,6 +12234,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. Text transformations are used in rule match statements, to transform the <code>FieldToMatch</code> request component before inspecting it, and they're used in rate-based rule statements, to transform request components before using them as custom aggregation keys. If you specify one or more transformations to apply, WAF performs all transformations on the specified content, starting from the lowest priority setting, and then uses the transformed component contents. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "PreParseTextTransformations": {
+                    "target": "com.amazonaws.wafv2#PreParseTextTransformations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 3 pre-parse text transformations per rule statement.</p>"
                     }
                 }
             },
@@ -13603,6 +13700,12 @@
                         "smithy.api#documentation": "<p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. Text transformations are used in rule match statements, to transform the <code>FieldToMatch</code> request component before inspecting it, and they're used in rate-based rule statements, to transform request components before using them as custom aggregation keys. If you specify one or more transformations to apply, WAF performs all transformations on the specified content, starting from the lowest priority setting, and then uses the transformed component contents. </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "PreParseTextTransformations": {
+                    "target": "com.amazonaws.wafv2#PreParseTextTransformations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 3 pre-parse text transformations per rule statement.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13751,6 +13854,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. Text transformations are used in rule match statements, to transform the <code>FieldToMatch</code> request component before inspecting it, and they're used in rate-based rule statements, to transform request components before using them as custom aggregation keys. If you specify one or more transformations to apply, WAF performs all transformations on the specified content, starting from the lowest priority setting, and then uses the transformed component contents. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "PreParseTextTransformations": {
+                    "target": "com.amazonaws.wafv2#PreParseTextTransformations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 3 pre-parse text transformations per rule statement.</p>"
                     }
                 },
                 "SensitivityLevel": {
@@ -14204,6 +14313,66 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UTF8_TO_UNICODE"
+                    }
+                },
+                "REMOVE_WHITESPACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOVE_WHITESPACE"
+                    }
+                },
+                "TRIM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRIM"
+                    }
+                },
+                "TRIM_LEFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRIM_LEFT"
+                    }
+                },
+                "TRIM_RIGHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRIM_RIGHT"
+                    }
+                },
+                "REMOVE_COMMENTS_CHAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOVE_COMMENTS_CHAR"
+                    }
+                },
+                "UPPERCASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPPERCASE"
+                    }
+                },
+                "CMD_LINE_WIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CMD_LINE_WIN"
+                    }
+                },
+                "CMD_LINE_UNIX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CMD_LINE_UNIX"
+                    }
+                },
+                "JS_DECODE_EXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JS_DECODE_EXT"
+                    }
+                },
+                "SHA256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHA256"
                     }
                 }
             }
@@ -14834,7 +15003,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified <a>WebACL</a>. While updating a web ACL, WAF provides\n         continuous coverage to the resources that you have associated with the web ACL. </p>\n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the web ACL with the ones that you provide to this call. </p>\n            <p>To modify a web ACL, do the following: </p>\n            <ol>\n               <li>\n                  <p>Retrieve it by calling <a>GetWebACL</a>\n                  </p>\n               </li>\n               <li>\n                  <p>Update its settings as needed</p>\n               </li>\n               <li>\n                  <p>Provide the complete web ACL specification to this call</p>\n               </li>\n            </ol>\n         </note>\n         <p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has a statement that defines what to look for in web requests and an action that WAF applies to requests that match the statement. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resource types include Amazon CloudFront distribution, Amazon API Gateway REST API, Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App Runner service, Amplify application, and Amazon Web Services Verified Access instance.  </p>\n         <p>\n            <b>Temporary inconsistencies during updates</b>\n         </p>\n         <p>When you create or change a web ACL or other WAF resources, the changes take a small amount of time to propagate to all areas where the resources are stored. The propagation time can be from a few seconds to a number of minutes. </p>\n         <p>The following are examples of the temporary inconsistencies that you might notice during change propagation: </p>\n         <ul>\n            <li>\n               <p>After you create a web ACL, if you try to associate it with a resource, you might get an exception indicating that the web ACL is unavailable. </p>\n            </li>\n            <li>\n               <p>After you add a rule group to a web ACL, the new rule group rules might be in effect in one area where the web ACL is used and not in another.</p>\n            </li>\n            <li>\n               <p>After you change a rule action setting, you might see the old action in some places and the new action in others. </p>\n            </li>\n            <li>\n               <p>After you add an IP address to an IP set that is in use in a blocking rule, the new address might be blocked in one area while still allowed in another.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Updates the specified <a>WebACL</a>. While updating a web ACL, WAF provides\n         continuous coverage to the resources that you have associated with the web ACL. </p>\n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the web ACL with the ones that you provide to this call. </p>\n            <p>To modify a web ACL, do the following: </p>\n            <ol>\n               <li>\n                  <p>Retrieve it by calling <a>GetWebACL</a>\n                  </p>\n               </li>\n               <li>\n                  <p>Update its settings as needed</p>\n               </li>\n               <li>\n                  <p>Provide the complete web ACL specification to this call</p>\n               </li>\n            </ol>\n         </note>\n         <p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has a statement that defines what to look for in web requests and an action that WAF applies to requests that match the statement. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resource types include Amazon CloudFront distribution, Amazon API Gateway REST API, Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App Runner service, Amplify application, Amazon Web Services Verified Access instance, and Amazon Bedrock AgentCore Gateway.  </p>\n         <p>\n            <b>Temporary inconsistencies during updates</b>\n         </p>\n         <p>When you create or change a web ACL or other WAF resources, the changes take a small amount of time to propagate to all areas where the resources are stored. The propagation time can be from a few seconds to a number of minutes. </p>\n         <p>The following are examples of the temporary inconsistencies that you might notice during change propagation: </p>\n         <ul>\n            <li>\n               <p>After you create a web ACL, if you try to associate it with a resource, you might get an exception indicating that the web ACL is unavailable. </p>\n            </li>\n            <li>\n               <p>After you add a rule group to a web ACL, the new rule group rules might be in effect in one area where the web ACL is used and not in another.</p>\n            </li>\n            <li>\n               <p>After you change a rule action setting, you might see the old action in some places and the new action in others. </p>\n            </li>\n            <li>\n               <p>After you add an IP address to an IP set that is in use in a blocking rule, the new address might be blocked in one area while still allowed in another.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.wafv2#UpdateWebACLRequest": {
@@ -15541,7 +15710,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has a statement that defines what to look for in web requests and an action that WAF applies to requests that match the statement. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resource types include Amazon CloudFront distribution, Amazon API Gateway REST API, Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App Runner service, Amplify application, and Amazon Web Services Verified Access instance.  </p>"
+                "smithy.api#documentation": "<p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has a statement that defines what to look for in web requests and an action that WAF applies to requests that match the statement. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resource types include Amazon CloudFront distribution, Amazon API Gateway REST API, Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App Runner service, Amplify application, Amazon Web Services Verified Access instance, and Amazon Bedrock AgentCore Gateway.  </p>"
             }
         },
         "com.amazonaws.wafv2#WebACLSummaries": {
@@ -15603,6 +15772,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. Text transformations are used in rule match statements, to transform the <code>FieldToMatch</code> request component before inspecting it, and they're used in rate-based rule statements, to transform request components before using them as custom aggregation keys. If you specify one or more transformations to apply, WAF performs all transformations on the specified content, starting from the lowest priority setting, and then uses the transformed component contents. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "PreParseTextTransformations": {
+                    "target": "com.amazonaws.wafv2#PreParseTextTransformations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pre-parse text transformations normalize the raw query string before WAF parses it into individual\n         query arguments. They are applied before the standard text transformations. Pre-parse text transformations\n         are only supported when <code>FieldToMatch</code> is <code>SingleQueryArgument</code> or\n         <code>AllQueryArguments</code>. You can specify up to 3 pre-parse text transformations per rule statement.</p>"
                     }
                 }
             },
