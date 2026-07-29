@@ -29,6 +29,13 @@ const (
 	betweenKeyCond
 	// beginsWithKeyCond represents the Begins With KeyCondition
 	beginsWithKeyCond
+
+	// compositeKeyCond represents a composite key condition (for multiple partition/sort keys)
+	compositeKeyCond
+	// compositeKeyCondPartition represents a partition key within a composite key condition
+	compositeKeyCondPartition
+	// compositeKeyCondSort represents a sort key within a composite key condition
+	compositeKeyCondSort
 )
 
 // KeyConditionBuilder represents Key Condition Expressions in DynamoDB.
@@ -38,6 +45,7 @@ type KeyConditionBuilder struct {
 	operandList      []OperandBuilder
 	keyConditionList []KeyConditionBuilder
 	mode             keyConditionMode
+	compositeKeyMode keyConditionMode
 }
 
 // KeyEqual returns a KeyConditionBuilder representing the equality clause
@@ -357,6 +365,9 @@ func KeyAnd(left, right KeyConditionBuilder) KeyConditionBuilder {
 //	// ExpressionAttributeValues representing the item attribute "Number",
 //	// the value "Wildcats", and the value 1
 //	"(TeamName = :teamName) AND (#NUMBER = :one)"
+//
+// WARNING: This method is not supported for composite keys (created with CompositeKey()).
+// Calling And() on a composite key will fail. Use AddPartitionKey() and AddSortKey() instead.
 func (kcb KeyConditionBuilder) And(right KeyConditionBuilder) KeyConditionBuilder {
 	return KeyAnd(kcb, right)
 }
@@ -486,6 +497,8 @@ func (kcb KeyConditionBuilder) buildTree() (exprNode, error) {
 		return exprNode{}, newUnsetParameterError("buildTree", "KeyConditionBuilder")
 	case invalidKeyCond:
 		return exprNode{}, fmt.Errorf("buildKeyCondition error: invalid key condition constructed")
+	case compositeKeyCond:
+		return compositeKeyCondition(kcb, ret)
 	default:
 		return exprNode{}, fmt.Errorf("buildKeyCondition error: unsupported mode: %v", kcb.mode)
 	}
