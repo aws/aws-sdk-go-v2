@@ -145,6 +145,58 @@ func TestCheckResponseSnapshot_AssociateTimeSeriesToAssetProperty(t *testing.T) 
 	}
 }
 
+func TestCheckResponseSnapshot_BatchAssociateDataSegmentsToDataset(t *testing.T) {
+	want := &BatchAssociateDataSegmentsToDatasetOutput{
+		DatasetId:      ptr.String("__DatasetId__"),
+		DatasetVersion: ptr.String("__DatasetVersion__"),
+		FailedAssociations: []types.FailedDataSegmentAssociation{
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				ErrorCode:    types.DataSegmentErrorCode("INTERNAL_FAILURE"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				ErrorCode:    types.DataSegmentErrorCode("INTERNAL_FAILURE"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchAssociateDataSegmentsToDataset.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchAssociateDataSegmentsToDataset(context.Background(), &BatchAssociateDataSegmentsToDatasetInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchAssociateDataSegmentsToDataset.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_BatchAssociateProjectAssets(t *testing.T) {
 	want := &BatchAssociateProjectAssetsOutput{
 		Errors: []types.AssetErrorDetails{
@@ -174,6 +226,108 @@ func TestCheckResponseSnapshot_BatchAssociateProjectAssets(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "BatchAssociateProjectAssets.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_BatchDeleteDatasetDataSegments(t *testing.T) {
+	want := &BatchDeleteDatasetDataSegmentsOutput{
+		DatasetId:      ptr.String("__DatasetId__"),
+		DatasetVersion: ptr.String("__DatasetVersion__"),
+		Errors: []types.FailedDataSegmentDeletion{
+			{
+				TimeSeriesId: ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				ErrorCode:    types.DataSegmentErrorCode("INTERNAL_FAILURE"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+			{
+				TimeSeriesId: ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				ErrorCode:    types.DataSegmentErrorCode("INTERNAL_FAILURE"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchDeleteDatasetDataSegments.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchDeleteDatasetDataSegments(context.Background(), &BatchDeleteDatasetDataSegmentsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchDeleteDatasetDataSegments.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_BatchDisassociateDataSegmentsFromDataset(t *testing.T) {
+	want := &BatchDisassociateDataSegmentsFromDatasetOutput{
+		DatasetId:      ptr.String("__DatasetId__"),
+		DatasetVersion: ptr.String("__DatasetVersion__"),
+		FailedDisassociations: []types.FailedDataSegmentDisassociation{
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				ErrorCode:    types.DataSegmentErrorCode("INTERNAL_FAILURE"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				ErrorCode:    types.DataSegmentErrorCode("INTERNAL_FAILURE"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchDisassociateDataSegmentsFromDataset.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchDisassociateDataSegmentsFromDataset(context.Background(), &BatchDisassociateDataSegmentsFromDatasetInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchDisassociateDataSegmentsFromDataset.response", err)
 	}
 }
 
@@ -626,6 +780,71 @@ func TestCheckResponseSnapshot_BatchPutAssetPropertyValue(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CancelEnrichmentJob(t *testing.T) {
+	want := &CancelEnrichmentJobOutput{
+		JobId:  ptr.String("__JobId__"),
+		Status: types.EnrichmentJobStatus("PENDING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CancelEnrichmentJob.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CancelEnrichmentJob(context.Background(), &CancelEnrichmentJobInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CancelEnrichmentJob.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CancelPipelineExecution(t *testing.T) {
+	want := &CancelPipelineExecutionOutput{
+		State: types.PipelineExecutionState("NOT_STARTED"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CancelPipelineExecution.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CancelPipelineExecution(context.Background(), &CancelPipelineExecutionInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CancelPipelineExecution.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CancelQuery(t *testing.T) {
+	want := &CancelQueryOutput{
+		QueryId: ptr.String("__QueryId__"),
+		Status:  types.QueryStatus("SUBMITTED"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CancelQuery.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CancelQuery(context.Background(), &CancelQueryInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CancelQuery.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateAccessPolicy(t *testing.T) {
 	want := &CreateAccessPolicyOutput{
 		AccessPolicyId:  ptr.String("__AccessPolicyId__"),
@@ -645,6 +864,31 @@ func TestCheckResponseSnapshot_CreateAccessPolicy(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateAccessPolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
+	want := &CreateApplicationOutput{
+		Arn:          ptr.String("__Arn__"),
+		Id:           ptr.String("__Id__"),
+		DnsSubdomain: ptr.String("__DnsSubdomain__"),
+		Name:         ptr.String("__Name__"),
+		Status:       types.ApplicationStatus("CREATING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateApplication.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateApplication.response", err)
 	}
 }
 
@@ -756,6 +1000,7 @@ func TestCheckResponseSnapshot_CreateAssetModelCompositeModel(t *testing.T) {
 				},
 			},
 		},
+		AssetModelId: ptr.String("__AssetModelId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateAssetModelCompositeModel.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -897,6 +1142,51 @@ func TestCheckResponseSnapshot_CreateDataset(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateDatasetExportJob(t *testing.T) {
+	want := &CreateDatasetExportJobOutput{
+		JobId:         ptr.String("__JobId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateDatasetExportJob.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateDatasetExportJob(context.Background(), &CreateDatasetExportJobInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateDatasetExportJob.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateEnrichmentJob(t *testing.T) {
+	want := &CreateEnrichmentJobOutput{
+		JobId:     ptr.String("__JobId__"),
+		Status:    types.EnrichmentJobStatus("PENDING"),
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateEnrichmentJob.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateEnrichmentJob(context.Background(), &CreateEnrichmentJobInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateEnrichmentJob.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 	want := &CreateGatewayOutput{
 		GatewayId:  ptr.String("__GatewayId__"),
@@ -916,6 +1206,36 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateGateway.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreatePipeline(t *testing.T) {
+	want := &CreatePipelineOutput{
+		PipelineName: ptr.String("__PipelineName__"),
+		PipelineArn:  ptr.String("__PipelineArn__"),
+		Version:      ptr.String("__Version__"),
+		Status: &types.ResourceStatus{
+			Error: &types.ResourceError{
+				Code:    types.ResourceErrorCode("VALIDATION_ERROR"),
+				Message: ptr.String("__Message__"),
+			},
+			State: types.ResourceState("CREATING"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreatePipeline.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreatePipeline(context.Background(), &CreatePipelineInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreatePipeline.response", err)
 	}
 }
 
@@ -972,6 +1292,65 @@ func TestCheckResponseSnapshot_CreateProject(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateTask(t *testing.T) {
+	want := &CreateTaskOutput{
+		TaskName: ptr.String("__TaskName__"),
+		TaskArn:  ptr.String("__TaskArn__"),
+		Version:  ptr.String("__Version__"),
+		Status: &types.ResourceStatus{
+			Error: &types.ResourceError{
+				Code:    types.ResourceErrorCode("VALIDATION_ERROR"),
+				Message: ptr.String("__Message__"),
+			},
+			State: types.ResourceState("CREATING"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateTask.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateTask(context.Background(), &CreateTaskInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateTask.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateWorkspace(t *testing.T) {
+	want := &CreateWorkspaceOutput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		WorkspaceArn:  ptr.String("__WorkspaceArn__"),
+		WorkspaceStatus: &types.WorkspaceStatus{
+			State: types.WorkspaceState("CREATING"),
+			Error: &types.WorkspaceErrorDetails{
+				Code:    types.ErrorCode("VALIDATION_ERROR"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateWorkspace.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateWorkspace(context.Background(), &CreateWorkspaceInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateWorkspace.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteAccessPolicy(t *testing.T) {
 	want := &DeleteAccessPolicyOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeleteAccessPolicy.response")
@@ -991,8 +1370,28 @@ func TestCheckResponseSnapshot_DeleteAccessPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
+	want := &DeleteApplicationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteApplication.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteApplication.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteAsset(t *testing.T) {
 	want := &DeleteAssetOutput{
+		AssetId: ptr.String("__AssetId__"),
 		AssetStatus: &types.AssetStatus{
 			State: types.AssetState("CREATING"),
 			Error: &types.ErrorDetails{
@@ -1030,6 +1429,7 @@ func TestCheckResponseSnapshot_DeleteAsset(t *testing.T) {
 
 func TestCheckResponseSnapshot_DeleteAssetModel(t *testing.T) {
 	want := &DeleteAssetModelOutput{
+		AssetModelId: ptr.String("__AssetModelId__"),
 		AssetModelStatus: &types.AssetModelStatus{
 			State: types.AssetModelState("CREATING"),
 			Error: &types.ErrorDetails{
@@ -1084,6 +1484,7 @@ func TestCheckResponseSnapshot_DeleteAssetModelCompositeModel(t *testing.T) {
 				},
 			},
 		},
+		AssetModelId: ptr.String("__AssetModelId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteAssetModelCompositeModel.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1254,6 +1655,33 @@ func TestCheckResponseSnapshot_DeleteGateway(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeletePipeline(t *testing.T) {
+	want := &DeletePipelineOutput{
+		Status: &types.ResourceStatus{
+			Error: &types.ResourceError{
+				Code:    types.ResourceErrorCode("VALIDATION_ERROR"),
+				Message: ptr.String("__Message__"),
+			},
+			State: types.ResourceState("CREATING"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeletePipeline.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeletePipeline(context.Background(), &DeletePipelineInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeletePipeline.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeletePortal(t *testing.T) {
 	want := &DeletePortalOutput{
 		PortalStatus: &types.PortalStatus{
@@ -1300,6 +1728,33 @@ func TestCheckResponseSnapshot_DeleteProject(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteTask(t *testing.T) {
+	want := &DeleteTaskOutput{
+		Status: &types.ResourceStatus{
+			Error: &types.ResourceError{
+				Code:    types.ResourceErrorCode("VALIDATION_ERROR"),
+				Message: ptr.String("__Message__"),
+			},
+			State: types.ResourceState("CREATING"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteTask.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteTask(context.Background(), &DeleteTaskInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteTask.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteTimeSeries(t *testing.T) {
 	want := &DeleteTimeSeriesOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeleteTimeSeries.response")
@@ -1316,6 +1771,33 @@ func TestCheckResponseSnapshot_DeleteTimeSeries(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteTimeSeries.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteWorkspace(t *testing.T) {
+	want := &DeleteWorkspaceOutput{
+		WorkspaceStatus: &types.WorkspaceStatus{
+			State: types.WorkspaceState("CREATING"),
+			Error: &types.WorkspaceErrorDetails{
+				Code:    types.ErrorCode("VALIDATION_ERROR"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteWorkspace.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteWorkspace(context.Background(), &DeleteWorkspaceInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteWorkspace.response", err)
 	}
 }
 
@@ -1396,6 +1878,36 @@ func TestCheckResponseSnapshot_DescribeAction(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeAction.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeApplication(t *testing.T) {
+	want := &DescribeApplicationOutput{
+		Arn:               ptr.String("__Arn__"),
+		CreatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DnsSubdomain:      ptr.String("__DnsSubdomain__"),
+		Description:       ptr.String("__Description__"),
+		Id:                ptr.String("__Id__"),
+		IdcApplicationArn: ptr.String("__IdcApplicationArn__"),
+		Name:              ptr.String("__Name__"),
+		Status:            types.ApplicationStatus("CREATING"),
+		UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		WorkspaceName:     ptr.String("__WorkspaceName__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeApplication.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeApplication(context.Background(), &DescribeApplicationInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeApplication.response", err)
 	}
 }
 
@@ -3328,11 +3840,43 @@ func TestCheckResponseSnapshot_DescribeBulkImportJob(t *testing.T) {
 				Bucket:    ptr.String("__Bucket__"),
 				Key:       ptr.String("__Key__"),
 				VersionId: ptr.String("__VersionId__"),
+				Alias:     ptr.String("__Alias__"),
+				StartTime: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				FileFormat: &types.FileFormat{
+					Csv: &types.Csv{
+						ColumnNames: []types.ColumnName{
+							types.ColumnName("ALIAS"),
+							types.ColumnName("ALIAS"),
+						},
+					},
+					Parquet:    &types.Parquet{},
+					Mp4:        &types.Mp4{},
+					Annotation: &types.Annotation{},
+				},
 			},
 			{
 				Bucket:    ptr.String("__Bucket__"),
 				Key:       ptr.String("__Key__"),
 				VersionId: ptr.String("__VersionId__"),
+				Alias:     ptr.String("__Alias__"),
+				StartTime: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				FileFormat: &types.FileFormat{
+					Csv: &types.Csv{
+						ColumnNames: []types.ColumnName{
+							types.ColumnName("ALIAS"),
+							types.ColumnName("ALIAS"),
+						},
+					},
+					Parquet:    &types.Parquet{},
+					Mp4:        &types.Mp4{},
+					Annotation: &types.Annotation{},
+				},
 			},
 		},
 		ErrorReportLocation: &types.ErrorReportLocation{
@@ -3347,13 +3891,17 @@ func TestCheckResponseSnapshot_DescribeBulkImportJob(t *testing.T) {
 						types.ColumnName("ALIAS"),
 					},
 				},
-				Parquet: &types.Parquet{},
+				Parquet:    &types.Parquet{},
+				Mp4:        &types.Mp4{},
+				Annotation: &types.Annotation{},
 			},
 		},
 		JobCreationDate:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		JobLastUpdateDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		AdaptiveIngestion:      ptr.Bool(true),
 		DeleteFilesAfterImport: ptr.Bool(true),
+		DatasetId:              ptr.String("__DatasetId__"),
+		WorkspaceName:          ptr.String("__WorkspaceName__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeBulkImportJob.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3511,6 +4059,23 @@ func TestCheckResponseSnapshot_DescribeDataset(t *testing.T) {
 		DatasetArn:         ptr.String("__DatasetArn__"),
 		DatasetName:        ptr.String("__DatasetName__"),
 		DatasetDescription: ptr.String("__DatasetDescription__"),
+		DatasetType:        types.DatasetTypeEnum("SESSION"),
+		DatasetConfig: &types.DatasetConfig{
+			Session: &types.SessionConfig{
+				SessionStartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				SessionEndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+		},
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
 		DatasetSource: &types.DatasetSource{
 			SourceType:   types.DatasetSourceType("KENDRA"),
 			SourceFormat: types.DatasetSourceFormat("KNOWLEDGE_BASE"),
@@ -3541,6 +4106,12 @@ func TestCheckResponseSnapshot_DescribeDataset(t *testing.T) {
 		DatasetCreationDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		DatasetLastUpdateDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		DatasetVersion:        ptr.String("__DatasetVersion__"),
+		EnrichmentStatus: &types.DatasetEnrichment{
+			Video: &types.DatasetEnrichmentEntry{
+				Status:         types.DatasetEnrichmentStatus("FULLY_ENRICHED"),
+				LastEnrichedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeDataset.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3556,6 +4127,77 @@ func TestCheckResponseSnapshot_DescribeDataset(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeDataset.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeDatasetExportJob(t *testing.T) {
+	want := &DescribeDatasetExportJobOutput{
+		JobId:            ptr.String("__JobId__"),
+		WorkspaceName:    ptr.String("__WorkspaceName__"),
+		Status:           types.DatasetExportJobStatus("SUBMITTED"),
+		StartedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DestinationS3Uri: ptr.String("__DestinationS3Uri__"),
+		ErrorReportLocation: &types.ExportErrorReportLocation{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		Input: &types.ProcessingInputMemberTimeseries{
+			Value: []types.TimeseriesItem{
+				{
+					TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+					PropertyAlias: ptr.String("__PropertyAlias__"),
+					TrimSettings: &types.TrimSettings{
+						StartTime: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+						EndTime: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+					},
+					FormatSettings: &types.FormatSettings{
+						FramesPerSecond: ptr.Int32(1),
+						WidthInPixels:   ptr.Int32(1),
+						HeightInPixels:  ptr.Int32(1),
+					},
+				},
+				{
+					TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+					PropertyAlias: ptr.String("__PropertyAlias__"),
+					TrimSettings: &types.TrimSettings{
+						StartTime: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+						EndTime: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+					},
+					FormatSettings: &types.FormatSettings{
+						FramesPerSecond: ptr.Int32(1),
+						WidthInPixels:   ptr.Int32(1),
+						HeightInPixels:  ptr.Int32(1),
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeDatasetExportJob.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeDatasetExportJob(context.Background(), &DescribeDatasetExportJobInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeDatasetExportJob.response", err)
 	}
 }
 
@@ -3585,6 +4227,52 @@ func TestCheckResponseSnapshot_DescribeDefaultEncryptionConfiguration(t *testing
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeDefaultEncryptionConfiguration.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeEnrichmentJob(t *testing.T) {
+	want := &DescribeEnrichmentJobOutput{
+		JobId:         ptr.String("__JobId__"),
+		Status:        types.EnrichmentJobStatus("PENDING"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		JobType:       types.JobType("EVENT_DETECTION"),
+		JobConfiguration: &types.EnrichmentJobConfigurationMemberEventDetection{
+			Value: types.EventDetection{
+				DatasetId:     ptr.String("__DatasetId__"),
+				TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+				PropertyAlias: ptr.String("__PropertyAlias__"),
+				TrimSettings: &types.EnrichmentTrimSettings{
+					StartTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+					EndTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+				},
+			},
+		},
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CompletedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CancelledAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureMessage: ptr.String("__FailureMessage__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeEnrichmentJob.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeEnrichmentJob(context.Background(), &DescribeEnrichmentJobInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeEnrichmentJob.response", err)
 	}
 }
 
@@ -3725,6 +4413,188 @@ func TestCheckResponseSnapshot_DescribeLoggingOptions(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribePipeline(t *testing.T) {
+	want := &DescribePipelineOutput{
+		PipelineName:  ptr.String("__PipelineName__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Description:   ptr.String("__Description__"),
+		PipelineArn:   ptr.String("__PipelineArn__"),
+		Version:       ptr.String("__Version__"),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		Computations: []types.ComputeNode{
+			{
+				ComputeNodeName: ptr.String("__ComputeNodeName__"),
+				TaskName:        ptr.String("__TaskName__"),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ComputeNodeName: ptr.String("__ComputeNodeName__"),
+				TaskName:        ptr.String("__TaskName__"),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Status: &types.ResourceStatus{
+			Error: &types.ResourceError{
+				Code:    types.ResourceErrorCode("VALIDATION_ERROR"),
+				Message: ptr.String("__Message__"),
+			},
+			State: types.ResourceState("CREATING"),
+		},
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribePipeline.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribePipeline(context.Background(), &DescribePipelineInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribePipeline.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribePipelineExecution(t *testing.T) {
+	want := &DescribePipelineExecutionOutput{
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+		PipelineName:        ptr.String("__PipelineName__"),
+		WorkspaceName:       ptr.String("__WorkspaceName__"),
+		PipelineVersion:     ptr.String("__PipelineVersion__"),
+		Status: &types.PipelineExecutionStatus{
+			State: types.PipelineExecutionState("NOT_STARTED"),
+			StateDetails: &types.PipelineExecutionStateDetails{
+				Code:    types.PipelineErrorCode("VALIDATION_ERROR"),
+				Message: ptr.String("__Message__"),
+				Details: []types.DetailedPipelineError{
+					{
+						Code:    types.DetailedPipelineErrorCode("VALIDATION_ERROR"),
+						Message: ptr.String("__Message__"),
+					},
+					{
+						Code:    types.DetailedPipelineErrorCode("VALIDATION_ERROR"),
+						Message: ptr.String("__Message__"),
+					},
+				},
+			},
+		},
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		RequestEnvironmentVariables: &types.ExecutionEnvironmentVariables{
+			Global: map[string]string{
+				"key0": "__Value__",
+			},
+			ComputeNodes: map[string]map[string]string{
+				"key0": {
+					"key0": "__Value__",
+				},
+			},
+		},
+		ExecutionPriority: ptr.Int32(1),
+		ComputeNodeExecutionDetails: []types.ComputeNodeExecutionDetails{
+			{
+				ComputeNodeName: ptr.String("__ComputeNodeName__"),
+				TaskName:        ptr.String("__TaskName__"),
+				TaskArn:         ptr.String("__TaskArn__"),
+				TaskVersion:     ptr.String("__TaskVersion__"),
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Status: &types.ComputeNodeExecutionStatus{
+					State: types.ComputeNodeExecutionState("NOT_STARTED"),
+					StateDetails: &types.ComputeNodeExecutionStateDetails{
+						Code:    types.ComputeNodeErrorCode("VALIDATION_ERROR"),
+						Message: ptr.String("__Message__"),
+						Details: []types.DetailedPipelineError{
+							{
+								Code:    types.DetailedPipelineErrorCode("VALIDATION_ERROR"),
+								Message: ptr.String("__Message__"),
+							},
+							{
+								Code:    types.DetailedPipelineErrorCode("VALIDATION_ERROR"),
+								Message: ptr.String("__Message__"),
+							},
+						},
+					},
+				},
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExecutionEnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				ComputeNodeName: ptr.String("__ComputeNodeName__"),
+				TaskName:        ptr.String("__TaskName__"),
+				TaskArn:         ptr.String("__TaskArn__"),
+				TaskVersion:     ptr.String("__TaskVersion__"),
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Status: &types.ComputeNodeExecutionStatus{
+					State: types.ComputeNodeExecutionState("NOT_STARTED"),
+					StateDetails: &types.ComputeNodeExecutionStateDetails{
+						Code:    types.ComputeNodeErrorCode("VALIDATION_ERROR"),
+						Message: ptr.String("__Message__"),
+						Details: []types.DetailedPipelineError{
+							{
+								Code:    types.DetailedPipelineErrorCode("VALIDATION_ERROR"),
+								Message: ptr.String("__Message__"),
+							},
+							{
+								Code:    types.DetailedPipelineErrorCode("VALIDATION_ERROR"),
+								Message: ptr.String("__Message__"),
+							},
+						},
+					},
+				},
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExecutionEnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribePipelineExecution.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribePipelineExecution(context.Background(), &DescribePipelineExecutionInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribePipelineExecution.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribePortal(t *testing.T) {
 	want := &DescribePortalOutput{
 		PortalId:           ptr.String("__PortalId__"),
@@ -3808,6 +4678,64 @@ func TestCheckResponseSnapshot_DescribeProject(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeQuery(t *testing.T) {
+	want := &DescribeQueryOutput{
+		QueryId:     ptr.String("__QueryId__"),
+		Status:      types.QueryStatus("SUBMITTED"),
+		SubmittedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CompletedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Statistics: &types.QueryStatistics{
+			RowCount:              ptr.Int64(1),
+			BytesScanned:          ptr.Int64(1),
+			ExecutionTimeInMillis: ptr.Int64(1),
+		},
+		ErrorMessage: ptr.String("__ErrorMessage__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeQuery.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeQuery(context.Background(), &DescribeQueryInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeQuery.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeSearch(t *testing.T) {
+	want := &DescribeSearchOutput{
+		SearchId:       ptr.String("__SearchId__"),
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
+		Status:         types.SearchStatus("QUEUED"),
+		QueryStatement: ptr.String("__QueryStatement__"),
+		SearchType:     types.SearchType("DEEP"),
+		StatusReason:   ptr.String("__StatusReason__"),
+		StartedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GroupId:        ptr.String("__GroupId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeSearch.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeSearch(context.Background(), &DescribeSearchInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeSearch.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeStorageConfiguration(t *testing.T) {
 	want := &DescribeStorageConfigurationOutput{
 		StorageType: types.StorageType("SITEWISE_DEFAULT_STORAGE"),
@@ -3854,6 +4782,56 @@ func TestCheckResponseSnapshot_DescribeStorageConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeTask(t *testing.T) {
+	want := &DescribeTaskOutput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		TaskName:      ptr.String("__TaskName__"),
+		Description:   ptr.String("__Description__"),
+		TaskArn:       ptr.String("__TaskArn__"),
+		Version:       ptr.String("__Version__"),
+		TaskConfiguration: &types.TaskConfigurationMemberContainerTaskConfiguration{
+			Value: types.ContainerTaskConfiguration{
+				EcrUri:            ptr.String("__EcrUri__"),
+				TaskExecutionRole: ptr.String("__TaskExecutionRole__"),
+				ProcessingType:    types.ProcessingType("GENERIC_COMPUTE_PROCESSING"),
+				ProcessingUnit:    types.ProcessingUnit("UNITS_2"),
+				Command: []string{
+					"__Member__",
+					"__Member__",
+				},
+				TimeoutSeconds: ptr.Int64(1),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Status: &types.ResourceStatus{
+			Error: &types.ResourceError{
+				Code:    types.ResourceErrorCode("VALIDATION_ERROR"),
+				Message: ptr.String("__Message__"),
+			},
+			State: types.ResourceState("CREATING"),
+		},
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeTask.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeTask(context.Background(), &DescribeTaskInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeTask.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeTimeSeries(t *testing.T) {
 	want := &DescribeTimeSeriesOutput{
 		AssetId:                  ptr.String("__AssetId__"),
@@ -3865,6 +4843,7 @@ func TestCheckResponseSnapshot_DescribeTimeSeries(t *testing.T) {
 		TimeSeriesCreationDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		TimeSeriesLastUpdateDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		TimeSeriesArn:            ptr.String("__TimeSeriesArn__"),
+		WorkspaceName:            ptr.String("__WorkspaceName__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeTimeSeries.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3880,6 +4859,42 @@ func TestCheckResponseSnapshot_DescribeTimeSeries(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeTimeSeries.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeWorkspace(t *testing.T) {
+	want := &DescribeWorkspaceOutput{
+		WorkspaceArn:         ptr.String("__WorkspaceArn__"),
+		WorkspaceName:        ptr.String("__WorkspaceName__"),
+		WorkspaceDescription: ptr.String("__WorkspaceDescription__"),
+		WorkspaceStatus: &types.WorkspaceStatus{
+			State: types.WorkspaceState("CREATING"),
+			Error: &types.WorkspaceErrorDetails{
+				Code:    types.ErrorCode("VALIDATION_ERROR"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+		EncryptionConfiguration: &types.WorkspaceEncryptionConfigurationInfo{
+			EncryptionType: types.EncryptionType("SITEWISE_DEFAULT_ENCRYPTION"),
+			KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+		},
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeWorkspace.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeWorkspace(context.Background(), &DescribeWorkspaceInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeWorkspace.response", err)
 	}
 }
 
@@ -4161,6 +5176,37 @@ func TestCheckResponseSnapshot_GetAssetPropertyValueHistory(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetCaptureData(t *testing.T) {
+	want := &GetCaptureDataOutput{
+		Data: []byte("blob"),
+		StartTime: &types.TimeInNanos{
+			TimeInSeconds: ptr.Int64(1),
+			OffsetInNanos: ptr.Int32(1),
+		},
+		EndTime: &types.TimeInNanos{
+			TimeInSeconds: ptr.Int64(1),
+			OffsetInNanos: ptr.Int32(1),
+		},
+		DataType:  types.VideoDataType("VIDEO-MP4"),
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetCaptureData.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetCaptureData(context.Background(), &GetCaptureDataInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetCaptureData.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetInterpolatedAssetPropertyValues(t *testing.T) {
 	want := &GetInterpolatedAssetPropertyValuesOutput{
 		InterpolatedAssetPropertyValues: []types.InterpolatedAssetPropertyValue{
@@ -4211,6 +5257,108 @@ func TestCheckResponseSnapshot_GetInterpolatedAssetPropertyValues(t *testing.T) 
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetInterpolatedAssetPropertyValues.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetQueryResults(t *testing.T) {
+	want := &GetQueryResultsOutput{
+		ColumnInfo: []types.ColumnInformation{
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Type: ptr.String("__Type__"),
+			},
+		},
+		Rows: [][]*string{
+			{
+				ptr.String("__Member__"),
+				ptr.String("__Member__"),
+			},
+			{
+				ptr.String("__Member__"),
+				ptr.String("__Member__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetQueryResults.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetQueryResults(context.Background(), &GetQueryResultsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetQueryResults.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetSearchResults(t *testing.T) {
+	want := &GetSearchResultsOutput{
+		SearchResults: []types.SearchResult{
+			{
+				SearchId:      ptr.String("__SearchId__"),
+				WorkspaceName: ptr.String("__WorkspaceName__"),
+				DatasetId:     ptr.String("__DatasetId__"),
+				TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				TopTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				Score: ptr.Float32(1.0),
+			},
+			{
+				SearchId:      ptr.String("__SearchId__"),
+				WorkspaceName: ptr.String("__WorkspaceName__"),
+				DatasetId:     ptr.String("__DatasetId__"),
+				TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				TopTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				Score: ptr.Float32(1.0),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetSearchResults.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetSearchResults(context.Background(), &GetSearchResultsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetSearchResults.response", err)
 	}
 }
 
@@ -4335,6 +5483,45 @@ func TestCheckResponseSnapshot_ListActions(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListActions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
+	want := &ListApplicationsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		Applications: []types.ApplicationSummary{
+			{
+				Arn:           ptr.String("__Arn__"),
+				Id:            ptr.String("__Id__"),
+				Name:          ptr.String("__Name__"),
+				Status:        types.ApplicationStatus("CREATING"),
+				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				WorkspaceName: ptr.String("__WorkspaceName__"),
+			},
+			{
+				Arn:           ptr.String("__Arn__"),
+				Id:            ptr.String("__Id__"),
+				Name:          ptr.String("__Name__"),
+				Status:        types.ApplicationStatus("CREATING"),
+				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				WorkspaceName: ptr.String("__WorkspaceName__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListApplications.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListApplications.response", err)
 	}
 }
 
@@ -5341,6 +6528,151 @@ func TestCheckResponseSnapshot_ListDashboards(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListDatasetDataSegmentRelationships(t *testing.T) {
+	want := &ListDatasetDataSegmentRelationshipsOutput{
+		DataSegmentRelationshipSummaries: []types.DataSegmentRelationshipSummary{
+			{
+				TargetDatasetId: ptr.String("__TargetDatasetId__"),
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+			{
+				TargetDatasetId: ptr.String("__TargetDatasetId__"),
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListDatasetDataSegmentRelationships.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListDatasetDataSegmentRelationships(context.Background(), &ListDatasetDataSegmentRelationshipsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListDatasetDataSegmentRelationships.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListDatasetDataSegments(t *testing.T) {
+	want := &ListDatasetDataSegmentsOutput{
+		DataSegments: []types.DataSegmentSummary{
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				Alias:    ptr.String("__Alias__"),
+				DataType: types.PropertyDataType("STRING"),
+				Enrichment: &types.DataSegmentEnrichment{
+					Status:         types.EnrichmentStatus("ENRICHED"),
+					LastEnrichedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				Alias:    ptr.String("__Alias__"),
+				DataType: types.PropertyDataType("STRING"),
+				Enrichment: &types.DataSegmentEnrichment{
+					Status:         types.EnrichmentStatus("ENRICHED"),
+					LastEnrichedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListDatasetDataSegments.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListDatasetDataSegments(context.Background(), &ListDatasetDataSegmentsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListDatasetDataSegments.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListDatasetExportJobs(t *testing.T) {
+	want := &ListDatasetExportJobsOutput{
+		Jobs: []types.ExportJobSummary{
+			{
+				JobId:            ptr.String("__JobId__"),
+				Status:           types.DatasetExportJobStatus("SUBMITTED"),
+				StartedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DestinationS3Uri: ptr.String("__DestinationS3Uri__"),
+			},
+			{
+				JobId:            ptr.String("__JobId__"),
+				Status:           types.DatasetExportJobStatus("SUBMITTED"),
+				StartedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DestinationS3Uri: ptr.String("__DestinationS3Uri__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListDatasetExportJobs.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListDatasetExportJobs(context.Background(), &ListDatasetExportJobsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListDatasetExportJobs.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
 	want := &ListDatasetsOutput{
 		DatasetSummaries: []types.DatasetSummary{
@@ -5349,6 +6681,8 @@ func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
 				Arn:            ptr.String("__Arn__"),
 				Name:           ptr.String("__Name__"),
 				Description:    ptr.String("__Description__"),
+				SourceType:     types.DatasetSourceType("KENDRA"),
+				DatasetType:    types.DatasetTypeEnum("SESSION"),
 				CreationDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastUpdateDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Status: &types.DatasetStatus{
@@ -5366,6 +6700,12 @@ func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
 								Message: ptr.String("__Message__"),
 							},
 						},
+					},
+				},
+				EnrichmentStatus: &types.DatasetEnrichment{
+					Video: &types.DatasetEnrichmentEntry{
+						Status:         types.DatasetEnrichmentStatus("FULLY_ENRICHED"),
+						LastEnrichedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
 				},
 			},
@@ -5374,6 +6714,8 @@ func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
 				Arn:            ptr.String("__Arn__"),
 				Name:           ptr.String("__Name__"),
 				Description:    ptr.String("__Description__"),
+				SourceType:     types.DatasetSourceType("KENDRA"),
+				DatasetType:    types.DatasetTypeEnum("SESSION"),
 				CreationDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastUpdateDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Status: &types.DatasetStatus{
@@ -5393,9 +6735,16 @@ func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
 						},
 					},
 				},
+				EnrichmentStatus: &types.DatasetEnrichment{
+					Video: &types.DatasetEnrichmentEntry{
+						Status:         types.DatasetEnrichmentStatus("FULLY_ENRICHED"),
+						LastEnrichedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
 			},
 		},
-		NextToken: ptr.String("__NextToken__"),
+		NextToken:     ptr.String("__NextToken__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ListDatasets.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -5411,6 +6760,51 @@ func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListDatasets.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListEnrichmentJobs(t *testing.T) {
+	want := &ListEnrichmentJobsOutput{
+		Jobs: []types.EnrichmentJobSummary{
+			{
+				JobId:         ptr.String("__JobId__"),
+				Status:        types.EnrichmentJobStatus("PENDING"),
+				WorkspaceName: ptr.String("__WorkspaceName__"),
+				JobType:       types.JobType("EVENT_DETECTION"),
+				DatasetId:     ptr.String("__DatasetId__"),
+				PropertyAlias: ptr.String("__PropertyAlias__"),
+				TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				JobId:         ptr.String("__JobId__"),
+				Status:        types.EnrichmentJobStatus("PENDING"),
+				WorkspaceName: ptr.String("__WorkspaceName__"),
+				JobType:       types.JobType("EVENT_DETECTION"),
+				DatasetId:     ptr.String("__DatasetId__"),
+				PropertyAlias: ptr.String("__PropertyAlias__"),
+				TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListEnrichmentJobs.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListEnrichmentJobs(context.Background(), &ListEnrichmentJobsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListEnrichmentJobs.response", err)
 	}
 }
 
@@ -5583,6 +6977,130 @@ func TestCheckResponseSnapshot_ListInterfaceRelationships(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListPipelineExecutions(t *testing.T) {
+	want := &ListPipelineExecutionsOutput{
+		PipelineExecutionSummaries: []types.PipelineExecutionSummary{
+			{
+				PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+				PipelineVersion:     ptr.String("__PipelineVersion__"),
+				Status: &types.PipelineExecutionStatus{
+					State: types.PipelineExecutionState("NOT_STARTED"),
+					StateDetails: &types.PipelineExecutionStateDetails{
+						Code:    types.PipelineErrorCode("VALIDATION_ERROR"),
+						Message: ptr.String("__Message__"),
+						Details: []types.DetailedPipelineError{
+							{
+								Code:    types.DetailedPipelineErrorCode("VALIDATION_ERROR"),
+								Message: ptr.String("__Message__"),
+							},
+							{
+								Code:    types.DetailedPipelineErrorCode("VALIDATION_ERROR"),
+								Message: ptr.String("__Message__"),
+							},
+						},
+					},
+				},
+				ExecutionPriority: ptr.Int32(1),
+				StartTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+				PipelineVersion:     ptr.String("__PipelineVersion__"),
+				Status: &types.PipelineExecutionStatus{
+					State: types.PipelineExecutionState("NOT_STARTED"),
+					StateDetails: &types.PipelineExecutionStateDetails{
+						Code:    types.PipelineErrorCode("VALIDATION_ERROR"),
+						Message: ptr.String("__Message__"),
+						Details: []types.DetailedPipelineError{
+							{
+								Code:    types.DetailedPipelineErrorCode("VALIDATION_ERROR"),
+								Message: ptr.String("__Message__"),
+							},
+							{
+								Code:    types.DetailedPipelineErrorCode("VALIDATION_ERROR"),
+								Message: ptr.String("__Message__"),
+							},
+						},
+					},
+				},
+				ExecutionPriority: ptr.Int32(1),
+				StartTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListPipelineExecutions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListPipelineExecutions(context.Background(), &ListPipelineExecutionsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListPipelineExecutions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListPipelines(t *testing.T) {
+	want := &ListPipelinesOutput{
+		PipelineSummaries: []types.PipelineSummary{
+			{
+				PipelineName: ptr.String("__PipelineName__"),
+				Description:  ptr.String("__Description__"),
+				PipelineArn:  ptr.String("__PipelineArn__"),
+				Version:      ptr.String("__Version__"),
+				Status: &types.ResourceStatus{
+					Error: &types.ResourceError{
+						Code:    types.ResourceErrorCode("VALIDATION_ERROR"),
+						Message: ptr.String("__Message__"),
+					},
+					State: types.ResourceState("CREATING"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				PipelineName: ptr.String("__PipelineName__"),
+				Description:  ptr.String("__Description__"),
+				PipelineArn:  ptr.String("__PipelineArn__"),
+				Version:      ptr.String("__Version__"),
+				Status: &types.ResourceStatus{
+					Error: &types.ResourceError{
+						Code:    types.ResourceErrorCode("VALIDATION_ERROR"),
+						Message: ptr.String("__Message__"),
+					},
+					State: types.ResourceState("CREATING"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListPipelines.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListPipelines(context.Background(), &ListPipelinesInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListPipelines.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListPortals(t *testing.T) {
 	want := &ListPortalsOutput{
 		PortalSummaries: []types.PortalSummary{
@@ -5702,6 +7220,84 @@ func TestCheckResponseSnapshot_ListProjects(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListQueries(t *testing.T) {
+	want := &ListQueriesOutput{
+		Queries: []types.QuerySummary{
+			{
+				QueryId:     ptr.String("__QueryId__"),
+				Status:      types.QueryStatus("SUBMITTED"),
+				SubmittedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				QueryId:     ptr.String("__QueryId__"),
+				Status:      types.QueryStatus("SUBMITTED"),
+				SubmittedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListQueries.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListQueries(context.Background(), &ListQueriesInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListQueries.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListSearches(t *testing.T) {
+	want := &ListSearchesOutput{
+		SearchSummaries: []types.SearchSummary{
+			{
+				SearchId:       ptr.String("__SearchId__"),
+				WorkspaceName:  ptr.String("__WorkspaceName__"),
+				Status:         types.SearchStatus("QUEUED"),
+				QueryStatement: ptr.String("__QueryStatement__"),
+				SearchType:     types.SearchType("DEEP"),
+				StatusReason:   ptr.String("__StatusReason__"),
+				StartedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				GroupId:        ptr.String("__GroupId__"),
+			},
+			{
+				SearchId:       ptr.String("__SearchId__"),
+				WorkspaceName:  ptr.String("__WorkspaceName__"),
+				Status:         types.SearchStatus("QUEUED"),
+				QueryStatement: ptr.String("__QueryStatement__"),
+				SearchType:     types.SearchType("DEEP"),
+				StatusReason:   ptr.String("__StatusReason__"),
+				StartedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				GroupId:        ptr.String("__GroupId__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListSearches.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListSearches(context.Background(), &ListSearchesInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListSearches.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	want := &ListTagsForResourceOutput{
 		Tags: map[string]string{
@@ -5722,6 +7318,59 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListTagsForResource.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListTasks(t *testing.T) {
+	want := &ListTasksOutput{
+		TaskSummaries: []types.TaskSummary{
+			{
+				TaskName:    ptr.String("__TaskName__"),
+				Description: ptr.String("__Description__"),
+				TaskArn:     ptr.String("__TaskArn__"),
+				Version:     ptr.String("__Version__"),
+				Status: &types.ResourceStatus{
+					Error: &types.ResourceError{
+						Code:    types.ResourceErrorCode("VALIDATION_ERROR"),
+						Message: ptr.String("__Message__"),
+					},
+					State: types.ResourceState("CREATING"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				TaskName:    ptr.String("__TaskName__"),
+				Description: ptr.String("__Description__"),
+				TaskArn:     ptr.String("__TaskArn__"),
+				Version:     ptr.String("__Version__"),
+				Status: &types.ResourceStatus{
+					Error: &types.ResourceError{
+						Code:    types.ResourceErrorCode("VALIDATION_ERROR"),
+						Message: ptr.String("__Message__"),
+					},
+					State: types.ResourceState("CREATING"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListTasks.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListTasks(context.Background(), &ListTasksInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListTasks.response", err)
 	}
 }
 
@@ -5751,7 +7400,8 @@ func TestCheckResponseSnapshot_ListTimeSeries(t *testing.T) {
 				TimeSeriesArn:            ptr.String("__TimeSeriesArn__"),
 			},
 		},
-		NextToken: ptr.String("__NextToken__"),
+		NextToken:     ptr.String("__NextToken__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ListTimeSeries.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -5767,6 +7417,55 @@ func TestCheckResponseSnapshot_ListTimeSeries(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListTimeSeries.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListWorkspaces(t *testing.T) {
+	want := &ListWorkspacesOutput{
+		WorkspaceSummaries: []types.WorkspaceSummary{
+			{
+				Name: ptr.String("__Name__"),
+				Arn:  ptr.String("__Arn__"),
+				Status: &types.WorkspaceStatus{
+					State: types.WorkspaceState("CREATING"),
+					Error: &types.WorkspaceErrorDetails{
+						Code:    types.ErrorCode("VALIDATION_ERROR"),
+						Message: ptr.String("__Message__"),
+					},
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Arn:  ptr.String("__Arn__"),
+				Status: &types.WorkspaceStatus{
+					State: types.WorkspaceState("CREATING"),
+					Error: &types.WorkspaceErrorDetails{
+						Code:    types.ErrorCode("VALIDATION_ERROR"),
+						Message: ptr.String("__Message__"),
+					},
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListWorkspaces.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListWorkspaces(context.Background(), &ListWorkspacesInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListWorkspaces.response", err)
 	}
 }
 
@@ -5903,6 +7602,73 @@ func TestCheckResponseSnapshot_PutStorageConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_StartPipelineExecution(t *testing.T) {
+	want := &StartPipelineExecutionOutput{
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartPipelineExecution.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartPipelineExecution(context.Background(), &StartPipelineExecutionInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartPipelineExecution.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StartQuery(t *testing.T) {
+	want := &StartQueryOutput{
+		QueryId: ptr.String("__QueryId__"),
+		Status:  types.QueryStatus("SUBMITTED"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartQuery.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartQuery(context.Background(), &StartQueryInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartQuery.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StartSearch(t *testing.T) {
+	want := &StartSearchOutput{
+		SearchId:      ptr.String("__SearchId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Status:        types.SearchStatus("QUEUED"),
+		GroupId:       ptr.String("__GroupId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartSearch.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartSearch(context.Background(), &StartSearchInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartSearch.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
 	status, header, body, err := serdeRespReadSnapshot("TagResource.response")
@@ -5962,6 +7728,7 @@ func TestCheckResponseSnapshot_UpdateAccessPolicy(t *testing.T) {
 
 func TestCheckResponseSnapshot_UpdateAsset(t *testing.T) {
 	want := &UpdateAssetOutput{
+		AssetId: ptr.String("__AssetId__"),
 		AssetStatus: &types.AssetStatus{
 			State: types.AssetState("CREATING"),
 			Error: &types.ErrorDetails{
@@ -5999,6 +7766,7 @@ func TestCheckResponseSnapshot_UpdateAsset(t *testing.T) {
 
 func TestCheckResponseSnapshot_UpdateAssetModel(t *testing.T) {
 	want := &UpdateAssetModelOutput{
+		AssetModelId: ptr.String("__AssetModelId__"),
 		AssetModelStatus: &types.AssetModelStatus{
 			State: types.AssetModelState("CREATING"),
 			Error: &types.ErrorDetails{
@@ -6063,6 +7831,7 @@ func TestCheckResponseSnapshot_UpdateAssetModelCompositeModel(t *testing.T) {
 				},
 			},
 		},
+		AssetModelId: ptr.String("__AssetModelId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateAssetModelCompositeModel.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -6236,6 +8005,34 @@ func TestCheckResponseSnapshot_UpdateGatewayCapabilityConfiguration(t *testing.T
 	}
 }
 
+func TestCheckResponseSnapshot_UpdatePipeline(t *testing.T) {
+	want := &UpdatePipelineOutput{
+		Version: ptr.String("__Version__"),
+		Status: &types.ResourceStatus{
+			Error: &types.ResourceError{
+				Code:    types.ResourceErrorCode("VALIDATION_ERROR"),
+				Message: ptr.String("__Message__"),
+			},
+			State: types.ResourceState("CREATING"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdatePipeline.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdatePipeline(context.Background(), &UpdatePipelineInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdatePipeline.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdatePortal(t *testing.T) {
 	want := &UpdatePortalOutput{
 		PortalStatus: &types.PortalStatus{
@@ -6282,6 +8079,61 @@ func TestCheckResponseSnapshot_UpdateProject(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateTask(t *testing.T) {
+	want := &UpdateTaskOutput{
+		Version: ptr.String("__Version__"),
+		Status: &types.ResourceStatus{
+			Error: &types.ResourceError{
+				Code:    types.ResourceErrorCode("VALIDATION_ERROR"),
+				Message: ptr.String("__Message__"),
+			},
+			State: types.ResourceState("CREATING"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateTask.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateTask(context.Background(), &UpdateTaskInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateTask.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateWorkspace(t *testing.T) {
+	want := &UpdateWorkspaceOutput{
+		WorkspaceStatus: &types.WorkspaceStatus{
+			State: types.WorkspaceState("CREATING"),
+			Error: &types.WorkspaceErrorDetails{
+				Code:    types.ErrorCode("VALIDATION_ERROR"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateWorkspace.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateWorkspace(context.Background(), &UpdateWorkspaceInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateWorkspace.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message: ptr.String("__Message__"),
@@ -6294,7 +8146,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteQuery(context.Background(), &ExecuteQueryInput{})
+	_, opErr := svc.CancelEnrichmentJob(context.Background(), &CancelEnrichmentJobInput{})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

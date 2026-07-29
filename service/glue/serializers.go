@@ -18997,6 +18997,28 @@ func awsAwsjson11_serializeDocumentBatchUpdatePartitionRequestEntryList(v []type
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentBetweenConfiguration(v *types.BetweenConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HighBoundKey != nil {
+		ok := object.Key("HighBoundKey")
+		ok.String(*v.HighBoundKey)
+	}
+
+	if v.LowBoundKey != nil {
+		ok := object.Key("LowBoundKey")
+		ok.String(*v.LowBoundKey)
+	}
+
+	if v.Template != nil {
+		ok := object.Key("Template")
+		ok.String(*v.Template)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentBinaryColumnStatisticsData(v *types.BinaryColumnStatisticsData, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -20733,6 +20755,17 @@ func awsAwsjson11_serializeDocumentConnectionStringList(v []string, value smithy
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentConnectionStringToStringMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentConnectorAuthenticationConfiguration(v *types.ConnectorAuthenticationConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -20968,6 +21001,11 @@ func awsAwsjson11_serializeDocumentConnectorProperty(v *types.ConnectorProperty,
 	if v.DefaultValue != nil {
 		ok := object.Key("DefaultValue")
 		ok.String(*v.DefaultValue)
+	}
+
+	if v.Format != nil {
+		ok := object.Key("Format")
+		ok.String(*v.Format)
 	}
 
 	if v.KeyOverride != nil {
@@ -23051,9 +23089,41 @@ func awsAwsjson11_serializeDocumentFieldDefinition(v *types.FieldDefinition, val
 		ok.String(string(v.FieldDataType))
 	}
 
+	if v.FilterOverrides != nil {
+		ok := object.Key("FilterOverrides")
+		if err := awsAwsjson11_serializeDocumentFilterOverrides(v.FilterOverrides, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IsNullable != nil {
+		ok := object.Key("IsNullable")
+		ok.Boolean(*v.IsNullable)
+	}
+
+	if v.IsOrderable != nil {
+		ok := object.Key("IsOrderable")
+		ok.Boolean(*v.IsOrderable)
+	}
+
+	if v.IsPartitionable != nil {
+		ok := object.Key("IsPartitionable")
+		ok.Boolean(*v.IsPartitionable)
+	}
+
+	if v.IsQueryable != nil {
+		ok := object.Key("IsQueryable")
+		ok.Boolean(*v.IsQueryable)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.ResponseDateFormat != nil {
+		ok := object.Key("ResponseDateFormat")
+		ok.String(*v.ResponseDateFormat)
 	}
 
 	return nil
@@ -23133,6 +23203,49 @@ func awsAwsjson11_serializeDocumentFilter(v *types.Filter, value smithyjson.Valu
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentFilterConfiguration(v *types.FilterConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BetweenConfiguration != nil {
+		ok := object.Key("BetweenConfiguration")
+		if err := awsAwsjson11_serializeDocumentBetweenConfiguration(v.BetweenConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DateTimeFormat != nil {
+		ok := object.Key("DateTimeFormat")
+		ok.String(*v.DateTimeFormat)
+	}
+
+	if len(v.FilterMode) > 0 {
+		ok := object.Key("FilterMode")
+		ok.String(string(v.FilterMode))
+	}
+
+	if v.FilterStringConfiguration != nil {
+		ok := object.Key("FilterStringConfiguration")
+		if err := awsAwsjson11_serializeDocumentFilterStringConfiguration(v.FilterStringConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OperatorMappings != nil {
+		ok := object.Key("OperatorMappings")
+		if err := awsAwsjson11_serializeDocumentConnectionStringToStringMap(v.OperatorMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StripQuotes != nil {
+		ok := object.Key("StripQuotes")
+		ok.Boolean(*v.StripQuotes)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentFilterExpression(v *types.FilterExpression, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -23167,6 +23280,59 @@ func awsAwsjson11_serializeDocumentFilterExpressions(v []types.FilterExpression,
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFilterOverrides(v *types.FilterOverrides, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BetweenConfiguration != nil {
+		ok := object.Key("BetweenConfiguration")
+		if err := awsAwsjson11_serializeDocumentBetweenConfiguration(v.BetweenConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DateTimeFormat != nil {
+		ok := object.Key("DateTimeFormat")
+		ok.String(*v.DateTimeFormat)
+	}
+
+	if v.FieldName != nil {
+		ok := object.Key("FieldName")
+		ok.String(*v.FieldName)
+	}
+
+	if v.OperatorMappings != nil {
+		ok := object.Key("OperatorMappings")
+		if err := awsAwsjson11_serializeDocumentConnectionStringToStringMap(v.OperatorMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFilterStringConfiguration(v *types.FilterStringConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.QueryParameterName != nil {
+		ok := object.Key("QueryParameterName")
+		ok.String(*v.QueryParameterName)
+	}
+
+	if v.QuoteCharacter != nil {
+		ok := object.Key("QuoteCharacter")
+		ok.String(*v.QuoteCharacter)
+	}
+
+	if v.QuoteStringValues != nil {
+		ok := object.Key("QuoteStringValues")
+		ok.Boolean(*v.QuoteStringValues)
+	}
+
 	return nil
 }
 
@@ -28878,6 +29044,13 @@ func awsAwsjson11_serializeDocumentSortCriterion(v *types.SortCriterion, value s
 func awsAwsjson11_serializeDocumentSourceConfiguration(v *types.SourceConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.FilterConfiguration != nil {
+		ok := object.Key("FilterConfiguration")
+		if err := awsAwsjson11_serializeDocumentFilterConfiguration(v.FilterConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.PaginationConfiguration != nil {
 		ok := object.Key("PaginationConfiguration")

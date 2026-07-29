@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsJsonRpc10DataPlane.GetMetricData
+
+{"EndTime":946684800,"LabelOptions":{"Timezone":"__Timezone__"},"MaxDatapoints":1,"MetricDataQueries":[{"AccountId":"__AccountId__","Expression":"__Expression__","Id":"__Id__","Label":"__Label__","MetricStat":{"Metric":{"Dimensions":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"MetricName":"__MetricName__","Namespace":"__Namespace__"},"Period":1,"Stat":"__Stat__","Unit":"Seconds"},"Period":1,"ReturnData":true},{"AccountId":"__AccountId__","Expression":"__Expression__","Id":"__Id__","Label":"__Label__","MetricStat":{"Metric":{"Dimensions":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"MetricName":"__MetricName__","Namespace":"__Namespace__"},"Period":1,"Stat":"__Stat__","Unit":"Seconds"},"Period":1,"ReturnData":true}],"NextToken":"__NextToken__","ScanBy":"TimestampDescending","StartTime":946684800}

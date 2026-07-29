@@ -134,6 +134,18 @@ func TestCheckSnapshot_CreateStreamSessionConnection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateStreamUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateStreamUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateStreamUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteApplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteApplication(context.Background(), nil, func(o *Options) {
@@ -218,11 +230,35 @@ func TestCheckSnapshot_GetStreamSession(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetStreamUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetStreamUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetStreamUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListApplications(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListApplications(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListApplications")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListApplicationShaderCaches(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListApplicationShaderCaches(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListApplicationShaderCaches")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -266,6 +302,18 @@ func TestCheckSnapshot_ListStreamSessionsByAccount(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListStreamUrls(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListStreamUrls(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListStreamUrls")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -283,6 +331,18 @@ func TestCheckSnapshot_RemoveStreamGroupLocations(t *testing.T) {
 	_, err := svc.RemoveStreamGroupLocations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RemoveStreamGroupLocations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RevokeStreamUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeStreamUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RevokeStreamUrl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -433,6 +493,18 @@ func TestUpdateSnapshot_CreateStreamSessionConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateStreamUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateStreamUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateStreamUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteApplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteApplication(context.Background(), nil, func(o *Options) {
@@ -517,11 +589,35 @@ func TestUpdateSnapshot_GetStreamSession(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetStreamUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetStreamUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetStreamUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListApplications(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListApplications(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListApplications")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListApplicationShaderCaches(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListApplicationShaderCaches(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListApplicationShaderCaches")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -565,6 +661,18 @@ func TestUpdateSnapshot_ListStreamSessionsByAccount(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListStreamUrls(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListStreamUrls(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListStreamUrls")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -582,6 +690,18 @@ func TestUpdateSnapshot_RemoveStreamGroupLocations(t *testing.T) {
 	_, err := svc.RemoveStreamGroupLocations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RemoveStreamGroupLocations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RevokeStreamUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RevokeStreamUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RevokeStreamUrl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

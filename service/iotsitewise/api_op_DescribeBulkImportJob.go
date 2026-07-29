@@ -37,6 +37,9 @@ type DescribeBulkImportJobInput struct {
 	// This member is required.
 	JobId *string
 
+	// The name of the workspace.
+	WorkspaceName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -48,16 +51,16 @@ type DescribeBulkImportJobOutput struct {
 	// This member is required.
 	ErrorReportLocation *types.ErrorReportLocation
 
-	// The files in the specified Amazon S3 bucket that contain your data.
+	// The files in the specified Amazon S3 bucket that contain your data. You can
+	// specify up to 100 files for each bulk import job. Each file supports the
+	// following size limits:
+	//
+	//   - Parquet files – Up to 256 MiB.
+	//
+	//   - Other file formats – Up to 5 GiB.
 	//
 	// This member is required.
 	Files []types.File
-
-	// Contains the configuration information of a job, such as the file format used
-	// to save data in Amazon S3.
-	//
-	// This member is required.
-	JobConfiguration *types.JobConfiguration
 
 	// The date the job was created, in Unix epoch TIME.
 	//
@@ -114,9 +117,19 @@ type DescribeBulkImportJobOutput struct {
 	// data is ingested into IoT SiteWise as is.
 	AdaptiveIngestion *bool
 
+	// The ID of the dataset.
+	DatasetId *string
+
 	// If set to true, your data files is deleted from S3, after ingestion into IoT
 	// SiteWise storage.
 	DeleteFilesAfterImport *bool
+
+	// Contains the configuration information of a job, such as the file format used
+	// to save data in Amazon S3.
+	JobConfiguration *types.JobConfiguration
+
+	// The name of the workspace.
+	WorkspaceName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

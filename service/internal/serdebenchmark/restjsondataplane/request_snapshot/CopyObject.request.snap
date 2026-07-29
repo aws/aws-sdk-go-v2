@@ -1,0 +1,43 @@
+PUT /__Bucket__/__Key__?x-id=CopyObject
+
+Cache-Control: __CacheControl__
+Content-Disposition: __ContentDisposition__
+Content-Encoding: __ContentEncoding__
+Content-Language: __ContentLanguage__
+Content-Type: __ContentType__
+Expires: Sat, 01 Jan 2000 00:00:00 GMT
+If-Match: __IfMatch__
+If-None-Match: __IfNoneMatch__
+X-Amz-Acl: __ACL__
+X-Amz-Checksum-Algorithm: __ChecksumAlgorithm__
+X-Amz-Copy-Source: __CopySource__
+X-Amz-Copy-Source-If-Match: __CopySourceIfMatch__
+X-Amz-Copy-Source-If-Modified-Since: Sat, 01 Jan 2000 00:00:00 GMT
+X-Amz-Copy-Source-If-None-Match: __CopySourceIfNoneMatch__
+X-Amz-Copy-Source-If-Unmodified-Since: Sat, 01 Jan 2000 00:00:00 GMT
+X-Amz-Copy-Source-Server-Side-Encryption-Customer-Algorithm: __CopySourceSSECustomerAlgorithm__
+X-Amz-Copy-Source-Server-Side-Encryption-Customer-Key: __CopySourceSSECustomerKey__
+X-Amz-Copy-Source-Server-Side-Encryption-Customer-Key-Md5: __CopySourceSSECustomerKeyMD5__
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Grant-Full-Control: __GrantFullControl__
+X-Amz-Grant-Read: __GrantRead__
+X-Amz-Grant-Read-Acp: __GrantReadACP__
+X-Amz-Grant-Write-Acp: __GrantWriteACP__
+X-Amz-Metadata-Directive: __MetadataDirective__
+X-Amz-Object-Lock-Legal-Hold: __ObjectLockLegalHoldStatus__
+X-Amz-Object-Lock-Mode: __ObjectLockMode__
+X-Amz-Object-Lock-Retain-Until-Date: Sat, 01 Jan 2000 00:00:00 GMT
+X-Amz-Request-Payer: __RequestPayer__
+X-Amz-Server-Side-Encryption: __ServerSideEncryption__
+X-Amz-Server-Side-Encryption-Aws-Kms-Key-Id: __SSEKMSKeyId__
+X-Amz-Server-Side-Encryption-Bucket-Key-Enabled: true
+X-Amz-Server-Side-Encryption-Context: __SSEKMSEncryptionContext__
+X-Amz-Server-Side-Encryption-Customer-Algorithm: __SSECustomerAlgorithm__
+X-Amz-Server-Side-Encryption-Customer-Key: __SSECustomerKey__
+X-Amz-Server-Side-Encryption-Customer-Key-Md5: __SSECustomerKeyMD5__
+X-Amz-Source-Expected-Bucket-Owner: __ExpectedSourceBucketOwner__
+X-Amz-Storage-Class: __StorageClass__
+X-Amz-Tagging: __Tagging__
+X-Amz-Tagging-Directive: __TaggingDirective__
+X-Amz-Website-Redirect-Location: __WebsiteRedirectLocation__
+

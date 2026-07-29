@@ -163,6 +163,47 @@ type Alarms struct {
 	noSmithyDocumentSerde
 }
 
+// The annotation format configuration for bulk import files.
+type Annotation struct {
+	noSmithyDocumentSerde
+}
+
+// Summary of an application for list operations
+type ApplicationSummary struct {
+
+	// ARN of the application
+	//
+	// This member is required.
+	Arn *string
+
+	// Timestamp when the application was created
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Unique identifier of the application
+	//
+	// This member is required.
+	Id *string
+
+	// Name of the application
+	//
+	// This member is required.
+	Name *string
+
+	// Current status of the application
+	//
+	// This member is required.
+	Status ApplicationStatus
+
+	// Name of the workspace this application belongs to
+	//
+	// This member is required.
+	WorkspaceName *string
+
+	noSmithyDocumentSerde
+}
+
 // A filter used to match data bindings based on a specific asset. This filter
 // identifies all computation models referencing a particular asset in their data
 // bindings.
@@ -558,6 +599,10 @@ type AssetModelProperty struct {
 
 	// The data type of the asset model property.
 	//
+	// The VIDEO , ANNOTATION , and JSON data types aren't supported for asset model
+	// properties. These types are used only by time series that store data for
+	// datasets in a workspace.
+	//
 	// If you specify STRUCT , you must also specify dataTypeSpec to identify the type
 	// of the structure for this property.
 	//
@@ -655,6 +700,10 @@ type AssetModelPropertyBindingValueFilter struct {
 type AssetModelPropertyDefinition struct {
 
 	// The data type of the property definition.
+	//
+	// The VIDEO , ANNOTATION , and JSON data types aren't supported for asset model
+	// properties. These types are used only by time series that store data for
+	// datasets in a workspace.
 	//
 	// If you specify STRUCT , you must also specify dataTypeSpec to identify the type
 	// of the structure for this property.
@@ -1161,6 +1210,32 @@ type AssociatedAssetsSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a data segment entry to associate with a dataset.
+type AssociateDataSegmentEntry struct {
+
+	// The nanosecond-precision end time of the data segment to associate.
+	//
+	// This member is required.
+	EndTimestamp *TimeInNanos
+
+	// The ID of the source dataset that contains the data segment.
+	//
+	// This member is required.
+	SourceDatasetId *string
+
+	// The nanosecond-precision start time of the data segment to associate.
+	//
+	// This member is required.
+	StartTimestamp *TimeInNanos
+
+	// The ID of the time series.
+	//
+	// This member is required.
+	TimeSeriesId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains an asset attribute property. For more information, see [Attributes] in the IoT
 // SiteWise User Guide.
 //
@@ -1643,6 +1718,23 @@ type ColumnInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Contains metadata about a column in the query results.
+type ColumnInformation struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	Name *string
+
+	// The data type of the column. Valid values are STRING, DOUBLE, BOOLEAN, INTEGER,
+	// TIMESTAMP, and VARIANT.
+	//
+	// This member is required.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
 // The data type of the column.
 type ColumnType struct {
 
@@ -1866,6 +1958,111 @@ type ComputationModelSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A single compute node in a pipeline DAG. Each compute node references a task
+// and can declare dependencies on other nodes.
+type ComputeNode struct {
+
+	// The unique name for this compute node within the pipeline.
+	//
+	// This member is required.
+	ComputeNodeName *string
+
+	// The name of the task to execute for this compute node.
+	//
+	// This member is required.
+	TaskName *string
+
+	// A list of compute node names that must complete successfully before this node
+	// can start.
+	DependsOn []string
+
+	// Environment variables specific to this compute node. These override
+	// pipeline-level environment variables with the same key.
+	EnvironmentVariables map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed execution information for a compute node within a pipeline
+// execution.
+type ComputeNodeExecutionDetails struct {
+
+	// The name of the compute node.
+	//
+	// This member is required.
+	ComputeNodeName *string
+
+	// A list of compute node names that this node depends on.
+	//
+	// This member is required.
+	DependsOn []string
+
+	// The current execution status of the compute node.
+	//
+	// This member is required.
+	Status *ComputeNodeExecutionStatus
+
+	// The ARN of the task.
+	//
+	// This member is required.
+	TaskArn *string
+
+	// The name of the task executed for this compute node.
+	//
+	// This member is required.
+	TaskName *string
+
+	// The task version that executed for this compute node.
+	//
+	// This member is required.
+	TaskVersion *string
+
+	// The time the compute node execution completed, in Unix epoch time.
+	EndTime *time.Time
+
+	// The fully resolved environment variables used for this compute node execution.
+	ExecutionEnvironmentVariables map[string]string
+
+	// The time the compute node execution started, in Unix epoch time.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Additional information about a compute node that has failed.
+type ComputeNodeExecutionStateDetails struct {
+
+	// Classification of the failure.
+	//
+	// This member is required.
+	Code ComputeNodeErrorCode
+
+	// Human-readable description of why the compute node failed.
+	//
+	// This member is required.
+	Message *string
+
+	// Detailed error entries to help diagnose the failure.
+	Details []DetailedPipelineError
+
+	noSmithyDocumentSerde
+}
+
+// Current execution status of a compute node within a pipeline execution.
+type ComputeNodeExecutionStatus struct {
+
+	// Current state of the compute node execution.
+	//
+	// This member is required.
+	State ComputeNodeExecutionState
+
+	// Additional information about the compute node's failure. Populated when the
+	// compute node has failed.
+	StateDetails *ComputeNodeExecutionStateDetails
+
+	noSmithyDocumentSerde
+}
+
 // Contains the details of an IoT SiteWise configuration error.
 type ConfigurationErrorDetails struct {
 
@@ -1892,6 +2089,44 @@ type ConfigurationStatus struct {
 
 	// Contains associated error information, if any.
 	Error *ConfigurationErrorDetails
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for a container task, including the container image, IAM role,
+// and compute settings.
+type ContainerTaskConfiguration struct {
+
+	// The Amazon ECR image URI for the task container.
+	//
+	// This member is required.
+	EcrUri *string
+
+	// The processing type for compute resources.
+	//
+	// This member is required.
+	ProcessingType ProcessingType
+
+	// The processing unit allocation that determines the vCPU, memory, and GPU
+	// resources.
+	//
+	// This member is required.
+	ProcessingUnit ProcessingUnit
+
+	// The ARN of the IAM role that grants the containerized workload permissions to
+	// access AWS resources.
+	//
+	// This member is required.
+	TaskExecutionRole *string
+
+	// The command to execute in the container.
+	Command []string
+
+	// Environment variables passed to the container at runtime.
+	EnvironmentVariables map[string]string
+
+	// The timeout in seconds for task execution. Default: 3600 (1 hour).
+	TimeoutSeconds *int64
 
 	noSmithyDocumentSerde
 }
@@ -2003,6 +2238,144 @@ type DataBindingValueFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Contains enrichment status information for a data segment.
+type DataSegmentEnrichment struct {
+
+	// The enrichment status of the data segment.
+	//
+	// This member is required.
+	Status EnrichmentStatus
+
+	// The date the data segment was last enriched, in Unix epoch time.
+	LastEnrichedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a data segment relationship between a source
+// session dataset that contains the data and a curated dataset that references it,
+// including the time series and timestamp range.
+type DataSegmentRelationshipSummary struct {
+
+	// The nanosecond-precision end time of the data segment.
+	//
+	// This member is required.
+	EndTimestamp *TimeInNanos
+
+	// The ID of the source session dataset that contains the data segment.
+	//
+	// This member is required.
+	SourceDatasetId *string
+
+	// The nanosecond-precision start time of the data segment.
+	//
+	// This member is required.
+	StartTimestamp *TimeInNanos
+
+	// The ID of the curated dataset that references the data segment.
+	//
+	// This member is required.
+	TargetDatasetId *string
+
+	// The ID of the time series.
+	//
+	// This member is required.
+	TimeSeriesId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a data segment, including its source
+// dataset, time series, timestamp range, and enrichment status.
+type DataSegmentSummary struct {
+
+	// The alias of the time series.
+	//
+	// This member is required.
+	Alias *string
+
+	// The data type of the time series.
+	//
+	// This member is required.
+	DataType PropertyDataType
+
+	// The nanosecond-precision end time of the data segment.
+	//
+	// This member is required.
+	EndTimestamp *TimeInNanos
+
+	// The ID of the source dataset that contains the data segment.
+	//
+	// This member is required.
+	SourceDatasetId *string
+
+	// The nanosecond-precision start time of the data segment.
+	//
+	// This member is required.
+	StartTimestamp *TimeInNanos
+
+	// The ID of the time series.
+	//
+	// This member is required.
+	TimeSeriesId *string
+
+	// The enrichment information for the data segment.
+	Enrichment *DataSegmentEnrichment
+
+	noSmithyDocumentSerde
+}
+
+// Contains the configuration for a dataset.
+type DatasetConfig struct {
+
+	// The session configuration for a session-type dataset.
+	Session *SessionConfig
+
+	noSmithyDocumentSerde
+}
+
+// Contains the enrichment status information for a dataset across data types.
+type DatasetEnrichment struct {
+
+	// The enrichment status for video data in the dataset.
+	Video *DatasetEnrichmentEntry
+
+	noSmithyDocumentSerde
+}
+
+// Contains enrichment status information for a specific data type in a dataset.
+type DatasetEnrichmentEntry struct {
+
+	// The enrichment status of the data type in the dataset.
+	//
+	// This member is required.
+	Status DatasetEnrichmentStatus
+
+	// The date the data was last enriched, in Unix epoch time.
+	LastEnrichedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A dataset to process.
+type DatasetItem struct {
+
+	// The unique identifier for the dataset.
+	//
+	// This member is required.
+	DatasetId *string
+
+	// The optional subset of data types to export. If omitted, all data types are
+	// exported.
+	ExportDataTypes []ExportDataType
+
+	// The trim settings applied to all items in the dataset. When omitted, the full
+	// dataset time range is used.
+	TrimSettings *TrimSettings
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the dataset use and it's source.
 type DataSetReference struct {
 
@@ -2094,6 +2467,16 @@ type DatasetSummary struct {
 	// This member is required.
 	Status *DatasetStatus
 
+	// The type of dataset: a session dataset, a curated dataset, or a connection to
+	// an external datasource.
+	DatasetType DatasetTypeEnum
+
+	// The enrichment status of the dataset.
+	EnrichmentStatus *DatasetEnrichment
+
+	// The data source type of the dataset.
+	SourceType DatasetSourceType
+
 	noSmithyDocumentSerde
 }
 
@@ -2116,6 +2499,27 @@ type Datum struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a data segment entry to delete.
+type DeleteDataSegmentEntry struct {
+
+	// The nanosecond-precision end time of the data segment to delete.
+	//
+	// This member is required.
+	EndTimestamp *TimeInNanos
+
+	// The nanosecond-precision start time of the data segment to delete.
+	//
+	// This member is required.
+	StartTimestamp *TimeInNanos
+
+	// The ID of the time series.
+	//
+	// This member is required.
+	TimeSeriesId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains detailed error information.
 type DetailedError struct {
 
@@ -2128,6 +2532,177 @@ type DetailedError struct {
 	//
 	// This member is required.
 	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains a detailed error entry for granular troubleshooting of pipeline
+// failures.
+type DetailedPipelineError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code DetailedPipelineErrorCode
+
+	// The associated error message.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a data segment entry to disassociate from a dataset.
+type DisassociateDataSegmentEntry struct {
+
+	// The nanosecond-precision end time of the data segment to disassociate.
+	//
+	// This member is required.
+	EndTimestamp *TimeInNanos
+
+	// The ID of the source dataset that contains the data segment.
+	//
+	// This member is required.
+	SourceDatasetId *string
+
+	// The nanosecond-precision start time of the data segment to disassociate.
+	//
+	// This member is required.
+	StartTimestamp *TimeInNanos
+
+	// The ID of the time series.
+	//
+	// This member is required.
+	TimeSeriesId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for the enrichment job defining which analysis type to perform on
+// video time-series data. Currently supports event detection enrichment. Exactly
+// one member must be specified.
+//
+// The following types satisfy this interface:
+//
+//	EnrichmentJobConfigurationMemberEventDetection
+type EnrichmentJobConfiguration interface {
+	isEnrichmentJobConfiguration()
+}
+
+// Event detection configuration that generates embeddings from video time-series
+// data enabling natural language similarity search on events. The service
+// processes video data and creates embeddings stored in IoT SiteWise for semantic
+// querying.
+type EnrichmentJobConfigurationMemberEventDetection struct {
+	Value EventDetection
+
+	noSmithyDocumentSerde
+}
+
+func (*EnrichmentJobConfigurationMemberEventDetection) isEnrichmentJobConfiguration() {}
+
+// Summary information for an enrichment job returned by ListEnrichmentJobs. This
+// lightweight representation includes identifiers, status, and key metadata
+// without the full job configuration.
+//
+// Use DescribeEnrichmentJob to retrieve:
+//
+//   - Complete job configuration (trim settings, full parameters)
+//   - Detailed timestamps (completedAt, cancelledAt)
+//   - Failure messages for failed jobs
+//
+// The summary is optimized for display in lists and dashboards, providing enough
+// information to identify and filter jobs without the overhead of full
+// configuration details.
+type EnrichmentJobSummary struct {
+
+	// Timestamp when the job was created in ISO 8601 format.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The dataset being enriched. Useful for filtering and identifying jobs without
+	// fetching the full configuration. This allows you to quickly find all jobs
+	// related to a specific dataset.
+	//
+	// This member is required.
+	DatasetId *string
+
+	// Unique identifier for the enrichment job.
+	//
+	// This member is required.
+	JobId *string
+
+	// The type of enrichment job. Currently EVENT_DETECTION is the only supported
+	// type.
+	//
+	// This member is required.
+	JobType JobType
+
+	// Current status of the job: PENDING, RUNNING, COMPLETED, FAILED, TIMED_OUT, or
+	// CANCELLED. Use this to quickly identify active jobs or jobs requiring attention.
+	//
+	// This member is required.
+	Status EnrichmentJobStatus
+
+	// The name of the IoT SiteWise workspace containing this job.
+	//
+	// This member is required.
+	WorkspaceName *string
+
+	// The property alias (human-readable sensor name) of the time series being
+	// enriched. Present when the job was created using a propertyAlias. Use this to
+	// identify which sensor the job analyzes.
+	PropertyAlias *string
+
+	// The system identifier of the time series being enriched. Present when the job
+	// was created using a timeSeriesId. Use this to identify which time series the job
+	// analyzes.
+	TimeSeriesId *string
+
+	// Timestamp of the last job status change in ISO 8601 format. Use this to track
+	// recent activity and identify stale jobs. For active jobs, this shows the last
+	// time the job transitioned to a new status.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Time range settings for extracting a specific window of video time-series data
+// to process.
+//
+// Trim settings define the time bounds for enrichment and must satisfy:
+//
+//   - Start and end times must be within the dataset's time bounds
+//   - Trim settings retrieve fully contained data segments within the specified
+//     time range
+//   - endTime must be greater than startTime
+//   - Both times should represent valid data ranges in the dataset
+//
+// Trim settings are required to:
+//
+//   - Prevent accidentally analyzing unbounded datasets
+//   - Ensure predictable processing time and costs
+//   - Allow focused analysis on specific time periods of interest
+type EnrichmentTrimSettings struct {
+
+	// End time for the video analysis time range in nanoseconds since Unix epoch
+	// (TimeInNanos format). Data segments at or before this time are included in the
+	// enrichment. Must be greater than startTime and within the dataset's time bounds.
+	//
+	// This member is required.
+	EndTime *TimeInNanos
+
+	// Start time for the video analysis time range in nanoseconds since Unix epoch
+	// (TimeInNanos format). Data segments at or after this time are included in the
+	// enrichment. Must be within the dataset's time bounds.
+	//
+	// Example (JavaScript): Date.parse('2024-01-01T00:00:00Z') * 1000000 Example
+	// (Python): int(datetime.timestamp() * 1e9)
+	//
+	// This member is required.
+	StartTime *TimeInNanos
 
 	noSmithyDocumentSerde
 }
@@ -2170,6 +2745,61 @@ type ErrorReportLocation struct {
 	//
 	// This member is required.
 	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for event detection enrichment on video time-series data.
+//
+// Event detection generates embeddings from video data enabling natural language
+// similarity search on events. This allows customers to:
+//
+//   - Query video events using semantic search after enrichment completes
+//   - Find relevant video segments through natural language queries
+//   - Search across video time-series data stored in IoT SiteWise
+//
+// You must specify the dataset, exactly one time-series identifier (timeSeriesId
+// OR propertyAlias), and trim settings defining the video time window to process.
+type EventDetection struct {
+
+	// The IoT SiteWise dataset ID containing the video time-series data to analyze.
+	// Query IoT SiteWise to discover available datasets in your workspace.
+	//
+	// This member is required.
+	DatasetId *string
+
+	// Time range settings defining which portion of the video time-series data to
+	// process. Required to ensure predictable processing time and prevent analyzing
+	// unbounded datasets. Start and end times must be within the dataset's time
+	// bounds.
+	//
+	// This member is required.
+	TrimSettings *EnrichmentTrimSettings
+
+	// Human-readable alias for the video time series to analyze (e.g.,
+	// /camera/warehouse/zone-a). Specify either propertyAlias or timeSeriesId, but not
+	// both. Use this when you have configured friendly aliases in IoT SiteWise for
+	// better readability.
+	PropertyAlias *string
+
+	// Unique system identifier for the video time series to analyze. Specify either
+	// timeSeriesId or propertyAlias, but not both. Use this when you have the
+	// system-generated time series identifier from IoT SiteWise.
+	TimeSeriesId *string
+
+	noSmithyDocumentSerde
+}
+
+// Environment variables provided as input for a pipeline execution.
+type ExecutionEnvironmentVariables struct {
+
+	// Per-compute-node environment variable overrides. Each entry maps a compute node
+	// name to its environment variable overrides.
+	ComputeNodes map[string]map[string]string
+
+	// Global environment variables that apply to all compute nodes in the pipeline
+	// execution.
+	Global map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -2229,6 +2859,46 @@ type ExecutionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the location where error reports will be written on failure.
+type ExportErrorReportLocation struct {
+
+	// The S3 URI prefix for the error report.
+	//
+	// This member is required.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a dataset export job.
+type ExportJobSummary struct {
+
+	// The S3 URI where output clips are written.
+	//
+	// This member is required.
+	DestinationS3Uri *string
+
+	// The unique identifier for the dataset export job.
+	//
+	// This member is required.
+	JobId *string
+
+	// The timestamp when the job started processing.
+	//
+	// This member is required.
+	StartedAt *time.Time
+
+	// The current status of the dataset export job.
+	//
+	// This member is required.
+	Status DatasetExportJobStatus
+
+	// The timestamp when the job completed, or null if the job is still running.
+	CompletedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains expression variable information.
 type ExpressionVariable struct {
 
@@ -2241,6 +2911,109 @@ type ExpressionVariable struct {
 	//
 	// This member is required.
 	Value *VariableValue
+
+	noSmithyDocumentSerde
+}
+
+// Contains error information for a data segment association that failed.
+type FailedDataSegmentAssociation struct {
+
+	// The nanosecond-precision end time of the data segment.
+	//
+	// This member is required.
+	EndTimestamp *TimeInNanos
+
+	// The error code for the failed association.
+	//
+	// This member is required.
+	ErrorCode DataSegmentErrorCode
+
+	// The error message for the failed association.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	// The ID of the source dataset.
+	//
+	// This member is required.
+	SourceDatasetId *string
+
+	// The nanosecond-precision start time of the data segment.
+	//
+	// This member is required.
+	StartTimestamp *TimeInNanos
+
+	// The ID of the time series.
+	//
+	// This member is required.
+	TimeSeriesId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains error information for a data segment deletion that failed.
+type FailedDataSegmentDeletion struct {
+
+	// The nanosecond-precision end time of the data segment.
+	//
+	// This member is required.
+	EndTimestamp *TimeInNanos
+
+	// The error code for the failed deletion.
+	//
+	// This member is required.
+	ErrorCode DataSegmentErrorCode
+
+	// The error message for the failed deletion.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	// The nanosecond-precision start time of the data segment.
+	//
+	// This member is required.
+	StartTimestamp *TimeInNanos
+
+	// The ID of the time series.
+	//
+	// This member is required.
+	TimeSeriesId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains error information for a data segment disassociation that failed.
+type FailedDataSegmentDisassociation struct {
+
+	// The nanosecond-precision end time of the data segment.
+	//
+	// This member is required.
+	EndTimestamp *TimeInNanos
+
+	// The error code for the failed disassociation.
+	//
+	// This member is required.
+	ErrorCode DataSegmentErrorCode
+
+	// The error message for the failed disassociation.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	// The ID of the source dataset.
+	//
+	// This member is required.
+	SourceDatasetId *string
+
+	// The nanosecond-precision start time of the data segment.
+	//
+	// This member is required.
+	StartTimestamp *TimeInNanos
+
+	// The ID of the time series.
+	//
+	// This member is required.
+	TimeSeriesId *string
 
 	noSmithyDocumentSerde
 }
@@ -2259,6 +3032,15 @@ type File struct {
 	// This member is required.
 	Key *string
 
+	// The alias associated with the file's time series.
+	Alias *string
+
+	// The file format of the data in S3.
+	FileFormat *FileFormat
+
+	// The nanosecond-precision start time for the file data.
+	StartTime *TimeInNanos
+
 	// The version ID to identify a specific version of the Amazon S3 object that
 	// contains your data.
 	VersionId *string
@@ -2269,11 +3051,32 @@ type File struct {
 // The file format of the data in S3.
 type FileFormat struct {
 
+	// The annotation format configuration.
+	Annotation *Annotation
+
 	// The file is in .CSV format.
 	Csv *Csv
 
+	// The MP4 format configuration.
+	Mp4 *Mp4
+
 	// The file is in parquet format.
 	Parquet *Parquet
+
+	noSmithyDocumentSerde
+}
+
+// Contains the output format configuration for video processing.
+type FormatSettings struct {
+
+	// The target frame rate for the output.
+	FramesPerSecond *int32
+
+	// The target height of the output, in pixels.
+	HeightInPixels *int32
+
+	// The target width of the output, in pixels.
+	WidthInPixels *int32
 
 	noSmithyDocumentSerde
 }
@@ -2652,8 +3455,6 @@ type InvocationOutput struct {
 type JobConfiguration struct {
 
 	// The file format of the data in S3.
-	//
-	// This member is required.
 	FileFormat *FileFormat
 
 	noSmithyDocumentSerde
@@ -2710,6 +3511,28 @@ type KendraSourceDetail struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Optional filters for ListSearches. When multiple filters are set, a search must
+// match all of them.
+type ListSearchesFilters struct {
+
+	// Returns only searches whose groupId is one of the listed values.
+	GroupIdFilter []string
+
+	// Returns only searches whose searchType is one of the listed values.
+	SearchTypeFilter []SearchType
+
+	// Returns only searches started at or after this time.
+	StartedAfter *time.Time
+
+	// Returns only searches started at or before this time.
+	StartedBefore *time.Time
+
+	// Returns only searches whose status is one of the listed values.
+	StatusFilter []SearchStatus
 
 	noSmithyDocumentSerde
 }
@@ -2847,6 +3670,11 @@ type MonitorErrorDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The MP4 video format configuration for bulk import files.
+type Mp4 struct {
+	noSmithyDocumentSerde
+}
+
 // Contains information about the storage destination.
 type MultiLayerStorage struct {
 
@@ -2860,6 +3688,112 @@ type MultiLayerStorage struct {
 
 // A parquet file.
 type Parquet struct {
+	noSmithyDocumentSerde
+}
+
+// Additional information about the current execution status. Populated when the
+// execution has terminated.
+type PipelineExecutionStateDetails struct {
+
+	// Human-readable description of the outcome. For a failed execution, this
+	// describes why it failed; for a cancelled execution, this is the reason you
+	// supplied when calling CancelPipelineExecution.
+	//
+	// This member is required.
+	Message *string
+
+	// Classification of the failure. Present when the execution failed.
+	Code PipelineErrorCode
+
+	// Per-step error entries to help diagnose a failed execution. Present when the
+	// execution failed.
+	Details []DetailedPipelineError
+
+	noSmithyDocumentSerde
+}
+
+// Current execution status of a pipeline.
+type PipelineExecutionStatus struct {
+
+	// Current state of the pipeline execution.
+	//
+	// This member is required.
+	State PipelineExecutionState
+
+	// Additional information about the execution outcome. Populated when the
+	// execution has terminated (failed or cancelled).
+	StateDetails *PipelineExecutionStateDetails
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a pipeline execution.
+type PipelineExecutionSummary struct {
+
+	// The unique identifier of the pipeline execution.
+	//
+	// This member is required.
+	PipelineExecutionId *string
+
+	// The pipeline version this execution ran against.
+	//
+	// This member is required.
+	PipelineVersion *string
+
+	// The current execution status of the pipeline.
+	//
+	// This member is required.
+	Status *PipelineExecutionStatus
+
+	// The time the pipeline execution completed, in Unix epoch time.
+	EndTime *time.Time
+
+	// Scheduling priority for the execution. When not specified, defaults to lowest
+	// priority.
+	ExecutionPriority *int32
+
+	// The time the pipeline execution started, in Unix epoch time.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a pipeline.
+type PipelineSummary struct {
+
+	// The time the pipeline was created, in Unix epoch time.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The ARN of the pipeline.
+	//
+	// This member is required.
+	PipelineArn *string
+
+	// The name of the pipeline.
+	//
+	// This member is required.
+	PipelineName *string
+
+	// The current lifecycle status of the pipeline.
+	//
+	// This member is required.
+	Status *ResourceStatus
+
+	// The time the pipeline was last updated, in Unix epoch time.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The version of the pipeline.
+	//
+	// This member is required.
+	Version *string
+
+	// The description of the pipeline.
+	Description *string
+
 	noSmithyDocumentSerde
 }
 
@@ -2949,6 +3883,34 @@ type PortalTypeEntry struct {
 
 	noSmithyDocumentSerde
 }
+
+// Input source for processing. Specify exactly one option.
+//
+// The following types satisfy this interface:
+//
+//	ProcessingInputMemberDataset
+//	ProcessingInputMemberTimeseries
+type ProcessingInput interface {
+	isProcessingInput()
+}
+
+// A dataset containing multiple items to process.
+type ProcessingInputMemberDataset struct {
+	Value DatasetItem
+
+	noSmithyDocumentSerde
+}
+
+func (*ProcessingInputMemberDataset) isProcessingInput() {}
+
+// List of individual timeseries items to process.
+type ProcessingInputMemberTimeseries struct {
+	Value []TimeseriesItem
+
+	noSmithyDocumentSerde
+}
+
+func (*ProcessingInputMemberTimeseries) isProcessingInput() {}
 
 // Identifies a specific IoT SiteWise Monitor project.
 type ProjectResource struct {
@@ -3165,6 +4127,51 @@ type PutAssetPropertyValueEntry struct {
 	noSmithyDocumentSerde
 }
 
+// Contains statistics about a completed query execution.
+type QueryStatistics struct {
+
+	// The total number of bytes scanned during query execution.
+	//
+	// This member is required.
+	BytesScanned *int64
+
+	// The total query execution time, in milliseconds.
+	//
+	// This member is required.
+	ExecutionTimeInMillis *int64
+
+	// The total number of rows returned by the query.
+	//
+	// This member is required.
+	RowCount *int64
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a query.
+type QuerySummary struct {
+
+	// The unique identifier for the query execution.
+	//
+	// This member is required.
+	QueryId *string
+
+	// The current query status.
+	//
+	// This member is required.
+	Status QueryStatus
+
+	// The date and time when the query was submitted, in Unix epoch time.
+	//
+	// This member is required.
+	SubmittedAt *time.Time
+
+	// The date and time when the query reached a terminal state, in Unix epoch time.
+	CompletedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains the reference information.
 type Reference struct {
 
@@ -3193,6 +4200,30 @@ type Resource struct {
 
 	// A project resource.
 	Project *ProjectResource
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details of a resource error.
+type ResourceError struct {
+
+	// The error code.
+	Code ResourceErrorCode
+
+	// The error message.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the current status of a resource.
+type ResourceStatus struct {
+
+	// Contains associated error information, if any.
+	Error *ResourceError
+
+	// The current status of the resource.
+	State ResourceState
 
 	noSmithyDocumentSerde
 }
@@ -3256,6 +4287,128 @@ type Row struct {
 	noSmithyDocumentSerde
 }
 
+// Optional filters that restrict a search to a subset of the workspace's data.
+type SearchFilters struct {
+
+	// Restricts the search to these datasets.
+	DatasetIds []string
+
+	// Restricts the search to these time intervals.
+	TimeIntervals []TimeInterval
+
+	// Restricts the search to these time series.
+	TimeSeriesIds []string
+
+	noSmithyDocumentSerde
+}
+
+// A single matching segment of time-series data returned by a search.
+type SearchResult struct {
+
+	// The identifier of the dataset that contains the matching data.
+	//
+	// This member is required.
+	DatasetId *string
+
+	// The end of the matching time-series segment, in nanoseconds since the Unix
+	// epoch.
+	//
+	// This member is required.
+	EndTimestamp *TimeInNanos
+
+	// The relevance score of this result. Higher scores indicate a stronger match.
+	//
+	// This member is required.
+	Score *float32
+
+	// The identifier of the search that produced this result.
+	//
+	// This member is required.
+	SearchId *string
+
+	// The start of the matching time-series segment, in nanoseconds since the Unix
+	// epoch.
+	//
+	// This member is required.
+	StartTimestamp *TimeInNanos
+
+	// The identifier of the time series that contains the matching data.
+	//
+	// This member is required.
+	TimeSeriesId *string
+
+	// The timestamp of the most relevant point within the matching segment, in
+	// nanoseconds since the Unix epoch.
+	//
+	// This member is required.
+	TopTimestamp *TimeInNanos
+
+	// The name of the workspace the search ran against.
+	//
+	// This member is required.
+	WorkspaceName *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a single search as returned by ListSearches.
+type SearchSummary struct {
+
+	// The natural-language query that was submitted for the search.
+	//
+	// This member is required.
+	QueryStatement *string
+
+	// The unique identifier of the search.
+	//
+	// This member is required.
+	SearchId *string
+
+	// The search strategy used for the search.
+	//
+	// This member is required.
+	SearchType SearchType
+
+	// The current status of the search.
+	//
+	// This member is required.
+	Status SearchStatus
+
+	// The name of the workspace the search runs against.
+	//
+	// This member is required.
+	WorkspaceName *string
+
+	// The group identifier associated with the search, if one was supplied on the
+	// request.
+	GroupId *string
+
+	// The time at which the search was started.
+	StartedAt *time.Time
+
+	// A human-readable explanation of the current status. Populated when the search
+	// has FAILED .
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the session configuration for a session-type dataset.
+type SessionConfig struct {
+
+	// The nanosecond-precision end time of the session.
+	//
+	// This member is required.
+	SessionEndTimestamp *TimeInNanos
+
+	// The nanosecond-precision start time of the session.
+	//
+	// This member is required.
+	SessionStartTimestamp *TimeInNanos
+
+	noSmithyDocumentSerde
+}
+
 // Contains details for a SiteWise Edge gateway that runs on a Siemens Industrial
 // Edge Device.
 type SiemensIE struct {
@@ -3305,6 +4458,65 @@ type TargetResource struct {
 	noSmithyDocumentSerde
 }
 
+// The task execution configuration. Specify a [containerTaskConfiguration] for a custom container workload.
+//
+// The following types satisfy this interface:
+//
+//	TaskConfigurationMemberContainerTaskConfiguration
+//
+// [containerTaskConfiguration]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_ContainerTaskConfiguration.html
+type TaskConfiguration interface {
+	isTaskConfiguration()
+}
+
+// Configuration for running a custom container image on managed compute.
+type TaskConfigurationMemberContainerTaskConfiguration struct {
+	Value ContainerTaskConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*TaskConfigurationMemberContainerTaskConfiguration) isTaskConfiguration() {}
+
+// Contains summary information about a task.
+type TaskSummary struct {
+
+	// The time the task was created, in Unix epoch time.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The current lifecycle status of the task.
+	//
+	// This member is required.
+	Status *ResourceStatus
+
+	// The ARN of the task.
+	//
+	// This member is required.
+	TaskArn *string
+
+	// The name of the task.
+	//
+	// This member is required.
+	TaskName *string
+
+	// The time the task was last updated, in Unix epoch time.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The version of the task.
+	//
+	// This member is required.
+	Version *string
+
+	// The description of the task.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains a timestamp with optional nanosecond granularity.
 type TimeInNanos struct {
 
@@ -3316,6 +4528,44 @@ type TimeInNanos struct {
 
 	// The nanosecond offset from timeInSeconds .
 	OffsetInNanos *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains a time interval with a start time and an end time. Use a time interval
+// to restrict an operation, such as a search, to a specific time range.
+type TimeInterval struct {
+
+	// The end of the time interval.
+	//
+	// This member is required.
+	EndTime *TimeInNanos
+
+	// The start of the time interval.
+	//
+	// This member is required.
+	StartTime *TimeInNanos
+
+	noSmithyDocumentSerde
+}
+
+// A single timeseries item to process. Exactly one of timeSeriesId or
+// propertyAlias must be provided.
+type TimeseriesItem struct {
+
+	// The optional format settings for the output.
+	FormatSettings *FormatSettings
+
+	// The customer-friendly alias for the timeseries. Mutually exclusive with
+	// timeSeriesId.
+	PropertyAlias *string
+
+	// The unique identifier for the timeseries. Mutually exclusive with propertyAlias.
+	TimeSeriesId *string
+
+	// The trim settings for the time range to export. Required for VIDEO and
+	// TELEMETRY data types; optional for ANNOTATION data types.
+	TrimSettings *TrimSettings
 
 	noSmithyDocumentSerde
 }
@@ -3435,6 +4685,22 @@ type TransformProcessingConfig struct {
 
 	// The forwarding configuration for a given property.
 	ForwardingConfig *ForwardingConfig
+
+	noSmithyDocumentSerde
+}
+
+// Contains settings for trimming content to a specific time range.
+type TrimSettings struct {
+
+	// The end time for the trim range. Must be greater than startTime.
+	//
+	// This member is required.
+	EndTime *TimeInNanos
+
+	// The start time for the trim range.
+	//
+	// This member is required.
+	StartTime *TimeInNanos
 
 	noSmithyDocumentSerde
 }
@@ -3590,6 +4856,102 @@ type WarmTierRetentionPeriod struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the encryption configuration for a workspace.
+type WorkspaceEncryptionConfiguration struct {
+
+	// The encryption scheme for the workspace. SITEWISE_DEFAULT_ENCRYPTION encrypts
+	// data with the IoT SiteWise default key. KMS_BASED_ENCRYPTION encrypts data with
+	// the customer managed KMS key identified by kmsKeyId .
+	//
+	// This member is required.
+	EncryptionType EncryptionType
+
+	// The customer managed KMS key used when encryptionType is KMS_BASED_ENCRYPTION .
+	// Accepts a key ID, key ARN, or key alias. Required for KMS_BASED_ENCRYPTION ;
+	// must be omitted for SITEWISE_DEFAULT_ENCRYPTION . After a workspace's customer
+	// managed key configuration becomes active, the key can't be changed.
+	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the encryption configuration information for a workspace.
+type WorkspaceEncryptionConfigurationInfo struct {
+
+	// The type of encryption used for the workspace.
+	//
+	// This member is required.
+	EncryptionType EncryptionType
+
+	// The key ARN of the KMS key used for KMS encryption if encryptionType is
+	// KMS_BASED_ENCRYPTION .
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details of an error associated with a workspace.
+type WorkspaceErrorDetails struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code ErrorCode
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the current status of a workspace.
+type WorkspaceStatus struct {
+
+	// The current state of the workspace.
+	//
+	// This member is required.
+	State WorkspaceState
+
+	// Contains associated error information, if any.
+	Error *WorkspaceErrorDetails
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a workspace, including its name, ARN,
+// status, and creation and update timestamps.
+type WorkspaceSummary struct {
+
+	// The ARN of the workspace.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date the workspace was created, in Unix epoch time.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The name of the workspace.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the workspace.
+	//
+	// This member is required.
+	Status *WorkspaceStatus
+
+	// The date the workspace was last updated, in Unix epoch time.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -3601,4 +4963,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isResponseStream() {}
+func (*UnknownUnionMember) isEnrichmentJobConfiguration() {}
+func (*UnknownUnionMember) isProcessingInput()            {}
+func (*UnknownUnionMember) isResponseStream()             {}
+func (*UnknownUnionMember) isTaskConfiguration()          {}

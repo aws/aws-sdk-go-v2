@@ -29,6 +29,27 @@ func (AggregateType) Values() []AggregateType {
 	}
 }
 
+type ApplicationStatus string
+
+// Enum values for ApplicationStatus
+const (
+	ApplicationStatusCreating ApplicationStatus = "CREATING"
+	ApplicationStatusActive   ApplicationStatus = "ACTIVE"
+	ApplicationStatusDeleting ApplicationStatus = "DELETING"
+)
+
+// Values returns all known values for ApplicationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationStatus) Values() []ApplicationStatus {
+	return []ApplicationStatus{
+		"CREATING",
+		"ACTIVE",
+		"DELETING",
+	}
+}
+
 type AssetErrorCode string
 
 // Enum values for AssetErrorCode
@@ -410,6 +431,54 @@ func (ComputeLocation) Values() []ComputeLocation {
 	}
 }
 
+type ComputeNodeErrorCode string
+
+// Enum values for ComputeNodeErrorCode
+const (
+	ComputeNodeErrorCodeValidationError ComputeNodeErrorCode = "VALIDATION_ERROR"
+	ComputeNodeErrorCodeInternalFailure ComputeNodeErrorCode = "INTERNAL_FAILURE"
+	ComputeNodeErrorCodeExecutionError  ComputeNodeErrorCode = "EXECUTION_ERROR"
+	ComputeNodeErrorCodeTimedOut        ComputeNodeErrorCode = "TIMED_OUT"
+)
+
+// Values returns all known values for ComputeNodeErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ComputeNodeErrorCode) Values() []ComputeNodeErrorCode {
+	return []ComputeNodeErrorCode{
+		"VALIDATION_ERROR",
+		"INTERNAL_FAILURE",
+		"EXECUTION_ERROR",
+		"TIMED_OUT",
+	}
+}
+
+type ComputeNodeExecutionState string
+
+// Enum values for ComputeNodeExecutionState
+const (
+	ComputeNodeExecutionStateNotStarted ComputeNodeExecutionState = "NOT_STARTED"
+	ComputeNodeExecutionStateQueued     ComputeNodeExecutionState = "QUEUED"
+	ComputeNodeExecutionStateRunning    ComputeNodeExecutionState = "RUNNING"
+	ComputeNodeExecutionStateSucceeded  ComputeNodeExecutionState = "SUCCEEDED"
+	ComputeNodeExecutionStateFailed     ComputeNodeExecutionState = "FAILED"
+)
+
+// Values returns all known values for ComputeNodeExecutionState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ComputeNodeExecutionState) Values() []ComputeNodeExecutionState {
+	return []ComputeNodeExecutionState{
+		"NOT_STARTED",
+		"QUEUED",
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type ConfigurationState string
 
 // Enum values for ConfigurationState
@@ -452,11 +521,110 @@ func (CoreDeviceOperatingSystem) Values() []CoreDeviceOperatingSystem {
 	}
 }
 
+type DataSegmentErrorCode string
+
+// Enum values for DataSegmentErrorCode
+const (
+	DataSegmentErrorCodeInternalFailure      DataSegmentErrorCode = "INTERNAL_FAILURE"
+	DataSegmentErrorCodeValidationError      DataSegmentErrorCode = "VALIDATION_ERROR"
+	DataSegmentErrorCodeResourceNotFound     DataSegmentErrorCode = "RESOURCE_NOT_FOUND"
+	DataSegmentErrorCodeLimitExceeded        DataSegmentErrorCode = "LIMIT_EXCEEDED"
+	DataSegmentErrorCodeConflictingOperation DataSegmentErrorCode = "CONFLICTING_OPERATION"
+)
+
+// Values returns all known values for DataSegmentErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataSegmentErrorCode) Values() []DataSegmentErrorCode {
+	return []DataSegmentErrorCode{
+		"INTERNAL_FAILURE",
+		"VALIDATION_ERROR",
+		"RESOURCE_NOT_FOUND",
+		"LIMIT_EXCEEDED",
+		"CONFLICTING_OPERATION",
+	}
+}
+
+type DatasetEnrichmentStatus string
+
+// Enum values for DatasetEnrichmentStatus
+const (
+	DatasetEnrichmentStatusFullyEnriched     DatasetEnrichmentStatus = "FULLY_ENRICHED"
+	DatasetEnrichmentStatusPartiallyEnriched DatasetEnrichmentStatus = "PARTIALLY_ENRICHED"
+	DatasetEnrichmentStatusNotEnriched       DatasetEnrichmentStatus = "NOT_ENRICHED"
+)
+
+// Values returns all known values for DatasetEnrichmentStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetEnrichmentStatus) Values() []DatasetEnrichmentStatus {
+	return []DatasetEnrichmentStatus{
+		"FULLY_ENRICHED",
+		"PARTIALLY_ENRICHED",
+		"NOT_ENRICHED",
+	}
+}
+
+type DatasetExportJobFilter string
+
+// Enum values for DatasetExportJobFilter
+const (
+	DatasetExportJobFilterAll                 DatasetExportJobFilter = "ALL"
+	DatasetExportJobFilterSubmitted           DatasetExportJobFilter = "SUBMITTED"
+	DatasetExportJobFilterRunning             DatasetExportJobFilter = "RUNNING"
+	DatasetExportJobFilterCompleted           DatasetExportJobFilter = "COMPLETED"
+	DatasetExportJobFilterCompletedWithErrors DatasetExportJobFilter = "COMPLETED_WITH_ERRORS"
+	DatasetExportJobFilterFailed              DatasetExportJobFilter = "FAILED"
+)
+
+// Values returns all known values for DatasetExportJobFilter. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetExportJobFilter) Values() []DatasetExportJobFilter {
+	return []DatasetExportJobFilter{
+		"ALL",
+		"SUBMITTED",
+		"RUNNING",
+		"COMPLETED",
+		"COMPLETED_WITH_ERRORS",
+		"FAILED",
+	}
+}
+
+type DatasetExportJobStatus string
+
+// Enum values for DatasetExportJobStatus
+const (
+	DatasetExportJobStatusSubmitted           DatasetExportJobStatus = "SUBMITTED"
+	DatasetExportJobStatusRunning             DatasetExportJobStatus = "RUNNING"
+	DatasetExportJobStatusCompleted           DatasetExportJobStatus = "COMPLETED"
+	DatasetExportJobStatusCompletedWithErrors DatasetExportJobStatus = "COMPLETED_WITH_ERRORS"
+	DatasetExportJobStatusFailed              DatasetExportJobStatus = "FAILED"
+)
+
+// Values returns all known values for DatasetExportJobStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetExportJobStatus) Values() []DatasetExportJobStatus {
+	return []DatasetExportJobStatus{
+		"SUBMITTED",
+		"RUNNING",
+		"COMPLETED",
+		"COMPLETED_WITH_ERRORS",
+		"FAILED",
+	}
+}
+
 type DatasetSourceFormat string
 
 // Enum values for DatasetSourceFormat
 const (
 	DatasetSourceFormatKnowledgeBase DatasetSourceFormat = "KNOWLEDGE_BASE"
+	DatasetSourceFormatTimeseries    DatasetSourceFormat = "TIMESERIES"
 )
 
 // Values returns all known values for DatasetSourceFormat. Note that this can be
@@ -466,6 +634,7 @@ const (
 func (DatasetSourceFormat) Values() []DatasetSourceFormat {
 	return []DatasetSourceFormat{
 		"KNOWLEDGE_BASE",
+		"TIMESERIES",
 	}
 }
 
@@ -473,7 +642,8 @@ type DatasetSourceType string
 
 // Enum values for DatasetSourceType
 const (
-	DatasetSourceTypeKendra DatasetSourceType = "KENDRA"
+	DatasetSourceTypeKendra   DatasetSourceType = "KENDRA"
+	DatasetSourceTypeSitewise DatasetSourceType = "SITEWISE"
 )
 
 // Values returns all known values for DatasetSourceType. Note that this can be
@@ -483,6 +653,7 @@ const (
 func (DatasetSourceType) Values() []DatasetSourceType {
 	return []DatasetSourceType{
 		"KENDRA",
+		"SITEWISE",
 	}
 }
 
@@ -511,6 +682,27 @@ func (DatasetState) Values() []DatasetState {
 	}
 }
 
+type DatasetTypeEnum string
+
+// Enum values for DatasetTypeEnum
+const (
+	DatasetTypeEnumSession  DatasetTypeEnum = "SESSION"
+	DatasetTypeEnumCurated  DatasetTypeEnum = "CURATED"
+	DatasetTypeEnumExternal DatasetTypeEnum = "EXTERNAL"
+)
+
+// Values returns all known values for DatasetTypeEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetTypeEnum) Values() []DatasetTypeEnum {
+	return []DatasetTypeEnum{
+		"SESSION",
+		"CURATED",
+		"EXTERNAL",
+	}
+}
+
 type DetailedErrorCode string
 
 // Enum values for DetailedErrorCode
@@ -527,6 +719,29 @@ func (DetailedErrorCode) Values() []DetailedErrorCode {
 	return []DetailedErrorCode{
 		"INCOMPATIBLE_COMPUTE_LOCATION",
 		"INCOMPATIBLE_FORWARDING_CONFIGURATION",
+	}
+}
+
+type DetailedPipelineErrorCode string
+
+// Enum values for DetailedPipelineErrorCode
+const (
+	DetailedPipelineErrorCodeValidationError DetailedPipelineErrorCode = "VALIDATION_ERROR"
+	DetailedPipelineErrorCodeInternalFailure DetailedPipelineErrorCode = "INTERNAL_FAILURE"
+	DetailedPipelineErrorCodeExecutionError  DetailedPipelineErrorCode = "EXECUTION_ERROR"
+	DetailedPipelineErrorCodeTimedOut        DetailedPipelineErrorCode = "TIMED_OUT"
+)
+
+// Values returns all known values for DetailedPipelineErrorCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DetailedPipelineErrorCode) Values() []DetailedPipelineErrorCode {
+	return []DetailedPipelineErrorCode{
+		"VALIDATION_ERROR",
+		"INTERNAL_FAILURE",
+		"EXECUTION_ERROR",
+		"TIMED_OUT",
 	}
 }
 
@@ -569,6 +784,52 @@ func (EncryptionType) Values() []EncryptionType {
 	}
 }
 
+type EnrichmentJobStatus string
+
+// Enum values for EnrichmentJobStatus
+const (
+	EnrichmentJobStatusPending   EnrichmentJobStatus = "PENDING"
+	EnrichmentJobStatusRunning   EnrichmentJobStatus = "RUNNING"
+	EnrichmentJobStatusCompleted EnrichmentJobStatus = "COMPLETED"
+	EnrichmentJobStatusFailed    EnrichmentJobStatus = "FAILED"
+	EnrichmentJobStatusTimedOut  EnrichmentJobStatus = "TIMED_OUT"
+	EnrichmentJobStatusCancelled EnrichmentJobStatus = "CANCELLED"
+)
+
+// Values returns all known values for EnrichmentJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnrichmentJobStatus) Values() []EnrichmentJobStatus {
+	return []EnrichmentJobStatus{
+		"PENDING",
+		"RUNNING",
+		"COMPLETED",
+		"FAILED",
+		"TIMED_OUT",
+		"CANCELLED",
+	}
+}
+
+type EnrichmentStatus string
+
+// Enum values for EnrichmentStatus
+const (
+	EnrichmentStatusEnriched    EnrichmentStatus = "ENRICHED"
+	EnrichmentStatusNotEnriched EnrichmentStatus = "NOT_ENRICHED"
+)
+
+// Values returns all known values for EnrichmentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnrichmentStatus) Values() []EnrichmentStatus {
+	return []EnrichmentStatus{
+		"ENRICHED",
+		"NOT_ENRICHED",
+	}
+}
+
 type ErrorCode string
 
 // Enum values for ErrorCode
@@ -606,6 +867,27 @@ func (ExecutionState) Values() []ExecutionState {
 		"RUNNING",
 		"COMPLETED",
 		"FAILED",
+	}
+}
+
+type ExportDataType string
+
+// Enum values for ExportDataType
+const (
+	ExportDataTypeVideo      ExportDataType = "VIDEO"
+	ExportDataTypeTelemetry  ExportDataType = "TELEMETRY"
+	ExportDataTypeAnnotation ExportDataType = "ANNOTATION"
+)
+
+// Values returns all known values for ExportDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExportDataType) Values() []ExportDataType {
+	return []ExportDataType{
+		"VIDEO",
+		"TELEMETRY",
+		"ANNOTATION",
 	}
 }
 
@@ -690,6 +972,23 @@ func (JobStatus) Values() []JobStatus {
 		"COMPLETED",
 		"FAILED",
 		"COMPLETED_WITH_FAILURES",
+	}
+}
+
+type JobType string
+
+// Enum values for JobType
+const (
+	JobTypeEventDetection JobType = "EVENT_DETECTION"
+)
+
+// Values returns all known values for JobType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobType) Values() []JobType {
+	return []JobType{
+		"EVENT_DETECTION",
 	}
 }
 
@@ -860,6 +1159,56 @@ func (Permission) Values() []Permission {
 	}
 }
 
+type PipelineErrorCode string
+
+// Enum values for PipelineErrorCode
+const (
+	PipelineErrorCodeValidationError PipelineErrorCode = "VALIDATION_ERROR"
+	PipelineErrorCodeInternalFailure PipelineErrorCode = "INTERNAL_FAILURE"
+	PipelineErrorCodeExecutionError  PipelineErrorCode = "EXECUTION_ERROR"
+	PipelineErrorCodeTimedOut        PipelineErrorCode = "TIMED_OUT"
+)
+
+// Values returns all known values for PipelineErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PipelineErrorCode) Values() []PipelineErrorCode {
+	return []PipelineErrorCode{
+		"VALIDATION_ERROR",
+		"INTERNAL_FAILURE",
+		"EXECUTION_ERROR",
+		"TIMED_OUT",
+	}
+}
+
+type PipelineExecutionState string
+
+// Enum values for PipelineExecutionState
+const (
+	PipelineExecutionStateNotStarted PipelineExecutionState = "NOT_STARTED"
+	PipelineExecutionStateRunning    PipelineExecutionState = "RUNNING"
+	PipelineExecutionStateSucceeded  PipelineExecutionState = "SUCCEEDED"
+	PipelineExecutionStateFailed     PipelineExecutionState = "FAILED"
+	PipelineExecutionStateCancelling PipelineExecutionState = "CANCELLING"
+	PipelineExecutionStateCancelled  PipelineExecutionState = "CANCELLED"
+)
+
+// Values returns all known values for PipelineExecutionState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PipelineExecutionState) Values() []PipelineExecutionState {
+	return []PipelineExecutionState{
+		"NOT_STARTED",
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+		"CANCELLING",
+		"CANCELLED",
+	}
+}
+
 type PortalState string
 
 // Enum values for PortalState
@@ -906,15 +1255,80 @@ func (PortalType) Values() []PortalType {
 	}
 }
 
+type ProcessingType string
+
+// Enum values for ProcessingType
+const (
+	ProcessingTypeGenericComputeProcessing      ProcessingType = "GENERIC_COMPUTE_PROCESSING"
+	ProcessingTypeHardwareAcceleratedProcessing ProcessingType = "HARDWARE_ACCELERATED_PROCESSING"
+)
+
+// Values returns all known values for ProcessingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProcessingType) Values() []ProcessingType {
+	return []ProcessingType{
+		"GENERIC_COMPUTE_PROCESSING",
+		"HARDWARE_ACCELERATED_PROCESSING",
+	}
+}
+
+type ProcessingUnit string
+
+// Enum values for ProcessingUnit
+const (
+	ProcessingUnitUnits2  ProcessingUnit = "UNITS_2"
+	ProcessingUnitUnits4  ProcessingUnit = "UNITS_4"
+	ProcessingUnitUnits8  ProcessingUnit = "UNITS_8"
+	ProcessingUnitUnits12 ProcessingUnit = "UNITS_12"
+	ProcessingUnitUnits16 ProcessingUnit = "UNITS_16"
+	ProcessingUnitUnits24 ProcessingUnit = "UNITS_24"
+	ProcessingUnitUnits32 ProcessingUnit = "UNITS_32"
+	ProcessingUnitUnits36 ProcessingUnit = "UNITS_36"
+	ProcessingUnitUnits48 ProcessingUnit = "UNITS_48"
+	ProcessingUnitUnits60 ProcessingUnit = "UNITS_60"
+	ProcessingUnitUnits64 ProcessingUnit = "UNITS_64"
+	ProcessingUnitUnits72 ProcessingUnit = "UNITS_72"
+	ProcessingUnitUnits84 ProcessingUnit = "UNITS_84"
+	ProcessingUnitUnits96 ProcessingUnit = "UNITS_96"
+)
+
+// Values returns all known values for ProcessingUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProcessingUnit) Values() []ProcessingUnit {
+	return []ProcessingUnit{
+		"UNITS_2",
+		"UNITS_4",
+		"UNITS_8",
+		"UNITS_12",
+		"UNITS_16",
+		"UNITS_24",
+		"UNITS_32",
+		"UNITS_36",
+		"UNITS_48",
+		"UNITS_60",
+		"UNITS_64",
+		"UNITS_72",
+		"UNITS_84",
+		"UNITS_96",
+	}
+}
+
 type PropertyDataType string
 
 // Enum values for PropertyDataType
 const (
-	PropertyDataTypeString  PropertyDataType = "STRING"
-	PropertyDataTypeInteger PropertyDataType = "INTEGER"
-	PropertyDataTypeDouble  PropertyDataType = "DOUBLE"
-	PropertyDataTypeBoolean PropertyDataType = "BOOLEAN"
-	PropertyDataTypeStruct  PropertyDataType = "STRUCT"
+	PropertyDataTypeString     PropertyDataType = "STRING"
+	PropertyDataTypeInteger    PropertyDataType = "INTEGER"
+	PropertyDataTypeDouble     PropertyDataType = "DOUBLE"
+	PropertyDataTypeBoolean    PropertyDataType = "BOOLEAN"
+	PropertyDataTypeStruct     PropertyDataType = "STRUCT"
+	PropertyDataTypeVideo      PropertyDataType = "VIDEO"
+	PropertyDataTypeAnnotation PropertyDataType = "ANNOTATION"
+	PropertyDataTypeJson       PropertyDataType = "JSON"
 )
 
 // Values returns all known values for PropertyDataType. Note that this can be
@@ -928,6 +1342,9 @@ func (PropertyDataType) Values() []PropertyDataType {
 		"DOUBLE",
 		"BOOLEAN",
 		"STRUCT",
+		"VIDEO",
+		"ANNOTATION",
+		"JSON",
 	}
 }
 
@@ -968,6 +1385,33 @@ func (Quality) Values() []Quality {
 		"GOOD",
 		"BAD",
 		"UNCERTAIN",
+	}
+}
+
+type QueryStatus string
+
+// Enum values for QueryStatus
+const (
+	QueryStatusSubmitted QueryStatus = "SUBMITTED"
+	QueryStatusRunning   QueryStatus = "RUNNING"
+	QueryStatusCompleted QueryStatus = "COMPLETED"
+	QueryStatusFailed    QueryStatus = "FAILED"
+	QueryStatusCanceled  QueryStatus = "CANCELED"
+	QueryStatusCanceling QueryStatus = "CANCELING"
+)
+
+// Values returns all known values for QueryStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QueryStatus) Values() []QueryStatus {
+	return []QueryStatus{
+		"SUBMITTED",
+		"RUNNING",
+		"COMPLETED",
+		"FAILED",
+		"CANCELED",
+		"CANCELING",
 	}
 }
 
@@ -1013,6 +1457,50 @@ func (ResolveToResourceType) Values() []ResolveToResourceType {
 	}
 }
 
+type ResourceErrorCode string
+
+// Enum values for ResourceErrorCode
+const (
+	ResourceErrorCodeValidationError ResourceErrorCode = "VALIDATION_ERROR"
+	ResourceErrorCodeInternalFailure ResourceErrorCode = "INTERNAL_FAILURE"
+)
+
+// Values returns all known values for ResourceErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceErrorCode) Values() []ResourceErrorCode {
+	return []ResourceErrorCode{
+		"VALIDATION_ERROR",
+		"INTERNAL_FAILURE",
+	}
+}
+
+type ResourceState string
+
+// Enum values for ResourceState
+const (
+	ResourceStateCreating ResourceState = "CREATING"
+	ResourceStateActive   ResourceState = "ACTIVE"
+	ResourceStateUpdating ResourceState = "UPDATING"
+	ResourceStateDeleting ResourceState = "DELETING"
+	ResourceStateFailed   ResourceState = "FAILED"
+)
+
+// Values returns all known values for ResourceState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceState) Values() []ResourceState {
+	return []ResourceState{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"FAILED",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -1054,6 +1542,48 @@ func (ScalarType) Values() []ScalarType {
 		"DOUBLE",
 		"TIMESTAMP",
 		"STRING",
+	}
+}
+
+type SearchStatus string
+
+// Enum values for SearchStatus
+const (
+	SearchStatusQueued    SearchStatus = "QUEUED"
+	SearchStatusRunning   SearchStatus = "RUNNING"
+	SearchStatusSucceeded SearchStatus = "SUCCEEDED"
+	SearchStatusFailed    SearchStatus = "FAILED"
+)
+
+// Values returns all known values for SearchStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchStatus) Values() []SearchStatus {
+	return []SearchStatus{
+		"QUEUED",
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
+type SearchType string
+
+// Enum values for SearchType
+const (
+	SearchTypeDeep  SearchType = "DEEP"
+	SearchTypeQuick SearchType = "QUICK"
+)
+
+// Values returns all known values for SearchType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchType) Values() []SearchType {
+	return []SearchType{
+		"DEEP",
+		"QUICK",
 	}
 }
 
@@ -1150,6 +1680,23 @@ func (TraversalType) Values() []TraversalType {
 	}
 }
 
+type VideoDataType string
+
+// Enum values for VideoDataType
+const (
+	VideoDataTypeMp4 VideoDataType = "VIDEO-MP4"
+)
+
+// Values returns all known values for VideoDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VideoDataType) Values() []VideoDataType {
+	return []VideoDataType{
+		"VIDEO-MP4",
+	}
+}
+
 type WarmTierState string
 
 // Enum values for WarmTierState
@@ -1166,5 +1713,30 @@ func (WarmTierState) Values() []WarmTierState {
 	return []WarmTierState{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type WorkspaceState string
+
+// Enum values for WorkspaceState
+const (
+	WorkspaceStateCreating WorkspaceState = "CREATING"
+	WorkspaceStateActive   WorkspaceState = "ACTIVE"
+	WorkspaceStateUpdating WorkspaceState = "UPDATING"
+	WorkspaceStateDeleting WorkspaceState = "DELETING"
+	WorkspaceStateFailed   WorkspaceState = "FAILED"
+)
+
+// Values returns all known values for WorkspaceState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WorkspaceState) Values() []WorkspaceState {
+	return []WorkspaceState{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"FAILED",
 	}
 }

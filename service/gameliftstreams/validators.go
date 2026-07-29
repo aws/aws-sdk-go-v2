@@ -130,6 +130,26 @@ func (m *validateOpCreateStreamSessionConnection) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateStreamUrl struct {
+}
+
+func (*validateOpCreateStreamUrl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateStreamUrl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateStreamUrlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateStreamUrlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteApplication struct {
 }
 
@@ -270,6 +290,46 @@ func (m *validateOpGetStreamSession) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetStreamUrl struct {
+}
+
+func (*validateOpGetStreamUrl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetStreamUrl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetStreamUrlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetStreamUrlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListApplicationShaderCaches struct {
+}
+
+func (*validateOpListApplicationShaderCaches) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListApplicationShaderCaches) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListApplicationShaderCachesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListApplicationShaderCachesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListStreamSessions struct {
 }
 
@@ -325,6 +385,26 @@ func (m *validateOpRemoveStreamGroupLocations) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRemoveStreamGroupLocationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRevokeStreamUrl struct {
+}
+
+func (*validateOpRevokeStreamUrl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRevokeStreamUrl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RevokeStreamUrlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRevokeStreamUrlInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -474,6 +554,10 @@ func addOpCreateStreamSessionConnectionValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpCreateStreamSessionConnection{}, middleware.After)
 }
 
+func addOpCreateStreamUrlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateStreamUrl{}, middleware.After)
+}
+
 func addOpDeleteApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteApplication{}, middleware.After)
 }
@@ -502,6 +586,14 @@ func addOpGetStreamSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStreamSession{}, middleware.After)
 }
 
+func addOpGetStreamUrlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetStreamUrl{}, middleware.After)
+}
+
+func addOpListApplicationShaderCachesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListApplicationShaderCaches{}, middleware.After)
+}
+
 func addOpListStreamSessionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListStreamSessions{}, middleware.After)
 }
@@ -512,6 +604,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpRemoveStreamGroupLocationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRemoveStreamGroupLocations{}, middleware.After)
+}
+
+func addOpRevokeStreamUrlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRevokeStreamUrl{}, middleware.After)
 }
 
 func addOpStartStreamSessionValidationMiddleware(stack *middleware.Stack) error {
@@ -776,6 +872,38 @@ func validateOpCreateStreamSessionConnectionInput(v *CreateStreamSessionConnecti
 	}
 }
 
+func validateOpCreateStreamUrlInput(v *CreateStreamUrlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateStreamUrlInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.ApplicationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationIdentifier"))
+	}
+	if len(v.Protocol) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if v.UrlExpiresAfterMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UrlExpiresAfterMinutes"))
+	}
+	if v.Locations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Locations"))
+	}
+	if v.DisplayConfiguration != nil {
+		if err := validateDisplayConfiguration(v.DisplayConfiguration); err != nil {
+			invalidParams.AddNested("DisplayConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteApplicationInput(v *DeleteApplicationInput) error {
 	if v == nil {
 		return nil
@@ -893,6 +1021,39 @@ func validateOpGetStreamSessionInput(v *GetStreamSessionInput) error {
 	}
 }
 
+func validateOpGetStreamUrlInput(v *GetStreamUrlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetStreamUrlInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.StreamUrlIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamUrlIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListApplicationShaderCachesInput(v *ListApplicationShaderCachesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListApplicationShaderCachesInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListStreamSessionsInput(v *ListStreamSessionsInput) error {
 	if v == nil {
 		return nil
@@ -933,6 +1094,24 @@ func validateOpRemoveStreamGroupLocationsInput(v *RemoveStreamGroupLocationsInpu
 	}
 	if v.Locations == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Locations"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRevokeStreamUrlInput(v *RevokeStreamUrlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RevokeStreamUrlInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.StreamUrlIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamUrlIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -12,6 +12,11 @@ import (
 // Saves a copy of a database migration assessment report to your Amazon S3
 // bucket. DMS can save your assessment report as a comma-separated value (CSV) or
 // a PDF file.
+//
+// Required permissions: dms:ExportMetadataModelAssessment . For more information,
+// see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) ExportMetadataModelAssessment(ctx context.Context, params *ExportMetadataModelAssessmentInput, optFns ...func(*Options)) (*ExportMetadataModelAssessmentOutput, error) {
 	if params == nil {
 		params = &ExportMetadataModelAssessmentInput{}
@@ -34,7 +39,17 @@ type ExportMetadataModelAssessmentInput struct {
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// A value that specifies the database objects to assess.
+	// A JSON string that identifies the metadata models to export a conversion
+	// assessment report for. For the selection rule format and examples, see [Selection rules in DMS Schema Conversion].
+	//
+	// Usage:
+	//
+	//   - Accepts only source selection rules, where server-name in the object locator
+	//   matches the source data provider.
+	//
+	//   - Supports only explicit rule actions.
+	//
+	// [Selection rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html
 	//
 	// This member is required.
 	SelectionRules *string

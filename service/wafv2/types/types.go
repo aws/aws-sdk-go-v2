@@ -616,6 +616,13 @@ type ByteMatchStatement struct {
 	// This member is required.
 	TextTransformations []TextTransformation
 
+	// Pre-parse text transformations normalize the raw query string before WAF parses
+	// it into individual query arguments. They are applied before the standard text
+	// transformations. Pre-parse text transformations are only supported when
+	// FieldToMatch is SingleQueryArgument or AllQueryArguments . You can specify up to
+	// 3 pre-parse text transformations per rule statement.
+	PreParseTextTransformations []PreParseTextTransformation
+
 	noSmithyDocumentSerde
 }
 
@@ -3333,6 +3340,26 @@ type PhoneNumberField struct {
 	noSmithyDocumentSerde
 }
 
+// A pre-parse text transformation that normalizes the raw query string before WAF
+// parses it into individual query arguments. Pre-parse text transformations are
+// only supported when FieldToMatch is SingleQueryArgument or AllQueryArguments .
+type PreParseTextTransformation struct {
+
+	// Sets the relative processing order for the pre-parse text transformations that
+	// you define. WAF processes all transformations, from lowest priority value to
+	// highest, before inspecting the transformed content.
+	//
+	// This member is required.
+	Priority int32
+
+	// The type of pre-parse text transformation to apply to the raw query string.
+	//
+	// This member is required.
+	Type PreParseTextTransformationType
+
+	noSmithyDocumentSerde
+}
+
 // The price per request for a payment network, specifying the amount and
 // cryptocurrency.
 type Price struct {
@@ -3910,7 +3937,11 @@ type RateLimitUriPath struct {
 // AWSManagedRulesAntiDDoSRuleSet .
 type Regex struct {
 
-	// The string representing the regular expression.
+	// The string representing the regular expression. WAF enforces a quota on the
+	// maximum number of characters in a regex pattern. For the current limit, see [WAF quotas]in
+	// the WAF Developer Guide.
+	//
+	// [WAF quotas]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
 	RegexString *string
 
 	noSmithyDocumentSerde
@@ -3925,7 +3956,11 @@ type RegexMatchStatement struct {
 	// This member is required.
 	FieldToMatch *FieldToMatch
 
-	// The string representing the regular expression.
+	// The string representing the regular expression. WAF enforces a quota on the
+	// maximum number of characters in a regex pattern. For the current limit, see [WAF quotas]in
+	// the WAF Developer Guide.
+	//
+	// [WAF quotas]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
 	//
 	// This member is required.
 	RegexString *string
@@ -3941,6 +3976,13 @@ type RegexMatchStatement struct {
 	//
 	// This member is required.
 	TextTransformations []TextTransformation
+
+	// Pre-parse text transformations normalize the raw query string before WAF parses
+	// it into individual query arguments. They are applied before the standard text
+	// transformations. Pre-parse text transformations are only supported when
+	// FieldToMatch is SingleQueryArgument or AllQueryArguments . You can specify up to
+	// 3 pre-parse text transformations per rule statement.
+	PreParseTextTransformations []PreParseTextTransformation
 
 	noSmithyDocumentSerde
 }
@@ -4003,6 +4045,13 @@ type RegexPatternSetReferenceStatement struct {
 	//
 	// This member is required.
 	TextTransformations []TextTransformation
+
+	// Pre-parse text transformations normalize the raw query string before WAF parses
+	// it into individual query arguments. They are applied before the standard text
+	// transformations. Pre-parse text transformations are only supported when
+	// FieldToMatch is SingleQueryArgument or AllQueryArguments . You can specify up to
+	// 3 pre-parse text transformations per rule statement.
+	PreParseTextTransformations []PreParseTextTransformation
 
 	noSmithyDocumentSerde
 }
@@ -5117,6 +5166,13 @@ type SizeConstraintStatement struct {
 	// This member is required.
 	TextTransformations []TextTransformation
 
+	// Pre-parse text transformations normalize the raw query string before WAF parses
+	// it into individual query arguments. They are applied before the standard text
+	// transformations. Pre-parse text transformations are only supported when
+	// FieldToMatch is SingleQueryArgument or AllQueryArguments . You can specify up to
+	// 3 pre-parse text transformations per rule statement.
+	PreParseTextTransformations []PreParseTextTransformation
+
 	noSmithyDocumentSerde
 }
 
@@ -5190,6 +5246,13 @@ type SqliMatchStatement struct {
 	//
 	// This member is required.
 	TextTransformations []TextTransformation
+
+	// Pre-parse text transformations normalize the raw query string before WAF parses
+	// it into individual query arguments. They are applied before the standard text
+	// transformations. Pre-parse text transformations are only supported when
+	// FieldToMatch is SingleQueryArgument or AllQueryArguments . You can specify up to
+	// 3 pre-parse text transformations per rule statement.
+	PreParseTextTransformations []PreParseTextTransformation
 
 	// The sensitivity that you want WAF to use to inspect for SQL injection attacks.
 	//
@@ -5735,8 +5798,8 @@ type VisibilityConfig struct {
 // ACL with one or more Amazon Web Services resources to protect. The resource
 // types include Amazon CloudFront distribution, Amazon API Gateway REST API,
 // Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App
-// Runner service, Amplify application, and Amazon Web Services Verified Access
-// instance.
+// Runner service, Amplify application, Amazon Web Services Verified Access
+// instance, and Amazon Bedrock AgentCore Gateway.
 type WebACL struct {
 
 	// The Amazon Resource Name (ARN) of the web ACL that you want to associate with
@@ -5970,6 +6033,13 @@ type XssMatchStatement struct {
 	//
 	// This member is required.
 	TextTransformations []TextTransformation
+
+	// Pre-parse text transformations normalize the raw query string before WAF parses
+	// it into individual query arguments. They are applied before the standard text
+	// transformations. Pre-parse text transformations are only supported when
+	// FieldToMatch is SingleQueryArgument or AllQueryArguments . You can specify up to
+	// 3 pre-parse text transformations per rule statement.
+	PreParseTextTransformations []PreParseTextTransformation
 
 	noSmithyDocumentSerde
 }

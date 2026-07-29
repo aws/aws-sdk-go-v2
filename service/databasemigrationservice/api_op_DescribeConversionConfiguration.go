@@ -9,6 +9,11 @@ import (
 )
 
 // Returns configuration parameters for a schema conversion project.
+//
+// Required permissions: dms:DescribeConversionConfiguration . For more
+// information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) DescribeConversionConfiguration(ctx context.Context, params *DescribeConversionConfigurationInput, optFns ...func(*Options)) (*DescribeConversionConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeConversionConfigurationInput{}
@@ -37,7 +42,10 @@ type DescribeConversionConfigurationInput struct {
 
 type DescribeConversionConfigurationOutput struct {
 
-	// The configuration parameters for the schema conversion project.
+	// A JSON string that contains the schema conversion settings for the migration
+	// project. For the format and available settings, see [Specifying schema conversion settings for migration projects].
+	//
+	// [Specifying schema conversion settings for migration projects]: https://docs.aws.amazon.com/dms/latest/userguide/schema-conversion-settings.html
 	ConversionConfiguration *string
 
 	// The name or Amazon Resource Name (ARN) for the schema conversion project.

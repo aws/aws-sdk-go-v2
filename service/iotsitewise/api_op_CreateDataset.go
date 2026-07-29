@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a dataset to connect an external datasource.
+// Creates a dataset. Session and curated datasets are created in a workspace. A
+// session dataset contains data segments of time series data, and a curated
+// dataset curates data segments selected from source session datasets. A dataset
+// that connects to an external datasource is created outside of a workspace.
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDatasetInput{}
@@ -43,17 +46,32 @@ type CreateDatasetInput struct {
 	// request is required.
 	ClientToken *string
 
+	// The configuration for the dataset.
+	DatasetConfig *types.DatasetConfig
+
 	// A description about the dataset, and its functionality.
 	DatasetDescription *string
 
 	// The ID of the dataset.
 	DatasetId *string
 
+	// The type of dataset: a session dataset, a curated dataset, or a connection to
+	// an external datasource.
+	DatasetType types.DatasetTypeEnum
+
+	// The metadata for the dataset, provided as key-value pairs.
+	Metadata map[string]string
+
 	// A list of key-value pairs that contain metadata for the access policy. For more
 	// information, see [Tagging your IoT SiteWise resources]in the IoT SiteWise User Guide.
 	//
 	// [Tagging your IoT SiteWise resources]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
 	Tags map[string]string
+
+	// The name of the workspace that contains the dataset. Required for session and
+	// curated datasets. Omit this field for datasets that connect to an external
+	// datasource.
+	WorkspaceName *string
 
 	noSmithyDocumentSerde
 }

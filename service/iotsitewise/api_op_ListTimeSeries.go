@@ -52,6 +52,9 @@ type ListTimeSeriesInput struct {
 	//   - DISASSOCIATED – The time series isn't associated with any asset property.
 	TimeSeriesType types.ListTimeSeriesType
 
+	// The name of the workspace.
+	WorkspaceName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -65,6 +68,9 @@ type ListTimeSeriesOutput struct {
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string
+
+	// The name of the workspace.
+	WorkspaceName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

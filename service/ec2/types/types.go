@@ -3657,7 +3657,12 @@ type CreateTransitGatewayVpcAttachmentRequestOptions struct {
 	// Enable or disable DNS support. The default is enable .
 	DnsSupport DnsSupportValue
 
-	// Enable or disable IPv6 support. The default is disable .
+	// Specifies whether IPv6 support is enabled for the attachment. When enabled, the
+	// transit gateway network interface receives an IPv6 address. When you enable
+	// route propagation, IPv6 VPC CIDRs propagate to the transit gateway route tables.
+	// When disabled, the network interface does not receive an IPv6 address, and IPv6
+	// routes do not propagate. The setting does not filter IPv6 traffic. The default
+	// is disable .
 	Ipv6Support Ipv6SupportValue
 
 	// Enables you to reference a security group across VPCs attached to a transit
@@ -15407,7 +15412,11 @@ type ModifyTransitGatewayVpcAttachmentRequestOptions struct {
 	// Enable or disable DNS support. The default is enable .
 	DnsSupport DnsSupportValue
 
-	// Enable or disable IPv6 support. The default is enable .
+	// Specifies whether IPv6 support is enabled for the attachment. When enabled, the
+	// transit gateway network interface receives an IPv6 address. When you enable
+	// route propagation, IPv6 VPC CIDRs propagate to the transit gateway route tables.
+	// When disabled, the network interface does not receive an IPv6 address, and IPv6
+	// routes do not propagate. The setting does not filter IPv6 traffic.
 	Ipv6Support Ipv6SupportValue
 
 	// Enables you to reference a security group across VPCs attached to a transit
@@ -23342,6 +23351,9 @@ type TransitGatewayAttachmentAssociation struct {
 	// The state of the association.
 	State TransitGatewayAssociationState
 
+	// The ID of the transit gateway policy table associated with the attachment.
+	TransitGatewayPolicyTableId *string
+
 	// The ID of the route table for the transit gateway.
 	TransitGatewayRouteTableId *string
 
@@ -23918,8 +23930,7 @@ type TransitGatewayPolicyRule struct {
 	// The destination CIDR block for the transit gateway policy rule.
 	DestinationCidrBlock *string
 
-	// The port range for the transit gateway policy rule. Currently this is set to *
-	// (all).
+	// The destination port or port range for the transit gateway policy rule.
 	DestinationPortRange *string
 
 	// The meta data tags used for the transit gateway policy rule.
@@ -23931,8 +23942,7 @@ type TransitGatewayPolicyRule struct {
 	// The source CIDR block for the transit gateway policy rule.
 	SourceCidrBlock *string
 
-	// The port range for the transit gateway policy rule. Currently this is set to *
-	// (all).
+	// The source port or port range for the transit gateway policy rule.
 	SourcePortRange *string
 
 	noSmithyDocumentSerde
@@ -24000,6 +24010,9 @@ type TransitGatewayPolicyTableEntry struct {
 
 	// The rule number for the transit gateway policy table entry.
 	PolicyRuleNumber *string
+
+	// The state of the transit gateway policy table entry.
+	State TransitGatewayPolicyTableEntryState
 
 	// The ID of the target route table.
 	TargetRouteTableId *string
@@ -24113,6 +24126,47 @@ type TransitGatewayRequestOptions struct {
 
 	// Enable or disable Equal Cost Multipath Protocol support. Enabled by default.
 	VpnEcmpSupport VpnEcmpSupportValue
+
+	noSmithyDocumentSerde
+}
+
+// The matching criteria for a transit gateway policy table entry.
+type TransitGatewayRequestPolicyRule struct {
+
+	// The destination CIDR block for the policy rule.
+	DestinationCidrBlock *string
+
+	// The destination port or port range for the policy rule. You can specify a port
+	// range only when Protocol is 6 (TCP) or 17 (UDP); for all other protocols, this
+	// value must be * .
+	DestinationPortRange *string
+
+	// The metadata key-value pair for the policy rule.
+	MetaData *TransitGatewayRequestPolicyRuleMetaData
+
+	// The protocol for the policy rule. Valid values are 1 (ICMP), 6 (TCP), 17 (UDP),
+	// 47 (GRE), or * for all protocols.
+	Protocol *string
+
+	// The source CIDR block for the policy rule.
+	SourceCidrBlock *string
+
+	// The source port or port range for the policy rule. You can specify a port range
+	// only when Protocol is 6 (TCP) or 17 (UDP); for all other protocols, this value
+	// must be * .
+	SourcePortRange *string
+
+	noSmithyDocumentSerde
+}
+
+// A metadata key-value pair for a transit gateway policy rule.
+type TransitGatewayRequestPolicyRuleMetaData struct {
+
+	// The key of the metadata pair for the policy rule.
+	MetaDataKey *string
+
+	// The value of the metadata pair for the policy rule.
+	MetaDataValue *string
 
 	noSmithyDocumentSerde
 }

@@ -13,7 +13,17 @@ import (
 	"time"
 )
 
-// Returns a paginated list of metadata model conversions for a migration project.
+// Returns a paginated list of metadata model conversion requests for a migration
+// project, initiated by [StartMetadataModelConversion].
+//
+// To cancel a queued or in-progress request, call [CancelMetadataModelConversion].
+//
+// Required permissions: dms:ListMetadataModelConversions . For more information,
+// see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
+// [StartMetadataModelConversion]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelConversion.html
+// [CancelMetadataModelConversion]: https://docs.aws.amazon.com/dms/latest/APIReference/API_CancelMetadataModelConversion.html
 func (c *Client) DescribeMetadataModelConversions(ctx context.Context, params *DescribeMetadataModelConversionsInput, optFns ...func(*Options)) (*DescribeMetadataModelConversionsOutput, error) {
 	if params == nil {
 		params = &DescribeMetadataModelConversionsInput{}
@@ -36,8 +46,14 @@ type DescribeMetadataModelConversionsInput struct {
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// Filters applied to the metadata model conversions described in the form of
-	// key-value pairs.
+	// The filters to apply to the metadata model conversion requests.
+	//
+	// The following filter names are supported:
+	//
+	//   - request-id – The request identifier.
+	//
+	//   - status – The request status. Valid values: RECEIVED , IN_PROGRESS , SUCCESS
+	//   , FAILED , CANCELING , CANCELED .
 	Filters []types.Filter
 
 	// Specifies the unique pagination token that makes it possible to display the
@@ -70,7 +86,9 @@ type DescribeMetadataModelConversionsOutput struct {
 	// arguments unchanged.
 	Marker *string
 
-	// A paginated list of metadata model conversions.
+	// A paginated list of metadata model conversion requests.
+	//
+	// DMS never populates the ExportSqlDetails field for this operation.
 	Requests []types.SchemaConversionRequest
 
 	// Metadata pertaining to the operation's result.

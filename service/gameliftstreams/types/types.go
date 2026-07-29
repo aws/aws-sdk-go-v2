@@ -377,6 +377,62 @@ type RuntimeEnvironment struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a shader cache associated with an Amazon GameLift Streams application.
+type ShaderCacheSummary struct {
+
+	// An [Amazon Resource Name (ARN)] that uniquely identifies the application resource. Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+	//
+	// This member is required.
+	ApplicationArn *string
+
+	// A unique identifier for the shader cache, formatted as a 32-character
+	// hexadecimal string. Format is 1271e693c50b940e228582f1ccdd4e27 .
+	//
+	// This member is required.
+	Identifier *string
+
+	// The stream groups compatible with this shader cache. Compatibility is based on
+	// GPU type and GPU driver version. For more information on shader cache
+	// compatibility, see [Shader caches]in the Amazon GameLift Streams Developer Guide.
+	//
+	// This value is a set of [Amazon Resource Names (ARNs)] that uniquely identify stream group resources. Example
+	// ARN: arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4 .
+	//
+	// [Shader caches]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/shader-caches.html
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+	AssociatedStreamGroups []string
+
+	// A timestamp that indicates when this resource was last updated. Timestamps are
+	// expressed using in ISO8601 format, such as: 2022-12-27T22:29:40+00:00 (UTC).
+	LastUpdatedAt *time.Time
+
+	// The current status of the shader cache. Possible statuses include the following:
+	//
+	//   - INITIALIZED : Amazon GameLift Streams received the request and is preparing
+	//   the shader cache.
+	//
+	//   - PROCESSING : Amazon GameLift Streams is replicating the shader cache to the
+	//   streaming locations in the associated stream groups.
+	//
+	//   - READY : The shader cache is replicated and available for use in stream
+	//   sessions.
+	//
+	//   - DELETING : Amazon GameLift Streams is deleting the shader cache.
+	//
+	//   - ERROR : An error occurred during shader cache processing. Create a new
+	//   shader cache to try again.
+	Status ShaderCacheStatus
+
+	// The total storage used by all compiled shader files in this shader cache, in
+	// bytes.
+	StorageBytes *int64
+
+	noSmithyDocumentSerde
+}
+
 // Describes a Amazon GameLift Streams stream group resource for hosting content
 // streams. To retrieve additional stream group details, call [GetStreamGroup].
 //
@@ -774,6 +830,104 @@ type StreamSessionSummary struct {
 
 	//  An opaque, unique identifier for an end-user, defined by the developer.
 	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a stream URL. This is a summary view that omits the full
+// configuration, such as launch arguments and display settings. To retrieve the
+// complete configuration, call [GetStreamUrl].
+//
+// [GetStreamUrl]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamUrl.html
+type StreamUrlSummary struct {
+
+	// The [Amazon Resource Name (ARN)] that uniquely identifies the stream URL across all Amazon Web Services
+	// Regions. Format is arn:aws:gameliftstreams:[AWS Region]:[AWS
+	// account]:streamurl/[stream group resource ID]/[stream URL resource ID] .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+	//
+	// This member is required.
+	Arn *string
+
+	// The application that runs in the stream sessions.
+	//
+	// This value is an [Amazon Resource Name (ARN)] that uniquely identifies the application resource. Example
+	// ARN: arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+	ApplicationArn *string
+
+	// A timestamp that indicates when this resource was created. Timestamps are
+	// expressed using in ISO8601 format, such as: 2022-12-27T22:29:40+00:00 (UTC).
+	CreatedAt *time.Time
+
+	// The descriptive label for the stream URL.
+	Description *string
+
+	// The date and time when the stream URL expires and stops accepting new stream
+	// sessions. Timestamps are expressed using in ISO8601 format, such as:
+	// 2022-12-27T22:29:40+00:00 (UTC).
+	ExpiresAt *time.Time
+
+	// The number of times the stream URL can still be used to start a stream session.
+	RemainingUses *int32
+
+	// The maximum length of time, in seconds, that a stream session started from this
+	// stream URL can run.
+	SessionLengthSeconds *int32
+
+	// The current status of the stream URL. Possible statuses include the following:
+	//
+	//   - ACTIVE : The stream URL is valid and can start stream sessions.
+	//
+	//   - EXPIRED : The stream URL has passed its expiration time and can no longer
+	//   start stream sessions.
+	//
+	//   - REVOKED : The stream URL was revoked and can no longer start stream sessions.
+	//
+	//   - LIMIT_REACHED : The stream URL has been used the maximum number of times and
+	//   can no longer start stream sessions.
+	Status StreamUrlStatus
+
+	// Additional information about why the stream URL is in its current status.
+	// Amazon GameLift Streams populates this value when the status is REVOKED .
+	// Possible values include the following:
+	//
+	//   - userRevoked : You revoked the stream URL.
+	//
+	//   - revokedAndTerminatingSessions : You revoked the stream URL and Amazon
+	//   GameLift Streams is ending its running stream sessions.
+	//
+	//   - revokedAndSessionsTerminated : You revoked the stream URL and its running
+	//   stream sessions have ended.
+	//
+	//   - streamGroupDeleted : The stream group was deleted, which revoked the stream
+	//   URL.
+	//
+	//   - applicationDeleted : The application was deleted, which revoked the stream
+	//   URL.
+	StatusReason StreamUrlStatusReason
+
+	// The stream group that runs the stream sessions.
+	//
+	// This value is an [Amazon Resource Name (ARN)] that uniquely identifies the stream group resource. Example
+	// ARN: arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4 .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+	StreamGroupArn *string
+
+	// The shareable stream URL. Distribute this URL to end users so that they can
+	// start and play a stream session in a hosted web player. Treat the stream URL as
+	// a secret. Anyone who has it can start a stream session until the stream URL
+	// expires, is revoked, or reaches its usage limit.
+	StreamUrl *string
+
+	// The unique identifier for the stream URL resource, for example su-1AB2C3De4 .
+	StreamUrlId *string
+
+	// The maximum number of times the stream URL can start a stream session.
+	UsageLimit *int32
 
 	noSmithyDocumentSerde
 }

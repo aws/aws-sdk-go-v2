@@ -699,6 +699,22 @@ type BatchUpdatePartitionRequestEntry struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration that defines how BETWEEN range filter operations are translated
+// into REST API request parameters.
+type BetweenConfiguration struct {
+
+	// The parameter name used for the upper bound value in a BETWEEN filter operation.
+	HighBoundKey *string
+
+	// The parameter name used for the lower bound value in a BETWEEN filter operation.
+	LowBoundKey *string
+
+	// A template string for constructing the BETWEEN filter expression.
+	Template *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines column statistics supported for bit sequence data values.
 type BinaryColumnStatisticsData struct {
 
@@ -2778,6 +2794,11 @@ type ConnectorProperty struct {
 
 	// The default value for the property.
 	DefaultValue *string
+
+	// A format template for the property value that defines how the value should be
+	// formatted before sending it in API requests. Use {value} as a placeholder for
+	// the actual property value (for example, SSWS {value} ).
+	Format *string
 
 	// A key name to use when sending this property in API requests, if different from
 	// the display name.
@@ -5145,6 +5166,30 @@ type FieldDefinition struct {
 	// This member is required.
 	Name *string
 
+	// Per-field overrides for filter behavior, allowing customization of how filters
+	// are applied to this specific field.
+	FilterOverrides *FilterOverrides
+
+	// Indicates whether this field can contain null values.
+	IsNullable *bool
+
+	// Indicates whether this field can be used for ordering results.
+	IsOrderable *bool
+
+	// Indicates whether this field can be used for partitioning queries to the data
+	// source.
+	IsPartitionable *bool
+
+	// Indicates whether this field can be used in filter predicates when querying
+	// data.
+	IsQueryable *bool
+
+	// The format pattern for parsing date values from API responses. Required when
+	// the API uses a non-ISO-8601 format. Accepts Java DateTimeFormatter patterns
+	// (for example, EEE, d MMM yyyy HH:mm:ss Z ), EPOCH_SECONDS for Unix epoch
+	// seconds, or EPOCH_MILLIS for Unix epoch milliseconds.
+	ResponseDateFormat *string
+
 	noSmithyDocumentSerde
 }
 
@@ -5203,6 +5248,43 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration that defines how filter predicates are applied to REST API
+// requests, supporting both query parameter and filter string strategies.
+type FilterConfiguration struct {
+
+	// The strategy for applying filters to requests. Use QUERY_PARAMS to pass filters
+	// as individual query parameters, or FILTER_STRING to construct a single filter
+	// expression string.
+	//
+	// This member is required.
+	FilterMode FilterMode
+
+	// Configuration for handling BETWEEN range filter operations.
+	BetweenConfiguration *BetweenConfiguration
+
+	// The global date and time format for filter expressions. Accepts Java
+	// DateTimeFormatter patterns (for example, EEE, d MMM yyyy HH:mm:ss Z ),
+	// EPOCH_SECONDS for Unix epoch seconds, or EPOCH_MILLIS for Unix epoch
+	// milliseconds. If not specified, values are passed as-is in ISO-8601 format.
+	DateTimeFormat *string
+
+	// Configuration for constructing filter expressions when FilterMode is set to
+	// FILTER_STRING .
+	FilterStringConfiguration *FilterStringConfiguration
+
+	// A map of logical filter operators to their API-specific string representations.
+	// Supported operator keys are: EQUAL_TO , NOT_EQUAL_TO , LESS_THAN , GREATER_THAN
+	// , LESS_THAN_OR_EQUAL_TO , GREATER_THAN_OR_EQUAL_TO , CONTAINS , BETWEEN , AND ,
+	// and OR .
+	OperatorMappings map[string]string
+
+	// Indicates whether surrounding double quotes should be stripped from filter
+	// values before processing.
+	StripQuotes *bool
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a filter expression.
 type FilterExpression struct {
 
@@ -5218,6 +5300,53 @@ type FilterExpression struct {
 
 	// Whether the expression is to be negated.
 	Negated *bool
+
+	noSmithyDocumentSerde
+}
+
+// Configuration that defines per-field overrides for filter behavior, allowing
+// individual fields to customize how filter operations are applied.
+type FilterOverrides struct {
+
+	// Field-specific configuration for handling BETWEEN range filter operations.
+	BetweenConfiguration *BetweenConfiguration
+
+	// The date and time format for filter expressions on this field, overriding the
+	// global DateTimeFormat . Accepts Java DateTimeFormatter patterns (for example,
+	// EEE, d MMM yyyy HH:mm:ss Z ), EPOCH_SECONDS for Unix epoch seconds, or
+	// EPOCH_MILLIS for Unix epoch milliseconds.
+	DateTimeFormat *string
+
+	// An override for the field name to use in filter expressions, if different from
+	// the schema field name.
+	FieldName *string
+
+	// A map of logical filter operators to their field-specific API representations,
+	// overriding the global operator mappings. Supported operator keys are: EQUAL_TO ,
+	// NOT_EQUAL_TO , LESS_THAN , GREATER_THAN , LESS_THAN_OR_EQUAL_TO ,
+	// GREATER_THAN_OR_EQUAL_TO , CONTAINS , BETWEEN , AND , and OR .
+	OperatorMappings map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for constructing filter expression strings when using the
+// FILTER_STRING filter mode.
+type FilterStringConfiguration struct {
+
+	// The query parameter name used to send the constructed filter expression string
+	// in API requests.
+	//
+	// This member is required.
+	QueryParameterName *string
+
+	// The character used to quote values when QuoteStringValues is true. Defaults to
+	// double quotes if not specified.
+	QuoteCharacter *string
+
+	// Indicates whether string and date values should be wrapped with a quote
+	// character in the filter expression.
+	QuoteStringValues *bool
 
 	noSmithyDocumentSerde
 }
@@ -11118,6 +11247,10 @@ type SortCriterion struct {
 // Configuration that defines how to make requests to endpoints, including request
 // methods, paths, parameters, and response handling.
 type SourceConfiguration struct {
+
+	// Configuration for applying filter pushdown to REST API requests, defining how
+	// filter predicates are translated into query parameters or filter strings.
+	FilterConfiguration *FilterConfiguration
 
 	// Configuration for handling paginated responses from the REST API, supporting
 	// both cursor-based and offset-based pagination strategies.

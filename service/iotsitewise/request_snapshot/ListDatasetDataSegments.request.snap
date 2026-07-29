@@ -1,0 +1,3 @@
+GET /datasets/__DatasetId__/data-segments?datasetVersion=__DatasetVersion__&maxResults=1&nextToken=__NextToken__&workspaceName=__WorkspaceName__
+
+

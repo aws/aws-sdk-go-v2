@@ -60,6 +60,9 @@ type DeleteAssetOutput struct {
 	// This member is required.
 	AssetStatus *types.AssetStatus
 
+	// The ID of the asset.
+	AssetId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

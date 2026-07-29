@@ -1414,6 +1414,25 @@ func (FilterLogicalOperator) Values() []FilterLogicalOperator {
 	}
 }
 
+type FilterMode string
+
+// Enum values for FilterMode
+const (
+	FilterModeQueryParams  FilterMode = "QUERY_PARAMS"
+	FilterModeFilterString FilterMode = "FILTER_STRING"
+)
+
+// Values returns all known values for FilterMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FilterMode) Values() []FilterMode {
+	return []FilterMode{
+		"QUERY_PARAMS",
+		"FILTER_STRING",
+	}
+}
+
 type FilterOperation string
 
 // Enum values for FilterOperation

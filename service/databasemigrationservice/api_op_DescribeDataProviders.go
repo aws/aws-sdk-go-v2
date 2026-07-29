@@ -12,6 +12,10 @@ import (
 
 // Returns a paginated list of data providers for your account in the current
 // region.
+//
+// Required permissions: dms:ListDataProviders . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) DescribeDataProviders(ctx context.Context, params *DescribeDataProvidersInput, optFns ...func(*Options)) (*DescribeDataProvidersOutput, error) {
 	if params == nil {
 		params = &DescribeDataProvidersInput{}
@@ -29,10 +33,11 @@ func (c *Client) DescribeDataProviders(ctx context.Context, params *DescribeData
 
 type DescribeDataProvidersInput struct {
 
-	// Filters applied to the data providers described in the form of key-value pairs.
+	// The filters to apply to the data providers.
 	//
-	// Valid filter names and values: data-provider-identifier, data provider arn or
-	// name
+	// The following filter names are supported:
+	//
+	//   - data-provider-identifier – The data provider name or ARN.
 	Filters []types.Filter
 
 	// Specifies the unique pagination token that makes it possible to display the

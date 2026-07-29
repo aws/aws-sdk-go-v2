@@ -11,7 +11,11 @@ import (
 
 // Deletes the specified migration project.
 //
+// Required permissions: dms:DeleteMigrationProject . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
 // The migration project must be closed before you can delete it.
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) DeleteMigrationProject(ctx context.Context, params *DeleteMigrationProjectInput, optFns ...func(*Options)) (*DeleteMigrationProjectOutput, error) {
 	if params == nil {
 		params = &DeleteMigrationProjectInput{}

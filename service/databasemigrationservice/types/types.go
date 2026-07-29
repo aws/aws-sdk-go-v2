@@ -508,10 +508,11 @@ type DataProvider struct {
 	// begin with a letter.
 	Description *string
 
-	// The type of database engine for the data provider. Valid values include "aurora"
-	// , "aurora-postgresql" , "mysql" , "oracle" , "postgres" , "sqlserver" , redshift
-	// , mariadb , mongodb , db2 , db2-zos , docdb , and sybase . A value of "aurora"
-	// represents Amazon Aurora MySQL-Compatible Edition.
+	// The type of database engine for the data provider.
+	//
+	// Valid values: aurora , aurora-postgresql , db2 , db2-zos , docdb , mariadb ,
+	// mongodb , mysql , oracle , postgres , redshift , sqlserver , and sybase . A
+	// value of aurora represents Amazon Aurora MySQL-Compatible Edition.
 	Engine *string
 
 	// The settings in JSON format for a data provider.
@@ -734,10 +735,14 @@ type DocDbSettings struct {
 	// Must be a positive value greater than 0 . Default value is 1000 .
 	DocsToInvestigate *int32
 
-	//  Specifies the document ID. Use this setting when NestingLevel is set to "none"
-	// .
+	// Specifies whether the document ID is added to the target table. Use this
+	// setting when NestingLevel is set to "none" .
 	//
-	// Default value is "false" .
+	// Set ExtractDocId to true when using [multi-document transactions] with CDC.
+	//
+	// Default value is false .
+	//
+	// [multi-document transactions]: https://www.mongodb.com/docs/manual/reference/method/Session.startTransaction/#mongodb-method-Session.startTransaction
 	ExtractDocId *bool
 
 	// The KMS key identifier that is used to encrypt the content on the replication
@@ -1210,14 +1215,16 @@ type ExportMetadataModelAssessmentResultEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about a metadata model assessment exported to SQL.
+// The Amazon S3 location of the ZIP archive that contains the exported data
+// definition language (DDL) scripts.
 type ExportSqlDetails struct {
 
-	// The URL for the object containing the exported metadata model assessment.
+	// The URL of the Amazon S3 object that contains the ZIP archive with exported DDL
+	// scripts.
 	ObjectURL *string
 
-	// The Amazon S3 object key for the object containing the exported metadata model
-	// assessment.
+	// The Amazon S3 URI of the object that contains the ZIP archive with exported DDL
+	// scripts.
 	S3ObjectKey *string
 
 	noSmithyDocumentSerde
@@ -1857,8 +1864,7 @@ type MariaDbDataProviderSettings struct {
 	noSmithyDocumentSerde
 }
 
-// The properties of metadata model in JSON format. This object is a Union. Only
-// one member of this object can be specified or returned.
+// The properties of the metadata model.
 //
 // The following types satisfy this interface:
 //
@@ -1867,7 +1873,7 @@ type MetadataModelProperties interface {
 	isMetadataModelProperties()
 }
 
-// The properties of the statement.
+// The properties of the SQL statement.
 type MetadataModelPropertiesMemberStatementProperties struct {
 	Value StatementProperties
 
@@ -1883,7 +1889,16 @@ type MetadataModelReference struct {
 	// The name of the metadata model.
 	MetadataModelName *string
 
-	// The JSON string representing metadata model location.
+	// A JSON string that identifies this metadata model in the metadata tree. For the
+	// selection rule format, see [Selection rules in DMS Schema Conversion].
+	//
+	// Usage:
+	//
+	//   - You can pass this value as the SelectionRules parameter to any operation
+	//   that accepts selection rules, such as DescribeMetadataModel ,
+	//   StartMetadataModelConversion , and others.
+	//
+	// [Selection rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html
 	SelectionRules *string
 
 	noSmithyDocumentSerde
@@ -2059,10 +2074,14 @@ type MigrationProject struct {
 	// Secrets Manager parameters.
 	TargetDataProviderDescriptors []DataProviderDescriptor
 
-	// The settings in JSON format for migration rules. Migration rules make it
-	// possible for you to change the object names according to the rules that you
-	// specify. For example, you can change an object name to lowercase or uppercase,
-	// add or remove a prefix or suffix, or rename objects.
+	// The transformation rules for the migration project in JSON format.
+	// Transformation rules let you customize how DMS Schema Conversion converts your
+	// source database objects, including renaming, adding prefixes or suffixes, and
+	// changing data types. For the transformation rule format and examples, see [Transformation rules in DMS Schema Conversion].
+	//
+	// Homogeneous data migrations do not support transformation rules.
+	//
+	// [Transformation rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-transformation-rules.html
 	TransformationRules *string
 
 	noSmithyDocumentSerde
@@ -2135,10 +2154,14 @@ type MongoDbSettings struct {
 	// Must be a positive value greater than 0 . Default value is 1000 .
 	DocsToInvestigate *string
 
-	//  Specifies the document ID. Use this setting when NestingLevel is set to "none"
-	// .
+	// Specifies whether the document ID is added to the target table. Use this
+	// setting when NestingLevel is set to "none" .
+	//
+	// Set ExtractDocId to "true" when using [multi-document transactions] with CDC.
 	//
 	// Default value is "false" .
+	//
+	// [multi-document transactions]: https://www.mongodb.com/docs/manual/reference/method/Session.startTransaction/#mongodb-method-Session.startTransaction
 	ExtractDocId *string
 
 	// The KMS key identifier that is used to encrypt the content on the replication
@@ -2678,10 +2701,10 @@ type OracleSettings struct {
 	SecretsManagerSecretId *string
 
 	// For an Oracle source endpoint, the transparent data encryption (TDE) password
-	// required by AWM DMS to access Oracle redo logs encrypted by TDE using Binary
-	// Reader. It is also the TDE_Password  part of the comma-separated value you set
-	// to the Password request parameter when you create the endpoint. The
-	// SecurityDbEncryptian setting is related to this SecurityDbEncryptionName
+	// required by DMS to access Oracle redo logs encrypted by TDE using Binary Reader.
+	// It is also the TDE_Password  part of the comma-separated value you set to the
+	// Password request parameter when you create the endpoint. The
+	// SecurityDbEncryption setting is related to this SecurityDbEncryptionName
 	// setting. For more information, see [Supported encryption methods for using Oracle as a source for DMS]in the Database Migration Service User
 	// Guide.
 	//
@@ -5038,7 +5061,11 @@ type SchemaConversionRequest struct {
 	// Provides error information about a project.
 	Error ErrorDetails
 
-	// Provides information about a metadata model assessment exported to SQL.
+	// The Amazon S3 location of the ZIP archive that contains the exported data
+	// definition language (DDL) scripts.
+	//
+	// DMS populates this field only for the DescribeMetadataModelExportsAsScript
+	// operation.
 	ExportSqlDetails *ExportSqlDetails
 
 	// The migration project ARN.
@@ -5050,7 +5077,20 @@ type SchemaConversionRequest struct {
 	// The identifier for the schema conversion action.
 	RequestIdentifier *string
 
-	// The schema conversion action status.
+	// The schema conversion operation status. Possible values:
+	//
+	//   - RECEIVED – The operation is received but not yet queued for processing.
+	//
+	//   - IN_PROGRESS – The operation is queued or actively running.
+	//
+	//   - SUCCESS – The operation completed successfully.
+	//
+	//   - FAILED – The operation did not complete.
+	//
+	//   - CANCELING – The operation is being canceled. The operation might still
+	//   succeed or fail before cancellation takes effect.
+	//
+	//   - CANCELED – The operation was canceled before completion.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -5163,7 +5203,7 @@ type StartRecommendationsRequestEntry struct {
 	noSmithyDocumentSerde
 }
 
-// The properties of the statement for metadata model creation.
+// The properties of the SQL statement.
 type StatementProperties struct {
 
 	// The SQL text of the statement.

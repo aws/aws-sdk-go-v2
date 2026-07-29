@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceName__/tasks
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","tags":{"key0":"__Value__"},"taskConfiguration":{"containerTaskConfiguration":{"command":["__Member__","__Member__"],"ecrUri":"__EcrUri__","environmentVariables":{"key0":"__Value__"},"processingType":"GENERIC_COMPUTE_PROCESSING","processingUnit":"UNITS_2","taskExecutionRole":"__TaskExecutionRole__","timeoutSeconds":1}},"taskName":"__TaskName__"}

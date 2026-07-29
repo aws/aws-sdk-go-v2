@@ -13,7 +13,14 @@ import (
 	"time"
 )
 
-// Returns a paginated list of metadata model imports.
+// Returns a paginated list of metadata model import requests for a migration
+// project, initiated by [StartMetadataModelImport].
+//
+// Required permissions: dms:DescribeMetadataModelImports . For more information,
+// see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [StartMetadataModelImport]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelImport.html
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) DescribeMetadataModelImports(ctx context.Context, params *DescribeMetadataModelImportsInput, optFns ...func(*Options)) (*DescribeMetadataModelImportsOutput, error) {
 	if params == nil {
 		params = &DescribeMetadataModelImportsInput{}
@@ -36,8 +43,14 @@ type DescribeMetadataModelImportsInput struct {
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// Filters applied to the metadata model imports described in the form of
-	// key-value pairs.
+	// The filters to apply to the metadata model import requests.
+	//
+	// The following filter names are supported:
+	//
+	//   - request-id – The request identifier.
+	//
+	//   - status – The request status. Valid values: RECEIVED , IN_PROGRESS , SUCCESS
+	//   , FAILED .
 	Filters []types.Filter
 
 	// Specifies the unique pagination token that makes it possible to display the
@@ -50,7 +63,9 @@ type DescribeMetadataModelImportsInput struct {
 	// arguments unchanged.
 	Marker *string
 
-	// A paginated list of metadata model imports.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, DMS includes a pagination token in the
+	// response so that you can retrieve the remaining results.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -68,7 +83,9 @@ type DescribeMetadataModelImportsOutput struct {
 	// arguments unchanged.
 	Marker *string
 
-	// A paginated list of metadata model imports.
+	// A paginated list of metadata model import requests.
+	//
+	// DMS never populates the ExportSqlDetails field for this operation.
 	Requests []types.SchemaConversionRequest
 
 	// Metadata pertaining to the operation's result.
@@ -351,7 +368,9 @@ func metadataModelImportedStateRetryable(ctx context.Context, input *DescribeMet
 // DescribeMetadataModelImportsPaginatorOptions is the paginator options for
 // DescribeMetadataModelImports
 type DescribeMetadataModelImportsPaginatorOptions struct {
-	// A paginated list of metadata model imports.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, DMS includes a pagination token in the
+	// response so that you can retrieve the remaining results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

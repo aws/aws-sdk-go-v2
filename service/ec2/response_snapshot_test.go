@@ -8303,6 +8303,42 @@ func TestCheckResponseSnapshot_CreateTransitGatewayPolicyTable(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateTransitGatewayPolicyTableEntry(t *testing.T) {
+	want := &CreateTransitGatewayPolicyTableEntryOutput{
+		TransitGatewayPolicyTableEntry: &types.TransitGatewayPolicyTableEntry{
+			PolicyRuleNumber: ptr.String("__PolicyRuleNumber__"),
+			PolicyRule: &types.TransitGatewayPolicyRule{
+				SourceCidrBlock:      ptr.String("__SourceCidrBlock__"),
+				SourcePortRange:      ptr.String("__SourcePortRange__"),
+				DestinationCidrBlock: ptr.String("__DestinationCidrBlock__"),
+				DestinationPortRange: ptr.String("__DestinationPortRange__"),
+				Protocol:             ptr.String("__Protocol__"),
+				MetaData: &types.TransitGatewayPolicyRuleMetaData{
+					MetaDataKey:   ptr.String("__MetaDataKey__"),
+					MetaDataValue: ptr.String("__MetaDataValue__"),
+				},
+			},
+			TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+			State:              types.TransitGatewayPolicyTableEntryState("active"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateTransitGatewayPolicyTableEntry.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateTransitGatewayPolicyTableEntry(context.Background(), &CreateTransitGatewayPolicyTableEntryInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateTransitGatewayPolicyTableEntry.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateTransitGatewayPrefixListReference(t *testing.T) {
 	want := &CreateTransitGatewayPrefixListReferenceOutput{
 		TransitGatewayPrefixListReference: &types.TransitGatewayPrefixListReference{
@@ -12238,6 +12274,42 @@ func TestCheckResponseSnapshot_DeleteTransitGatewayPolicyTable(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteTransitGatewayPolicyTable.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteTransitGatewayPolicyTableEntry(t *testing.T) {
+	want := &DeleteTransitGatewayPolicyTableEntryOutput{
+		TransitGatewayPolicyTableEntry: &types.TransitGatewayPolicyTableEntry{
+			PolicyRuleNumber: ptr.String("__PolicyRuleNumber__"),
+			PolicyRule: &types.TransitGatewayPolicyRule{
+				SourceCidrBlock:      ptr.String("__SourceCidrBlock__"),
+				SourcePortRange:      ptr.String("__SourcePortRange__"),
+				DestinationCidrBlock: ptr.String("__DestinationCidrBlock__"),
+				DestinationPortRange: ptr.String("__DestinationPortRange__"),
+				Protocol:             ptr.String("__Protocol__"),
+				MetaData: &types.TransitGatewayPolicyRuleMetaData{
+					MetaDataKey:   ptr.String("__MetaDataKey__"),
+					MetaDataValue: ptr.String("__MetaDataValue__"),
+				},
+			},
+			TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+			State:              types.TransitGatewayPolicyTableEntryState("active"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteTransitGatewayPolicyTableEntry.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteTransitGatewayPolicyTableEntry(context.Background(), &DeleteTransitGatewayPolicyTableEntryInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteTransitGatewayPolicyTableEntry.response", err)
 	}
 }
 
@@ -44184,8 +44256,9 @@ func TestCheckResponseSnapshot_DescribeTransitGatewayAttachments(t *testing.T) {
 				ResourceId:                 ptr.String("__ResourceId__"),
 				State:                      types.TransitGatewayAttachmentState("initiating"),
 				Association: &types.TransitGatewayAttachmentAssociation{
-					TransitGatewayRouteTableId: ptr.String("__TransitGatewayRouteTableId__"),
-					State:                      types.TransitGatewayAssociationState("associating"),
+					TransitGatewayRouteTableId:  ptr.String("__TransitGatewayRouteTableId__"),
+					TransitGatewayPolicyTableId: ptr.String("__TransitGatewayPolicyTableId__"),
+					State:                       types.TransitGatewayAssociationState("associating"),
 				},
 				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Tags: []types.Tag{
@@ -44208,8 +44281,9 @@ func TestCheckResponseSnapshot_DescribeTransitGatewayAttachments(t *testing.T) {
 				ResourceId:                 ptr.String("__ResourceId__"),
 				State:                      types.TransitGatewayAttachmentState("initiating"),
 				Association: &types.TransitGatewayAttachmentAssociation{
-					TransitGatewayRouteTableId: ptr.String("__TransitGatewayRouteTableId__"),
-					State:                      types.TransitGatewayAssociationState("associating"),
+					TransitGatewayRouteTableId:  ptr.String("__TransitGatewayRouteTableId__"),
+					TransitGatewayPolicyTableId: ptr.String("__TransitGatewayPolicyTableId__"),
+					State:                       types.TransitGatewayAssociationState("associating"),
 				},
 				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Tags: []types.Tag{
@@ -58203,6 +58277,7 @@ func TestCheckResponseSnapshot_GetTransitGatewayPolicyTableEntries(t *testing.T)
 					},
 				},
 				TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+				State:              types.TransitGatewayPolicyTableEntryState("active"),
 			},
 			{
 				PolicyRuleNumber: ptr.String("__PolicyRuleNumber__"),
@@ -58218,8 +58293,10 @@ func TestCheckResponseSnapshot_GetTransitGatewayPolicyTableEntries(t *testing.T)
 					},
 				},
 				TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+				State:              types.TransitGatewayPolicyTableEntryState("active"),
 			},
 		},
+		NextToken: ptr.String("__NextToken__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetTransitGatewayPolicyTableEntries.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -60936,6 +61013,42 @@ func TestCheckResponseSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) 
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ModifyTransitGatewayMeteringPolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
+	want := &ModifyTransitGatewayPolicyTableEntryOutput{
+		TransitGatewayPolicyTableEntry: &types.TransitGatewayPolicyTableEntry{
+			PolicyRuleNumber: ptr.String("__PolicyRuleNumber__"),
+			PolicyRule: &types.TransitGatewayPolicyRule{
+				SourceCidrBlock:      ptr.String("__SourceCidrBlock__"),
+				SourcePortRange:      ptr.String("__SourcePortRange__"),
+				DestinationCidrBlock: ptr.String("__DestinationCidrBlock__"),
+				DestinationPortRange: ptr.String("__DestinationPortRange__"),
+				Protocol:             ptr.String("__Protocol__"),
+				MetaData: &types.TransitGatewayPolicyRuleMetaData{
+					MetaDataKey:   ptr.String("__MetaDataKey__"),
+					MetaDataValue: ptr.String("__MetaDataValue__"),
+				},
+			},
+			TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+			State:              types.TransitGatewayPolicyTableEntryState("active"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ModifyTransitGatewayPolicyTableEntry.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ModifyTransitGatewayPolicyTableEntry(context.Background(), &ModifyTransitGatewayPolicyTableEntryInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ModifyTransitGatewayPolicyTableEntry.response", err)
 	}
 }
 

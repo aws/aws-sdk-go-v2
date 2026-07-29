@@ -300,6 +300,16 @@ func TestCheckRequestSnapshot_CheckCapacity(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -380,6 +390,16 @@ func TestCheckRequestSnapshot_CheckCapacity(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -464,6 +484,16 @@ func TestCheckRequestSnapshot_CheckCapacity(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -545,6 +575,16 @@ func TestCheckRequestSnapshot_CheckCapacity(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -818,6 +858,16 @@ func TestCheckRequestSnapshot_CheckCapacity(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -1595,6 +1645,16 @@ func TestCheckRequestSnapshot_CheckCapacity(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -1812,6 +1872,16 @@ func TestCheckRequestSnapshot_CheckCapacity(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -1892,6 +1962,16 @@ func TestCheckRequestSnapshot_CheckCapacity(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -1976,6 +2056,16 @@ func TestCheckRequestSnapshot_CheckCapacity(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -2057,6 +2147,16 @@ func TestCheckRequestSnapshot_CheckCapacity(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -2330,6 +2430,16 @@ func TestCheckRequestSnapshot_CheckCapacity(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -3107,6 +3217,16 @@ func TestCheckRequestSnapshot_CheckCapacity(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -3478,6 +3598,16 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -3558,6 +3688,16 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -3642,6 +3782,16 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -3723,6 +3873,16 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -3996,6 +4156,16 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -4773,6 +4943,16 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -4990,6 +5170,16 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -5070,6 +5260,16 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -5154,6 +5354,16 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -5235,6 +5445,16 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -5508,6 +5728,16 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -6285,6 +6515,16 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -6621,6 +6861,16 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -6701,6 +6951,16 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -6785,6 +7045,16 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -6866,6 +7136,16 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -7139,6 +7419,16 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -7916,6 +8206,16 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -8133,6 +8433,16 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -8213,6 +8523,16 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -8297,6 +8617,16 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -8378,6 +8708,16 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -8651,6 +8991,16 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -9428,6 +9778,16 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -11586,6 +11946,16 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -11666,6 +12036,16 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -11750,6 +12130,16 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -11831,6 +12221,16 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -12104,6 +12504,16 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -12881,6 +13291,16 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -13098,6 +13518,16 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -13178,6 +13608,16 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -13262,6 +13702,16 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -13343,6 +13793,16 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -13616,6 +14076,16 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -14393,6 +14863,16 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -14721,6 +15201,16 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -14801,6 +15291,16 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -14885,6 +15385,16 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -14966,6 +15476,16 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -15239,6 +15759,16 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -16016,6 +16546,16 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -16233,6 +16773,16 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -16313,6 +16863,16 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -16397,6 +16957,16 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -16478,6 +17048,16 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -16751,6 +17331,16 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -17528,6 +18118,16 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -17918,6 +18518,16 @@ func TestUpdateRequestSnapshot_CheckCapacity(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -17998,6 +18608,16 @@ func TestUpdateRequestSnapshot_CheckCapacity(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -18082,6 +18702,16 @@ func TestUpdateRequestSnapshot_CheckCapacity(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -18163,6 +18793,16 @@ func TestUpdateRequestSnapshot_CheckCapacity(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -18436,6 +19076,16 @@ func TestUpdateRequestSnapshot_CheckCapacity(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -19213,6 +19863,16 @@ func TestUpdateRequestSnapshot_CheckCapacity(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -19430,6 +20090,16 @@ func TestUpdateRequestSnapshot_CheckCapacity(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -19510,6 +20180,16 @@ func TestUpdateRequestSnapshot_CheckCapacity(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -19594,6 +20274,16 @@ func TestUpdateRequestSnapshot_CheckCapacity(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -19675,6 +20365,16 @@ func TestUpdateRequestSnapshot_CheckCapacity(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -19948,6 +20648,16 @@ func TestUpdateRequestSnapshot_CheckCapacity(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -20725,6 +21435,16 @@ func TestUpdateRequestSnapshot_CheckCapacity(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -21096,6 +21816,16 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -21176,6 +21906,16 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -21260,6 +22000,16 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -21341,6 +22091,16 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -21614,6 +22374,16 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -22391,6 +23161,16 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -22608,6 +23388,16 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -22688,6 +23478,16 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -22772,6 +23572,16 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -22853,6 +23663,16 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -23126,6 +23946,16 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -23903,6 +24733,16 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -24239,6 +25079,16 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -24319,6 +25169,16 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -24403,6 +25263,16 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -24484,6 +25354,16 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -24757,6 +25637,16 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -25534,6 +26424,16 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -25751,6 +26651,16 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -25831,6 +26741,16 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -25915,6 +26835,16 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -25996,6 +26926,16 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -26269,6 +27209,16 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -27046,6 +27996,16 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -29204,6 +30164,16 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -29284,6 +30254,16 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -29368,6 +30348,16 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -29449,6 +30439,16 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -29722,6 +30722,16 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -30499,6 +31509,16 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -30716,6 +31736,16 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -30796,6 +31826,16 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -30880,6 +31920,16 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -30961,6 +32011,16 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -31234,6 +32294,16 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -32011,6 +33081,16 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -32339,6 +33419,16 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -32419,6 +33509,16 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -32503,6 +33603,16 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -32584,6 +33694,16 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -32857,6 +33977,16 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -33634,6 +34764,16 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -33851,6 +34991,16 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
 					},
 					SqliMatchStatement: &types.SqliMatchStatement{
@@ -33931,6 +35081,16 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 						SensitivityLevel: types.SensitivityLevel("LOW"),
@@ -34015,6 +35175,16 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 								Type:     types.TextTransformationType("NONE"),
 							},
 						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
 					},
 					SizeConstraintStatement: &types.SizeConstraintStatement{
 						FieldToMatch: &types.FieldToMatch{
@@ -34096,6 +35266,16 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -34369,6 +35549,16 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},
@@ -35146,6 +36336,16 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 							{
 								Priority: 1,
 								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
 							},
 						},
 					},

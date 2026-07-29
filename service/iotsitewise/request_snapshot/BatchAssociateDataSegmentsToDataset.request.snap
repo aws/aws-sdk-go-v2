@@ -1,0 +1,5 @@
+POST /datasets/__DatasetId__/data-segments/associate
+
+Content-Type: application/json
+
+{"associateDataSegmentEntries":[{"endTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"sourceDatasetId":"__SourceDatasetId__","startTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"timeSeriesId":"__TimeSeriesId__"},{"endTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"sourceDatasetId":"__SourceDatasetId__","startTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"timeSeriesId":"__TimeSeriesId__"}],"clientToken":"__ClientToken__","workspaceName":"__WorkspaceName__"}

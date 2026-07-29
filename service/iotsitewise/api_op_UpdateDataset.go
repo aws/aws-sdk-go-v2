@@ -48,8 +48,17 @@ type UpdateDatasetInput struct {
 	// request is required.
 	ClientToken *string
 
+	// The updated configuration for the dataset.
+	DatasetConfig *types.DatasetConfig
+
 	// A description about the dataset, and its functionality.
 	DatasetDescription *string
+
+	// The updated metadata for the dataset.
+	Metadata map[string]string
+
+	// The name of the workspace that contains the dataset.
+	WorkspaceName *string
 
 	noSmithyDocumentSerde
 }

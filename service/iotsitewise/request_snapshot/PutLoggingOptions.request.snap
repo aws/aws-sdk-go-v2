@@ -2,4 +2,4 @@ PUT /logging
 
 Content-Type: application/json
 
-{"loggingOptions":{"level":"ERROR"}}
+{"loggingOptions":{"level":"ERROR"},"workspaceName":"__WorkspaceName__"}

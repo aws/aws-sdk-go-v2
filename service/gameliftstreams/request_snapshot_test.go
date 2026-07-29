@@ -433,6 +433,58 @@ func TestCheckRequestSnapshot_CreateStreamSessionConnection(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateStreamUrl(t *testing.T) {
+	input := &CreateStreamUrlInput{
+		Identifier:             ptr.String("__Identifier__"),
+		ApplicationIdentifier:  ptr.String("__ApplicationIdentifier__"),
+		Protocol:               types.Protocol("WebRTC"),
+		UrlExpiresAfterMinutes: ptr.Int32(1),
+		UsageLimit:             ptr.Int32(1),
+		Description:            ptr.String("__Description__"),
+		Locations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SessionLengthSeconds: ptr.Int32(1),
+		AdditionalLaunchArgs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AdditionalEnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		DisplayConfiguration: &types.DisplayConfiguration{
+			Resolution: &types.Resolution{
+				Width:  ptr.Int32(1),
+				Height: ptr.Int32(1),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateStreamUrl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateStreamUrl"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteApplication(t *testing.T) {
 	input := &DeleteApplicationInput{
 		Identifier: ptr.String("__Identifier__"),
@@ -629,6 +681,34 @@ func TestCheckRequestSnapshot_GetStreamSession(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetStreamUrl(t *testing.T) {
+	input := &GetStreamUrlInput{
+		Identifier:          ptr.String("__Identifier__"),
+		StreamUrlIdentifier: ptr.String("__StreamUrlIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetStreamUrl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetStreamUrl"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListApplications(t *testing.T) {
 	input := &ListApplicationsInput{
 		NextToken:  ptr.String("__NextToken__"),
@@ -653,6 +733,33 @@ func TestCheckRequestSnapshot_ListApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListApplications"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListApplicationShaderCaches(t *testing.T) {
+	input := &ListApplicationShaderCachesInput{
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListApplicationShaderCaches(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListApplicationShaderCaches"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -746,6 +853,36 @@ func TestCheckRequestSnapshot_ListStreamSessionsByAccount(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListStreamUrls(t *testing.T) {
+	input := &ListStreamUrlsInput{
+		Status:                types.StreamUrlStatus("ACTIVE"),
+		StreamGroupIdentifier: ptr.String("__StreamGroupIdentifier__"),
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListStreamUrls(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListStreamUrls"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 	input := &ListTagsForResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -800,6 +937,35 @@ func TestCheckRequestSnapshot_RemoveStreamGroupLocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RemoveStreamGroupLocations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_RevokeStreamUrl(t *testing.T) {
+	input := &RevokeStreamUrlInput{
+		Identifier:          ptr.String("__Identifier__"),
+		StreamUrlIdentifier: ptr.String("__StreamUrlIdentifier__"),
+		RevocationMode:      types.RevocationMode("REVOKE_URL"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RevokeStreamUrl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RevokeStreamUrl"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1291,6 +1457,58 @@ func TestUpdateRequestSnapshot_CreateStreamSessionConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateStreamUrl(t *testing.T) {
+	input := &CreateStreamUrlInput{
+		Identifier:             ptr.String("__Identifier__"),
+		ApplicationIdentifier:  ptr.String("__ApplicationIdentifier__"),
+		Protocol:               types.Protocol("WebRTC"),
+		UrlExpiresAfterMinutes: ptr.Int32(1),
+		UsageLimit:             ptr.Int32(1),
+		Description:            ptr.String("__Description__"),
+		Locations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SessionLengthSeconds: ptr.Int32(1),
+		AdditionalLaunchArgs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AdditionalEnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		DisplayConfiguration: &types.DisplayConfiguration{
+			Resolution: &types.Resolution{
+				Width:  ptr.Int32(1),
+				Height: ptr.Int32(1),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateStreamUrl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateStreamUrl"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteApplication(t *testing.T) {
 	input := &DeleteApplicationInput{
 		Identifier: ptr.String("__Identifier__"),
@@ -1487,6 +1705,34 @@ func TestUpdateRequestSnapshot_GetStreamSession(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetStreamUrl(t *testing.T) {
+	input := &GetStreamUrlInput{
+		Identifier:          ptr.String("__Identifier__"),
+		StreamUrlIdentifier: ptr.String("__StreamUrlIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetStreamUrl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetStreamUrl"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListApplications(t *testing.T) {
 	input := &ListApplicationsInput{
 		NextToken:  ptr.String("__NextToken__"),
@@ -1511,6 +1757,33 @@ func TestUpdateRequestSnapshot_ListApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListApplications"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListApplicationShaderCaches(t *testing.T) {
+	input := &ListApplicationShaderCachesInput{
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListApplicationShaderCaches(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListApplicationShaderCaches"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1604,6 +1877,36 @@ func TestUpdateRequestSnapshot_ListStreamSessionsByAccount(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListStreamUrls(t *testing.T) {
+	input := &ListStreamUrlsInput{
+		Status:                types.StreamUrlStatus("ACTIVE"),
+		StreamGroupIdentifier: ptr.String("__StreamGroupIdentifier__"),
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListStreamUrls(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListStreamUrls"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 	input := &ListTagsForResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -1658,6 +1961,35 @@ func TestUpdateRequestSnapshot_RemoveStreamGroupLocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RemoveStreamGroupLocations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_RevokeStreamUrl(t *testing.T) {
+	input := &RevokeStreamUrlInput{
+		Identifier:          ptr.String("__Identifier__"),
+		StreamUrlIdentifier: ptr.String("__StreamUrlIdentifier__"),
+		RevocationMode:      types.RevocationMode("REVOKE_URL"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RevokeStreamUrl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RevokeStreamUrl"); err != nil {
 		t.Fatal(err)
 	}
 }

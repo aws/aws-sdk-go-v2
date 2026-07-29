@@ -8368,6 +8368,26 @@ func validateFilter(v *types.Filter) error {
 	}
 }
 
+func validateFilterConfiguration(v *types.FilterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterConfiguration"}
+	if len(v.FilterMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterMode"))
+	}
+	if v.FilterStringConfiguration != nil {
+		if err := validateFilterStringConfiguration(v.FilterStringConfiguration); err != nil {
+			invalidParams.AddNested("FilterStringConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFilterExpression(v *types.FilterExpression) error {
 	if v == nil {
 		return nil
@@ -8399,6 +8419,21 @@ func validateFilterExpressions(v []types.FilterExpression) error {
 		if err := validateFilterExpression(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterStringConfiguration(v *types.FilterStringConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterStringConfiguration"}
+	if v.QueryParameterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryParameterName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10546,6 +10581,11 @@ func validateSourceConfiguration(v *types.SourceConfiguration) error {
 	if v.PaginationConfiguration != nil {
 		if err := validatePaginationConfiguration(v.PaginationConfiguration); err != nil {
 			invalidParams.AddNested("PaginationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FilterConfiguration != nil {
+		if err := validateFilterConfiguration(v.FilterConfiguration); err != nil {
+			invalidParams.AddNested("FilterConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

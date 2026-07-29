@@ -9120,6 +9120,11 @@ func awsAwsjson11_deserializeDocumentByteMatchStatement(v **types.ByteMatchState
 				sv.PositionalConstraint = types.PositionalConstraint(jtv)
 			}
 
+		case "PreParseTextTransformations":
+			if err := awsAwsjson11_deserializeDocumentPreParseTextTransformations(&sv.PreParseTextTransformations, value); err != nil {
+				return err
+			}
+
 		case "SearchString":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14090,6 +14095,93 @@ func awsAwsjson11_deserializeDocumentPhoneNumberFields(v *[]types.PhoneNumberFie
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentPreParseTextTransformation(v **types.PreParseTextTransformation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PreParseTextTransformation
+	if *v == nil {
+		sv = &types.PreParseTextTransformation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Priority":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PreParseTextTransformationPriority to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Priority = int32(i64)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PreParseTextTransformationType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.PreParseTextTransformationType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPreParseTextTransformations(v *[]types.PreParseTextTransformation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PreParseTextTransformation
+	if *v == nil {
+		cv = []types.PreParseTextTransformation{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PreParseTextTransformation
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentPreParseTextTransformation(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentPrice(v **types.Price, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15042,6 +15134,11 @@ func awsAwsjson11_deserializeDocumentRegexMatchStatement(v **types.RegexMatchSta
 				return err
 			}
 
+		case "PreParseTextTransformations":
+			if err := awsAwsjson11_deserializeDocumentPreParseTextTransformations(&sv.PreParseTextTransformations, value); err != nil {
+				return err
+			}
+
 		case "RegexString":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15170,6 +15267,11 @@ func awsAwsjson11_deserializeDocumentRegexPatternSetReferenceStatement(v **types
 
 		case "FieldToMatch":
 			if err := awsAwsjson11_deserializeDocumentFieldToMatch(&sv.FieldToMatch, value); err != nil {
+				return err
+			}
+
+		case "PreParseTextTransformations":
+			if err := awsAwsjson11_deserializeDocumentPreParseTextTransformations(&sv.PreParseTextTransformations, value); err != nil {
 				return err
 			}
 
@@ -17526,6 +17628,11 @@ func awsAwsjson11_deserializeDocumentSizeConstraintStatement(v **types.SizeConst
 				return err
 			}
 
+		case "PreParseTextTransformations":
+			if err := awsAwsjson11_deserializeDocumentPreParseTextTransformations(&sv.PreParseTextTransformations, value); err != nil {
+				return err
+			}
+
 		case "Size":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17752,6 +17859,11 @@ func awsAwsjson11_deserializeDocumentSqliMatchStatement(v **types.SqliMatchState
 		switch key {
 		case "FieldToMatch":
 			if err := awsAwsjson11_deserializeDocumentFieldToMatch(&sv.FieldToMatch, value); err != nil {
+				return err
+			}
+
+		case "PreParseTextTransformations":
+			if err := awsAwsjson11_deserializeDocumentPreParseTextTransformations(&sv.PreParseTextTransformations, value); err != nil {
 				return err
 			}
 
@@ -19558,6 +19670,11 @@ func awsAwsjson11_deserializeDocumentXssMatchStatement(v **types.XssMatchStateme
 		switch key {
 		case "FieldToMatch":
 			if err := awsAwsjson11_deserializeDocumentFieldToMatch(&sv.FieldToMatch, value); err != nil {
+				return err
+			}
+
+		case "PreParseTextTransformations":
+			if err := awsAwsjson11_deserializeDocumentPreParseTextTransformations(&sv.PreParseTextTransformations, value); err != nil {
 				return err
 			}
 

@@ -1,0 +1,3 @@
+GET /workspaces/__WorkspaceName__/searches/__SearchId__/results?maxResults=1&nextToken=__NextToken__
+
+

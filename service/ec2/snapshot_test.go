@@ -1826,6 +1826,18 @@ func TestCheckSnapshot_CreateTransitGatewayPolicyTable(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateTransitGatewayPolicyTableEntry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTransitGatewayPolicyTableEntry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateTransitGatewayPolicyTableEntry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateTransitGatewayPrefixListReference(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTransitGatewayPrefixListReference(context.Background(), nil, func(o *Options) {
@@ -2935,6 +2947,18 @@ func TestCheckSnapshot_DeleteTransitGatewayPolicyTable(t *testing.T) {
 	_, err := svc.DeleteTransitGatewayPolicyTable(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteTransitGatewayPolicyTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteTransitGatewayPolicyTableEntry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTransitGatewayPolicyTableEntry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTransitGatewayPolicyTableEntry")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8042,6 +8066,18 @@ func TestCheckSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayPolicyTableEntry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyTransitGatewayPolicyTableEntry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyTransitGatewayPrefixListReference(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyTransitGatewayPrefixListReference(context.Background(), nil, func(o *Options) {
@@ -11089,6 +11125,18 @@ func TestUpdateSnapshot_CreateTransitGatewayPolicyTable(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateTransitGatewayPolicyTableEntry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTransitGatewayPolicyTableEntry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateTransitGatewayPolicyTableEntry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateTransitGatewayPrefixListReference(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTransitGatewayPrefixListReference(context.Background(), nil, func(o *Options) {
@@ -12198,6 +12246,18 @@ func TestUpdateSnapshot_DeleteTransitGatewayPolicyTable(t *testing.T) {
 	_, err := svc.DeleteTransitGatewayPolicyTable(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteTransitGatewayPolicyTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteTransitGatewayPolicyTableEntry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTransitGatewayPolicyTableEntry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTransitGatewayPolicyTableEntry")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -17298,6 +17358,18 @@ func TestUpdateSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) {
 	_, err := svc.ModifyTransitGatewayMeteringPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyTransitGatewayMeteringPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayPolicyTableEntry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyTransitGatewayPolicyTableEntry")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

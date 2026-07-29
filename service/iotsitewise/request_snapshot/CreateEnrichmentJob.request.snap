@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceName__/enrichment-jobs
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","jobConfiguration":{"eventDetection":{"datasetId":"__DatasetId__","propertyAlias":"__PropertyAlias__","timeSeriesId":"__TimeSeriesId__","trimSettings":{"endTime":{"offsetInNanos":1,"timeInSeconds":1},"startTime":{"offsetInNanos":1,"timeInSeconds":1}}}}}

@@ -40,6 +40,9 @@ type ListBulkImportJobsInput struct {
 	// The token to be used for the next set of paginated results.
 	NextToken *string
 
+	// The name of the workspace.
+	WorkspaceName *string
+
 	noSmithyDocumentSerde
 }
 

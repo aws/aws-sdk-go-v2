@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateTransitGatewayPolicyTableEntry&DryRun=true&PolicyRule.DestinationCidrBlock=__DestinationCidrBlock__&PolicyRule.DestinationPortRange=__DestinationPortRange__&PolicyRule.MetaData.MetaDataKey=__MetaDataKey__&PolicyRule.MetaData.MetaDataValue=__MetaDataValue__&PolicyRule.Protocol=__Protocol__&PolicyRule.SourceCidrBlock=__SourceCidrBlock__&PolicyRule.SourcePortRange=__SourcePortRange__&PolicyRuleNumber=__PolicyRuleNumber__&TargetRouteTableId=__TargetRouteTableId__&TransitGatewayPolicyTableId=__TransitGatewayPolicyTableId__&Version=2016-11-15

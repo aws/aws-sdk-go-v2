@@ -8,9 +8,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Applies the extension pack to your target database. An extension pack is an
-// add-on module that emulates functions present in a source database that are
-// required when converting objects to the target database.
+// Queues the installation of the extension pack on your target database. If other
+// requests created by Start* operations are already in the migration project's
+// queue, the installation begins after they complete.
+//
+// This operation requires a non-virtual target data provider.
+//
+// If the extension pack already exists, the operation reinstalls it. To ensure
+// compatibility, reconvert your database objects if the version has changed since
+// your last conversion. For more information, see [Using extension packs in DMS Schema Conversion].
+//
+// To check the status of the request, call [DescribeExtensionPackAssociations] using the returned RequestIdentifier
+// as a filter.
+//
+// Required permissions: dms:AssociateExtensionPack . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [DescribeExtensionPackAssociations]: https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeExtensionPackAssociations.html
+// [Using extension packs in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/extension-pack.html
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) StartExtensionPackAssociation(ctx context.Context, params *StartExtensionPackAssociationInput, optFns ...func(*Options)) (*StartExtensionPackAssociationOutput, error) {
 	if params == nil {
 		params = &StartExtensionPackAssociationInput{}
@@ -38,7 +53,7 @@ type StartExtensionPackAssociationInput struct {
 
 type StartExtensionPackAssociationOutput struct {
 
-	// The identifier for the request operation.
+	// The identifier for the installation request.
 	RequestIdentifier *string
 
 	// Metadata pertaining to the operation's result.

@@ -1,0 +1,5 @@
+PUT /workspaces/__WorkspaceName__/pipelines/__PipelineName__
+
+Content-Type: application/json
+
+{"computations":[{"computeNodeName":"__ComputeNodeName__","dependsOn":["__Member__","__Member__"],"environmentVariables":{"key0":"__Value__"},"taskName":"__TaskName__"},{"computeNodeName":"__ComputeNodeName__","dependsOn":["__Member__","__Member__"],"environmentVariables":{"key0":"__Value__"},"taskName":"__TaskName__"}],"description":"__Description__","environmentVariables":{"key0":"__Value__"}}

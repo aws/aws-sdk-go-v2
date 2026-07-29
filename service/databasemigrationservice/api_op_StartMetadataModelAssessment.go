@@ -8,11 +8,30 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a database migration assessment report by assessing the migration
-// complexity for your source database. A database migration assessment report
-// summarizes all of the schema conversion tasks. It also details the action items
-// for database objects that can't be converted to the database engine of your
-// target database instance.
+// Queues an assessment of the selected source metadata models (database objects
+// such as tables, views, and procedures) to evaluate conversion complexity to the
+// target database format. If other requests created by Start* operations are
+// already in the migration project's queue, the assessment begins after they
+// complete.
+//
+// The assessment request loads metadata models that are not yet in the metadata
+// tree, but does not reload metadata models that are already present. If your
+// source database has changed since the metadata was loaded, refresh the affected
+// metadata models with [StartMetadataModelImport]before calling this operation.
+//
+// To check the status of the assessment request, call [DescribeMetadataModelAssessments] using the returned
+// RequestIdentifier as a filter.
+//
+// To export the conversion assessment report after the request completes
+// successfully, call [ExportMetadataModelAssessment].
+//
+// Required permissions: dms:StartMetadataModelAssessment . For more information,
+// see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [StartMetadataModelImport]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelImport.html
+// [ExportMetadataModelAssessment]: https://docs.aws.amazon.com/dms/latest/APIReference/API_ExportMetadataModelAssessment.html
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
+// [DescribeMetadataModelAssessments]: https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelAssessments.html
 func (c *Client) StartMetadataModelAssessment(ctx context.Context, params *StartMetadataModelAssessmentInput, optFns ...func(*Options)) (*StartMetadataModelAssessmentOutput, error) {
 	if params == nil {
 		params = &StartMetadataModelAssessmentInput{}
@@ -35,7 +54,17 @@ type StartMetadataModelAssessmentInput struct {
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// A value that specifies the database objects to assess.
+	// A JSON string that identifies the metadata models to assess. For the selection
+	// rule format and examples, see [Selection rules in DMS Schema Conversion].
+	//
+	// Usage:
+	//
+	//   - Accepts only source selection rules, where server-name in the object locator
+	//   matches the source data provider.
+	//
+	//   - Supports explicit , include , and exclude rule actions.
+	//
+	// [Selection rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html
 	//
 	// This member is required.
 	SelectionRules *string
@@ -45,7 +74,7 @@ type StartMetadataModelAssessmentInput struct {
 
 type StartMetadataModelAssessmentOutput struct {
 
-	// The identifier for the assessment operation.
+	// The identifier for the assessment request.
 	RequestIdentifier *string
 
 	// Metadata pertaining to the operation's result.

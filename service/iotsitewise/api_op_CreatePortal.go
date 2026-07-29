@@ -10,6 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// The IoT SiteWise Monitor feature will no longer be open to new customers
+// starting November 7, 2025. If you would like to use the IoT SiteWise Monitor
+// feature, sign up prior to that date. Existing customers can continue to use the
+// service as normal. For more information, see [IoT SiteWise Monitor availability change].
+//
 // Creates a portal, which can contain projects and dashboards. IoT SiteWise
 // Monitor uses IAM Identity Center or IAM to authenticate portal users and manage
 // user permissions.
@@ -18,6 +23,7 @@ import (
 // that portal. For more information, see [Adding or removing portal administrators]in the IoT SiteWise User Guide.
 //
 // [Adding or removing portal administrators]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/administer-portals.html#portal-change-admins
+// [IoT SiteWise Monitor availability change]: https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html
 func (c *Client) CreatePortal(ctx context.Context, params *CreatePortalInput, optFns ...func(*Options)) (*CreatePortalOutput, error) {
 	if params == nil {
 		params = &CreatePortalInput{}

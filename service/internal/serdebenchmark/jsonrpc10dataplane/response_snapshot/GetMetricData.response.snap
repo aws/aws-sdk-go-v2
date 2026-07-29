@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsJsonRpc10DataPlane.
+
+{"Messages":[{"Code":"__Code__","Value":"__Value__"},{"Code":"__Code__","Value":"__Value__"}],"MetricDataResults":[{"Id":"__Id__","Label":"__Label__","Messages":[{"Code":"__Code__","Value":"__Value__"},{"Code":"__Code__","Value":"__Value__"}],"StatusCode":"Complete","Timestamps":[946684800,946684800],"Values":[1,1]},{"Id":"__Id__","Label":"__Label__","Messages":[{"Code":"__Code__","Value":"__Value__"},{"Code":"__Code__","Value":"__Value__"}],"StatusCode":"Complete","Timestamps":[946684800,946684800],"Values":[1,1]}],"NextToken":"__NextToken__"}

@@ -9,8 +9,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Saves your converted code to a file as a SQL script, and stores this file on
-// your Amazon S3 bucket.
+// Queues an export of metadata models (database objects such as tables, views,
+// and procedures) as a data definition language (DDL) script. The script is stored
+// as a ZIP archive in the Amazon S3 bucket associated with the migration project.
+// If other requests created by Start* operations are already in the migration
+// project's queue, the export begins after they complete.
+//
+// When exporting from the target metadata tree, the export applies only to
+// metadata models created by conversion. Metadata models imported from the
+// database are skipped.
+//
+// To check the status of the export request, call [DescribeMetadataModelExportsAsScript] using the returned
+// RequestIdentifier as a filter.
+//
+// Required permissions: dms:StartMetadataModelExportAsScripts . For more
+// information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [DescribeMetadataModelExportsAsScript]: https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelExportsAsScript.html
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) StartMetadataModelExportAsScript(ctx context.Context, params *StartMetadataModelExportAsScriptInput, optFns ...func(*Options)) (*StartMetadataModelExportAsScriptOutput, error) {
 	if params == nil {
 		params = &StartMetadataModelExportAsScriptInput{}
@@ -33,17 +49,29 @@ type StartMetadataModelExportAsScriptInput struct {
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// Whether to export the metadata model from the source or the target.
+	// Specifies the metadata tree to export from.
 	//
 	// This member is required.
 	Origin types.OriginTypeValue
 
-	// A value that specifies the database objects to export.
+	// A JSON string that identifies the metadata models to export as a SQL script.
+	// For the selection rule format and examples, see [Selection rules in DMS Schema Conversion].
+	//
+	// Usage:
+	//
+	//   - Accepts source or target selection rules depending on the Origin parameter.
+	//   The server-name in the object locator must match the corresponding data
+	//   provider.
+	//
+	//   - Supports explicit , include , and exclude rule actions.
+	//
+	// [Selection rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html
 	//
 	// This member is required.
 	SelectionRules *string
 
-	// The name of the model file to create in the Amazon S3 bucket.
+	// The name for the exported file. When you omit this parameter, the service
+	// generates a name from the data provider engine name and an export timestamp.
 	FileName *string
 
 	noSmithyDocumentSerde
@@ -51,7 +79,7 @@ type StartMetadataModelExportAsScriptInput struct {
 
 type StartMetadataModelExportAsScriptOutput struct {
 
-	// The identifier for the export operation.
+	// The identifier for the export request.
 	RequestIdentifier *string
 
 	// Metadata pertaining to the operation's result.

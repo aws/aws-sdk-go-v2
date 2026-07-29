@@ -11,7 +11,11 @@ import (
 
 // Modifies the specified migration project using the provided parameters.
 //
+// Required permissions: dms:UpdateMigrationProject . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
 // The migration project must be closed before you can modify it.
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) ModifyMigrationProject(ctx context.Context, params *ModifyMigrationProjectInput, optFns ...func(*Options)) (*ModifyMigrationProjectOutput, error) {
 	if params == nil {
 		params = &ModifyMigrationProjectInput{}
@@ -57,10 +61,15 @@ type ModifyMigrationProjectInput struct {
 	// Web Services Secrets Manager parameters.
 	TargetDataProviderDescriptors []types.DataProviderDescriptorDefinition
 
-	// The settings in JSON format for migration rules. Migration rules make it
-	// possible for you to change the object names according to the rules that you
-	// specify. For example, you can change an object name to lowercase or uppercase,
-	// add or remove a prefix or suffix, or rename objects.
+	// A JSON string that specifies the transformation rules for the migration
+	// project. Transformation rules let you customize how DMS Schema Conversion
+	// converts your source database objects, including renaming, adding prefixes or
+	// suffixes, and changing data types. For the transformation rule format and
+	// examples, see [Transformation rules in DMS Schema Conversion].
+	//
+	// Homogeneous data migrations do not support transformation rules.
+	//
+	// [Transformation rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-transformation-rules.html
 	TransformationRules *string
 
 	noSmithyDocumentSerde

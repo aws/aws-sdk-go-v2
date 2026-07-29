@@ -33,6 +33,9 @@ type PutLoggingOptionsInput struct {
 	// This member is required.
 	LoggingOptions *types.LoggingOptions
 
+	// The name of the workspace.
+	WorkspaceName *string
+
 	noSmithyDocumentSerde
 }
 

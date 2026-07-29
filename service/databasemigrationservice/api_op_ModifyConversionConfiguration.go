@@ -10,6 +10,11 @@ import (
 
 // Modifies the specified schema conversion configuration using the provided
 // parameters.
+//
+// Required permissions: dms:UpdateConversionConfiguration . For more information,
+// see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) ModifyConversionConfiguration(ctx context.Context, params *ModifyConversionConfigurationInput, optFns ...func(*Options)) (*ModifyConversionConfigurationOutput, error) {
 	if params == nil {
 		params = &ModifyConversionConfigurationInput{}
@@ -27,7 +32,15 @@ func (c *Client) ModifyConversionConfiguration(ctx context.Context, params *Modi
 
 type ModifyConversionConfigurationInput struct {
 
-	// The new conversion configuration.
+	// A JSON string that contains the schema conversion settings to update. For the
+	// format and available settings, see [Specifying schema conversion settings for migration projects].
+	//
+	// Usage:
+	//
+	//   - Include only the sections and keys to change. The operation merges supplied
+	//   values with the existing configuration.
+	//
+	// [Specifying schema conversion settings for migration projects]: https://docs.aws.amazon.com/dms/latest/userguide/schema-conversion-settings.html
 	//
 	// This member is required.
 	ConversionConfiguration *string

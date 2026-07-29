@@ -374,6 +374,58 @@ func TestCheckResponseSnapshot_CreateStreamSessionConnection(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateStreamUrl(t *testing.T) {
+	want := &CreateStreamUrlOutput{
+		Arn:            ptr.String("__Arn__"),
+		StreamUrlId:    ptr.String("__StreamUrlId__"),
+		StreamUrl:      ptr.String("__StreamUrl__"),
+		Status:         types.StreamUrlStatus("ACTIVE"),
+		StatusReason:   types.StreamUrlStatusReason("userRevoked"),
+		ExpiresAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UsageLimit:     ptr.Int32(1),
+		RemainingUses:  ptr.Int32(1),
+		StreamGroupArn: ptr.String("__StreamGroupArn__"),
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		Protocol:       types.Protocol("WebRTC"),
+		Locations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SessionLengthSeconds: ptr.Int32(1),
+		Description:          ptr.String("__Description__"),
+		AdditionalLaunchArgs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AdditionalEnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		DisplayConfiguration: &types.DisplayConfiguration{
+			Resolution: &types.Resolution{
+				Width:  ptr.Int32(1),
+				Height: ptr.Int32(1),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateStreamUrl.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateStreamUrl(context.Background(), &CreateStreamUrlInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateStreamUrl.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 	want := &DeleteApplicationOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeleteApplication.response")
@@ -648,6 +700,138 @@ func TestCheckResponseSnapshot_GetStreamSession(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetStreamUrl(t *testing.T) {
+	want := &GetStreamUrlOutput{
+		Arn:            ptr.String("__Arn__"),
+		StreamUrlId:    ptr.String("__StreamUrlId__"),
+		StreamUrl:      ptr.String("__StreamUrl__"),
+		Status:         types.StreamUrlStatus("ACTIVE"),
+		StatusReason:   types.StreamUrlStatusReason("userRevoked"),
+		ExpiresAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UsageLimit:     ptr.Int32(1),
+		RemainingUses:  ptr.Int32(1),
+		StreamGroupArn: ptr.String("__StreamGroupArn__"),
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		Protocol:       types.Protocol("WebRTC"),
+		Locations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SessionLengthSeconds: ptr.Int32(1),
+		Description:          ptr.String("__Description__"),
+		AdditionalLaunchArgs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AdditionalEnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		DisplayConfiguration: &types.DisplayConfiguration{
+			Resolution: &types.Resolution{
+				Width:  ptr.Int32(1),
+				Height: ptr.Int32(1),
+			},
+		},
+		StreamSessions: []types.StreamSessionSummary{
+			{
+				Arn:            ptr.String("__Arn__"),
+				UserId:         ptr.String("__UserId__"),
+				Status:         types.StreamSessionStatus("ACTIVATING"),
+				StatusReason:   types.StreamSessionStatusReason("internalError"),
+				Protocol:       types.Protocol("WebRTC"),
+				LastUpdatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ApplicationArn: ptr.String("__ApplicationArn__"),
+				ExportFilesMetadata: &types.ExportFilesMetadata{
+					Status:       types.ExportFilesStatus("SUCCEEDED"),
+					StatusReason: ptr.String("__StatusReason__"),
+					OutputUri:    ptr.String("__OutputUri__"),
+				},
+				Location: ptr.String("__Location__"),
+				RoleArn:  ptr.String("__RoleArn__"),
+			},
+			{
+				Arn:            ptr.String("__Arn__"),
+				UserId:         ptr.String("__UserId__"),
+				Status:         types.StreamSessionStatus("ACTIVATING"),
+				StatusReason:   types.StreamSessionStatusReason("internalError"),
+				Protocol:       types.Protocol("WebRTC"),
+				LastUpdatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ApplicationArn: ptr.String("__ApplicationArn__"),
+				ExportFilesMetadata: &types.ExportFilesMetadata{
+					Status:       types.ExportFilesStatus("SUCCEEDED"),
+					StatusReason: ptr.String("__StatusReason__"),
+					OutputUri:    ptr.String("__OutputUri__"),
+				},
+				Location: ptr.String("__Location__"),
+				RoleArn:  ptr.String("__RoleArn__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetStreamUrl.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetStreamUrl(context.Background(), &GetStreamUrlInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetStreamUrl.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListApplicationShaderCaches(t *testing.T) {
+	want := &ListApplicationShaderCachesOutput{
+		Items: []types.ShaderCacheSummary{
+			{
+				Identifier:     ptr.String("__Identifier__"),
+				ApplicationArn: ptr.String("__ApplicationArn__"),
+				Status:         types.ShaderCacheStatus("INITIALIZED"),
+				LastUpdatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StorageBytes:   ptr.Int64(1),
+				AssociatedStreamGroups: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Identifier:     ptr.String("__Identifier__"),
+				ApplicationArn: ptr.String("__ApplicationArn__"),
+				Status:         types.ShaderCacheStatus("INITIALIZED"),
+				LastUpdatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StorageBytes:   ptr.Int64(1),
+				AssociatedStreamGroups: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListApplicationShaderCaches.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListApplicationShaderCaches(context.Background(), &ListApplicationShaderCachesInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListApplicationShaderCaches.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
 	want := &ListApplicationsOutput{
 		Items: []types.ApplicationSummary{
@@ -860,6 +1044,59 @@ func TestCheckResponseSnapshot_ListStreamSessionsByAccount(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListStreamUrls(t *testing.T) {
+	want := &ListStreamUrlsOutput{
+		Items: []types.StreamUrlSummary{
+			{
+				Arn:                  ptr.String("__Arn__"),
+				StreamUrlId:          ptr.String("__StreamUrlId__"),
+				StreamUrl:            ptr.String("__StreamUrl__"),
+				Status:               types.StreamUrlStatus("ACTIVE"),
+				StatusReason:         types.StreamUrlStatusReason("userRevoked"),
+				ExpiresAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UsageLimit:           ptr.Int32(1),
+				RemainingUses:        ptr.Int32(1),
+				StreamGroupArn:       ptr.String("__StreamGroupArn__"),
+				ApplicationArn:       ptr.String("__ApplicationArn__"),
+				SessionLengthSeconds: ptr.Int32(1),
+				Description:          ptr.String("__Description__"),
+			},
+			{
+				Arn:                  ptr.String("__Arn__"),
+				StreamUrlId:          ptr.String("__StreamUrlId__"),
+				StreamUrl:            ptr.String("__StreamUrl__"),
+				Status:               types.StreamUrlStatus("ACTIVE"),
+				StatusReason:         types.StreamUrlStatusReason("userRevoked"),
+				ExpiresAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UsageLimit:           ptr.Int32(1),
+				RemainingUses:        ptr.Int32(1),
+				StreamGroupArn:       ptr.String("__StreamGroupArn__"),
+				ApplicationArn:       ptr.String("__ApplicationArn__"),
+				SessionLengthSeconds: ptr.Int32(1),
+				Description:          ptr.String("__Description__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListStreamUrls.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListStreamUrls(context.Background(), &ListStreamUrlsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListStreamUrls.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	want := &ListTagsForResourceOutput{
 		Tags: map[string]string{
@@ -899,6 +1136,25 @@ func TestCheckResponseSnapshot_RemoveStreamGroupLocations(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "RemoveStreamGroupLocations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_RevokeStreamUrl(t *testing.T) {
+	want := &RevokeStreamUrlOutput{}
+	status, header, body, err := serdeRespReadSnapshot("RevokeStreamUrl.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RevokeStreamUrl(context.Background(), &RevokeStreamUrlInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RevokeStreamUrl.response", err)
 	}
 }
 

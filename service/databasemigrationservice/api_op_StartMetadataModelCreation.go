@@ -9,11 +9,36 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates source metadata model of the given type with the specified properties
-// for schema conversion operations.
+// Queues the creation of a metadata model in the source metadata tree. If other
+// requests created by Start* operations are already in the migration project's
+// queue, the creation begins after they complete.
 //
-// This action supports only these directions: from SQL Server to Aurora
-// PostgreSQL, or from SQL Server to RDS for PostgreSQL.
+// This operation supports only Microsoft SQL Server to Aurora PostgreSQL and
+// Microsoft SQL Server to Amazon RDS for PostgreSQL conversion paths.
+//
+// To check the status of the creation request, call [DescribeMetadataModelCreations] using the returned
+// RequestIdentifier as a filter.
+//
+// To cancel a queued or in-progress request, call [CancelMetadataModelCreation] with the returned
+// RequestIdentifier .
+//
+// Calling [StartMetadataModelImport] with Refresh deletes metadata models created by this operation.
+//
+// After the creation completes successfully:
+//
+//   - To evaluate conversion complexity, call [StartMetadataModelAssessment].
+//
+//   - To convert to the target database format, call [StartMetadataModelConversion].
+//
+// Required permissions: dms:StartMetadataModelCreation . For more information, see [Actions, resources, and condition keys for Database Migration Service]
+// .
+//
+// [StartMetadataModelImport]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelImport.html
+// [CancelMetadataModelCreation]: https://docs.aws.amazon.com/dms/latest/APIReference/API_CancelMetadataModelCreation.html
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
+// [DescribeMetadataModelCreations]: https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelCreations.html
+// [StartMetadataModelConversion]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelConversion.html
+// [StartMetadataModelAssessment]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelAssessment.html
 func (c *Client) StartMetadataModelCreation(ctx context.Context, params *StartMetadataModelCreationInput, optFns ...func(*Options)) (*StartMetadataModelCreationOutput, error) {
 	if params == nil {
 		params = &StartMetadataModelCreationInput{}
@@ -31,7 +56,7 @@ func (c *Client) StartMetadataModelCreation(ctx context.Context, params *StartMe
 
 type StartMetadataModelCreationInput struct {
 
-	// The name of the metadata model.
+	// The name for the metadata model to use in subsequent operations.
 	//
 	// This member is required.
 	MetadataModelName *string
@@ -41,15 +66,24 @@ type StartMetadataModelCreationInput struct {
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// The properties of metadata model in JSON format. This object is a Union. Only
-	// one member of this object can be specified or returned.
+	// The properties of the metadata model.
 	//
 	// This member is required.
 	Properties types.MetadataModelProperties
 
-	// The JSON string that specifies the location where the metadata model will be
-	// created. Selection rules must specify a single schema. For more information, see
-	// Selection Rules in the DMS User Guide.
+	// A JSON string that identifies the source schema for the metadata model. For the
+	// selection rule format and examples, see [Selection rules in DMS Schema Conversion].
+	//
+	// Usage:
+	//
+	//   - Accepts only source selection rules, where server-name in the object locator
+	//   matches the source data provider.
+	//
+	//   - Supports only explicit rule actions.
+	//
+	//   - Exactly one rule is allowed.
+	//
+	// [Selection rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html
 	//
 	// This member is required.
 	SelectionRules *string
@@ -59,7 +93,7 @@ type StartMetadataModelCreationInput struct {
 
 type StartMetadataModelCreationOutput struct {
 
-	// The identifier for the metadata model creation operation.
+	// The identifier for the creation request.
 	RequestIdentifier *string
 
 	// Metadata pertaining to the operation's result.

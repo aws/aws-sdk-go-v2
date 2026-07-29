@@ -11831,6 +11831,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 				},
 				PropertyLocation: types.PropertyLocation("HEADER"),
 				PropertyType:     types.PropertyType("USER_INPUT"),
+				Format:           ptr.String("__Format__"),
 			},
 			AdditionalRequestParameters: []types.ConnectorProperty{
 				{
@@ -11844,6 +11845,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 					},
 					PropertyLocation: types.PropertyLocation("HEADER"),
 					PropertyType:     types.PropertyType("USER_INPUT"),
+					Format:           ptr.String("__Format__"),
 				},
 				{
 					Name:         ptr.String("__Name__"),
@@ -11856,6 +11858,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 					},
 					PropertyLocation: types.PropertyLocation("HEADER"),
 					PropertyType:     types.PropertyType("USER_INPUT"),
+					Format:           ptr.String("__Format__"),
 				},
 			},
 		},
@@ -11878,6 +11881,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					RequestMethod: types.HTTPMethod("GET"),
 					ContentType:   types.ContentType("APPLICATION_JSON"),
@@ -11892,6 +11896,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					ClientSecret: &types.ConnectorProperty{
 						Name:         ptr.String("__Name__"),
@@ -11904,6 +11909,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					Scope: &types.ConnectorProperty{
 						Name:         ptr.String("__Name__"),
@@ -11916,6 +11922,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					TokenUrlParameters: []types.ConnectorProperty{
 						{
@@ -11929,6 +11936,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 							},
 							PropertyLocation: types.PropertyLocation("HEADER"),
 							PropertyType:     types.PropertyType("USER_INPUT"),
+							Format:           ptr.String("__Format__"),
 						},
 						{
 							Name:         ptr.String("__Name__"),
@@ -11941,6 +11949,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 							},
 							PropertyLocation: types.PropertyLocation("HEADER"),
 							PropertyType:     types.PropertyType("USER_INPUT"),
+							Format:           ptr.String("__Format__"),
 						},
 					},
 				},
@@ -11956,6 +11965,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					RequestMethod: types.HTTPMethod("GET"),
 					ContentType:   types.ContentType("APPLICATION_JSON"),
@@ -11970,6 +11980,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					TokenUrlParameters: []types.ConnectorProperty{
 						{
@@ -11983,6 +11994,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 							},
 							PropertyLocation: types.PropertyLocation("HEADER"),
 							PropertyType:     types.PropertyType("USER_INPUT"),
+							Format:           ptr.String("__Format__"),
 						},
 						{
 							Name:         ptr.String("__Name__"),
@@ -11995,6 +12007,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 							},
 							PropertyLocation: types.PropertyLocation("HEADER"),
 							PropertyType:     types.PropertyType("USER_INPUT"),
+							Format:           ptr.String("__Format__"),
 						},
 					},
 				},
@@ -12010,6 +12023,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					AuthorizationCode: &types.ConnectorProperty{
 						Name:         ptr.String("__Name__"),
@@ -12022,6 +12036,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					RedirectUri: &types.ConnectorProperty{
 						Name:         ptr.String("__Name__"),
@@ -12034,6 +12049,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					TokenUrl: &types.ConnectorProperty{
 						Name:         ptr.String("__Name__"),
@@ -12046,6 +12062,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					RequestMethod: types.HTTPMethod("GET"),
 					ContentType:   types.ContentType("APPLICATION_JSON"),
@@ -12060,6 +12077,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					ClientSecret: &types.ConnectorProperty{
 						Name:         ptr.String("__Name__"),
@@ -12072,6 +12090,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					Scope: &types.ConnectorProperty{
 						Name:         ptr.String("__Name__"),
@@ -12084,6 +12103,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					Prompt: &types.ConnectorProperty{
 						Name:         ptr.String("__Name__"),
@@ -12096,6 +12116,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					TokenUrlParameters: []types.ConnectorProperty{
 						{
@@ -12109,6 +12130,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 							},
 							PropertyLocation: types.PropertyLocation("HEADER"),
 							PropertyType:     types.PropertyType("USER_INPUT"),
+							Format:           ptr.String("__Format__"),
 						},
 						{
 							Name:         ptr.String("__Name__"),
@@ -12121,6 +12143,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 							},
 							PropertyLocation: types.PropertyLocation("HEADER"),
 							PropertyType:     types.PropertyType("USER_INPUT"),
+							Format:           ptr.String("__Format__"),
 						},
 					},
 				},
@@ -12137,6 +12160,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 					},
 					PropertyLocation: types.PropertyLocation("HEADER"),
 					PropertyType:     types.PropertyType("USER_INPUT"),
+					Format:           ptr.String("__Format__"),
 				},
 				Password: &types.ConnectorProperty{
 					Name:         ptr.String("__Name__"),
@@ -12149,6 +12173,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 					},
 					PropertyLocation: types.PropertyLocation("HEADER"),
 					PropertyType:     types.PropertyType("USER_INPUT"),
+					Format:           ptr.String("__Format__"),
 				},
 			},
 			CustomAuthenticationProperties: &types.CustomAuthenticationProperties{
@@ -12164,6 +12189,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					{
 						Name:         ptr.String("__Name__"),
@@ -12176,6 +12202,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 				},
 			},
@@ -12196,6 +12223,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					{
 						Name:         ptr.String("__Name__"),
@@ -12208,6 +12236,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 				},
 				ResponseConfiguration: &types.ResponseConfiguration{
@@ -12254,6 +12283,24 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 								HeaderKey:   ptr.String("__HeaderKey__"),
 							},
 						},
+					},
+				},
+				FilterConfiguration: &types.FilterConfiguration{
+					FilterMode: types.FilterMode("QUERY_PARAMS"),
+					OperatorMappings: map[string]string{
+						"key0": "__Value__",
+					},
+					DateTimeFormat: ptr.String("__DateTimeFormat__"),
+					StripQuotes:    ptr.Bool(true),
+					BetweenConfiguration: &types.BetweenConfiguration{
+						LowBoundKey:  ptr.String("__LowBoundKey__"),
+						HighBoundKey: ptr.String("__HighBoundKey__"),
+						Template:     ptr.String("__Template__"),
+					},
+					FilterStringConfiguration: &types.FilterStringConfiguration{
+						QueryParameterName: ptr.String("__QueryParameterName__"),
+						QuoteStringValues:  ptr.Bool(true),
+						QuoteCharacter:     ptr.String("__QuoteCharacter__"),
 					},
 				},
 			},
@@ -12272,6 +12319,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					{
 						Name:         ptr.String("__Name__"),
@@ -12284,6 +12332,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 				},
 				ResponseConfiguration: &types.ResponseConfiguration{
@@ -12330,6 +12379,24 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 								HeaderKey:   ptr.String("__HeaderKey__"),
 							},
 						},
+					},
+				},
+				FilterConfiguration: &types.FilterConfiguration{
+					FilterMode: types.FilterMode("QUERY_PARAMS"),
+					OperatorMappings: map[string]string{
+						"key0": "__Value__",
+					},
+					DateTimeFormat: ptr.String("__DateTimeFormat__"),
+					StripQuotes:    ptr.Bool(true),
+					BetweenConfiguration: &types.BetweenConfiguration{
+						LowBoundKey:  ptr.String("__LowBoundKey__"),
+						HighBoundKey: ptr.String("__HighBoundKey__"),
+						Template:     ptr.String("__Template__"),
+					},
+					FilterStringConfiguration: &types.FilterStringConfiguration{
+						QueryParameterName: ptr.String("__QueryParameterName__"),
+						QuoteStringValues:  ptr.Bool(true),
+						QuoteCharacter:     ptr.String("__QuoteCharacter__"),
 					},
 				},
 			},
@@ -12350,6 +12417,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 								},
 								PropertyLocation: types.PropertyLocation("HEADER"),
 								PropertyType:     types.PropertyType("USER_INPUT"),
+								Format:           ptr.String("__Format__"),
 							},
 							{
 								Name:         ptr.String("__Name__"),
@@ -12362,6 +12430,7 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 								},
 								PropertyLocation: types.PropertyLocation("HEADER"),
 								PropertyType:     types.PropertyType("USER_INPUT"),
+								Format:           ptr.String("__Format__"),
 							},
 						},
 						ResponseConfiguration: &types.ResponseConfiguration{
@@ -12410,11 +12479,46 @@ func TestCheckRequestSnapshot_RegisterConnectionType(t *testing.T) {
 								},
 							},
 						},
+						FilterConfiguration: &types.FilterConfiguration{
+							FilterMode: types.FilterMode("QUERY_PARAMS"),
+							OperatorMappings: map[string]string{
+								"key0": "__Value__",
+							},
+							DateTimeFormat: ptr.String("__DateTimeFormat__"),
+							StripQuotes:    ptr.Bool(true),
+							BetweenConfiguration: &types.BetweenConfiguration{
+								LowBoundKey:  ptr.String("__LowBoundKey__"),
+								HighBoundKey: ptr.String("__HighBoundKey__"),
+								Template:     ptr.String("__Template__"),
+							},
+							FilterStringConfiguration: &types.FilterStringConfiguration{
+								QueryParameterName: ptr.String("__QueryParameterName__"),
+								QuoteStringValues:  ptr.Bool(true),
+								QuoteCharacter:     ptr.String("__QuoteCharacter__"),
+							},
+						},
 					},
 					Schema: map[string]types.FieldDefinition{
 						"key0": {
-							Name:          ptr.String("__Name__"),
-							FieldDataType: types.FieldDataType("INT"),
+							Name:               ptr.String("__Name__"),
+							FieldDataType:      types.FieldDataType("INT"),
+							ResponseDateFormat: ptr.String("__ResponseDateFormat__"),
+							IsPartitionable:    ptr.Bool(true),
+							IsNullable:         ptr.Bool(true),
+							IsQueryable:        ptr.Bool(true),
+							IsOrderable:        ptr.Bool(true),
+							FilterOverrides: &types.FilterOverrides{
+								FieldName: ptr.String("__FieldName__"),
+								OperatorMappings: map[string]string{
+									"key0": "__Value__",
+								},
+								BetweenConfiguration: &types.BetweenConfiguration{
+									LowBoundKey:  ptr.String("__LowBoundKey__"),
+									HighBoundKey: ptr.String("__HighBoundKey__"),
+									Template:     ptr.String("__Template__"),
+								},
+								DateTimeFormat: ptr.String("__DateTimeFormat__"),
+							},
 						},
 					},
 				},
@@ -30197,6 +30301,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 				},
 				PropertyLocation: types.PropertyLocation("HEADER"),
 				PropertyType:     types.PropertyType("USER_INPUT"),
+				Format:           ptr.String("__Format__"),
 			},
 			AdditionalRequestParameters: []types.ConnectorProperty{
 				{
@@ -30210,6 +30315,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 					},
 					PropertyLocation: types.PropertyLocation("HEADER"),
 					PropertyType:     types.PropertyType("USER_INPUT"),
+					Format:           ptr.String("__Format__"),
 				},
 				{
 					Name:         ptr.String("__Name__"),
@@ -30222,6 +30328,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 					},
 					PropertyLocation: types.PropertyLocation("HEADER"),
 					PropertyType:     types.PropertyType("USER_INPUT"),
+					Format:           ptr.String("__Format__"),
 				},
 			},
 		},
@@ -30244,6 +30351,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					RequestMethod: types.HTTPMethod("GET"),
 					ContentType:   types.ContentType("APPLICATION_JSON"),
@@ -30258,6 +30366,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					ClientSecret: &types.ConnectorProperty{
 						Name:         ptr.String("__Name__"),
@@ -30270,6 +30379,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					Scope: &types.ConnectorProperty{
 						Name:         ptr.String("__Name__"),
@@ -30282,6 +30392,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					TokenUrlParameters: []types.ConnectorProperty{
 						{
@@ -30295,6 +30406,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 							},
 							PropertyLocation: types.PropertyLocation("HEADER"),
 							PropertyType:     types.PropertyType("USER_INPUT"),
+							Format:           ptr.String("__Format__"),
 						},
 						{
 							Name:         ptr.String("__Name__"),
@@ -30307,6 +30419,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 							},
 							PropertyLocation: types.PropertyLocation("HEADER"),
 							PropertyType:     types.PropertyType("USER_INPUT"),
+							Format:           ptr.String("__Format__"),
 						},
 					},
 				},
@@ -30322,6 +30435,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					RequestMethod: types.HTTPMethod("GET"),
 					ContentType:   types.ContentType("APPLICATION_JSON"),
@@ -30336,6 +30450,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					TokenUrlParameters: []types.ConnectorProperty{
 						{
@@ -30349,6 +30464,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 							},
 							PropertyLocation: types.PropertyLocation("HEADER"),
 							PropertyType:     types.PropertyType("USER_INPUT"),
+							Format:           ptr.String("__Format__"),
 						},
 						{
 							Name:         ptr.String("__Name__"),
@@ -30361,6 +30477,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 							},
 							PropertyLocation: types.PropertyLocation("HEADER"),
 							PropertyType:     types.PropertyType("USER_INPUT"),
+							Format:           ptr.String("__Format__"),
 						},
 					},
 				},
@@ -30376,6 +30493,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					AuthorizationCode: &types.ConnectorProperty{
 						Name:         ptr.String("__Name__"),
@@ -30388,6 +30506,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					RedirectUri: &types.ConnectorProperty{
 						Name:         ptr.String("__Name__"),
@@ -30400,6 +30519,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					TokenUrl: &types.ConnectorProperty{
 						Name:         ptr.String("__Name__"),
@@ -30412,6 +30532,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					RequestMethod: types.HTTPMethod("GET"),
 					ContentType:   types.ContentType("APPLICATION_JSON"),
@@ -30426,6 +30547,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					ClientSecret: &types.ConnectorProperty{
 						Name:         ptr.String("__Name__"),
@@ -30438,6 +30560,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					Scope: &types.ConnectorProperty{
 						Name:         ptr.String("__Name__"),
@@ -30450,6 +30573,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					Prompt: &types.ConnectorProperty{
 						Name:         ptr.String("__Name__"),
@@ -30462,6 +30586,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					TokenUrlParameters: []types.ConnectorProperty{
 						{
@@ -30475,6 +30600,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 							},
 							PropertyLocation: types.PropertyLocation("HEADER"),
 							PropertyType:     types.PropertyType("USER_INPUT"),
+							Format:           ptr.String("__Format__"),
 						},
 						{
 							Name:         ptr.String("__Name__"),
@@ -30487,6 +30613,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 							},
 							PropertyLocation: types.PropertyLocation("HEADER"),
 							PropertyType:     types.PropertyType("USER_INPUT"),
+							Format:           ptr.String("__Format__"),
 						},
 					},
 				},
@@ -30503,6 +30630,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 					},
 					PropertyLocation: types.PropertyLocation("HEADER"),
 					PropertyType:     types.PropertyType("USER_INPUT"),
+					Format:           ptr.String("__Format__"),
 				},
 				Password: &types.ConnectorProperty{
 					Name:         ptr.String("__Name__"),
@@ -30515,6 +30643,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 					},
 					PropertyLocation: types.PropertyLocation("HEADER"),
 					PropertyType:     types.PropertyType("USER_INPUT"),
+					Format:           ptr.String("__Format__"),
 				},
 			},
 			CustomAuthenticationProperties: &types.CustomAuthenticationProperties{
@@ -30530,6 +30659,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					{
 						Name:         ptr.String("__Name__"),
@@ -30542,6 +30672,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 				},
 			},
@@ -30562,6 +30693,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					{
 						Name:         ptr.String("__Name__"),
@@ -30574,6 +30706,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 				},
 				ResponseConfiguration: &types.ResponseConfiguration{
@@ -30620,6 +30753,24 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 								HeaderKey:   ptr.String("__HeaderKey__"),
 							},
 						},
+					},
+				},
+				FilterConfiguration: &types.FilterConfiguration{
+					FilterMode: types.FilterMode("QUERY_PARAMS"),
+					OperatorMappings: map[string]string{
+						"key0": "__Value__",
+					},
+					DateTimeFormat: ptr.String("__DateTimeFormat__"),
+					StripQuotes:    ptr.Bool(true),
+					BetweenConfiguration: &types.BetweenConfiguration{
+						LowBoundKey:  ptr.String("__LowBoundKey__"),
+						HighBoundKey: ptr.String("__HighBoundKey__"),
+						Template:     ptr.String("__Template__"),
+					},
+					FilterStringConfiguration: &types.FilterStringConfiguration{
+						QueryParameterName: ptr.String("__QueryParameterName__"),
+						QuoteStringValues:  ptr.Bool(true),
+						QuoteCharacter:     ptr.String("__QuoteCharacter__"),
 					},
 				},
 			},
@@ -30638,6 +30789,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					{
 						Name:         ptr.String("__Name__"),
@@ -30650,6 +30802,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 				},
 				ResponseConfiguration: &types.ResponseConfiguration{
@@ -30696,6 +30849,24 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 								HeaderKey:   ptr.String("__HeaderKey__"),
 							},
 						},
+					},
+				},
+				FilterConfiguration: &types.FilterConfiguration{
+					FilterMode: types.FilterMode("QUERY_PARAMS"),
+					OperatorMappings: map[string]string{
+						"key0": "__Value__",
+					},
+					DateTimeFormat: ptr.String("__DateTimeFormat__"),
+					StripQuotes:    ptr.Bool(true),
+					BetweenConfiguration: &types.BetweenConfiguration{
+						LowBoundKey:  ptr.String("__LowBoundKey__"),
+						HighBoundKey: ptr.String("__HighBoundKey__"),
+						Template:     ptr.String("__Template__"),
+					},
+					FilterStringConfiguration: &types.FilterStringConfiguration{
+						QueryParameterName: ptr.String("__QueryParameterName__"),
+						QuoteStringValues:  ptr.Bool(true),
+						QuoteCharacter:     ptr.String("__QuoteCharacter__"),
 					},
 				},
 			},
@@ -30716,6 +30887,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 								},
 								PropertyLocation: types.PropertyLocation("HEADER"),
 								PropertyType:     types.PropertyType("USER_INPUT"),
+								Format:           ptr.String("__Format__"),
 							},
 							{
 								Name:         ptr.String("__Name__"),
@@ -30728,6 +30900,7 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 								},
 								PropertyLocation: types.PropertyLocation("HEADER"),
 								PropertyType:     types.PropertyType("USER_INPUT"),
+								Format:           ptr.String("__Format__"),
 							},
 						},
 						ResponseConfiguration: &types.ResponseConfiguration{
@@ -30776,11 +30949,46 @@ func TestUpdateRequestSnapshot_RegisterConnectionType(t *testing.T) {
 								},
 							},
 						},
+						FilterConfiguration: &types.FilterConfiguration{
+							FilterMode: types.FilterMode("QUERY_PARAMS"),
+							OperatorMappings: map[string]string{
+								"key0": "__Value__",
+							},
+							DateTimeFormat: ptr.String("__DateTimeFormat__"),
+							StripQuotes:    ptr.Bool(true),
+							BetweenConfiguration: &types.BetweenConfiguration{
+								LowBoundKey:  ptr.String("__LowBoundKey__"),
+								HighBoundKey: ptr.String("__HighBoundKey__"),
+								Template:     ptr.String("__Template__"),
+							},
+							FilterStringConfiguration: &types.FilterStringConfiguration{
+								QueryParameterName: ptr.String("__QueryParameterName__"),
+								QuoteStringValues:  ptr.Bool(true),
+								QuoteCharacter:     ptr.String("__QuoteCharacter__"),
+							},
+						},
 					},
 					Schema: map[string]types.FieldDefinition{
 						"key0": {
-							Name:          ptr.String("__Name__"),
-							FieldDataType: types.FieldDataType("INT"),
+							Name:               ptr.String("__Name__"),
+							FieldDataType:      types.FieldDataType("INT"),
+							ResponseDateFormat: ptr.String("__ResponseDateFormat__"),
+							IsPartitionable:    ptr.Bool(true),
+							IsNullable:         ptr.Bool(true),
+							IsQueryable:        ptr.Bool(true),
+							IsOrderable:        ptr.Bool(true),
+							FilterOverrides: &types.FilterOverrides{
+								FieldName: ptr.String("__FieldName__"),
+								OperatorMappings: map[string]string{
+									"key0": "__Value__",
+								},
+								BetweenConfiguration: &types.BetweenConfiguration{
+									LowBoundKey:  ptr.String("__LowBoundKey__"),
+									HighBoundKey: ptr.String("__HighBoundKey__"),
+									Template:     ptr.String("__Template__"),
+								},
+								DateTimeFormat: ptr.String("__DateTimeFormat__"),
+							},
 						},
 					},
 				},

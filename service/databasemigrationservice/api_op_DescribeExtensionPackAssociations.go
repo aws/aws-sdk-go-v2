@@ -13,10 +13,13 @@ import (
 	"time"
 )
 
-// Returns a paginated list of extension pack associations for the specified
-// migration project. An extension pack is an add-on module that emulates functions
-// present in a source database that are required when converting objects to the
-// target database.
+// Returns a paginated list of extension pack installation requests for a
+// migration project, initiated by [StartExtensionPackAssociation].
+//
+// Required permissions: dms:ListExtensionPacks . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
+// [StartExtensionPackAssociation]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartExtensionPackAssociation.html
 func (c *Client) DescribeExtensionPackAssociations(ctx context.Context, params *DescribeExtensionPackAssociationsInput, optFns ...func(*Options)) (*DescribeExtensionPackAssociationsOutput, error) {
 	if params == nil {
 		params = &DescribeExtensionPackAssociationsInput{}
@@ -34,13 +37,19 @@ func (c *Client) DescribeExtensionPackAssociations(ctx context.Context, params *
 
 type DescribeExtensionPackAssociationsInput struct {
 
-	// The name or Amazon Resource Name (ARN) for the migration project.
+	// The migration project name or Amazon Resource Name (ARN).
 	//
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// Filters applied to the extension pack associations described in the form of
-	// key-value pairs.
+	// The filters to apply to the extension pack installation requests.
+	//
+	// The following filter names are supported:
+	//
+	//   - request-id – The request identifier.
+	//
+	//   - status – The request status. Valid values: RECEIVED , IN_PROGRESS , SUCCESS
+	//   , FAILED .
 	Filters []types.Filter
 
 	// Specifies the unique pagination token that makes it possible to display the
@@ -73,8 +82,9 @@ type DescribeExtensionPackAssociationsOutput struct {
 	// arguments unchanged.
 	Marker *string
 
-	// A paginated list of extension pack associations for the specified migration
-	// project.
+	// A paginated list of extension pack installation requests.
+	//
+	// DMS never populates the ExportSqlDetails field for this operation.
 	Requests []types.SchemaConversionRequest
 
 	// Metadata pertaining to the operation's result.

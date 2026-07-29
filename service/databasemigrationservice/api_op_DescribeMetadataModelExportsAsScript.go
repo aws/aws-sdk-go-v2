@@ -13,7 +13,13 @@ import (
 	"time"
 )
 
-// Returns a paginated list of metadata model exports.
+// Returns a paginated list of metadata model export requests for a migration
+// project, initiated by [StartMetadataModelExportAsScript].
+//
+// Required permissions: dms:ListMetadataModelExports . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
+// [StartMetadataModelExportAsScript]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelExportAsScript.html
 func (c *Client) DescribeMetadataModelExportsAsScript(ctx context.Context, params *DescribeMetadataModelExportsAsScriptInput, optFns ...func(*Options)) (*DescribeMetadataModelExportsAsScriptOutput, error) {
 	if params == nil {
 		params = &DescribeMetadataModelExportsAsScriptInput{}
@@ -36,8 +42,14 @@ type DescribeMetadataModelExportsAsScriptInput struct {
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// Filters applied to the metadata model exports described in the form of
-	// key-value pairs.
+	// The filters to apply to the metadata model export requests.
+	//
+	// The following filter names are supported:
+	//
+	//   - request-id – The request identifier.
+	//
+	//   - status – The request status. Valid values: RECEIVED , IN_PROGRESS , SUCCESS
+	//   , FAILED .
 	Filters []types.Filter
 
 	// Specifies the unique pagination token that makes it possible to display the
@@ -70,7 +82,7 @@ type DescribeMetadataModelExportsAsScriptOutput struct {
 	// arguments unchanged.
 	Marker *string
 
-	// A paginated list of metadata model exports.
+	// A paginated list of metadata model export requests.
 	Requests []types.SchemaConversionRequest
 
 	// Metadata pertaining to the operation's result.

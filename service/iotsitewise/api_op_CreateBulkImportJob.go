@@ -13,9 +13,12 @@ import (
 // Defines a job to ingest data to IoT SiteWise from Amazon S3. For more
 // information, see [Create a bulk import job (CLI)]in the Amazon Simple Storage Service User Guide.
 //
-// Before you create a bulk import job, you must enable IoT SiteWise warm tier or
-// IoT SiteWise cold tier. For more information about how to configure storage
-// settings, see [PutStorageConfiguration].
+// Before you create a bulk import job that ingests data into time series outside
+// of a workspace, you must enable IoT SiteWise warm tier or IoT SiteWise cold
+// tier. For more information about how to configure storage settings, see [PutStorageConfiguration]. This
+// requirement doesn't apply to bulk import jobs that ingest data into a session
+// dataset in a workspace (jobs that specify a workspaceName and datasetId ). Those
+// jobs don't use IoT SiteWise warm or cold tier storage.
 //
 // Bulk import is designed to store historical data to IoT SiteWise.
 //
@@ -51,16 +54,16 @@ type CreateBulkImportJobInput struct {
 	// This member is required.
 	ErrorReportLocation *types.ErrorReportLocation
 
-	// The files in the specified Amazon S3 bucket that contain your data.
+	// The files in the specified Amazon S3 bucket that contain your data. You can
+	// specify up to 100 files for each bulk import job. Each file supports the
+	// following size limits:
+	//
+	//   - Parquet files – Up to 256 MiB.
+	//
+	//   - Other file formats – Up to 5 GiB.
 	//
 	// This member is required.
 	Files []types.File
-
-	// Contains the configuration information of a job, such as the file format used
-	// to save data in Amazon S3.
-	//
-	// This member is required.
-	JobConfiguration *types.JobConfiguration
 
 	// The unique name that helps identify the job request.
 	//
@@ -79,9 +82,21 @@ type CreateBulkImportJobInput struct {
 	// data is ingested into IoT SiteWise as is.
 	AdaptiveIngestion *bool
 
+	// The ID of the session dataset to ingest data into. Specify this field, together
+	// with workspaceName , to ingest data into a session dataset in a workspace.
+	DatasetId *string
+
 	// If set to true, your data files is deleted from S3, after ingestion into IoT
 	// SiteWise storage.
 	DeleteFilesAfterImport *bool
+
+	// Contains the configuration information of a job, such as the file format used
+	// to save data in Amazon S3.
+	JobConfiguration *types.JobConfiguration
+
+	// The name of the workspace that contains the session dataset. Specify this field
+	// together with datasetId .
+	WorkspaceName *string
 
 	noSmithyDocumentSerde
 }

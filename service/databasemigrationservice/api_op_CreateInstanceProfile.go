@@ -10,6 +10,10 @@ import (
 )
 
 // Creates the instance profile using the specified parameters.
+//
+// Required permissions: dms:CreateInstanceProfile . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) CreateInstanceProfile(ctx context.Context, params *CreateInstanceProfileInput, optFns ...func(*Options)) (*CreateInstanceProfileOutput, error) {
 	if params == nil {
 		params = &CreateInstanceProfileInput{}

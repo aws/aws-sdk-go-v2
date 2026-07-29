@@ -2,4 +2,4 @@ POST /datasets
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","datasetDescription":"__DatasetDescription__","datasetId":"__DatasetId__","datasetName":"__DatasetName__","datasetSource":{"sourceDetail":{"kendra":{"knowledgeBaseArn":"__KnowledgeBaseArn__","roleArn":"__RoleArn__"}},"sourceFormat":"KNOWLEDGE_BASE","sourceType":"KENDRA"},"tags":{"key0":"__Value__"}}
+{"clientToken":"__ClientToken__","datasetConfig":{"session":{"sessionEndTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"sessionStartTimestamp":{"offsetInNanos":1,"timeInSeconds":1}}},"datasetDescription":"__DatasetDescription__","datasetId":"__DatasetId__","datasetName":"__DatasetName__","datasetSource":{"sourceDetail":{"kendra":{"knowledgeBaseArn":"__KnowledgeBaseArn__","roleArn":"__RoleArn__"}},"sourceFormat":"KNOWLEDGE_BASE","sourceType":"KENDRA"},"datasetType":"SESSION","metadata":{"key0":"__Value__"},"tags":{"key0":"__Value__"},"workspaceName":"__WorkspaceName__"}

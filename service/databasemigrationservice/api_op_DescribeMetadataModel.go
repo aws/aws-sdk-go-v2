@@ -12,6 +12,10 @@ import (
 // Gets detailed information about the specified metadata model, including its
 // definition and corresponding converted objects in the target database if
 // applicable.
+//
+// Required permissions: dms:DescribeMetadataModel . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) DescribeMetadataModel(ctx context.Context, params *DescribeMetadataModelInput, optFns ...func(*Options)) (*DescribeMetadataModelOutput, error) {
 	if params == nil {
 		params = &DescribeMetadataModelInput{}
@@ -40,11 +44,20 @@ type DescribeMetadataModelInput struct {
 	// This member is required.
 	Origin types.OriginTypeValue
 
-	// The JSON string that specifies which metadata model to retrieve. Only one
-	// selection rule with "rule-action": "explicit" can be provided. For more
-	// information, see [Selection Rules]in the DMS User Guide.
+	// A JSON string that identifies the metadata model to retrieve. For the selection
+	// rule format and examples, see [Selection rules in DMS Schema Conversion].
 	//
-	// [Selection Rules]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.SelectionTransformation.Selections.html
+	// Usage:
+	//
+	//   - Accepts source or target selection rules depending on the Origin parameter.
+	//   The server-name in the object locator must match the corresponding data
+	//   provider.
+	//
+	//   - Supports only explicit rule actions.
+	//
+	//   - Exactly one rule is allowed.
+	//
+	// [Selection rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html
 	//
 	// This member is required.
 	SelectionRules *string

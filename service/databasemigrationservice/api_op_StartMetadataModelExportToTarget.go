@@ -8,7 +8,31 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Applies converted database objects to your target database.
+// Queues an export of the selected converted metadata models (database objects
+// such as tables, views, and procedures) to your target database. If other
+// requests created by Start* operations are already in the migration project's
+// queue, the export begins after they complete.
+//
+// This operation requires a non-virtual target data provider.
+//
+// The export applies only metadata models created by conversion. Metadata models
+// imported from the database are skipped.
+//
+// If objects with the same name already exist on the target database, the export
+// overwrites them.
+//
+// The operation installs the extension pack on the target database. For more
+// information, see [Using extension packs in DMS Schema Conversion].
+//
+// To check the status of the export request, call [DescribeMetadataModelExportsToTarget] using the returned
+// RequestIdentifier as a filter.
+//
+// Required permissions: dms:StartMetadataModelExportToTarget . For more
+// information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Using extension packs in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/extension-pack.html
+// [DescribeMetadataModelExportsToTarget]: https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelExportsToTarget.html
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) StartMetadataModelExportToTarget(ctx context.Context, params *StartMetadataModelExportToTargetInput, optFns ...func(*Options)) (*StartMetadataModelExportToTargetOutput, error) {
 	if params == nil {
 		params = &StartMetadataModelExportToTargetInput{}
@@ -31,14 +55,23 @@ type StartMetadataModelExportToTargetInput struct {
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// A value that specifies the database objects to export.
+	// A JSON string that identifies the metadata models to export to the target
+	// database. For the selection rule format and examples, see [Selection rules in DMS Schema Conversion].
+	//
+	// Usage:
+	//
+	//   - Accepts only target selection rules, where server-name in the object locator
+	//   matches the target data provider.
+	//
+	//   - Supports explicit , include , and exclude rule actions.
+	//
+	// [Selection rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html
 	//
 	// This member is required.
 	SelectionRules *string
 
-	// Whether to overwrite the migration project extension pack. An extension pack is
-	// an add-on module that emulates functions present in a source database that are
-	// required when converting objects to the target database.
+	// Specifies whether to overwrite the extension pack if one already exists on the
+	// target database. The default value is true .
 	OverwriteExtensionPack *bool
 
 	noSmithyDocumentSerde
@@ -46,7 +79,7 @@ type StartMetadataModelExportToTargetInput struct {
 
 type StartMetadataModelExportToTargetOutput struct {
 
-	// The identifier for the export operation.
+	// The identifier for the export request.
 	RequestIdentifier *string
 
 	// Metadata pertaining to the operation's result.

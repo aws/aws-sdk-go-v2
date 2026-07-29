@@ -11,6 +11,10 @@ import (
 
 // Creates a data provider using the provided settings. A data provider stores a
 // data store type and location information about your database.
+//
+// Required permissions: dms:CreateDataProvider . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) CreateDataProvider(ctx context.Context, params *CreateDataProviderInput, optFns ...func(*Options)) (*CreateDataProviderOutput, error) {
 	if params == nil {
 		params = &CreateDataProviderInput{}
@@ -28,10 +32,11 @@ func (c *Client) CreateDataProvider(ctx context.Context, params *CreateDataProvi
 
 type CreateDataProviderInput struct {
 
-	// The type of database engine for the data provider. Valid values include "aurora"
-	// , "aurora-postgresql" , "mysql" , "oracle" , "postgres" , "sqlserver" , redshift
-	// , mariadb , mongodb , db2 , db2-zos , docdb , and sybase . A value of "aurora"
-	// represents Amazon Aurora MySQL-Compatible Edition.
+	// The type of database engine for the data provider.
+	//
+	// Valid values: aurora , aurora-postgresql , db2 , db2-zos , docdb , mariadb ,
+	// mongodb , mysql , oracle , postgres , redshift , sqlserver , and sybase . A
+	// value of aurora represents Amazon Aurora MySQL-Compatible Edition.
 	//
 	// This member is required.
 	Engine *string

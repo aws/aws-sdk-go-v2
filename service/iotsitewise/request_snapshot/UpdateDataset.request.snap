@@ -2,4 +2,4 @@ PUT /datasets/__DatasetId__
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","datasetDescription":"__DatasetDescription__","datasetName":"__DatasetName__","datasetSource":{"sourceDetail":{"kendra":{"knowledgeBaseArn":"__KnowledgeBaseArn__","roleArn":"__RoleArn__"}},"sourceFormat":"KNOWLEDGE_BASE","sourceType":"KENDRA"}}
+{"clientToken":"__ClientToken__","datasetConfig":{"session":{"sessionEndTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"sessionStartTimestamp":{"offsetInNanos":1,"timeInSeconds":1}}},"datasetDescription":"__DatasetDescription__","datasetName":"__DatasetName__","datasetSource":{"sourceDetail":{"kendra":{"knowledgeBaseArn":"__KnowledgeBaseArn__","roleArn":"__RoleArn__"}},"sourceFormat":"KNOWLEDGE_BASE","sourceType":"KENDRA"},"metadata":{"key0":"__Value__"},"workspaceName":"__WorkspaceName__"}

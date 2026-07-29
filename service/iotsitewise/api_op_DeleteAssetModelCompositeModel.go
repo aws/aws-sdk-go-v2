@@ -79,6 +79,9 @@ type DeleteAssetModelCompositeModelOutput struct {
 	// This member is required.
 	AssetModelStatus *types.AssetModelStatus
 
+	// The ID of the asset model.
+	AssetModelId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

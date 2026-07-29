@@ -11,7 +11,9 @@ import (
 
 // Deletes a time series (data stream). If you delete a time series that's
 // associated with an asset property, the asset property still exists, but the time
-// series will no longer be associated with this asset property.
+// series will no longer be associated with this asset property. You can't delete a
+// time series until all of its data segments have been deleted from session
+// datasets.
 //
 // To identify a time series, do one of the following:
 //
@@ -62,6 +64,9 @@ type DeleteTimeSeriesInput struct {
 	//
 	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	PropertyId *string
+
+	// The name of the workspace.
+	WorkspaceName *string
 
 	noSmithyDocumentSerde
 }

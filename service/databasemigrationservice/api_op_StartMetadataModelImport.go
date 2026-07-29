@@ -9,10 +9,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Loads the metadata for all the dependent database objects of the parent object.
+// Queues an import of metadata models (database objects such as tables, views,
+// and procedures) from your data provider into the metadata tree. If other
+// requests created by Start* operations are already in the migration project's
+// queue, the import begins after they complete.
 //
-// This operation uses your project's Amazon S3 bucket as a metadata cache to
-// improve performance.
+// To check the status of the import request, call [DescribeMetadataModelImports] using the returned
+// RequestIdentifier as a filter.
+//
+// Required permissions: dms:StartMetadataModelImport . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
+// [DescribeMetadataModelImports]: https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelImports.html
 func (c *Client) StartMetadataModelImport(ctx context.Context, params *StartMetadataModelImportInput, optFns ...func(*Options)) (*StartMetadataModelImportOutput, error) {
 	if params == nil {
 		params = &StartMetadataModelImportInput{}
@@ -35,17 +43,37 @@ type StartMetadataModelImportInput struct {
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// Whether to load metadata to the source or target database.
+	// Specifies the metadata tree to import into.
+	//
+	// You cannot import from a virtual target data provider.
 	//
 	// This member is required.
 	Origin types.OriginTypeValue
 
-	// A value that specifies the database objects to import.
+	// A JSON string that identifies the metadata models to import from the data
+	// provider. For the selection rule format and examples, see [Selection rules in DMS Schema Conversion].
+	//
+	// Usage:
+	//
+	//   - Accepts source or target selection rules depending on the Origin parameter.
+	//   The server-name in the object locator must match the corresponding data
+	//   provider.
+	//
+	//   - Supports explicit , include , and exclude rule actions.
+	//
+	// [Selection rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html
 	//
 	// This member is required.
 	SelectionRules *string
 
-	// If true , DMS loads metadata for the specified objects from the source database.
+	// Specifies whether to refresh the selected metadata models from the data
+	// provider.
+	//
+	// When true , the import reloads the selected metadata models with current
+	// definitions and removes their existing subtree.
+	//
+	// When false (default), the import loads the full subtree that has not yet been
+	// loaded into the metadata tree.
 	Refresh bool
 
 	noSmithyDocumentSerde
@@ -53,7 +81,7 @@ type StartMetadataModelImportInput struct {
 
 type StartMetadataModelImportOutput struct {
 
-	// The identifier for the import operation.
+	// The identifier for the import request.
 	RequestIdentifier *string
 
 	// Metadata pertaining to the operation's result.

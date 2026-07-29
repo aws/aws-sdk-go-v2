@@ -1,4 +1,4 @@
-POST /timeseries/delete?alias=__Alias__&assetId=__AssetId__&propertyId=__PropertyId__
+POST /timeseries/delete?alias=__Alias__&assetId=__AssetId__&propertyId=__PropertyId__&workspaceName=__WorkspaceName__
 
 Content-Type: application/json
 

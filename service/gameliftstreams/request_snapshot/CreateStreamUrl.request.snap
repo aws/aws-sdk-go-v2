@@ -1,0 +1,5 @@
+POST /streamgroups/__Identifier__/streamurls
+
+Content-Type: application/json
+
+{"AdditionalEnvironmentVariables":{"key0":"__Value__"},"AdditionalLaunchArgs":["__Member__","__Member__"],"ApplicationIdentifier":"__ApplicationIdentifier__","ClientToken":"__ClientToken__","Description":"__Description__","DisplayConfiguration":{"Resolution":{"Height":1,"Width":1}},"Locations":["__Member__","__Member__"],"Protocol":"WebRTC","RoleArn":"__RoleArn__","SessionLengthSeconds":1,"UrlExpiresAfterMinutes":1,"UsageLimit":1}

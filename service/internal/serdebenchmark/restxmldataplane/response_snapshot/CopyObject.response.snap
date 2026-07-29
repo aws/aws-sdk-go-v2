@@ -1,0 +1,14 @@
+200
+Content-Type: application/xml
+X-Amz-Copy-Source-Version-Id: __CopySourceVersionId__
+X-Amz-Expiration: __Expiration__
+X-Amz-Request-Charged: __RequestCharged__
+X-Amz-Server-Side-Encryption: __ServerSideEncryption__
+X-Amz-Server-Side-Encryption-Aws-Kms-Key-Id: __SSEKMSKeyId__
+X-Amz-Server-Side-Encryption-Bucket-Key-Enabled: true
+X-Amz-Server-Side-Encryption-Context: __SSEKMSEncryptionContext__
+X-Amz-Server-Side-Encryption-Customer-Algorithm: __SSECustomerAlgorithm__
+X-Amz-Server-Side-Encryption-Customer-Key-Md5: __SSECustomerKeyMD5__
+X-Amz-Version-Id: __VersionId__
+
+<CopyObjectOutput xmlns="https://awsrestxmldataplane.amazonaws.com"><ChecksumCRC32>__ChecksumCRC32__</ChecksumCRC32><ChecksumCRC32C>__ChecksumCRC32C__</ChecksumCRC32C><ChecksumCRC64NVME>__ChecksumCRC64NVME__</ChecksumCRC64NVME><ChecksumSHA1>__ChecksumSHA1__</ChecksumSHA1><ChecksumSHA256>__ChecksumSHA256__</ChecksumSHA256><ChecksumType>__ChecksumType__</ChecksumType><ETag>__ETag__</ETag><LastModified>2000-01-01T00:00:00Z</LastModified></CopyObjectOutput>

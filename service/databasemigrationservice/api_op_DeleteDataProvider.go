@@ -11,8 +11,12 @@ import (
 
 // Deletes the specified data provider.
 //
+// Required permissions: dms:DeleteDataProvider . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
 // All migration projects associated with the data provider must be deleted or
 // modified before you can delete the data provider.
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) DeleteDataProvider(ctx context.Context, params *DeleteDataProviderInput, optFns ...func(*Options)) (*DeleteDataProviderOutput, error) {
 	if params == nil {
 		params = &DeleteDataProviderInput{}

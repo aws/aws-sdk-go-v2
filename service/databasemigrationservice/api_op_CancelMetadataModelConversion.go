@@ -11,6 +11,11 @@ import (
 
 // Cancels a single metadata model conversion operation that was started with
 // StartMetadataModelConversion .
+//
+// Required permissions: dms:CancelMetadataModelConversion . For more information,
+// see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) CancelMetadataModelConversion(ctx context.Context, params *CancelMetadataModelConversionInput, optFns ...func(*Options)) (*CancelMetadataModelConversionOutput, error) {
 	if params == nil {
 		params = &CancelMetadataModelConversionInput{}
@@ -44,7 +49,9 @@ type CancelMetadataModelConversionInput struct {
 
 type CancelMetadataModelConversionOutput struct {
 
-	// Provides information about a schema conversion action.
+	// The metadata model conversion request.
+	//
+	// DMS never populates the ExportSqlDetails field for this operation.
 	Request *types.SchemaConversionRequest
 
 	// Metadata pertaining to the operation's result.

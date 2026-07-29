@@ -243,6 +243,61 @@ func TestCheckRequestSnapshot_AssociateTimeSeriesToAssetProperty(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_BatchAssociateDataSegmentsToDataset(t *testing.T) {
+	input := &BatchAssociateDataSegmentsToDatasetInput{
+		DatasetId:     ptr.String("__DatasetId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		AssociateDataSegmentEntries: []types.AssociateDataSegmentEntry{
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchAssociateDataSegmentsToDataset(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchAssociateDataSegmentsToDataset"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_BatchAssociateProjectAssets(t *testing.T) {
 	input := &BatchAssociateProjectAssetsInput{
 		ProjectId: ptr.String("__ProjectId__"),
@@ -271,6 +326,114 @@ func TestCheckRequestSnapshot_BatchAssociateProjectAssets(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchAssociateProjectAssets"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_BatchDeleteDatasetDataSegments(t *testing.T) {
+	input := &BatchDeleteDatasetDataSegmentsInput{
+		DatasetId:     ptr.String("__DatasetId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		DeleteDataSegmentEntries: []types.DeleteDataSegmentEntry{
+			{
+				TimeSeriesId: ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+			{
+				TimeSeriesId: ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchDeleteDatasetDataSegments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchDeleteDatasetDataSegments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_BatchDisassociateDataSegmentsFromDataset(t *testing.T) {
+	input := &BatchDisassociateDataSegmentsFromDatasetInput{
+		DatasetId:     ptr.String("__DatasetId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		DisassociateDataSegmentEntries: []types.DisassociateDataSegmentEntry{
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchDisassociateDataSegmentsFromDataset(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchDisassociateDataSegmentsFromDataset"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -579,6 +742,92 @@ func TestCheckRequestSnapshot_BatchPutAssetPropertyValue(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CancelEnrichmentJob(t *testing.T) {
+	input := &CancelEnrichmentJobInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		JobId:         ptr.String("__JobId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelEnrichmentJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelEnrichmentJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CancelPipelineExecution(t *testing.T) {
+	input := &CancelPipelineExecutionInput{
+		WorkspaceName:       ptr.String("__WorkspaceName__"),
+		PipelineName:        ptr.String("__PipelineName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+		Reason:              ptr.String("__Reason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelPipelineExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelPipelineExecution"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CancelQuery(t *testing.T) {
+	input := &CancelQueryInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		QueryId:       ptr.String("__QueryId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelQuery(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelQuery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateAccessPolicy(t *testing.T) {
 	input := &CreateAccessPolicyInput{
 		AccessPolicyIdentity: &types.Identity{
@@ -628,6 +877,40 @@ func TestCheckRequestSnapshot_CreateAccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAccessPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateApplication(t *testing.T) {
+	input := &CreateApplicationInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		IdcInstanceArn: ptr.String("__IdcInstanceArn__"),
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateApplication"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1691,11 +1974,43 @@ func TestCheckRequestSnapshot_CreateBulkImportJob(t *testing.T) {
 				Bucket:    ptr.String("__Bucket__"),
 				Key:       ptr.String("__Key__"),
 				VersionId: ptr.String("__VersionId__"),
+				Alias:     ptr.String("__Alias__"),
+				StartTime: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				FileFormat: &types.FileFormat{
+					Csv: &types.Csv{
+						ColumnNames: []types.ColumnName{
+							types.ColumnName("ALIAS"),
+							types.ColumnName("ALIAS"),
+						},
+					},
+					Parquet:    &types.Parquet{},
+					Mp4:        &types.Mp4{},
+					Annotation: &types.Annotation{},
+				},
 			},
 			{
 				Bucket:    ptr.String("__Bucket__"),
 				Key:       ptr.String("__Key__"),
 				VersionId: ptr.String("__VersionId__"),
+				Alias:     ptr.String("__Alias__"),
+				StartTime: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				FileFormat: &types.FileFormat{
+					Csv: &types.Csv{
+						ColumnNames: []types.ColumnName{
+							types.ColumnName("ALIAS"),
+							types.ColumnName("ALIAS"),
+						},
+					},
+					Parquet:    &types.Parquet{},
+					Mp4:        &types.Mp4{},
+					Annotation: &types.Annotation{},
+				},
 			},
 		},
 		ErrorReportLocation: &types.ErrorReportLocation{
@@ -1710,11 +2025,15 @@ func TestCheckRequestSnapshot_CreateBulkImportJob(t *testing.T) {
 						types.ColumnName("ALIAS"),
 					},
 				},
-				Parquet: &types.Parquet{},
+				Parquet:    &types.Parquet{},
+				Mp4:        &types.Mp4{},
+				Annotation: &types.Annotation{},
 			},
 		},
 		AdaptiveIngestion:      ptr.Bool(true),
 		DeleteFilesAfterImport: ptr.Bool(true),
+		DatasetId:              ptr.String("__DatasetId__"),
+		WorkspaceName:          ptr.String("__WorkspaceName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1832,6 +2151,23 @@ func TestCheckRequestSnapshot_CreateDataset(t *testing.T) {
 		DatasetId:          ptr.String("__DatasetId__"),
 		DatasetName:        ptr.String("__DatasetName__"),
 		DatasetDescription: ptr.String("__DatasetDescription__"),
+		DatasetType:        types.DatasetTypeEnum("SESSION"),
+		DatasetConfig: &types.DatasetConfig{
+			Session: &types.SessionConfig{
+				SessionStartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				SessionEndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+		},
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
 		DatasetSource: &types.DatasetSource{
 			SourceType:   types.DatasetSourceType("KENDRA"),
 			SourceFormat: types.DatasetSourceFormat("KNOWLEDGE_BASE"),
@@ -1866,6 +2202,125 @@ func TestCheckRequestSnapshot_CreateDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDataset"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateDatasetExportJob(t *testing.T) {
+	input := &CreateDatasetExportJobInput{
+		WorkspaceName:    ptr.String("__WorkspaceName__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		DestinationS3Uri: ptr.String("__DestinationS3Uri__"),
+		Input: &types.ProcessingInputMemberTimeseries{
+			Value: []types.TimeseriesItem{
+				{
+					TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+					PropertyAlias: ptr.String("__PropertyAlias__"),
+					TrimSettings: &types.TrimSettings{
+						StartTime: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+						EndTime: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+					},
+					FormatSettings: &types.FormatSettings{
+						FramesPerSecond: ptr.Int32(1),
+						WidthInPixels:   ptr.Int32(1),
+						HeightInPixels:  ptr.Int32(1),
+					},
+				},
+				{
+					TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+					PropertyAlias: ptr.String("__PropertyAlias__"),
+					TrimSettings: &types.TrimSettings{
+						StartTime: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+						EndTime: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+					},
+					FormatSettings: &types.FormatSettings{
+						FramesPerSecond: ptr.Int32(1),
+						WidthInPixels:   ptr.Int32(1),
+						HeightInPixels:  ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ErrorReportLocation: &types.ExportErrorReportLocation{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateDatasetExportJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDatasetExportJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateEnrichmentJob(t *testing.T) {
+	input := &CreateEnrichmentJobInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		JobConfiguration: &types.EnrichmentJobConfigurationMemberEventDetection{
+			Value: types.EventDetection{
+				DatasetId:     ptr.String("__DatasetId__"),
+				TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+				PropertyAlias: ptr.String("__PropertyAlias__"),
+				TrimSettings: &types.EnrichmentTrimSettings{
+					StartTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+					EndTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateEnrichmentJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateEnrichmentJob"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1909,6 +2364,66 @@ func TestCheckRequestSnapshot_CreateGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreatePipeline(t *testing.T) {
+	input := &CreatePipelineInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		PipelineName:  ptr.String("__PipelineName__"),
+		Description:   ptr.String("__Description__"),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		Computations: []types.ComputeNode{
+			{
+				ComputeNodeName: ptr.String("__ComputeNodeName__"),
+				TaskName:        ptr.String("__TaskName__"),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ComputeNodeName: ptr.String("__ComputeNodeName__"),
+				TaskName:        ptr.String("__TaskName__"),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreatePipeline(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePipeline"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1999,6 +2514,91 @@ func TestCheckRequestSnapshot_CreateProject(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateTask(t *testing.T) {
+	input := &CreateTaskInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		TaskName:      ptr.String("__TaskName__"),
+		Description:   ptr.String("__Description__"),
+		TaskConfiguration: &types.TaskConfigurationMemberContainerTaskConfiguration{
+			Value: types.ContainerTaskConfiguration{
+				EcrUri:            ptr.String("__EcrUri__"),
+				TaskExecutionRole: ptr.String("__TaskExecutionRole__"),
+				ProcessingType:    types.ProcessingType("GENERIC_COMPUTE_PROCESSING"),
+				ProcessingUnit:    types.ProcessingUnit("UNITS_2"),
+				Command: []string{
+					"__Member__",
+					"__Member__",
+				},
+				TimeoutSeconds: ptr.Int64(1),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateTask(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTask"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateWorkspace(t *testing.T) {
+	input := &CreateWorkspaceInput{
+		WorkspaceName:        ptr.String("__WorkspaceName__"),
+		WorkspaceDescription: ptr.String("__WorkspaceDescription__"),
+		EncryptionConfiguration: &types.WorkspaceEncryptionConfiguration{
+			EncryptionType: types.EncryptionType("SITEWISE_DEFAULT_ENCRYPTION"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateWorkspace(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateWorkspace"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteAccessPolicy(t *testing.T) {
 	input := &DeleteAccessPolicyInput{
 		AccessPolicyId: ptr.String("__AccessPolicyId__"),
@@ -2023,6 +2623,34 @@ func TestCheckRequestSnapshot_DeleteAccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAccessPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteApplication(t *testing.T) {
+	input := &DeleteApplicationInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Id:            ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteApplication"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2205,8 +2833,9 @@ func TestCheckRequestSnapshot_DeleteDashboard(t *testing.T) {
 
 func TestCheckRequestSnapshot_DeleteDataset(t *testing.T) {
 	input := &DeleteDatasetInput{
-		DatasetId:   ptr.String("__DatasetId__"),
-		ClientToken: ptr.String("__ClientToken__"),
+		DatasetId:     ptr.String("__DatasetId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2254,6 +2883,34 @@ func TestCheckRequestSnapshot_DeleteGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeletePipeline(t *testing.T) {
+	input := &DeletePipelineInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		PipelineName:  ptr.String("__PipelineName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeletePipeline(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePipeline"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2314,12 +2971,41 @@ func TestCheckRequestSnapshot_DeleteProject(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteTask(t *testing.T) {
+	input := &DeleteTaskInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		TaskName:      ptr.String("__TaskName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTask(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTask"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteTimeSeries(t *testing.T) {
 	input := &DeleteTimeSeriesInput{
-		Alias:       ptr.String("__Alias__"),
-		AssetId:     ptr.String("__AssetId__"),
-		PropertyId:  ptr.String("__PropertyId__"),
-		ClientToken: ptr.String("__ClientToken__"),
+		Alias:         ptr.String("__Alias__"),
+		AssetId:       ptr.String("__AssetId__"),
+		PropertyId:    ptr.String("__PropertyId__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2340,6 +3026,34 @@ func TestCheckRequestSnapshot_DeleteTimeSeries(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTimeSeries"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteWorkspace(t *testing.T) {
+	input := &DeleteWorkspaceInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteWorkspace(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteWorkspace"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2394,6 +3108,34 @@ func TestCheckRequestSnapshot_DescribeAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeApplication(t *testing.T) {
+	input := &DescribeApplicationInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Id:            ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeApplication"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2570,7 +3312,8 @@ func TestCheckRequestSnapshot_DescribeAssetProperty(t *testing.T) {
 
 func TestCheckRequestSnapshot_DescribeBulkImportJob(t *testing.T) {
 	input := &DescribeBulkImportJobInput{
-		JobId: ptr.String("__JobId__"),
+		JobId:         ptr.String("__JobId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2681,7 +3424,9 @@ func TestCheckRequestSnapshot_DescribeDashboard(t *testing.T) {
 
 func TestCheckRequestSnapshot_DescribeDataset(t *testing.T) {
 	input := &DescribeDatasetInput{
-		DatasetId: ptr.String("__DatasetId__"),
+		DatasetId:      ptr.String("__DatasetId__"),
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
+		DatasetVersion: ptr.String("__DatasetVersion__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2702,6 +3447,34 @@ func TestCheckRequestSnapshot_DescribeDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeDataset"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeDatasetExportJob(t *testing.T) {
+	input := &DescribeDatasetExportJobInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		JobId:         ptr.String("__JobId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeDatasetExportJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeDatasetExportJob"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2727,6 +3500,34 @@ func TestCheckRequestSnapshot_DescribeDefaultEncryptionConfiguration(t *testing.
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeDefaultEncryptionConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeEnrichmentJob(t *testing.T) {
+	input := &DescribeEnrichmentJobInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		JobId:         ptr.String("__JobId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeEnrichmentJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeEnrichmentJob"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2814,7 +3615,9 @@ func TestCheckRequestSnapshot_DescribeGatewayCapabilityConfiguration(t *testing.
 }
 
 func TestCheckRequestSnapshot_DescribeLoggingOptions(t *testing.T) {
-	input := &DescribeLoggingOptionsInput{}
+	input := &DescribeLoggingOptionsInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+	}
 	body := &bytes.Buffer{}
 	method := ""
 	rawPath := ""
@@ -2834,6 +3637,66 @@ func TestCheckRequestSnapshot_DescribeLoggingOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeLoggingOptions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribePipeline(t *testing.T) {
+	input := &DescribePipelineInput{
+		WorkspaceName:   ptr.String("__WorkspaceName__"),
+		PipelineName:    ptr.String("__PipelineName__"),
+		PipelineVersion: ptr.String("__PipelineVersion__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribePipeline(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribePipeline"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribePipelineExecution(t *testing.T) {
+	input := &DescribePipelineExecutionInput{
+		WorkspaceName:       ptr.String("__WorkspaceName__"),
+		PipelineName:        ptr.String("__PipelineName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribePipelineExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribePipelineExecution"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2892,6 +3755,62 @@ func TestCheckRequestSnapshot_DescribeProject(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeQuery(t *testing.T) {
+	input := &DescribeQueryInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		QueryId:       ptr.String("__QueryId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeQuery(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeQuery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeSearch(t *testing.T) {
+	input := &DescribeSearchInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		SearchId:      ptr.String("__SearchId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeSearch(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeSearch"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeStorageConfiguration(t *testing.T) {
 	input := &DescribeStorageConfigurationInput{}
 	body := &bytes.Buffer{}
@@ -2917,11 +3836,41 @@ func TestCheckRequestSnapshot_DescribeStorageConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeTask(t *testing.T) {
+	input := &DescribeTaskInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		TaskName:      ptr.String("__TaskName__"),
+		TaskVersion:   ptr.String("__TaskVersion__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTask(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTask"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeTimeSeries(t *testing.T) {
 	input := &DescribeTimeSeriesInput{
-		Alias:      ptr.String("__Alias__"),
-		AssetId:    ptr.String("__AssetId__"),
-		PropertyId: ptr.String("__PropertyId__"),
+		Alias:         ptr.String("__Alias__"),
+		AssetId:       ptr.String("__AssetId__"),
+		PropertyId:    ptr.String("__PropertyId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2942,6 +3891,33 @@ func TestCheckRequestSnapshot_DescribeTimeSeries(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTimeSeries"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeWorkspace(t *testing.T) {
+	input := &DescribeWorkspaceInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeWorkspace(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeWorkspace"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3184,6 +4160,49 @@ func TestCheckRequestSnapshot_GetAssetPropertyValueHistory(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetCaptureData(t *testing.T) {
+	input := &GetCaptureDataInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		StartTime: &types.TimeInNanos{
+			TimeInSeconds: ptr.Int64(1),
+			OffsetInNanos: ptr.Int32(1),
+		},
+		EndTime: &types.TimeInNanos{
+			TimeInSeconds: ptr.Int64(1),
+			OffsetInNanos: ptr.Int32(1),
+		},
+		TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+		PropertyAlias: ptr.String("__PropertyAlias__"),
+		FormatSettings: &types.FormatSettings{
+			FramesPerSecond: ptr.Int32(1),
+			WidthInPixels:   ptr.Int32(1),
+			HeightInPixels:  ptr.Int32(1),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetCaptureData(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCaptureData"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetInterpolatedAssetPropertyValues(t *testing.T) {
 	input := &GetInterpolatedAssetPropertyValuesInput{
 		AssetId:                 ptr.String("__AssetId__"),
@@ -3219,6 +4238,66 @@ func TestCheckRequestSnapshot_GetInterpolatedAssetPropertyValues(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetInterpolatedAssetPropertyValues"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetQueryResults(t *testing.T) {
+	input := &GetQueryResultsInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		QueryId:       ptr.String("__QueryId__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetQueryResults(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetQueryResults"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetSearchResults(t *testing.T) {
+	input := &GetSearchResultsInput{
+		SearchId:      ptr.String("__SearchId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSearchResults(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSearchResults"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3284,6 +4363,34 @@ func TestCheckRequestSnapshot_ListActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListActions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListApplications(t *testing.T) {
+	input := &ListApplicationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListApplications(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListApplications"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3505,9 +4612,10 @@ func TestCheckRequestSnapshot_ListAssociatedAssets(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListBulkImportJobs(t *testing.T) {
 	input := &ListBulkImportJobsInput{
-		NextToken:  ptr.String("__NextToken__"),
-		MaxResults: ptr.Int32(1),
-		Filter:     types.ListBulkImportJobsFilter("ALL"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		Filter:        types.ListBulkImportJobsFilter("ALL"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3692,11 +4800,104 @@ func TestCheckRequestSnapshot_ListDashboards(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListDatasetDataSegmentRelationships(t *testing.T) {
+	input := &ListDatasetDataSegmentRelationshipsInput{
+		DatasetId:     ptr.String("__DatasetId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDatasetDataSegmentRelationships(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasetDataSegmentRelationships"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListDatasetDataSegments(t *testing.T) {
+	input := &ListDatasetDataSegmentsInput{
+		DatasetId:      ptr.String("__DatasetId__"),
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
+		DatasetVersion: ptr.String("__DatasetVersion__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDatasetDataSegments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasetDataSegments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListDatasetExportJobs(t *testing.T) {
+	input := &ListDatasetExportJobsInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Filter:        types.DatasetExportJobFilter("ALL"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDatasetExportJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasetExportJobs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListDatasets(t *testing.T) {
 	input := &ListDatasetsInput{
-		SourceType: types.DatasetSourceType("KENDRA"),
-		NextToken:  ptr.String("__NextToken__"),
-		MaxResults: ptr.Int32(1),
+		SourceType:    types.DatasetSourceType("KENDRA"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		DatasetType:   types.DatasetTypeEnum("SESSION"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3717,6 +4918,42 @@ func TestCheckRequestSnapshot_ListDatasets(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasets"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListEnrichmentJobs(t *testing.T) {
+	input := &ListEnrichmentJobsInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		DatasetId:     ptr.String("__DatasetId__"),
+		PropertyAlias: ptr.String("__PropertyAlias__"),
+		TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+		Status:        types.EnrichmentJobStatus("PENDING"),
+		JobType:       types.JobType("EVENT_DETECTION"),
+		StartDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListEnrichmentJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEnrichmentJobs"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3811,6 +5048,70 @@ func TestCheckRequestSnapshot_ListInterfaceRelationships(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListPipelineExecutions(t *testing.T) {
+	input := &ListPipelineExecutionsInput{
+		WorkspaceName:   ptr.String("__WorkspaceName__"),
+		PipelineName:    ptr.String("__PipelineName__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		State:           types.PipelineExecutionState("NOT_STARTED"),
+		StartTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StartTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTimeAfter:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTimeBefore:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListPipelineExecutions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPipelineExecutions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListPipelines(t *testing.T) {
+	input := &ListPipelinesInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListPipelines(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPipelines"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListPortals(t *testing.T) {
 	input := &ListPortalsInput{
 		NextToken:  ptr.String("__NextToken__"),
@@ -3897,6 +5198,81 @@ func TestCheckRequestSnapshot_ListProjects(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListQueries(t *testing.T) {
+	input := &ListQueriesInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Filter:        ptr.String("__Filter__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListQueries(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListQueries"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListSearches(t *testing.T) {
+	input := &ListSearchesInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		ListSearchesFilters: &types.ListSearchesFilters{
+			StatusFilter: []types.SearchStatus{
+				types.SearchStatus("QUEUED"),
+				types.SearchStatus("QUEUED"),
+			},
+			StartedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StartedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			GroupIdFilter: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SearchTypeFilter: []types.SearchType{
+				types.SearchType("DEEP"),
+				types.SearchType("DEEP"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSearches(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSearches"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 	input := &ListTagsForResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -3924,6 +5300,35 @@ func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListTasks(t *testing.T) {
+	input := &ListTasksInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTasks(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTasks"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListTimeSeries(t *testing.T) {
 	input := &ListTimeSeriesInput{
 		NextToken:      ptr.String("__NextToken__"),
@@ -3931,6 +5336,7 @@ func TestCheckRequestSnapshot_ListTimeSeries(t *testing.T) {
 		AssetId:        ptr.String("__AssetId__"),
 		AliasPrefix:    ptr.String("__AliasPrefix__"),
 		TimeSeriesType: types.ListTimeSeriesType("ASSOCIATED"),
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3951,6 +5357,34 @@ func TestCheckRequestSnapshot_ListTimeSeries(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTimeSeries"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListWorkspaces(t *testing.T) {
+	input := &ListWorkspacesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListWorkspaces(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListWorkspaces"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4031,6 +5465,7 @@ func TestCheckRequestSnapshot_PutLoggingOptions(t *testing.T) {
 		LoggingOptions: &types.LoggingOptions{
 			Level: types.LoggingLevel("ERROR"),
 		},
+		WorkspaceName: ptr.String("__WorkspaceName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4095,6 +5530,138 @@ func TestCheckRequestSnapshot_PutStorageConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutStorageConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartPipelineExecution(t *testing.T) {
+	input := &StartPipelineExecutionInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		PipelineName:  ptr.String("__PipelineName__"),
+		ExecutionEnvironmentVariableOverrides: &types.ExecutionEnvironmentVariables{
+			Global: map[string]string{
+				"key0": "__Value__",
+			},
+			ComputeNodes: map[string]map[string]string{
+				"key0": {
+					"key0": "__Value__",
+				},
+			},
+		},
+		ExecutionPriority: ptr.Int32(1),
+		ClientToken:       ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartPipelineExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartPipelineExecution"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartQuery(t *testing.T) {
+	input := &StartQueryInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
+		QueryStatement: ptr.String("__QueryStatement__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartQuery(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartQuery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartSearch(t *testing.T) {
+	input := &StartSearchInput{
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
+		QueryStatement: ptr.String("__QueryStatement__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		SearchType:     types.SearchType("DEEP"),
+		SearchFilters: &types.SearchFilters{
+			TimeSeriesIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			DatasetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TimeIntervals: []types.TimeInterval{
+				{
+					StartTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+					EndTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+				},
+				{
+					StartTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+					EndTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+				},
+			},
+		},
+		GroupId: ptr.String("__GroupId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartSearch(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartSearch"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5451,8 +7018,24 @@ func TestCheckRequestSnapshot_UpdateDashboard(t *testing.T) {
 func TestCheckRequestSnapshot_UpdateDataset(t *testing.T) {
 	input := &UpdateDatasetInput{
 		DatasetId:          ptr.String("__DatasetId__"),
+		WorkspaceName:      ptr.String("__WorkspaceName__"),
 		DatasetName:        ptr.String("__DatasetName__"),
 		DatasetDescription: ptr.String("__DatasetDescription__"),
+		DatasetConfig: &types.DatasetConfig{
+			Session: &types.SessionConfig{
+				SessionStartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				SessionEndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+		},
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
 		DatasetSource: &types.DatasetSource{
 			SourceType:   types.DatasetSourceType("KENDRA"),
 			SourceFormat: types.DatasetSourceFormat("KNOWLEDGE_BASE"),
@@ -5545,6 +7128,62 @@ func TestCheckRequestSnapshot_UpdateGatewayCapabilityConfiguration(t *testing.T)
 	}
 }
 
+func TestCheckRequestSnapshot_UpdatePipeline(t *testing.T) {
+	input := &UpdatePipelineInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		PipelineName:  ptr.String("__PipelineName__"),
+		Description:   ptr.String("__Description__"),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		Computations: []types.ComputeNode{
+			{
+				ComputeNodeName: ptr.String("__ComputeNodeName__"),
+				TaskName:        ptr.String("__TaskName__"),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ComputeNodeName: ptr.String("__ComputeNodeName__"),
+				TaskName:        ptr.String("__TaskName__"),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdatePipeline(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdatePipeline"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdatePortal(t *testing.T) {
 	input := &UpdatePortalInput{
 		PortalId:           ptr.String("__PortalId__"),
@@ -5627,6 +7266,84 @@ func TestCheckRequestSnapshot_UpdateProject(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckRequestSnapshot_UpdateTask(t *testing.T) {
+	input := &UpdateTaskInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		TaskName:      ptr.String("__TaskName__"),
+		Description:   ptr.String("__Description__"),
+		TaskConfiguration: &types.TaskConfigurationMemberContainerTaskConfiguration{
+			Value: types.ContainerTaskConfiguration{
+				EcrUri:            ptr.String("__EcrUri__"),
+				TaskExecutionRole: ptr.String("__TaskExecutionRole__"),
+				ProcessingType:    types.ProcessingType("GENERIC_COMPUTE_PROCESSING"),
+				ProcessingUnit:    types.ProcessingUnit("UNITS_2"),
+				Command: []string{
+					"__Member__",
+					"__Member__",
+				},
+				TimeoutSeconds: ptr.Int64(1),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateTask(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateTask"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateWorkspace(t *testing.T) {
+	input := &UpdateWorkspaceInput{
+		WorkspaceName:        ptr.String("__WorkspaceName__"),
+		WorkspaceDescription: ptr.String("__WorkspaceDescription__"),
+		EncryptionConfiguration: &types.WorkspaceEncryptionConfiguration{
+			EncryptionType: types.EncryptionType("SITEWISE_DEFAULT_ENCRYPTION"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateWorkspace(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateWorkspace"); err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateRequestSnapshot_AssociateAssets(t *testing.T) {
 	input := &AssociateAssetsInput{
 		AssetId:      ptr.String("__AssetId__"),
@@ -5687,6 +7404,61 @@ func TestUpdateRequestSnapshot_AssociateTimeSeriesToAssetProperty(t *testing.T) 
 	}
 }
 
+func TestUpdateRequestSnapshot_BatchAssociateDataSegmentsToDataset(t *testing.T) {
+	input := &BatchAssociateDataSegmentsToDatasetInput{
+		DatasetId:     ptr.String("__DatasetId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		AssociateDataSegmentEntries: []types.AssociateDataSegmentEntry{
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchAssociateDataSegmentsToDataset(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchAssociateDataSegmentsToDataset"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_BatchAssociateProjectAssets(t *testing.T) {
 	input := &BatchAssociateProjectAssetsInput{
 		ProjectId: ptr.String("__ProjectId__"),
@@ -5715,6 +7487,114 @@ func TestUpdateRequestSnapshot_BatchAssociateProjectAssets(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchAssociateProjectAssets"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_BatchDeleteDatasetDataSegments(t *testing.T) {
+	input := &BatchDeleteDatasetDataSegmentsInput{
+		DatasetId:     ptr.String("__DatasetId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		DeleteDataSegmentEntries: []types.DeleteDataSegmentEntry{
+			{
+				TimeSeriesId: ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+			{
+				TimeSeriesId: ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchDeleteDatasetDataSegments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchDeleteDatasetDataSegments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_BatchDisassociateDataSegmentsFromDataset(t *testing.T) {
+	input := &BatchDisassociateDataSegmentsFromDatasetInput{
+		DatasetId:     ptr.String("__DatasetId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		DisassociateDataSegmentEntries: []types.DisassociateDataSegmentEntry{
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+			{
+				SourceDatasetId: ptr.String("__SourceDatasetId__"),
+				TimeSeriesId:    ptr.String("__TimeSeriesId__"),
+				StartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				EndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchDisassociateDataSegmentsFromDataset(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchDisassociateDataSegmentsFromDataset"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6023,6 +7903,92 @@ func TestUpdateRequestSnapshot_BatchPutAssetPropertyValue(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CancelEnrichmentJob(t *testing.T) {
+	input := &CancelEnrichmentJobInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		JobId:         ptr.String("__JobId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelEnrichmentJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelEnrichmentJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CancelPipelineExecution(t *testing.T) {
+	input := &CancelPipelineExecutionInput{
+		WorkspaceName:       ptr.String("__WorkspaceName__"),
+		PipelineName:        ptr.String("__PipelineName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+		Reason:              ptr.String("__Reason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelPipelineExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelPipelineExecution"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CancelQuery(t *testing.T) {
+	input := &CancelQueryInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		QueryId:       ptr.String("__QueryId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelQuery(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelQuery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateAccessPolicy(t *testing.T) {
 	input := &CreateAccessPolicyInput{
 		AccessPolicyIdentity: &types.Identity{
@@ -6072,6 +8038,40 @@ func TestUpdateRequestSnapshot_CreateAccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAccessPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateApplication(t *testing.T) {
+	input := &CreateApplicationInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		IdcInstanceArn: ptr.String("__IdcInstanceArn__"),
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateApplication"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7135,11 +9135,43 @@ func TestUpdateRequestSnapshot_CreateBulkImportJob(t *testing.T) {
 				Bucket:    ptr.String("__Bucket__"),
 				Key:       ptr.String("__Key__"),
 				VersionId: ptr.String("__VersionId__"),
+				Alias:     ptr.String("__Alias__"),
+				StartTime: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				FileFormat: &types.FileFormat{
+					Csv: &types.Csv{
+						ColumnNames: []types.ColumnName{
+							types.ColumnName("ALIAS"),
+							types.ColumnName("ALIAS"),
+						},
+					},
+					Parquet:    &types.Parquet{},
+					Mp4:        &types.Mp4{},
+					Annotation: &types.Annotation{},
+				},
 			},
 			{
 				Bucket:    ptr.String("__Bucket__"),
 				Key:       ptr.String("__Key__"),
 				VersionId: ptr.String("__VersionId__"),
+				Alias:     ptr.String("__Alias__"),
+				StartTime: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				FileFormat: &types.FileFormat{
+					Csv: &types.Csv{
+						ColumnNames: []types.ColumnName{
+							types.ColumnName("ALIAS"),
+							types.ColumnName("ALIAS"),
+						},
+					},
+					Parquet:    &types.Parquet{},
+					Mp4:        &types.Mp4{},
+					Annotation: &types.Annotation{},
+				},
 			},
 		},
 		ErrorReportLocation: &types.ErrorReportLocation{
@@ -7154,11 +9186,15 @@ func TestUpdateRequestSnapshot_CreateBulkImportJob(t *testing.T) {
 						types.ColumnName("ALIAS"),
 					},
 				},
-				Parquet: &types.Parquet{},
+				Parquet:    &types.Parquet{},
+				Mp4:        &types.Mp4{},
+				Annotation: &types.Annotation{},
 			},
 		},
 		AdaptiveIngestion:      ptr.Bool(true),
 		DeleteFilesAfterImport: ptr.Bool(true),
+		DatasetId:              ptr.String("__DatasetId__"),
+		WorkspaceName:          ptr.String("__WorkspaceName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7276,6 +9312,23 @@ func TestUpdateRequestSnapshot_CreateDataset(t *testing.T) {
 		DatasetId:          ptr.String("__DatasetId__"),
 		DatasetName:        ptr.String("__DatasetName__"),
 		DatasetDescription: ptr.String("__DatasetDescription__"),
+		DatasetType:        types.DatasetTypeEnum("SESSION"),
+		DatasetConfig: &types.DatasetConfig{
+			Session: &types.SessionConfig{
+				SessionStartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				SessionEndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+		},
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
 		DatasetSource: &types.DatasetSource{
 			SourceType:   types.DatasetSourceType("KENDRA"),
 			SourceFormat: types.DatasetSourceFormat("KNOWLEDGE_BASE"),
@@ -7310,6 +9363,125 @@ func TestUpdateRequestSnapshot_CreateDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDataset"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateDatasetExportJob(t *testing.T) {
+	input := &CreateDatasetExportJobInput{
+		WorkspaceName:    ptr.String("__WorkspaceName__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		DestinationS3Uri: ptr.String("__DestinationS3Uri__"),
+		Input: &types.ProcessingInputMemberTimeseries{
+			Value: []types.TimeseriesItem{
+				{
+					TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+					PropertyAlias: ptr.String("__PropertyAlias__"),
+					TrimSettings: &types.TrimSettings{
+						StartTime: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+						EndTime: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+					},
+					FormatSettings: &types.FormatSettings{
+						FramesPerSecond: ptr.Int32(1),
+						WidthInPixels:   ptr.Int32(1),
+						HeightInPixels:  ptr.Int32(1),
+					},
+				},
+				{
+					TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+					PropertyAlias: ptr.String("__PropertyAlias__"),
+					TrimSettings: &types.TrimSettings{
+						StartTime: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+						EndTime: &types.TimeInNanos{
+							TimeInSeconds: ptr.Int64(1),
+							OffsetInNanos: ptr.Int32(1),
+						},
+					},
+					FormatSettings: &types.FormatSettings{
+						FramesPerSecond: ptr.Int32(1),
+						WidthInPixels:   ptr.Int32(1),
+						HeightInPixels:  ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ErrorReportLocation: &types.ExportErrorReportLocation{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateDatasetExportJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateDatasetExportJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateEnrichmentJob(t *testing.T) {
+	input := &CreateEnrichmentJobInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		JobConfiguration: &types.EnrichmentJobConfigurationMemberEventDetection{
+			Value: types.EventDetection{
+				DatasetId:     ptr.String("__DatasetId__"),
+				TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+				PropertyAlias: ptr.String("__PropertyAlias__"),
+				TrimSettings: &types.EnrichmentTrimSettings{
+					StartTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+					EndTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateEnrichmentJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateEnrichmentJob"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7353,6 +9525,66 @@ func TestUpdateRequestSnapshot_CreateGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreatePipeline(t *testing.T) {
+	input := &CreatePipelineInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		PipelineName:  ptr.String("__PipelineName__"),
+		Description:   ptr.String("__Description__"),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		Computations: []types.ComputeNode{
+			{
+				ComputeNodeName: ptr.String("__ComputeNodeName__"),
+				TaskName:        ptr.String("__TaskName__"),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ComputeNodeName: ptr.String("__ComputeNodeName__"),
+				TaskName:        ptr.String("__TaskName__"),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreatePipeline(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePipeline"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7443,6 +9675,91 @@ func TestUpdateRequestSnapshot_CreateProject(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateTask(t *testing.T) {
+	input := &CreateTaskInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		TaskName:      ptr.String("__TaskName__"),
+		Description:   ptr.String("__Description__"),
+		TaskConfiguration: &types.TaskConfigurationMemberContainerTaskConfiguration{
+			Value: types.ContainerTaskConfiguration{
+				EcrUri:            ptr.String("__EcrUri__"),
+				TaskExecutionRole: ptr.String("__TaskExecutionRole__"),
+				ProcessingType:    types.ProcessingType("GENERIC_COMPUTE_PROCESSING"),
+				ProcessingUnit:    types.ProcessingUnit("UNITS_2"),
+				Command: []string{
+					"__Member__",
+					"__Member__",
+				},
+				TimeoutSeconds: ptr.Int64(1),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateTask(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTask"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateWorkspace(t *testing.T) {
+	input := &CreateWorkspaceInput{
+		WorkspaceName:        ptr.String("__WorkspaceName__"),
+		WorkspaceDescription: ptr.String("__WorkspaceDescription__"),
+		EncryptionConfiguration: &types.WorkspaceEncryptionConfiguration{
+			EncryptionType: types.EncryptionType("SITEWISE_DEFAULT_ENCRYPTION"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateWorkspace(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateWorkspace"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteAccessPolicy(t *testing.T) {
 	input := &DeleteAccessPolicyInput{
 		AccessPolicyId: ptr.String("__AccessPolicyId__"),
@@ -7467,6 +9784,34 @@ func TestUpdateRequestSnapshot_DeleteAccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAccessPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteApplication(t *testing.T) {
+	input := &DeleteApplicationInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Id:            ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteApplication"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7649,8 +9994,9 @@ func TestUpdateRequestSnapshot_DeleteDashboard(t *testing.T) {
 
 func TestUpdateRequestSnapshot_DeleteDataset(t *testing.T) {
 	input := &DeleteDatasetInput{
-		DatasetId:   ptr.String("__DatasetId__"),
-		ClientToken: ptr.String("__ClientToken__"),
+		DatasetId:     ptr.String("__DatasetId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7698,6 +10044,34 @@ func TestUpdateRequestSnapshot_DeleteGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeletePipeline(t *testing.T) {
+	input := &DeletePipelineInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		PipelineName:  ptr.String("__PipelineName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeletePipeline(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePipeline"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7758,12 +10132,41 @@ func TestUpdateRequestSnapshot_DeleteProject(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteTask(t *testing.T) {
+	input := &DeleteTaskInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		TaskName:      ptr.String("__TaskName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTask(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTask"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteTimeSeries(t *testing.T) {
 	input := &DeleteTimeSeriesInput{
-		Alias:       ptr.String("__Alias__"),
-		AssetId:     ptr.String("__AssetId__"),
-		PropertyId:  ptr.String("__PropertyId__"),
-		ClientToken: ptr.String("__ClientToken__"),
+		Alias:         ptr.String("__Alias__"),
+		AssetId:       ptr.String("__AssetId__"),
+		PropertyId:    ptr.String("__PropertyId__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7784,6 +10187,34 @@ func TestUpdateRequestSnapshot_DeleteTimeSeries(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTimeSeries"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteWorkspace(t *testing.T) {
+	input := &DeleteWorkspaceInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteWorkspace(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteWorkspace"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7838,6 +10269,34 @@ func TestUpdateRequestSnapshot_DescribeAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeApplication(t *testing.T) {
+	input := &DescribeApplicationInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Id:            ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeApplication"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8014,7 +10473,8 @@ func TestUpdateRequestSnapshot_DescribeAssetProperty(t *testing.T) {
 
 func TestUpdateRequestSnapshot_DescribeBulkImportJob(t *testing.T) {
 	input := &DescribeBulkImportJobInput{
-		JobId: ptr.String("__JobId__"),
+		JobId:         ptr.String("__JobId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8125,7 +10585,9 @@ func TestUpdateRequestSnapshot_DescribeDashboard(t *testing.T) {
 
 func TestUpdateRequestSnapshot_DescribeDataset(t *testing.T) {
 	input := &DescribeDatasetInput{
-		DatasetId: ptr.String("__DatasetId__"),
+		DatasetId:      ptr.String("__DatasetId__"),
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
+		DatasetVersion: ptr.String("__DatasetVersion__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8146,6 +10608,34 @@ func TestUpdateRequestSnapshot_DescribeDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeDataset"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeDatasetExportJob(t *testing.T) {
+	input := &DescribeDatasetExportJobInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		JobId:         ptr.String("__JobId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeDatasetExportJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeDatasetExportJob"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8171,6 +10661,34 @@ func TestUpdateRequestSnapshot_DescribeDefaultEncryptionConfiguration(t *testing
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeDefaultEncryptionConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeEnrichmentJob(t *testing.T) {
+	input := &DescribeEnrichmentJobInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		JobId:         ptr.String("__JobId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeEnrichmentJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeEnrichmentJob"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8258,7 +10776,9 @@ func TestUpdateRequestSnapshot_DescribeGatewayCapabilityConfiguration(t *testing
 }
 
 func TestUpdateRequestSnapshot_DescribeLoggingOptions(t *testing.T) {
-	input := &DescribeLoggingOptionsInput{}
+	input := &DescribeLoggingOptionsInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+	}
 	body := &bytes.Buffer{}
 	method := ""
 	rawPath := ""
@@ -8278,6 +10798,66 @@ func TestUpdateRequestSnapshot_DescribeLoggingOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeLoggingOptions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribePipeline(t *testing.T) {
+	input := &DescribePipelineInput{
+		WorkspaceName:   ptr.String("__WorkspaceName__"),
+		PipelineName:    ptr.String("__PipelineName__"),
+		PipelineVersion: ptr.String("__PipelineVersion__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribePipeline(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribePipeline"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribePipelineExecution(t *testing.T) {
+	input := &DescribePipelineExecutionInput{
+		WorkspaceName:       ptr.String("__WorkspaceName__"),
+		PipelineName:        ptr.String("__PipelineName__"),
+		PipelineExecutionId: ptr.String("__PipelineExecutionId__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribePipelineExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribePipelineExecution"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8336,6 +10916,62 @@ func TestUpdateRequestSnapshot_DescribeProject(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeQuery(t *testing.T) {
+	input := &DescribeQueryInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		QueryId:       ptr.String("__QueryId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeQuery(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeQuery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeSearch(t *testing.T) {
+	input := &DescribeSearchInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		SearchId:      ptr.String("__SearchId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeSearch(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeSearch"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeStorageConfiguration(t *testing.T) {
 	input := &DescribeStorageConfigurationInput{}
 	body := &bytes.Buffer{}
@@ -8361,11 +10997,41 @@ func TestUpdateRequestSnapshot_DescribeStorageConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeTask(t *testing.T) {
+	input := &DescribeTaskInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		TaskName:      ptr.String("__TaskName__"),
+		TaskVersion:   ptr.String("__TaskVersion__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTask(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTask"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeTimeSeries(t *testing.T) {
 	input := &DescribeTimeSeriesInput{
-		Alias:      ptr.String("__Alias__"),
-		AssetId:    ptr.String("__AssetId__"),
-		PropertyId: ptr.String("__PropertyId__"),
+		Alias:         ptr.String("__Alias__"),
+		AssetId:       ptr.String("__AssetId__"),
+		PropertyId:    ptr.String("__PropertyId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8386,6 +11052,33 @@ func TestUpdateRequestSnapshot_DescribeTimeSeries(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTimeSeries"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeWorkspace(t *testing.T) {
+	input := &DescribeWorkspaceInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeWorkspace(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeWorkspace"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8628,6 +11321,49 @@ func TestUpdateRequestSnapshot_GetAssetPropertyValueHistory(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetCaptureData(t *testing.T) {
+	input := &GetCaptureDataInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		StartTime: &types.TimeInNanos{
+			TimeInSeconds: ptr.Int64(1),
+			OffsetInNanos: ptr.Int32(1),
+		},
+		EndTime: &types.TimeInNanos{
+			TimeInSeconds: ptr.Int64(1),
+			OffsetInNanos: ptr.Int32(1),
+		},
+		TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+		PropertyAlias: ptr.String("__PropertyAlias__"),
+		FormatSettings: &types.FormatSettings{
+			FramesPerSecond: ptr.Int32(1),
+			WidthInPixels:   ptr.Int32(1),
+			HeightInPixels:  ptr.Int32(1),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetCaptureData(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCaptureData"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetInterpolatedAssetPropertyValues(t *testing.T) {
 	input := &GetInterpolatedAssetPropertyValuesInput{
 		AssetId:                 ptr.String("__AssetId__"),
@@ -8663,6 +11399,66 @@ func TestUpdateRequestSnapshot_GetInterpolatedAssetPropertyValues(t *testing.T) 
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetInterpolatedAssetPropertyValues"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetQueryResults(t *testing.T) {
+	input := &GetQueryResultsInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		QueryId:       ptr.String("__QueryId__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetQueryResults(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetQueryResults"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetSearchResults(t *testing.T) {
+	input := &GetSearchResultsInput{
+		SearchId:      ptr.String("__SearchId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSearchResults(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSearchResults"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8728,6 +11524,34 @@ func TestUpdateRequestSnapshot_ListActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListActions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListApplications(t *testing.T) {
+	input := &ListApplicationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListApplications(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListApplications"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8949,9 +11773,10 @@ func TestUpdateRequestSnapshot_ListAssociatedAssets(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListBulkImportJobs(t *testing.T) {
 	input := &ListBulkImportJobsInput{
-		NextToken:  ptr.String("__NextToken__"),
-		MaxResults: ptr.Int32(1),
-		Filter:     types.ListBulkImportJobsFilter("ALL"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		Filter:        types.ListBulkImportJobsFilter("ALL"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9136,11 +11961,104 @@ func TestUpdateRequestSnapshot_ListDashboards(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListDatasetDataSegmentRelationships(t *testing.T) {
+	input := &ListDatasetDataSegmentRelationshipsInput{
+		DatasetId:     ptr.String("__DatasetId__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDatasetDataSegmentRelationships(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasetDataSegmentRelationships"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListDatasetDataSegments(t *testing.T) {
+	input := &ListDatasetDataSegmentsInput{
+		DatasetId:      ptr.String("__DatasetId__"),
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
+		DatasetVersion: ptr.String("__DatasetVersion__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDatasetDataSegments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasetDataSegments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListDatasetExportJobs(t *testing.T) {
+	input := &ListDatasetExportJobsInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Filter:        types.DatasetExportJobFilter("ALL"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDatasetExportJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasetExportJobs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListDatasets(t *testing.T) {
 	input := &ListDatasetsInput{
-		SourceType: types.DatasetSourceType("KENDRA"),
-		NextToken:  ptr.String("__NextToken__"),
-		MaxResults: ptr.Int32(1),
+		SourceType:    types.DatasetSourceType("KENDRA"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		DatasetType:   types.DatasetTypeEnum("SESSION"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9161,6 +12079,42 @@ func TestUpdateRequestSnapshot_ListDatasets(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasets"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListEnrichmentJobs(t *testing.T) {
+	input := &ListEnrichmentJobsInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		DatasetId:     ptr.String("__DatasetId__"),
+		PropertyAlias: ptr.String("__PropertyAlias__"),
+		TimeSeriesId:  ptr.String("__TimeSeriesId__"),
+		Status:        types.EnrichmentJobStatus("PENDING"),
+		JobType:       types.JobType("EVENT_DETECTION"),
+		StartDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndDate:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListEnrichmentJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEnrichmentJobs"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -9255,6 +12209,70 @@ func TestUpdateRequestSnapshot_ListInterfaceRelationships(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListPipelineExecutions(t *testing.T) {
+	input := &ListPipelineExecutionsInput{
+		WorkspaceName:   ptr.String("__WorkspaceName__"),
+		PipelineName:    ptr.String("__PipelineName__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		State:           types.PipelineExecutionState("NOT_STARTED"),
+		StartTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StartTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTimeAfter:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTimeBefore:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListPipelineExecutions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPipelineExecutions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListPipelines(t *testing.T) {
+	input := &ListPipelinesInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListPipelines(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPipelines"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListPortals(t *testing.T) {
 	input := &ListPortalsInput{
 		NextToken:  ptr.String("__NextToken__"),
@@ -9341,6 +12359,81 @@ func TestUpdateRequestSnapshot_ListProjects(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListQueries(t *testing.T) {
+	input := &ListQueriesInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		Filter:        ptr.String("__Filter__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListQueries(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListQueries"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListSearches(t *testing.T) {
+	input := &ListSearchesInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		ListSearchesFilters: &types.ListSearchesFilters{
+			StatusFilter: []types.SearchStatus{
+				types.SearchStatus("QUEUED"),
+				types.SearchStatus("QUEUED"),
+			},
+			StartedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StartedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			GroupIdFilter: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SearchTypeFilter: []types.SearchType{
+				types.SearchType("DEEP"),
+				types.SearchType("DEEP"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSearches(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSearches"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 	input := &ListTagsForResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -9368,6 +12461,35 @@ func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListTasks(t *testing.T) {
+	input := &ListTasksInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTasks(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTasks"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListTimeSeries(t *testing.T) {
 	input := &ListTimeSeriesInput{
 		NextToken:      ptr.String("__NextToken__"),
@@ -9375,6 +12497,7 @@ func TestUpdateRequestSnapshot_ListTimeSeries(t *testing.T) {
 		AssetId:        ptr.String("__AssetId__"),
 		AliasPrefix:    ptr.String("__AliasPrefix__"),
 		TimeSeriesType: types.ListTimeSeriesType("ASSOCIATED"),
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9395,6 +12518,34 @@ func TestUpdateRequestSnapshot_ListTimeSeries(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTimeSeries"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListWorkspaces(t *testing.T) {
+	input := &ListWorkspacesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListWorkspaces(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListWorkspaces"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -9475,6 +12626,7 @@ func TestUpdateRequestSnapshot_PutLoggingOptions(t *testing.T) {
 		LoggingOptions: &types.LoggingOptions{
 			Level: types.LoggingLevel("ERROR"),
 		},
+		WorkspaceName: ptr.String("__WorkspaceName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9539,6 +12691,138 @@ func TestUpdateRequestSnapshot_PutStorageConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutStorageConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartPipelineExecution(t *testing.T) {
+	input := &StartPipelineExecutionInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		PipelineName:  ptr.String("__PipelineName__"),
+		ExecutionEnvironmentVariableOverrides: &types.ExecutionEnvironmentVariables{
+			Global: map[string]string{
+				"key0": "__Value__",
+			},
+			ComputeNodes: map[string]map[string]string{
+				"key0": {
+					"key0": "__Value__",
+				},
+			},
+		},
+		ExecutionPriority: ptr.Int32(1),
+		ClientToken:       ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartPipelineExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartPipelineExecution"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartQuery(t *testing.T) {
+	input := &StartQueryInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
+		QueryStatement: ptr.String("__QueryStatement__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartQuery(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartQuery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartSearch(t *testing.T) {
+	input := &StartSearchInput{
+		WorkspaceName:  ptr.String("__WorkspaceName__"),
+		QueryStatement: ptr.String("__QueryStatement__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		SearchType:     types.SearchType("DEEP"),
+		SearchFilters: &types.SearchFilters{
+			TimeSeriesIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			DatasetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TimeIntervals: []types.TimeInterval{
+				{
+					StartTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+					EndTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+				},
+				{
+					StartTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+					EndTime: &types.TimeInNanos{
+						TimeInSeconds: ptr.Int64(1),
+						OffsetInNanos: ptr.Int32(1),
+					},
+				},
+			},
+		},
+		GroupId: ptr.String("__GroupId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartSearch(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartSearch"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -10895,8 +14179,24 @@ func TestUpdateRequestSnapshot_UpdateDashboard(t *testing.T) {
 func TestUpdateRequestSnapshot_UpdateDataset(t *testing.T) {
 	input := &UpdateDatasetInput{
 		DatasetId:          ptr.String("__DatasetId__"),
+		WorkspaceName:      ptr.String("__WorkspaceName__"),
 		DatasetName:        ptr.String("__DatasetName__"),
 		DatasetDescription: ptr.String("__DatasetDescription__"),
+		DatasetConfig: &types.DatasetConfig{
+			Session: &types.SessionConfig{
+				SessionStartTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+				SessionEndTimestamp: &types.TimeInNanos{
+					TimeInSeconds: ptr.Int64(1),
+					OffsetInNanos: ptr.Int32(1),
+				},
+			},
+		},
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
 		DatasetSource: &types.DatasetSource{
 			SourceType:   types.DatasetSourceType("KENDRA"),
 			SourceFormat: types.DatasetSourceFormat("KNOWLEDGE_BASE"),
@@ -10989,6 +14289,62 @@ func TestUpdateRequestSnapshot_UpdateGatewayCapabilityConfiguration(t *testing.T
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdatePipeline(t *testing.T) {
+	input := &UpdatePipelineInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		PipelineName:  ptr.String("__PipelineName__"),
+		Description:   ptr.String("__Description__"),
+		EnvironmentVariables: map[string]string{
+			"key0": "__Value__",
+		},
+		Computations: []types.ComputeNode{
+			{
+				ComputeNodeName: ptr.String("__ComputeNodeName__"),
+				TaskName:        ptr.String("__TaskName__"),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ComputeNodeName: ptr.String("__ComputeNodeName__"),
+				TaskName:        ptr.String("__TaskName__"),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+				DependsOn: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdatePipeline(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdatePipeline"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdatePortal(t *testing.T) {
 	input := &UpdatePortalInput{
 		PortalId:           ptr.String("__PortalId__"),
@@ -11068,6 +14424,84 @@ func TestUpdateRequestSnapshot_UpdateProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProject"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateTask(t *testing.T) {
+	input := &UpdateTaskInput{
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+		TaskName:      ptr.String("__TaskName__"),
+		Description:   ptr.String("__Description__"),
+		TaskConfiguration: &types.TaskConfigurationMemberContainerTaskConfiguration{
+			Value: types.ContainerTaskConfiguration{
+				EcrUri:            ptr.String("__EcrUri__"),
+				TaskExecutionRole: ptr.String("__TaskExecutionRole__"),
+				ProcessingType:    types.ProcessingType("GENERIC_COMPUTE_PROCESSING"),
+				ProcessingUnit:    types.ProcessingUnit("UNITS_2"),
+				Command: []string{
+					"__Member__",
+					"__Member__",
+				},
+				TimeoutSeconds: ptr.Int64(1),
+				EnvironmentVariables: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateTask(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateTask"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateWorkspace(t *testing.T) {
+	input := &UpdateWorkspaceInput{
+		WorkspaceName:        ptr.String("__WorkspaceName__"),
+		WorkspaceDescription: ptr.String("__WorkspaceDescription__"),
+		EncryptionConfiguration: &types.WorkspaceEncryptionConfiguration{
+			EncryptionType: types.EncryptionType("SITEWISE_DEFAULT_ENCRYPTION"),
+			KmsKeyId:       ptr.String("__KmsKeyId__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateWorkspace(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateWorkspace"); err != nil {
 		t.Fatal(err)
 	}
 }

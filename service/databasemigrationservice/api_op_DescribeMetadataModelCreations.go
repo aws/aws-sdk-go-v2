@@ -14,7 +14,16 @@ import (
 )
 
 // Returns a paginated list of metadata model creation requests for a migration
-// project.
+// project, initiated by [StartMetadataModelCreation].
+//
+// To cancel a queued or in-progress request, call [CancelMetadataModelCreation].
+//
+// Required permissions: dms:DescribeMetadataModelCreations . For more information,
+// see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [StartMetadataModelCreation]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelCreation.html
+// [CancelMetadataModelCreation]: https://docs.aws.amazon.com/dms/latest/APIReference/API_CancelMetadataModelCreation.html
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) DescribeMetadataModelCreations(ctx context.Context, params *DescribeMetadataModelCreationsInput, optFns ...func(*Options)) (*DescribeMetadataModelCreationsOutput, error) {
 	if params == nil {
 		params = &DescribeMetadataModelCreationsInput{}
@@ -37,19 +46,29 @@ type DescribeMetadataModelCreationsInput struct {
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// Filters applied to the metadata model creation requests described in the form
-	// of key-value pairs. The supported filters are request-id and status.
+	// The filters to apply to the metadata model creation requests.
+	//
+	// The following filter names are supported:
+	//
+	//   - request-id – The request identifier.
+	//
+	//   - status – The request status. Valid values: RECEIVED , IN_PROGRESS , SUCCESS
+	//   , FAILED , CANCELING , CANCELED .
 	Filters []types.Filter
 
 	// Specifies the unique pagination token that makes it possible to display the
-	// next page of metadata model creation requests. If Marker is returned by a
-	// previous response, there are more metadata model creation requests available.
+	// next page of results. If this parameter is specified, the response includes only
+	// records beyond the marker, up to the value specified by MaxRecords .
+	//
+	// If Marker is returned by a previous response, there are more results available.
+	// The value of Marker is a unique pagination token for each page. To retrieve the
+	// next page, make the call again using the returned token and keeping all other
+	// arguments unchanged.
 	Marker *string
 
-	// The maximum number of metadata model creation requests to include in the
-	// response. If more requests exist than the specified MaxRecords value, a
-	// pagination token is provided in the response so that you can retrieve the
-	// remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, DMS includes a pagination token in the
+	// response so that you can retrieve the remaining results.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -58,12 +77,18 @@ type DescribeMetadataModelCreationsInput struct {
 type DescribeMetadataModelCreationsOutput struct {
 
 	// Specifies the unique pagination token that makes it possible to display the
-	// next page of metadata model creation requests. If Marker is returned, there are
-	// more metadata model creation requests available.
+	// next page of results. If this parameter is specified, the response includes only
+	// records beyond the marker, up to the value specified by MaxRecords .
+	//
+	// If Marker is returned by a previous response, there are more results available.
+	// The value of Marker is a unique pagination token for each page. To retrieve the
+	// next page, make the call again using the returned token and keeping all other
+	// arguments unchanged.
 	Marker *string
 
-	// A list of metadata model creation requests. The ExportSqlDetails field will
-	// never be populated for the DescribeMetadataModelCreations operation.
+	// A paginated list of metadata model creation requests.
+	//
+	// DMS never populates the ExportSqlDetails field for this operation.
 	Requests []types.SchemaConversionRequest
 
 	// Metadata pertaining to the operation's result.
@@ -562,10 +587,9 @@ func metadataModelCreationCancelledStateRetryable(ctx context.Context, input *De
 // DescribeMetadataModelCreationsPaginatorOptions is the paginator options for
 // DescribeMetadataModelCreations
 type DescribeMetadataModelCreationsPaginatorOptions struct {
-	// The maximum number of metadata model creation requests to include in the
-	// response. If more requests exist than the specified MaxRecords value, a
-	// pagination token is provided in the response so that you can retrieve the
-	// remaining results.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, DMS includes a pagination token in the
+	// response so that you can retrieve the remaining results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

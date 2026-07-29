@@ -27,6 +27,10 @@ func (c *Client) DescribeLoggingOptions(ctx context.Context, params *DescribeLog
 }
 
 type DescribeLoggingOptionsInput struct {
+
+	// The name of the workspace.
+	WorkspaceName *string
+
 	noSmithyDocumentSerde
 }
 

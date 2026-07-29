@@ -11,8 +11,12 @@ import (
 
 // Modifies the specified data provider using the provided settings.
 //
+// Required permissions: dms:UpdateDataProvider . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
 // You must remove the data provider from all migration projects before you can
 // modify it.
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) ModifyDataProvider(ctx context.Context, params *ModifyDataProviderInput, optFns ...func(*Options)) (*ModifyDataProviderOutput, error) {
 	if params == nil {
 		params = &ModifyDataProviderInput{}
@@ -43,10 +47,11 @@ type ModifyDataProviderInput struct {
 	// A user-friendly description of the data provider.
 	Description *string
 
-	// The type of database engine for the data provider. Valid values include "aurora"
-	// , "aurora-postgresql" , "mysql" , "oracle" , "postgres" , "sqlserver" , redshift
-	// , mariadb , mongodb , db2 , db2-zos , docdb , and sybase . A value of "aurora"
-	// represents Amazon Aurora MySQL-Compatible Edition.
+	// The type of database engine for the data provider.
+	//
+	// Valid values: aurora , aurora-postgresql , db2 , db2-zos , docdb , mariadb ,
+	// mongodb , mysql , oracle , postgres , redshift , sqlserver , and sybase . A
+	// value of aurora represents Amazon Aurora MySQL-Compatible Edition.
 	Engine *string
 
 	// If this attribute is Y, the current call to ModifyDataProvider replaces all

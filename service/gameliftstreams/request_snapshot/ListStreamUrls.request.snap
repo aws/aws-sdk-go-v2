@@ -1,0 +1,3 @@
+GET /streamurls?MaxResults=1&NextToken=__NextToken__&Status=ACTIVE&StreamGroupIdentifier=__StreamGroupIdentifier__
+
+

@@ -12,6 +12,10 @@ import (
 
 // Returns a paginated list of instance profiles for your account in the current
 // region.
+//
+// Required permissions: dms:ListInstanceProfiles . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) DescribeInstanceProfiles(ctx context.Context, params *DescribeInstanceProfilesInput, optFns ...func(*Options)) (*DescribeInstanceProfilesOutput, error) {
 	if params == nil {
 		params = &DescribeInstanceProfilesInput{}
@@ -29,11 +33,11 @@ func (c *Client) DescribeInstanceProfiles(ctx context.Context, params *DescribeI
 
 type DescribeInstanceProfilesInput struct {
 
-	// Filters applied to the instance profiles described in the form of key-value
-	// pairs.
+	// The filters to apply to the instance profiles.
 	//
-	// Valid filter names and values: instance-profile-identifier, instance profile
-	// arn or name
+	// The following filter names are supported:
+	//
+	//   - instance-profile-identifier – The instance profile name or ARN.
 	Filters []types.Filter
 
 	// Specifies the unique pagination token that makes it possible to display the

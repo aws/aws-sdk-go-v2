@@ -3953,6 +3953,13 @@ func awsAwsjson11_serializeDocumentByteMatchStatement(v *types.ByteMatchStatemen
 		ok.String(string(v.PositionalConstraint))
 	}
 
+	if v.PreParseTextTransformations != nil {
+		ok := object.Key("PreParseTextTransformations")
+		if err := awsAwsjson11_serializeDocumentPreParseTextTransformations(v.PreParseTextTransformations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SearchString != nil {
 		ok := object.Key("SearchString")
 		ok.Base64EncodeBytes(v.SearchString)
@@ -5322,6 +5329,36 @@ func awsAwsjson11_serializeDocumentPhoneNumberFields(v []types.PhoneNumberField,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentPreParseTextTransformation(v *types.PreParseTextTransformation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("Priority")
+		ok.Integer(v.Priority)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPreParseTextTransformations(v []types.PreParseTextTransformation, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentPreParseTextTransformation(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentPrice(v *types.Price, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5691,6 +5728,13 @@ func awsAwsjson11_serializeDocumentRegexMatchStatement(v *types.RegexMatchStatem
 		}
 	}
 
+	if v.PreParseTextTransformations != nil {
+		ok := object.Key("PreParseTextTransformations")
+		if err := awsAwsjson11_serializeDocumentPreParseTextTransformations(v.PreParseTextTransformations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RegexString != nil {
 		ok := object.Key("RegexString")
 		ok.String(*v.RegexString)
@@ -5718,6 +5762,13 @@ func awsAwsjson11_serializeDocumentRegexPatternSetReferenceStatement(v *types.Re
 	if v.FieldToMatch != nil {
 		ok := object.Key("FieldToMatch")
 		if err := awsAwsjson11_serializeDocumentFieldToMatch(v.FieldToMatch, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PreParseTextTransformations != nil {
+		ok := object.Key("PreParseTextTransformations")
+		if err := awsAwsjson11_serializeDocumentPreParseTextTransformations(v.PreParseTextTransformations, ok); err != nil {
 			return err
 		}
 	}
@@ -6287,6 +6338,13 @@ func awsAwsjson11_serializeDocumentSizeConstraintStatement(v *types.SizeConstrai
 		}
 	}
 
+	if v.PreParseTextTransformations != nil {
+		ok := object.Key("PreParseTextTransformations")
+		if err := awsAwsjson11_serializeDocumentPreParseTextTransformations(v.PreParseTextTransformations, ok); err != nil {
+			return err
+		}
+	}
+
 	{
 		ok := object.Key("Size")
 		ok.Long(v.Size)
@@ -6309,6 +6367,13 @@ func awsAwsjson11_serializeDocumentSqliMatchStatement(v *types.SqliMatchStatemen
 	if v.FieldToMatch != nil {
 		ok := object.Key("FieldToMatch")
 		if err := awsAwsjson11_serializeDocumentFieldToMatch(v.FieldToMatch, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PreParseTextTransformations != nil {
+		ok := object.Key("PreParseTextTransformations")
+		if err := awsAwsjson11_serializeDocumentPreParseTextTransformations(v.PreParseTextTransformations, ok); err != nil {
 			return err
 		}
 	}
@@ -6650,6 +6715,13 @@ func awsAwsjson11_serializeDocumentXssMatchStatement(v *types.XssMatchStatement,
 	if v.FieldToMatch != nil {
 		ok := object.Key("FieldToMatch")
 		if err := awsAwsjson11_serializeDocumentFieldToMatch(v.FieldToMatch, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PreParseTextTransformations != nil {
+		ok := object.Key("PreParseTextTransformations")
+		if err := awsAwsjson11_serializeDocumentPreParseTextTransformations(v.PreParseTextTransformations, ok); err != nil {
 			return err
 		}
 	}

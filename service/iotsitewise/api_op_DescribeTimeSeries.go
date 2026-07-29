@@ -58,6 +58,9 @@ type DescribeTimeSeriesInput struct {
 	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	PropertyId *string
 
+	// The name of the workspace.
+	WorkspaceName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -111,6 +114,9 @@ type DescribeTimeSeriesOutput struct {
 
 	// The ID of the asset property, in UUID format.
 	PropertyId *string
+
+	// The name of the workspace.
+	WorkspaceName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

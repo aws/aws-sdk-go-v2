@@ -1,0 +1,5 @@
+PUT /workspaces/__WorkspaceName__/tasks/__TaskName__
+
+Content-Type: application/json
+
+{"description":"__Description__","taskConfiguration":{"containerTaskConfiguration":{"command":["__Member__","__Member__"],"ecrUri":"__EcrUri__","environmentVariables":{"key0":"__Value__"},"processingType":"GENERIC_COMPUTE_PROCESSING","processingUnit":"UNITS_2","taskExecutionRole":"__TaskExecutionRole__","timeoutSeconds":1}}}

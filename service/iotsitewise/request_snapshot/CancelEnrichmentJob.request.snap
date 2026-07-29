@@ -1,0 +1,3 @@
+POST /workspaces/__WorkspaceName__/enrichment-jobs/__JobId__/cancel
+
+

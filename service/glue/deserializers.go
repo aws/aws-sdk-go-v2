@@ -40534,6 +40534,64 @@ func awsAwsjson11_deserializeDocumentBatchUpdatePartitionFailureList(v *[]types.
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentBetweenConfiguration(v **types.BetweenConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BetweenConfiguration
+	if *v == nil {
+		sv = &types.BetweenConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "HighBoundKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.HighBoundKey = ptr.String(jtv)
+			}
+
+		case "LowBoundKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LowBoundKey = ptr.String(jtv)
+			}
+
+		case "Template":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Template = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentBinaryColumnStatisticsData(v **types.BinaryColumnStatisticsData, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -45574,6 +45632,42 @@ func awsAwsjson11_deserializeDocumentConnectionStringList(v *[]string, value int
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentConnectionStringToStringMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentConnectionTypeBrief(v **types.ConnectionTypeBrief, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -45988,6 +46082,15 @@ func awsAwsjson11_deserializeDocumentConnectorProperty(v **types.ConnectorProper
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.DefaultValue = ptr.String(jtv)
+			}
+
+		case "Format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Format = ptr.String(jtv)
 			}
 
 		case "KeyOverride":
@@ -54194,6 +54297,47 @@ func awsAwsjson11_deserializeDocumentFieldDefinition(v **types.FieldDefinition, 
 				sv.FieldDataType = types.FieldDataType(jtv)
 			}
 
+		case "FilterOverrides":
+			if err := awsAwsjson11_deserializeDocumentFilterOverrides(&sv.FilterOverrides, value); err != nil {
+				return err
+			}
+
+		case "IsNullable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Bool to be of type *bool, got %T instead", value)
+				}
+				sv.IsNullable = ptr.Bool(jtv)
+			}
+
+		case "IsOrderable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Bool to be of type *bool, got %T instead", value)
+				}
+				sv.IsOrderable = ptr.Bool(jtv)
+			}
+
+		case "IsPartitionable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Bool to be of type *bool, got %T instead", value)
+				}
+				sv.IsPartitionable = ptr.Bool(jtv)
+			}
+
+		case "IsQueryable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Bool to be of type *bool, got %T instead", value)
+				}
+				sv.IsQueryable = ptr.Bool(jtv)
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -54201,6 +54345,15 @@ func awsAwsjson11_deserializeDocumentFieldDefinition(v **types.FieldDefinition, 
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "ResponseDateFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ResponseDateFormat = ptr.String(jtv)
 			}
 
 		default:
@@ -54439,6 +54592,79 @@ func awsAwsjson11_deserializeDocumentFilter(v **types.Filter, value interface{})
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentFilterConfiguration(v **types.FilterConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FilterConfiguration
+	if *v == nil {
+		sv = &types.FilterConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BetweenConfiguration":
+			if err := awsAwsjson11_deserializeDocumentBetweenConfiguration(&sv.BetweenConfiguration, value); err != nil {
+				return err
+			}
+
+		case "DateTimeFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DateTimeFormat = ptr.String(jtv)
+			}
+
+		case "FilterMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FilterMode to be of type string, got %T instead", value)
+				}
+				sv.FilterMode = types.FilterMode(jtv)
+			}
+
+		case "FilterStringConfiguration":
+			if err := awsAwsjson11_deserializeDocumentFilterStringConfiguration(&sv.FilterStringConfiguration, value); err != nil {
+				return err
+			}
+
+		case "OperatorMappings":
+			if err := awsAwsjson11_deserializeDocumentConnectionStringToStringMap(&sv.OperatorMappings, value); err != nil {
+				return err
+			}
+
+		case "StripQuotes":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Bool to be of type *bool, got %T instead", value)
+				}
+				sv.StripQuotes = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentFilterExpression(v **types.FilterExpression, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -54524,6 +54750,123 @@ func awsAwsjson11_deserializeDocumentFilterExpressions(v *[]types.FilterExpressi
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFilterOverrides(v **types.FilterOverrides, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FilterOverrides
+	if *v == nil {
+		sv = &types.FilterOverrides{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BetweenConfiguration":
+			if err := awsAwsjson11_deserializeDocumentBetweenConfiguration(&sv.BetweenConfiguration, value); err != nil {
+				return err
+			}
+
+		case "DateTimeFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DateTimeFormat = ptr.String(jtv)
+			}
+
+		case "FieldName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FieldName = ptr.String(jtv)
+			}
+
+		case "OperatorMappings":
+			if err := awsAwsjson11_deserializeDocumentConnectionStringToStringMap(&sv.OperatorMappings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFilterStringConfiguration(v **types.FilterStringConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FilterStringConfiguration
+	if *v == nil {
+		sv = &types.FilterStringConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "QueryParameterName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.QueryParameterName = ptr.String(jtv)
+			}
+
+		case "QuoteCharacter":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.QuoteCharacter = ptr.String(jtv)
+			}
+
+		case "QuoteStringValues":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Bool to be of type *bool, got %T instead", value)
+				}
+				sv.QuoteStringValues = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -72591,6 +72934,11 @@ func awsAwsjson11_deserializeDocumentSourceConfiguration(v **types.SourceConfigu
 
 	for key, value := range shape {
 		switch key {
+		case "FilterConfiguration":
+			if err := awsAwsjson11_deserializeDocumentFilterConfiguration(&sv.FilterConfiguration, value); err != nil {
+				return err
+			}
+
 		case "PaginationConfiguration":
 			if err := awsAwsjson11_deserializeDocumentPaginationConfiguration(&sv.PaginationConfiguration, value); err != nil {
 				return err

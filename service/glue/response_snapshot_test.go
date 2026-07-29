@@ -11537,6 +11537,7 @@ func TestCheckResponseSnapshot_DescribeConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					{
 						Name:         ptr.String("__Name__"),
@@ -11549,6 +11550,7 @@ func TestCheckResponseSnapshot_DescribeConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 				},
 				ResponseConfiguration: &types.ResponseConfiguration{
@@ -11595,6 +11597,24 @@ func TestCheckResponseSnapshot_DescribeConnectionType(t *testing.T) {
 								HeaderKey:   ptr.String("__HeaderKey__"),
 							},
 						},
+					},
+				},
+				FilterConfiguration: &types.FilterConfiguration{
+					FilterMode: types.FilterMode("QUERY_PARAMS"),
+					OperatorMappings: map[string]string{
+						"key0": "__Value__",
+					},
+					DateTimeFormat: ptr.String("__DateTimeFormat__"),
+					StripQuotes:    ptr.Bool(true),
+					BetweenConfiguration: &types.BetweenConfiguration{
+						LowBoundKey:  ptr.String("__LowBoundKey__"),
+						HighBoundKey: ptr.String("__HighBoundKey__"),
+						Template:     ptr.String("__Template__"),
+					},
+					FilterStringConfiguration: &types.FilterStringConfiguration{
+						QueryParameterName: ptr.String("__QueryParameterName__"),
+						QuoteStringValues:  ptr.Bool(true),
+						QuoteCharacter:     ptr.String("__QuoteCharacter__"),
 					},
 				},
 			},
@@ -11613,6 +11633,7 @@ func TestCheckResponseSnapshot_DescribeConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 					{
 						Name:         ptr.String("__Name__"),
@@ -11625,6 +11646,7 @@ func TestCheckResponseSnapshot_DescribeConnectionType(t *testing.T) {
 						},
 						PropertyLocation: types.PropertyLocation("HEADER"),
 						PropertyType:     types.PropertyType("USER_INPUT"),
+						Format:           ptr.String("__Format__"),
 					},
 				},
 				ResponseConfiguration: &types.ResponseConfiguration{
@@ -11671,6 +11693,24 @@ func TestCheckResponseSnapshot_DescribeConnectionType(t *testing.T) {
 								HeaderKey:   ptr.String("__HeaderKey__"),
 							},
 						},
+					},
+				},
+				FilterConfiguration: &types.FilterConfiguration{
+					FilterMode: types.FilterMode("QUERY_PARAMS"),
+					OperatorMappings: map[string]string{
+						"key0": "__Value__",
+					},
+					DateTimeFormat: ptr.String("__DateTimeFormat__"),
+					StripQuotes:    ptr.Bool(true),
+					BetweenConfiguration: &types.BetweenConfiguration{
+						LowBoundKey:  ptr.String("__LowBoundKey__"),
+						HighBoundKey: ptr.String("__HighBoundKey__"),
+						Template:     ptr.String("__Template__"),
+					},
+					FilterStringConfiguration: &types.FilterStringConfiguration{
+						QueryParameterName: ptr.String("__QueryParameterName__"),
+						QuoteStringValues:  ptr.Bool(true),
+						QuoteCharacter:     ptr.String("__QuoteCharacter__"),
 					},
 				},
 			},
@@ -11691,6 +11731,7 @@ func TestCheckResponseSnapshot_DescribeConnectionType(t *testing.T) {
 								},
 								PropertyLocation: types.PropertyLocation("HEADER"),
 								PropertyType:     types.PropertyType("USER_INPUT"),
+								Format:           ptr.String("__Format__"),
 							},
 							{
 								Name:         ptr.String("__Name__"),
@@ -11703,6 +11744,7 @@ func TestCheckResponseSnapshot_DescribeConnectionType(t *testing.T) {
 								},
 								PropertyLocation: types.PropertyLocation("HEADER"),
 								PropertyType:     types.PropertyType("USER_INPUT"),
+								Format:           ptr.String("__Format__"),
 							},
 						},
 						ResponseConfiguration: &types.ResponseConfiguration{
@@ -11751,11 +11793,46 @@ func TestCheckResponseSnapshot_DescribeConnectionType(t *testing.T) {
 								},
 							},
 						},
+						FilterConfiguration: &types.FilterConfiguration{
+							FilterMode: types.FilterMode("QUERY_PARAMS"),
+							OperatorMappings: map[string]string{
+								"key0": "__Value__",
+							},
+							DateTimeFormat: ptr.String("__DateTimeFormat__"),
+							StripQuotes:    ptr.Bool(true),
+							BetweenConfiguration: &types.BetweenConfiguration{
+								LowBoundKey:  ptr.String("__LowBoundKey__"),
+								HighBoundKey: ptr.String("__HighBoundKey__"),
+								Template:     ptr.String("__Template__"),
+							},
+							FilterStringConfiguration: &types.FilterStringConfiguration{
+								QueryParameterName: ptr.String("__QueryParameterName__"),
+								QuoteStringValues:  ptr.Bool(true),
+								QuoteCharacter:     ptr.String("__QuoteCharacter__"),
+							},
+						},
 					},
 					Schema: map[string]types.FieldDefinition{
 						"key0": {
-							Name:          ptr.String("__Name__"),
-							FieldDataType: types.FieldDataType("INT"),
+							Name:               ptr.String("__Name__"),
+							FieldDataType:      types.FieldDataType("INT"),
+							ResponseDateFormat: ptr.String("__ResponseDateFormat__"),
+							IsPartitionable:    ptr.Bool(true),
+							IsNullable:         ptr.Bool(true),
+							IsQueryable:        ptr.Bool(true),
+							IsOrderable:        ptr.Bool(true),
+							FilterOverrides: &types.FilterOverrides{
+								FieldName: ptr.String("__FieldName__"),
+								OperatorMappings: map[string]string{
+									"key0": "__Value__",
+								},
+								BetweenConfiguration: &types.BetweenConfiguration{
+									LowBoundKey:  ptr.String("__LowBoundKey__"),
+									HighBoundKey: ptr.String("__HighBoundKey__"),
+									Template:     ptr.String("__Template__"),
+								},
+								DateTimeFormat: ptr.String("__DateTimeFormat__"),
+							},
 						},
 					},
 				},

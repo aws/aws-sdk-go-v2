@@ -33,12 +33,19 @@ type ListDatasetsInput struct {
 	// This member is required.
 	SourceType types.DatasetSourceType
 
+	// The type of dataset to filter by: a session dataset, a curated dataset, or a
+	// connection to an external datasource.
+	DatasetType types.DatasetTypeEnum
+
 	// The maximum number of results to return for each paginated request.
 	MaxResults *int32
 
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string
+
+	// The name of the workspace to filter datasets by.
+	WorkspaceName *string
 
 	noSmithyDocumentSerde
 }
@@ -53,6 +60,9 @@ type ListDatasetsOutput struct {
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string
+
+	// The name of the workspace.
+	WorkspaceName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

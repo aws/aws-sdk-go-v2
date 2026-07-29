@@ -1,0 +1,8 @@
+{
+    "id": "0e3b92a5-cdd0-4684-9f6e-d542e801a04c",
+    "type": "documentation",
+    "description": "Updated documentation for various DMS Schema Conversion operations",
+    "modules": [
+        "service/databasemigrationservice"
+    ]
+}

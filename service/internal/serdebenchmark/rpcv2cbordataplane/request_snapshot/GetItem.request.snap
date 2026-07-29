@@ -1,0 +1,7 @@
+POST /service/SmithyRpcV2CborDataPlane/operation/GetItem
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿oAttributesToGetŸj__Member__j__Member__ÿnConsistentReadõxExpressionAttributeNames¿dkey0i__Value__ÿcKey¿dkey0¡aSx__AttributeValueMemberS__ÿtProjectionExpressionx__ProjectionExpression__vReturnConsumedCapacityx__ReturnConsumedCapacity__iTableNamem__TableName__ÿ

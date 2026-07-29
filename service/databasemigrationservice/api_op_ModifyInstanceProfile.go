@@ -11,8 +11,12 @@ import (
 
 // Modifies the specified instance profile using the provided parameters.
 //
+// Required permissions: dms:UpdateInstanceProfile . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
 // All migration projects associated with the instance profile must be deleted or
 // modified before you can modify the instance profile.
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) ModifyInstanceProfile(ctx context.Context, params *ModifyInstanceProfileInput, optFns ...func(*Options)) (*ModifyInstanceProfileOutput, error) {
 	if params == nil {
 		params = &ModifyInstanceProfileInput{}

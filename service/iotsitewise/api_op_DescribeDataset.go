@@ -34,6 +34,12 @@ type DescribeDatasetInput struct {
 	// This member is required.
 	DatasetId *string
 
+	// The version of the dataset.
+	DatasetVersion *string
+
+	// The name of the workspace that contains the dataset.
+	WorkspaceName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -84,8 +90,24 @@ type DescribeDatasetOutput struct {
 	// This member is required.
 	DatasetStatus *types.DatasetStatus
 
+	// The configuration for the dataset.
+	DatasetConfig *types.DatasetConfig
+
+	// The type of dataset: a session dataset, a curated dataset, or a connection to
+	// an external datasource.
+	DatasetType types.DatasetTypeEnum
+
 	// The version of the dataset.
 	DatasetVersion *string
+
+	// The enrichment status of the dataset.
+	EnrichmentStatus *types.DatasetEnrichment
+
+	// The metadata for the dataset.
+	Metadata map[string]string
+
+	// The name of the workspace that contains the dataset.
+	WorkspaceName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

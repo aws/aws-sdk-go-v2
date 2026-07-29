@@ -7,6 +7,46 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 )
 
+func ExampleEnrichmentJobConfiguration_outputUsage() {
+	var union types.EnrichmentJobConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EnrichmentJobConfigurationMemberEventDetection:
+		_ = v.Value // Value is types.EventDetection
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EventDetection
+
+func ExampleProcessingInput_outputUsage() {
+	var union types.ProcessingInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProcessingInputMemberDataset:
+		_ = v.Value // Value is types.DatasetItem
+
+	case *types.ProcessingInputMemberTimeseries:
+		_ = v.Value // Value is []types.TimeseriesItem
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DatasetItem
+var _ []types.TimeseriesItem
+
 func ExampleResponseStream_outputUsage() {
 	var union types.ResponseStream
 	// type switches can be used to check the union value
@@ -28,3 +68,21 @@ func ExampleResponseStream_outputUsage() {
 
 var _ *types.InvocationOutput
 var _ *types.Trace
+
+func ExampleTaskConfiguration_outputUsage() {
+	var union types.TaskConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TaskConfigurationMemberContainerTaskConfiguration:
+		_ = v.Value // Value is types.ContainerTaskConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ContainerTaskConfiguration

@@ -11,8 +11,12 @@ import (
 
 // Deletes the specified instance profile.
 //
+// Required permissions: dms:DeleteInstanceProfile . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
 // All migration projects associated with the instance profile must be deleted or
 // modified before you can delete the instance profile.
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) DeleteInstanceProfile(ctx context.Context, params *DeleteInstanceProfileInput, optFns ...func(*Options)) (*DeleteInstanceProfileOutput, error) {
 	if params == nil {
 		params = &DeleteInstanceProfileInput{}

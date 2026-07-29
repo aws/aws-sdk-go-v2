@@ -105,6 +105,25 @@ func (ReplicationStatusType) Values() []ReplicationStatusType {
 	}
 }
 
+type RevocationMode string
+
+// Enum values for RevocationMode
+const (
+	RevocationModeRevokeUrl                  RevocationMode = "REVOKE_URL"
+	RevocationModeRevokeAndTerminateSessions RevocationMode = "REVOKE_AND_TERMINATE_SESSIONS"
+)
+
+// Values returns all known values for RevocationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RevocationMode) Values() []RevocationMode {
+	return []RevocationMode{
+		"REVOKE_URL",
+		"REVOKE_AND_TERMINATE_SESSIONS",
+	}
+}
+
 type RuntimeEnvironmentType string
 
 // Enum values for RuntimeEnvironmentType
@@ -123,6 +142,31 @@ func (RuntimeEnvironmentType) Values() []RuntimeEnvironmentType {
 		"PROTON",
 		"WINDOWS",
 		"UBUNTU",
+	}
+}
+
+type ShaderCacheStatus string
+
+// Enum values for ShaderCacheStatus
+const (
+	ShaderCacheStatusInitialized ShaderCacheStatus = "INITIALIZED"
+	ShaderCacheStatusProcessing  ShaderCacheStatus = "PROCESSING"
+	ShaderCacheStatusReady       ShaderCacheStatus = "READY"
+	ShaderCacheStatusDeleting    ShaderCacheStatus = "DELETING"
+	ShaderCacheStatusError       ShaderCacheStatus = "ERROR"
+)
+
+// Values returns all known values for ShaderCacheStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ShaderCacheStatus) Values() []ShaderCacheStatus {
+	return []ShaderCacheStatus{
+		"INITIALIZED",
+		"PROCESSING",
+		"READY",
+		"DELETING",
+		"ERROR",
 	}
 }
 
@@ -311,5 +355,53 @@ func (StreamSessionStatusReason) Values() []StreamSessionStatusReason {
 		"maxSessionLengthTimeout",
 		"idleTimeout",
 		"apiTerminated",
+	}
+}
+
+type StreamUrlStatus string
+
+// Enum values for StreamUrlStatus
+const (
+	StreamUrlStatusActive       StreamUrlStatus = "ACTIVE"
+	StreamUrlStatusExpired      StreamUrlStatus = "EXPIRED"
+	StreamUrlStatusRevoked      StreamUrlStatus = "REVOKED"
+	StreamUrlStatusLimitReached StreamUrlStatus = "LIMIT_REACHED"
+)
+
+// Values returns all known values for StreamUrlStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StreamUrlStatus) Values() []StreamUrlStatus {
+	return []StreamUrlStatus{
+		"ACTIVE",
+		"EXPIRED",
+		"REVOKED",
+		"LIMIT_REACHED",
+	}
+}
+
+type StreamUrlStatusReason string
+
+// Enum values for StreamUrlStatusReason
+const (
+	StreamUrlStatusReasonUserRevoked                   StreamUrlStatusReason = "userRevoked"
+	StreamUrlStatusReasonRevokedAndTerminatingSessions StreamUrlStatusReason = "revokedAndTerminatingSessions"
+	StreamUrlStatusReasonRevokedAndSessionsTerminated  StreamUrlStatusReason = "revokedAndSessionsTerminated"
+	StreamUrlStatusReasonStreamGroupDeleted            StreamUrlStatusReason = "streamGroupDeleted"
+	StreamUrlStatusReasonApplicationDeleted            StreamUrlStatusReason = "applicationDeleted"
+)
+
+// Values returns all known values for StreamUrlStatusReason. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StreamUrlStatusReason) Values() []StreamUrlStatusReason {
+	return []StreamUrlStatusReason{
+		"userRevoked",
+		"revokedAndTerminatingSessions",
+		"revokedAndSessionsTerminated",
+		"streamGroupDeleted",
+		"applicationDeleted",
 	}
 }

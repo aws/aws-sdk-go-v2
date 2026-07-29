@@ -14,6 +14,9 @@ import (
 // You can run this action only after you create an instance profile and data
 // providers using [CreateInstanceProfile]and [CreateDataProvider].
 //
+// Required permissions: dms:CreateMigrationProject . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 // [CreateDataProvider]: https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateDataProvider.html
 // [CreateInstanceProfile]: https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateInstanceProfile.html
 func (c *Client) CreateMigrationProject(ctx context.Context, params *CreateMigrationProjectInput, optFns ...func(*Options)) (*CreateMigrationProjectOutput, error) {
@@ -65,10 +68,15 @@ type CreateMigrationProjectInput struct {
 	// One or more tags to be assigned to the migration project.
 	Tags []types.Tag
 
-	// The settings in JSON format for migration rules. Migration rules make it
-	// possible for you to change the object names according to the rules that you
-	// specify. For example, you can change an object name to lowercase or uppercase,
-	// add or remove a prefix or suffix, or rename objects.
+	// A JSON string that specifies the transformation rules for the migration
+	// project. Transformation rules let you customize how DMS Schema Conversion
+	// converts your source database objects, including renaming, adding prefixes or
+	// suffixes, and changing data types. For the transformation rule format and
+	// examples, see [Transformation rules in DMS Schema Conversion].
+	//
+	// Homogeneous data migrations do not support transformation rules.
+	//
+	// [Transformation rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-transformation-rules.html
 	TransformationRules *string
 
 	noSmithyDocumentSerde

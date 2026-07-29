@@ -1147,6 +1147,7 @@ const (
 	ParameterExceptionFieldWalletAddress                  ParameterExceptionField = "WALLET_ADDRESS"
 	ParameterExceptionFieldPriceAmount                    ParameterExceptionField = "PRICE_AMOUNT"
 	ParameterExceptionFieldPaymentNetwork                 ParameterExceptionField = "PAYMENT_NETWORK"
+	ParameterExceptionFieldPreParseTextTransformation     ParameterExceptionField = "PRE_PARSE_TEXT_TRANSFORMATION"
 )
 
 // Values returns all known values for ParameterExceptionField. Note that this can
@@ -1231,6 +1232,7 @@ func (ParameterExceptionField) Values() []ParameterExceptionField {
 		"WALLET_ADDRESS",
 		"PRICE_AMOUNT",
 		"PAYMENT_NETWORK",
+		"PRE_PARSE_TEXT_TRANSFORMATION",
 	}
 }
 
@@ -1294,6 +1296,32 @@ func (PositionalConstraint) Values() []PositionalConstraint {
 		"ENDS_WITH",
 		"CONTAINS",
 		"CONTAINS_WORD",
+	}
+}
+
+type PreParseTextTransformationType string
+
+// Enum values for PreParseTextTransformationType
+const (
+	PreParseTextTransformationTypeNone                             PreParseTextTransformationType = "NONE"
+	PreParseTextTransformationTypeUrlDecode                        PreParseTextTransformationType = "URL_DECODE"
+	PreParseTextTransformationTypeUrlDecodeUni                     PreParseTextTransformationType = "URL_DECODE_UNI"
+	PreParseTextTransformationTypeCombineDuplicateQueryArgsByComma PreParseTextTransformationType = "COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA"
+	PreParseTextTransformationTypeReplaceSemicolonsWithAmpersands  PreParseTextTransformationType = "REPLACE_SEMICOLONS_WITH_AMPERSANDS"
+)
+
+// Values returns all known values for PreParseTextTransformationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreParseTextTransformationType) Values() []PreParseTextTransformationType {
+	return []PreParseTextTransformationType{
+		"NONE",
+		"URL_DECODE",
+		"URL_DECODE_UNI",
+		"COMBINE_DUPLICATE_QUERY_ARGS_BY_COMMA",
+		"REPLACE_SEMICOLONS_WITH_AMPERSANDS",
 	}
 }
 
@@ -1589,6 +1617,16 @@ const (
 	TextTransformationTypeBase64DecodeExt    TextTransformationType = "BASE64_DECODE_EXT"
 	TextTransformationTypeUrlDecodeUni       TextTransformationType = "URL_DECODE_UNI"
 	TextTransformationTypeUtf8ToUnicode      TextTransformationType = "UTF8_TO_UNICODE"
+	TextTransformationTypeRemoveWhitespace   TextTransformationType = "REMOVE_WHITESPACE"
+	TextTransformationTypeTrim               TextTransformationType = "TRIM"
+	TextTransformationTypeTrimLeft           TextTransformationType = "TRIM_LEFT"
+	TextTransformationTypeTrimRight          TextTransformationType = "TRIM_RIGHT"
+	TextTransformationTypeRemoveCommentsChar TextTransformationType = "REMOVE_COMMENTS_CHAR"
+	TextTransformationTypeUppercase          TextTransformationType = "UPPERCASE"
+	TextTransformationTypeCmdLineWin         TextTransformationType = "CMD_LINE_WIN"
+	TextTransformationTypeCmdLineUnix        TextTransformationType = "CMD_LINE_UNIX"
+	TextTransformationTypeJsDecodeExt        TextTransformationType = "JS_DECODE_EXT"
+	TextTransformationTypeSha256             TextTransformationType = "SHA256"
 )
 
 // Values returns all known values for TextTransformationType. Note that this can
@@ -1618,6 +1656,16 @@ func (TextTransformationType) Values() []TextTransformationType {
 		"BASE64_DECODE_EXT",
 		"URL_DECODE_UNI",
 		"UTF8_TO_UNICODE",
+		"REMOVE_WHITESPACE",
+		"TRIM",
+		"TRIM_LEFT",
+		"TRIM_RIGHT",
+		"REMOVE_COMMENTS_CHAR",
+		"UPPERCASE",
+		"CMD_LINE_WIN",
+		"CMD_LINE_UNIX",
+		"JS_DECODE_EXT",
+		"SHA256",
 	}
 }
 

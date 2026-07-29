@@ -1626,6 +1626,11 @@ func validateByteMatchStatement(v *types.ByteMatchStatement) error {
 			invalidParams.AddNested("TextTransformations", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.PreParseTextTransformations != nil {
+		if err := validatePreParseTextTransformations(v.PreParseTextTransformations); err != nil {
+			invalidParams.AddNested("PreParseTextTransformations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if len(v.PositionalConstraint) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PositionalConstraint"))
 	}
@@ -2778,6 +2783,38 @@ func validatePhoneNumberFields(v []types.PhoneNumberField) error {
 	}
 }
 
+func validatePreParseTextTransformation(v *types.PreParseTextTransformation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PreParseTextTransformation"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePreParseTextTransformations(v []types.PreParseTextTransformation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PreParseTextTransformations"}
+	for i := range v {
+		if err := validatePreParseTextTransformation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePrice(v *types.Price) error {
 	if v == nil {
 		return nil
@@ -3103,6 +3140,11 @@ func validateRegexMatchStatement(v *types.RegexMatchStatement) error {
 			invalidParams.AddNested("TextTransformations", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.PreParseTextTransformations != nil {
+		if err := validatePreParseTextTransformations(v.PreParseTextTransformations); err != nil {
+			invalidParams.AddNested("PreParseTextTransformations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3130,6 +3172,11 @@ func validateRegexPatternSetReferenceStatement(v *types.RegexPatternSetReference
 	} else if v.TextTransformations != nil {
 		if err := validateTextTransformations(v.TextTransformations); err != nil {
 			invalidParams.AddNested("TextTransformations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PreParseTextTransformations != nil {
+		if err := validatePreParseTextTransformations(v.PreParseTextTransformations); err != nil {
+			invalidParams.AddNested("PreParseTextTransformations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3575,6 +3622,11 @@ func validateSizeConstraintStatement(v *types.SizeConstraintStatement) error {
 			invalidParams.AddNested("TextTransformations", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.PreParseTextTransformations != nil {
+		if err := validatePreParseTextTransformations(v.PreParseTextTransformations); err != nil {
+			invalidParams.AddNested("PreParseTextTransformations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3599,6 +3651,11 @@ func validateSqliMatchStatement(v *types.SqliMatchStatement) error {
 	} else if v.TextTransformations != nil {
 		if err := validateTextTransformations(v.TextTransformations); err != nil {
 			invalidParams.AddNested("TextTransformations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PreParseTextTransformations != nil {
+		if err := validatePreParseTextTransformations(v.PreParseTextTransformations); err != nil {
+			invalidParams.AddNested("PreParseTextTransformations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3849,6 +3906,11 @@ func validateXssMatchStatement(v *types.XssMatchStatement) error {
 	} else if v.TextTransformations != nil {
 		if err := validateTextTransformations(v.TextTransformations); err != nil {
 			invalidParams.AddNested("TextTransformations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PreParseTextTransformations != nil {
+		if err := validatePreParseTextTransformations(v.PreParseTextTransformations); err != nil {
+			invalidParams.AddNested("PreParseTextTransformations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

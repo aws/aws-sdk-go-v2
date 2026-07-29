@@ -12262,6 +12262,26 @@ func (TransitGatewayMulticastDomainState) Values() []TransitGatewayMulticastDoma
 	}
 }
 
+type TransitGatewayPolicyTableEntryState string
+
+// Enum values for TransitGatewayPolicyTableEntryState
+const (
+	TransitGatewayPolicyTableEntryStateActive  TransitGatewayPolicyTableEntryState = "active"
+	TransitGatewayPolicyTableEntryStateDeleted TransitGatewayPolicyTableEntryState = "deleted"
+)
+
+// Values returns all known values for TransitGatewayPolicyTableEntryState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TransitGatewayPolicyTableEntryState) Values() []TransitGatewayPolicyTableEntryState {
+	return []TransitGatewayPolicyTableEntryState{
+		"active",
+		"deleted",
+	}
+}
+
 type TransitGatewayPolicyTableState string
 
 // Enum values for TransitGatewayPolicyTableState

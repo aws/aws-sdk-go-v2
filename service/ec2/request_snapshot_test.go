@@ -9871,6 +9871,47 @@ func TestCheckRequestSnapshot_CreateTransitGatewayPolicyTable(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateTransitGatewayPolicyTableEntry(t *testing.T) {
+	input := &CreateTransitGatewayPolicyTableEntryInput{
+		TransitGatewayPolicyTableId: ptr.String("__TransitGatewayPolicyTableId__"),
+		PolicyRuleNumber:            ptr.String("__PolicyRuleNumber__"),
+		PolicyRule: &types.TransitGatewayRequestPolicyRule{
+			SourceCidrBlock:      ptr.String("__SourceCidrBlock__"),
+			SourcePortRange:      ptr.String("__SourcePortRange__"),
+			DestinationCidrBlock: ptr.String("__DestinationCidrBlock__"),
+			DestinationPortRange: ptr.String("__DestinationPortRange__"),
+			Protocol:             ptr.String("__Protocol__"),
+			MetaData: &types.TransitGatewayRequestPolicyRuleMetaData{
+				MetaDataKey:   ptr.String("__MetaDataKey__"),
+				MetaDataValue: ptr.String("__MetaDataValue__"),
+			},
+		},
+		TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+		DryRun:             ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateTransitGatewayPolicyTableEntry(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTransitGatewayPolicyTableEntry"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateTransitGatewayPrefixListReference(t *testing.T) {
 	input := &CreateTransitGatewayPrefixListReferenceInput{
 		TransitGatewayRouteTableId: ptr.String("__TransitGatewayRouteTableId__"),
@@ -13424,6 +13465,35 @@ func TestCheckRequestSnapshot_DeleteTransitGatewayPolicyTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTransitGatewayPolicyTable"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteTransitGatewayPolicyTableEntry(t *testing.T) {
+	input := &DeleteTransitGatewayPolicyTableEntryInput{
+		TransitGatewayPolicyTableId: ptr.String("__TransitGatewayPolicyTableId__"),
+		PolicyRuleNumber:            ptr.String("__PolicyRuleNumber__"),
+		DryRun:                      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTransitGatewayPolicyTableEntry(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTransitGatewayPolicyTableEntry"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -31738,6 +31808,47 @@ func TestCheckRequestSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
+	input := &ModifyTransitGatewayPolicyTableEntryInput{
+		TransitGatewayPolicyTableId: ptr.String("__TransitGatewayPolicyTableId__"),
+		PolicyRuleNumber:            ptr.String("__PolicyRuleNumber__"),
+		PolicyRule: &types.TransitGatewayRequestPolicyRule{
+			SourceCidrBlock:      ptr.String("__SourceCidrBlock__"),
+			SourcePortRange:      ptr.String("__SourcePortRange__"),
+			DestinationCidrBlock: ptr.String("__DestinationCidrBlock__"),
+			DestinationPortRange: ptr.String("__DestinationPortRange__"),
+			Protocol:             ptr.String("__Protocol__"),
+			MetaData: &types.TransitGatewayRequestPolicyRuleMetaData{
+				MetaDataKey:   ptr.String("__MetaDataKey__"),
+				MetaDataValue: ptr.String("__MetaDataValue__"),
+			},
+		},
+		TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+		DryRun:             ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyTransitGatewayPolicyTableEntry(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGatewayPolicyTableEntry"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ModifyTransitGatewayPrefixListReference(t *testing.T) {
 	input := &ModifyTransitGatewayPrefixListReferenceInput{
 		TransitGatewayRouteTableId: ptr.String("__TransitGatewayRouteTableId__"),
@@ -47802,6 +47913,47 @@ func TestUpdateRequestSnapshot_CreateTransitGatewayPolicyTable(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateTransitGatewayPolicyTableEntry(t *testing.T) {
+	input := &CreateTransitGatewayPolicyTableEntryInput{
+		TransitGatewayPolicyTableId: ptr.String("__TransitGatewayPolicyTableId__"),
+		PolicyRuleNumber:            ptr.String("__PolicyRuleNumber__"),
+		PolicyRule: &types.TransitGatewayRequestPolicyRule{
+			SourceCidrBlock:      ptr.String("__SourceCidrBlock__"),
+			SourcePortRange:      ptr.String("__SourcePortRange__"),
+			DestinationCidrBlock: ptr.String("__DestinationCidrBlock__"),
+			DestinationPortRange: ptr.String("__DestinationPortRange__"),
+			Protocol:             ptr.String("__Protocol__"),
+			MetaData: &types.TransitGatewayRequestPolicyRuleMetaData{
+				MetaDataKey:   ptr.String("__MetaDataKey__"),
+				MetaDataValue: ptr.String("__MetaDataValue__"),
+			},
+		},
+		TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+		DryRun:             ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateTransitGatewayPolicyTableEntry(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTransitGatewayPolicyTableEntry"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateTransitGatewayPrefixListReference(t *testing.T) {
 	input := &CreateTransitGatewayPrefixListReferenceInput{
 		TransitGatewayRouteTableId: ptr.String("__TransitGatewayRouteTableId__"),
@@ -51355,6 +51507,35 @@ func TestUpdateRequestSnapshot_DeleteTransitGatewayPolicyTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTransitGatewayPolicyTable"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteTransitGatewayPolicyTableEntry(t *testing.T) {
+	input := &DeleteTransitGatewayPolicyTableEntryInput{
+		TransitGatewayPolicyTableId: ptr.String("__TransitGatewayPolicyTableId__"),
+		PolicyRuleNumber:            ptr.String("__PolicyRuleNumber__"),
+		DryRun:                      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTransitGatewayPolicyTableEntry(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTransitGatewayPolicyTableEntry"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -69665,6 +69846,47 @@ func TestUpdateRequestSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) 
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGatewayMeteringPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
+	input := &ModifyTransitGatewayPolicyTableEntryInput{
+		TransitGatewayPolicyTableId: ptr.String("__TransitGatewayPolicyTableId__"),
+		PolicyRuleNumber:            ptr.String("__PolicyRuleNumber__"),
+		PolicyRule: &types.TransitGatewayRequestPolicyRule{
+			SourceCidrBlock:      ptr.String("__SourceCidrBlock__"),
+			SourcePortRange:      ptr.String("__SourcePortRange__"),
+			DestinationCidrBlock: ptr.String("__DestinationCidrBlock__"),
+			DestinationPortRange: ptr.String("__DestinationPortRange__"),
+			Protocol:             ptr.String("__Protocol__"),
+			MetaData: &types.TransitGatewayRequestPolicyRuleMetaData{
+				MetaDataKey:   ptr.String("__MetaDataKey__"),
+				MetaDataValue: ptr.String("__MetaDataValue__"),
+			},
+		},
+		TargetRouteTableId: ptr.String("__TargetRouteTableId__"),
+		DryRun:             ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyTransitGatewayPolicyTableEntry(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGatewayPolicyTableEntry"); err != nil {
 		t.Fatal(err)
 	}
 }
