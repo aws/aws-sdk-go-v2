@@ -10,6 +10,7 @@
         "api_client_test.go",
         "api_op_GetResource.go",
         "api_op_GetStreamingResource.go",
+        "api_op_PutCompressedData.go",
         "api_op_SubscribeEvents.go",
         "auth.go",
         "common_serde.go",

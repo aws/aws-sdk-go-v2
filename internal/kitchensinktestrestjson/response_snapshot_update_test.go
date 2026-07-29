@@ -125,6 +125,28 @@ func TestUpdateResponseSnapshot_GetStreamingResource(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_PutCompressedData(t *testing.T) {
+	want := &PutCompressedDataOutput{}
+	proto := restjson1.New(schemas.RestJson1KitchenSink)
+	opSchema := smithy.NewOperationSchema(schemas.PutCompressedData, schemas.PutCompressedDataOutput, schemas.PutCompressedDataOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutCompressedData.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_Error_ResourceNotFound(t *testing.T) {
 	want := &types.ResourceNotFound{}
 	proto := restjson1.New(schemas.RestJson1KitchenSink)

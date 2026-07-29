@@ -22,6 +22,13 @@ var GetStreamingResource = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/resource/{id}/stream",
 	Code: 200})
 
+var PutCompressedData = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestrestjson",
+	Name:      "PutCompressedData",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/compressed",
+	Code: 200})
+
 var SubscribeEvents = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestrestjson",
 	Name:      "SubscribeEvents",
@@ -82,6 +89,17 @@ var GetStreamingResourceOutput = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var GetStreamingResourceOutput_body *smithy.Schema
 
+var PutCompressedDataInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestrestjson",
+	Name:      "PutCompressedDataInput",
+}, smithy.ShapeTypeStructure, 1)
+var PutCompressedDataInput_data *smithy.Schema
+
+var PutCompressedDataOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "aws.kitchensinktestrestjson",
+	Name:      "PutCompressedDataOutput",
+}, smithy.ShapeTypeStructure, 0)
+
 var SubscribeEventsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "aws.kitchensinktestrestjson",
 	Name:      "SubscribeEventsInput",
@@ -108,6 +126,8 @@ func init() {
 	GetStreamingResourceInput_id = GetStreamingResourceInput.AddMember("id", smithyprelude.String, &smithytraits.HTTPLabel{})
 
 	GetStreamingResourceOutput_body = GetStreamingResourceOutput.AddMember("body", _StreamingPayload, &smithytraits.HTTPPayload{})
+
+	PutCompressedDataInput_data = PutCompressedDataInput.AddMember("data", smithyprelude.String)
 
 	SubscribeEventsInput_id = SubscribeEventsInput.AddMember("id", smithyprelude.String, &smithytraits.HTTPLabel{})
 

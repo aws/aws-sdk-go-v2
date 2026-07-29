@@ -128,7 +128,7 @@ namespace aws.kitchensinktest
 )
 service AwsJson1KitchenSink {
     version: "2025-03-01",
-    operations: [GetItem, SubscribeEvents],
+    operations: [GetItem, SubscribeEvents, PutCompressedData],
 }
 
 operation GetItem {
@@ -172,3 +172,20 @@ union Events {
 structure MessageEvent {
     body: String,
 }
+
+// Request-compression operation: the request body is gzip-compressed by a
+// Serialize-step middleware after serialization. Content length must be
+// computed from the compressed body, so this guards against it being computed
+// (inline in the serializer) from the uncompressed body.
+@requestCompression(encodings: ["gzip"])
+operation PutCompressedData {
+    input: PutCompressedDataInput,
+    output: PutCompressedDataOutput,
+    errors: [ItemNotFound],
+}
+
+structure PutCompressedDataInput {
+    data: String,
+}
+
+structure PutCompressedDataOutput {}
