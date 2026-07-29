@@ -1,3 +1,7 @@
+# v0.3.7 (2026-07-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v0.3.6 (2026-07-28)
 
 * **Bug Fix**: Fix flaky test from feature/s3/transfermanager upload retry

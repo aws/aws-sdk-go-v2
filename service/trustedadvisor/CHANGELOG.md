@@ -1,3 +1,7 @@
+# v1.18.1 (2026-07-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2026-07-28)
 
 * **Feature**: Adds ListRecommendationsForResource API and four CheckSummary fields (resourceArnQueryable, awsResourceTypes, checkGranularity, recommendationId) to retrieve recommendations for a given resource ARN.

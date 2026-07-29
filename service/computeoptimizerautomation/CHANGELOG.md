@@ -1,3 +1,7 @@
+# v1.6.1 (2026-07-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.0 (2026-07-28)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

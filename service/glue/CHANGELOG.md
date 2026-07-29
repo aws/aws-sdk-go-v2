@@ -1,3 +1,8 @@
+# v1.151.0 (2026-07-29)
+
+* **Feature**: Adding filtering, partitioning, and VPC support to AWS Glue REST API connector
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.150.1 (2026-07-28)
 
 * **Dependency Update**: Update to smithy-go v1.27.5.

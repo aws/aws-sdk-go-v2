@@ -1,3 +1,7 @@
+# v1.61.2 (2026-07-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.61.1 (2026-07-28)
 
 * **Documentation**: Adds Enhanced mode support for EFS and FSx Lustre locations without an agent, and for HDFS (TDE), Azure Blob, and object storage locations with an agent. HDFS Enhanced mode supports multiple NameNodes for High Availability. Enhanced mode agents can now be deployed on Microsoft Hyper-V.

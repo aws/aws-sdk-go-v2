@@ -1,3 +1,22 @@
+# Release (2026-07-29)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.66.2](service/databasemigrationservice/CHANGELOG.md#v1662-2026-07-29)
+  * **Documentation**: Updated documentation for various DMS Schema Conversion operations
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.318.0](service/ec2/CHANGELOG.md#v13180-2026-07-29)
+  * **Feature**: This release adds support for policy-based routing on AWS Transit Gateway, enabling you to route traffic based on 5-tuple matching (source IP, destination IP, source port, destination port, and protocol) using new policy table entry APIs that direct matching traffic to a target route table.
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.17.0](service/gameliftstreams/CHANGELOG.md#v1170-2026-07-29)
+  * **Feature**: Adds ListApplicationShaderCaches API to retrieve shader cache metadata for applications and adds stream URLs, which give end users temporary, unauthenticated access to a stream session in their browser. Includes CreateStreamUrl, GetStreamUrl, ListStreamUrls, and RevokeStreamUrl operations.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.151.0](service/glue/CHANGELOG.md#v11510-2026-07-29)
+  * **Feature**: Adding filtering, partitioning, and VPC support to AWS Glue REST API connector
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.56.0](service/iotsitewise/CHANGELOG.md#v1560-2026-07-29)
+  * **Feature**: We have released a new set of APIs in support of a major new feature within AWS IoT SiteWise called Scenario Discover. Please see user guide about the feature and the API guide in public documentation for new APIs.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.77.0](service/wafv2/CHANGELOG.md#v1770-2026-07-29)
+  * **Feature**: AWS WAF now supports pre-parse text transformations, letting you normalize raw query strings before parsing, available on rule statements that use SingleQueryArgument or AllQueryArguments as the FieldToMatch. AWS WAF also added 10 new text transformations, including ModSecurity v3 parity options.
+
 # Release (2026-07-28)
 
 ## General Highlights

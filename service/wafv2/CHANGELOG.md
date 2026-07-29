@@ -1,3 +1,8 @@
+# v1.77.0 (2026-07-29)
+
+* **Feature**: AWS WAF now supports pre-parse text transformations, letting you normalize raw query strings before parsing, available on rule statements that use SingleQueryArgument or AllQueryArguments as the FieldToMatch. AWS WAF also added 10 new text transformations, including ModSecurity v3 parity options.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.76.1 (2026-07-28)
 
 * **Dependency Update**: Update to smithy-go v1.27.5.

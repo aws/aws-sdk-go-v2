@@ -1,3 +1,8 @@
+# v1.56.0 (2026-07-29)
+
+* **Feature**: We have released a new set of APIs in support of a major new feature within AWS IoT SiteWise called Scenario Discover. Please see user guide about the feature and the API guide in public documentation for new APIs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.1 (2026-07-28)
 
 * **Dependency Update**: Update to smithy-go v1.27.5.

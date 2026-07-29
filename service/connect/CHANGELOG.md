@@ -1,3 +1,7 @@
+# v1.184.2 (2026-07-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.184.1 (2026-07-28)
 
 * **Documentation**: Documentation updates for SearchRules, AssociateRoutingProfileQueues, CreateRoutingProfile, AssociateContactWithUser CreateTaskTemplate, and UpdateTaskTemplate
