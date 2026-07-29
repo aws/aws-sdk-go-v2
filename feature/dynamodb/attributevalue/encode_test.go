@@ -292,6 +292,18 @@ func TestMarshalListOmitEmptyElem(t *testing.T) {
 	}
 }
 
+func TestMarshalTime_S_FiveDigitYear(t *testing.T) {
+	type A struct {
+		TimeField time.Time
+	}
+
+	input := A{TimeField: time.Date(58000, 1, 15, 12, 30, 45, 123456789, time.UTC)}
+	_, err := Marshal(input)
+	if err == nil {
+		t.Fatal("expect marshal error for 5-digit year, got nil")
+	}
+}
+
 func TestMarshalMapOmitEmptyElem(t *testing.T) {
 	expect := &types.AttributeValueMemberM{
 		Value: map[string]types.AttributeValue{
