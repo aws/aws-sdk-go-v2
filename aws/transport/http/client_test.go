@@ -1,8 +1,10 @@
 package http
 
 import (
+	"crypto/tls"
 	"net/http"
 	"net/http/httptest"
+	"reflect"
 	"strings"
 	"sync"
 	"testing"
@@ -156,5 +158,41 @@ func TestBuildableClient_KeepsSecurityTokenOnSameHost(t *testing.T) {
 
 	if resp.StatusCode != http.StatusOK {
 		t.Errorf("expect 200 code, got %d", resp.StatusCode)
+	}
+}
+func TestDefaultHTTPTransportTLSConfig(t *testing.T) {
+	tr := defaultHTTPTransport()
+
+	if tr.TLSClientConfig == nil {
+		t.Fatal("expected TLSClientConfig to be initialized")
+	}
+
+	if tr.TLSClientConfig.MinVersion != tls.VersionTLS12 {
+		t.Fatalf(
+			"expected TLS min version %v, got %v",
+			tls.VersionTLS12,
+			tr.TLSClientConfig.MinVersion,
+		)
+	}
+}
+func TestDefaultHTTPTransportCurvePreferences(t *testing.T) {
+	tr := defaultHTTPTransport()
+
+	if tr.TLSClientConfig == nil {
+		t.Fatal("expected TLSClientConfig")
+	}
+
+	expected := []tls.CurveID{
+		tls.CurveP256,
+		tls.CurveP384,
+		tls.CurveP521,
+	}
+
+	if !reflect.DeepEqual(tr.TLSClientConfig.CurvePreferences, expected) {
+		t.Fatalf(
+			"expected curve preferences %v, got %v",
+			expected,
+			tr.TLSClientConfig.CurvePreferences,
+		)
 	}
 }
