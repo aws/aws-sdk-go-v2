@@ -1,0 +1,15 @@
+{
+    "id": "1f9a61e5-d6e5-44f1-9e55-ddc17f6439ee",
+    "type": "bugfix",
+    "description": "Handle explicit wire-level null values in CBOR structure fields for services on legacy static CBOR serde.",
+    "modules": [
+        "service/applicationinsights",
+        "service/appstream",
+        "service/backupgateway",
+        "service/bcmpricingcalculator",
+        "service/bcmrecommendedactions",
+        "service/kendraranking",
+        "service/mailmanager",
+        "service/workspacesinstances"
+    ]
+}
