@@ -1,3 +1,7 @@
+# v1.9.0 (2026-07-30)
+
+* **Feature**: Adds support for providing a branch override when configured integrated repositories
+
 # v1.8.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

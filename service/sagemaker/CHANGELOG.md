@@ -1,3 +1,7 @@
+# v1.263.0 (2026-07-30)
+
+* **Feature**: Adds support for g7 family instance types for SageMaker Studio JupyterLab and CodeEditor apps for IAD (us-east-1), PDX (us-west-2), CMH (us-east-2).
+
 # v1.262.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,24 @@
+# Release (2026-07-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.53.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1530-2026-07-30)
+  * **Feature**: Adds support for configuring models through the OpenResponses API for custom evaluators. CreateEvaluator and UpdateEvaluator now accept an OpenResponses model configuration for LLM-as-a-Judge evaluations.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.57.0](service/iam/CHANGELOG.md#v1570-2026-07-30)
+  * **Feature**: Improved IAM Policy Simulator accuracy. Simulator now evaluates SCP conditions and resource scoping, returns explicitDeny for explicit SCP denials, and reports accurate cross-account decisions.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.57.0](service/kafka/CHANGELOG.md#v1570-2026-07-30)
+  * **Feature**: Amazon MSK Express brokers now support streaming tables for Apache Iceberg, continuously materializing Apache Kafka topics as Iceberg tables in Amazon S3 Tables. Express brokers also now support data delivery to Amazon S3 general purpose buckets.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.101.0](service/lambda/CHANGELOG.md#v11010-2026-07-30)
+  * **Feature**: Add Python3.15 (python3.15) and NodeJs 26 (nodejs26.x) support to AWS Lambda
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.65.0](service/networkfirewall/CHANGELOG.md#v1650-2026-07-30)
+  * **Feature**: Adds UPDATING field to Container Association Status
+* `github.com/aws/aws-sdk-go-v2/service/pricingplanmanager`: [v1.0.0](service/pricingplanmanager/CHANGELOG.md#v100-2026-07-30)
+  * **Release**: New AWS service client module
+  * **Feature**: Adds support for Public PricingPlanManager SDK
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.263.0](service/sagemaker/CHANGELOG.md#v12630-2026-07-30)
+  * **Feature**: Adds support for g7 family instance types for SageMaker Studio JupyterLab and CodeEditor apps for IAD (us-east-1), PDX (us-west-2), CMH (us-east-2).
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.9.0](service/securityagent/CHANGELOG.md#v190-2026-07-30)
+  * **Feature**: Adds support for providing a branch override when configured integrated repositories
+
 # Release (2026-07-29)
 
 ## General Highlights

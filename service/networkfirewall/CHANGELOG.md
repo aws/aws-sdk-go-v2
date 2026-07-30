@@ -1,3 +1,7 @@
+# v1.65.0 (2026-07-30)
+
+* **Feature**: Adds UPDATING field to Container Association Status
+
 # v1.64.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

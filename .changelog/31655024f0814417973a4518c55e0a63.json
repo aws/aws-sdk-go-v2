@@ -1,8 +1,0 @@
-{
-    "id": "31655024-f081-4417-973a-4518c55e0a63",
-    "type": "feature",
-    "description": "Adds support for Public PricingPlanManager SDK",
-    "modules": [
-        "service/pricingplanmanager"
-    ]
-}

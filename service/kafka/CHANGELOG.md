@@ -1,3 +1,7 @@
+# v1.57.0 (2026-07-30)
+
+* **Feature**: Amazon MSK Express brokers now support streaming tables for Apache Iceberg, continuously materializing Apache Kafka topics as Iceberg tables in Amazon S3 Tables. Express brokers also now support data delivery to Amazon S3 general purpose buckets.
+
 # v1.56.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

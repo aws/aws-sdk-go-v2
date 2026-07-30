@@ -1,8 +1,0 @@
-{
-    "id": "46b3ef7a-be31-41fd-bc52-3682df7a7549",
-    "type": "feature",
-    "description": "Add Python3.15 (python3.15) and NodeJs 26 (nodejs26.x) support to AWS Lambda",
-    "modules": [
-        "service/lambda"
-    ]
-}

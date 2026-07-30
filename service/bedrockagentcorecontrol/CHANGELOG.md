@@ -1,3 +1,7 @@
+# v1.53.0 (2026-07-30)
+
+* **Feature**: Adds support for configuring models through the OpenResponses API for custom evaluators. CreateEvaluator and UpdateEvaluator now accept an OpenResponses model configuration for LLM-as-a-Judge evaluations.
+
 # v1.52.1 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

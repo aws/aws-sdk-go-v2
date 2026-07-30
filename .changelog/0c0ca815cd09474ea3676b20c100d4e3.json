@@ -1,8 +1,0 @@
-{
-    "id": "0c0ca815-cd09-474e-a367-6b20c100d4e3",
-    "type": "feature",
-    "description": "Adds support for configuring models through the OpenResponses API for custom evaluators. CreateEvaluator and UpdateEvaluator now accept an OpenResponses model configuration for LLM-as-a-Judge evaluations.",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "2f08b86f-4a3f-4e64-be1c-75491992b4cd",
-    "type": "feature",
-    "description": "Adds support for providing a branch override when configured integrated repositories",
-    "modules": [
-        "service/securityagent"
-    ]
-}
