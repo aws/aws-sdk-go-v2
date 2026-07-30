@@ -12073,6 +12073,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The Amazon Bedrock model configuration for evaluation. </p>"
                     }
+                },
+                "responsesEvaluatorModelConfig": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#OpenResponsesEvaluatorModelConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The OpenResponses model configuration for evaluation. </p>"
+                    }
                 }
             },
             "traits": {
@@ -26082,6 +26088,56 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#OpenResponsesEvaluatorModelConfig": {
+            "type": "structure",
+            "members": {
+                "modelId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ModelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier of the model to use for evaluation. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxOutputTokens": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum number of tokens to generate in the model response, including visible output and reasoning tokens. </p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                },
+                "temperature": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The temperature value that controls randomness in the model's responses. Lower values produce more deterministic outputs. </p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 2
+                        }
+                    }
+                },
+                "topP": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The top-p sampling parameter that controls the diversity of the model's responses by limiting the cumulative probability of token choices. </p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1
+                        }
+                    }
+                },
+                "reasoning": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ReasoningConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The reasoning configuration for reasoning models. Non-reasoning models ignore this configuration. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The configuration for using models served through the OpenResponses API in evaluator assessments, including model selection and inference parameters. </p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#OutputConfig": {
             "type": "structure",
             "members": {
@@ -27968,6 +28024,24 @@
             "traits": {
                 "smithy.api#documentation": "<p> The rating scale that defines how evaluators should score agent performance, supporting both numerical and categorical scales. </p>",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ReasoningConfiguration": {
+            "type": "structure",
+            "members": {
+                "effort": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The level of reasoning effort the model applies when generating a response. For supported values, see the model provider's documentation. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 64
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The reasoning configuration that controls how a reasoning model allocates effort during evaluation. </p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#RecordIdentifier": {

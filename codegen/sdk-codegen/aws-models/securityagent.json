@@ -7193,6 +7193,12 @@
                         "smithy.api#documentation": "<p>The provider-specific resource identifier for the repository.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "branch": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional override for the repository branch.</p>"
+                    }
                 }
             },
             "traits": {

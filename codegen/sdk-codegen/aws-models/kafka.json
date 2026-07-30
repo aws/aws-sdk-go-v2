@@ -502,6 +502,209 @@
                 "smithy.api#documentation": "<p>Information about the current software installed on the cluster.</p>"
             }
         },
+        "com.amazonaws.kafka#Catalog": {
+            "type": "structure",
+            "members": {
+                "CatalogArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the federated AWS Glue Data Catalog that projects the S3 Tables bucket. If omitted, MSK derives the catalog ARN from warehouseLocation.</p>",
+                        "smithy.api#jsonName": "catalogArn"
+                    }
+                },
+                "WarehouseLocation": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the S3 Tables bucket that backs the Apache Iceberg warehouse.</p>",
+                        "smithy.api#jsonName": "warehouseLocation"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration of the AWS Glue Data Catalog and S3 Tables warehouse used by the Apache Iceberg destination.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ChannelDestinationType": {
+            "type": "enum",
+            "members": {
+                "ICEBERG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ICEBERG"
+                    }
+                },
+                "S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of destination configured for the channel.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ChannelInfo": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the channel.</p>",
+                        "smithy.api#jsonName": "channelArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the channel.</p>",
+                        "smithy.api#jsonName": "channelName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.kafka#ChannelStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The current lifecycle state of the channel.</p>",
+                        "smithy.api#jsonName": "status",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.kafka#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time when the channel was created.</p>",
+                        "smithy.api#jsonName": "creationTime",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationType": {
+                    "target": "com.amazonaws.kafka#ChannelDestinationType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of destination configured for the channel.</p>",
+                        "smithy.api#jsonName": "destinationType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterOperationArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the in-flight cluster operation. Returned only while the channel is in CREATING, UPDATING, or DELETING.</p>",
+                        "smithy.api#jsonName": "clusterOperationArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a channel returned by ListChannels.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ChannelLoggingInfo": {
+            "type": "structure",
+            "members": {
+                "CloudWatchLogs": {
+                    "target": "com.amazonaws.kafka#CloudWatchLogs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the CloudWatch Logs destination for Channel logs.</p>",
+                        "smithy.api#jsonName": "cloudWatchLogs"
+                    }
+                },
+                "Firehose": {
+                    "target": "com.amazonaws.kafka#Firehose",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the Kinesis Data Firehose delivery stream that is the destination for Channel logs.</p>",
+                        "smithy.api#jsonName": "firehose"
+                    }
+                },
+                "S3": {
+                    "target": "com.amazonaws.kafka#S3",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the Amazon S3 destination for Channel logs.</p>",
+                        "smithy.api#jsonName": "s3"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for the destinations to which the channel publishes operational logs.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ChannelStateInfo": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short, machine-readable code identifying the failure cause.</p>",
+                        "smithy.api#jsonName": "code"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable message describing the failure.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Additional context for the current channel state, populated when the channel is in FAILED.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ChannelStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SUSPENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUSPENDING"
+                    }
+                },
+                "SUSPENDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUSPENDED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The lifecycle state of a channel.</p>"
+            }
+        },
         "com.amazonaws.kafka#ClientAuthentication": {
             "type": "structure",
             "members": {
@@ -1667,6 +1870,145 @@
                 "smithy.api#documentation": "<p>Controller node information.</p>"
             }
         },
+        "com.amazonaws.kafka#CreateChannel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#CreateChannelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#CreateChannelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Channel that streams records from an Amazon MSK Express cluster topic to Amazon S3 or Apache Iceberg.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/clusters/{ClusterArn}/channels",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.kafka#CreateChannelRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the channel. Must be unique within the cluster.</p>",
+                        "smithy.api#jsonName": "channelName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.kafka#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration applied to the channel.</p>",
+                        "smithy.api#jsonName": "encryptionConfiguration"
+                    }
+                },
+                "IcebergDestinationConfiguration": {
+                    "target": "com.amazonaws.kafka#IcebergDestinationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Apache Iceberg destination for the channel. Mutually exclusive with s3DestinationConfiguration.</p>",
+                        "smithy.api#jsonName": "icebergDestinationConfiguration"
+                    }
+                },
+                "S3DestinationConfiguration": {
+                    "target": "com.amazonaws.kafka#S3DestinationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 destination for the channel. Mutually exclusive with icebergDestinationConfiguration.</p>",
+                        "smithy.api#jsonName": "s3DestinationConfiguration"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.kafka#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags attached to the channel.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                },
+                "TopicConfigurationList": {
+                    "target": "com.amazonaws.kafka#__listOfTopicConfiguration",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The list of topic configurations for the channel. Currently exactly one topic must be specified.</p>",
+                        "smithy.api#jsonName": "topicConfigurationList",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LoggingInfo": {
+                    "target": "com.amazonaws.kafka#ChannelLoggingInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destinations to which the channel publishes operational logs.</p>",
+                        "smithy.api#jsonName": "loggingInfo"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Channel that streams records from an Amazon MSK Express cluster topic to Amazon S3 or Apache Iceberg.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#CreateChannelResponse": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the channel.</p>",
+                        "smithy.api#jsonName": "channelArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterOperationArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster operation.</p>",
+                        "smithy.api#jsonName": "clusterOperationArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the channel ARN and the cluster-operation ARN that tracks the asynchronous create.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kafka#CreateCluster": {
             "type": "operation",
             "input": {
@@ -2550,6 +2892,127 @@
                 "smithy.api#documentation": "<p>A type of an action required from the customer.</p>"
             }
         },
+        "com.amazonaws.kafka#DeadLetterQueueS3": {
+            "type": "structure",
+            "members": {
+                "BucketArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dead-letter Amazon S3 bucket.</p>",
+                        "smithy.api#jsonName": "bucketArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorOutputPrefix": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional prefix prepended to every dead-letter Amazon S3 object key.</p>",
+                        "smithy.api#jsonName": "errorOutputPrefix"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional 12-digit AWS account ID expected to own the dead-letter Amazon S3 bucket.</p>",
+                        "smithy.api#jsonName": "expectedBucketOwner"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration of the Amazon S3 bucket where records that fail to deliver are stored.</p>"
+            }
+        },
+        "com.amazonaws.kafka#DeleteChannel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#DeleteChannelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#DeleteChannelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the channel specified by channelArn from the cluster specified by clusterArn. The channel transitions through DELETING and is removed when the asynchronous delete completes.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/clusters/{ClusterArn}/channels/{ChannelArn}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.kafka#DeleteChannelRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the channel.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#DeleteChannelResponse": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the channel.</p>",
+                        "smithy.api#jsonName": "channelArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterOperationArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster operation.</p>",
+                        "smithy.api#jsonName": "clusterOperationArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the channel ARN and the cluster-operation ARN that tracks the asynchronous delete.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kafka#DeleteCluster": {
             "type": "operation",
             "input": {
@@ -3008,6 +3471,182 @@
                 }
             },
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kafka#DescribeChannel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#DescribeChannelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#DescribeChannelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the current configuration and state of a channel.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/clusters/{ClusterArn}/channels/{ChannelArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#DescribeChannelRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the channel.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#DescribeChannelResponse": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the channel.</p>",
+                        "smithy.api#jsonName": "channelArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the channel.</p>",
+                        "smithy.api#jsonName": "channelName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.kafka#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration applied to the channel.</p>",
+                        "smithy.api#jsonName": "encryptionConfiguration"
+                    }
+                },
+                "IcebergDestinationConfiguration": {
+                    "target": "com.amazonaws.kafka#IcebergDestinationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Apache Iceberg destination for the channel, if configured.</p>",
+                        "smithy.api#jsonName": "icebergDestinationConfiguration"
+                    }
+                },
+                "S3DestinationConfiguration": {
+                    "target": "com.amazonaws.kafka#S3DestinationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 destination for the channel, if configured.</p>",
+                        "smithy.api#jsonName": "s3DestinationConfiguration"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.kafka#ChannelStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The current lifecycle state of the channel.</p>",
+                        "smithy.api#jsonName": "status",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationType": {
+                    "target": "com.amazonaws.kafka#ChannelDestinationType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of destination configured for the channel.</p>",
+                        "smithy.api#jsonName": "destinationType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.kafka#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time when the channel was created.</p>",
+                        "smithy.api#jsonName": "creationTime",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TopicConfigurationList": {
+                    "target": "com.amazonaws.kafka#__listOfTopicConfiguration",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The list of topic configurations for the channel.</p>",
+                        "smithy.api#jsonName": "topicConfigurationList",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LoggingInfo": {
+                    "target": "com.amazonaws.kafka#ChannelLoggingInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destinations to which the channel publishes operational logs.</p>",
+                        "smithy.api#jsonName": "loggingInfo"
+                    }
+                },
+                "StateInfo": {
+                    "target": "com.amazonaws.kafka#ChannelStateInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional context for the current channel state, populated when the channel is in FAILED.</p>",
+                        "smithy.api#jsonName": "stateInfo"
+                    }
+                },
+                "ClusterOperationArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the in-flight cluster operation. Returned only while the channel is in CREATING, UPDATING, or DELETING.</p>",
+                        "smithy.api#jsonName": "clusterOperationArn"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.kafka#__mapOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags attached to the channel.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the current configuration and state of a channel.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -3985,6 +4624,35 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kafka#DestinationTable": {
+            "type": "structure",
+            "members": {
+                "DestinationDatabaseName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the destination namespace (database) in the AWS Glue Data Catalog.</p>",
+                        "smithy.api#jsonName": "destinationDatabaseName"
+                    }
+                },
+                "DestinationTableName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the destination Apache Iceberg table.</p>",
+                        "smithy.api#jsonName": "destinationTableName"
+                    }
+                },
+                "PartitionSpec": {
+                    "target": "com.amazonaws.kafka#PartitionSpec",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The partition specification for the destination table.</p>",
+                        "smithy.api#jsonName": "partitionSpec"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration of an Apache Iceberg destination table.</p>"
+            }
+        },
         "com.amazonaws.kafka#EBSStorageInfo": {
             "type": "structure",
             "members": {
@@ -4022,6 +4690,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The data-volume encryption details.</p>"
+            }
+        },
+        "com.amazonaws.kafka#EncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS KMS key used to encrypt the data.</p>",
+                        "smithy.api#jsonName": "kmsKeyArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The AWS KMS encryption configuration applied to data at rest.</p>"
             }
         },
         "com.amazonaws.kafka#EncryptionInTransit": {
@@ -4499,6 +5184,126 @@
                 "smithy.api#documentation": "<p>Details for IAM access control.</p>"
             }
         },
+        "com.amazonaws.kafka#IcebergCompressionType": {
+            "type": "enum",
+            "members": {
+                "ZSTD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZSTD"
+                    }
+                },
+                "SNAPPY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNAPPY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Compression codec for Iceberg table data files. Defaults to ZSTD.</p>"
+            }
+        },
+        "com.amazonaws.kafka#IcebergDestinationConfiguration": {
+            "type": "structure",
+            "members": {
+                "AppendOnly": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Whether the destination is append-only. Must be true; updates and deletes are not supported.</p>",
+                        "smithy.api#jsonName": "appendOnly",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Catalog": {
+                    "target": "com.amazonaws.kafka#Catalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Glue Data Catalog and S3 Tables warehouse used by the destination.</p>",
+                        "smithy.api#jsonName": "catalog"
+                    }
+                },
+                "DataFreshnessInSeconds": {
+                    "target": "com.amazonaws.kafka#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that records buffer in MSK before being flushed to the destination. Allowed range: 300 to 900. Default: 600.</p>",
+                        "smithy.api#jsonName": "dataFreshnessInSeconds"
+                    }
+                },
+                "DeadLetterQueueS3": {
+                    "target": "com.amazonaws.kafka#DeadLetterQueueS3",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket and prefix where MSK writes records that fail to deliver.</p>",
+                        "smithy.api#jsonName": "deadLetterQueueS3",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationTableList": {
+                    "target": "com.amazonaws.kafka#__listOfDestinationTable",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The destination Iceberg tables. Currently exactly one table must be specified.</p>",
+                        "smithy.api#jsonName": "destinationTableList",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SchemaEvolution": {
+                    "target": "com.amazonaws.kafka#SchemaEvolution",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Configuration controlling whether the destination table's schema is evolved to match incoming records.</p>",
+                        "smithy.api#jsonName": "schemaEvolution",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceExecutionRoleArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that MSK assumes to access the destination table, the AWS Glue Data Catalog, and the dead-letter Amazon S3 bucket.</p>",
+                        "smithy.api#jsonName": "serviceExecutionRoleArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableCreation": {
+                    "target": "com.amazonaws.kafka#TableCreation",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Configuration controlling whether MSK creates the destination table if it does not already exist.</p>",
+                        "smithy.api#jsonName": "tableCreation",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CompressionType": {
+                    "target": "com.amazonaws.kafka#IcebergCompressionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compression codec for Iceberg table data files. Defaults to ZSTD.</p>",
+                        "smithy.api#jsonName": "compressionType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration of an Apache Iceberg destination for a channel.</p>"
+            }
+        },
+        "com.amazonaws.kafka#IcebergDestinationUpdate": {
+            "type": "structure",
+            "members": {
+                "DataFreshnessInSeconds": {
+                    "target": "com.amazonaws.kafka#__integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that records buffer in MSK before being flushed to the destination. Allowed range: 300 to 900.</p>",
+                        "smithy.api#jsonName": "dataFreshnessInSeconds",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Update payload for an Apache Iceberg destination.</p>"
+            }
+        },
         "com.amazonaws.kafka#InternalServerErrorException": {
             "type": "structure",
             "members": {
@@ -4568,6 +5373,9 @@
                     "target": "com.amazonaws.kafka#BatchDisassociateScramSecret"
                 },
                 {
+                    "target": "com.amazonaws.kafka#CreateChannel"
+                },
+                {
                     "target": "com.amazonaws.kafka#CreateCluster"
                 },
                 {
@@ -4586,6 +5394,9 @@
                     "target": "com.amazonaws.kafka#CreateVpcConnection"
                 },
                 {
+                    "target": "com.amazonaws.kafka#DeleteChannel"
+                },
+                {
                     "target": "com.amazonaws.kafka#DeleteCluster"
                 },
                 {
@@ -4602,6 +5413,9 @@
                 },
                 {
                     "target": "com.amazonaws.kafka#DeleteVpcConnection"
+                },
+                {
+                    "target": "com.amazonaws.kafka#DescribeChannel"
                 },
                 {
                     "target": "com.amazonaws.kafka#DescribeCluster"
@@ -4641,6 +5455,9 @@
                 },
                 {
                     "target": "com.amazonaws.kafka#GetCompatibleKafkaVersions"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ListChannels"
                 },
                 {
                     "target": "com.amazonaws.kafka#ListClientVpcConnections"
@@ -4707,6 +5524,9 @@
                 },
                 {
                     "target": "com.amazonaws.kafka#UpdateBrokerType"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UpdateChannel"
                 },
                 {
                     "target": "com.amazonaws.kafka#UpdateClusterConfiguration"
@@ -6350,6 +7170,106 @@
                 }
             }
         },
+        "com.amazonaws.kafka#ListChannels": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#ListChannelsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#ListChannelsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the list of channels in a cluster.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/clusters/{ClusterArn}/channels",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#ListChannelsRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.kafka#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of channels to return in a single response.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response of ListChannels is truncated, it returns a nextToken in the response. This nextToken should be sent in the subsequent request to ListChannels.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "TopicNameFilter": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters results to channels whose topic name matches the specified value.</p>",
+                        "smithy.api#httpQuery": "topicNameFilter"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#ListChannelsResponse": {
+            "type": "structure",
+            "members": {
+                "Channels": {
+                    "target": "com.amazonaws.kafka#__listOfChannelInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of channels in the cluster.</p>",
+                        "smithy.api#jsonName": "channels"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from ListChannels is truncated, this token is included. Send it as the nextToken parameter on a subsequent ListChannels call to retrieve the next page.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the list of channels in the cluster.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.kafka#ListClientVpcConnections": {
             "type": "operation",
             "input": {
@@ -7953,6 +8873,59 @@
                 "smithy.api#documentation": "<p>JMX and Node monitoring for the MSK cluster.</p>"
             }
         },
+        "com.amazonaws.kafka#PartitionSource": {
+            "type": "structure",
+            "members": {
+                "SourceName": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source name.</p>",
+                        "smithy.api#jsonName": "sourceName"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A source column used by an Apache Iceberg destination table's partition specification.</p>"
+            }
+        },
+        "com.amazonaws.kafka#PartitionSpec": {
+            "type": "structure",
+            "members": {
+                "PartitionStrategy": {
+                    "target": "com.amazonaws.kafka#PartitionStrategy",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The partitioning strategy applied to records written to the table.</p>",
+                        "smithy.api#jsonName": "partitionStrategy",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceList": {
+                    "target": "com.amazonaws.kafka#__listOfPartitionSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source columns used by the partitioning strategy. For TIME_HOUR, must contain exactly one source column whose value is a timestamp.</p>",
+                        "smithy.api#jsonName": "sourceList"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Partition specification for an Apache Iceberg destination table.</p>"
+            }
+        },
+        "com.amazonaws.kafka#PartitionStrategy": {
+            "type": "enum",
+            "members": {
+                "TIME_HOUR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_HOUR"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The partitioning strategy used to partition records in the destination Apache Iceberg table.</p>"
+            }
+        },
         "com.amazonaws.kafka#Prometheus": {
             "type": "structure",
             "members": {
@@ -8448,6 +9421,40 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kafka#RecordConverter": {
+            "type": "structure",
+            "members": {
+                "ValueConverter": {
+                    "target": "com.amazonaws.kafka#ValueConverter",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The deserialization format applied to Apache Kafka record values.</p>",
+                        "smithy.api#jsonName": "valueConverter",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that controls how Apache Kafka record values are deserialized for the destination.</p>"
+            }
+        },
+        "com.amazonaws.kafka#RecordSchema": {
+            "type": "structure",
+            "members": {
+                "GsrArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Glue Schema Registry schema (not registry) used to validate records for the destination Apache Iceberg table.</p>",
+                        "smithy.api#jsonName": "gsrArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Schema configuration that controls how Apache Kafka record values are validated.</p>"
             }
         },
         "com.amazonaws.kafka#RejectClientVpcConnection": {
@@ -8978,6 +9985,173 @@
                 }
             }
         },
+        "com.amazonaws.kafka#S3CompressionType": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "GZIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GZIP"
+                    }
+                },
+                "ZSTD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZSTD"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The compression codec applied to delivered Amazon S3 objects.</p>"
+            }
+        },
+        "com.amazonaws.kafka#S3DestinationConfiguration": {
+            "type": "structure",
+            "members": {
+                "DataFreshnessInSeconds": {
+                    "target": "com.amazonaws.kafka#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that records buffer in MSK before being flushed to the destination. Allowed range: 300 to 900. Default: 600.</p>",
+                        "smithy.api#jsonName": "dataFreshnessInSeconds"
+                    }
+                },
+                "DeadLetterQueueS3": {
+                    "target": "com.amazonaws.kafka#DeadLetterQueueS3",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket and prefix where MSK writes records that fail to deliver.</p>",
+                        "smithy.api#jsonName": "deadLetterQueueS3",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceExecutionRoleArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that MSK assumes to write to the destination Amazon S3 bucket and the dead-letter bucket.</p>",
+                        "smithy.api#jsonName": "serviceExecutionRoleArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Storage": {
+                    "target": "com.amazonaws.kafka#S3Storage",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket, prefix, and storage class for delivered records.</p>",
+                        "smithy.api#jsonName": "storage",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration of an Amazon S3 destination for a channel.</p>"
+            }
+        },
+        "com.amazonaws.kafka#S3DestinationUpdate": {
+            "type": "structure",
+            "members": {
+                "DataFreshnessInSeconds": {
+                    "target": "com.amazonaws.kafka#__integer",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that records buffer in MSK before being flushed to the destination. Allowed range: 300 to 900.</p>",
+                        "smithy.api#jsonName": "dataFreshnessInSeconds",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Update payload for an Amazon S3 destination.</p>"
+            }
+        },
+        "com.amazonaws.kafka#S3Storage": {
+            "type": "structure",
+            "members": {
+                "BucketArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination Amazon S3 bucket.</p>",
+                        "smithy.api#jsonName": "bucketArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CompressionType": {
+                    "target": "com.amazonaws.kafka#S3CompressionType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The compression codec applied to delivered Amazon S3 objects.</p>",
+                        "smithy.api#jsonName": "compressionType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputPrefix": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional prefix prepended to every Amazon S3 object key written by the channel.</p>",
+                        "smithy.api#jsonName": "outputPrefix"
+                    }
+                },
+                "OutputKeyTemplate": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional template that controls the Amazon S3 object key for each delivered record. Supports the placeholders !{partition-id}, !{sequence-number}, and !{kafka-offset}.</p>",
+                        "smithy.api#jsonName": "outputKeyTemplate"
+                    }
+                },
+                "StorageClass": {
+                    "target": "com.amazonaws.kafka#S3StorageClass",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon S3 storage class for delivered objects.</p>",
+                        "smithy.api#jsonName": "storageClass",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional 12-digit AWS account ID expected to own the Amazon S3 bucket.</p>",
+                        "smithy.api#jsonName": "expectedBucketOwner"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Storage configuration for an Amazon S3 destination bucket.</p>"
+            }
+        },
+        "com.amazonaws.kafka#S3StorageClass": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "INTELLIGENT_TIERING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTELLIGENT_TIERING"
+                    }
+                },
+                "GLACIER_IR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GLACIER_IR"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 storage class applied to delivered objects.</p>"
+            }
+        },
         "com.amazonaws.kafka#Sasl": {
             "type": "structure",
             "members": {
@@ -8998,6 +10172,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details for client authentication using SASL.</p>"
+            }
+        },
+        "com.amazonaws.kafka#SchemaEvolution": {
+            "type": "structure",
+            "members": {
+                "EnableSchemaEvolution": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to allow MSK to evolve the destination table's schema. Must be false for the current release.</p>",
+                        "smithy.api#jsonName": "enableSchemaEvolution"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration controlling whether the Apache Iceberg destination table's schema is evolved as incoming records change.</p>"
             }
         },
         "com.amazonaws.kafka#Scram": {
@@ -9191,6 +10380,21 @@
                 "smithy.api#documentation": "Controls storage mode for various supported storage tiers."
             }
         },
+        "com.amazonaws.kafka#TableCreation": {
+            "type": "structure",
+            "members": {
+                "EnableTableCreation": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether MSK creates the destination table on the customer's behalf. Must be true for the current release.</p>",
+                        "smithy.api#jsonName": "enableTableCreation"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration controlling whether MSK creates the destination Apache Iceberg table if it does not already exist.</p>"
+            }
+        },
         "com.amazonaws.kafka#TagResource": {
             "type": "operation",
             "input": {
@@ -9326,6 +10530,39 @@
                 "smithy.api#documentation": "<p>Returns information about an error.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.kafka#TopicConfiguration": {
+            "type": "structure",
+            "members": {
+                "RecordConverter": {
+                    "target": "com.amazonaws.kafka#RecordConverter",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Configuration that controls how Apache Kafka record values are deserialized for the destination.</p>",
+                        "smithy.api#jsonName": "recordConverter",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecordSchema": {
+                    "target": "com.amazonaws.kafka#RecordSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema used to validate records when the value converter requires one (for example, JSON_SCHEMA_GSR).</p>",
+                        "smithy.api#jsonName": "recordSchema"
+                    }
+                },
+                "TopicArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the topic.</p>",
+                        "smithy.api#jsonName": "topicArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration of an Apache Kafka topic that feeds a channel.</p>"
             }
         },
         "com.amazonaws.kafka#TopicExistsException": {
@@ -9990,6 +11227,111 @@
                 }
             },
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kafka#UpdateChannel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#UpdateChannelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#UpdateChannelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the destination configuration of an existing channel. Exactly one of icebergDestinationUpdate or s3DestinationUpdate must be supplied.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/clusters/{ClusterArn}/channels/{ChannelArn}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.kafka#UpdateChannelRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the channel.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IcebergDestinationUpdate": {
+                    "target": "com.amazonaws.kafka#IcebergDestinationUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates fields on an Apache Iceberg destination. Use only when the channel was created with an Iceberg destination.</p>",
+                        "smithy.api#jsonName": "icebergDestinationUpdate"
+                    }
+                },
+                "S3DestinationUpdate": {
+                    "target": "com.amazonaws.kafka#S3DestinationUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates fields on an Amazon S3 destination. Use only when the channel was created with an Amazon S3 destination.</p>",
+                        "smithy.api#jsonName": "s3DestinationUpdate"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing channel's destination configuration. You must update the same destination type the channel was created with; the destination type cannot be changed.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafka#UpdateChannelResponse": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the channel.</p>",
+                        "smithy.api#jsonName": "channelArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterOperationArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster operation.</p>",
+                        "smithy.api#jsonName": "clusterOperationArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the channel ARN and the cluster-operation ARN that tracks the asynchronous update.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -11094,6 +12436,38 @@
                 "smithy.api#documentation": "<p>The identity type of the requester that calls the API operation.</p>"
             }
         },
+        "com.amazonaws.kafka#ValueConverter": {
+            "type": "enum",
+            "members": {
+                "BYTE_ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BYTE_ARRAY"
+                    }
+                },
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                },
+                "JSON_SCHEMA_GSR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON_SCHEMA_GSR"
+                    }
+                },
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The deserialization format applied to Apache Kafka record values.</p>"
+            }
+        },
         "com.amazonaws.kafka#VpcConfig": {
             "type": "structure",
             "members": {
@@ -11506,6 +12880,12 @@
                 "target": "com.amazonaws.kafka#BrokerEBSVolumeInfo"
             }
         },
+        "com.amazonaws.kafka#__listOfChannelInfo": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#ChannelInfo"
+            }
+        },
         "com.amazonaws.kafka#__listOfClientVpcConnection": {
             "type": "list",
             "member": {
@@ -11560,6 +12940,12 @@
                 "target": "com.amazonaws.kafka#ConfigurationRevision"
             }
         },
+        "com.amazonaws.kafka#__listOfDestinationTable": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#DestinationTable"
+            }
+        },
         "com.amazonaws.kafka#__listOfKafkaCluster": {
             "type": "list",
             "member": {
@@ -11590,6 +12976,12 @@
                 "target": "com.amazonaws.kafka#NodeInfo"
             }
         },
+        "com.amazonaws.kafka#__listOfPartitionSource": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#PartitionSource"
+            }
+        },
         "com.amazonaws.kafka#__listOfReplicationInfo": {
             "type": "list",
             "member": {
@@ -11612,6 +13004,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.kafka#ReplicatorSummary"
+            }
+        },
+        "com.amazonaws.kafka#__listOfTopicConfiguration": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#TopicConfiguration"
             }
         },
         "com.amazonaws.kafka#__listOfTopicInfo": {

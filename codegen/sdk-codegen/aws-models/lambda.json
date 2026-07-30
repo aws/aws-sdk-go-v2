@@ -6,9 +6,6 @@
             "version": "2015-03-31",
             "operations": [
                 {
-                    "target": "com.amazonaws.lambda#CheckpointDurableExecution"
-                },
-                {
                     "target": "com.amazonaws.lambda#DeleteFunction"
                 },
                 {
@@ -18,19 +15,7 @@
                     "target": "com.amazonaws.lambda#GetAccountSettings"
                 },
                 {
-                    "target": "com.amazonaws.lambda#GetDurableExecution"
-                },
-                {
-                    "target": "com.amazonaws.lambda#GetDurableExecutionHistory"
-                },
-                {
-                    "target": "com.amazonaws.lambda#GetDurableExecutionState"
-                },
-                {
                     "target": "com.amazonaws.lambda#GetFunctionEventInvokeConfig"
-                },
-                {
-                    "target": "com.amazonaws.lambda#ListDurableExecutionsByFunction"
                 },
                 {
                     "target": "com.amazonaws.lambda#ListFunctionEventInvokeConfigs"
@@ -51,9 +36,6 @@
                     "target": "com.amazonaws.lambda#SendDurableExecutionCallbackSuccess"
                 },
                 {
-                    "target": "com.amazonaws.lambda#StopDurableExecution"
-                },
-                {
                     "target": "com.amazonaws.lambda#TagResource"
                 },
                 {
@@ -69,6 +51,9 @@
                 },
                 {
                     "target": "com.amazonaws.lambda#CodeSigningConfigResource"
+                },
+                {
+                    "target": "com.amazonaws.lambda#DurableExecution"
                 },
                 {
                     "target": "com.amazonaws.lambda#EventSourceMapping"
@@ -2946,7 +2931,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The telemetry configuration for the capacity provider, including logging settings.</p>",
                         "smithy.api#tags": [
-                            "feature:lmi-system-log"
+                            "feature:public"
                         ]
                     }
                 }
@@ -3030,7 +3015,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Set this property to filter the system logs for your capacity provider that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where <code>DEBUG</code> is the highest level and <code>WARN</code> is the lowest.</p>",
                         "smithy.api#tags": [
-                            "feature:lmi-system-log"
+                            "feature:public"
                         ]
                     }
                 },
@@ -3039,7 +3024,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Amazon CloudWatch log group the capacity provider sends logs to. By default, Lambda capacity providers send logs to a default log group named <code>/aws/lambda/capacity-provider/&lt;capacity provider name&gt;</code>. To use a different log group, enter an existing log group or enter a new log group name.</p>",
                         "smithy.api#tags": [
-                            "feature:lmi-system-log"
+                            "feature:public"
                         ]
                     }
                 }
@@ -3047,7 +3032,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>The capacity provider's Amazon CloudWatch Logs configuration settings.</p>",
                 "smithy.api#tags": [
-                    "feature:lmi-system-log"
+                    "feature:public"
                 ]
             }
         },
@@ -3344,7 +3329,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The capacity provider's Amazon CloudWatch Logs configuration settings.</p>",
                         "smithy.api#tags": [
-                            "feature:lmi-system-log"
+                            "feature:public"
                         ]
                     }
                 }
@@ -3352,7 +3337,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>Configuration that specifies the telemetry collection for the capacity provider.</p>",
                 "smithy.api#tags": [
-                    "feature:lmi-system-log"
+                    "feature:public"
                 ]
             }
         },
@@ -4703,7 +4688,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The telemetry configuration for the capacity provider. Specifies logging settings for managed resources.</p>",
                         "smithy.api#tags": [
-                            "feature:lmi-system-log"
+                            "feature:public"
                         ]
                     }
                 }
@@ -6870,7 +6855,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the Key Management Service (KMS) customer managed key that is used to encrypt your durable execution's payload data, including input, output, and error payloads.</p>",
                         "smithy.api#tags": [
-                            "feature:dar-cmkms"
+                            "feature:public"
                         ]
                     }
                 },
@@ -6895,6 +6880,46 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration settings for <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html\">durable functions</a>, including execution timeout, retention period for execution history, and an optional ARN of the Key Management Service (KMS) customer managed key that is used to encrypt your durable execution's payload data, including input, output, and error payloads.</p>",
+                "smithy.api#tags": [
+                    "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#DurableExecution": {
+            "type": "resource",
+            "identifiers": {
+                "DurableExecutionArn": {
+                    "target": "com.amazonaws.lambda#DurableExecutionArn"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.lambda#GetDurableExecution"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.lambda#CheckpointDurableExecution"
+                },
+                {
+                    "target": "com.amazonaws.lambda#GetDurableExecutionHistory"
+                },
+                {
+                    "target": "com.amazonaws.lambda#GetDurableExecutionState"
+                },
+                {
+                    "target": "com.amazonaws.lambda#StopDurableExecution"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "durable-execution:{DurableExecutionArn}",
+                    "absolute": true
+                },
+                "aws.iam#iamResource": {
+                    "disableConditionKeyInheritance": true,
+                    "name": "durable execution",
+                    "relativeDocumentation": "lambda-api-permissions-ref.html"
+                },
+                "smithy.api#documentation": "Represents an AWS Lambda Durable Execution",
                 "smithy.api#tags": [
                     "feature:public"
                 ]
@@ -8828,7 +8853,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the Key Management Service (KMS) customer managed key that is used to encrypt your durable execution's payload data, including input, output, and error payloads.</p>",
                         "smithy.api#tags": [
-                            "feature:dar-cmkms"
+                            "feature:public"
                         ]
                     }
                 }
@@ -8844,7 +8869,7 @@
             "type": "boolean",
             "traits": {
                 "smithy.api#tags": [
-                    "feature:dar-cmkms"
+                    "feature:public"
                 ]
             }
         },
@@ -9369,6 +9394,9 @@
                     "target": "com.amazonaws.lambda#InvokeWithResponseStream"
                 },
                 {
+                    "target": "com.amazonaws.lambda#ListDurableExecutionsByFunction"
+                },
+                {
                     "target": "com.amazonaws.lambda#ListFunctionUrlConfigs"
                 },
                 {
@@ -9529,7 +9557,7 @@
                 "S3ObjectStorageMode": {
                     "target": "com.amazonaws.lambda#S3ObjectStorageMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how the deployment package is stored. Use <code>COPY</code> (default) to upload a copy of your deployment package to Lambda. Use <code>REFERENCE</code> to have Lambda reference the deployment package from the specified Amazon S3 bucket.</p>",
+                        "smithy.api#documentation": "<p>Specifies how the deployment package is stored. Valid values:</p> <ul> <li> <p> <code>COPY</code> (default) – Uploads a copy of your deployment package to Lambda.</p> </li> <li> <p> <code>REFERENCE</code> – Lambda references the deployment package from the specified Amazon S3 bucket.</p> </li> </ul>",
                         "smithy.api#tags": [
                             "feature:public"
                         ]
@@ -9641,7 +9669,7 @@
                 "ErrorCode": {
                     "target": "com.amazonaws.lambda#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The error code for the failed retrieval.</p>",
+                        "smithy.api#documentation": "<p>The error code that identifies why Lambda failed to retrieve the deployment package.</p>",
                         "smithy.api#tags": [
                             "feature:public"
                         ]
@@ -9650,7 +9678,7 @@
                 "Message": {
                     "target": "com.amazonaws.lambda#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the error.</p>",
+                        "smithy.api#documentation": "<p>The human-readable message that describes why Lambda failed to retrieve the deployment package.</p>",
                         "smithy.api#tags": [
                             "feature:public"
                         ]
@@ -9658,7 +9686,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about an error related to retrieving a function's deployment package.</p>",
+                "smithy.api#documentation": "<p>Contains details about an error that occurred when Lambda attempted to retrieve a function's deployment package.</p>",
                 "smithy.api#tags": [
                     "feature:public"
                 ]
@@ -11125,7 +11153,7 @@
                         "smithy.api#documentation": "<p>Specifies whether to include execution data such as input payload, result, and error information in the response. Set to <code>false</code> for a more compact response that includes only execution metadata. The default value is set to <code>true</code>.</p>",
                         "smithy.api#httpQuery": "IncludeExecutionData",
                         "smithy.api#tags": [
-                            "feature:dar-cmkms"
+                            "feature:public"
                         ]
                     }
                 }
@@ -11249,7 +11277,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether execution data is included in this response. Returns <code>false</code> when <code>IncludeExecutionData</code> is set to <code>false</code> in the request.</p>",
                         "smithy.api#tags": [
-                            "feature:dar-cmkms"
+                            "feature:public"
                         ]
                     }
                 },
@@ -11258,7 +11286,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration settings for the durable execution, including execution timeout, retention period for execution history, and an optional ARN of the Key Management Service (KMS) customer managed key that is used to encrypt your durable execution's payload data, including input, output, and error payloads.</p>",
                         "smithy.api#tags": [
-                            "feature:dar-cmkms"
+                            "feature:public"
                         ]
                     }
                 }
@@ -15757,7 +15785,7 @@
                     "traits": {
                         "smithy.api#enumValue": "DependencyError",
                         "smithy.api#tags": [
-                            "feature:dependency-error"
+                            "feature:public"
                         ]
                     }
                 }
@@ -16009,6 +16037,7 @@
                 "S3ObjectStorageMode": {
                     "target": "com.amazonaws.lambda#S3ObjectStorageMode",
                     "traits": {
+                        "smithy.api#documentation": "<p>Specifies how the layer archive is stored. Valid values:</p> <ul> <li> <p> <code>COPY</code> (default) – Uploads a copy of your layer archive to Lambda.</p> </li> <li> <p> <code>REFERENCE</code> – Lambda references the layer archive from the specified Amazon S3 bucket.</p> </li> </ul>",
                         "smithy.api#tags": [
                             "feature:public"
                         ]
@@ -16083,6 +16112,7 @@
                 "ResolvedS3Object": {
                     "target": "com.amazonaws.lambda#ResolvedS3Object",
                     "traits": {
+                        "smithy.api#documentation": "<p>The resolved Amazon S3 object that contains the layer archive.</p>",
                         "smithy.api#tags": [
                             "feature:public"
                         ]
@@ -22393,12 +22423,30 @@
                         ]
                     }
                 },
+                "nodejs26x": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nodejs26.x",
+                        "smithy.api#tags": [
+                            "feature:nodejs-26"
+                        ]
+                    }
+                },
+                "python315": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "python3.15",
+                        "smithy.api#tags": [
+                            "feature:python-315"
+                        ]
+                    }
+                },
                 "java8al2023": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "java8.al2023",
                         "smithy.api#tags": [
-                            "feature:java-al2023"
+                            "feature:public"
                         ]
                     }
                 },
@@ -22407,7 +22455,7 @@
                     "traits": {
                         "smithy.api#enumValue": "java11.al2023",
                         "smithy.api#tags": [
-                            "feature:java-al2023"
+                            "feature:public"
                         ]
                     }
                 },
@@ -22416,7 +22464,7 @@
                     "traits": {
                         "smithy.api#enumValue": "java17.al2023",
                         "smithy.api#tags": [
-                            "feature:java-al2023"
+                            "feature:public"
                         ]
                     }
                 }
@@ -22623,7 +22671,7 @@
                 "Copy": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "<p> <code>COPY</code> (default) uploads a copy of your deployment package to Lambda.</p>",
+                        "smithy.api#documentation": "<p>The default storage mode. Uploads a copy of your deployment package to Lambda.</p>",
                         "smithy.api#enumValue": "COPY",
                         "smithy.api#tags": [
                             "feature:public"
@@ -22633,7 +22681,7 @@
                 "Reference": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lambda references the deployment package from the specified Amazon S3 bucket.</p>",
+                        "smithy.api#documentation": "<p>The reference storage mode. Lambda references the deployment package from the specified Amazon S3 bucket without uploading a copy.</p>",
                         "smithy.api#enumValue": "REFERENCE",
                         "smithy.api#tags": [
                             "feature:public"
@@ -22642,7 +22690,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The storage mode for a function's deployment package.</p>",
+                "smithy.api#documentation": "<p>The method Lambda uses to store a function's deployment package — either by copying the package into Lambda-managed storage (<code>COPY</code>) or by referencing it directly from the source Amazon S3 bucket (<code>REFERENCE</code>).</p>",
                 "smithy.api#tags": [
                     "feature:public"
                 ]
@@ -24051,7 +24099,7 @@
                     "traits": {
                         "smithy.api#enumValue": "DependencyError",
                         "smithy.api#tags": [
-                            "feature:dependency-error"
+                            "feature:public"
                         ]
                     }
                 }
@@ -25454,7 +25502,7 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The updated telemetry configuration for the capacity provider.</p>",
                         "smithy.api#tags": [
-                            "feature:lmi-system-log"
+                            "feature:public"
                         ]
                     }
                 }
@@ -26025,7 +26073,7 @@
                 "S3ObjectStorageMode": {
                     "target": "com.amazonaws.lambda#S3ObjectStorageMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how the deployment package is stored. Use <code>COPY</code> (default) to upload a copy of your deployment package to Lambda. Use <code>REFERENCE</code> to have Lambda reference the deployment package from the specified Amazon S3 bucket.</p>",
+                        "smithy.api#documentation": "<p>Specifies how the deployment package is stored. Valid values:</p> <ul> <li> <p> <code>COPY</code> (default) – Uploads a copy of your deployment package to Lambda.</p> </li> <li> <p> <code>REFERENCE</code> – Lambda references the deployment package from the specified Amazon S3 bucket.</p> </li> </ul>",
                         "smithy.api#tags": [
                             "feature:public"
                         ]
