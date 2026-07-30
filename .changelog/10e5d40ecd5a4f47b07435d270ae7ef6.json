@@ -1,0 +1,8 @@
+{
+    "id": "10e5d40e-cd5a-4f47-b074-35d270ae7ef6",
+    "type": "feature",
+    "description": "Adds support for g7 family instance types for SageMaker Studio JupyterLab and CodeEditor apps for IAD (us-east-1), PDX (us-west-2), CMH (us-east-2).",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

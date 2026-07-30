@@ -244,6 +244,145 @@ func TestCheckRequestSnapshot_BatchDisassociateScramSecret(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
+	input := &CreateChannelInput{
+		ChannelName: ptr.String("__ChannelName__"),
+		ClusterArn:  ptr.String("__ClusterArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		IcebergDestinationConfiguration: &types.IcebergDestinationConfiguration{
+			AppendOnly: ptr.Bool(true),
+			Catalog: &types.Catalog{
+				CatalogArn:        ptr.String("__CatalogArn__"),
+				WarehouseLocation: ptr.String("__WarehouseLocation__"),
+			},
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3: &types.DeadLetterQueueS3{
+				BucketArn:           ptr.String("__BucketArn__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+			},
+			DestinationTableList: []types.DestinationTable{
+				{
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionStrategy: types.PartitionStrategy("TIME_HOUR"),
+						SourceList: []types.PartitionSource{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+				{
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionStrategy: types.PartitionStrategy("TIME_HOUR"),
+						SourceList: []types.PartitionSource{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+			},
+			SchemaEvolution: &types.SchemaEvolution{
+				EnableSchemaEvolution: ptr.Bool(true),
+			},
+			ServiceExecutionRoleArn: ptr.String("__ServiceExecutionRoleArn__"),
+			TableCreation: &types.TableCreation{
+				EnableTableCreation: ptr.Bool(true),
+			},
+			CompressionType: types.IcebergCompressionType("ZSTD"),
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3: &types.DeadLetterQueueS3{
+				BucketArn:           ptr.String("__BucketArn__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+			},
+			ServiceExecutionRoleArn: ptr.String("__ServiceExecutionRoleArn__"),
+			Storage: &types.S3Storage{
+				BucketArn:           ptr.String("__BucketArn__"),
+				CompressionType:     types.S3CompressionType("NONE"),
+				OutputPrefix:        ptr.String("__OutputPrefix__"),
+				OutputKeyTemplate:   ptr.String("__OutputKeyTemplate__"),
+				StorageClass:        types.S3StorageClass("STANDARD"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TopicConfigurationList: []types.TopicConfiguration{
+			{
+				RecordConverter: &types.RecordConverter{
+					ValueConverter: types.ValueConverter("BYTE_ARRAY"),
+				},
+				RecordSchema: &types.RecordSchema{
+					GsrArn: ptr.String("__GsrArn__"),
+				},
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+			{
+				RecordConverter: &types.RecordConverter{
+					ValueConverter: types.ValueConverter("BYTE_ARRAY"),
+				},
+				RecordSchema: &types.RecordSchema{
+					GsrArn: ptr.String("__GsrArn__"),
+				},
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+		},
+		LoggingInfo: &types.ChannelLoggingInfo{
+			CloudWatchLogs: &types.CloudWatchLogs{
+				Enabled:  ptr.Bool(true),
+				LogGroup: ptr.String("__LogGroup__"),
+			},
+			Firehose: &types.Firehose{
+				DeliveryStream: ptr.String("__DeliveryStream__"),
+				Enabled:        ptr.Bool(true),
+			},
+			S3: &types.S3{
+				Bucket:  ptr.String("__Bucket__"),
+				Enabled: ptr.Bool(true),
+				Prefix:  ptr.String("__Prefix__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateChannel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateChannel"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateCluster(t *testing.T) {
 	input := &CreateClusterInput{
 		BrokerNodeGroupInfo: &types.BrokerNodeGroupInfo{
@@ -862,6 +1001,34 @@ func TestCheckRequestSnapshot_CreateVpcConnection(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteChannel(t *testing.T) {
+	input := &DeleteChannelInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteChannel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteChannel"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteCluster(t *testing.T) {
 	input := &DeleteClusterInput{
 		ClusterArn:     ptr.String("__ClusterArn__"),
@@ -1023,6 +1190,34 @@ func TestCheckRequestSnapshot_DeleteVpcConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteVpcConnection"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeChannel(t *testing.T) {
+	input := &DescribeChannelInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeChannel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeChannel"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1379,6 +1574,36 @@ func TestCheckRequestSnapshot_GetCompatibleKafkaVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCompatibleKafkaVersions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListChannels(t *testing.T) {
+	input := &ListChannelsInput{
+		ClusterArn:      ptr.String("__ClusterArn__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		TopicNameFilter: ptr.String("__TopicNameFilter__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListChannels(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListChannels"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2039,6 +2264,40 @@ func TestCheckRequestSnapshot_UpdateBrokerType(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
+	input := &UpdateChannelInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+		IcebergDestinationUpdate: &types.IcebergDestinationUpdate{
+			DataFreshnessInSeconds: ptr.Int32(1),
+		},
+		S3DestinationUpdate: &types.S3DestinationUpdate{
+			DataFreshnessInSeconds: ptr.Int32(1),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateChannel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateChannel"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateClusterConfiguration(t *testing.T) {
 	input := &UpdateClusterConfigurationInput{
 		ClusterArn: ptr.String("__ClusterArn__"),
@@ -2524,6 +2783,145 @@ func TestUpdateRequestSnapshot_BatchDisassociateScramSecret(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchDisassociateScramSecret"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
+	input := &CreateChannelInput{
+		ChannelName: ptr.String("__ChannelName__"),
+		ClusterArn:  ptr.String("__ClusterArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		IcebergDestinationConfiguration: &types.IcebergDestinationConfiguration{
+			AppendOnly: ptr.Bool(true),
+			Catalog: &types.Catalog{
+				CatalogArn:        ptr.String("__CatalogArn__"),
+				WarehouseLocation: ptr.String("__WarehouseLocation__"),
+			},
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3: &types.DeadLetterQueueS3{
+				BucketArn:           ptr.String("__BucketArn__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+			},
+			DestinationTableList: []types.DestinationTable{
+				{
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionStrategy: types.PartitionStrategy("TIME_HOUR"),
+						SourceList: []types.PartitionSource{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+				{
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionStrategy: types.PartitionStrategy("TIME_HOUR"),
+						SourceList: []types.PartitionSource{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+			},
+			SchemaEvolution: &types.SchemaEvolution{
+				EnableSchemaEvolution: ptr.Bool(true),
+			},
+			ServiceExecutionRoleArn: ptr.String("__ServiceExecutionRoleArn__"),
+			TableCreation: &types.TableCreation{
+				EnableTableCreation: ptr.Bool(true),
+			},
+			CompressionType: types.IcebergCompressionType("ZSTD"),
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3: &types.DeadLetterQueueS3{
+				BucketArn:           ptr.String("__BucketArn__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+			},
+			ServiceExecutionRoleArn: ptr.String("__ServiceExecutionRoleArn__"),
+			Storage: &types.S3Storage{
+				BucketArn:           ptr.String("__BucketArn__"),
+				CompressionType:     types.S3CompressionType("NONE"),
+				OutputPrefix:        ptr.String("__OutputPrefix__"),
+				OutputKeyTemplate:   ptr.String("__OutputKeyTemplate__"),
+				StorageClass:        types.S3StorageClass("STANDARD"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TopicConfigurationList: []types.TopicConfiguration{
+			{
+				RecordConverter: &types.RecordConverter{
+					ValueConverter: types.ValueConverter("BYTE_ARRAY"),
+				},
+				RecordSchema: &types.RecordSchema{
+					GsrArn: ptr.String("__GsrArn__"),
+				},
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+			{
+				RecordConverter: &types.RecordConverter{
+					ValueConverter: types.ValueConverter("BYTE_ARRAY"),
+				},
+				RecordSchema: &types.RecordSchema{
+					GsrArn: ptr.String("__GsrArn__"),
+				},
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+		},
+		LoggingInfo: &types.ChannelLoggingInfo{
+			CloudWatchLogs: &types.CloudWatchLogs{
+				Enabled:  ptr.Bool(true),
+				LogGroup: ptr.String("__LogGroup__"),
+			},
+			Firehose: &types.Firehose{
+				DeliveryStream: ptr.String("__DeliveryStream__"),
+				Enabled:        ptr.Bool(true),
+			},
+			S3: &types.S3{
+				Bucket:  ptr.String("__Bucket__"),
+				Enabled: ptr.Bool(true),
+				Prefix:  ptr.String("__Prefix__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateChannel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateChannel"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3146,6 +3544,34 @@ func TestUpdateRequestSnapshot_CreateVpcConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteChannel(t *testing.T) {
+	input := &DeleteChannelInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteChannel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteChannel"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteCluster(t *testing.T) {
 	input := &DeleteClusterInput{
 		ClusterArn:     ptr.String("__ClusterArn__"),
@@ -3307,6 +3733,34 @@ func TestUpdateRequestSnapshot_DeleteVpcConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteVpcConnection"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeChannel(t *testing.T) {
+	input := &DescribeChannelInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeChannel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeChannel"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3663,6 +4117,36 @@ func TestUpdateRequestSnapshot_GetCompatibleKafkaVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCompatibleKafkaVersions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListChannels(t *testing.T) {
+	input := &ListChannelsInput{
+		ClusterArn:      ptr.String("__ClusterArn__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		TopicNameFilter: ptr.String("__TopicNameFilter__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListChannels(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListChannels"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4319,6 +4803,40 @@ func TestUpdateRequestSnapshot_UpdateBrokerType(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateBrokerType"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
+	input := &UpdateChannelInput{
+		ChannelArn: ptr.String("__ChannelArn__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+		IcebergDestinationUpdate: &types.IcebergDestinationUpdate{
+			DataFreshnessInSeconds: ptr.Int32(1),
+		},
+		S3DestinationUpdate: &types.S3DestinationUpdate{
+			DataFreshnessInSeconds: ptr.Int32(1),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateChannel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateChannel"); err != nil {
 		t.Fatal(err)
 	}
 }

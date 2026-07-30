@@ -30,13 +30,14 @@ import (
 // If the output is long, you can use MaxItems and Marker parameters to paginate
 // the results.
 //
-// The IAM policy simulator evaluates statements in the identity-based policy and
-// the inputs that you provide during simulation. The policy simulator results can
-// differ from your live Amazon Web Services environment. We recommend that you
-// check your policies against your live Amazon Web Services environment after
-// testing using the policy simulator to confirm that you have the desired results.
-// For more information about using the policy simulator, see [Testing IAM policies with the IAM policy simulator]in the IAM User
-// Guide.
+// The IAM policy simulator evaluates statements in identity-based policies,
+// service control policies (SCPs) including their condition keys and resource
+// scoping, and the inputs that you provide during simulation. The policy simulator
+// results can differ from your live Amazon Web Services environment. We recommend
+// that you check your policies against your live Amazon Web Services environment
+// after testing using the policy simulator to confirm that you have the desired
+// results. For more information about using the policy simulator, see [Testing IAM policies with the IAM policy simulator]in the IAM
+// User Guide.
 //
 // [GetContextKeysForCustomPolicy]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html
 // [Testing IAM policies with the IAM policy simulator]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html
@@ -98,12 +99,13 @@ type SimulateCustomPolicyInput struct {
 	// This member is required.
 	PolicyInputList []string
 
-	// The ARN of the IAM user that you want to use as the simulated caller of the API
-	// operations. CallerArn is required if you include a ResourcePolicy so that the
-	// policy's Principal element has a value to use in evaluating the policy.
+	// The ARN of the IAM user, group, or role that you want to use as the simulated
+	// caller of the API operations. CallerArn is required if you include a
+	// ResourcePolicy so that the policy's Principal element has a value to use in
+	// evaluating the policy.
 	//
-	// You can specify only the ARN of an IAM user. You cannot specify the ARN of an
-	// assumed role, federated user, or a service principal.
+	// You cannot specify the ARN of an assumed role, federated user, or a service
+	// principal.
 	CallerArn *string
 
 	// A list of context keys and corresponding values for the simulation to use.
@@ -127,6 +129,20 @@ type SimulateCustomPolicyInput struct {
 	// contains a value to include in the subsequent call that tells the service where
 	// to continue from.
 	MaxItems *int32
+
+	// An ordered list of service control policies (SCPs) to include in the
+	// simulation. Each element represents one level of an Organizations hierarchy,
+	// from the organization root to the account.
+	//
+	// The simulator evaluates SCPs in the order that you provide, consistent with how
+	// Organizations enforces SCPs. The first element must represent the organization
+	// root, and the last element must represent the account. Any elements between them
+	// represent organizational units (OUs) in descending order.
+	//
+	// Use this parameter to simulate the effect of an SCP hierarchy without calling [SimulatePrincipalPolicy].
+	//
+	// [SimulatePrincipalPolicy]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html
+	OrderedOrganizationPolicyInputList []types.OrderedOrganizationPolicyType
 
 	// The IAM permissions boundary policy to simulate. The permissions boundary sets
 	// the maximum permissions that an IAM entity can have. You can input only one

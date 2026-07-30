@@ -162,6 +162,87 @@ type BrokerSoftwareInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration of the AWS Glue Data Catalog and S3 Tables warehouse used by the
+// Apache Iceberg destination.
+type Catalog struct {
+
+	// The Amazon Resource Name (ARN) of the federated AWS Glue Data Catalog that
+	// projects the S3 Tables bucket. If omitted, MSK derives the catalog ARN from
+	// warehouseLocation.
+	CatalogArn *string
+
+	// The Amazon Resource Name (ARN) of the S3 Tables bucket that backs the Apache
+	// Iceberg warehouse.
+	WarehouseLocation *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a channel returned by ListChannels.
+type ChannelInfo struct {
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the channel.
+	//
+	// This member is required.
+	ChannelArn *string
+
+	// The name of the channel.
+	//
+	// This member is required.
+	ChannelName *string
+
+	// The time when the channel was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The type of destination configured for the channel.
+	//
+	// This member is required.
+	DestinationType ChannelDestinationType
+
+	// The current lifecycle state of the channel.
+	//
+	// This member is required.
+	Status ChannelStatus
+
+	// The Amazon Resource Name (ARN) of the in-flight cluster operation. Returned
+	// only while the channel is in CREATING, UPDATING, or DELETING.
+	ClusterOperationArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for the destinations to which the channel publishes operational
+// logs.
+type ChannelLoggingInfo struct {
+
+	// Details of the CloudWatch Logs destination for Channel logs.
+	CloudWatchLogs *CloudWatchLogs
+
+	// Details of the Kinesis Data Firehose delivery stream that is the destination
+	// for Channel logs.
+	Firehose *Firehose
+
+	// Details of the Amazon S3 destination for Channel logs.
+	S3 *S3
+
+	noSmithyDocumentSerde
+}
+
+// Additional context for the current channel state, populated when the channel is
+// in FAILED.
+type ChannelStateInfo struct {
+
+	// A short, machine-readable code identifying the failure cause.
+	Code *string
+
+	// A human-readable message describing the failure.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // Includes all client authentication information.
 type ClientAuthentication struct {
 
@@ -666,6 +747,40 @@ type ControllerNodeInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration of the Amazon S3 bucket where records that fail to deliver are
+// stored.
+type DeadLetterQueueS3 struct {
+
+	// The Amazon Resource Name (ARN) of the dead-letter Amazon S3 bucket.
+	//
+	// This member is required.
+	BucketArn *string
+
+	// An optional prefix prepended to every dead-letter Amazon S3 object key.
+	ErrorOutputPrefix *string
+
+	// Optional 12-digit AWS account ID expected to own the dead-letter Amazon S3
+	// bucket.
+	ExpectedBucketOwner *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration of an Apache Iceberg destination table.
+type DestinationTable struct {
+
+	// The name of the destination namespace (database) in the AWS Glue Data Catalog.
+	DestinationDatabaseName *string
+
+	// The name of the destination Apache Iceberg table.
+	DestinationTableName *string
+
+	// The partition specification for the destination table.
+	PartitionSpec *PartitionSpec
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the EBS storage volumes attached to Apache Kafka
 // broker nodes.
 type EBSStorageInfo struct {
@@ -687,6 +802,17 @@ type EncryptionAtRest struct {
 	//
 	// This member is required.
 	DataVolumeKMSKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// The AWS KMS encryption configuration applied to data at rest.
+type EncryptionConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the AWS KMS key used to encrypt the data.
+	//
+	// This member is required.
+	KmsKeyArn *string
 
 	noSmithyDocumentSerde
 }
@@ -758,6 +884,69 @@ type Iam struct {
 
 	// Indicates whether IAM access control is enabled.
 	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Configuration of an Apache Iceberg destination for a channel.
+type IcebergDestinationConfiguration struct {
+
+	// Whether the destination is append-only. Must be true; updates and deletes are
+	// not supported.
+	//
+	// This member is required.
+	AppendOnly *bool
+
+	// The Amazon S3 bucket and prefix where MSK writes records that fail to deliver.
+	//
+	// This member is required.
+	DeadLetterQueueS3 *DeadLetterQueueS3
+
+	// The destination Iceberg tables. Currently exactly one table must be specified.
+	//
+	// This member is required.
+	DestinationTableList []DestinationTable
+
+	// Configuration controlling whether the destination table's schema is evolved to
+	// match incoming records.
+	//
+	// This member is required.
+	SchemaEvolution *SchemaEvolution
+
+	// The Amazon Resource Name (ARN) of the IAM role that MSK assumes to access the
+	// destination table, the AWS Glue Data Catalog, and the dead-letter Amazon S3
+	// bucket.
+	//
+	// This member is required.
+	ServiceExecutionRoleArn *string
+
+	// Configuration controlling whether MSK creates the destination table if it does
+	// not already exist.
+	//
+	// This member is required.
+	TableCreation *TableCreation
+
+	// The AWS Glue Data Catalog and S3 Tables warehouse used by the destination.
+	Catalog *Catalog
+
+	// The compression codec for Iceberg table data files. Defaults to ZSTD.
+	CompressionType IcebergCompressionType
+
+	// The maximum time, in seconds, that records buffer in MSK before being flushed
+	// to the destination. Allowed range: 300 to 900. Default: 600.
+	DataFreshnessInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// Update payload for an Apache Iceberg destination.
+type IcebergDestinationUpdate struct {
+
+	// The maximum time, in seconds, that records buffer in MSK before being flushed
+	// to the destination. Allowed range: 300 to 900.
+	//
+	// This member is required.
+	DataFreshnessInSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -1065,6 +1254,31 @@ type OpenMonitoringInfo struct {
 	noSmithyDocumentSerde
 }
 
+// A source column used by an Apache Iceberg destination table's partition
+// specification.
+type PartitionSource struct {
+
+	// Source name.
+	SourceName *string
+
+	noSmithyDocumentSerde
+}
+
+// Partition specification for an Apache Iceberg destination table.
+type PartitionSpec struct {
+
+	// The partitioning strategy applied to records written to the table.
+	//
+	// This member is required.
+	PartitionStrategy PartitionStrategy
+
+	// The source columns used by the partitioning strategy. For TIME_HOUR, must
+	// contain exactly one source column whose value is a timestamp.
+	SourceList []PartitionSource
+
+	noSmithyDocumentSerde
+}
+
 // Prometheus settings.
 type Prometheus struct {
 
@@ -1227,6 +1441,30 @@ type Rebalancing struct {
 	// Intelligent rebalancing status. The default intelligent rebalancing status is
 	// ACTIVE for all new Express-based clusters.
 	Status RebalancingStatus
+
+	noSmithyDocumentSerde
+}
+
+// Configuration that controls how Apache Kafka record values are deserialized for
+// the destination.
+type RecordConverter struct {
+
+	// The deserialization format applied to Apache Kafka record values.
+	//
+	// This member is required.
+	ValueConverter ValueConverter
+
+	noSmithyDocumentSerde
+}
+
+// Schema configuration that controls how Apache Kafka record values are validated.
+type RecordSchema struct {
+
+	// The Amazon Resource Name (ARN) of the AWS Glue Schema Registry schema (not
+	// registry) used to validate records for the destination Apache Iceberg table.
+	//
+	// This member is required.
+	GsrArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1437,6 +1675,77 @@ type S3 struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration of an Amazon S3 destination for a channel.
+type S3DestinationConfiguration struct {
+
+	// The Amazon S3 bucket and prefix where MSK writes records that fail to deliver.
+	//
+	// This member is required.
+	DeadLetterQueueS3 *DeadLetterQueueS3
+
+	// The Amazon Resource Name (ARN) of the IAM role that MSK assumes to write to the
+	// destination Amazon S3 bucket and the dead-letter bucket.
+	//
+	// This member is required.
+	ServiceExecutionRoleArn *string
+
+	// The Amazon S3 bucket, prefix, and storage class for delivered records.
+	//
+	// This member is required.
+	Storage *S3Storage
+
+	// The maximum time, in seconds, that records buffer in MSK before being flushed
+	// to the destination. Allowed range: 300 to 900. Default: 600.
+	DataFreshnessInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// Update payload for an Amazon S3 destination.
+type S3DestinationUpdate struct {
+
+	// The maximum time, in seconds, that records buffer in MSK before being flushed
+	// to the destination. Allowed range: 300 to 900.
+	//
+	// This member is required.
+	DataFreshnessInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// Storage configuration for an Amazon S3 destination bucket.
+type S3Storage struct {
+
+	// The Amazon Resource Name (ARN) of the destination Amazon S3 bucket.
+	//
+	// This member is required.
+	BucketArn *string
+
+	// The compression codec applied to delivered Amazon S3 objects.
+	//
+	// This member is required.
+	CompressionType S3CompressionType
+
+	// The Amazon S3 storage class for delivered objects.
+	//
+	// This member is required.
+	StorageClass S3StorageClass
+
+	// Optional 12-digit AWS account ID expected to own the Amazon S3 bucket.
+	ExpectedBucketOwner *string
+
+	// An optional template that controls the Amazon S3 object key for each delivered
+	// record. Supports the placeholders !{partition-id}, !{sequence-number}, and
+	// !{kafka-offset}.
+	OutputKeyTemplate *string
+
+	// An optional prefix prepended to every Amazon S3 object key written by the
+	// channel.
+	OutputPrefix *string
+
+	noSmithyDocumentSerde
+}
+
 // Details for client authentication using SASL.
 type Sasl struct {
 
@@ -1445,6 +1754,17 @@ type Sasl struct {
 
 	// Details for SASL/SCRAM client authentication.
 	Scram *Scram
+
+	noSmithyDocumentSerde
+}
+
+// Configuration controlling whether the Apache Iceberg destination table's schema
+// is evolved as incoming records change.
+type SchemaEvolution struct {
+
+	// Whether to allow MSK to evolve the destination table's schema. Must be false
+	// for the current release.
+	EnableSchemaEvolution *bool
 
 	noSmithyDocumentSerde
 }
@@ -1538,6 +1858,17 @@ type StorageInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration controlling whether MSK creates the destination Apache Iceberg
+// table if it does not already exist.
+type TableCreation struct {
+
+	// Whether MSK creates the destination table on the customer's behalf. Must be
+	// true for the current release.
+	EnableTableCreation *bool
+
+	noSmithyDocumentSerde
+}
+
 // Details for client authentication using TLS.
 type Tls struct {
 
@@ -1546,6 +1877,27 @@ type Tls struct {
 
 	// Specifies whether you want to turn on or turn off TLS authentication.
 	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Configuration of an Apache Kafka topic that feeds a channel.
+type TopicConfiguration struct {
+
+	// Configuration that controls how Apache Kafka record values are deserialized for
+	// the destination.
+	//
+	// This member is required.
+	RecordConverter *RecordConverter
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the topic.
+	//
+	// This member is required.
+	TopicArn *string
+
+	// The schema used to validate records when the value converter requires one (for
+	// example, JSON_SCHEMA_GSR).
+	RecordSchema *RecordSchema
 
 	noSmithyDocumentSerde
 }

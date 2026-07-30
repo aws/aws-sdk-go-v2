@@ -3370,6 +3370,63 @@ func addOpUploadSSHPublicKeyValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpUploadSSHPublicKey{}, middleware.After)
 }
 
+func validateInlinePolicyIdentifierType(v *types.InlinePolicyIdentifierType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InlinePolicyIdentifierType"}
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
+	}
+	if len(v.AttachmentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentType"))
+	}
+	if v.AttachmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePolicyExclusionsListType(v []types.PolicyIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PolicyExclusionsListType"}
+	for i := range v {
+		if err := validatePolicyIdentifier(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePolicyIdentifier(v types.PolicyIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PolicyIdentifier"}
+	switch uv := v.(type) {
+	case *types.PolicyIdentifierMemberInlinePolicyIdentifier:
+		if err := validateInlinePolicyIdentifierType(&uv.Value); err != nil {
+			invalidParams.AddNested("[InlinePolicyIdentifier]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -5190,6 +5247,11 @@ func validateOpSimulatePrincipalPolicyInput(v *SimulatePrincipalPolicyInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "SimulatePrincipalPolicyInput"}
 	if v.PolicySourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicySourceArn"))
+	}
+	if v.PolicyExclusionList != nil {
+		if err := validatePolicyExclusionsListType(v.PolicyExclusionList); err != nil {
+			invalidParams.AddNested("PolicyExclusionList", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.ActionNames == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionNames"))

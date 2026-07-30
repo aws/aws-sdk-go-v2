@@ -1,0 +1,5 @@
+400
+Content-Type: application/json
+X-Amzn-Errortype: ValidationException
+
+{"message":"__Message__","resourceId":"__ResourceId__"}

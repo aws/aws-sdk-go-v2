@@ -504,6 +504,20 @@ type ErrorDetails struct {
 //
 // This data type is used by the return parameter of [SimulateCustomPolicy] and [SimulatePrincipalPolicy].
 //
+// The simulator now returns a single EvaluationResult per action, regardless of
+// how many resource ARNs are provided. Previously, simulating one action against N
+// resources returned N evaluation results, each containing the same aggregate
+// decision. The top-level fields ( EvalDecision , MatchedStatements ,
+// MissingContextValues , EvalDecisionDetails ) now represent the aggregate
+// decision across all requested resources. The top-level EvalDecision reflects
+// the most restrictive decision across all resources (for example, if any resource
+// produces explicitDeny , the top-level decision is explicitDeny ).
+//
+// To see the decision for each individual resource, use ResourceSpecificResults .
+// If your application parses evaluation results per resource ARN, update your code
+// to read per-resource decisions from ResourceSpecificResults rather than from
+// the top-level result.
+//
 // [SimulatePrincipalPolicy]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html
 // [SimulateCustomPolicy]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulateCustomPolicy.html
 type EvaluationResult struct {
@@ -523,6 +537,9 @@ type EvaluationResult struct {
 	// brief summary of how each policy type contributes to the final evaluation
 	// decision.
 	//
+	// In the top-level result, this map reports the most restrictive decision per
+	// policy type across all requested resources.
+	//
 	// If the simulation evaluates policies within the same account and includes a
 	// resource ARN, then the parameter is present but the response is empty. If the
 	// simulation evaluates policies within the same account and specifies all
@@ -540,7 +557,14 @@ type EvaluationResult struct {
 	// [Evaluating policies within a single account]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics
 	EvalDecisionDetails map[string]PolicyEvaluationDecisionType
 
-	// The ARN of the resource that the indicated API operation was tested on.
+	// The ARN template for the simulated resource type (for example,
+	// arn:${Partition}:s3:::${BucketName}/${KeyName} ), or * if no ARN format is
+	// defined for the action. This is not a specific customer-provided resource ARN.
+	// To find the decision for a specific resource, use ResourceSpecificResults .
+	//
+	// If you previously relied on EvalResourceName to identify which specific
+	// resource a result applies to, you must now use the EvalResourceName field
+	// within individual entries in ResourceSpecificResults instead.
 	EvalResourceName *string
 
 	// A list of the statements in the input policies that determine the result for
@@ -548,6 +572,13 @@ type EvaluationResult struct {
 	// the resource, if only one statement denies that operation, then the explicit
 	// deny overrides any allow. In addition, the deny statement is the only entry
 	// included in the result.
+	//
+	// In the top-level result, this field contains the union of matched statements
+	// across all requested resources. Only statements that contributed to the reported
+	// decision are included. For per-resource matched statements, see
+	// ResourceSpecificResults . This field doesn't include statements from service
+	// control policies (SCPs). Only statements from identity-based and resource-based
+	// policies appear here.
 	MatchedStatements []Statement
 
 	// A list of context keys that are required by the included input policies but
@@ -557,6 +588,11 @@ type EvaluationResult struct {
 	// values are instead included under the ResourceSpecificResults section. To
 	// discover the context keys used by a set of policies, you can call [GetContextKeysForCustomPolicy]or [GetContextKeysForPrincipalPolicy].
 	//
+	// In the top-level result, this field contains the deduplicated set of missing
+	// context values across all requested resources. This field doesn't include
+	// context keys referenced by service control policies (SCPs). Only context keys
+	// referenced by identity-based and resource-based policies appear here.
+	//
 	// [GetContextKeysForPrincipalPolicy]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html
 	// [GetContextKeysForCustomPolicy]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html
 	MissingContextValues []string
@@ -564,6 +600,10 @@ type EvaluationResult struct {
 	// A structure that details how Organizations and its service control policies
 	// affect the results of the simulation. Only applies if the simulated user's
 	// account is part of an organization.
+	//
+	// For resources that don't support organization-level evaluation, this field is
+	// omitted from the top-level result. For per-resource details, see
+	// ResourceSpecificResults .
 	OrganizationsDecisionDetail *OrganizationsDecisionDetail
 
 	// Contains information about the effect that a permissions boundary has on a
@@ -672,6 +712,34 @@ type GroupDetail struct {
 	//
 	// [IAM identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
 	Path *string
+
+	noSmithyDocumentSerde
+}
+
+// Identifies one or more inline policies that are embedded in IAM users, groups,
+// or roles, by the name of the policy together with the type and name of the
+// entity that it is attached to. Wildcard characters in the entity name can match
+// multiple entities, so a single identifier can select more than one attached
+// inline policy.
+type InlinePolicyIdentifierType struct {
+
+	// The name of the IAM user, group, or role that the inline policy is attached to.
+	// Wildcard characters are supported to match multiple entities: use at most one *
+	// (matches any sequence of characters, including none), and any number of ? (each
+	// matches exactly one character).
+	//
+	// This member is required.
+	AttachmentName *string
+
+	// The type of IAM entity that the inline policy is attached to.
+	//
+	// This member is required.
+	AttachmentType AttachmentType
+
+	// The name of the inline policy.
+	//
+	// This member is required.
+	PolicyName *string
 
 	noSmithyDocumentSerde
 }
@@ -915,6 +983,25 @@ type OpenIDConnectProviderListEntry struct {
 	//
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents one level of an Organizations hierarchy—the organization root, an
+// organizational unit (OU), or an account—together with the service control
+// policies (SCPs) that apply at that level. Each element in the list represents
+// one level of the hierarchy, ordered from the organization root down to the
+// account.
+//
+// For more information about SCPs, see [Service control policies (SCPs)] in the Organizations User Guide.
+//
+// [Service control policies (SCPs)]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html
+type OrderedOrganizationPolicyType struct {
+
+	// A list of SCP documents that apply at this level of the Organizations
+	// hierarchy. Each document is specified as a string containing the complete, valid
+	// JSON text of an SCP.
+	ServiceControlPolicyInputList []string
 
 	noSmithyDocumentSerde
 }
@@ -1179,6 +1266,59 @@ type PolicyGroup struct {
 
 	noSmithyDocumentSerde
 }
+
+// Identifies one or more policies as a union type. Specify exactly one of
+// PolicyType , PolicyArn , or InlinePolicyIdentifier to identify policies by
+// their type, by Amazon Resource Name (ARN), or by the name of an inline policy
+// and the entity it is attached to.
+//
+// The following types satisfy this interface:
+//
+//	PolicyIdentifierMemberInlinePolicyIdentifier
+//	PolicyIdentifierMemberPolicyArn
+//	PolicyIdentifierMemberPolicyType
+type PolicyIdentifier interface {
+	isPolicyIdentifier()
+}
+
+// An inline policy identifier consisting of a policy name and the entity it is
+// attached to. Wildcard characters ( * and ? ) in the entity name can match
+// multiple entities.
+type PolicyIdentifierMemberInlinePolicyIdentifier struct {
+	Value InlinePolicyIdentifierType
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyIdentifierMemberInlinePolicyIdentifier) isPolicyIdentifier() {}
+
+// The Amazon Resource Name (ARN) of an Amazon Web Services managed policy or a
+// customer managed policy that is attached to an IAM user, group, or role.
+// Wildcard characters are supported in the resource name portion of the ARN to
+// match multiple managed policies: use at most one * (matches any sequence of
+// characters, including none), and any number of ? (each matches exactly one
+// character).
+//
+// For more information about ARNs, see [Amazon Resource Names (ARNs)] in the Amazon Web Services General
+// Reference.
+//
+// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+type PolicyIdentifierMemberPolicyArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyIdentifierMemberPolicyArn) isPolicyIdentifier() {}
+
+// The policy type to identify. All policies of the specified type are matched.
+type PolicyIdentifierMemberPolicyType struct {
+	Value PolicyIdentifierPolicyType
+
+	noSmithyDocumentSerde
+}
+
+func (*PolicyIdentifierMemberPolicyType) isPolicyIdentifier() {}
 
 // Contains information about a policy parameter used to customize delegated
 // permissions.
@@ -2247,3 +2387,14 @@ type VirtualMFADevice struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isPolicyIdentifier() {}

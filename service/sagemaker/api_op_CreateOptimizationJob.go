@@ -123,8 +123,7 @@ type CreateOptimizationJobInput struct {
 	//
 	// When you use reserved capacity from a training plan, the optimization job runs
 	// on that reserved capacity instead of on-demand capacity. If you omit this field,
-	// the job uses on-demand capacity. Currently, you can specify at most one training
-	// plan.
+	// the job uses on-demand capacity. You can specify at most one training plan.
 	//
 	// For more information about how to reserve GPU capacity for your optimization
 	// jobs using Amazon SageMaker Training Plans, see [Reserve capacity with training plans].

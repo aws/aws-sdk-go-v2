@@ -24,7 +24,10 @@ import (
 // Context keys are variables maintained by Amazon Web Services and its services
 // that provide details about the context of an API query request. Context keys can
 // be evaluated by testing against a value in an IAM policy. Use [GetContextKeysForPrincipalPolicy]to understand
-// what key names and values you must supply when you call [SimulatePrincipalPolicy].
+// what key names and values you must supply when you call [SimulatePrincipalPolicy]. This operation
+// doesn't return context keys referenced by service control policies (SCPs). Only
+// context keys referenced by the identity-based policies attached to the specified
+// entity, and any additional policies that you provide, are included.
 //
 // [GetContextKeysForPrincipalPolicy]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html
 // [GetContextKeysForCustomPolicy]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html

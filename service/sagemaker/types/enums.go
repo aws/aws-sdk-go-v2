@@ -588,6 +588,12 @@ const (
 	AppInstanceTypeMlR6id24xlarge          AppInstanceType = "ml.r6id.24xlarge"
 	AppInstanceTypeMlR6id32xlarge          AppInstanceType = "ml.r6id.32xlarge"
 	AppInstanceTypeMlP54xlarge             AppInstanceType = "ml.p5.4xlarge"
+	AppInstanceTypeMlG72xlarge             AppInstanceType = "ml.g7.2xlarge"
+	AppInstanceTypeMlG74xlarge             AppInstanceType = "ml.g7.4xlarge"
+	AppInstanceTypeMlG78xlarge             AppInstanceType = "ml.g7.8xlarge"
+	AppInstanceTypeMlG712xlarge            AppInstanceType = "ml.g7.12xlarge"
+	AppInstanceTypeMlG724xlarge            AppInstanceType = "ml.g7.24xlarge"
+	AppInstanceTypeMlG748xlarge            AppInstanceType = "ml.g7.48xlarge"
 	AppInstanceTypeMlG7e2xlarge            AppInstanceType = "ml.g7e.2xlarge"
 	AppInstanceTypeMlG7e4xlarge            AppInstanceType = "ml.g7e.4xlarge"
 	AppInstanceTypeMlG7e8xlarge            AppInstanceType = "ml.g7e.8xlarge"
@@ -766,6 +772,12 @@ func (AppInstanceType) Values() []AppInstanceType {
 		"ml.r6id.24xlarge",
 		"ml.r6id.32xlarge",
 		"ml.p5.4xlarge",
+		"ml.g7.2xlarge",
+		"ml.g7.4xlarge",
+		"ml.g7.8xlarge",
+		"ml.g7.12xlarge",
+		"ml.g7.24xlarge",
+		"ml.g7.48xlarge",
 		"ml.g7e.2xlarge",
 		"ml.g7e.4xlarge",
 		"ml.g7e.8xlarge",

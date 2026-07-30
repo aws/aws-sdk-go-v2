@@ -563,6 +563,9 @@ func ExampleEvaluatorModelConfig_outputUsage() {
 	case *types.EvaluatorModelConfigMemberBedrockEvaluatorModelConfig:
 		_ = v.Value // Value is types.BedrockEvaluatorModelConfig
 
+	case *types.EvaluatorModelConfigMemberResponsesEvaluatorModelConfig:
+		_ = v.Value // Value is types.OpenResponsesEvaluatorModelConfig
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -572,6 +575,7 @@ func ExampleEvaluatorModelConfig_outputUsage() {
 	}
 }
 
+var _ *types.OpenResponsesEvaluatorModelConfig
 var _ *types.BedrockEvaluatorModelConfig
 
 func ExampleEvaluatorReference_outputUsage() {

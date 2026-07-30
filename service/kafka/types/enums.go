@@ -19,6 +19,54 @@ func (BrokerAZDistribution) Values() []BrokerAZDistribution {
 	}
 }
 
+type ChannelDestinationType string
+
+// Enum values for ChannelDestinationType
+const (
+	ChannelDestinationTypeIceberg ChannelDestinationType = "ICEBERG"
+	ChannelDestinationTypeS3      ChannelDestinationType = "S3"
+)
+
+// Values returns all known values for ChannelDestinationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelDestinationType) Values() []ChannelDestinationType {
+	return []ChannelDestinationType{
+		"ICEBERG",
+		"S3",
+	}
+}
+
+type ChannelStatus string
+
+// Enum values for ChannelStatus
+const (
+	ChannelStatusCreating   ChannelStatus = "CREATING"
+	ChannelStatusActive     ChannelStatus = "ACTIVE"
+	ChannelStatusUpdating   ChannelStatus = "UPDATING"
+	ChannelStatusDeleting   ChannelStatus = "DELETING"
+	ChannelStatusFailed     ChannelStatus = "FAILED"
+	ChannelStatusSuspending ChannelStatus = "SUSPENDING"
+	ChannelStatusSuspended  ChannelStatus = "SUSPENDED"
+)
+
+// Values returns all known values for ChannelStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelStatus) Values() []ChannelStatus {
+	return []ChannelStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"FAILED",
+		"SUSPENDING",
+		"SUSPENDED",
+	}
+}
+
 type ClientBroker string
 
 // Enum values for ClientBroker
@@ -174,6 +222,25 @@ func (EnhancedMonitoring) Values() []EnhancedMonitoring {
 	}
 }
 
+type IcebergCompressionType string
+
+// Enum values for IcebergCompressionType
+const (
+	IcebergCompressionTypeZstd   IcebergCompressionType = "ZSTD"
+	IcebergCompressionTypeSnappy IcebergCompressionType = "SNAPPY"
+)
+
+// Values returns all known values for IcebergCompressionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IcebergCompressionType) Values() []IcebergCompressionType {
+	return []IcebergCompressionType{
+		"ZSTD",
+		"SNAPPY",
+	}
+}
+
 type KafkaClusterEncryptionInTransitType string
 
 // Enum values for KafkaClusterEncryptionInTransitType
@@ -267,6 +334,23 @@ func (NodeType) Values() []NodeType {
 	}
 }
 
+type PartitionStrategy string
+
+// Enum values for PartitionStrategy
+const (
+	PartitionStrategyTimeHour PartitionStrategy = "TIME_HOUR"
+)
+
+// Values returns all known values for PartitionStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PartitionStrategy) Values() []PartitionStrategy {
+	return []PartitionStrategy{
+		"TIME_HOUR",
+	}
+}
+
 type RebalancingStatus string
 
 // Enum values for RebalancingStatus
@@ -348,6 +432,48 @@ func (ReplicatorState) Values() []ReplicatorState {
 		"UPDATING",
 		"DELETING",
 		"FAILED",
+	}
+}
+
+type S3CompressionType string
+
+// Enum values for S3CompressionType
+const (
+	S3CompressionTypeNone S3CompressionType = "NONE"
+	S3CompressionTypeGzip S3CompressionType = "GZIP"
+	S3CompressionTypeZstd S3CompressionType = "ZSTD"
+)
+
+// Values returns all known values for S3CompressionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3CompressionType) Values() []S3CompressionType {
+	return []S3CompressionType{
+		"NONE",
+		"GZIP",
+		"ZSTD",
+	}
+}
+
+type S3StorageClass string
+
+// Enum values for S3StorageClass
+const (
+	S3StorageClassStandard           S3StorageClass = "STANDARD"
+	S3StorageClassIntelligentTiering S3StorageClass = "INTELLIGENT_TIERING"
+	S3StorageClassGlacierIr          S3StorageClass = "GLACIER_IR"
+)
+
+// Values returns all known values for S3StorageClass. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3StorageClass) Values() []S3StorageClass {
+	return []S3StorageClass{
+		"STANDARD",
+		"INTELLIGENT_TIERING",
+		"GLACIER_IR",
 	}
 }
 
@@ -434,6 +560,29 @@ func (UserIdentityType) Values() []UserIdentityType {
 	return []UserIdentityType{
 		"AWSACCOUNT",
 		"AWSSERVICE",
+	}
+}
+
+type ValueConverter string
+
+// Enum values for ValueConverter
+const (
+	ValueConverterByteArray     ValueConverter = "BYTE_ARRAY"
+	ValueConverterJson          ValueConverter = "JSON"
+	ValueConverterJsonSchemaGsr ValueConverter = "JSON_SCHEMA_GSR"
+	ValueConverterString        ValueConverter = "STRING"
+)
+
+// Values returns all known values for ValueConverter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValueConverter) Values() []ValueConverter {
+	return []ValueConverter{
+		"BYTE_ARRAY",
+		"JSON",
+		"JSON_SCHEMA_GSR",
+		"STRING",
 	}
 }
 

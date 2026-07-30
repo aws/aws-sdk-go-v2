@@ -173,6 +173,28 @@ func TestCheckResponseSnapshot_BatchDisassociateScramSecret(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
+	want := &CreateChannelOutput{
+		ChannelArn:          ptr.String("__ChannelArn__"),
+		ClusterOperationArn: ptr.String("__ClusterOperationArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateChannel.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateChannel(context.Background(), &CreateChannelInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateChannel.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 	want := &CreateClusterOutput{
 		ClusterArn:  ptr.String("__ClusterArn__"),
@@ -331,6 +353,28 @@ func TestCheckResponseSnapshot_CreateVpcConnection(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
+	want := &DeleteChannelOutput{
+		ChannelArn:          ptr.String("__ChannelArn__"),
+		ClusterOperationArn: ptr.String("__ClusterOperationArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteChannel.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteChannel(context.Background(), &DeleteChannelInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteChannel.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteCluster(t *testing.T) {
 	want := &DeleteClusterOutput{
 		ClusterArn: ptr.String("__ClusterArn__"),
@@ -458,6 +502,147 @@ func TestCheckResponseSnapshot_DeleteVpcConnection(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteVpcConnection.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
+	want := &DescribeChannelOutput{
+		ChannelArn:  ptr.String("__ChannelArn__"),
+		ChannelName: ptr.String("__ChannelName__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		IcebergDestinationConfiguration: &types.IcebergDestinationConfiguration{
+			AppendOnly: ptr.Bool(true),
+			Catalog: &types.Catalog{
+				CatalogArn:        ptr.String("__CatalogArn__"),
+				WarehouseLocation: ptr.String("__WarehouseLocation__"),
+			},
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3: &types.DeadLetterQueueS3{
+				BucketArn:           ptr.String("__BucketArn__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+			},
+			DestinationTableList: []types.DestinationTable{
+				{
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionStrategy: types.PartitionStrategy("TIME_HOUR"),
+						SourceList: []types.PartitionSource{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+				{
+					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
+					DestinationTableName:    ptr.String("__DestinationTableName__"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionStrategy: types.PartitionStrategy("TIME_HOUR"),
+						SourceList: []types.PartitionSource{
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+			},
+			SchemaEvolution: &types.SchemaEvolution{
+				EnableSchemaEvolution: ptr.Bool(true),
+			},
+			ServiceExecutionRoleArn: ptr.String("__ServiceExecutionRoleArn__"),
+			TableCreation: &types.TableCreation{
+				EnableTableCreation: ptr.Bool(true),
+			},
+			CompressionType: types.IcebergCompressionType("ZSTD"),
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3: &types.DeadLetterQueueS3{
+				BucketArn:           ptr.String("__BucketArn__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+			},
+			ServiceExecutionRoleArn: ptr.String("__ServiceExecutionRoleArn__"),
+			Storage: &types.S3Storage{
+				BucketArn:           ptr.String("__BucketArn__"),
+				CompressionType:     types.S3CompressionType("NONE"),
+				OutputPrefix:        ptr.String("__OutputPrefix__"),
+				OutputKeyTemplate:   ptr.String("__OutputKeyTemplate__"),
+				StorageClass:        types.S3StorageClass("STANDARD"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+			},
+		},
+		Status:          types.ChannelStatus("CREATING"),
+		DestinationType: types.ChannelDestinationType("ICEBERG"),
+		CreationTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TopicConfigurationList: []types.TopicConfiguration{
+			{
+				RecordConverter: &types.RecordConverter{
+					ValueConverter: types.ValueConverter("BYTE_ARRAY"),
+				},
+				RecordSchema: &types.RecordSchema{
+					GsrArn: ptr.String("__GsrArn__"),
+				},
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+			{
+				RecordConverter: &types.RecordConverter{
+					ValueConverter: types.ValueConverter("BYTE_ARRAY"),
+				},
+				RecordSchema: &types.RecordSchema{
+					GsrArn: ptr.String("__GsrArn__"),
+				},
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+		},
+		LoggingInfo: &types.ChannelLoggingInfo{
+			CloudWatchLogs: &types.CloudWatchLogs{
+				Enabled:  ptr.Bool(true),
+				LogGroup: ptr.String("__LogGroup__"),
+			},
+			Firehose: &types.Firehose{
+				DeliveryStream: ptr.String("__DeliveryStream__"),
+				Enabled:        ptr.Bool(true),
+			},
+			S3: &types.S3{
+				Bucket:  ptr.String("__Bucket__"),
+				Enabled: ptr.Bool(true),
+				Prefix:  ptr.String("__Prefix__"),
+			},
+		},
+		StateInfo: &types.ChannelStateInfo{
+			Code:    ptr.String("__Code__"),
+			Message: ptr.String("__Message__"),
+		},
+		ClusterOperationArn: ptr.String("__ClusterOperationArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeChannel.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeChannel(context.Background(), &DescribeChannelInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeChannel.response", err)
 	}
 }
 
@@ -1874,6 +2059,45 @@ func TestCheckResponseSnapshot_GetCompatibleKafkaVersions(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetCompatibleKafkaVersions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
+	want := &ListChannelsOutput{
+		Channels: []types.ChannelInfo{
+			{
+				ChannelArn:          ptr.String("__ChannelArn__"),
+				ChannelName:         ptr.String("__ChannelName__"),
+				Status:              types.ChannelStatus("CREATING"),
+				CreationTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DestinationType:     types.ChannelDestinationType("ICEBERG"),
+				ClusterOperationArn: ptr.String("__ClusterOperationArn__"),
+			},
+			{
+				ChannelArn:          ptr.String("__ChannelArn__"),
+				ChannelName:         ptr.String("__ChannelName__"),
+				Status:              types.ChannelStatus("CREATING"),
+				CreationTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DestinationType:     types.ChannelDestinationType("ICEBERG"),
+				ClusterOperationArn: ptr.String("__ClusterOperationArn__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListChannels.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListChannels.response", err)
 	}
 }
 
@@ -3793,6 +4017,28 @@ func TestCheckResponseSnapshot_UpdateBrokerType(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
+	want := &UpdateChannelOutput{
+		ChannelArn:          ptr.String("__ChannelArn__"),
+		ClusterOperationArn: ptr.String("__ClusterOperationArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateChannel.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateChannel(context.Background(), &UpdateChannelInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateChannel.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateClusterConfiguration(t *testing.T) {
 	want := &UpdateClusterConfigurationOutput{
 		ClusterArn:          ptr.String("__ClusterArn__"),
@@ -4083,7 +4329,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

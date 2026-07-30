@@ -16306,6 +16306,12 @@ func awsRestjson1_serializeDocumentEvaluatorModelConfig(v types.EvaluatorModelCo
 			return err
 		}
 
+	case *types.EvaluatorModelConfigMemberResponsesEvaluatorModelConfig:
+		av := object.Key("responsesEvaluatorModelConfig")
+		if err := awsRestjson1_serializeDocumentOpenResponsesEvaluatorModelConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -19434,6 +19440,66 @@ func awsRestjson1_serializeDocumentOnBehalfOfTokenExchangeConfigType(v *types.On
 	return nil
 }
 
+func awsRestjson1_serializeDocumentOpenResponsesEvaluatorModelConfig(v *types.OpenResponsesEvaluatorModelConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxOutputTokens != nil {
+		ok := object.Key("maxOutputTokens")
+		ok.Integer(*v.MaxOutputTokens)
+	}
+
+	if v.ModelId != nil {
+		ok := object.Key("modelId")
+		ok.String(*v.ModelId)
+	}
+
+	if v.Reasoning != nil {
+		ok := object.Key("reasoning")
+		if err := awsRestjson1_serializeDocumentReasoningConfiguration(v.Reasoning, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Temperature != nil {
+		ok := object.Key("temperature")
+		switch {
+		case math.IsNaN(float64(*v.Temperature)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.Temperature), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.Temperature), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.Temperature)
+
+		}
+	}
+
+	if v.TopP != nil {
+		ok := object.Key("topP")
+		switch {
+		case math.IsNaN(float64(*v.TopP)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.TopP), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.TopP), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.TopP)
+
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPassthroughTargetConfiguration(v *types.PassthroughTargetConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19717,6 +19783,18 @@ func awsRestjson1_serializeDocumentRatingScale(v types.RatingScale, value smithy
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentReasoningConfiguration(v *types.ReasoningConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Effort != nil {
+		ok := object.Key("effort")
+		ok.String(*v.Effort)
+	}
+
 	return nil
 }
 

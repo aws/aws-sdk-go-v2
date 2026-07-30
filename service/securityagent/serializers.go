@@ -9469,6 +9469,11 @@ func awsRestjson1_serializeDocumentIntegratedRepository(v *types.IntegratedRepos
 	object := value.Object()
 	defer object.Close()
 
+	if v.Branch != nil {
+		ok := object.Key("branch")
+		ok.String(*v.Branch)
+	}
+
 	if v.IntegrationId != nil {
 		ok := object.Key("integrationId")
 		ok.String(*v.IntegrationId)

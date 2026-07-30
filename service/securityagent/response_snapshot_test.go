@@ -288,10 +288,12 @@ func TestCheckResponseSnapshot_BatchDeletePentests(t *testing.T) {
 						{
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
+							Branch:             ptr.String("__Branch__"),
 						},
 						{
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
+							Branch:             ptr.String("__Branch__"),
 						},
 					},
 				},
@@ -417,10 +419,12 @@ func TestCheckResponseSnapshot_BatchDeletePentests(t *testing.T) {
 						{
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
+							Branch:             ptr.String("__Branch__"),
 						},
 						{
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
+							Branch:             ptr.String("__Branch__"),
 						},
 					},
 				},
@@ -918,10 +922,12 @@ func TestCheckResponseSnapshot_BatchGetCodeReviewJobs(t *testing.T) {
 					{
 						IntegrationId:      ptr.String("__IntegrationId__"),
 						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						Branch:             ptr.String("__Branch__"),
 					},
 					{
 						IntegrationId:      ptr.String("__IntegrationId__"),
 						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						Branch:             ptr.String("__Branch__"),
 					},
 				},
 				CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
@@ -999,10 +1005,12 @@ func TestCheckResponseSnapshot_BatchGetCodeReviewJobs(t *testing.T) {
 					{
 						IntegrationId:      ptr.String("__IntegrationId__"),
 						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						Branch:             ptr.String("__Branch__"),
 					},
 					{
 						IntegrationId:      ptr.String("__IntegrationId__"),
 						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						Branch:             ptr.String("__Branch__"),
 					},
 				},
 				CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
@@ -1104,10 +1112,12 @@ func TestCheckResponseSnapshot_BatchGetCodeReviews(t *testing.T) {
 						{
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
+							Branch:             ptr.String("__Branch__"),
 						},
 						{
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
+							Branch:             ptr.String("__Branch__"),
 						},
 					},
 				},
@@ -1190,10 +1200,12 @@ func TestCheckResponseSnapshot_BatchGetCodeReviews(t *testing.T) {
 						{
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
+							Branch:             ptr.String("__Branch__"),
 						},
 						{
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
+							Branch:             ptr.String("__Branch__"),
 						},
 					},
 				},
@@ -1649,10 +1661,12 @@ func TestCheckResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 					{
 						IntegrationId:      ptr.String("__IntegrationId__"),
 						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						Branch:             ptr.String("__Branch__"),
 					},
 					{
 						IntegrationId:      ptr.String("__IntegrationId__"),
 						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						Branch:             ptr.String("__Branch__"),
 					},
 				},
 				CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
@@ -1824,10 +1838,12 @@ func TestCheckResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 					{
 						IntegrationId:      ptr.String("__IntegrationId__"),
 						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						Branch:             ptr.String("__Branch__"),
 					},
 					{
 						IntegrationId:      ptr.String("__IntegrationId__"),
 						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						Branch:             ptr.String("__Branch__"),
 					},
 				},
 				CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
@@ -1934,10 +1950,12 @@ func TestCheckResponseSnapshot_BatchGetPentests(t *testing.T) {
 						{
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
+							Branch:             ptr.String("__Branch__"),
 						},
 						{
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
+							Branch:             ptr.String("__Branch__"),
 						},
 					},
 				},
@@ -2063,10 +2081,12 @@ func TestCheckResponseSnapshot_BatchGetPentests(t *testing.T) {
 						{
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
+							Branch:             ptr.String("__Branch__"),
 						},
 						{
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
+							Branch:             ptr.String("__Branch__"),
 						},
 					},
 				},
@@ -2353,10 +2373,12 @@ func TestCheckResponseSnapshot_BatchGetThreatModelJobs(t *testing.T) {
 					{
 						IntegrationId:      ptr.String("__IntegrationId__"),
 						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						Branch:             ptr.String("__Branch__"),
 					},
 					{
 						IntegrationId:      ptr.String("__IntegrationId__"),
 						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						Branch:             ptr.String("__Branch__"),
 					},
 				},
 				Documents: []types.DocumentInfo{
@@ -2423,10 +2445,12 @@ func TestCheckResponseSnapshot_BatchGetThreatModelJobs(t *testing.T) {
 					{
 						IntegrationId:      ptr.String("__IntegrationId__"),
 						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						Branch:             ptr.String("__Branch__"),
 					},
 					{
 						IntegrationId:      ptr.String("__IntegrationId__"),
 						ProviderResourceId: ptr.String("__ProviderResourceId__"),
+						Branch:             ptr.String("__Branch__"),
 					},
 				},
 				Documents: []types.DocumentInfo{
@@ -2567,10 +2591,12 @@ func TestCheckResponseSnapshot_BatchGetThreatModels(t *testing.T) {
 						{
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
+							Branch:             ptr.String("__Branch__"),
 						},
 						{
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
+							Branch:             ptr.String("__Branch__"),
 						},
 					},
 				},
@@ -2670,10 +2696,12 @@ func TestCheckResponseSnapshot_BatchGetThreatModels(t *testing.T) {
 						{
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
+							Branch:             ptr.String("__Branch__"),
 						},
 						{
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
+							Branch:             ptr.String("__Branch__"),
 						},
 					},
 				},
@@ -3050,10 +3078,12 @@ func TestCheckResponseSnapshot_CreateCodeReview(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},
@@ -3194,10 +3224,12 @@ func TestCheckResponseSnapshot_CreatePentest(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},
@@ -3457,10 +3489,12 @@ func TestCheckResponseSnapshot_CreateThreatModel(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},
@@ -5206,10 +5240,12 @@ func TestCheckResponseSnapshot_UpdateCodeReview(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},
@@ -5348,10 +5384,12 @@ func TestCheckResponseSnapshot_UpdatePentest(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},
@@ -5612,10 +5650,12 @@ func TestCheckResponseSnapshot_UpdateThreatModel(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},

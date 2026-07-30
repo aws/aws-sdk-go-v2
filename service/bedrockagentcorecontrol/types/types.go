@@ -2313,6 +2313,7 @@ func (*EvaluatorConfigMemberLlmAsAJudge) isEvaluatorConfig() {}
 // The following types satisfy this interface:
 //
 //	EvaluatorModelConfigMemberBedrockEvaluatorModelConfig
+//	EvaluatorModelConfigMemberResponsesEvaluatorModelConfig
 type EvaluatorModelConfig interface {
 	isEvaluatorModelConfig()
 }
@@ -2325,6 +2326,15 @@ type EvaluatorModelConfigMemberBedrockEvaluatorModelConfig struct {
 }
 
 func (*EvaluatorModelConfigMemberBedrockEvaluatorModelConfig) isEvaluatorModelConfig() {}
+
+// The OpenResponses model configuration for evaluation.
+type EvaluatorModelConfigMemberResponsesEvaluatorModelConfig struct {
+	Value OpenResponsesEvaluatorModelConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluatorModelConfigMemberResponsesEvaluatorModelConfig) isEvaluatorModelConfig() {}
 
 //	The reference to an evaluator used in online evaluation configurations,
 //
@@ -5775,6 +5785,35 @@ type OnlineEvaluationConfigSummary struct {
 	noSmithyDocumentSerde
 }
 
+//	The configuration for using models served through the OpenResponses API in
+//
+// evaluator assessments, including model selection and inference parameters.
+type OpenResponsesEvaluatorModelConfig struct {
+
+	//  The identifier of the model to use for evaluation.
+	//
+	// This member is required.
+	ModelId *string
+
+	//  The maximum number of tokens to generate in the model response, including
+	// visible output and reasoning tokens.
+	MaxOutputTokens *int32
+
+	//  The reasoning configuration for reasoning models. Non-reasoning models ignore
+	// this configuration.
+	Reasoning *ReasoningConfiguration
+
+	//  The temperature value that controls randomness in the model's responses. Lower
+	// values produce more deterministic outputs.
+	Temperature *float32
+
+	//  The top-p sampling parameter that controls the diversity of the model's
+	// responses by limiting the cumulative probability of token choices.
+	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
 //	The configuration that specifies where evaluation results should be written
 //
 // for monitoring and analysis.
@@ -6651,6 +6690,18 @@ type RatingScaleMemberNumerical struct {
 }
 
 func (*RatingScaleMemberNumerical) isRatingScale() {}
+
+//	The reasoning configuration that controls how a reasoning model allocates
+//
+// effort during evaluation.
+type ReasoningConfiguration struct {
+
+	//  The level of reasoning effort the model applies when generating a response.
+	// For supported values, see the model provider's documentation.
+	Effort *string
+
+	noSmithyDocumentSerde
+}
 
 // The recording configuration for a browser. This structure defines how browser
 // sessions are recorded.

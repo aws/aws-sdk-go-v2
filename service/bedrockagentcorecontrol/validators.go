@@ -4714,6 +4714,11 @@ func validateEvaluatorModelConfig(v types.EvaluatorModelConfig) error {
 			invalidParams.AddNested("[bedrockEvaluatorModelConfig]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.EvaluatorModelConfigMemberResponsesEvaluatorModelConfig:
+		if err := validateOpenResponsesEvaluatorModelConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[responsesEvaluatorModelConfig]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6610,6 +6615,21 @@ func validateOnBehalfOfTokenExchangeConfigType(v *types.OnBehalfOfTokenExchangeC
 		if err := validateTokenExchangeGrantTypeConfigType(v.TokenExchangeGrantTypeConfig); err != nil {
 			invalidParams.AddNested("TokenExchangeGrantTypeConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpenResponsesEvaluatorModelConfig(v *types.OpenResponsesEvaluatorModelConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenResponsesEvaluatorModelConfig"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

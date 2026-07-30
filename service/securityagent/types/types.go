@@ -1452,6 +1452,9 @@ type IntegratedRepository struct {
 	// This member is required.
 	ProviderResourceId *string
 
+	// An optional override for the repository branch.
+	Branch *string
+
 	noSmithyDocumentSerde
 }
 

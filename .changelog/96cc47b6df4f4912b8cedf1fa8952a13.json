@@ -1,0 +1,8 @@
+{
+    "id": "96cc47b6-df4f-4912-b8ce-df1fa8952a13",
+    "type": "feature",
+    "description": "Adds UPDATING field to Container Association Status",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

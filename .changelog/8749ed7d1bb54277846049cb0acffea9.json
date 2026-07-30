@@ -1,0 +1,8 @@
+{
+    "id": "8749ed7d-1bb5-4277-8460-49cb0acffea9",
+    "type": "feature",
+    "description": "Improved IAM Policy Simulator accuracy. Simulator now evaluates SCP conditions and resource scoping, returns explicitDeny for explicit SCP denials, and reports accurate cross-account decisions.",
+    "modules": [
+        "service/iam"
+    ]
+}

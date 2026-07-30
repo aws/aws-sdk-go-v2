@@ -1072,10 +1072,12 @@ func TestCheckRequestSnapshot_CreateCodeReview(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},
@@ -1256,10 +1258,12 @@ func TestCheckRequestSnapshot_CreatePentest(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},
@@ -1586,10 +1590,12 @@ func TestCheckRequestSnapshot_CreateThreatModel(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},
@@ -3207,10 +3213,12 @@ func TestCheckRequestSnapshot_UpdateCodeReview(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},
@@ -3410,10 +3418,12 @@ func TestCheckRequestSnapshot_UpdatePentest(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},
@@ -3708,10 +3718,12 @@ func TestCheckRequestSnapshot_UpdateThreatModel(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},
@@ -4678,10 +4690,12 @@ func TestUpdateRequestSnapshot_CreateCodeReview(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},
@@ -4862,10 +4876,12 @@ func TestUpdateRequestSnapshot_CreatePentest(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},
@@ -5192,10 +5208,12 @@ func TestUpdateRequestSnapshot_CreateThreatModel(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},
@@ -6813,10 +6831,12 @@ func TestUpdateRequestSnapshot_UpdateCodeReview(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},
@@ -7016,10 +7036,12 @@ func TestUpdateRequestSnapshot_UpdatePentest(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},
@@ -7314,10 +7336,12 @@ func TestUpdateRequestSnapshot_UpdateThreatModel(t *testing.T) {
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 				{
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
+					Branch:             ptr.String("__Branch__"),
 				},
 			},
 		},

@@ -12370,6 +12370,94 @@ func awsAwsquery_serializeDocumentEntityListType(v []types.EntityType, value que
 	return nil
 }
 
+func awsAwsquery_serializeDocumentInlinePolicyIdentifierType(v *types.InlinePolicyIdentifierType, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.AttachmentName != nil {
+		objectKey := object.Key("AttachmentName")
+		objectKey.String(*v.AttachmentName)
+	}
+
+	if len(v.AttachmentType) > 0 {
+		objectKey := object.Key("AttachmentType")
+		objectKey.String(string(v.AttachmentType))
+	}
+
+	if v.PolicyName != nil {
+		objectKey := object.Key("PolicyName")
+		objectKey.String(*v.PolicyName)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentOrderedOrganizationPolicyType(v *types.OrderedOrganizationPolicyType, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ServiceControlPolicyInputList != nil {
+		objectKey := object.Key("ServiceControlPolicyInputList")
+		if err := awsAwsquery_serializeDocumentSimulationPolicyListType(v.ServiceControlPolicyInputList, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentOrganizationPolicyListType(v []types.OrderedOrganizationPolicyType, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentOrderedOrganizationPolicyType(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentPolicyExclusionsListType(v []types.PolicyIdentifier, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentPolicyIdentifier(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentPolicyIdentifier(v types.PolicyIdentifier, value query.Value) error {
+	object := value.Object()
+
+	switch uv := v.(type) {
+	case *types.PolicyIdentifierMemberInlinePolicyIdentifier:
+		objectKey := object.Key("InlinePolicyIdentifier")
+		if err := awsAwsquery_serializeDocumentInlinePolicyIdentifierType(&uv.Value, objectKey); err != nil {
+			return err
+		}
+
+	case *types.PolicyIdentifierMemberPolicyArn:
+		objectKey := object.Key("PolicyArn")
+		objectKey.String(uv.Value)
+
+	case *types.PolicyIdentifierMemberPolicyType:
+		objectKey := object.Key("PolicyType")
+		objectKey.String(string(uv.Value))
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentPolicyParameter(v *types.PolicyParameter, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -15005,6 +15093,13 @@ func awsAwsquery_serializeOpDocumentSimulateCustomPolicyInput(v *SimulateCustomP
 		objectKey.Integer(*v.MaxItems)
 	}
 
+	if v.OrderedOrganizationPolicyInputList != nil {
+		objectKey := object.Key("OrderedOrganizationPolicyInputList")
+		if err := awsAwsquery_serializeDocumentOrganizationPolicyListType(v.OrderedOrganizationPolicyInputList, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.PermissionsBoundaryPolicyInputList != nil {
 		objectKey := object.Key("PermissionsBoundaryPolicyInputList")
 		if err := awsAwsquery_serializeDocumentSimulationPolicyListType(v.PermissionsBoundaryPolicyInputList, objectKey); err != nil {
@@ -15080,6 +15175,13 @@ func awsAwsquery_serializeOpDocumentSimulatePrincipalPolicyInput(v *SimulatePrin
 	if v.PermissionsBoundaryPolicyInputList != nil {
 		objectKey := object.Key("PermissionsBoundaryPolicyInputList")
 		if err := awsAwsquery_serializeDocumentSimulationPolicyListType(v.PermissionsBoundaryPolicyInputList, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.PolicyExclusionList != nil {
+		objectKey := object.Key("PolicyExclusionList")
+		if err := awsAwsquery_serializeDocumentPolicyExclusionsListType(v.PolicyExclusionList, objectKey); err != nil {
 			return err
 		}
 	}

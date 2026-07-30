@@ -62,6 +62,27 @@ func (AssignmentStatusType) Values() []AssignmentStatusType {
 	}
 }
 
+type AttachmentType string
+
+// Enum values for AttachmentType
+const (
+	AttachmentTypeUser  AttachmentType = "user"
+	AttachmentTypeGroup AttachmentType = "group"
+	AttachmentTypeRole  AttachmentType = "role"
+)
+
+// Values returns all known values for AttachmentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AttachmentType) Values() []AttachmentType {
+	return []AttachmentType{
+		"user",
+		"group",
+		"role",
+	}
+}
+
 type ContextKeyTypeEnum string
 
 // Enum values for ContextKeyTypeEnum
@@ -306,6 +327,33 @@ func (PolicyEvaluationDecisionType) Values() []PolicyEvaluationDecisionType {
 		"allowed",
 		"explicitDeny",
 		"implicitDeny",
+	}
+}
+
+type PolicyIdentifierPolicyType string
+
+// Enum values for PolicyIdentifierPolicyType
+const (
+	PolicyIdentifierPolicyTypeInline             PolicyIdentifierPolicyType = "inline"
+	PolicyIdentifierPolicyTypeAwsManaged         PolicyIdentifierPolicyType = "aws-managed"
+	PolicyIdentifierPolicyTypeUserManaged        PolicyIdentifierPolicyType = "user-managed"
+	PolicyIdentifierPolicyTypePermissionBoundary PolicyIdentifierPolicyType = "permission-boundary"
+	PolicyIdentifierPolicyTypeScp                PolicyIdentifierPolicyType = "scp"
+	PolicyIdentifierPolicyTypeRcp                PolicyIdentifierPolicyType = "rcp"
+)
+
+// Values returns all known values for PolicyIdentifierPolicyType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyIdentifierPolicyType) Values() []PolicyIdentifierPolicyType {
+	return []PolicyIdentifierPolicyType{
+		"inline",
+		"aws-managed",
+		"user-managed",
+		"permission-boundary",
+		"scp",
+		"rcp",
 	}
 }
 

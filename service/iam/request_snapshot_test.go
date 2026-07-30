@@ -4223,6 +4223,20 @@ func TestCheckRequestSnapshot_SimulateCustomPolicy(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		OrderedOrganizationPolicyInputList: []types.OrderedOrganizationPolicyType{
+			{
+				ServiceControlPolicyInputList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ServiceControlPolicyInputList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 		ActionNames: []string{
 			"__Member__",
 			"__Member__",
@@ -4289,6 +4303,14 @@ func TestCheckRequestSnapshot_SimulatePrincipalPolicy(t *testing.T) {
 		PermissionsBoundaryPolicyInputList: []string{
 			"__Member__",
 			"__Member__",
+		},
+		PolicyExclusionList: []types.PolicyIdentifier{
+			&types.PolicyIdentifierMemberPolicyType{
+				Value: types.PolicyIdentifierPolicyType("inline"),
+			},
+			&types.PolicyIdentifierMemberPolicyType{
+				Value: types.PolicyIdentifierPolicyType("inline"),
+			},
 		},
 		ActionNames: []string{
 			"__Member__",
@@ -9469,6 +9491,20 @@ func TestUpdateRequestSnapshot_SimulateCustomPolicy(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		OrderedOrganizationPolicyInputList: []types.OrderedOrganizationPolicyType{
+			{
+				ServiceControlPolicyInputList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ServiceControlPolicyInputList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 		ActionNames: []string{
 			"__Member__",
 			"__Member__",
@@ -9535,6 +9571,14 @@ func TestUpdateRequestSnapshot_SimulatePrincipalPolicy(t *testing.T) {
 		PermissionsBoundaryPolicyInputList: []string{
 			"__Member__",
 			"__Member__",
+		},
+		PolicyExclusionList: []types.PolicyIdentifier{
+			&types.PolicyIdentifierMemberPolicyType{
+				Value: types.PolicyIdentifierPolicyType("inline"),
+			},
+			&types.PolicyIdentifierMemberPolicyType{
+				Value: types.PolicyIdentifierPolicyType("inline"),
+			},
 		},
 		ActionNames: []string{
 			"__Member__",

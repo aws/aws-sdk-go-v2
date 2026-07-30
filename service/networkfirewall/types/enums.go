@@ -57,6 +57,7 @@ const (
 	ContainerAssociationStatusActive   ContainerAssociationStatus = "ACTIVE"
 	ContainerAssociationStatusCreating ContainerAssociationStatus = "CREATING"
 	ContainerAssociationStatusDeleting ContainerAssociationStatus = "DELETING"
+	ContainerAssociationStatusUpdating ContainerAssociationStatus = "UPDATING"
 )
 
 // Values returns all known values for ContainerAssociationStatus. Note that this
@@ -68,6 +69,7 @@ func (ContainerAssociationStatus) Values() []ContainerAssociationStatus {
 		"ACTIVE",
 		"CREATING",
 		"DELETING",
+		"UPDATING",
 	}
 }
 

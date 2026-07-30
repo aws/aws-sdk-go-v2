@@ -20743,6 +20743,15 @@ func awsRestjson1_deserializeDocumentIntegratedRepository(v **types.IntegratedRe
 
 	for key, value := range shape {
 		switch key {
+		case "branch":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Branch = ptr.String(jtv)
+			}
+
 		case "integrationId":
 			if value != nil {
 				jtv, ok := value.(string)

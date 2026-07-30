@@ -847,6 +847,8 @@ const (
 	RuntimeProvided       Runtime = "provided"
 	RuntimeProvidedal2    Runtime = "provided.al2"
 	RuntimeProvidedal2023 Runtime = "provided.al2023"
+	RuntimeNodejs26x      Runtime = "nodejs26.x"
+	RuntimePython315      Runtime = "python3.15"
 	RuntimeJava8al2023    Runtime = "java8.al2023"
 	RuntimeJava11al2023   Runtime = "java11.al2023"
 	RuntimeJava17al2023   Runtime = "java17.al2023"
@@ -904,6 +906,8 @@ func (Runtime) Values() []Runtime {
 		"provided",
 		"provided.al2",
 		"provided.al2023",
+		"nodejs26.x",
+		"python3.15",
 		"java8.al2023",
 		"java11.al2023",
 		"java17.al2023",
@@ -914,9 +918,10 @@ type S3ObjectStorageMode string
 
 // Enum values for S3ObjectStorageMode
 const (
-	// COPY (default) uploads a copy of your deployment package to Lambda.
+	// The default storage mode. Uploads a copy of your deployment package to Lambda.
 	S3ObjectStorageModeCopy S3ObjectStorageMode = "COPY"
-	// Lambda references the deployment package from the specified Amazon S3 bucket.
+	// The reference storage mode. Lambda references the deployment package from the
+	// specified Amazon S3 bucket without uploading a copy.
 	S3ObjectStorageModeReference S3ObjectStorageMode = "REFERENCE"
 )
 

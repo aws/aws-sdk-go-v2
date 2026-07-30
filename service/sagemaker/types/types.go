@@ -523,8 +523,8 @@ type AIRecommendation struct {
 
 // The per-recommendation LoRA adapter details. Contains both the model package
 // ARNs and Amazon S3 URIs for each adapter, regardless of which form was
-// originally supplied in the request. When the customer supplies only Amazon S3
-// URIs, Amazon SageMaker AI creates model packages on their behalf.
+// originally supplied in the request. When you supply only Amazon S3 URIs, Amazon
+// SageMaker AI creates model packages on your behalf.
 type AIRecommendationAdapterDetails struct {
 
 	// The list of LoRA adapters with their model package ARNs.
@@ -583,11 +583,9 @@ type AIRecommendationDeploymentConfiguration struct {
 	// The recommended instance type for the deployment.
 	InstanceType AIRecommendationInstanceType
 
-	// The minimum host (CPU) memory, in MiB, to reserve per model copy when deploying
-	// the recommendation as an Inference Component. This value maps to the base
-	// Inference Component's ComputeResourceRequirements$MinMemoryRequiredInMb and is
-	// sized so that CopyCountPerInstance copies co-place within the instance's
-	// allocatable host memory.
+	// The minimum host (CPU) memory, in MiB, to reserve for each model copy when
+	// deploying the recommendation as an Inference Component. This value maps to the
+	// Inference Component's ComputeResourceRequirements$MinMemoryRequiredInMb field.
 	MinCpuMemoryRequiredInMb *int32
 
 	// The Amazon S3 data channels for the deployment.
