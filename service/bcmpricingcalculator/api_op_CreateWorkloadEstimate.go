@@ -88,11 +88,11 @@ type CreateWorkloadEstimateOutput struct {
 }
 
 func (c *Client) addOperationCreateWorkloadEstimateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateWorkloadEstimate{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateWorkloadEstimate{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateWorkloadEstimate{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateWorkloadEstimate{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -116,9 +116,6 @@ func (c *Client) addOperationCreateWorkloadEstimateMiddlewares(stack *middleware
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

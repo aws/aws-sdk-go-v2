@@ -42,11 +42,11 @@ type DeleteWorkloadEstimateOutput struct {
 }
 
 func (c *Client) addOperationDeleteWorkloadEstimateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteWorkloadEstimate{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteWorkloadEstimate{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteWorkloadEstimate{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteWorkloadEstimate{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -70,9 +70,6 @@ func (c *Client) addOperationDeleteWorkloadEstimateMiddlewares(stack *middleware
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

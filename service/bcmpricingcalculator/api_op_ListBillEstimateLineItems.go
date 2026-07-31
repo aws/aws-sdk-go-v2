@@ -60,11 +60,11 @@ type ListBillEstimateLineItemsOutput struct {
 }
 
 func (c *Client) addOperationListBillEstimateLineItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListBillEstimateLineItems{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListBillEstimateLineItems{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListBillEstimateLineItems{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListBillEstimateLineItems{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -88,9 +88,6 @@ func (c *Client) addOperationListBillEstimateLineItemsMiddlewares(stack *middlew
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

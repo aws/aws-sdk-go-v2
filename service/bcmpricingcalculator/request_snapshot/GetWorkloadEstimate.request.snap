@@ -1,7 +1,6 @@
-POST /service/AWSBCMPricingCalculator/operation/GetWorkloadEstimate
+POST /
 
-Accept: application/cbor
-Content-Type: application/cbor
-Smithy-Protocol: rpc-v2-cbor
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.GetWorkloadEstimate
 
-¡jidentifiern__Identifier__
+{"identifier":"__Identifier__"}

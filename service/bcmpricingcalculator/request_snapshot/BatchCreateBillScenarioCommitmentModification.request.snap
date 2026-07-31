@@ -1,7 +1,6 @@
-POST /service/AWSBCMPricingCalculator/operation/BatchCreateBillScenarioCommitmentModification
+POST /
 
-Accept: application/cbor
-Content-Type: application/cbor
-Smithy-Protocol: rpc-v2-cbor
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.BatchCreateBillScenarioCommitmentModification
 
-£nbillScenarioIdr__BillScenarioId__wcommitmentModifications‚¤ckeyg__Key__egroupi__Group__nusageAccountIdr__UsageAccountId__pcommitmentAction¡xaddReservedInstanceAction¢minstanceCountxreservedInstancesOfferingIdx__ReservedInstancesOfferingId__¤egroupi__Group__nusageAccountIdr__UsageAccountId__pcommitmentAction¡xaddReservedInstanceAction¢xreservedInstancesOfferingIdx__ReservedInstancesOfferingId__minstanceCountckeyg__Key__kclientTokeno__ClientToken__
+{"billScenarioId":"__BillScenarioId__","clientToken":"__ClientToken__","commitmentModifications":[{"commitmentAction":{"addReservedInstanceAction":{"instanceCount":1,"reservedInstancesOfferingId":"__ReservedInstancesOfferingId__"}},"group":"__Group__","key":"__Key__","usageAccountId":"__UsageAccountId__"},{"commitmentAction":{"addReservedInstanceAction":{"instanceCount":1,"reservedInstancesOfferingId":"__ReservedInstancesOfferingId__"}},"group":"__Group__","key":"__Key__","usageAccountId":"__UsageAccountId__"}]}

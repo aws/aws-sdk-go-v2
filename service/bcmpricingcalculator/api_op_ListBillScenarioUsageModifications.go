@@ -60,11 +60,11 @@ type ListBillScenarioUsageModificationsOutput struct {
 }
 
 func (c *Client) addOperationListBillScenarioUsageModificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListBillScenarioUsageModifications{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListBillScenarioUsageModifications{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListBillScenarioUsageModifications{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListBillScenarioUsageModifications{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -88,9 +88,6 @@ func (c *Client) addOperationListBillScenarioUsageModificationsMiddlewares(stack
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

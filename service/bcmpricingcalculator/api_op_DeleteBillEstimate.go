@@ -42,11 +42,11 @@ type DeleteBillEstimateOutput struct {
 }
 
 func (c *Client) addOperationDeleteBillEstimateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteBillEstimate{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteBillEstimate{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteBillEstimate{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteBillEstimate{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -70,9 +70,6 @@ func (c *Client) addOperationDeleteBillEstimateMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

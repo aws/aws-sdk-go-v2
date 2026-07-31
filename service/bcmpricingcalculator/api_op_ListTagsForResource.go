@@ -46,11 +46,11 @@ type ListTagsForResourceOutput struct {
 }
 
 func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListTagsForResource{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListTagsForResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListTagsForResource{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListTagsForResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -74,9 +74,6 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
