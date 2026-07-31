@@ -26,7 +26,6 @@
                 "aws.protocols#awsJson1_0": {},
                 "smithy.api#documentation": "<p>You can use the Billing and Cost Management Recommended Actions API to programmatically query your best practices and recommendations to optimize your costs.</p> <p>The Billing and Cost Management Recommended Actions API provides the following endpoint:</p> <ul> <li> <p> https://bcm-recommended-actions.us-east-1.api.aws</p> </li> </ul>",
                 "smithy.api#title": "AWS Billing and Cost Management Recommended Actions",
-                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
                     "parameters": {
