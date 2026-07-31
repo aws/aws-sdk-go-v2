@@ -1,3 +1,7 @@
+# v1.15.0 (2026-07-31)
+
+* **Feature**: Removing Smithy RPC v2 CBOR support that was added in previous SDK release.
+
 # v1.14.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

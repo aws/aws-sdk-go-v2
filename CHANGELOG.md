@@ -1,3 +1,11 @@
+# Release (2026-07-31)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator`: [v1.15.0](service/bcmpricingcalculator/CHANGELOG.md#v1150-2026-07-31)
+  * **Feature**: Removing Smithy RPC v2 CBOR support that was added in previous SDK release.
+* `github.com/aws/aws-sdk-go-v2/service/bcmrecommendedactions`: [v1.6.0](service/bcmrecommendedactions/CHANGELOG.md#v160-2026-07-31)
+  * **Feature**: Removing Smithy RPC v2 CBOR support that was added in previous SDK release.
+
 # Release (2026-07-30)
 
 ## Module Highlights

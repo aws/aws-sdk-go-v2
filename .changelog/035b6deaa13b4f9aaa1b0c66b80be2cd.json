@@ -1,8 +1,0 @@
-{
-    "id": "035b6dea-a13b-4f9a-aa1b-0c66b80be2cd",
-    "type": "feature",
-    "description": "Removing Smithy RPC v2 CBOR support that was added in previous SDK release.",
-    "modules": [
-        "service/bcmrecommendedactions"
-    ]
-}
