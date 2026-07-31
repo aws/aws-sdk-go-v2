@@ -5330,7 +5330,9 @@ func deserializeCBOR_AccessEndpoint(v smithycbor.Value) (*types.AccessEndpoint, 
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "EndpointType" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_AccessEndpointType(sv)
 			if err != nil {
 				return nil, err
@@ -5532,7 +5534,9 @@ func deserializeCBOR_AgentAccessConfig(v smithycbor.Value) (*types.AgentAccessCo
 		}
 
 		if key == "ScreenResolution" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ScreenResolution(sv)
 			if err != nil {
 				return nil, err
@@ -5541,7 +5545,9 @@ func deserializeCBOR_AgentAccessConfig(v smithycbor.Value) (*types.AgentAccessCo
 		}
 
 		if key == "ScreenImageFormat" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ScreenImageFormat(sv)
 			if err != nil {
 				return nil, err
@@ -5550,7 +5556,9 @@ func deserializeCBOR_AgentAccessConfig(v smithycbor.Value) (*types.AgentAccessCo
 		}
 
 		if key == "UserControlMode" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_UserControlMode(sv)
 			if err != nil {
 				return nil, err
@@ -5570,7 +5578,9 @@ func deserializeCBOR_AgentAccessSetting(v smithycbor.Value) (*types.AgentAccessS
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "AgentAction" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_AgentAction(sv)
 			if err != nil {
 				return nil, err
@@ -5579,7 +5589,9 @@ func deserializeCBOR_AgentAccessSetting(v smithycbor.Value) (*types.AgentAccessS
 		}
 
 		if key == "Permission" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_Permission(sv)
 			if err != nil {
 				return nil, err
@@ -5712,7 +5724,9 @@ func deserializeCBOR_AppBlock(v smithycbor.Value) (*types.AppBlock, error) {
 		}
 
 		if key == "PackagingType" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_PackagingType(sv)
 			if err != nil {
 				return nil, err
@@ -5721,7 +5735,9 @@ func deserializeCBOR_AppBlock(v smithycbor.Value) (*types.AppBlock, error) {
 		}
 
 		if key == "State" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_AppBlockState(sv)
 			if err != nil {
 				return nil, err
@@ -5796,7 +5812,9 @@ func deserializeCBOR_AppBlockBuilder(v smithycbor.Value) (*types.AppBlockBuilder
 		}
 
 		if key == "Platform" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_AppBlockBuilderPlatformType(sv)
 			if err != nil {
 				return nil, err
@@ -5849,7 +5867,9 @@ func deserializeCBOR_AppBlockBuilder(v smithycbor.Value) (*types.AppBlockBuilder
 		}
 
 		if key == "State" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_AppBlockBuilderState(sv)
 			if err != nil {
 				return nil, err
@@ -6007,7 +6027,9 @@ func deserializeCBOR_AppBlockBuilderStateChangeReason(v smithycbor.Value) (*type
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Code" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_AppBlockBuilderStateChangeReasonCode(sv)
 			if err != nil {
 				return nil, err
@@ -6374,7 +6396,9 @@ func deserializeCBOR_CertificateBasedAuthProperties(v smithycbor.Value) (*types.
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Status" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_CertificateBasedAuthStatus(sv)
 			if err != nil {
 				return nil, err
@@ -6841,7 +6865,9 @@ func deserializeCBOR_Entitlement(v smithycbor.Value) (*types.Entitlement, error)
 		}
 
 		if key == "AppVisibility" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_AppVisibility(sv)
 			if err != nil {
 				return nil, err
@@ -7110,7 +7136,9 @@ func deserializeCBOR_ExportImageTask(v smithycbor.Value) (*types.ExportImageTask
 		}
 
 		if key == "State" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ExportImageTaskState(sv)
 			if err != nil {
 				return nil, err
@@ -7265,7 +7293,9 @@ func deserializeCBOR_Fleet(v smithycbor.Value) (*types.Fleet, error) {
 		}
 
 		if key == "FleetType" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_FleetType(sv)
 			if err != nil {
 				return nil, err
@@ -7307,7 +7337,9 @@ func deserializeCBOR_Fleet(v smithycbor.Value) (*types.Fleet, error) {
 		}
 
 		if key == "State" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_FleetState(sv)
 			if err != nil {
 				return nil, err
@@ -7393,7 +7425,9 @@ func deserializeCBOR_Fleet(v smithycbor.Value) (*types.Fleet, error) {
 		}
 
 		if key == "StreamView" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_StreamView(sv)
 			if err != nil {
 				return nil, err
@@ -7402,7 +7436,9 @@ func deserializeCBOR_Fleet(v smithycbor.Value) (*types.Fleet, error) {
 		}
 
 		if key == "Platform" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_PlatformType(sv)
 			if err != nil {
 				return nil, err
@@ -7488,7 +7524,9 @@ func deserializeCBOR_FleetError(v smithycbor.Value) (*types.FleetError, error) {
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ErrorCode" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_FleetErrorCode(sv)
 			if err != nil {
 				return nil, err
@@ -7621,7 +7659,9 @@ func deserializeCBOR_Image(v smithycbor.Value) (*types.Image, error) {
 		}
 
 		if key == "State" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ImageState(sv)
 			if err != nil {
 				return nil, err
@@ -7630,7 +7670,9 @@ func deserializeCBOR_Image(v smithycbor.Value) (*types.Image, error) {
 		}
 
 		if key == "Visibility" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_VisibilityType(sv)
 			if err != nil {
 				return nil, err
@@ -7661,7 +7703,9 @@ func deserializeCBOR_Image(v smithycbor.Value) (*types.Image, error) {
 		}
 
 		if key == "Platform" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_PlatformType(sv)
 			if err != nil {
 				return nil, err
@@ -7758,7 +7802,9 @@ func deserializeCBOR_Image(v smithycbor.Value) (*types.Image, error) {
 		}
 
 		if key == "LatestAppstreamAgentVersion" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_LatestAppstreamAgentVersion(sv)
 			if err != nil {
 				return nil, err
@@ -7778,7 +7824,9 @@ func deserializeCBOR_Image(v smithycbor.Value) (*types.Image, error) {
 		}
 
 		if key == "DynamicAppProvidersEnabled" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_DynamicAppProvidersEnabled(sv)
 			if err != nil {
 				return nil, err
@@ -7787,7 +7835,9 @@ func deserializeCBOR_Image(v smithycbor.Value) (*types.Image, error) {
 		}
 
 		if key == "ImageSharedWithOthers" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ImageSharedWithOthers(sv)
 			if err != nil {
 				return nil, err
@@ -7807,7 +7857,9 @@ func deserializeCBOR_Image(v smithycbor.Value) (*types.Image, error) {
 		}
 
 		if key == "ImageType" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ImageType(sv)
 			if err != nil {
 				return nil, err
@@ -7904,7 +7956,9 @@ func deserializeCBOR_ImageBuilder(v smithycbor.Value) (*types.ImageBuilder, erro
 		}
 
 		if key == "Platform" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_PlatformType(sv)
 			if err != nil {
 				return nil, err
@@ -7924,7 +7978,9 @@ func deserializeCBOR_ImageBuilder(v smithycbor.Value) (*types.ImageBuilder, erro
 		}
 
 		if key == "State" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ImageBuilderState(sv)
 			if err != nil {
 				return nil, err
@@ -8032,7 +8088,9 @@ func deserializeCBOR_ImageBuilder(v smithycbor.Value) (*types.ImageBuilder, erro
 		}
 
 		if key == "LatestAppstreamAgentVersion" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_LatestAppstreamAgentVersion(sv)
 			if err != nil {
 				return nil, err
@@ -8088,7 +8146,9 @@ func deserializeCBOR_ImageBuilderStateChangeReason(v smithycbor.Value) (*types.I
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Code" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ImageBuilderStateChangeReasonCode(sv)
 			if err != nil {
 				return nil, err
@@ -8193,7 +8253,9 @@ func deserializeCBOR_ImageStateChangeReason(v smithycbor.Value) (*types.ImageSta
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Code" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ImageStateChangeReasonCode(sv)
 			if err != nil {
 				return nil, err
@@ -8336,7 +8398,9 @@ func deserializeCBOR_LastReportGenerationExecutionError(v smithycbor.Value) (*ty
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ErrorCode" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_UsageReportExecutionErrorCode(sv)
 			if err != nil {
 				return nil, err
@@ -8607,7 +8671,9 @@ func deserializeCBOR_ResourceError(v smithycbor.Value) (*types.ResourceError, er
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ErrorCode" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_FleetErrorCode(sv)
 			if err != nil {
 				return nil, err
@@ -8930,7 +8996,9 @@ func deserializeCBOR_Session(v smithycbor.Value) (*types.Session, error) {
 		}
 
 		if key == "State" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_SessionState(sv)
 			if err != nil {
 				return nil, err
@@ -8939,7 +9007,9 @@ func deserializeCBOR_Session(v smithycbor.Value) (*types.Session, error) {
 		}
 
 		if key == "ConnectionState" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_SessionConnectionState(sv)
 			if err != nil {
 				return nil, err
@@ -8970,7 +9040,9 @@ func deserializeCBOR_Session(v smithycbor.Value) (*types.Session, error) {
 		}
 
 		if key == "AuthenticationType" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_AuthenticationType(sv)
 			if err != nil {
 				return nil, err
@@ -9001,7 +9073,9 @@ func deserializeCBOR_Session(v smithycbor.Value) (*types.Session, error) {
 		}
 
 		if key == "InstanceDrainStatus" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_InstanceDrainStatus(sv)
 			if err != nil {
 				return nil, err
@@ -9115,7 +9189,9 @@ func deserializeCBOR_SoftwareAssociations(v smithycbor.Value) (*types.SoftwareAs
 		}
 
 		if key == "Status" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_SoftwareDeploymentStatus(sv)
 			if err != nil {
 				return nil, err
@@ -9358,7 +9434,9 @@ func deserializeCBOR_StackError(v smithycbor.Value) (*types.StackError, error) {
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ErrorCode" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_StackErrorCode(sv)
 			if err != nil {
 				return nil, err
@@ -9431,7 +9509,9 @@ func deserializeCBOR_StorageConnector(v smithycbor.Value) (*types.StorageConnect
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ConnectorType" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_StorageConnectorType(sv)
 			if err != nil {
 				return nil, err
@@ -9509,7 +9589,9 @@ func deserializeCBOR_StreamingExperienceSettings(v smithycbor.Value) (*types.Str
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "PreferredProtocol" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_PreferredProtocol(sv)
 			if err != nil {
 				return nil, err
@@ -9599,7 +9681,9 @@ func deserializeCBOR_Theme(v smithycbor.Value) (*types.Theme, error) {
 		}
 
 		if key == "State" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ThemeState(sv)
 			if err != nil {
 				return nil, err
@@ -9619,7 +9703,9 @@ func deserializeCBOR_Theme(v smithycbor.Value) (*types.Theme, error) {
 		}
 
 		if key == "ThemeStyling" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ThemeStyling(sv)
 			if err != nil {
 				return nil, err
@@ -9837,7 +9923,9 @@ func deserializeCBOR_UsageReportSubscription(v smithycbor.Value) (*types.UsageRe
 		}
 
 		if key == "Schedule" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_UsageReportSchedule(sv)
 			if err != nil {
 				return nil, err
@@ -9990,7 +10078,9 @@ func deserializeCBOR_User(v smithycbor.Value) (*types.User, error) {
 		}
 
 		if key == "AuthenticationType" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_AuthenticationType(sv)
 			if err != nil {
 				return nil, err
@@ -10035,7 +10125,9 @@ func deserializeCBOR_UserSetting(v smithycbor.Value) (*types.UserSetting, error)
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Action" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_Action(sv)
 			if err != nil {
 				return nil, err
@@ -10044,7 +10136,9 @@ func deserializeCBOR_UserSetting(v smithycbor.Value) (*types.UserSetting, error)
 		}
 
 		if key == "Permission" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_Permission(sv)
 			if err != nil {
 				return nil, err
@@ -10114,7 +10208,9 @@ func deserializeCBOR_UserStackAssociation(v smithycbor.Value) (*types.UserStackA
 		}
 
 		if key == "AuthenticationType" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_AuthenticationType(sv)
 			if err != nil {
 				return nil, err
@@ -10156,7 +10252,9 @@ func deserializeCBOR_UserStackAssociationError(v smithycbor.Value) (*types.UserS
 		}
 
 		if key == "ErrorCode" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_UserStackAssociationErrorCode(sv)
 			if err != nil {
 				return nil, err
@@ -10811,7 +10909,9 @@ func deserializeCBOR_CreateUsageReportSubscriptionOutput(v smithycbor.Value) (*C
 		}
 
 		if key == "Schedule" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_UsageReportSchedule(sv)
 			if err != nil {
 				return nil, err
