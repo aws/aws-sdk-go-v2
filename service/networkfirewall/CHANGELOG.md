@@ -1,3 +1,9 @@
+# v1.66.0 (2026-07-31.2)
+
+* **Feature**: Doc Updates for Container Attributes
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.65.0 (2026-07-30)
 
 * **Feature**: Adds UPDATING field to Container Association Status

@@ -1,8 +1,0 @@
-{
-    "id": "f55cb4bc-a86b-473a-91fa-1b32d158f5a9",
-    "type": "feature",
-    "description": "Adding TopicV2 management APIs, adding possibility to use Topics in Analysis",
-    "modules": [
-        "service/quicksight"
-    ]
-}

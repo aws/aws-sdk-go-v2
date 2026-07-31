@@ -1,8 +1,0 @@
-{
-    "id": "693bd1cf-5dfe-4223-a35f-4aedd7c19b80",
-    "type": "feature",
-    "description": "Adding support for new testing capability in AWS Resilience Hub.",
-    "modules": [
-        "service/resiliencehubv2"
-    ]
-}

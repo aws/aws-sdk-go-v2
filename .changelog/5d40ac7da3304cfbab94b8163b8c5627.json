@@ -1,8 +1,0 @@
-{
-    "id": "5d40ac7d-a330-4cfb-ab94-b8163b8c5627",
-    "type": "feature",
-    "description": "This release adds a new optional TranscriptFormat parameter to the Amazon Transcribe streaming API, letting customers select spoken or written form for numeric and formatted output.",
-    "modules": [
-        "service/transcribestreaming"
-    ]
-}

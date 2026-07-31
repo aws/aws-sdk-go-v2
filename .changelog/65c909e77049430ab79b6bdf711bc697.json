@@ -1,8 +1,0 @@
-{
-    "id": "65c909e7-7049-430a-b79b-6bdf711bc697",
-    "type": "feature",
-    "description": "Added support for mid-conversation tool changes in the Amazon Bedrock Converse and ConverseStream APIs",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}

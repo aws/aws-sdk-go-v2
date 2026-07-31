@@ -1,3 +1,9 @@
+# v1.14.0 (2026-07-31.2)
+
+* **Feature**: Adds GetEnterpriseSupportChargeSummary, GetEnterpriseSupportContractDetails, and ListEnterpriseSupportLinkedAccountCharges. These APIs provide first-time programmatic access to billing data for Enterprise Support usage previously only available upon request through AWS Concierge or Support.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.13.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

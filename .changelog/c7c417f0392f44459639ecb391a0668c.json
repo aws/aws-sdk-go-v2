@@ -1,8 +1,0 @@
-{
-    "id": "c7c417f0-392f-4445-9639-ecb391a0668c",
-    "type": "feature",
-    "description": "Launching feature for abandonment rate pacing control for outbound campaigns.",
-    "modules": [
-        "service/connectcampaignsv2"
-    ]
-}

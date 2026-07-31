@@ -1,3 +1,9 @@
+# v1.66.0 (2026-07-31.2)
+
+* **Feature**: Adds the "EKS" value to the AWSServiceName enum and marks the Address field as sensitive.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.65.2 (2026-07-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

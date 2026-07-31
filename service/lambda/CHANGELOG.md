@@ -1,3 +1,8 @@
+# v1.101.1 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
 # v1.101.0 (2026-07-30)
 
 * **Feature**: Add Python3.15 (python3.15) and NodeJs 26 (nodejs26.x) support to AWS Lambda

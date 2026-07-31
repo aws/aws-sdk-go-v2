@@ -1,3 +1,41 @@
+# Release (2026-07-31.2)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.48.0](service/amp/CHANGELOG.md#v1480-2026-07-312)
+  * **Feature**: Amazon Managed Service for Prometheus adds support for an Amazon OpenSearch Service exporter for managed collectors.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.57.0](service/bedrockruntime/CHANGELOG.md#v1570-2026-07-312)
+  * **Feature**: Added support for mid-conversation tool changes in the Amazon Bedrock Converse and ConverseStream APIs
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.14.0](service/billing/CHANGELOG.md#v1140-2026-07-312)
+  * **Feature**: Adds GetEnterpriseSupportChargeSummary, GetEnterpriseSupportContractDetails, and ListEnterpriseSupportLinkedAccountCharges. These APIs provide first-time programmatic access to billing data for Enterprise Support usage previously only available upon request through AWS Concierge or Support.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.76.0](service/cloudformation/CHANGELOG.md#v1760-2026-07-312)
+  * **Feature**: Adding enum for sensitive property to DriftIgnoredReason
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.81.0](service/cloudwatchlogs/CHANGELOG.md#v1810-2026-07-312)
+  * **Feature**: Amazon CloudWatch Logs now lets you create and update lookup tables directly from CloudWatch Logs query results by passing a queryId, and configure a lookup table as a scheduled query destination so it refreshes automatically with the latest query results on each run.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.18.0](service/connectcampaignsv2/CHANGELOG.md#v1180-2026-07-312)
+  * **Feature**: Launching feature for abandonment rate pacing control for outbound campaigns.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.68.0](service/datazone/CHANGELOG.md#v1680-2026-07-312)
+  * **Feature**: Adding support for enhanced Git experience in Sagemaker Unified Studio.
+* `github.com/aws/aws-sdk-go-v2/service/elementalinference`: [v1.5.0](service/elementalinference/CHANGELOG.md#v150-2026-07-312)
+  * **Feature**: AWS Elemental Inference now supports graphic composition on cropped video outputs, enabling branded graphics and other visual elements to be overlaid as part of the inference workflow.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.44.0](service/marketplacecatalog/CHANGELOG.md#v1440-2026-07-312)
+  * **Feature**: This release enhances the ListEntities API to support TargetAgreementId, TargetAgreementIntent, and CreatedBySource filters for the Offer entity type.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.66.0](service/networkfirewall/CHANGELOG.md#v1660-2026-07-312)
+  * **Feature**: Doc Updates for Container Attributes
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.66.0](service/outposts/CHANGELOG.md#v1660-2026-07-312)
+  * **Feature**: Adds the "EKS" value to the AWSServiceName enum and marks the Address field as sensitive.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.123.0](service/quicksight/CHANGELOG.md#v11230-2026-07-312)
+  * **Feature**: Adding TopicV2 management APIs, adding possibility to use Topics in Analysis
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.124.0](service/rds/CHANGELOG.md#v11240-2026-07-312)
+  * **Feature**: Adds StorageOperationStatus and StorageOperationPercentProgress to DescribeDBInstances, letting you monitor RDS storage initialization and optimization progress.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehubv2`: [v1.4.0](service/resiliencehubv2/CHANGELOG.md#v140-2026-07-312)
+  * **Feature**: Adding support for new testing capability in AWS Resilience Hub.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.38.0](service/transcribestreaming/CHANGELOG.md#v1380-2026-07-312)
+  * **Feature**: This release adds a new optional TranscriptFormat parameter to the Amazon Transcribe streaming API, letting customers select spoken or written form for numeric and formatted output.
+
 # Release (2026-07-31)
 
 ## Module Highlights

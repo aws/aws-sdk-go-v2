@@ -1,8 +1,0 @@
-{
-    "id": "cc844a80-65dd-415c-a5f8-8db0a0202574",
-    "type": "feature",
-    "description": "Amazon Managed Service for Prometheus adds support for an Amazon OpenSearch Service exporter for managed collectors.",
-    "modules": [
-        "service/amp"
-    ]
-}

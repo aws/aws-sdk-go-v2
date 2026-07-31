@@ -3,10 +3,10 @@ module github.com/aws/aws-sdk-go-v2/internal/kitchensinktestlegacy
 go 1.24
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.43.2
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.15
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.33
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.33
+	github.com/aws/aws-sdk-go-v2 v1.43.3
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.16
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.34
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.34
 	github.com/aws/smithy-go v1.27.6
 )
 
