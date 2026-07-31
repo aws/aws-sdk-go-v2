@@ -1833,7 +1833,9 @@ func deserializeCBOR_Gateway(v smithycbor.Value) (*types.Gateway, error) {
 		}
 
 		if key == "GatewayType" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_GatewayType(sv)
 			if err != nil {
 				return nil, err
@@ -1897,7 +1899,9 @@ func deserializeCBOR_GatewayDetails(v smithycbor.Value) (*types.GatewayDetails, 
 		}
 
 		if key == "GatewayType" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_GatewayType(sv)
 			if err != nil {
 				return nil, err
@@ -2063,7 +2067,9 @@ func deserializeCBOR_Hypervisor(v smithycbor.Value) (*types.Hypervisor, error) {
 		}
 
 		if key == "State" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_HypervisorState(sv)
 			if err != nil {
 				return nil, err
@@ -2138,7 +2144,9 @@ func deserializeCBOR_HypervisorDetails(v smithycbor.Value) (*types.HypervisorDet
 		}
 
 		if key == "State" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_HypervisorState(sv)
 			if err != nil {
 				return nil, err
@@ -2169,7 +2177,9 @@ func deserializeCBOR_HypervisorDetails(v smithycbor.Value) (*types.HypervisorDet
 		}
 
 		if key == "LatestMetadataSyncStatus" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_SyncMetadataStatus(sv)
 			if err != nil {
 				return nil, err

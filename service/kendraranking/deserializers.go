@@ -686,7 +686,9 @@ func deserializeCBOR_RescoreExecutionPlanSummary(v smithycbor.Value) (*types.Res
 		}
 
 		if key == "Status" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_RescoreExecutionPlanStatus(sv)
 			if err != nil {
 				return nil, err
@@ -1063,7 +1065,9 @@ func deserializeCBOR_DescribeRescoreExecutionPlanOutput(v smithycbor.Value) (*De
 		}
 
 		if key == "Status" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_RescoreExecutionPlanStatus(sv)
 			if err != nil {
 				return nil, err
