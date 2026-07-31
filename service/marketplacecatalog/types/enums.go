@@ -256,6 +256,25 @@ func (MachineLearningProductVisibilityString) Values() []MachineLearningProductV
 	}
 }
 
+type OfferCreatedBySourceString string
+
+// Enum values for OfferCreatedBySourceString
+const (
+	OfferCreatedBySourceStringSeller         OfferCreatedBySourceString = "Seller"
+	OfferCreatedBySourceStringAwsMarketplace OfferCreatedBySourceString = "AwsMarketplace"
+)
+
+// Values returns all known values for OfferCreatedBySourceString. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OfferCreatedBySourceString) Values() []OfferCreatedBySourceString {
+	return []OfferCreatedBySourceString{
+		"Seller",
+		"AwsMarketplace",
+	}
+}
+
 type OfferSetSortBy string
 
 // Enum values for OfferSetSortBy
@@ -317,6 +336,9 @@ const (
 	OfferSortByTargeting             OfferSortBy = "Targeting"
 	OfferSortByLastModifiedDate      OfferSortBy = "LastModifiedDate"
 	OfferSortByOfferSetId            OfferSortBy = "OfferSetId"
+	OfferSortByTargetAgreementId     OfferSortBy = "TargetAgreementId"
+	OfferSortByTargetAgreementIntent OfferSortBy = "TargetAgreementIntent"
+	OfferSortByCreatedBySource       OfferSortBy = "CreatedBySource"
 )
 
 // Values returns all known values for OfferSortBy. Note that this can be expanded
@@ -336,6 +358,9 @@ func (OfferSortBy) Values() []OfferSortBy {
 		"Targeting",
 		"LastModifiedDate",
 		"OfferSetId",
+		"TargetAgreementId",
+		"TargetAgreementIntent",
+		"CreatedBySource",
 	}
 }
 
@@ -355,6 +380,24 @@ func (OfferStateString) Values() []OfferStateString {
 	return []OfferStateString{
 		"Draft",
 		"Released",
+	}
+}
+
+type OfferTargetAgreementIntentString string
+
+// Enum values for OfferTargetAgreementIntentString
+const (
+	OfferTargetAgreementIntentStringRenew OfferTargetAgreementIntentString = "Renew"
+)
+
+// Values returns all known values for OfferTargetAgreementIntentString. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OfferTargetAgreementIntentString) Values() []OfferTargetAgreementIntentString {
+	return []OfferTargetAgreementIntentString{
+		"Renew",
 	}
 }
 

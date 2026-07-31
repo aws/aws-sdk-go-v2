@@ -54,6 +54,11 @@ type UpdateFeedInput struct {
 	// This member is required.
 	Outputs []types.UpdateOutput
 
+	// The ARN of an IAM role that Elemental Inference assumes to access resources in
+	// your account on your behalf. You can specify the existing role (to leave it
+	// unchanged) or a new role. You specify one access role for each feed.
+	AccessRoleArn *string
+
 	noSmithyDocumentSerde
 }
 

@@ -23,6 +23,23 @@ type ActiveTimeRange struct {
 	noSmithyDocumentSerde
 }
 
+// An additional charge applied to an Enterprise Support contract.
+type AdditionalCharge struct {
+
+	// A description of the additional charge.
+	//
+	// This member is required.
+	Description *string
+
+	// The charge amount.
+	Amount *string
+
+	// The type of additional charge.
+	ChargeType *string
+
+	noSmithyDocumentSerde
+}
+
 // A monetary amount with a currency code. Used throughout the Billing API to
 // represent credit balances, allocations, and adjustments.
 type Amount struct {
@@ -211,6 +228,41 @@ type BillingViewListElement struct {
 	noSmithyDocumentSerde
 }
 
+// An account that is charged all or a portion of the total Support charge and the
+// percentage of the charge allocated to it.
+type ChargeAccount struct {
+
+	// The account ID.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The percentage of the total Support charge allocated to this account. This is
+	// 0.0 when supportAllocationMethod = Proportional.
+	//
+	// This member is required.
+	ChargePercentage *string
+
+	noSmithyDocumentSerde
+}
+
+// An account that is covered by the Enterprise Support contract.
+type ContractAccount struct {
+
+	// The account ID.
+	//
+	// This member is required.
+	AccountId *string
+
+	// When true, Support charges are calculated on charges before private discounts.
+	// When false, they are calculated after private discounts.
+	//
+	// This member is required.
+	IsGdn *bool
+
+	noSmithyDocumentSerde
+}
+
 // The Cost Categories values used for filtering the costs.
 type CostCategoryValues struct {
 
@@ -376,6 +428,20 @@ type DimensionValues struct {
 	noSmithyDocumentSerde
 }
 
+// A time period for Enterprise Support billing.
+type EnterpriseSupportTimePeriod struct {
+
+	// The begin date of the time period.
+	//
+	// This member is required.
+	BeginDate *time.Time
+
+	// The end date of the time period.
+	EndDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
 //	See [Expression]. Billing view only supports LINKED_ACCOUNT , Tags , and CostCategories .
 //
 // [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html
@@ -396,6 +462,141 @@ type Expression struct {
 	noSmithyDocumentSerde
 }
 
+// Enterprise Support charges for a linked account.
+type LinkedAccountCharge struct {
+
+	// The linked account ID.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The number of billable seconds in the billing period based on when the account
+	// was subscribed to Enterprise Support.
+	//
+	// This member is required.
+	BillableSeconds *int64
+
+	// The payer account ID that is authorized to view Enterprise Support data for all
+	// accounts in its Support profile.
+	//
+	// This member is required.
+	PayerAccountId *string
+
+	// The prorated total support-eligible spend based on when the account was
+	// subscribed to Enterprise Support.
+	//
+	// This member is required.
+	ProratedTotalSupportEligibleSpend *string
+
+	// The total number of seconds in the billing period.
+	//
+	// This member is required.
+	TotalSeconds *int64
+
+	// The total support-eligible spend for this account.
+	//
+	// This member is required.
+	TotalSupportEligibleSpend *string
+
+	// The type of account.
+	AccountType *string
+
+	// The time periods during which this account was linked.
+	LinkedTimePeriods []EnterpriseSupportTimePeriod
+
+	// The subscription time periods for this account.
+	SubscriptionTimePeriods []EnterpriseSupportTimePeriod
+
+	// The support-eligible spend broken down by service.
+	SupportEligibleSpendByService []ServiceLevelAccountUsage
+
+	// The total support-eligible Reserved Instance spend for this account.
+	TotalSupportEligibleReservedInstanceSpend *string
+
+	// The total support-eligible Savings Plan spend for this account.
+	TotalSupportEligibleSavingsPlanSpend *string
+
+	noSmithyDocumentSerde
+}
+
+// A pricing plan for Enterprise Support billing.
+type PricingPlan struct {
+
+	// The pricing tiers within this plan.
+	//
+	// This member is required.
+	Tiers []PricingPlanTier
+
+	// A description of the pricing plan.
+	Description *string
+
+	// Whether the discount applies to the minimum Support charge.
+	DiscountAppliesToMinimumCharge *bool
+
+	// The end date of the pricing plan.
+	EndDate *time.Time
+
+	// The minimum Support charge amount for this pricing plan.
+	MinimumCharge *string
+
+	// The name of the pricing plan.
+	Name *string
+
+	// The discount percentage applied by this pricing plan.
+	PlanDiscountPercent *string
+
+	// The unique identifier for the pricing plan.
+	PricingPlanId *string
+
+	// The start date of the pricing plan.
+	StartDate *time.Time
+
+	// Whether the pricing plan uses tiered pricing.
+	Tiered *string
+
+	noSmithyDocumentSerde
+}
+
+// A tier within an Enterprise Support pricing plan.
+type PricingPlanTier struct {
+
+	// The additional percentage applied to aggregate charges in this tier.
+	//
+	// This member is required.
+	AdditionalPercentageOfAggregateCharges *string
+
+	// The adjustment applied to aggregate charges.
+	//
+	// This member is required.
+	AggregateChargesAdjustment *string
+
+	// The base charge for this tier.
+	//
+	// This member is required.
+	BaseCharge *string
+
+	// Whether the tier charges are calculated incrementally.
+	//
+	// This member is required.
+	Incremental *bool
+
+	// The minimum spend threshold for this tier.
+	//
+	// This member is required.
+	TierMinimum *string
+
+	// The increment amount for incremental tier calculations.
+	Increment *string
+
+	// The charge per increment.
+	IncrementCharge *string
+
+	// The maximum spend threshold for this tier.
+	TierMaximum *string
+
+	noSmithyDocumentSerde
+}
+
 // The tag structure that contains a tag key and value.
 type ResourceTag struct {
 
@@ -406,6 +607,18 @@ type ResourceTag struct {
 
 	//  The value that's associated with the tag.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Service-level usage details by account.
+type ServiceLevelAccountUsage struct {
+
+	// The service code for which to return Support-eligible spend data.
+	ServiceCode *string
+
+	// The total support-eligible spend for the service.
+	TotalSupportEligibleSpend *string
 
 	noSmithyDocumentSerde
 }

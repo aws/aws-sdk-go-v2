@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-// Returns the properties of a container association.
+// Retrieves the configuration and status of a container association.
 func (c *Client) DescribeContainerAssociation(ctx context.Context, params *DescribeContainerAssociationInput, optFns ...func(*Options)) (*DescribeContainerAssociationOutput, error) {
 	if params == nil {
 		params = &DescribeContainerAssociationInput{}
@@ -28,12 +28,14 @@ func (c *Client) DescribeContainerAssociation(ctx context.Context, params *Descr
 
 type DescribeContainerAssociationInput struct {
 
-	// The Amazon Resource Name (ARN) of the container association. You must specify
-	// the ARN or the name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the container association.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	ContainerAssociationArn *string
 
-	// The descriptive name of the container association. You must specify the ARN or
-	// the name, and you can specify both.
+	// The descriptive name of the container association.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	ContainerAssociationName *string
 
 	noSmithyDocumentSerde
@@ -47,32 +49,42 @@ type DescribeContainerAssociationOutput struct {
 	// The descriptive name of the container association.
 	ContainerAssociationName *string
 
-	// The container monitoring configurations for this container association.
+	// The monitoring configurations for the container association.
 	ContainerMonitoringConfigurations []types.ContainerMonitoringConfiguration
 
 	// A description of the container association.
 	Description *string
 
-	// The last time that the container association was updated or resolved new
-	// container IP addresses.
+	// The most recent time that Network Firewall updated the container association.
 	LastUpdatedTime *time.Time
 
-	// The number of CIDR blocks that have been resolved from the monitored containers
-	// for this container association.
+	// The number of CIDR blocks resolved from the monitored containers.
 	ResolvedCidrCount *int32
 
 	// The current status of the container association.
 	Status types.ContainerAssociationStatus
 
-	// The key:value pairs associated with the resource.
+	// The key:value pairs to associate with the resource.
 	Tags []types.Tag
 
-	// The type of container orchestration platform. Either ECS or EKS .
+	// The container type. Valid values:
+	//
+	//   - ECS - Amazon Elastic Container Service
+	//
+	//   - EKS - Amazon Elastic Kubernetes Service
 	Type types.ContainerMonitoringType
 
 	// A token used for optimistic locking. Network Firewall returns a token to your
 	// requests that access the container association. The token marks the state of the
 	// container association resource at the time of the request.
+	//
+	// To make changes to the container association, you provide the token in your
+	// request. Network Firewall uses the token to ensure that the container
+	// association hasn't changed since you last retrieved it. If it has changed, the
+	// operation fails with an InvalidTokenException . If this happens, retrieve the
+	// container association again to get a current copy of it with a current token.
+	// Reapply your changes as needed, then try the operation again using the new
+	// token.
 	UpdateToken *string
 
 	// Metadata pertaining to the operation's result.

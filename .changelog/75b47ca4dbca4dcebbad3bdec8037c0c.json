@@ -1,0 +1,8 @@
+{
+    "id": "75b47ca4-dbca-4dce-bbad-3bdec8037c0c",
+    "type": "feature",
+    "description": "This release enhances the ListEntities API to support TargetAgreementId, TargetAgreementIntent, and CreatedBySource filters for the Offer entity type.",
+    "modules": [
+        "service/marketplacecatalog"
+    ]
+}

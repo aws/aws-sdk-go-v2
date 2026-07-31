@@ -505,6 +505,7 @@ func TestCheckRequestSnapshot_CreateLookupTable(t *testing.T) {
 		LookupTableName: ptr.String("__LookupTableName__"),
 		Description:     ptr.String("__Description__"),
 		TableBody:       ptr.String("__TableBody__"),
+		QueryId:         ptr.String("__QueryId__"),
 		KmsKeyId:        ptr.String("__KmsKeyId__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -553,6 +554,15 @@ func TestCheckRequestSnapshot_CreateScheduledQuery(t *testing.T) {
 				RoleArn:               ptr.String("__RoleArn__"),
 				OwnerAccountId:        ptr.String("__OwnerAccountId__"),
 				KmsKeyId:              ptr.String("__KmsKeyId__"),
+			},
+			LookupTableConfiguration: &types.LookupTableConfiguration{
+				TableName:   ptr.String("__TableName__"),
+				RoleArn:     ptr.String("__RoleArn__"),
+				Description: ptr.String("__Description__"),
+				KmsKeyId:    ptr.String("__KmsKeyId__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 		},
 		ScheduleStartTime: ptr.Int64(1),
@@ -4489,6 +4499,7 @@ func TestCheckRequestSnapshot_UpdateLookupTable(t *testing.T) {
 		LookupTableArn: ptr.String("__LookupTableArn__"),
 		Description:    ptr.String("__Description__"),
 		TableBody:      ptr.String("__TableBody__"),
+		QueryId:        ptr.String("__QueryId__"),
 		KmsKeyId:       ptr.String("__KmsKeyId__"),
 	}
 	body := &bytes.Buffer{}
@@ -4534,6 +4545,15 @@ func TestCheckRequestSnapshot_UpdateScheduledQuery(t *testing.T) {
 				RoleArn:               ptr.String("__RoleArn__"),
 				OwnerAccountId:        ptr.String("__OwnerAccountId__"),
 				KmsKeyId:              ptr.String("__KmsKeyId__"),
+			},
+			LookupTableConfiguration: &types.LookupTableConfiguration{
+				TableName:   ptr.String("__TableName__"),
+				RoleArn:     ptr.String("__RoleArn__"),
+				Description: ptr.String("__Description__"),
+				KmsKeyId:    ptr.String("__KmsKeyId__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 		},
 		ScheduleStartTime: ptr.Int64(1),
@@ -4886,6 +4906,7 @@ func TestUpdateRequestSnapshot_CreateLookupTable(t *testing.T) {
 		LookupTableName: ptr.String("__LookupTableName__"),
 		Description:     ptr.String("__Description__"),
 		TableBody:       ptr.String("__TableBody__"),
+		QueryId:         ptr.String("__QueryId__"),
 		KmsKeyId:        ptr.String("__KmsKeyId__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -4934,6 +4955,15 @@ func TestUpdateRequestSnapshot_CreateScheduledQuery(t *testing.T) {
 				RoleArn:               ptr.String("__RoleArn__"),
 				OwnerAccountId:        ptr.String("__OwnerAccountId__"),
 				KmsKeyId:              ptr.String("__KmsKeyId__"),
+			},
+			LookupTableConfiguration: &types.LookupTableConfiguration{
+				TableName:   ptr.String("__TableName__"),
+				RoleArn:     ptr.String("__RoleArn__"),
+				Description: ptr.String("__Description__"),
+				KmsKeyId:    ptr.String("__KmsKeyId__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 		},
 		ScheduleStartTime: ptr.Int64(1),
@@ -8870,6 +8900,7 @@ func TestUpdateRequestSnapshot_UpdateLookupTable(t *testing.T) {
 		LookupTableArn: ptr.String("__LookupTableArn__"),
 		Description:    ptr.String("__Description__"),
 		TableBody:      ptr.String("__TableBody__"),
+		QueryId:        ptr.String("__QueryId__"),
 		KmsKeyId:       ptr.String("__KmsKeyId__"),
 	}
 	body := &bytes.Buffer{}
@@ -8915,6 +8946,15 @@ func TestUpdateRequestSnapshot_UpdateScheduledQuery(t *testing.T) {
 				RoleArn:               ptr.String("__RoleArn__"),
 				OwnerAccountId:        ptr.String("__OwnerAccountId__"),
 				KmsKeyId:              ptr.String("__KmsKeyId__"),
+			},
+			LookupTableConfiguration: &types.LookupTableConfiguration{
+				TableName:   ptr.String("__TableName__"),
+				RoleArn:     ptr.String("__RoleArn__"),
+				Description: ptr.String("__Description__"),
+				KmsKeyId:    ptr.String("__KmsKeyId__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 		},
 		ScheduleStartTime: ptr.Int64(1),

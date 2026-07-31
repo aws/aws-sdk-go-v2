@@ -20253,6 +20253,12 @@ func awsRestjson1_serializeDocumentConnectionPropertiesInput(v types.ConnectionP
 			return err
 		}
 
+	case *types.ConnectionPropertiesInputMemberGitProperties:
+		av := object.Key("gitProperties")
+		if err := awsRestjson1_serializeDocumentGitPropertiesInput(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ConnectionPropertiesInputMemberGlueProperties:
 		av := object.Key("glueProperties")
 		if err := awsRestjson1_serializeDocumentGluePropertiesInput(&uv.Value, av); err != nil {
@@ -20352,6 +20358,12 @@ func awsRestjson1_serializeDocumentConnectionPropertiesPatch(v types.ConnectionP
 	case *types.ConnectionPropertiesPatchMemberAthenaProperties:
 		av := object.Key("athenaProperties")
 		if err := awsRestjson1_serializeDocumentAthenaPropertiesPatch(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ConnectionPropertiesPatchMemberGitProperties:
+		av := object.Key("gitProperties")
+		if err := awsRestjson1_serializeDocumentGitPropertiesPatch(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -21473,6 +21485,45 @@ func awsRestjson1_serializeDocumentGitMetadata(v *types.GitMetadata, value smith
 	if v.Repository != nil {
 		ok := object.Key("repository")
 		ok.String(*v.Repository)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGitPropertiesInput(v *types.GitPropertiesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CodeConnectionArn != nil {
+		ok := object.Key("codeConnectionArn")
+		ok.String(*v.CodeConnectionArn)
+	}
+
+	if v.DefaultBranch != nil {
+		ok := object.Key("defaultBranch")
+		ok.String(*v.DefaultBranch)
+	}
+
+	if v.RepositoryId != nil {
+		ok := object.Key("repositoryId")
+		ok.String(*v.RepositoryId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGitPropertiesPatch(v *types.GitPropertiesPatch, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CodeConnectionArn != nil {
+		ok := object.Key("codeConnectionArn")
+		ok.String(*v.CodeConnectionArn)
+	}
+
+	if v.DefaultBranch != nil {
+		ok := object.Key("defaultBranch")
+		ok.String(*v.DefaultBranch)
 	}
 
 	return nil

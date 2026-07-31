@@ -403,6 +403,18 @@ func TestCheckRequestSnapshot_CreateScraper(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
+		Exporters: []types.ExporterConfiguration{
+			&types.ExporterConfigurationMemberOpenSearchConfiguration{
+				Value: types.OpenSearchExporterConfiguration{
+					DomainArn: ptr.String("__DomainArn__"),
+				},
+			},
+			&types.ExporterConfigurationMemberOpenSearchConfiguration{
+				Value: types.OpenSearchExporterConfiguration{
+					DomainArn: ptr.String("__DomainArn__"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1452,6 +1464,18 @@ func TestCheckRequestSnapshot_UpdateScraper(t *testing.T) {
 			TargetRoleArn: ptr.String("__TargetRoleArn__"),
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		Exporters: []types.ExporterConfiguration{
+			&types.ExporterConfigurationMemberOpenSearchConfiguration{
+				Value: types.OpenSearchExporterConfiguration{
+					DomainArn: ptr.String("__DomainArn__"),
+				},
+			},
+			&types.ExporterConfigurationMemberOpenSearchConfiguration{
+				Value: types.OpenSearchExporterConfiguration{
+					DomainArn: ptr.String("__DomainArn__"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1823,6 +1847,18 @@ func TestUpdateRequestSnapshot_CreateScraper(t *testing.T) {
 		ClientToken: ptr.String("__ClientToken__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
+		},
+		Exporters: []types.ExporterConfiguration{
+			&types.ExporterConfigurationMemberOpenSearchConfiguration{
+				Value: types.OpenSearchExporterConfiguration{
+					DomainArn: ptr.String("__DomainArn__"),
+				},
+			},
+			&types.ExporterConfigurationMemberOpenSearchConfiguration{
+				Value: types.OpenSearchExporterConfiguration{
+					DomainArn: ptr.String("__DomainArn__"),
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2873,6 +2909,18 @@ func TestUpdateRequestSnapshot_UpdateScraper(t *testing.T) {
 			TargetRoleArn: ptr.String("__TargetRoleArn__"),
 		},
 		ClientToken: ptr.String("__ClientToken__"),
+		Exporters: []types.ExporterConfiguration{
+			&types.ExporterConfigurationMemberOpenSearchConfiguration{
+				Value: types.OpenSearchExporterConfiguration{
+					DomainArn: ptr.String("__DomainArn__"),
+				},
+			},
+			&types.ExporterConfigurationMemberOpenSearchConfiguration{
+				Value: types.OpenSearchExporterConfiguration{
+					DomainArn: ptr.String("__DomainArn__"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

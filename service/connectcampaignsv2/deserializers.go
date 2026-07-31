@@ -5274,6 +5274,102 @@ func awsRestjson1_deserializeErrorValidationException(response *smithyhttp.Respo
 	return output
 }
 
+func awsRestjson1_deserializeDocumentAbandonmentRatePacingConfig(v **types.AbandonmentRatePacingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AbandonmentRatePacingConfig
+	if *v == nil {
+		sv = &types.AbandonmentRatePacingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "connectionStartPoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionStartPoint to be of type string, got %T instead", value)
+				}
+				sv.ConnectionStartPoint = types.ConnectionStartPoint(jtv)
+			}
+
+		case "connectionThresholdSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ConnectionThresholdSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "evaluationWindow":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EvaluationWindow to be of type string, got %T instead", value)
+				}
+				sv.EvaluationWindow = ptr.String(jtv)
+			}
+
+		case "targetRate":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.TargetRate = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.TargetRate = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected TargetRate to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDeniedException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7338,6 +7434,78 @@ loop:
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPacingStrategy(v *types.PacingStrategy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.PacingStrategy
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "abandonmentRate":
+			var mv types.AbandonmentRatePacingConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAbandonmentRatePacingConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.PacingStrategyMemberAbandonmentRate{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPacingStrategyList(v *[]types.PacingStrategy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PacingStrategy
+	if *v == nil {
+		cv = []types.PacingStrategy{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PacingStrategy
+		if err := awsRestjson1_deserializeDocumentPacingStrategy(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPredictiveConfig(v **types.PredictiveConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7392,6 +7560,11 @@ func awsRestjson1_deserializeDocumentPredictiveConfig(v **types.PredictiveConfig
 					return fmt.Errorf("expected BandwidthAllocation to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "pacingStrategies":
+			if err := awsRestjson1_deserializeDocumentPacingStrategyList(&sv.PacingStrategies, value); err != nil {
+				return err
 			}
 
 		default:

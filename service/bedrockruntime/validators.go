@@ -396,6 +396,16 @@ func validateContentBlock(v types.ContentBlock) error {
 			invalidParams.AddNested("[searchResult]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ContentBlockMemberToolAddition:
+		if err := validateToolAdditionBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[toolAddition]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ContentBlockMemberToolRemoval:
+		if err := validateToolRemovalBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[toolRemoval]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ContentBlockMemberToolResult:
 		if err := validateToolResultBlock(&uv.Value); err != nil {
 			invalidParams.AddNested("[toolResult]", err.(smithy.InvalidParamsError))
@@ -1308,6 +1318,21 @@ func validateTool(v types.Tool) error {
 	}
 }
 
+func validateToolAdditionBlock(v *types.ToolAdditionBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ToolAdditionBlock"}
+	if v.Tool == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tool"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateToolChoice(v types.ToolChoice) error {
 	if v == nil {
 		return nil
@@ -1343,6 +1368,21 @@ func validateToolConfiguration(v *types.ToolConfiguration) error {
 		if err := validateToolChoice(v.ToolChoice); err != nil {
 			invalidParams.AddNested("ToolChoice", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateToolRemovalBlock(v *types.ToolRemovalBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ToolRemovalBlock"}
+	if v.Tool == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tool"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

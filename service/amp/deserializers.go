@@ -8114,6 +8114,78 @@ func awsRestjson1_deserializeDocumentEksConfiguration(v **types.EksConfiguration
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentExporterConfiguration(v *types.ExporterConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ExporterConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "openSearchConfiguration":
+			var mv types.OpenSearchExporterConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentOpenSearchExporterConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ExporterConfigurationMemberOpenSearchConfiguration{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExporterList(v *[]types.ExporterConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ExporterConfiguration
+	if *v == nil {
+		cv = []types.ExporterConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ExporterConfiguration
+		if err := awsRestjson1_deserializeDocumentExporterConfiguration(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIgnoreNearExpected(v *types.IgnoreNearExpected, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8669,6 +8741,46 @@ func awsRestjson1_deserializeDocumentLoggingFilter(v **types.LoggingFilter, valu
 					return err
 				}
 				sv.QspThreshold = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOpenSearchExporterConfiguration(v **types.OpenSearchExporterConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenSearchExporterConfiguration
+	if *v == nil {
+		sv = &types.OpenSearchExporterConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "domainArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OpenSearchDomainArn to be of type string, got %T instead", value)
+				}
+				sv.DomainArn = ptr.String(jtv)
 			}
 
 		default:
@@ -9494,6 +9606,11 @@ func awsRestjson1_deserializeDocumentScraperDescription(v **types.ScraperDescrip
 				return err
 			}
 
+		case "exporters":
+			if err := awsRestjson1_deserializeDocumentExporterList(&sv.Exporters, value); err != nil {
+				return err
+			}
+
 		case "lastModifiedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9758,6 +9875,11 @@ func awsRestjson1_deserializeDocumentScraperSummary(v **types.ScraperSummary, va
 
 		case "destination":
 			if err := awsRestjson1_deserializeDocumentDestination(&sv.Destination, value); err != nil {
+				return err
+			}
+
+		case "exporters":
+			if err := awsRestjson1_deserializeDocumentExporterList(&sv.Exporters, value); err != nil {
 				return err
 			}
 

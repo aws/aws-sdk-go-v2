@@ -26520,6 +26520,36 @@ func awsAwsquery_deserializeDocumentAdditionalStorageVolumeOutput(v **types.Addi
 				sv.MaxAllocatedStorage = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("StorageOperationPercentProgress", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.StorageOperationPercentProgress = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("StorageOperationStatus", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StorageOperationStatus = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("StorageThroughput", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -35167,6 +35197,36 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 			{
 				xtv := string(val)
 				sv.StorageEncryptionType = types.StorageEncryptionType(xtv)
+			}
+
+		case strings.EqualFold("StorageOperationPercentProgress", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.StorageOperationPercentProgress = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("StorageOperationStatus", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StorageOperationStatus = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("StorageThroughput", t.Name.Local):

@@ -99,7 +99,9 @@ type UpdateDashboardInput struct {
 	//
 	// Use the DataSetReferences entity within SourceTemplate to list the replacement
 	// datasets for the placeholders listed in the original. The schema in each dataset
-	// must match its placeholder.
+	// must match its placeholder. Use the TopicReferences entity to list the
+	// replacement topics for the topic placeholders listed in the original. The schema
+	// in each topic must match its placeholder.
 	//
 	// [CreateTemplate]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html
 	SourceEntity *types.DashboardSourceEntity

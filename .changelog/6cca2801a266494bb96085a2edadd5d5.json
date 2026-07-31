@@ -1,0 +1,8 @@
+{
+    "id": "6cca2801-a266-494b-b960-85a2edadd5d5",
+    "type": "feature",
+    "description": "Amazon CloudWatch Logs now lets you create and update lookup tables directly from CloudWatch Logs query results by passing a queryId, and configure a lookup table as a scheduled query destination so it refreshes automatically with the latest query results on each run.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

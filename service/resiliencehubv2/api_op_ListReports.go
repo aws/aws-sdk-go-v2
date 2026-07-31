@@ -45,6 +45,9 @@ type ListReportsInput struct {
 	// Optional. If not provided, lists all reports owned by the account.
 	ServiceArn *string
 
+	// The unique identifier of a test run.
+	TestRunId *string
+
 	noSmithyDocumentSerde
 }
 

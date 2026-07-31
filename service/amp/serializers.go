@@ -648,6 +648,13 @@ func awsRestjson1_serializeOpDocumentCreateScraperInput(v *CreateScraperInput, v
 		}
 	}
 
+	if v.Exporters != nil {
+		ok := object.Key("exporters")
+		if err := awsRestjson1_serializeDocumentExporterList(v.Exporters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RoleConfiguration != nil {
 		ok := object.Key("roleConfiguration")
 		if err := awsRestjson1_serializeDocumentRoleConfiguration(v.RoleConfiguration, ok); err != nil {
@@ -3568,6 +3575,13 @@ func awsRestjson1_serializeOpDocumentUpdateScraperInput(v *UpdateScraperInput, v
 		}
 	}
 
+	if v.Exporters != nil {
+		ok := object.Key("exporters")
+		if err := awsRestjson1_serializeDocumentExporterList(v.Exporters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RoleConfiguration != nil {
 		ok := object.Key("roleConfiguration")
 		if err := awsRestjson1_serializeDocumentRoleConfiguration(v.RoleConfiguration, ok); err != nil {
@@ -4041,6 +4055,40 @@ func awsRestjson1_serializeDocumentEksConfiguration(v *types.EksConfiguration, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentExporterConfiguration(v types.ExporterConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ExporterConfigurationMemberOpenSearchConfiguration:
+		av := object.Key("openSearchConfiguration")
+		if err := awsRestjson1_serializeDocumentOpenSearchExporterConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExporterList(v []types.ExporterConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentExporterConfiguration(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIgnoreNearExpected(v types.IgnoreNearExpected, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4185,6 +4233,18 @@ func awsRestjson1_serializeDocumentLoggingFilter(v *types.LoggingFilter, value s
 	if v.QspThreshold != nil {
 		ok := object.Key("qspThreshold")
 		ok.Long(*v.QspThreshold)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOpenSearchExporterConfiguration(v *types.OpenSearchExporterConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DomainArn != nil {
+		ok := object.Key("domainArn")
+		ok.String(*v.DomainArn)
 	}
 
 	return nil

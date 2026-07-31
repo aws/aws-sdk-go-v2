@@ -236,6 +236,8 @@ const (
 	ConnectionTypeAmazonQ       ConnectionType = "AMAZON_Q"
 	ConnectionTypeMlflow        ConnectionType = "MLFLOW"
 	ConnectionTypeVpc           ConnectionType = "VPC"
+	// A Git connection type.
+	ConnectionTypeGit ConnectionType = "GIT"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
@@ -267,6 +269,7 @@ func (ConnectionType) Values() []ConnectionType {
 		"AMAZON_Q",
 		"MLFLOW",
 		"VPC",
+		"GIT",
 	}
 }
 

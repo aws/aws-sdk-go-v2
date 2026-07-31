@@ -1,0 +1,8 @@
+{
+    "id": "3e1acb7d-51cb-4595-955e-775e12c3c4ba",
+    "type": "feature",
+    "description": "Adding enum for sensitive property to DriftIgnoredReason",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

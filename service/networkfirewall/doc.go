@@ -33,7 +33,7 @@
 // includes filtering traffic going to and coming from an internet gateway, NAT
 // gateway, or over VPN or Direct Connect. Network Firewall uses rules that are
 // compatible with Suricata, a free, open source network analysis and threat
-// detection engine. Network Firewall supports Suricata version 7.0.3. For
+// detection engine. Network Firewall supports Suricata version 7.0.8. For
 // information about Suricata, see the [Suricata website]and the [Suricata User Guide].
 //
 // You can use Network Firewall to monitor and protect your VPC traffic in a
@@ -83,7 +83,7 @@
 // by following the prior steps for the Amazon VPC setup, and defining the new VPC
 // subnets as VPC endpoint associations.
 //
-// [Suricata User Guide]: https://suricata.readthedocs.io/en/suricata-7.0.3/
+// [Suricata User Guide]: https://suricata.readthedocs.io/en/suricata-7.0.8/
 // [Network Firewall Developer Guide]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/
 // [Amazon Web Services SDKs]: http://aws.amazon.com/tools/#SDKs
 // [Service endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/network-firewall.html

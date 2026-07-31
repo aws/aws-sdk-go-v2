@@ -1,0 +1,8 @@
+{
+    "id": "3db3f754-1273-44cf-90ac-4dc4b55fca42",
+    "type": "feature",
+    "description": "Adds the \"EKS\" value to the AWSServiceName enum and marks the Address field as sensitive.",
+    "modules": [
+        "service/outposts"
+    ]
+}

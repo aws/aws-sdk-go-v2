@@ -2450,6 +2450,15 @@ func TestCheckResponseSnapshot_GetScheduledQuery(t *testing.T) {
 				OwnerAccountId:        ptr.String("__OwnerAccountId__"),
 				KmsKeyId:              ptr.String("__KmsKeyId__"),
 			},
+			LookupTableConfiguration: &types.LookupTableConfiguration{
+				TableName:   ptr.String("__TableName__"),
+				RoleArn:     ptr.String("__RoleArn__"),
+				Description: ptr.String("__Description__"),
+				KmsKeyId:    ptr.String("__KmsKeyId__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 		},
 		State:               types.ScheduledQueryState("ENABLED"),
 		ScheduleType:        types.ScheduleType("CUSTOMER_MANAGED"),
@@ -3313,6 +3322,15 @@ func TestCheckResponseSnapshot_ListScheduledQueries(t *testing.T) {
 						OwnerAccountId:        ptr.String("__OwnerAccountId__"),
 						KmsKeyId:              ptr.String("__KmsKeyId__"),
 					},
+					LookupTableConfiguration: &types.LookupTableConfiguration{
+						TableName:   ptr.String("__TableName__"),
+						RoleArn:     ptr.String("__RoleArn__"),
+						Description: ptr.String("__Description__"),
+						KmsKeyId:    ptr.String("__KmsKeyId__"),
+						Tags: map[string]string{
+							"key0": "__Value__",
+						},
+					},
 				},
 				CreationTime:    ptr.Int64(1),
 				LastUpdatedTime: ptr.Int64(1),
@@ -3332,6 +3350,15 @@ func TestCheckResponseSnapshot_ListScheduledQueries(t *testing.T) {
 						RoleArn:               ptr.String("__RoleArn__"),
 						OwnerAccountId:        ptr.String("__OwnerAccountId__"),
 						KmsKeyId:              ptr.String("__KmsKeyId__"),
+					},
+					LookupTableConfiguration: &types.LookupTableConfiguration{
+						TableName:   ptr.String("__TableName__"),
+						RoleArn:     ptr.String("__RoleArn__"),
+						Description: ptr.String("__Description__"),
+						KmsKeyId:    ptr.String("__KmsKeyId__"),
+						Tags: map[string]string{
+							"key0": "__Value__",
+						},
 					},
 				},
 				CreationTime:    ptr.Int64(1),
@@ -4243,6 +4270,15 @@ func TestCheckResponseSnapshot_UpdateScheduledQuery(t *testing.T) {
 				RoleArn:               ptr.String("__RoleArn__"),
 				OwnerAccountId:        ptr.String("__OwnerAccountId__"),
 				KmsKeyId:              ptr.String("__KmsKeyId__"),
+			},
+			LookupTableConfiguration: &types.LookupTableConfiguration{
+				TableName:   ptr.String("__TableName__"),
+				RoleArn:     ptr.String("__RoleArn__"),
+				Description: ptr.String("__Description__"),
+				KmsKeyId:    ptr.String("__KmsKeyId__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 		},
 		State:               types.ScheduledQueryState("ENABLED"),

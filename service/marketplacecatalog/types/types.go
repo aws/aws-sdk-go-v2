@@ -909,6 +909,15 @@ type OfferBuyerAccountsFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Allows filtering on the CreatedBySource of an offer.
+type OfferCreatedBySourceFilter struct {
+
+	// Allows filtering on the CreatedBySource of an offer with list input.
+	ValueList []OfferCreatedBySourceString
+
+	noSmithyDocumentSerde
+}
+
 // Allows filtering on the entity id of an offer.
 type OfferEntityIdFilter struct {
 
@@ -927,6 +936,9 @@ type OfferFilters struct {
 
 	// Allows filtering on the BuyerAccounts of an offer.
 	BuyerAccounts *OfferBuyerAccountsFilter
+
+	// Allows filtering on the CreatedBySource of an offer.
+	CreatedBySource *OfferCreatedBySourceFilter
 
 	// Allows filtering on EntityId of an offer.
 	EntityId *OfferEntityIdFilter
@@ -954,6 +966,12 @@ type OfferFilters struct {
 
 	// Allows filtering on the State of an offer.
 	State *OfferStateFilter
+
+	// Allows filtering on the TargetAgreementId of an offer.
+	TargetAgreementId *OfferTargetAgreementIdFilter
+
+	// Allows filtering on the TargetAgreementIntent of an offer.
+	TargetAgreementIntent *OfferTargetAgreementIntentFilter
 
 	// Allows filtering on the Targeting of an offer.
 	Targeting *OfferTargetingFilter
@@ -1225,6 +1243,9 @@ type OfferSummary struct {
 	// The buyer accounts in the offer.
 	BuyerAccounts []string
 
+	// The creation source of the offer.
+	CreatedBySource OfferCreatedBySourceString
+
 	// The name of the offer.
 	Name *string
 
@@ -1243,8 +1264,32 @@ type OfferSummary struct {
 	// The status of the offer.
 	State OfferStateString
 
+	// The target agreement ID of the offer.
+	TargetAgreementId *string
+
+	// The target agreement intent of the offer.
+	TargetAgreementIntent OfferTargetAgreementIntentString
+
 	// The targeting in the offer.
 	Targeting []OfferTargetingString
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the TargetAgreementId of an offer.
+type OfferTargetAgreementIdFilter struct {
+
+	// Allows filtering on the TargetAgreementId of an offer with list input.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+// Allows filtering on the TargetAgreementIntent of an offer.
+type OfferTargetAgreementIntentFilter struct {
+
+	// Allows filtering on the TargetAgreementIntent of an offer with list input.
+	ValueList []OfferTargetAgreementIntentString
 
 	noSmithyDocumentSerde
 }

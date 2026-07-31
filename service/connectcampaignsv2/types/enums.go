@@ -152,6 +152,30 @@ func (CommunicationTimeConfigType) Values() []CommunicationTimeConfigType {
 	}
 }
 
+type ConnectionStartPoint string
+
+// Enum values for ConnectionStartPoint
+const (
+	// Threshold measured from when the contact connects to the telephony system.
+	ConnectionStartPointConnectedToSystem ConnectionStartPoint = "CONNECTED_TO_SYSTEM"
+	// Threshold measured from when the customer-side greeting begins.
+	ConnectionStartPointGreetingStart ConnectionStartPoint = "GREETING_START"
+	// Threshold measured from when the customer-side greeting ends.
+	ConnectionStartPointGreetingEnd ConnectionStartPoint = "GREETING_END"
+)
+
+// Values returns all known values for ConnectionStartPoint. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionStartPoint) Values() []ConnectionStartPoint {
+	return []ConnectionStartPoint{
+		"CONNECTED_TO_SYSTEM",
+		"GREETING_START",
+		"GREETING_END",
+	}
+}
+
 type DayOfWeek string
 
 // Enum values for DayOfWeek

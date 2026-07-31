@@ -973,6 +973,11 @@ func awsRestjson1_deserializeOpHttpBindingsStartStreamTranscriptionOutput(v *Sta
 		v.ShowSpeakerLabel = vv
 	}
 
+	if headerValues := response.Header.Values("x-amzn-transcribe-transcript-format"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.TranscriptFormat = types.TranscriptFormat(headerValues[0])
+	}
+
 	if headerValues := response.Header.Values("x-amzn-transcribe-vocabulary-filter-method"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.VocabularyFilterMethod = types.VocabularyFilterMethod(headerValues[0])

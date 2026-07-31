@@ -670,6 +670,26 @@ func (m *validateOpCreateTopicRefreshSchedule) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateTopicV2 struct {
+}
+
+func (*validateOpCreateTopicV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTopicV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTopicV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTopicV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateVPCConnection struct {
 }
 
@@ -1365,6 +1385,26 @@ func (m *validateOpDeleteTopicRefreshSchedule) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteTopicRefreshScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTopicV2 struct {
+}
+
+func (*validateOpDeleteTopicV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTopicV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTopicV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTopicV2Input(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2650,6 +2690,26 @@ func (m *validateOpDescribeTopicPermissions) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeTopicPermissionsV2 struct {
+}
+
+func (*validateOpDescribeTopicPermissionsV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTopicPermissionsV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTopicPermissionsV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTopicPermissionsV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeTopicRefresh struct {
 }
 
@@ -2685,6 +2745,26 @@ func (m *validateOpDescribeTopicRefreshSchedule) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeTopicRefreshScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeTopicV2 struct {
+}
+
+func (*validateOpDescribeTopicV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTopicV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTopicV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTopicV2Input(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3670,6 +3750,26 @@ func (m *validateOpListTopics) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTopicsV2 struct {
+}
+
+func (*validateOpListTopicsV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTopicsV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTopicsV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTopicsV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListUserGroups struct {
 }
 
@@ -4065,6 +4165,26 @@ func (m *validateOpSearchTopics) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSearchTopicsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchTopicsV2 struct {
+}
+
+func (*validateOpSearchTopicsV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchTopicsV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchTopicsV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchTopicsV2Input(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5310,6 +5430,26 @@ func (m *validateOpUpdateTopicPermissions) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateTopicPermissionsV2 struct {
+}
+
+func (*validateOpUpdateTopicPermissionsV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTopicPermissionsV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTopicPermissionsV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTopicPermissionsV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTopicRefreshSchedule struct {
 }
 
@@ -5325,6 +5465,26 @@ func (m *validateOpUpdateTopicRefreshSchedule) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateTopicRefreshScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateTopicV2 struct {
+}
+
+func (*validateOpUpdateTopicV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTopicV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTopicV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTopicV2Input(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5522,6 +5682,10 @@ func addOpCreateTopicRefreshScheduleValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpCreateTopicRefreshSchedule{}, middleware.After)
 }
 
+func addOpCreateTopicV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTopicV2{}, middleware.After)
+}
+
 func addOpCreateVPCConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVPCConnection{}, middleware.After)
 }
@@ -5660,6 +5824,10 @@ func addOpDeleteTopicValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteTopicRefreshScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTopicRefreshSchedule{}, middleware.After)
+}
+
+func addOpDeleteTopicV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTopicV2{}, middleware.After)
 }
 
 func addOpDeleteUserByPrincipalIdValidationMiddleware(stack *middleware.Stack) error {
@@ -5918,12 +6086,20 @@ func addOpDescribeTopicPermissionsValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDescribeTopicPermissions{}, middleware.After)
 }
 
+func addOpDescribeTopicPermissionsV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTopicPermissionsV2{}, middleware.After)
+}
+
 func addOpDescribeTopicRefreshValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTopicRefresh{}, middleware.After)
 }
 
 func addOpDescribeTopicRefreshScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTopicRefreshSchedule{}, middleware.After)
+}
+
+func addOpDescribeTopicV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTopicV2{}, middleware.After)
 }
 
 func addOpDescribeUserValidationMiddleware(stack *middleware.Stack) error {
@@ -6122,6 +6298,10 @@ func addOpListTopicsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTopics{}, middleware.After)
 }
 
+func addOpListTopicsV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTopicsV2{}, middleware.After)
+}
+
 func addOpListUserGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUserGroups{}, middleware.After)
 }
@@ -6200,6 +6380,10 @@ func addOpSearchSpacesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpSearchTopicsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchTopics{}, middleware.After)
+}
+
+func addOpSearchTopicsV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchTopicsV2{}, middleware.After)
 }
 
 func addOpStartAssetBundleExportJobValidationMiddleware(stack *middleware.Stack) error {
@@ -6450,8 +6634,16 @@ func addOpUpdateTopicPermissionsValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpUpdateTopicPermissions{}, middleware.After)
 }
 
+func addOpUpdateTopicPermissionsV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTopicPermissionsV2{}, middleware.After)
+}
+
 func addOpUpdateTopicRefreshScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTopicRefreshSchedule{}, middleware.After)
+}
+
+func addOpUpdateTopicV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTopicV2{}, middleware.After)
 }
 
 func addOpUpdateUserCustomPermissionValidationMiddleware(stack *middleware.Stack) error {
@@ -6724,6 +6916,11 @@ func validateAnalysisDefinition(v *types.AnalysisDefinition) error {
 			invalidParams.AddNested("DataSetIdentifierDeclarations", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TopicIdentifierDeclarations != nil {
+		if err := validateTopicIdentifierDeclarationList(v.TopicIdentifierDeclarations); err != nil {
+			invalidParams.AddNested("TopicIdentifierDeclarations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Sheets != nil {
 		if err := validateSheetDefinitionList(v.Sheets); err != nil {
 			invalidParams.AddNested("Sheets", err.(smithy.InvalidParamsError))
@@ -6803,6 +7000,11 @@ func validateAnalysisSourceTemplate(v *types.AnalysisSourceTemplate) error {
 	} else if v.DataSetReferences != nil {
 		if err := validateDataSetReferenceList(v.DataSetReferences); err != nil {
 			invalidParams.AddNested("DataSetReferences", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TopicReferences != nil {
+		if err := validateTopicReferenceList(v.TopicReferences); err != nil {
+			invalidParams.AddNested("TopicReferences", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Arn == nil {
@@ -9297,9 +9499,6 @@ func validateCalculatedField(v *types.CalculatedField) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CalculatedField"}
-	if v.DataSetIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSetIdentifier"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -9889,9 +10088,6 @@ func validateColumnIdentifier(v *types.ColumnIdentifier) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ColumnIdentifier"}
-	if v.DataSetIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSetIdentifier"))
-	}
 	if v.ColumnName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
 	}
@@ -10792,9 +10988,6 @@ func validateCustomContentVisual(v *types.CustomContentVisual) error {
 			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.DataSetIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSetIdentifier"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -11073,6 +11266,11 @@ func validateDashboardSourceTemplate(v *types.DashboardSourceTemplate) error {
 			invalidParams.AddNested("DataSetReferences", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TopicReferences != nil {
+		if err := validateTopicReferenceList(v.TopicReferences); err != nil {
+			invalidParams.AddNested("TopicReferences", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
@@ -11093,6 +11291,11 @@ func validateDashboardVersionDefinition(v *types.DashboardVersionDefinition) err
 	} else if v.DataSetIdentifierDeclarations != nil {
 		if err := validateDataSetIdentifierDeclarationList(v.DataSetIdentifierDeclarations); err != nil {
 			invalidParams.AddNested("DataSetIdentifierDeclarations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TopicIdentifierDeclarations != nil {
+		if err := validateTopicIdentifierDeclarationList(v.TopicIdentifierDeclarations); err != nil {
+			invalidParams.AddNested("TopicIdentifierDeclarations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Sheets != nil {
@@ -12823,9 +13026,6 @@ func validateEmptyVisual(v *types.EmptyVisual) error {
 	invalidParams := smithy.InvalidParamsError{Context: "EmptyVisual"}
 	if v.VisualId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VisualId"))
-	}
-	if v.DataSetIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSetIdentifier"))
 	}
 	if v.Actions != nil {
 		if err := validateVisualCustomActionList(v.Actions); err != nil {
@@ -16237,9 +16437,6 @@ func validateInsightVisual(v *types.InsightVisual) error {
 			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.DataSetIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSetIdentifier"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -16961,9 +17158,6 @@ func validateLayerMapVisual(v *types.LayerMapVisual) error {
 			invalidParams.AddNested("ChartConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.DataSetIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSetIdentifier"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -17589,6 +17783,41 @@ func validateMySqlParameters(v *types.MySqlParameters) error {
 	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNamedEntitySort(v *types.NamedEntitySort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NamedEntitySort"}
+	if v.FieldName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldName"))
+	}
+	if len(v.Direction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Direction"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNamedEntitySortList(v []types.NamedEntitySort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NamedEntitySortList"}
+	for i := range v {
+		if err := validateNamedEntitySort(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -22886,6 +23115,11 @@ func validateTemplateSourceAnalysis(v *types.TemplateSourceAnalysis) error {
 			invalidParams.AddNested("DataSetReferences", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TopicReferences != nil {
+		if err := validateTopicReferenceList(v.TopicReferences); err != nil {
+			invalidParams.AddNested("TopicReferences", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -23545,6 +23779,41 @@ func validateTopicFilters(v []types.TopicFilter) error {
 	}
 }
 
+func validateTopicIdentifierDeclaration(v *types.TopicIdentifierDeclaration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicIdentifierDeclaration"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.TopicArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicIdentifierDeclarationList(v []types.TopicIdentifierDeclaration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicIdentifierDeclarationList"}
+	for i := range v {
+		if err := validateTopicIdentifierDeclaration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTopicIR(v *types.TopicIR) error {
 	if v == nil {
 		return nil
@@ -23763,6 +24032,46 @@ func validateTopicNamedEntity(v *types.TopicNamedEntity) error {
 	if v.EntityName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityName"))
 	}
+	if v.Sort != nil {
+		if err := validateNamedEntitySortList(v.Sort); err != nil {
+			invalidParams.AddNested("Sort", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicReference(v *types.TopicReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicReference"}
+	if v.TopicPlaceholder == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicPlaceholder"))
+	}
+	if v.TopicArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicReferenceList(v []types.TopicReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicReferenceList"}
+	for i := range v {
+		if err := validateTopicReference(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -23831,6 +24140,124 @@ func validateTopicSortClause(v *types.TopicSortClause) error {
 	if v.Operand != nil {
 		if err := validateIdentifier(v.Operand); err != nil {
 			invalidParams.AddNested("Operand", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicV2DataSetReference(v *types.TopicV2DataSetReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicV2DataSetReference"}
+	if v.DataSetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicV2DataSetReferences(v []types.TopicV2DataSetReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicV2DataSetReferences"}
+	for i := range v {
+		if err := validateTopicV2DataSetReference(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicV2DataSetRelation(v *types.TopicV2DataSetRelation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicV2DataSetRelation"}
+	if v.Left == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Left"))
+	} else if v.Left != nil {
+		if err := validateTopicV2DataSetRelationEndpoint(v.Left); err != nil {
+			invalidParams.AddNested("Left", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Right == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Right"))
+	} else if v.Right != nil {
+		if err := validateTopicV2DataSetRelationEndpoint(v.Right); err != nil {
+			invalidParams.AddNested("Right", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicV2DataSetRelationEndpoint(v *types.TopicV2DataSetRelationEndpoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicV2DataSetRelationEndpoint"}
+	if v.DataSetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetArn"))
+	}
+	if v.ColumnNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnNames"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicV2DataSetRelationList(v []types.TopicV2DataSetRelation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicV2DataSetRelationList"}
+	for i := range v {
+		if err := validateTopicV2DataSetRelation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTopicV2Details(v *types.TopicV2Details) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TopicV2Details"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DataSets != nil {
+		if err := validateTopicV2DataSetReferences(v.DataSets); err != nil {
+			invalidParams.AddNested("DataSets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataSetRelations != nil {
+		if err := validateTopicV2DataSetRelationList(v.DataSetRelations); err != nil {
+			invalidParams.AddNested("DataSetRelations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -26447,6 +26874,41 @@ func validateOpCreateTopicRefreshScheduleInput(v *CreateTopicRefreshScheduleInpu
 	}
 }
 
+func validateOpCreateTopicV2Input(v *CreateTopicV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTopicV2Input"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.TopicId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicId"))
+	}
+	if v.Topic == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Topic"))
+	} else if v.Topic != nil {
+		if err := validateTopicV2Details(v.Topic); err != nil {
+			invalidParams.AddNested("Topic", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomInstructions != nil {
+		if err := validateCustomInstructions(v.CustomInstructions); err != nil {
+			invalidParams.AddNested("CustomInstructions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateVPCConnectionInput(v *CreateVPCConnectionInput) error {
 	if v == nil {
 		return nil
@@ -27110,6 +27572,24 @@ func validateOpDeleteTopicRefreshScheduleInput(v *DeleteTopicRefreshScheduleInpu
 	}
 	if v.DatasetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTopicV2Input(v *DeleteTopicV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTopicV2Input"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.TopicId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -28288,6 +28768,24 @@ func validateOpDescribeTopicPermissionsInput(v *DescribeTopicPermissionsInput) e
 	}
 }
 
+func validateOpDescribeTopicPermissionsV2Input(v *DescribeTopicPermissionsV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTopicPermissionsV2Input"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.TopicId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeTopicRefreshInput(v *DescribeTopicRefreshInput) error {
 	if v == nil {
 		return nil
@@ -28322,6 +28820,24 @@ func validateOpDescribeTopicRefreshScheduleInput(v *DescribeTopicRefreshSchedule
 	}
 	if v.DatasetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeTopicV2Input(v *DescribeTopicV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTopicV2Input"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.TopicId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -29187,6 +29703,21 @@ func validateOpListTopicsInput(v *ListTopicsInput) error {
 	}
 }
 
+func validateOpListTopicsV2Input(v *ListTopicsV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTopicsV2Input"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListUserGroupsInput(v *ListUserGroupsInput) error {
 	if v == nil {
 		return nil
@@ -29595,6 +30126,28 @@ func validateOpSearchTopicsInput(v *SearchTopicsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchTopicsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	} else if v.Filters != nil {
+		if err := validateTopicSearchFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchTopicsV2Input(v *SearchTopicsV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchTopicsV2Input"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}
@@ -31161,6 +31714,34 @@ func validateOpUpdateTopicPermissionsInput(v *UpdateTopicPermissionsInput) error
 	}
 }
 
+func validateOpUpdateTopicPermissionsV2Input(v *UpdateTopicPermissionsV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTopicPermissionsV2Input"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.TopicId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicId"))
+	}
+	if v.GrantPermissions != nil {
+		if err := validateUpdateResourcePermissionList(v.GrantPermissions); err != nil {
+			invalidParams.AddNested("GrantPermissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RevokePermissions != nil {
+		if err := validateUpdateResourcePermissionList(v.RevokePermissions); err != nil {
+			invalidParams.AddNested("RevokePermissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateTopicRefreshScheduleInput(v *UpdateTopicRefreshScheduleInput) error {
 	if v == nil {
 		return nil
@@ -31180,6 +31761,36 @@ func validateOpUpdateTopicRefreshScheduleInput(v *UpdateTopicRefreshScheduleInpu
 	} else if v.RefreshSchedule != nil {
 		if err := validateTopicRefreshSchedule(v.RefreshSchedule); err != nil {
 			invalidParams.AddNested("RefreshSchedule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateTopicV2Input(v *UpdateTopicV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTopicV2Input"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.TopicId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicId"))
+	}
+	if v.Topic == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Topic"))
+	} else if v.Topic != nil {
+		if err := validateTopicV2Details(v.Topic); err != nil {
+			invalidParams.AddNested("Topic", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomInstructions != nil {
+		if err := validateCustomInstructions(v.CustomInstructions); err != nil {
+			invalidParams.AddNested("CustomInstructions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

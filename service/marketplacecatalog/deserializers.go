@@ -3565,6 +3565,15 @@ func awsRestjson1_deserializeDocumentOfferSummary(v **types.OfferSummary, value 
 				return err
 			}
 
+		case "CreatedBySource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OfferCreatedBySourceString to be of type string, got %T instead", value)
+				}
+				sv.CreatedBySource = types.OfferCreatedBySourceString(jtv)
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3617,6 +3626,24 @@ func awsRestjson1_deserializeDocumentOfferSummary(v **types.OfferSummary, value 
 					return fmt.Errorf("expected OfferStateString to be of type string, got %T instead", value)
 				}
 				sv.State = types.OfferStateString(jtv)
+			}
+
+		case "TargetAgreementId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OfferTargetAgreementIdString to be of type string, got %T instead", value)
+				}
+				sv.TargetAgreementId = ptr.String(jtv)
+			}
+
+		case "TargetAgreementIntent":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OfferTargetAgreementIntentString to be of type string, got %T instead", value)
+				}
+				sv.TargetAgreementIntent = types.OfferTargetAgreementIntentString(jtv)
 			}
 
 		case "Targeting":

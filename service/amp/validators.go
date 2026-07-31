@@ -1076,6 +1076,42 @@ func validateEksConfiguration(v *types.EksConfiguration) error {
 	}
 }
 
+func validateExporterConfiguration(v types.ExporterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExporterConfiguration"}
+	switch uv := v.(type) {
+	case *types.ExporterConfigurationMemberOpenSearchConfiguration:
+		if err := validateOpenSearchExporterConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[openSearchConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExporterList(v []types.ExporterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExporterList"}
+	for i := range v {
+		if err := validateExporterConfiguration(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLimitsPerLabelSet(v *types.LimitsPerLabelSet) error {
 	if v == nil {
 		return nil
@@ -1161,6 +1197,21 @@ func validateLoggingFilter(v *types.LoggingFilter) error {
 	invalidParams := smithy.InvalidParamsError{Context: "LoggingFilter"}
 	if v.QspThreshold == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QspThreshold"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpenSearchExporterConfiguration(v *types.OpenSearchExporterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenSearchExporterConfiguration"}
+	if v.DomainArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1401,6 +1452,11 @@ func validateOpCreateScraperInput(v *CreateScraperInput) error {
 	} else if v.Destination != nil {
 		if err := validateDestination(v.Destination); err != nil {
 			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Exporters != nil {
+		if err := validateExporterList(v.Exporters); err != nil {
+			invalidParams.AddNested("Exporters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1921,6 +1977,11 @@ func validateOpUpdateScraperInput(v *UpdateScraperInput) error {
 	if v.Destination != nil {
 		if err := validateDestination(v.Destination); err != nil {
 			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Exporters != nil {
+		if err := validateExporterList(v.Exporters); err != nil {
+			invalidParams.AddNested("Exporters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

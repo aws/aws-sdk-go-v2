@@ -390,7 +390,10 @@ func TestCheckResponseSnapshot_ListEntities(t *testing.T) {
 						types.OfferTargetingString("BuyerAccounts"),
 						types.OfferTargetingString("BuyerAccounts"),
 					},
-					OfferSetId: ptr.String("__OfferSetId__"),
+					OfferSetId:            ptr.String("__OfferSetId__"),
+					TargetAgreementId:     ptr.String("__TargetAgreementId__"),
+					TargetAgreementIntent: types.OfferTargetAgreementIntentString("Renew"),
+					CreatedBySource:       types.OfferCreatedBySourceString("Seller"),
 				},
 				ResaleAuthorizationSummary: &types.ResaleAuthorizationSummary{
 					Name:                  ptr.String("__Name__"),
@@ -459,7 +462,10 @@ func TestCheckResponseSnapshot_ListEntities(t *testing.T) {
 						types.OfferTargetingString("BuyerAccounts"),
 						types.OfferTargetingString("BuyerAccounts"),
 					},
-					OfferSetId: ptr.String("__OfferSetId__"),
+					OfferSetId:            ptr.String("__OfferSetId__"),
+					TargetAgreementId:     ptr.String("__TargetAgreementId__"),
+					TargetAgreementIntent: types.OfferTargetAgreementIntentString("Renew"),
+					CreatedBySource:       types.OfferCreatedBySourceString("Seller"),
 				},
 				ResaleAuthorizationSummary: &types.ResaleAuthorizationSummary{
 					Name:                  ptr.String("__Name__"),

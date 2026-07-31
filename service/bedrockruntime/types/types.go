@@ -435,6 +435,8 @@ type CitationSourceContentDelta struct {
 //	ContentBlockMemberReasoningContent
 //	ContentBlockMemberSearchResult
 //	ContentBlockMemberText
+//	ContentBlockMemberToolAddition
+//	ContentBlockMemberToolRemoval
 //	ContentBlockMemberToolResult
 //	ContentBlockMemberToolUse
 //	ContentBlockMemberVideo
@@ -535,6 +537,30 @@ type ContentBlockMemberText struct {
 }
 
 func (*ContentBlockMemberText) isContentBlock() {}
+
+// A content block for adding a tool to the available tool set mid-conversation.
+// Each block references a single tool via its tool field. Use within a system
+// role message to make a tool available without re-sending the full tool
+// configuration.
+type ContentBlockMemberToolAddition struct {
+	Value ToolAdditionBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockMemberToolAddition) isContentBlock() {}
+
+// A content block for removing a tool from the available tool set
+// mid-conversation. Each block references a single tool via its tool field. Use
+// within a system role message to remove a tool without re-sending the full tool
+// configuration.
+type ContentBlockMemberToolRemoval struct {
+	Value ToolRemovalBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockMemberToolRemoval) isContentBlock() {}
 
 // The result for a tool request that a model makes.
 type ContentBlockMemberToolResult struct {
@@ -2583,6 +2609,14 @@ type MessageStopEvent struct {
 // [ConverseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
 type OutputConfig struct {
 
+	// The effort level for the model to use when generating a response. Higher effort
+	// levels allow the model to spend more time reasoning before responding. Supported
+	// values are low , medium , high , xhigh , and max .
+	//
+	// When extended thinking is disabled, the effort level is capped at high . Use
+	// effort high or below, or enable thinking to use higher effort levels.
+	Effort *string
+
 	// Structured output parameters to control the model's text response.
 	TextFormat *OutputFormat
 
@@ -3026,6 +3060,20 @@ type ToolMemberToolSpec struct {
 
 func (*ToolMemberToolSpec) isTool() {}
 
+// A content block for adding a tool to the available tool set mid-conversation.
+// Each block references a single tool via its tool field. Use within a system
+// role message to make a tool available without re-sending the full tool
+// configuration.
+type ToolAdditionBlock struct {
+
+	// A reference to the tool to add to the available tool set.
+	//
+	// This member is required.
+	Tool *ToolReference
+
+	noSmithyDocumentSerde
+}
+
 // Determines which tools the model should request in a call to Converse or
 // ConverseStream . For more information, see [Call a tool with the Converse API] in the Amazon Bedrock User Guide.
 //
@@ -3108,6 +3156,38 @@ type ToolInputSchemaMemberJson struct {
 }
 
 func (*ToolInputSchemaMemberJson) isToolInputSchema() {}
+
+// A reference to a tool in the tool configuration. Used with ToolAdditionBlock
+// and ToolRemovalBlock to identify which tool to add or remove mid-conversation.
+type ToolReference struct {
+
+	// The name of the tool. Must match the name of a tool declared in the top-level
+	// tool configuration.
+	Name *string
+
+	// The name of the MCP server that provides the tool. Required when referencing an
+	// MCP tool.
+	ServerName *string
+
+	// The type of tool reference.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// A content block for removing a tool from the available tool set
+// mid-conversation. Each block references a single tool via its tool field. Use
+// within a system role message to remove a tool without re-sending the full tool
+// configuration.
+type ToolRemovalBlock struct {
+
+	// A reference to the tool to remove from the available tool set.
+	//
+	// This member is required.
+	Tool *ToolReference
+
+	noSmithyDocumentSerde
+}
 
 // A tool result block that contains the results for a tool request that the model
 // previously made. For more information, see [Call a tool with the Converse API]in the Amazon Bedrock User Guide.

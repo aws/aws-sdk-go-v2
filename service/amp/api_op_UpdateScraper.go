@@ -48,6 +48,11 @@ type UpdateScraperInput struct {
 	// Amazon Managed Service for Prometheus workspaces and CloudWatch datasets.
 	Destination types.Destination
 
+	// The exporter configurations for the scraper. You can configure at most one
+	// Amazon OpenSearch Service domain. If you don't specify a value, the existing
+	// exporter configuration remains unchanged.
+	Exporters []types.ExporterConfiguration
+
 	// Use this structure to enable cross-account access, so that you can use a target
 	// account to access Prometheus metrics from source accounts.
 	RoleConfiguration *types.RoleConfiguration

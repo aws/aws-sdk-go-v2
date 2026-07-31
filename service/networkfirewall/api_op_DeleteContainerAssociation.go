@@ -9,9 +9,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified container association. When you delete a container
-// association, Network Firewall stops monitoring the associated container clusters
-// and removes the resolved IP addresses from firewall rules.
+// Deletes a container association. The resource transitions to a DELETING state.
+// Deletion is asynchronous - Network Firewall returns immediately while cleanup
+// proceeds in the background. You can't delete a container association while a
+// rule group references it.
 func (c *Client) DeleteContainerAssociation(ctx context.Context, params *DeleteContainerAssociationInput, optFns ...func(*Options)) (*DeleteContainerAssociationOutput, error) {
 	if params == nil {
 		params = &DeleteContainerAssociationInput{}
@@ -29,12 +30,14 @@ func (c *Client) DeleteContainerAssociation(ctx context.Context, params *DeleteC
 
 type DeleteContainerAssociationInput struct {
 
-	// The Amazon Resource Name (ARN) of the container association. You must specify
-	// the ARN or the name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the container association.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	ContainerAssociationArn *string
 
-	// The descriptive name of the container association. You must specify the ARN or
-	// the name, and you can specify both.
+	// The descriptive name of the container association.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	ContainerAssociationName *string
 
 	noSmithyDocumentSerde
@@ -48,7 +51,8 @@ type DeleteContainerAssociationOutput struct {
 	// The descriptive name of the container association.
 	ContainerAssociationName *string
 
-	// The current status of the container association.
+	// The current status of the container association. After deletion is initiated,
+	// the status is DELETING .
 	Status types.ContainerAssociationStatus
 
 	// Metadata pertaining to the operation's result.

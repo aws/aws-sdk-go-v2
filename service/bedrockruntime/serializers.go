@@ -1667,6 +1667,18 @@ func awsRestjson1_serializeDocumentContentBlock(v types.ContentBlock, value smit
 		av := object.Key("text")
 		av.String(uv.Value)
 
+	case *types.ContentBlockMemberToolAddition:
+		av := object.Key("toolAddition")
+		if err := awsRestjson1_serializeDocumentToolAdditionBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ContentBlockMemberToolRemoval:
+		av := object.Key("toolRemoval")
+		if err := awsRestjson1_serializeDocumentToolRemovalBlock(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ContentBlockMemberToolResult:
 		av := object.Key("toolResult")
 		if err := awsRestjson1_serializeDocumentToolResultBlock(&uv.Value, av); err != nil {
@@ -2596,6 +2608,11 @@ func awsRestjson1_serializeDocumentOutputConfig(v *types.OutputConfig, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.Effort != nil {
+		ok := object.Key("effort")
+		ok.String(*v.Effort)
+	}
+
 	if v.TextFormat != nil {
 		ok := object.Key("textFormat")
 		if err := awsRestjson1_serializeDocumentOutputFormat(v.TextFormat, ok); err != nil {
@@ -2972,6 +2989,20 @@ func awsRestjson1_serializeDocumentTool(v types.Tool, value smithyjson.Value) er
 	return nil
 }
 
+func awsRestjson1_serializeDocumentToolAdditionBlock(v *types.ToolAdditionBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Tool != nil {
+		ok := object.Key("tool")
+		if err := awsRestjson1_serializeDocumentToolReference(v.Tool, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentToolChoice(v types.ToolChoice, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3038,6 +3069,42 @@ func awsRestjson1_serializeDocumentToolInputSchema(v types.ToolInputSchema, valu
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentToolReference(v *types.ToolReference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.ServerName != nil {
+		ok := object.Key("serverName")
+		ok.String(*v.ServerName)
+	}
+
+	if v.Type != nil {
+		ok := object.Key("type")
+		ok.String(*v.Type)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentToolRemovalBlock(v *types.ToolRemovalBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Tool != nil {
+		ok := object.Key("tool")
+		if err := awsRestjson1_serializeDocumentToolReference(v.Tool, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

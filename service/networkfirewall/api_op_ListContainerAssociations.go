@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the metadata for the container associations that you have defined.
-// You can optionally page through results.
+// Lists the container associations in your account and Region. Use the NextToken
+// parameter in subsequent requests to retrieve additional results.
 func (c *Client) ListContainerAssociations(ctx context.Context, params *ListContainerAssociationsInput, optFns ...func(*Options)) (*ListContainerAssociationsOutput, error) {
 	if params == nil {
 		params = &ListContainerAssociationsInput{}
@@ -47,7 +47,7 @@ type ListContainerAssociationsInput struct {
 
 type ListContainerAssociationsOutput struct {
 
-	// The container association metadata objects.
+	// The container association metadata objects for the account and Region.
 	ContainerAssociations []types.ContainerAssociationSummary
 
 	// When you request a list of objects with a MaxResults setting, if the number of

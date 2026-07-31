@@ -1,0 +1,8 @@
+{
+    "id": "1ed7bd2d-607c-4e97-9837-5d48ccbc0a6e",
+    "type": "feature",
+    "description": "Adds StorageOperationStatus and StorageOperationPercentProgress to DescribeDBInstances, letting you monitor RDS storage initialization and optimization progress.",
+    "modules": [
+        "service/rds"
+    ]
+}

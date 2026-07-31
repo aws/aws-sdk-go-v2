@@ -3953,9 +3953,7 @@ func deserializeCBOR_Archive(v smithycbor.Value) (*types.Archive, error) {
 		}
 
 		if key == "ArchiveState" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ArchiveState(sv)
 			if err != nil {
 				return nil, err
@@ -3986,9 +3984,7 @@ func deserializeCBOR_ArchiveAction(v smithycbor.Value) (*types.ArchiveAction, er
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -4027,9 +4023,7 @@ func deserializeCBOR_ArchiveBooleanExpression(v smithycbor.Value) (*types.Archiv
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ArchiveBooleanToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -4038,9 +4032,7 @@ func deserializeCBOR_ArchiveBooleanExpression(v smithycbor.Value) (*types.Archiv
 		}
 
 		if key == "Operator" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ArchiveBooleanOperator(sv)
 			if err != nil {
 				return nil, err
@@ -4222,9 +4214,7 @@ func deserializeCBOR_ArchiveStringExpression(v smithycbor.Value) (*types.Archive
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ArchiveStringToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -4233,9 +4223,7 @@ func deserializeCBOR_ArchiveStringExpression(v smithycbor.Value) (*types.Archive
 		}
 
 		if key == "Operator" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ArchiveStringOperator(sv)
 			if err != nil {
 				return nil, err
@@ -4294,9 +4282,7 @@ func deserializeCBOR_BounceAction(v smithycbor.Value) (*types.BounceAction, erro
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -4404,9 +4390,7 @@ func deserializeCBOR_DeliverToMailboxAction(v smithycbor.Value) (*types.DeliverT
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -4448,9 +4432,7 @@ func deserializeCBOR_DeliverToQBusinessAction(v smithycbor.Value) (*types.Delive
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -4627,9 +4609,7 @@ func deserializeCBOR_ExportStatus(v smithycbor.Value) (*types.ExportStatus, erro
 		}
 
 		if key == "State" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ExportState(sv)
 			if err != nil {
 				return nil, err
@@ -4710,9 +4690,7 @@ func deserializeCBOR_ImportDataFormat(v smithycbor.Value) (*types.ImportDataForm
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ImportDataType" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ImportDataType(sv)
 			if err != nil {
 				return nil, err
@@ -4762,9 +4740,7 @@ func deserializeCBOR_ImportJob(v smithycbor.Value) (*types.ImportJob, error) {
 		}
 
 		if key == "Status" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ImportJobStatus(sv)
 			if err != nil {
 				return nil, err
@@ -4966,9 +4942,7 @@ func deserializeCBOR_IngressBooleanExpression(v smithycbor.Value) (*types.Ingres
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_IngressBooleanToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -4977,9 +4951,7 @@ func deserializeCBOR_IngressBooleanExpression(v smithycbor.Value) (*types.Ingres
 		}
 
 		if key == "Operator" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_IngressBooleanOperator(sv)
 			if err != nil {
 				return nil, err
@@ -5074,9 +5046,7 @@ func deserializeCBOR_IngressIpv4Expression(v smithycbor.Value) (*types.IngressIp
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_IngressIpToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -5085,9 +5055,7 @@ func deserializeCBOR_IngressIpv4Expression(v smithycbor.Value) (*types.IngressIp
 		}
 
 		if key == "Operator" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_IngressIpOperator(sv)
 			if err != nil {
 				return nil, err
@@ -5126,9 +5094,7 @@ func deserializeCBOR_IngressIpv6Expression(v smithycbor.Value) (*types.IngressIp
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_IngressIpv6ToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -5137,9 +5103,7 @@ func deserializeCBOR_IngressIpv6Expression(v smithycbor.Value) (*types.IngressIp
 		}
 
 		if key == "Operator" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_IngressIpOperator(sv)
 			if err != nil {
 				return nil, err
@@ -5190,9 +5154,7 @@ func deserializeCBOR_IngressIsInAddressList(v smithycbor.Value) (*types.IngressI
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Attribute" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_IngressAddressListEmailAttribute(sv)
 			if err != nil {
 				return nil, err
@@ -5245,9 +5207,7 @@ func deserializeCBOR_IngressPoint(v smithycbor.Value) (*types.IngressPoint, erro
 		}
 
 		if key == "Status" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_IngressPointStatus(sv)
 			if err != nil {
 				return nil, err
@@ -5256,9 +5216,7 @@ func deserializeCBOR_IngressPoint(v smithycbor.Value) (*types.IngressPoint, erro
 		}
 
 		if key == "Type" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_IngressPointType(sv)
 			if err != nil {
 				return nil, err
@@ -5418,9 +5376,7 @@ func deserializeCBOR_IngressStringExpression(v smithycbor.Value) (*types.Ingress
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_IngressStringToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -5429,9 +5385,7 @@ func deserializeCBOR_IngressStringExpression(v smithycbor.Value) (*types.Ingress
 		}
 
 		if key == "Operator" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_IngressStringOperator(sv)
 			if err != nil {
 				return nil, err
@@ -5517,9 +5471,7 @@ func deserializeCBOR_IngressTlsProtocolExpression(v smithycbor.Value) (*types.In
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_IngressTlsProtocolToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -5528,9 +5480,7 @@ func deserializeCBOR_IngressTlsProtocolExpression(v smithycbor.Value) (*types.In
 		}
 
 		if key == "Operator" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_IngressTlsProtocolOperator(sv)
 			if err != nil {
 				return nil, err
@@ -5539,9 +5489,7 @@ func deserializeCBOR_IngressTlsProtocolExpression(v smithycbor.Value) (*types.In
 		}
 
 		if key == "Value" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_IngressTlsProtocolAttribute(sv)
 			if err != nil {
 				return nil, err
@@ -5589,9 +5537,7 @@ func deserializeCBOR_InvokeLambdaAction(v smithycbor.Value) (*types.InvokeLambda
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -5611,9 +5557,7 @@ func deserializeCBOR_InvokeLambdaAction(v smithycbor.Value) (*types.InvokeLambda
 		}
 
 		if key == "InvocationType" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_LambdaInvocationType(sv)
 			if err != nil {
 				return nil, err
@@ -6047,9 +5991,7 @@ func deserializeCBOR_PolicyStatement(v smithycbor.Value) (*types.PolicyStatement
 		}
 
 		if key == "Action" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_AcceptAction(sv)
 			if err != nil {
 				return nil, err
@@ -6108,9 +6050,7 @@ func deserializeCBOR_PublicNetworkConfiguration(v smithycbor.Value) (*types.Publ
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "IpType" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_IpType(sv)
 			if err != nil {
 				return nil, err
@@ -6191,9 +6131,7 @@ func deserializeCBOR_RelayAction(v smithycbor.Value) (*types.RelayAction, error)
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -6213,9 +6151,7 @@ func deserializeCBOR_RelayAction(v smithycbor.Value) (*types.RelayAction, error)
 		}
 
 		if key == "MailFrom" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_MailFrom(sv)
 			if err != nil {
 				return nil, err
@@ -6818,9 +6754,7 @@ func deserializeCBOR_RuleBooleanExpression(v smithycbor.Value) (*types.RuleBoole
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_RuleBooleanToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -6829,9 +6763,7 @@ func deserializeCBOR_RuleBooleanExpression(v smithycbor.Value) (*types.RuleBoole
 		}
 
 		if key == "Operator" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_RuleBooleanOperator(sv)
 			if err != nil {
 				return nil, err
@@ -7001,9 +6933,7 @@ func deserializeCBOR_RuleDmarcExpression(v smithycbor.Value) (*types.RuleDmarcEx
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Operator" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_RuleDmarcOperator(sv)
 			if err != nil {
 				return nil, err
@@ -7075,9 +7005,7 @@ func deserializeCBOR_RuleIpExpression(v smithycbor.Value) (*types.RuleIpExpressi
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_RuleIpToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -7086,9 +7014,7 @@ func deserializeCBOR_RuleIpExpression(v smithycbor.Value) (*types.RuleIpExpressi
 		}
 
 		if key == "Operator" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_RuleIpOperator(sv)
 			if err != nil {
 				return nil, err
@@ -7164,9 +7090,7 @@ func deserializeCBOR_RuleIsInAddressList(v smithycbor.Value) (*types.RuleIsInAdd
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Attribute" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_RuleAddressListEmailAttribute(sv)
 			if err != nil {
 				return nil, err
@@ -7205,9 +7129,7 @@ func deserializeCBOR_RuleNumberExpression(v smithycbor.Value) (*types.RuleNumber
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_RuleNumberToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -7216,9 +7138,7 @@ func deserializeCBOR_RuleNumberExpression(v smithycbor.Value) (*types.RuleNumber
 		}
 
 		if key == "Operator" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_RuleNumberOperator(sv)
 			if err != nil {
 				return nil, err
@@ -7363,9 +7283,7 @@ func deserializeCBOR_RuleStringExpression(v smithycbor.Value) (*types.RuleString
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_RuleStringToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -7374,9 +7292,7 @@ func deserializeCBOR_RuleStringExpression(v smithycbor.Value) (*types.RuleString
 		}
 
 		if key == "Operator" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_RuleStringOperator(sv)
 			if err != nil {
 				return nil, err
@@ -7501,9 +7417,7 @@ func deserializeCBOR_RuleVerdictExpression(v smithycbor.Value) (*types.RuleVerdi
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "Evaluate" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_RuleVerdictToEvaluate(sv)
 			if err != nil {
 				return nil, err
@@ -7512,9 +7426,7 @@ func deserializeCBOR_RuleVerdictExpression(v smithycbor.Value) (*types.RuleVerdi
 		}
 
 		if key == "Operator" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_RuleVerdictOperator(sv)
 			if err != nil {
 				return nil, err
@@ -7601,9 +7513,7 @@ func deserializeCBOR_S3Action(v smithycbor.Value) (*types.S3Action, error) {
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -7769,9 +7679,7 @@ func deserializeCBOR_SearchStatus(v smithycbor.Value) (*types.SearchStatus, erro
 		}
 
 		if key == "State" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_SearchState(sv)
 			if err != nil {
 				return nil, err
@@ -7852,9 +7760,7 @@ func deserializeCBOR_SendAction(v smithycbor.Value) (*types.SendAction, error) {
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -7907,9 +7813,7 @@ func deserializeCBOR_SnsAction(v smithycbor.Value) (*types.SnsAction, error) {
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ActionFailurePolicy" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ActionFailurePolicy(sv)
 			if err != nil {
 				return nil, err
@@ -7940,9 +7844,7 @@ func deserializeCBOR_SnsAction(v smithycbor.Value) (*types.SnsAction, error) {
 		}
 
 		if key == "Encoding" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_SnsNotificationEncoding(sv)
 			if err != nil {
 				return nil, err
@@ -7951,9 +7853,7 @@ func deserializeCBOR_SnsAction(v smithycbor.Value) (*types.SnsAction, error) {
 		}
 
 		if key == "PayloadType" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_SnsNotificationPayloadType(sv)
 			if err != nil {
 				return nil, err
@@ -8147,9 +8047,7 @@ func deserializeCBOR_TrafficPolicy(v smithycbor.Value) (*types.TrafficPolicy, er
 		}
 
 		if key == "DefaultAction" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_AcceptAction(sv)
 			if err != nil {
 				return nil, err
@@ -8610,9 +8508,7 @@ func deserializeCBOR_GetAddressListImportJobOutput(v smithycbor.Value) (*GetAddr
 		}
 
 		if key == "Status" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ImportJobStatus(sv)
 			if err != nil {
 				return nil, err
@@ -8852,9 +8748,7 @@ func deserializeCBOR_GetArchiveExportOutput(v smithycbor.Value) (*GetArchiveExpo
 		}
 
 		if key == "ExportDestinationConfiguration" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ExportDestinationConfiguration(sv)
 			if err != nil {
 				return nil, err
@@ -8984,9 +8878,7 @@ func deserializeCBOR_GetArchiveOutput(v smithycbor.Value) (*GetArchiveOutput, er
 		}
 
 		if key == "ArchiveState" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ArchiveState(sv)
 			if err != nil {
 				return nil, err
@@ -8995,9 +8887,7 @@ func deserializeCBOR_GetArchiveOutput(v smithycbor.Value) (*GetArchiveOutput, er
 		}
 
 		if key == "Retention" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ArchiveRetention(sv)
 			if err != nil {
 				return nil, err
@@ -9182,9 +9072,7 @@ func deserializeCBOR_GetIngressPointOutput(v smithycbor.Value) (*GetIngressPoint
 		}
 
 		if key == "Status" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_IngressPointStatus(sv)
 			if err != nil {
 				return nil, err
@@ -9193,9 +9081,7 @@ func deserializeCBOR_GetIngressPointOutput(v smithycbor.Value) (*GetIngressPoint
 		}
 
 		if key == "Type" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_IngressPointType(sv)
 			if err != nil {
 				return nil, err
@@ -9248,9 +9134,7 @@ func deserializeCBOR_GetIngressPointOutput(v smithycbor.Value) (*GetIngressPoint
 		}
 
 		if key == "NetworkConfiguration" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_NetworkConfiguration(sv)
 			if err != nil {
 				return nil, err
@@ -9259,9 +9143,7 @@ func deserializeCBOR_GetIngressPointOutput(v smithycbor.Value) (*GetIngressPoint
 		}
 
 		if key == "TlsPolicy" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_TlsPolicy(sv)
 			if err != nil {
 				return nil, err
@@ -9391,9 +9273,7 @@ func deserializeCBOR_GetRelayOutput(v smithycbor.Value) (*GetRelayOutput, error)
 		}
 
 		if key == "Authentication" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_RelayAuthentication(sv)
 			if err != nil {
 				return nil, err
@@ -9567,9 +9447,7 @@ func deserializeCBOR_GetTrafficPolicyOutput(v smithycbor.Value) (*GetTrafficPoli
 		}
 
 		if key == "DefaultAction" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_AcceptAction(sv)
 			if err != nil {
 				return nil, err

@@ -64,6 +64,12 @@ type CreateOutput struct {
 
 // A type of OutputConfig, used when the output in a feed is for the crop feature.
 type CroppingConfig struct {
+
+	// An array of template groups for the crop output. Each template group provides
+	// the graphics-compositing templates that Elemental Inference applies to the
+	// cropped video. You can specify from 1 to 4 template groups.
+	TemplateGroups []TemplateGroup
+
 	noSmithyDocumentSerde
 }
 
@@ -242,6 +248,26 @@ type SubtitlingConfig struct {
 	// DISABLED (no filtering, default), CENSOR (replace profanity with asterisks),
 	// DROP (remove profanity from the transcript).
 	ProfanityFilter ProfanityFilterMode
+
+	noSmithyDocumentSerde
+}
+
+// A named set of graphics-compositing templates used by the crop feature,
+// specified in the templateGroups array of a CroppingConfig.
+type TemplateGroup struct {
+
+	// A name for the template group.
+	//
+	// This member is required.
+	Name *string
+
+	// An array of Amazon S3 URIs that point to the graphics-compositing templates for
+	// this group. You can specify 1 or 2 URIs. Each URI must be in the form
+	// s3://bucket-name/key . Elemental Inference reads these templates using the IAM
+	// role that you specify in accessRoleArn.
+	//
+	// This member is required.
+	TemplateUris []string
 
 	noSmithyDocumentSerde
 }

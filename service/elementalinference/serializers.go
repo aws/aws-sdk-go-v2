@@ -292,6 +292,11 @@ func awsRestjson1_serializeOpDocumentCreateFeedInput(v *CreateFeedInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccessRoleArn != nil {
+		ok := object.Key("accessRoleArn")
+		ok.String(*v.AccessRoleArn)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -1342,6 +1347,11 @@ func awsRestjson1_serializeOpDocumentUpdateFeedInput(v *UpdateFeedInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccessRoleArn != nil {
+		ok := object.Key("accessRoleArn")
+		ok.String(*v.AccessRoleArn)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -1432,6 +1442,13 @@ func awsRestjson1_serializeDocumentCroppingConfig(v *types.CroppingConfig, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.TemplateGroups != nil {
+		ok := object.Key("templateGroups")
+		if err := awsRestjson1_serializeDocumentTemplateGroupList(v.TemplateGroups, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1501,6 +1518,49 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTemplateGroup(v *types.TemplateGroup, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.TemplateUris != nil {
+		ok := object.Key("templateUris")
+		if err := awsRestjson1_serializeDocumentTemplateUriList(v.TemplateUris, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTemplateGroupList(v []types.TemplateGroup, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTemplateGroup(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTemplateUriList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

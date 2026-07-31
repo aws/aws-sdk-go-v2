@@ -122,7 +122,9 @@ type CreateDashboardInput struct {
 	//
 	// Use the DataSetReferences entity within SourceTemplate to list the replacement
 	// datasets for the placeholders listed in the original. The schema in each dataset
-	// must match its placeholder.
+	// must match its placeholder. Use the TopicReferences entity to list the
+	// replacement topics for the topic placeholders listed in the original. The schema
+	// in each topic must match its placeholder.
 	//
 	// Either a SourceEntity or a Definition must be provided in order for the request
 	// to be valid.

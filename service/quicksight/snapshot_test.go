@@ -458,6 +458,18 @@ func TestCheckSnapshot_CreateTopicRefreshSchedule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateTopicV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTopicV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateTopicV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateVPCConnection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateVPCConnection(context.Background(), nil, func(o *Options) {
@@ -871,6 +883,18 @@ func TestCheckSnapshot_DeleteTopicRefreshSchedule(t *testing.T) {
 	_, err := svc.DeleteTopicRefreshSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteTopicRefreshSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteTopicV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTopicV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTopicV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1646,6 +1670,18 @@ func TestCheckSnapshot_DescribeTopicPermissions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeTopicPermissionsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTopicPermissionsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTopicPermissionsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeTopicRefresh(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeTopicRefresh(context.Background(), nil, func(o *Options) {
@@ -1663,6 +1699,18 @@ func TestCheckSnapshot_DescribeTopicRefreshSchedule(t *testing.T) {
 	_, err := svc.DescribeTopicRefreshSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeTopicRefreshSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeTopicV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTopicV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTopicV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2258,6 +2306,18 @@ func TestCheckSnapshot_ListTopics(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListTopicsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTopicsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTopicsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListUserGroups(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListUserGroups(context.Background(), nil, func(o *Options) {
@@ -2491,6 +2551,18 @@ func TestCheckSnapshot_SearchTopics(t *testing.T) {
 	_, err := svc.SearchTopics(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SearchTopics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SearchTopicsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchTopicsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchTopicsV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3242,11 +3314,35 @@ func TestCheckSnapshot_UpdateTopicPermissions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateTopicPermissionsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTopicPermissionsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateTopicPermissionsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateTopicRefreshSchedule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateTopicRefreshSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateTopicRefreshSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateTopicV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTopicV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateTopicV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3685,6 +3781,18 @@ func TestUpdateSnapshot_CreateTopicRefreshSchedule(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateTopicV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTopicV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateTopicV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateVPCConnection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateVPCConnection(context.Background(), nil, func(o *Options) {
@@ -4098,6 +4206,18 @@ func TestUpdateSnapshot_DeleteTopicRefreshSchedule(t *testing.T) {
 	_, err := svc.DeleteTopicRefreshSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteTopicRefreshSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteTopicV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTopicV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTopicV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4873,6 +4993,18 @@ func TestUpdateSnapshot_DescribeTopicPermissions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeTopicPermissionsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTopicPermissionsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTopicPermissionsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeTopicRefresh(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeTopicRefresh(context.Background(), nil, func(o *Options) {
@@ -4890,6 +5022,18 @@ func TestUpdateSnapshot_DescribeTopicRefreshSchedule(t *testing.T) {
 	_, err := svc.DescribeTopicRefreshSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeTopicRefreshSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeTopicV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTopicV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTopicV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5485,6 +5629,18 @@ func TestUpdateSnapshot_ListTopics(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListTopicsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTopicsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTopicsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListUserGroups(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListUserGroups(context.Background(), nil, func(o *Options) {
@@ -5718,6 +5874,18 @@ func TestUpdateSnapshot_SearchTopics(t *testing.T) {
 	_, err := svc.SearchTopics(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SearchTopics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchTopicsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchTopicsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchTopicsV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6469,11 +6637,35 @@ func TestUpdateSnapshot_UpdateTopicPermissions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateTopicPermissionsV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTopicPermissionsV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateTopicPermissionsV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateTopicRefreshSchedule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateTopicRefreshSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateTopicRefreshSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateTopicV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateTopicV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateTopicV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

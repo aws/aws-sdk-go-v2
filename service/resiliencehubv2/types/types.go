@@ -381,6 +381,21 @@ type EventActor struct {
 	noSmithyDocumentSerde
 }
 
+// Details about an AWS Fault Injection Service (AWS FIS) experiment run as part
+// of a test run.
+type ExperimentDetails struct {
+
+	// The ARN of the AWS FIS experiment.
+	//
+	// This member is required.
+	ExperimentArn *string
+
+	// Additional details about the experiment.
+	Details *string
+
+	noSmithyDocumentSerde
+}
+
 // Details when report generation failed.
 type FailedReportOutput struct {
 
@@ -533,6 +548,21 @@ type InputSourceSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for test execution logging destinations.
+type LoggingConfiguration struct {
+
+	// The ARN of the CloudWatch Logs log group for log delivery.
+	CloudWatchLogGroupArn *string
+
+	// The version of the log schema.
+	LogSchemaVersion *string
+
+	// The name of the S3 bucket for log delivery.
+	S3BucketName *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines the multi-AZ disaster recovery targets for a resilience policy.
 type MultiAzTargets struct {
 
@@ -559,6 +589,46 @@ type MultiRegionTargets struct {
 
 	// The recovery time objective (RTO) target for multi-Region, in minutes.
 	RtoInMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
+// Identifies an observability alarm by its ARN.
+type ObservabilityAlarmInput struct {
+
+	// The ARN of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a configured observability alarm.
+type ObservabilityAlarmSummary struct {
+
+	// The account ID that owns the CloudWatch alarm.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The ARN of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmArn *string
+
+	// The name of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmName *string
+
+	// The Region of the CloudWatch alarm.
+	//
+	// This member is required.
+	Region *string
+
+	// The timestamp when the source was configured.
+	CreatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -737,6 +807,13 @@ type ReportGenerationResult struct {
 	// The service this report was generated for.
 	ServiceArn *string
 
+	// The unique identifier of a test run.
+	TestRunId *string
+
+	// An ARN owned by the service. Accepts either a standard 12-digit account ID or
+	// the literal "aws" for AWS-managed resources, such as AWS-managed test templates.
+	TestTemplateArn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -785,6 +862,29 @@ type ReportOutputConfigurationMemberS3 struct {
 }
 
 func (*ReportOutputConfigurationMemberS3) isReportOutputConfiguration() {}
+
+// A single AWS resource that AWS Fault Injection Service (AWS FIS) resolved as a
+// target during a test run.
+type ResolvedTargetResource struct {
+
+	// The AWS FIS resource type the target belongs to, such as aws:ec2:instance,
+	// aws:ecs:task, or aws:eks:pod.
+	//
+	// This member is required.
+	ResourceType *string
+
+	// The raw target information map as returned by AWS FIS.
+	//
+	// This member is required.
+	TargetInformation map[string]string
+
+	// The name of the target in the AWS FIS experiment template.
+	//
+	// This member is required.
+	TargetName *string
+
+	noSmithyDocumentSerde
+}
 
 // Represents an AWS resource discovered by Resilience Hub.
 type Resource struct {
@@ -984,7 +1084,7 @@ type Service struct {
 	// ARN identifier.
 	PolicyArn *string
 
-	// The AWS Regions where the service operates.
+	// The Regions where the service operates.
 	Regions []string
 
 	// Configuration for automatic report generation on a Service.
@@ -1552,7 +1652,7 @@ type ServiceSummary struct {
 	// ARN identifier.
 	PolicyArn *string
 
-	// The AWS Regions where the service operates.
+	// The Regions where the service operates.
 	Regions []string
 
 	// The number of resolved findings.
@@ -1650,6 +1750,23 @@ type SloSource struct {
 	noSmithyDocumentSerde
 }
 
+// A CloudWatch alarm that automatically stops a test run if it breaches its
+// threshold.
+type StopCondition struct {
+
+	// The source of the stop condition.
+	//
+	// This member is required.
+	Source StopConditionSource
+
+	// The value of the stop condition, such as the ARN of the CloudWatch alarm.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a change from one string value to another.
 type StringChange struct {
 
@@ -1658,6 +1775,46 @@ type StringChange struct {
 
 	// The old value.
 	OldValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Identifies a success criteria alarm by its ARN.
+type SuccessCriteriaAlarmInput struct {
+
+	// The ARN of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a configured success criteria alarm.
+type SuccessCriteriaAlarmSummary struct {
+
+	// The account ID that owns the CloudWatch alarm.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The ARN of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmArn *string
+
+	// The name of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmName *string
+
+	// The Region of the CloudWatch alarm.
+	//
+	// This member is required.
+	Region *string
+
+	// The timestamp when the source was configured.
+	CreatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -2017,11 +2174,540 @@ type TargetSource struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a test created for a service by configuring a test template.
+type Test struct {
+
+	// The timestamp when the test was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The name of the test.
+	//
+	// This member is required.
+	Name *string
+
+	// The ARN of the service the test belongs to.
+	//
+	// This member is required.
+	ServiceArn *string
+
+	// The number of successful runs of the test.
+	//
+	// This member is required.
+	SuccessfulTestRuns *int32
+
+	// The unique identifier of the test.
+	//
+	// This member is required.
+	TestId *string
+
+	// The ARN of the test template the test was created from.
+	//
+	// This member is required.
+	TestTemplateArn *string
+
+	// The total number of runs of the test.
+	//
+	// This member is required.
+	TotalTestRuns *int32
+
+	// The fault actions the test runs.
+	Actions []TestAction
+
+	// The logging configuration for the test.
+	LoggingConfiguration *LoggingConfiguration
+
+	// The parameter values configured for the test.
+	Parameters map[string][]string
+
+	// The name of the IAM execution role used to run the test.
+	RoleName *string
+
+	// The stop conditions for the test.
+	StopConditions []StopCondition
+
+	noSmithyDocumentSerde
+}
+
+// Represents a fault action that a test runs, along with the resource type it
+// targets.
+type TestAction struct {
+
+	// The identifier of the fault action.
+	//
+	// This member is required.
+	ActionId *string
+
+	// The resource type that the action targets.
+	//
+	// This member is required.
+	ResourceType *string
+
+	// A description of the fault action.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // A testing recommendation to address a finding.
 type TestingRecommendation struct {
 
 	// The list of suggested testing changes.
 	SuggestedChanges []string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a single run of a test. Configuration is snapshotted from the test
+// and service at the time the run is started.
+type TestRun struct {
+
+	// The timestamp when the test run started.
+	//
+	// This member is required.
+	StartedAt *time.Time
+
+	// The current status of the test run.
+	//
+	// This member is required.
+	Status TestRunStatus
+
+	// The identifier of the test that was run.
+	//
+	// This member is required.
+	TestId *string
+
+	// The unique identifier of the test run.
+	//
+	// This member is required.
+	TestRunId *string
+
+	// The ARN of the test template snapshotted from the test when the run was started.
+	//
+	// This member is required.
+	TestTemplateArn *string
+
+	// Indicates whether this test run targets a single account or multiple accounts.
+	AccountTargeting AccountTargeting
+
+	// The timestamp when the test run ended.
+	EndedAt *time.Time
+
+	// A human-readable reason for test run failure. Only present when the status is
+	// FAILED or ERROR.
+	ErrorMessage *string
+
+	// The number of events recorded for the test run. Use ListTestRunEvents to
+	// retrieve the details.
+	EventCount *int32
+
+	// The AWS Fault Injection Service (AWS FIS) experiments run as part of the test
+	// run.
+	Experiments []ExperimentDetails
+
+	// The logging configuration snapshotted from the test when the run was started.
+	LoggingConfiguration *LoggingConfiguration
+
+	// The parameter values used for the test run.
+	Parameters map[string][]string
+
+	// The permission model snapshotted from the service when the run was started.
+	PermissionModel *PermissionModel
+
+	// The resilience policy snapshotted from the service when the run was started.
+	Policy *TestRunPolicySnapshot
+
+	// The identifier of the ARC Region switch execution detected during the test run.
+	RegionSwitchExecutionId *string
+
+	// The ARN of the ARC Region switch plan associated with the test run.
+	RegionSwitchPlanArn *string
+
+	// The Regions snapshotted from the service when the run was started.
+	Regions []string
+
+	// The report configuration snapshotted from the service when the run was started.
+	ReportConfiguration *TestRunReportConfiguration
+
+	// The report generation result for the test run. Present after report generation
+	// completes or fails.
+	ReportOutput *ReportGenerationResult
+
+	// The IAM execution role name snapshotted from the test when the run was started.
+	RoleName *string
+
+	// The ARN of the service the test run belongs to.
+	ServiceArn *string
+
+	// The stop conditions snapshotted from the test when the run was started.
+	StopConditions []StopCondition
+
+	noSmithyDocumentSerde
+}
+
+// A single event in a test run's timeline.
+type TestRunEvent struct {
+
+	// The unique identifier of the event.
+	//
+	// This member is required.
+	EventId *string
+
+	// The type of the event, such as action_started, action_completed, or
+	// rto_recovery_detected.
+	//
+	// This member is required.
+	EventType *string
+
+	// A human-readable description of what happened.
+	//
+	// This member is required.
+	Message *string
+
+	// The timestamp when the event occurred.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// Machine-parseable key-value attributes for the event.
+	Attributes map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an observability alarm snapshot captured for a test
+// run.
+type TestRunObservabilityAlarmSummary struct {
+
+	// The account ID that owns the CloudWatch alarm.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The ARN of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmArn *string
+
+	// The name of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmName *string
+
+	// The Region of the CloudWatch alarm.
+	//
+	// This member is required.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
+// A snapshot of the resilience policy captured onto a test run from the service
+// when the run was started.
+type TestRunPolicySnapshot struct {
+
+	// The availability SLO targets.
+	AvailabilitySlo *AvailabilitySlo
+
+	// The data recovery targets.
+	DataRecovery *DataRecoveryTargets
+
+	// The multi-AZ resilience targets.
+	MultiAz *MultiAzTargets
+
+	// The multi-Region resilience targets.
+	MultiRegion *MultiRegionTargets
+
+	// The name of the policy.
+	Name *string
+
+	// The ARN of the policy.
+	PolicyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A snapshot of the report configuration captured onto a test run from the
+// service when the run was started.
+type TestRunReportConfiguration struct {
+
+	// The output destinations for generated reports.
+	//
+	// This member is required.
+	ReportOutput []ReportOutputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A monitoring-source snapshot captured for a test run. Exactly one member is set.
+//
+// The following types satisfy this interface:
+//
+//	TestRunSourceSummaryMemberObservabilityAlarm
+//	TestRunSourceSummaryMemberSuccessCriteriaAlarm
+type TestRunSourceSummary interface {
+	isTestRunSourceSummary()
+}
+
+// An observability alarm snapshot captured for the test run.
+type TestRunSourceSummaryMemberObservabilityAlarm struct {
+	Value TestRunObservabilityAlarmSummary
+
+	noSmithyDocumentSerde
+}
+
+func (*TestRunSourceSummaryMemberObservabilityAlarm) isTestRunSourceSummary() {}
+
+// A success criteria alarm snapshot captured for the test run.
+type TestRunSourceSummaryMemberSuccessCriteriaAlarm struct {
+	Value TestRunSuccessCriteriaAlarmSummary
+
+	noSmithyDocumentSerde
+}
+
+func (*TestRunSourceSummaryMemberSuccessCriteriaAlarm) isTestRunSourceSummary() {}
+
+// Summary information about a success criteria alarm snapshot captured for a test
+// run.
+type TestRunSuccessCriteriaAlarmSummary struct {
+
+	// The account ID that owns the CloudWatch alarm.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The ARN of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmArn *string
+
+	// The name of the CloudWatch alarm.
+	//
+	// This member is required.
+	AlarmName *string
+
+	// The Region of the CloudWatch alarm.
+	//
+	// This member is required.
+	Region *string
+
+	// The evaluation outcome of the source. Absent while the source has not yet been
+	// evaluated; set to the terminal outcome afterwards.
+	Outcome TestSourceOutcome
+
+	// A human-readable reason for the outcome.
+	OutcomeReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a test run.
+type TestRunSummary struct {
+
+	// The timestamp when the test run started.
+	//
+	// This member is required.
+	StartedAt *time.Time
+
+	// The current status of the test run.
+	//
+	// This member is required.
+	Status TestRunStatus
+
+	// The unique identifier of the test run.
+	//
+	// This member is required.
+	TestRunId *string
+
+	// The ARN of the test template the test run was based on.
+	//
+	// This member is required.
+	TestTemplateArn *string
+
+	// Indicates whether this test run targets a single account or multiple accounts.
+	AccountTargeting AccountTargeting
+
+	// The timestamp when the test run ended.
+	EndedAt *time.Time
+
+	// A human-readable reason for test run failure. Only present when the status is
+	// FAILED or ERROR.
+	ErrorMessage *string
+
+	// The ARN of the service the test run belongs to.
+	ServiceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Identifies a monitoring source to add to or remove from a test. Exactly one
+// member is set.
+//
+// The following types satisfy this interface:
+//
+//	TestSourceInputMemberObservabilityAlarm
+//	TestSourceInputMemberSuccessCriteriaAlarm
+type TestSourceInput interface {
+	isTestSourceInput()
+}
+
+// An observability alarm included for visibility only.
+type TestSourceInputMemberObservabilityAlarm struct {
+	Value ObservabilityAlarmInput
+
+	noSmithyDocumentSerde
+}
+
+func (*TestSourceInputMemberObservabilityAlarm) isTestSourceInput() {}
+
+// A success criteria alarm that determines whether the test passes or fails.
+type TestSourceInputMemberSuccessCriteriaAlarm struct {
+	Value SuccessCriteriaAlarmInput
+
+	noSmithyDocumentSerde
+}
+
+func (*TestSourceInputMemberSuccessCriteriaAlarm) isTestSourceInput() {}
+
+// A configured monitoring source returned by ListTestSources. Exactly one member
+// is set.
+//
+// The following types satisfy this interface:
+//
+//	TestSourceSummaryMemberObservabilityAlarm
+//	TestSourceSummaryMemberSuccessCriteriaAlarm
+type TestSourceSummary interface {
+	isTestSourceSummary()
+}
+
+// A configured observability alarm.
+type TestSourceSummaryMemberObservabilityAlarm struct {
+	Value ObservabilityAlarmSummary
+
+	noSmithyDocumentSerde
+}
+
+func (*TestSourceSummaryMemberObservabilityAlarm) isTestSourceSummary() {}
+
+// A configured success criteria alarm.
+type TestSourceSummaryMemberSuccessCriteriaAlarm struct {
+	Value SuccessCriteriaAlarmSummary
+
+	noSmithyDocumentSerde
+}
+
+func (*TestSourceSummaryMemberSuccessCriteriaAlarm) isTestSourceSummary() {}
+
+// Contains summary information about a test.
+type TestSummary struct {
+
+	// The timestamp when the test was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The ARN of the service the test belongs to.
+	//
+	// This member is required.
+	ServiceArn *string
+
+	// The number of successful runs of the test.
+	//
+	// This member is required.
+	SuccessfulTestRuns *int32
+
+	// The unique identifier of the test.
+	//
+	// This member is required.
+	TestId *string
+
+	// The ARN of the test template the test was created from.
+	//
+	// This member is required.
+	TestTemplateArn *string
+
+	// The total number of runs of the test.
+	//
+	// This member is required.
+	TotalTestRuns *int32
+
+	noSmithyDocumentSerde
+}
+
+// A pre-configured, AWS recommended test that defines which resilience capability
+// to validate, the fault actions it runs, and the parameters it accepts.
+type TestTemplate struct {
+
+	// The name of the test template.
+	//
+	// This member is required.
+	Name *string
+
+	// The ARN of the test template.
+	//
+	// This member is required.
+	TestTemplateArn *string
+
+	// The fault actions the test template runs.
+	Actions []TestAction
+
+	// A description of the test template.
+	Description *string
+
+	// The parameters the test template accepts.
+	Parameters []TestTemplateParameter
+
+	noSmithyDocumentSerde
+}
+
+// Describes a parameter accepted by a test template.
+type TestTemplateParameter struct {
+
+	// The name of the parameter.
+	//
+	// This member is required.
+	Name *string
+
+	// Indicates whether the parameter is required.
+	//
+	// This member is required.
+	Required *bool
+
+	// The data type of the parameter.
+	//
+	// This member is required.
+	Type ParameterType
+
+	// The default value of the parameter.
+	DefaultValue *string
+
+	// A description of the parameter.
+	Description *string
+
+	// The maximum number of values the parameter accepts.
+	MaxValues *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a test template.
+type TestTemplateSummary struct {
+
+	// A description of the test template.
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the test template.
+	//
+	// This member is required.
+	Name *string
+
+	// The ARN of the test template.
+	//
+	// This member is required.
+	TestTemplateArn *string
 
 	noSmithyDocumentSerde
 }
@@ -2120,3 +2806,6 @@ func (*UnknownUnionMember) isReportOutputConfiguration() {}
 func (*UnknownUnionMember) isResourceConfiguration()     {}
 func (*UnknownUnionMember) isServiceEventMetadata()      {}
 func (*UnknownUnionMember) isSystemEventMetadata()       {}
+func (*UnknownUnionMember) isTestRunSourceSummary()      {}
+func (*UnknownUnionMember) isTestSourceInput()           {}
+func (*UnknownUnionMember) isTestSourceSummary()         {}

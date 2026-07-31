@@ -38,7 +38,7 @@ type CreateServiceInput struct {
 	// This member is required.
 	PermissionModel *types.PermissionModel
 
-	// The AWS Regions where the service operates.
+	// The Regions where the service operates.
 	//
 	// This member is required.
 	Regions []string

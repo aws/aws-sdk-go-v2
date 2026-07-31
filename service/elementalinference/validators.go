@@ -406,12 +406,34 @@ func validateCreateOutputList(v []types.CreateOutput) error {
 	}
 }
 
+func validateCroppingConfig(v *types.CroppingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CroppingConfig"}
+	if v.TemplateGroups != nil {
+		if err := validateTemplateGroupList(v.TemplateGroups); err != nil {
+			invalidParams.AddNested("TemplateGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOutputConfig(v types.OutputConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OutputConfig"}
 	switch uv := v.(type) {
+	case *types.OutputConfigMemberCropping:
+		if err := validateCroppingConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[cropping]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.OutputConfigMemberSubtitling:
 		if err := validateSubtitlingConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[subtitling]", err.(smithy.InvalidParamsError))
@@ -436,6 +458,41 @@ func validateSubtitlingConfig(v *types.SubtitlingConfig) error {
 	if v.AspectRatio != nil {
 		if err := validateAspectRatio(v.AspectRatio); err != nil {
 			invalidParams.AddNested("AspectRatio", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTemplateGroup(v *types.TemplateGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TemplateGroup"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TemplateUris == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateUris"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTemplateGroupList(v []types.TemplateGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TemplateGroupList"}
+	for i := range v {
+		if err := validateTemplateGroup(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

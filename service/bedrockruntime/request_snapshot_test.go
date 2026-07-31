@@ -339,6 +339,7 @@ func TestCheckRequestSnapshot_Converse(t *testing.T) {
 					},
 				},
 			},
+			Effort: ptr.String("__Effort__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -775,6 +776,7 @@ func TestUpdateRequestSnapshot_Converse(t *testing.T) {
 					},
 				},
 			},
+			Effort: ptr.String("__Effort__"),
 		},
 	}
 	body := &bytes.Buffer{}

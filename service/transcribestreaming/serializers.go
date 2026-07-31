@@ -595,6 +595,11 @@ func awsRestjson1_serializeOpHttpBindingsStartStreamTranscriptionInput(v *StartS
 		encoder.SetHeader(locationName).Boolean(v.ShowSpeakerLabel)
 	}
 
+	if len(v.TranscriptFormat) > 0 {
+		locationName := "X-Amzn-Transcribe-Transcript-Format"
+		encoder.SetHeader(locationName).String(string(v.TranscriptFormat))
+	}
+
 	if len(v.VocabularyFilterMethod) > 0 {
 		locationName := "X-Amzn-Transcribe-Vocabulary-Filter-Method"
 		encoder.SetHeader(locationName).String(string(v.VocabularyFilterMethod))

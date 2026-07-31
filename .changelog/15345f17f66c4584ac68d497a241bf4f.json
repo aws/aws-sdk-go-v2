@@ -1,0 +1,8 @@
+{
+    "id": "15345f17-f66c-4584-ac68-d497a241bf4f",
+    "type": "feature",
+    "description": "Doc Updates for Container Attributes",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

@@ -72,7 +72,7 @@ type CreateAnalysisInput struct {
 
 	// A source entity to use for the analysis that you're creating. This metadata
 	// structure contains details that describe a source template and one or more
-	// datasets.
+	// datasets or topics.
 	//
 	// Either a SourceEntity or a Definition must be provided in order for the request
 	// to be valid.

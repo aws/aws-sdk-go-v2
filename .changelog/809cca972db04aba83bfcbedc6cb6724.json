@@ -1,0 +1,8 @@
+{
+    "id": "809cca97-2db0-4aba-83bf-cbedc6cb6724",
+    "type": "feature",
+    "description": "Adding support for enhanced Git experience in Sagemaker Unified Studio.",
+    "modules": [
+        "service/datazone"
+    ]
+}

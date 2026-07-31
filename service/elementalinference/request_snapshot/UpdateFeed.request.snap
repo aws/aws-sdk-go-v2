@@ -2,4 +2,4 @@ PUT /v1/feed/__Id__
 
 Content-Type: application/json
 
-{"name":"__Name__","outputs":[{"description":"__Description__","fromAssociation":true,"name":"__Name__","outputConfig":{"cropping":{}},"status":"ENABLED"},{"description":"__Description__","fromAssociation":true,"name":"__Name__","outputConfig":{"cropping":{}},"status":"ENABLED"}]}
+{"accessRoleArn":"__AccessRoleArn__","name":"__Name__","outputs":[{"description":"__Description__","fromAssociation":true,"name":"__Name__","outputConfig":{"cropping":{"templateGroups":[{"name":"__Name__","templateUris":["__Member__","__Member__"]},{"name":"__Name__","templateUris":["__Member__","__Member__"]}]}},"status":"ENABLED"},{"description":"__Description__","fromAssociation":true,"name":"__Name__","outputConfig":{"cropping":{"templateGroups":[{"name":"__Name__","templateUris":["__Member__","__Member__"]},{"name":"__Name__","templateUris":["__Member__","__Member__"]}]}},"status":"ENABLED"}]}

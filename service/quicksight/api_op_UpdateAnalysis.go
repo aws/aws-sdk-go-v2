@@ -57,7 +57,7 @@ type UpdateAnalysisInput struct {
 
 	// A source entity to use for the analysis that you're updating. This metadata
 	// structure contains details that describe a source template and one or more
-	// datasets.
+	// datasets or topics.
 	SourceEntity *types.AnalysisSourceEntity
 
 	// The Amazon Resource Name (ARN) for the theme to apply to the analysis that

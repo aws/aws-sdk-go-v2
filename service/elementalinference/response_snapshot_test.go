@@ -173,7 +173,24 @@ func TestCheckResponseSnapshot_CreateFeed(t *testing.T) {
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:          types.OutputStatus("ENABLED"),
 				Description:     ptr.String("__Description__"),
@@ -182,7 +199,24 @@ func TestCheckResponseSnapshot_CreateFeed(t *testing.T) {
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:          types.OutputStatus("ENABLED"),
 				Description:     ptr.String("__Description__"),
@@ -348,7 +382,24 @@ func TestCheckResponseSnapshot_GetFeed(t *testing.T) {
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:          types.OutputStatus("ENABLED"),
 				Description:     ptr.String("__Description__"),
@@ -357,7 +408,24 @@ func TestCheckResponseSnapshot_GetFeed(t *testing.T) {
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:          types.OutputStatus("ENABLED"),
 				Description:     ptr.String("__Description__"),
@@ -573,7 +641,24 @@ func TestCheckResponseSnapshot_UpdateFeed(t *testing.T) {
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:          types.OutputStatus("ENABLED"),
 				Description:     ptr.String("__Description__"),
@@ -582,7 +667,24 @@ func TestCheckResponseSnapshot_UpdateFeed(t *testing.T) {
 			{
 				Name: ptr.String("__Name__"),
 				OutputConfig: &types.OutputConfigMemberCropping{
-					Value: types.CroppingConfig{},
+					Value: types.CroppingConfig{
+						TemplateGroups: []types.TemplateGroup{
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								TemplateUris: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
 				},
 				Status:          types.OutputStatus("ENABLED"),
 				Description:     ptr.String("__Description__"),

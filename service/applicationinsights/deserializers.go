@@ -2065,9 +2065,7 @@ func deserializeCBOR_ApplicationComponent(v smithycbor.Value) (*types.Applicatio
 		}
 
 		if key == "OsType" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_OsType(sv)
 			if err != nil {
 				return nil, err
@@ -2076,9 +2074,7 @@ func deserializeCBOR_ApplicationComponent(v smithycbor.Value) (*types.Applicatio
 		}
 
 		if key == "Tier" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_Tier(sv)
 			if err != nil {
 				return nil, err
@@ -2236,9 +2232,7 @@ func deserializeCBOR_ApplicationInfo(v smithycbor.Value) (*types.ApplicationInfo
 		}
 
 		if key == "DiscoveryType" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_DiscoveryType(sv)
 			if err != nil {
 				return nil, err
@@ -2349,9 +2343,7 @@ func deserializeCBOR_ConfigurationEvent(v smithycbor.Value) (*types.Configuratio
 		}
 
 		if key == "EventStatus" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ConfigurationEventStatus(sv)
 			if err != nil {
 				return nil, err
@@ -2360,9 +2352,7 @@ func deserializeCBOR_ConfigurationEvent(v smithycbor.Value) (*types.Configuratio
 		}
 
 		if key == "EventResourceType" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ConfigurationEventResourceType(sv)
 			if err != nil {
 				return nil, err
@@ -2572,9 +2562,7 @@ func deserializeCBOR_LogPattern(v smithycbor.Value) (*types.LogPattern, error) {
 		}
 
 		if key == "Rank" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_Int32(sv)
 			if err != nil {
 				return nil, err
@@ -2716,9 +2704,7 @@ func deserializeCBOR_Observation(v smithycbor.Value) (*types.Observation, error)
 		}
 
 		if key == "LogFilter" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_LogFilter(sv)
 			if err != nil {
 				return nil, err
@@ -2782,9 +2768,7 @@ func deserializeCBOR_Observation(v smithycbor.Value) (*types.Observation, error)
 		}
 
 		if key == "CloudWatchEventSource" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_CloudWatchEventSource(sv)
 			if err != nil {
 				return nil, err
@@ -3203,9 +3187,7 @@ func deserializeCBOR_Problem(v smithycbor.Value) (*types.Problem, error) {
 		}
 
 		if key == "Status" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_Status(sv)
 			if err != nil {
 				return nil, err
@@ -3247,9 +3229,7 @@ func deserializeCBOR_Problem(v smithycbor.Value) (*types.Problem, error) {
 		}
 
 		if key == "SeverityLevel" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_SeverityLevel(sv)
 			if err != nil {
 				return nil, err
@@ -3313,9 +3293,7 @@ func deserializeCBOR_Problem(v smithycbor.Value) (*types.Problem, error) {
 		}
 
 		if key == "Visibility" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_Visibility(sv)
 			if err != nil {
 				return nil, err
@@ -3324,9 +3302,7 @@ func deserializeCBOR_Problem(v smithycbor.Value) (*types.Problem, error) {
 		}
 
 		if key == "ResolutionMethod" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_ResolutionMethod(sv)
 			if err != nil {
 				return nil, err
@@ -3646,9 +3622,7 @@ func deserializeCBOR_Workload(v smithycbor.Value) (*types.Workload, error) {
 		}
 
 		if key == "Tier" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_Tier(sv)
 			if err != nil {
 				return nil, err
@@ -3701,9 +3675,7 @@ func deserializeCBOR_WorkloadConfiguration(v smithycbor.Value) (*types.WorkloadC
 		}
 
 		if key == "Tier" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_Tier(sv)
 			if err != nil {
 				return nil, err
@@ -3921,9 +3893,7 @@ func deserializeCBOR_DescribeComponentConfigurationOutput(v smithycbor.Value) (*
 		}
 
 		if key == "Tier" {
-			if _, ok := sv.(*smithycbor.Nil); ok {
-				continue
-			}
+
 			dv, err := deserializeCBOR_Tier(sv)
 			if err != nil {
 				return nil, err

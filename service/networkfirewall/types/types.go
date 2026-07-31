@@ -322,9 +322,9 @@ type CIDRSummary struct {
 	noSmithyDocumentSerde
 }
 
-// High-level information about a container association, returned by the ListContainerAssociations
-// operation. You can use this information to retrieve the full details of a
-// container association using DescribeContainerAssociation.
+// The metadata for a container association returned by ListContainerAssociations .
+// Contains the ARN and name that you use to identify the container association in
+// other operations.
 type ContainerAssociationSummary struct {
 
 	// The Amazon Resource Name (ARN) of the container association.
@@ -336,16 +336,16 @@ type ContainerAssociationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A key-value pair that defines a container attribute filter for a container
-// monitoring configuration.
+// A key-value filter pair used in container association monitoring configurations
+// to narrow which containers are tracked.
 type ContainerAttribute struct {
 
-	// The key of the container attribute to filter on.
+	// The attribute key to filter on.
 	//
 	// This member is required.
 	Key *string
 
-	// The value of the container attribute to filter on.
+	// The attribute value to match.
 	//
 	// This member is required.
 	Value *string
@@ -353,17 +353,20 @@ type ContainerAttribute struct {
 	noSmithyDocumentSerde
 }
 
-// Defines a container cluster to monitor, along with optional attribute filters
-// that narrow the scope of monitored containers within the cluster.
+// Contains the monitoring configuration for a single cluster in a container
+// association. Specifies the cluster ARN and optional attribute filters to narrow
+// which containers are tracked.
 type ContainerMonitoringConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of the container cluster to monitor.
+	// The ARN of the Amazon ECS or Amazon EKS cluster to monitor. The cluster must be
+	// in the same Region and account as the container association.
 	//
 	// This member is required.
 	ClusterArn *string
 
-	// A list of key-value pairs that filter which containers within the cluster are
-	// monitored. Only containers that match the specified attributes are included.
+	// Key-value pairs that filter which containers are tracked. For Amazon EKS, you
+	// can filter by namespace and Kubernetes labels. For Amazon ECS, you can filter by
+	// container instance attributes (EC2 launch type only).
 	AttributeFilters []ContainerAttribute
 
 	noSmithyDocumentSerde
@@ -757,6 +760,14 @@ type FirewallPolicy struct {
 	//   - aws:alert_strict
 	//
 	//   - aws:alert_established
+	//
+	//   - aws:drop_established_app_layer
+	//
+	//   - aws:alert_established_app_layer
+	//
+	//   - aws:drop_established_app_layer_to_server
+	//
+	//   - aws:alert_established_app_layer_to_server
 	//
 	// For more information, see [Strict evaluation order] in the Network Firewall Developer Guide.
 	//
@@ -1950,7 +1961,7 @@ type RuleOption struct {
 	// (signature ID), and can optionally include other keywords. For information about
 	// Suricata compatible keywords, see [Rule options]in the Suricata documentation.
 	//
-	// [Rule options]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html#rule-options
+	// [Rule options]: https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html#rule-options
 	//
 	// This member is required.
 	Keyword *string
@@ -1960,7 +1971,7 @@ type RuleOption struct {
 	// the Keyword . For more information about the settings for specific options, see [Rule options]
 	// .
 	//
-	// [Rule options]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html#rule-options
+	// [Rule options]: https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html#rule-options
 	Settings []string
 
 	noSmithyDocumentSerde
@@ -1991,7 +2002,7 @@ type RulesSource struct {
 	// protocol, source and destination, ports, direction, and rule options. For
 	// information about the Suricata Rules format, see [Rules Format].
 	//
-	// [Rules Format]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html
+	// [Rules Format]: https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html
 	StatefulRules []StatefulRule
 
 	// Stateless inspection criteria to be used in a stateless rule group.
@@ -2214,6 +2225,11 @@ type SourceMetadata struct {
 
 // Configuration settings for the handling of the stateful rule groups in a
 // firewall policy.
+//
+// Updating any setting in StatefulEngineOptions may require a restart of the
+// stateful engine in order to apply the changes. When this occurs, existing
+// connections will be treated according to your stream exception policy
+// configuration.
 type StatefulEngineOptions struct {
 
 	// Configures the amount of time that can pass without any traffic sent through
@@ -2265,7 +2281,7 @@ type StatefulEngineOptions struct {
 // destination, ports, direction, and rule options. For information about the
 // Suricata Rules format, see [Rules Format].
 //
-// [Rules Format]: https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html
+// [Rules Format]: https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html
 type StatefulRule struct {
 
 	// Defines what Network Firewall should do with the packets in a traffic flow when

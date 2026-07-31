@@ -44501,6 +44501,16 @@ loop:
 			uv = &types.ConnectionPropertiesOutputMemberAthenaProperties{Value: mv}
 			break loop
 
+		case "gitProperties":
+			var mv types.GitPropertiesOutput
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentGitPropertiesOutput(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConnectionPropertiesOutputMemberGitProperties{Value: mv}
+			break loop
+
 		case "glueProperties":
 			var mv types.GluePropertiesOutput
 			destAddr := &mv
@@ -49899,6 +49909,82 @@ func awsRestjson1_deserializeDocumentGitMetadata(v **types.GitMetadata, value in
 					return fmt.Errorf("expected GitRepository to be of type string, got %T instead", value)
 				}
 				sv.Repository = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGitPropertiesOutput(v **types.GitPropertiesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GitPropertiesOutput
+	if *v == nil {
+		sv = &types.GitPropertiesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "codeConnectionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CodeConnectionArn = ptr.String(jtv)
+			}
+
+		case "defaultBranch":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DefaultBranch = ptr.String(jtv)
+			}
+
+		case "errorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		case "repositoryId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RepositoryId = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ConnectionStatus(jtv)
 			}
 
 		default:

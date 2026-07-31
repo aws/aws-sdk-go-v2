@@ -58,7 +58,9 @@ type UpdateTemplateInput struct {
 	//
 	// Use the DataSetReferences entity within SourceTemplate or SourceAnalysis to
 	// list the replacement datasets for the placeholders listed in the original. The
-	// schema in each dataset must match its placeholder.
+	// schema in each dataset must match its placeholder. Use the TopicReferences
+	// entity to list the replacement topics for the topic placeholders listed in the
+	// original. The schema in each topic must match its placeholder.
 	SourceEntity *types.TemplateSourceEntity
 
 	// The option to relax the validation needed to update a template with definition

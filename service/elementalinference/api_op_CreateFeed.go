@@ -47,6 +47,12 @@ type CreateFeedInput struct {
 	// This member is required.
 	Outputs []types.CreateOutput
 
+	// The ARN of an IAM role that Elemental Inference assumes to access resources in
+	// your account on your behalf. For example, the smart crop feature uses this role
+	// to read graphics-compositing templates from your Amazon S3 bucket. You specify
+	// one access role for each feed.
+	AccessRoleArn *string
+
 	// Optional tags. You can also add tags later, using TagResource.
 	Tags map[string]string
 

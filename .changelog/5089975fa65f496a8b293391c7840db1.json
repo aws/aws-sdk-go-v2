@@ -1,0 +1,8 @@
+{
+    "id": "5089975f-a65f-496a-8b29-3391c7840db1",
+    "type": "feature",
+    "description": "AWS Elemental Inference now supports graphic composition on cropped video outputs, enabling branded graphics and other visual elements to be overlaid as part of the inference workflow.",
+    "modules": [
+        "service/elementalinference"
+    ]
+}
