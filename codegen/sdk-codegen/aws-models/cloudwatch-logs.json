@@ -1619,7 +1619,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a lookup table by uploading CSV data. You can use lookup tables to enrich log\n      data in CloudWatch Logs Insights queries with reference data such as user details, application\n      names, or error descriptions.</p>\n         <p>The table name must be unique within your account and Region. The CSV content must include\n      a header row with column names, use UTF-8 encoding, and not exceed 10 MB.</p>"
+                "smithy.api#documentation": "<p>Creates a lookup table by uploading CSV data or from CloudWatch Logs query\n      results. You can use lookup tables to enrich log data in CloudWatch Logs queries with\n      reference data such as user details, application names, or error descriptions.</p>\n         <p>The table name must be unique within your account and Region. You must specify either\n      <code>tableBody</code> or <code>queryId</code>, but not both. If you use\n      <code>tableBody</code>, the CSV content must include a header row with column names, use\n      UTF-8 encoding, and not exceed 10 MB.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#CreateLookupTableRequest": {
@@ -1641,8 +1641,13 @@
                 "tableBody": {
                     "target": "com.amazonaws.cloudwatchlogs#TableBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CSV content of the lookup table. The first row must be a header row with column\n      names. The content must use UTF-8 encoding and not exceed 10 MB.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The CSV content of the lookup table. The first row must be a header row with column\n      names. The content must use UTF-8 encoding and not exceed 10 MB.</p>\n         <p>You must specify either <code>tableBody</code> or <code>queryId</code>, but not\n      both.</p>"
+                    }
+                },
+                "queryId": {
+                    "target": "com.amazonaws.cloudwatchlogs#QueryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a completed CloudWatch Logs query whose results populate\n      the lookup table.</p>\n         <p>You must specify either <code>tableBody</code> or <code>queryId</code>, but not\n      both.</p>"
                     }
                 },
                 "kmsKeyId": {
@@ -1781,7 +1786,7 @@
                 "destinationConfiguration": {
                     "target": "com.amazonaws.cloudwatchlogs#DestinationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration for where to deliver query results. Currently supports Amazon S3 destinations for\n      storing query output.</p>"
+                        "smithy.api#documentation": "<p>Configuration for where to deliver query results. Supports Amazon S3 destinations for storing\n      query output and lookup table destinations for automatically refreshing lookup tables with\n      query results. You can configure one or both destination types.</p>"
                     }
                 },
                 "scheduleStartTime": {
@@ -5105,8 +5110,13 @@
                 "s3Configuration": {
                     "target": "com.amazonaws.cloudwatchlogs#S3Configuration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration for delivering query results to Amazon S3.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Configuration for delivering query results to Amazon S3.</p>"
+                    }
+                },
+                "lookupTableConfiguration": {
+                    "target": "com.amazonaws.cloudwatchlogs#LookupTableConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for delivering query results to a lookup table. The query results\n      automatically populate or refresh the specified lookup table on each scheduled\n      execution.</p>"
                     }
                 }
             },
@@ -7595,7 +7605,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the storage tier policy for your account.</p>"
+                "smithy.api#documentation": "<p>Returns the storage tier policy for the account.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#GetStorageTierPolicyRequest": {
@@ -7617,7 +7627,7 @@
                 "lastUpdatedTime": {
                     "target": "com.amazonaws.cloudwatchlogs#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when the storage tier policy was last updated, expressed as the number of\n      milliseconds after <code>Jan 1, 1970 00:00:00 UTC</code>.</p>"
+                        "smithy.api#documentation": "<p>The time when the storage tier policy was last updated, expressed as the number of\n      milliseconds after <code>January 1, 1970 00:00:00 UTC</code>.</p>"
                     }
                 }
             },
@@ -11531,6 +11541,46 @@
                 "smithy.api#documentation": "<p>Contains metadata about a lookup table returned by <code>DescribeLookupTables</code>.</p>"
             }
         },
+        "com.amazonaws.cloudwatchlogs#LookupTableConfiguration": {
+            "type": "structure",
+            "members": {
+                "tableName": {
+                    "target": "com.amazonaws.cloudwatchlogs#LookupTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the lookup table to create or update with query results. The name can\n      contain only alphanumeric characters and underscores.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.cloudwatchlogs#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that grants permissions to create or update the lookup table\n      with query results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.cloudwatchlogs#LookupTableDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the lookup table.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.cloudwatchlogs#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the KMS key to use to encrypt the lookup table data. If you\n      don't specify a key, the data is encrypted with an Amazon Web Services-owned key.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.cloudwatchlogs#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs to associate with the lookup table for resource management and cost\n      allocation. The service applies tags only during initial table creation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a lookup table destination. Use it to automatically refresh a lookup\n      table with query results on a schedule.</p>"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#LookupTableDescription": {
             "type": "string",
             "traits": {
@@ -14095,7 +14145,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sets the storage tier policy for your account. When you set the storage tier to\n      <code>INTELLIGENT_TIERING</code>, CloudWatch Logs automatically moves your log data between\n      storage tiers based on access patterns to optimize costs.</p>"
+                "smithy.api#documentation": "<p>Sets the storage tier policy for the account. When you set the storage tier to\n      <code>INTELLIGENT_TIERING</code>, the service automatically moves log data to the most\n      cost-effective storage tier based on access frequency.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutStorageTierPolicyRequest": {
@@ -14104,7 +14154,7 @@
                 "storageTier": {
                     "target": "com.amazonaws.cloudwatchlogs#StorageTier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage tier to set for the account. Valid values are <code>STANDARD</code> and\n      <code>INTELLIGENT_TIERING</code>.</p>",
+                        "smithy.api#documentation": "<p>The storage tier to set for the account. Use <code>INTELLIGENT_TIERING</code> to\n      automatically optimize storage costs by moving log data to the appropriate tier based on\n      access frequency.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -14119,13 +14169,13 @@
                 "storageTier": {
                     "target": "com.amazonaws.cloudwatchlogs#StorageTier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage tier that was set.</p>"
+                        "smithy.api#documentation": "<p>The storage tier for the account.</p>"
                     }
                 },
                 "lastUpdatedTime": {
                     "target": "com.amazonaws.cloudwatchlogs#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when the storage tier policy was last updated, expressed as the number of\n      milliseconds after <code>Jan 1, 1970 00:00:00 UTC</code>.</p>"
+                        "smithy.api#documentation": "<p>The time when the storage tier policy was last updated, expressed as the number of\n      milliseconds after <code>January 1, 1970 00:00:00 UTC</code>.</p>"
                     }
                 }
             },
@@ -14224,7 +14274,7 @@
                 "emitSystemFields": {
                     "target": "com.amazonaws.cloudwatchlogs#EmitSystemFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of system fields to include in the log events sent to the subscription destination.\n      Valid values are <code>@aws.account</code> and <code>@aws.region</code>. These fields provide\n      source information for centralized log data in the forwarded payload.</p>"
+                        "smithy.api#documentation": "<p>A list of system fields to include in the log events sent to the subscription destination.\n      Valid values are <code>@aws.account</code>, <code>@aws.region</code>, and\n      <code>@source.log</code>. These fields provide\n      source information for centralized log data in the forwarded payload.</p>"
                     }
                 }
             },
@@ -15366,6 +15416,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "S3"
+                    }
+                },
+                "LOOKUP_TABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOOKUP_TABLE"
                     }
                 }
             }
@@ -17454,7 +17510,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing lookup table by replacing all of its CSV content. After the update\n      completes, queries that use this table will use the new data.</p>\n         <p>This is a full replacement operation. All existing content is replaced with the new CSV\n      data.</p>"
+                "smithy.api#documentation": "<p>Updates an existing lookup table by replacing all of its content with new CSV data or\n      CloudWatch Logs query results. After the update completes, queries that use this table\n      use the new data.</p>\n         <p>This is a full replacement operation. All existing content is replaced. You must specify\n      either <code>tableBody</code> or <code>queryId</code>, but not both.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#UpdateLookupTableRequest": {
@@ -17476,8 +17532,13 @@
                 "tableBody": {
                     "target": "com.amazonaws.cloudwatchlogs#TableBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new CSV content to replace the existing data. The first row must be a header row\n      with column names. The content must use UTF-8 encoding and not exceed 10 MB.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The new CSV content to replace the existing data. The first row must be a header row\n      with column names. The content must use UTF-8 encoding and not exceed 10 MB.</p>\n         <p>You must specify either <code>tableBody</code> or <code>queryId</code>, but not\n      both.</p>"
+                    }
+                },
+                "queryId": {
+                    "target": "com.amazonaws.cloudwatchlogs#QueryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a completed CloudWatch Logs query whose results replace\n      the lookup table content.</p>\n         <p>You must specify either <code>tableBody</code> or <code>queryId</code>, but not\n      both.</p>"
                     }
                 },
                 "kmsKeyId": {

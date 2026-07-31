@@ -30,10 +30,19 @@
                     "target": "com.amazonaws.billing#GetCredits"
                 },
                 {
+                    "target": "com.amazonaws.billing#GetEnterpriseSupportChargeSummary"
+                },
+                {
+                    "target": "com.amazonaws.billing#GetEnterpriseSupportContractDetails"
+                },
+                {
                     "target": "com.amazonaws.billing#GetResourcePolicy"
                 },
                 {
                     "target": "com.amazonaws.billing#ListBillingViews"
+                },
+                {
+                    "target": "com.amazonaws.billing#ListEnterpriseSupportLinkedAccountCharges"
                 },
                 {
                     "target": "com.amazonaws.billing#ListSourceViewsForBillingView"
@@ -1371,6 +1380,45 @@
                 "smithy.api#documentation": "<p>A time range with a start and end time.</p>"
             }
         },
+        "com.amazonaws.billing#AdditionalCharge": {
+            "type": "structure",
+            "members": {
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the additional charge.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "amount": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The charge amount.</p>"
+                    }
+                },
+                "chargeType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of additional charge.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An additional charge applied to an Enterprise Support contract.</p>"
+            }
+        },
+        "com.amazonaws.billing#AdditionalChargeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#AdditionalCharge"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of additional charges.</p>",
+                "smithy.api#length": {
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.billing#Amount": {
             "type": "structure",
             "members": {
@@ -2113,6 +2161,40 @@
                 }
             }
         },
+        "com.amazonaws.billing#ChargeAccount": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "chargePercentage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of the total Support charge allocated to this account. This is 0.0 when supportAllocationMethod = Proportional.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An account that is charged all or a portion of the total Support charge and the percentage of the charge allocated to it.</p>"
+            }
+        },
+        "com.amazonaws.billing#ChargeAccountList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#ChargeAccount"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of charge accounts.</p>",
+                "smithy.api#length": {
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.billing#ClientToken": {
             "type": "string",
             "traits": {
@@ -2151,6 +2233,40 @@
                 "smithy.api#documentation": "<p> The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.billing#ContractAccount": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "isGdn": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When true, Support charges are calculated on charges before private discounts. When false, they are calculated after private discounts.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An account that is covered by the Enterprise Support contract.</p>"
+            }
+        },
+        "com.amazonaws.billing#ContractAccountList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#ContractAccount"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of accounts that appear in the Enterprise Support Contract.</p>",
+                "smithy.api#length": {
+                    "max": 2000
+                }
             }
         },
         "com.amazonaws.billing#CostCategoryName": {
@@ -2787,6 +2903,34 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.billing#EnterpriseSupportBillingMonth": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The billing month in YYYY-MM format. This must be a month in the past.</p>",
+                "smithy.api#pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+            }
+        },
+        "com.amazonaws.billing#EnterpriseSupportTimePeriod": {
+            "type": "structure",
+            "members": {
+                "beginDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The begin date of the time period.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end date of the time period.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A time period for Enterprise Support billing.</p>"
+            }
+        },
         "com.amazonaws.billing#ErrorMessage": {
             "type": "string",
             "traits": {
@@ -3208,6 +3352,297 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.billing#GetEnterpriseSupportChargeSummary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#GetEnterpriseSupportChargeSummaryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#GetEnterpriseSupportChargeSummaryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a summary of Enterprise Support data aggregated across all accounts in the Enterprise Support profile.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.billing#GetEnterpriseSupportChargeSummaryRequest": {
+            "type": "structure",
+            "members": {
+                "billingMonth": {
+                    "target": "com.amazonaws.billing#EnterpriseSupportBillingMonth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing month in YYYY-MM format. This must be a month in the past.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request structure for GetEnterpriseSupportChargeSummary.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#GetEnterpriseSupportChargeSummaryResponse": {
+            "type": "structure",
+            "members": {
+                "payerAccountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payer account ID that is authorized to view Enterprise Support data for all accounts in its Support profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "billingMonth": {
+                    "target": "com.amazonaws.billing#EnterpriseSupportBillingMonth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing month in YYYY-MM format. This must be a month in the past.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "billingPeriodStartDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date of the billing period.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "billingPeriodEndDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end date of the billing period.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "isEstimated": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When true, the Support charge amount is estimated. When false, the Support charge amount is finalized.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "billDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the bill was generated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "supportCharge": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Support charge amount for the account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "totalSupportCharge": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total Support charge amount for all accounts in the Support profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "supportDiscount": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The support discount amount.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "totalSupportEligibleSpend": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total Support-eligible Spend from all accounts in the Support profile. This includes eligible spend from usage of Amazon Web Services, Reserved Instances, and Savings Plans.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "totalSupportEligibleUsageSpend": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total Support-eligible spend from usage of Amazon Web Services from all accounts in the Support profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "totalSupportEligibleReservedInstanceSpend": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total Support-eligible Reserved Instance spend from all accounts in the Support profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "totalSupportEligibleSavingsPlanSpend": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total Support-eligible Savings Plan spend from all accounts in the Support profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "supportChargePercentage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage applied to the total Support-eligible spend to calculate the total Support charge across all accounts in the Support profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "supportEffectivePricingPlan": {
+                    "target": "com.amazonaws.billing#PricingPlan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective pricing plan used for the support charge calculation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response structure for GetEnterpriseSupportChargeSummary.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.billing#GetEnterpriseSupportContractDetails": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#GetEnterpriseSupportContractDetailsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#GetEnterpriseSupportContractDetailsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns Enterprise Support contract details.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.billing#GetEnterpriseSupportContractDetailsRequest": {
+            "type": "structure",
+            "members": {
+                "billingMonth": {
+                    "target": "com.amazonaws.billing#EnterpriseSupportBillingMonth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing month in YYYY-MM format. This must be a month in the past.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request structure for GetEnterpriseSupportContractDetails.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#GetEnterpriseSupportContractDetailsResponse": {
+            "type": "structure",
+            "members": {
+                "isContractActive": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When true, the Enterprise Support contract is active. When false, the Enterprise Support Contract is inactive.</p>"
+                    }
+                },
+                "supportAllocationMethod": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method used to distribute the total Support charge amount across each account in the Support profile. Valid values: Proportional, Fixed_Percentage. Proportional means support charges are distributed to each account in proportion to its eligible Spend. Fixed_Percentage means support charges are distributed across accounts according to pre-configured percentages from the contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "supportReservedInstanceAmortizationStartDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When supportReservedInstanceTreatmentMethod = AmortizedCustom, only amortized fees for Reserved Instances purchased on or after this date are included in the calculation. This field is Null for all other treatment methods.</p>"
+                    }
+                },
+                "supportReservedInstanceTreatmentMethod": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method used to include Reserved Instance (RI) fees in the Enterprise Support charge calculation. Valid values: None (RI fees excluded from Support-eligible spend), Upfront (full upfront RI fees included in month of purchase), Amortized (RI fees spread over commitment term for RIs purchased on or after Support subscription start date), AmortizedCustom (same as Amortized but only for RIs purchased on or after a specified custom start date), AmortizedAll (RI fees amortized for all active RIs including those purchased before Support subscription started).</p>"
+                    }
+                },
+                "supportSavingsPlansAmortizationStartDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is applicable when supportSavingsPlansTreatmentMethod = Amortized and is Null for all other methods. It shows the start date from which Savings Plan fees are included in Support Eligible Spend.</p>"
+                    }
+                },
+                "supportSavingsPlansTreatmentMethod": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method used to include Savings Plans fees in Enterprise Support charge calculations. Valid values: None (Savings Plan fees excluded from Support-eligible spend), Upfront (full upfront Savings Plan fees included in month of purchase), Amortized (Savings Plan fees spread over commitment term for Savings Plans purchased on or after Support subscription start date), AmortizedCustom (same as Amortized but only for Savings Plans purchased on or after a specified custom start date), AmortizedAll (Savings Plan fees amortized for all active Savings Plans including those purchased before Support subscription started).</p>"
+                    }
+                },
+                "supportProrateStartDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date for accounts subscribed or unsubscribed to Support billing during the billing month.</p>"
+                    }
+                },
+                "contractPayerAccountIds": {
+                    "target": "com.amazonaws.billing#ContractAccountList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of accounts covered by the Enterprise Support contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "chargedPayerAccountIds": {
+                    "target": "com.amazonaws.billing#ChargeAccountList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of payer accounts and their charge allocation percentages.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "additionalSupportCharge": {
+                    "target": "com.amazonaws.billing#AdditionalChargeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any Additional support charges applied to the contract.</p>"
+                    }
+                },
+                "additionalSupportEligibleUsageSpend": {
+                    "target": "com.amazonaws.billing#AdditionalChargeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any Additional support-eligible usage spend charges.</p>"
+                    }
+                },
+                "pricingPlans": {
+                    "target": "com.amazonaws.billing#PricingPlanList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing plans associated with this Enterprise Support contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response structure for GetEnterpriseSupportContractDetails.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.billing#GetResourcePolicy": {
             "type": "operation",
             "input": {
@@ -3304,6 +3739,104 @@
                 "smithy.api#documentation": "<p>The request processing failed because of an unknown error, exception, or failure. </p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.billing#LinkedAccountCharge": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The linked account ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "payerAccountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payer account ID that is authorized to view Enterprise Support data for all accounts in its Support profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of account.</p>"
+                    }
+                },
+                "billableSeconds": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of billable seconds in the billing period based on when the account was subscribed to Enterprise Support.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "totalSeconds": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of seconds in the billing period.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "totalSupportEligibleSpend": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total support-eligible spend for this account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "proratedTotalSupportEligibleSpend": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prorated total support-eligible spend based on when the account was subscribed to Enterprise Support.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "linkedTimePeriods": {
+                    "target": "com.amazonaws.billing#TimePeriodList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time periods during which this account was linked.</p>"
+                    }
+                },
+                "subscriptionTimePeriods": {
+                    "target": "com.amazonaws.billing#TimePeriodList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subscription time periods for this account.</p>"
+                    }
+                },
+                "totalSupportEligibleReservedInstanceSpend": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total support-eligible Reserved Instance spend for this account.</p>"
+                    }
+                },
+                "totalSupportEligibleSavingsPlanSpend": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total support-eligible Savings Plan spend for this account.</p>"
+                    }
+                },
+                "supportEligibleSpendByService": {
+                    "target": "com.amazonaws.billing#ServiceLevelAccountUsageList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The support-eligible spend broken down by service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enterprise Support charges for a linked account.</p>"
+            }
+        },
+        "com.amazonaws.billing#LinkedAccountChargeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#LinkedAccountCharge"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of linked account charges.</p>",
+                "smithy.api#length": {
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.billing#ListBillingViews": {
@@ -3474,6 +4007,102 @@
                 }
             },
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.billing#ListEnterpriseSupportLinkedAccountCharges": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.billing#ListEnterpriseSupportLinkedAccountChargesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.billing#ListEnterpriseSupportLinkedAccountChargesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.billing#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billing#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.billing#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns Support-eligible spend broken down at linked account level.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "linkedAccount"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.billing#ListEnterpriseSupportLinkedAccountChargesRequest": {
+            "type": "structure",
+            "members": {
+                "billingMonth": {
+                    "target": "com.amazonaws.billing#EnterpriseSupportBillingMonth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billing month in YYYY-MM format. This must be a month in the past.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.billing#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional linked account ID to filter results to a specific account.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.billing#PageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request structure for ListEnterpriseSupportLinkedAccountCharges.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.billing#ListEnterpriseSupportLinkedAccountChargesResponse": {
+            "type": "structure",
+            "members": {
+                "linkedAccount": {
+                    "target": "com.amazonaws.billing#LinkedAccountChargeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Enterprise Support charges per linked account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.billing#PageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response structure for ListEnterpriseSupportLinkedAccountCharges.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -3695,6 +4324,160 @@
                     "traits": {
                         "smithy.api#enumValue": "DISABLED"
                     }
+                }
+            }
+        },
+        "com.amazonaws.billing#PricingPlan": {
+            "type": "structure",
+            "members": {
+                "pricingPlanId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the pricing plan.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the pricing plan.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the pricing plan.</p>"
+                    }
+                },
+                "startDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date of the pricing plan.</p>"
+                    }
+                },
+                "endDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end date of the pricing plan.</p>"
+                    }
+                },
+                "planDiscountPercent": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The discount percentage applied by this pricing plan.</p>"
+                    }
+                },
+                "discountAppliesToMinimumCharge": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the discount applies to the minimum Support charge.</p>"
+                    }
+                },
+                "minimumCharge": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum Support charge amount for this pricing plan.</p>"
+                    }
+                },
+                "tiered": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the pricing plan uses tiered pricing.</p>"
+                    }
+                },
+                "tiers": {
+                    "target": "com.amazonaws.billing#PricingPlanTierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing tiers within this plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A pricing plan for Enterprise Support billing.</p>"
+            }
+        },
+        "com.amazonaws.billing#PricingPlanList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#PricingPlan"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of pricing plans.</p>",
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.billing#PricingPlanTier": {
+            "type": "structure",
+            "members": {
+                "tierMinimum": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum spend threshold for this tier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tierMaximum": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum spend threshold for this tier.</p>"
+                    }
+                },
+                "baseCharge": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base charge for this tier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "additionalPercentageOfAggregateCharges": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional percentage applied to aggregate charges in this tier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aggregateChargesAdjustment": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The adjustment applied to aggregate charges.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "incremental": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the tier charges are calculated incrementally.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "increment": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The increment amount for incremental tier calculations.</p>"
+                    }
+                },
+                "incrementCharge": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The charge per increment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A tier within an Enterprise Support pricing plan.</p>"
+            }
+        },
+        "com.amazonaws.billing#PricingPlanTierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#PricingPlanTier"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of pricing plan tiers.</p>",
+                "smithy.api#length": {
+                    "max": 20
                 }
             }
         },
@@ -3956,6 +4739,38 @@
                 }
             }
         },
+        "com.amazonaws.billing#ServiceLevelAccountUsage": {
+            "type": "structure",
+            "members": {
+                "serviceCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service code for which to return Support-eligible spend data.</p>"
+                    }
+                },
+                "totalSupportEligibleSpend": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total support-eligible spend for the service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Service-level usage details by account.</p>"
+            }
+        },
+        "com.amazonaws.billing#ServiceLevelAccountUsageList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#ServiceLevelAccountUsage"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of service-level account usages.</p>",
+                "smithy.api#length": {
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.billing#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -4167,6 +4982,18 @@
                 "smithy.api#documentation": "<p>The request was denied due to request throttling. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.billing#TimePeriodList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.billing#EnterpriseSupportTimePeriod"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of time periods.</p>",
+                "smithy.api#length": {
+                    "max": 500
+                }
             }
         },
         "com.amazonaws.billing#TimeRange": {

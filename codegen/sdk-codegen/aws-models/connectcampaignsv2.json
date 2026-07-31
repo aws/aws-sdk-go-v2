@@ -1,6 +1,44 @@
 {
     "smithy": "2.0",
     "shapes": {
+        "com.amazonaws.connectcampaignsv2#AbandonmentRatePacingConfig": {
+            "type": "structure",
+            "members": {
+                "targetRate": {
+                    "target": "com.amazonaws.connectcampaignsv2#TargetRate",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectionStartPoint": {
+                    "target": "com.amazonaws.connectcampaignsv2#ConnectionStartPoint",
+                    "traits": {
+                        "smithy.api#documentation": "Event from which connectionThresholdSeconds is measured.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectionThresholdSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "Seconds after connectionStartPoint before a contact counts as abandoned.",
+                        "smithy.api#range": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "evaluationWindow": {
+                    "target": "com.amazonaws.connectcampaignsv2#EvaluationWindow",
+                    "traits": {
+                        "smithy.api#documentation": "Rolling window over which abandonmentRate is computed.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configuration for abandonment-rate-based dialer throttling."
+            }
+        },
         "com.amazonaws.connectcampaignsv2#AccessDeniedException": {
             "type": "structure",
             "members": {
@@ -1089,7 +1127,7 @@
                 "smithy.api#documentation": "The bandwidth allocation of a queue resource.",
                 "smithy.api#range": {
                     "min": 0,
-                    "max": 1
+                    "max": 2
                 }
             }
         },
@@ -1598,6 +1636,29 @@
                 "smithy.api#documentation": "The request could not be processed because of conflict in the current state of the resource.",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#ConnectionStartPoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Reference point against which the connection threshold is measured.",
+                "smithy.api#enum": [
+                    {
+                        "value": "CONNECTED_TO_SYSTEM",
+                        "name": "CONNECTED_TO_SYSTEM",
+                        "documentation": "Threshold measured from when the contact connects to the telephony system."
+                    },
+                    {
+                        "value": "GREETING_START",
+                        "name": "GREETING_START",
+                        "documentation": "Threshold measured from when the customer-side greeting begins."
+                    },
+                    {
+                        "value": "GREETING_END",
+                        "name": "GREETING_END",
+                        "documentation": "Threshold measured from when the customer-side greeting ends."
+                    }
+                ]
             }
         },
         "com.amazonaws.connectcampaignsv2#ContactFlowId": {
@@ -2518,6 +2579,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "Campaign entry limits config"
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#EvaluationWindow": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Rolling window over which abandonmentRate is computed. Range PT1H to PT24H.",
+                "smithy.api#length": {
+                    "max": 5
+                },
+                "smithy.api#pattern": "^PT([1-9]|1[0-9]|2[0-4])H$"
             }
         },
         "com.amazonaws.connectcampaignsv2#EventTrigger": {
@@ -3772,6 +3843,30 @@
                 }
             }
         },
+        "com.amazonaws.connectcampaignsv2#PacingStrategy": {
+            "type": "union",
+            "members": {
+                "abandonmentRate": {
+                    "target": "com.amazonaws.connectcampaignsv2#AbandonmentRatePacingConfig"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Pacing constraint the dialer may enforce."
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#PacingStrategyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcampaignsv2#PacingStrategy"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of pacing strategies the dialer enforces simultaneously.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.connectcampaignsv2#PauseCampaign": {
             "type": "operation",
             "input": {
@@ -3834,6 +3929,12 @@
                     "target": "com.amazonaws.connectcampaignsv2#BandwidthAllocation",
                     "traits": {
                         "smithy.api#required": {}
+                    }
+                },
+                "pacingStrategies": {
+                    "target": "com.amazonaws.connectcampaignsv2#PacingStrategyList",
+                    "traits": {
+                        "smithy.api#documentation": "Pacing strategies the dialer enforces simultaneously."
                     }
                 }
             },
@@ -4965,6 +5066,16 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#TargetRate": {
+            "type": "double",
+            "traits": {
+                "smithy.api#documentation": "Target abandonment rate.",
+                "smithy.api#range": {
+                    "min": 0.0,
+                    "max": 1.0
                 }
             }
         },

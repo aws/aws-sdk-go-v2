@@ -1834,6 +1834,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Search result to include in the message.</p>"
                     }
+                },
+                "toolAddition": {
+                    "target": "com.amazonaws.bedrockruntime#ToolAdditionBlock"
+                },
+                "toolRemoval": {
+                    "target": "com.amazonaws.bedrockruntime#ToolRemovalBlock"
                 }
             },
             "traits": {
@@ -7168,6 +7174,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Structured output parameters to control the model's text response. </p>"
                     }
+                },
+                "effort": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effort level for the model to use when generating a response. Higher effort levels allow the model to spend more time reasoning before responding. Supported values are <code>low</code>, <code>medium</code>, <code>high</code>, <code>xhigh</code>, and <code>max</code>.</p> <note> <p>When extended thinking is disabled, the effort level is capped at <code>high</code>. Use effort <code>high</code> or below, or enable thinking to use higher effort levels.</p> </note>",
+                        "smithy.api#length": {
+                            "max": 16
+                        }
+                    }
                 }
             },
             "traits": {
@@ -8130,6 +8145,21 @@
                 "smithy.api#documentation": "<p>Information about a tool that you can use with the Converse API. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html\">Call a tool with the Converse API</a> in the Amazon Bedrock User Guide.</p>"
             }
         },
+        "com.amazonaws.bedrockruntime#ToolAdditionBlock": {
+            "type": "structure",
+            "members": {
+                "tool": {
+                    "target": "com.amazonaws.bedrockruntime#ToolReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A reference to the tool to add to the available tool set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A content block for adding a tool to the available tool set mid-conversation. Each block references a single tool via its <code>tool</code> field. Use within a <code>system</code> role message to make a tool available without re-sending the full tool configuration.</p>"
+            }
+        },
         "com.amazonaws.bedrockruntime#ToolChoice": {
             "type": "union",
             "members": {
@@ -8202,6 +8232,59 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.bedrockruntime#ToolReference": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of tool reference.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 64
+                        }
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tool. Must match the name of a tool declared in the top-level tool configuration.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                },
+                "serverName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the MCP server that provides the tool. Required when referencing an MCP tool.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reference to a tool in the tool configuration. Used with <code>ToolAdditionBlock</code> and <code>ToolRemovalBlock</code> to identify which tool to add or remove mid-conversation.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#ToolRemovalBlock": {
+            "type": "structure",
+            "members": {
+                "tool": {
+                    "target": "com.amazonaws.bedrockruntime#ToolReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A reference to the tool to remove from the available tool set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A content block for removing a tool from the available tool set mid-conversation. Each block references a single tool via its <code>tool</code> field. Use within a <code>system</code> role message to remove a tool without re-sending the full tool configuration.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#ToolResultBlock": {

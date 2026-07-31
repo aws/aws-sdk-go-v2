@@ -6827,6 +6827,12 @@
                     "traits": {
                         "smithy.api#enumValue": "WRITE_ONLY_PROPERTY"
                     }
+                },
+                "SENSITIVE_PROPERTY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SENSITIVE_PROPERTY"
+                    }
                 }
             }
         },
@@ -12223,7 +12229,7 @@
                 "Reason": {
                     "target": "com.amazonaws.cloudformation#DriftIgnoredReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reason why drift was ignored for the attribute, can have 2 possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>WRITE_ONLY_PROPERTY</code> - Property is not included in read response for the\n     resource’s live state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MANAGED_BY_AWS</code> - Property is managed by an Amazon Web Services service and is expected to be\n     dynamically modified.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Reason why drift was ignored for the attribute, can have 3 possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>WRITE_ONLY_PROPERTY</code> – Property is not included in read response for the\n     resource’s live state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MANAGED_BY_AWS</code> – Property is managed by an Amazon Web Services service and is expected to be\n     dynamically modified.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SENSITIVE_PROPERTY</code> – Property has a sensitive value, such as an Amazon Web Services Secrets Manager value.</p>\n            </li>\n         </ul>"
                     }
                 }
             },

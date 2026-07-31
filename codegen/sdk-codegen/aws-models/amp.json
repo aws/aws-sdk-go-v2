@@ -2183,6 +2183,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>(Optional) The list of tag keys and values to associate with the scraper.</p>"
                     }
+                },
+                "exporters": {
+                    "target": "com.amazonaws.amp#ExporterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exporter configurations for the scraper. You can configure at most one Amazon OpenSearch Service domain. If you don't specify a value, the scraper is created without an exporter configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3915,6 +3921,32 @@
                 "smithy.api#documentation": "<p>The <code>EksConfiguration</code> structure describes the connection to the Amazon EKS cluster from which a scraper collects metrics.</p>"
             }
         },
+        "com.amazonaws.amp#ExporterConfiguration": {
+            "type": "union",
+            "members": {
+                "openSearchConfiguration": {
+                    "target": "com.amazonaws.amp#OpenSearchExporterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that the scraper uses to export metrics to an Amazon OpenSearch Service domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration for an exporter managed by the scraper.</p>"
+            }
+        },
+        "com.amazonaws.amp#ExporterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amp#ExporterConfiguration"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of exporter configurations for a scraper. You can configure at most one Amazon OpenSearch Service domain.</p>",
+                "smithy.api#length": {
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.amp#FilterKey": {
             "type": "string",
             "traits": {
@@ -4928,6 +4960,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Filtering criteria that determine which queries are logged.</p>"
+            }
+        },
+        "com.amazonaws.amp#OpenSearchDomainArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that identifies an Amazon OpenSearch Service domain.</p>",
+                "smithy.api#pattern": "^arn:aws[-a-z]*:es:[-a-z0-9]+:[0-9]{12}:domain\\/.+$"
+            }
+        },
+        "com.amazonaws.amp#OpenSearchExporterConfiguration": {
+            "type": "structure",
+            "members": {
+                "domainArn": {
+                    "target": "com.amazonaws.amp#OpenSearchDomainArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon OpenSearch Service domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for exporting metrics to an Amazon OpenSearch Service domain.</p>"
             }
         },
         "com.amazonaws.amp#PaginationToken": {
@@ -6075,6 +6129,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This structure displays information about the IAM roles used for cross-account scraping configuration.</p>"
                     }
+                },
+                "exporters": {
+                    "target": "com.amazonaws.amp#ExporterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exporter configurations for the scraper, if configured. The list contains at most one configuration for an Amazon OpenSearch Service domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6355,6 +6415,12 @@
                     "target": "com.amazonaws.amp#RoleConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>This structure displays information about the IAM roles used for cross-account scraping configuration.</p>"
+                    }
+                },
+                "exporters": {
+                    "target": "com.amazonaws.amp#ExporterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exporter configurations for the scraper, if configured. The list contains at most one configuration for an Amazon OpenSearch Service domain.</p>"
                     }
                 }
             },
@@ -7056,6 +7122,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier that you can provide to ensure the idempotency of the request. Case-sensitive.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "exporters": {
+                    "target": "com.amazonaws.amp#ExporterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exporter configurations for the scraper. You can configure at most one Amazon OpenSearch Service domain. If you don't specify a value, the existing exporter configuration remains unchanged.</p>"
                     }
                 }
             },
