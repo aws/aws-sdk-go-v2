@@ -63,8 +63,8 @@ func generateConfigPackage(jsonFile, outputFile, packageName, resolverName strin
 
 	decoder = newDecoder(config)
 
-	if schemaVersion.Version != 1 {
-		return fmt.Errorf("generator only supports version 1 schema, got %d", schemaVersion.Version)
+	if schemaVersion.Version.Major != 1 {
+		return fmt.Errorf("generator only supports version 1 schema, got %s", schemaVersion.Version.Raw)
 	}
 
 	var defaultConfig SDKDefaultConfig
