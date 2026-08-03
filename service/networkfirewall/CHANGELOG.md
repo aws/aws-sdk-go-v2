@@ -1,3 +1,7 @@
+# v1.67.0 (2026-08-03)
+
+* **Feature**: This launch allows customers to use Network Firewall as an explicit Proxy and protect their workloads against threat of data exfiltration.
+
 # v1.66.0 (2026-07-31.2)
 
 * **Feature**: Doc Updates for Container Attributes

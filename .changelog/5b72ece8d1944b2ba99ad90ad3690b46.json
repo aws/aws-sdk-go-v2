@@ -1,8 +1,0 @@
-{
-    "id": "5b72ece8-d194-4b2b-a99a-d90ad3690b46",
-    "type": "bugfix",
-    "description": "Expand S3 operations that check for an error inside an HTTP 200 response",
-    "modules": [
-        "service/s3"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "033cd6d2-8d99-4c7c-b58d-ad76f18855c3",
-    "type": "feature",
-    "description": "Launch CMK support for Telemetry Enablement Organization and Account Rules.",
-    "modules": [
-        "service/observabilityadmin"
-    ]
-}

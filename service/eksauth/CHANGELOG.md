@@ -1,3 +1,7 @@
+# v1.16.0 (2026-08-03)
+
+* **Feature**: Added eksNodeName, instanceId, and zone optional parameters to the AssumeRoleForPodIdentity API.
+
 # v1.15.3 (2026-07-31.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

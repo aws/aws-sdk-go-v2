@@ -1,8 +1,0 @@
-{
-    "id": "3a9c8691-b4ff-456c-9c67-e85dc03ab312",
-    "type": "feature",
-    "description": "Updates Kantar server URL validation to accept Fifty5Blue domain. Adds support for output to S3 Glacier Instant Retrieval.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

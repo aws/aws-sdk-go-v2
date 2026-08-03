@@ -1,3 +1,7 @@
+# v1.97.0 (2026-08-03)
+
+* **Feature**: Updates Kantar server URL validation to accept Fifty5Blue domain. Adds support for output to S3 Glacier Instant Retrieval.
+
 # v1.96.3 (2026-07-31.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

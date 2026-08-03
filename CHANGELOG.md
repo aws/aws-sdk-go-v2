@@ -1,3 +1,26 @@
+# Release (2026-08-03)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.44.0](service/directconnect/CHANGELOG.md#v1440-2026-08-03)
+  * **Feature**: Added route visibility support for AWS Direct Connect, allowing customers to call ListVirtualInterfaceRoutes to view the BGP routes including AS path and BGP communities advertised over their virtual interfaces.
+* `github.com/aws/aws-sdk-go-v2/service/eksauth`: [v1.16.0](service/eksauth/CHANGELOG.md#v1160-2026-08-03)
+  * **Feature**: Added eksNodeName, instanceId, and zone optional parameters to the AssumeRoleForPodIdentity API.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.97.0](service/mediaconvert/CHANGELOG.md#v1970-2026-08-03)
+  * **Feature**: Updates Kantar server URL validation to accept Fifty5Blue domain. Adds support for output to S3 Glacier Instant Retrieval.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.67.0](service/networkfirewall/CHANGELOG.md#v1670-2026-08-03)
+  * **Feature**: This launch allows customers to use Network Firewall as an explicit Proxy and protect their workloads against threat of data exfiltration.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.22.0](service/observabilityadmin/CHANGELOG.md#v1220-2026-08-03)
+  * **Feature**: Launch CMK support for Telemetry Enablement Organization and Account Rules.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.106.4](service/s3/CHANGELOG.md#v11064-2026-08-03)
+  * **Bug Fix**: Expand S3 operations that check for an error inside an HTTP 200 response
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.23.0](service/timestreaminfluxdb/CHANGELOG.md#v1230-2026-08-03)
+  * **Feature**: This release adds support for customer-managed backup restore, and encryption of new DbInstances and DbClusters using customer-managed KMS keys.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.77.2](service/wafv2/CHANGELOG.md#v1772-2026-08-03)
+  * **Documentation**: Updated descriptions for number of PreParseTextTransformations allowed per rule statement
+
 # Release (2026-07-31.2)
 
 ## General Highlights

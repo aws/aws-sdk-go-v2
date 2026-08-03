@@ -1,3 +1,7 @@
+# v1.23.0 (2026-08-03)
+
+* **Feature**: This release adds support for customer-managed backup restore, and encryption of new DbInstances and DbClusters using customer-managed KMS keys.
+
 # v1.22.3 (2026-07-31.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

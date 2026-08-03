@@ -1,8 +1,0 @@
-{
-    "id": "41d3c579-775f-45af-9111-93c17b7f523f",
-    "type": "feature",
-    "description": "Added route visibility support for AWS Direct Connect, allowing customers to call ListVirtualInterfaceRoutes to view the BGP routes including AS path and BGP communities advertised over their virtual interfaces.",
-    "modules": [
-        "service/directconnect"
-    ]
-}
