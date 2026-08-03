@@ -61,6 +61,7 @@
         "api_op_DescribeVirtualInterfaces.go",
         "api_op_DisassociateConnectionFromLag.go",
         "api_op_DisassociateMacSecKey.go",
+        "api_op_ListVirtualInterfaceRoutes.go",
         "api_op_ListVirtualInterfaceTestHistory.go",
         "api_op_StartBgpFailoverTest.go",
         "api_op_StopBgpFailoverTest.go",

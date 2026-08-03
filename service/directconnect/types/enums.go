@@ -21,6 +21,25 @@ func (AddressFamily) Values() []AddressFamily {
 	}
 }
 
+type AsPathType string
+
+// Enum values for AsPathType
+const (
+	AsPathTypeSeq AsPathType = "seq"
+	AsPathTypeSet AsPathType = "set"
+)
+
+// Values returns all known values for AsPathType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AsPathType) Values() []AsPathType {
+	return []AsPathType{
+		"seq",
+		"set",
+	}
+}
+
 type BGPPeerState string
 
 // Enum values for BGPPeerState
@@ -348,6 +367,25 @@ func (NniPartnerType) Values() []NniPartnerType {
 		"v1",
 		"v2",
 		"nonPartner",
+	}
+}
+
+type RouteDirection string
+
+// Enum values for RouteDirection
+const (
+	RouteDirectionAccepted   RouteDirection = "accepted"
+	RouteDirectionAdvertised RouteDirection = "advertised"
+)
+
+// Values returns all known values for RouteDirection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteDirection) Values() []RouteDirection {
+	return []RouteDirection{
+		"accepted",
+		"advertised",
 	}
 }
 

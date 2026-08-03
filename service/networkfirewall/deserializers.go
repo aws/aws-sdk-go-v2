@@ -9869,6 +9869,135 @@ func awsAwsjson10_deserializeOpErrorUpdateProxyRulePriorities(response *smithyht
 	}
 }
 
+type awsAwsjson10_deserializeOpUpdateProxySettings struct {
+}
+
+func (*awsAwsjson10_deserializeOpUpdateProxySettings) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpUpdateProxySettings) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateProxySettings(response, &metadata)
+	}
+	output := &UpdateProxySettingsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentUpdateProxySettingsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorUpdateProxySettings(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
+
+	case strings.EqualFold("InvalidOperationException", errorCode):
+		return awsAwsjson10_deserializeErrorInvalidOperationException(response, errorBody)
+
+	case strings.EqualFold("InvalidRequestException", errorCode):
+		return awsAwsjson10_deserializeErrorInvalidRequestException(response, errorBody)
+
+	case strings.EqualFold("InvalidTokenException", errorCode):
+		return awsAwsjson10_deserializeErrorInvalidTokenException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ResourceOwnerCheckException", errorCode):
+		return awsAwsjson10_deserializeErrorResourceOwnerCheckException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson10_deserializeOpUpdateRuleGroup struct {
 }
 
@@ -11149,6 +11278,15 @@ func awsAwsjson10_deserializeDocumentAttachment(v **types.Attachment, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "DnsName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DnsName to be of type string, got %T instead", value)
+				}
+				sv.DnsName = ptr.String(jtv)
+			}
+
 		case "EndpointId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12310,6 +12448,20 @@ func awsAwsjson10_deserializeDocumentFirewall(v **types.Firewall, value interfac
 				sv.FirewallPolicyChangeProtection = jtv
 			}
 
+		case "NatGatewayMappings":
+			if err := awsAwsjson10_deserializeDocumentNatGatewayMappingsList(&sv.NatGatewayMappings, value); err != nil {
+				return err
+			}
+
+		case "NoSourcePreservation":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.NoSourcePreservation = jtv
+			}
+
 		case "NumberOfAssociations":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12321,6 +12473,11 @@ func awsAwsjson10_deserializeDocumentFirewall(v **types.Firewall, value interfac
 					return err
 				}
 				sv.NumberOfAssociations = ptr.Int32(int32(i64))
+			}
+
+		case "ProxySettings":
+			if err := awsAwsjson10_deserializeDocumentProxySettings(&sv.ProxySettings, value); err != nil {
+				return err
 			}
 
 		case "SubnetChangeProtection":
@@ -12358,6 +12515,11 @@ func awsAwsjson10_deserializeDocumentFirewall(v **types.Firewall, value interfac
 					return fmt.Errorf("expected AWSAccountId to be of type string, got %T instead", value)
 				}
 				sv.TransitGatewayOwnerAccountId = ptr.String(jtv)
+			}
+
+		case "VpcEndpoint":
+			if err := awsAwsjson10_deserializeDocumentVpcEndpoint(&sv.VpcEndpoint, value); err != nil {
+				return err
 			}
 
 		case "VpcId":
@@ -14318,6 +14480,181 @@ func awsAwsjson10_deserializeDocumentMatchAttributes(v **types.MatchAttributes, 
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentNatGatewayAttachment(v **types.NatGatewayAttachment, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NatGatewayAttachment
+	if *v == nil {
+		sv = &types.NatGatewayAttachment{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DnsName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DnsName to be of type string, got %T instead", value)
+				}
+				sv.DnsName = ptr.String(jtv)
+			}
+
+		case "NatGatewayId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NatGatewayId to be of type string, got %T instead", value)
+				}
+				sv.NatGatewayId = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NatGatewayAttachmentStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.NatGatewayAttachmentStatus(jtv)
+			}
+
+		case "StatusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatusReason to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentNatGatewayAttachmentsList(v *[]types.NatGatewayAttachment, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NatGatewayAttachment
+	if *v == nil {
+		cv = []types.NatGatewayAttachment{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NatGatewayAttachment
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentNatGatewayAttachment(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentNatGatewayMapping(v **types.NatGatewayMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NatGatewayMapping
+	if *v == nil {
+		sv = &types.NatGatewayMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NatGatewayId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NatGatewayId to be of type string, got %T instead", value)
+				}
+				sv.NatGatewayId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentNatGatewayMappingsList(v *[]types.NatGatewayMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NatGatewayMapping
+	if *v == nil {
+		cv = []types.NatGatewayMapping{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NatGatewayMapping
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentNatGatewayMapping(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentPerObjectStatus(v **types.PerObjectStatus, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15862,6 +16199,42 @@ func awsAwsjson10_deserializeDocumentProxyRulesByRequestPhase(v **types.ProxyRul
 
 		case "PreREQUEST":
 			if err := awsAwsjson10_deserializeDocumentProxyRuleList(&sv.PreREQUEST, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentProxySettings(v **types.ProxySettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProxySettings
+	if *v == nil {
+		sv = &types.ProxySettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ListenerProperties":
+			if err := awsAwsjson10_deserializeDocumentListenerProperties(&sv.ListenerProperties, value); err != nil {
 				return err
 			}
 
@@ -17971,6 +18344,11 @@ func awsAwsjson10_deserializeDocumentSyncState(v **types.SyncState, value interf
 				return err
 			}
 
+		case "NatGatewayAttachments":
+			if err := awsAwsjson10_deserializeDocumentNatGatewayAttachmentsList(&sv.NatGatewayAttachments, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -18819,6 +19197,51 @@ func awsAwsjson10_deserializeDocumentVariableDefinitionList(v *[]string, value i
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentVpcEndpoint(v **types.VpcEndpoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VpcEndpoint
+	if *v == nil {
+		sv = &types.VpcEndpoint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SubnetMappings":
+			if err := awsAwsjson10_deserializeDocumentSubnetMappings(&sv.SubnetMappings, value); err != nil {
+				return err
+			}
+
+		case "VpcId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VpcId to be of type string, got %T instead", value)
+				}
+				sv.VpcId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -23429,6 +23852,69 @@ func awsAwsjson10_deserializeOpDocumentUpdateProxyRulePrioritiesOutput(v **Updat
 
 		case "Rules":
 			if err := awsAwsjson10_deserializeDocumentProxyRulePriorityList(&sv.Rules, value); err != nil {
+				return err
+			}
+
+		case "UpdateToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UpdateToken to be of type string, got %T instead", value)
+				}
+				sv.UpdateToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeOpDocumentUpdateProxySettingsOutput(v **UpdateProxySettingsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateProxySettingsOutput
+	if *v == nil {
+		sv = &UpdateProxySettingsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FirewallArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.FirewallArn = ptr.String(jtv)
+			}
+
+		case "FirewallName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.FirewallName = ptr.String(jtv)
+			}
+
+		case "ProxySettings":
+			if err := awsAwsjson10_deserializeDocumentProxySettings(&sv.ProxySettings, value); err != nil {
 				return err
 			}
 

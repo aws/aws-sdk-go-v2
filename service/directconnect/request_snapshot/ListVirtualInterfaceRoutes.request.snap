@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: OvertureService.ListVirtualInterfaceRoutes
+
+{"filters":{"addressFamily":"ipv4","asPath":[1,1],"cidrs":["__Member__","__Member__"],"communities":["__Member__","__Member__"],"routeDirection":"accepted"},"maxResults":1,"nextToken":"__NextToken__","virtualInterfaceId":"__VirtualInterfaceId__"}

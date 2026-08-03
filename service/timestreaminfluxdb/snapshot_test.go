@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_CreateDbBackup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDbBackup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDbBackup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDbCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDbCluster(context.Background(), nil, func(o *Options) {
@@ -98,6 +110,18 @@ func TestCheckSnapshot_CreateDbParameterGroup(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteDbBackup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDbBackup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDbBackup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteDbCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDbCluster(context.Background(), nil, func(o *Options) {
@@ -115,6 +139,18 @@ func TestCheckSnapshot_DeleteDbInstance(t *testing.T) {
 	_, err := svc.DeleteDbInstance(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteDbInstance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDbBackup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDbBackup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDbBackup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -151,6 +187,18 @@ func TestCheckSnapshot_GetDbParameterGroup(t *testing.T) {
 	_, err := svc.GetDbParameterGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetDbParameterGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDbBackups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDbBackups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDbBackups")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -242,6 +290,18 @@ func TestCheckSnapshot_RebootDbInstance(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RestoreFromDbBackup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RestoreFromDbBackup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RestoreFromDbBackup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -289,6 +349,18 @@ func TestCheckSnapshot_UpdateDbInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_CreateDbBackup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDbBackup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDbBackup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateDbCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDbCluster(context.Background(), nil, func(o *Options) {
@@ -325,6 +397,18 @@ func TestUpdateSnapshot_CreateDbParameterGroup(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteDbBackup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDbBackup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDbBackup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteDbCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDbCluster(context.Background(), nil, func(o *Options) {
@@ -342,6 +426,18 @@ func TestUpdateSnapshot_DeleteDbInstance(t *testing.T) {
 	_, err := svc.DeleteDbInstance(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteDbInstance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDbBackup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDbBackup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDbBackup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -378,6 +474,18 @@ func TestUpdateSnapshot_GetDbParameterGroup(t *testing.T) {
 	_, err := svc.GetDbParameterGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDbParameterGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDbBackups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDbBackups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDbBackups")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -462,6 +570,18 @@ func TestUpdateSnapshot_RebootDbInstance(t *testing.T) {
 	_, err := svc.RebootDbInstance(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RebootDbInstance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RestoreFromDbBackup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RestoreFromDbBackup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RestoreFromDbBackup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

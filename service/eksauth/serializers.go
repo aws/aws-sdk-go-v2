@@ -100,9 +100,24 @@ func awsRestjson1_serializeOpDocumentAssumeRoleForPodIdentityInput(v *AssumeRole
 	object := value.Object()
 	defer object.Close()
 
+	if v.EksNodeName != nil {
+		ok := object.Key("eksNodeName")
+		ok.String(*v.EksNodeName)
+	}
+
+	if v.InstanceId != nil {
+		ok := object.Key("instanceId")
+		ok.String(*v.InstanceId)
+	}
+
 	if v.Token != nil {
 		ok := object.Key("token")
 		ok.String(*v.Token)
+	}
+
+	if v.Zone != nil {
+		ok := object.Key("zone")
+		ok.String(*v.Zone)
 	}
 
 	return nil

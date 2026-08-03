@@ -1010,6 +1010,26 @@ func (m *validateOpUpdateProxyRulePriorities) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateProxySettings struct {
+}
+
+func (*validateOpUpdateProxySettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProxySettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProxySettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProxySettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRuleGroup struct {
 }
 
@@ -1268,6 +1288,10 @@ func addOpUpdateProxyRuleValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateProxyRulePrioritiesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateProxyRulePriorities{}, middleware.After)
+}
+
+func addOpUpdateProxySettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProxySettings{}, middleware.After)
 }
 
 func addOpUpdateRuleGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1790,6 +1814,38 @@ func validateMatchAttributes(v *types.MatchAttributes) error {
 	}
 }
 
+func validateNatGatewayMapping(v *types.NatGatewayMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NatGatewayMapping"}
+	if v.NatGatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NatGatewayId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNatGatewayMappingsList(v []types.NatGatewayMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NatGatewayMappingsList"}
+	for i := range v {
+		if err := validateNatGatewayMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePolicyVariables(v *types.PolicyVariables) error {
 	if v == nil {
 		return nil
@@ -1828,6 +1884,21 @@ func validatePortRanges(v []types.PortRange) error {
 		if err := validatePortRange(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProxySettings(v *types.ProxySettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProxySettings"}
+	if v.ListenerProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ListenerProperties"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2373,6 +2444,28 @@ func validateTLSInspectionConfiguration(v *types.TLSInspectionConfiguration) err
 	}
 }
 
+func validateVpcEndpoint(v *types.VpcEndpoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcEndpoint"}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if v.SubnetMappings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetMappings"))
+	} else if v.SubnetMappings != nil {
+		if err := validateSubnetMappings(v.SubnetMappings); err != nil {
+			invalidParams.AddNested("SubnetMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAcceptNetworkFirewallTransitGatewayAttachmentInput(v *AcceptNetworkFirewallTransitGatewayAttachmentInput) error {
 	if v == nil {
 		return nil
@@ -2518,6 +2611,21 @@ func validateOpCreateFirewallInput(v *CreateFirewallInput) error {
 	if v.AvailabilityZoneMappings != nil {
 		if err := validateAvailabilityZoneMappings(v.AvailabilityZoneMappings); err != nil {
 			invalidParams.AddNested("AvailabilityZoneMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NatGatewayMappings != nil {
+		if err := validateNatGatewayMappingsList(v.NatGatewayMappings); err != nil {
+			invalidParams.AddNested("NatGatewayMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProxySettings != nil {
+		if err := validateProxySettings(v.ProxySettings); err != nil {
+			invalidParams.AddNested("ProxySettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcEndpoint != nil {
+		if err := validateVpcEndpoint(v.VpcEndpoint); err != nil {
+			invalidParams.AddNested("VpcEndpoint", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3350,6 +3458,23 @@ func validateOpUpdateProxyRulePrioritiesInput(v *UpdateProxyRulePrioritiesInput)
 	}
 	if v.UpdateToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UpdateToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProxySettingsInput(v *UpdateProxySettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProxySettingsInput"}
+	if v.ProxySettings != nil {
+		if err := validateProxySettings(v.ProxySettings); err != nil {
+			invalidParams.AddNested("ProxySettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

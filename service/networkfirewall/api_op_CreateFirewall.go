@@ -96,6 +96,30 @@ type CreateFirewallInput struct {
 	// firewall, the operation initializes this setting to TRUE .
 	FirewallPolicyChangeProtection bool
 
+	// The NAT gateways that the firewall uses to proxy traffic when
+	// NoSourcePreservation is TRUE . Network Firewall attaches the firewall to each
+	// NAT gateway that you specify, so that egress traffic is proxied through the NAT
+	// gateway.
+	NatGatewayMappings []types.NatGatewayMapping
+
+	// Optional. Indicates whether the firewall operates in proxy mode, in which the
+	// source IP address of the traffic is not preserved. When set to TRUE , the
+	// firewall proxies traffic through a NAT gateway and the traffic reaching the
+	// destination uses the NAT gateway's IP address as the source.
+	//
+	// When you set this to TRUE , you must specify NatGatewayMappings and VpcEndpoint
+	// instead of a top-level VpcId and SubnetMappings .
+	//
+	// You can't change this setting after you create the firewall.
+	//
+	// Default value: FALSE
+	NoSourcePreservation bool
+
+	// The listener configuration for a proxy mode firewall, used when
+	// NoSourcePreservation is TRUE . This specifies the ports and protocols on which
+	// the firewall's proxy listens for traffic.
+	ProxySettings *types.ProxySettings
+
 	// A setting indicating whether the firewall is protected against changes to the
 	// subnet associations. Use this setting to protect against accidentally modifying
 	// the subnet associations for a firewall that is in use. When you create a
@@ -123,6 +147,14 @@ type CreateFirewallInput struct {
 	//
 	// [Considerations for transit gateway-attached firewalls]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tgw-firewall-considerations.html
 	TransitGatewayId *string
+
+	// The VPC and subnets for the firewall endpoint, used when NoSourcePreservation
+	// is TRUE . Network Firewall creates the firewall endpoint in the subnets that you
+	// specify here.
+	//
+	// For proxy mode firewalls, provide the firewall's VPC and endpoint subnets
+	// through this parameter instead of the top-level VpcId and SubnetMappings .
+	VpcEndpoint *types.VpcEndpoint
 
 	// The unique identifier of the VPC where Network Firewall should create the
 	// firewall.

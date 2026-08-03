@@ -1,0 +1,8 @@
+{
+    "id": "56d724e0-8a92-4656-ba57-e80735561563",
+    "type": "feature",
+    "description": "This launch allows customers to use Network Firewall as an explicit Proxy and protect their workloads against threat of data exfiltration.",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

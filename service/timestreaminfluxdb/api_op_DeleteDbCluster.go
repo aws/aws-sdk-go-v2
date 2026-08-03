@@ -32,6 +32,10 @@ type DeleteDbClusterInput struct {
 	// This member is required.
 	DbClusterId *string
 
+	// Specifies whether to retain automated backups after the DB cluster is deleted.
+	// If set to true, automated backups are not deleted and can be restored later.
+	RetainAutomatedBackups *bool
+
 	noSmithyDocumentSerde
 }
 

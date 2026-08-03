@@ -177,6 +177,11 @@ type AnalysisTypeReportResult struct {
 //     using CreateVpcEndpointAssociation .
 type Attachment struct {
 
+	// The DNS name that resolves to the firewall endpoint in the subnet. This is
+	// populated for proxy mode firewalls, where clients direct traffic to the
+	// firewall's proxy using this name.
+	DnsName *string
+
 	// The identifier of the firewall endpoint that Network Firewall has instantiated
 	// in the subnet. You use this to identify the firewall endpoint in the VPC route
 	// tables, when you redirect the VPC traffic through the endpoint.
@@ -655,8 +660,22 @@ type Firewall struct {
 	// firewall, the operation initializes this setting to TRUE .
 	FirewallPolicyChangeProtection bool
 
+	// The NAT gateways that the firewall uses to proxy traffic. This is set for proxy
+	// mode firewalls, where NoSourcePreservation is TRUE .
+	NatGatewayMappings []NatGatewayMapping
+
+	// Indicates whether the firewall operates in proxy mode, in which the source IP
+	// address of the traffic is not preserved. When this value is TRUE , the firewall
+	// proxies traffic through a NAT gateway and uses the NAT gateway's IP address as
+	// the source for traffic reaching the destination.
+	NoSourcePreservation bool
+
 	// The number of VpcEndpointAssociation resources that use this firewall.
 	NumberOfAssociations *int32
+
+	// The listener configuration for the firewall's proxy. This is set for proxy mode
+	// firewalls, where NoSourcePreservation is TRUE .
+	ProxySettings *ProxySettings
 
 	// A setting indicating whether the firewall is protected against changes to the
 	// subnet associations. Use this setting to protect against accidentally modifying
@@ -675,6 +694,10 @@ type Firewall struct {
 	// different from the firewall owner's account ID when using a shared transit
 	// gateway.
 	TransitGatewayOwnerAccountId *string
+
+	// The VPC and subnets for the firewall endpoint. This is set for proxy mode
+	// firewalls, where NoSourcePreservation is TRUE .
+	VpcEndpoint *VpcEndpoint
 
 	noSmithyDocumentSerde
 }
@@ -1364,6 +1387,46 @@ type MatchAttributes struct {
 	noSmithyDocumentSerde
 }
 
+// The definition and status of the attachment between a proxy mode firewall and a
+// NAT gateway that proxies its traffic.
+type NatGatewayAttachment struct {
+
+	// A unique identifier for the NAT gateway to use with proxy resources.
+	//
+	// This member is required.
+	NatGatewayId *string
+
+	// The current status of the NAT gateway attachment.
+	//
+	// When this value is READY , the attachment is available to proxy traffic.
+	// Otherwise, this value reflects its state, for example CREATING or DELETING .
+	//
+	// This member is required.
+	Status NatGatewayAttachmentStatus
+
+	// The DNS name that resolves to the firewall's proxy for traffic sent through
+	// this NAT gateway attachment.
+	DnsName *string
+
+	// If Network Firewall encounters an issue with the NAT gateway attachment, it
+	// populates this with an explanation of the problem.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// A NAT gateway that a proxy mode firewall uses to proxy traffic. This is used in CreateFirewall
+// when NoSourcePreservation is TRUE .
+type NatGatewayMapping struct {
+
+	// A unique identifier for the NAT gateway to use with proxy resources.
+	//
+	// This member is required.
+	NatGatewayId *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides configuration status for a single policy or rule group that is used
 // for a firewall endpoint. Network Firewall provides each endpoint with the rules
 // that are configured in the firewall policy. Each time you add a subnet or modify
@@ -1734,6 +1797,18 @@ type ProxyRulesByRequestPhase struct {
 
 	// After DNS, before request.
 	PreREQUEST []ProxyRule
+
+	noSmithyDocumentSerde
+}
+
+// The listener configuration for a proxy mode firewall. This specifies the ports
+// and protocols on which the firewall's proxy listens for traffic.
+type ProxySettings struct {
+
+	// Listener properties for HTTP and HTTPS traffic.
+	//
+	// This member is required.
+	ListenerProperties []ListenerProperty
 
 	noSmithyDocumentSerde
 }
@@ -2538,6 +2613,11 @@ type SyncState struct {
 	// can properly filter network traffic.
 	Config map[string]PerObjectStatus
 
+	// The status of the NAT gateway attachments for a proxy mode firewall in the
+	// Availability Zone. This reflects the attachment of the firewall to each NAT
+	// gateway that proxies its traffic.
+	NatGatewayAttachments []NatGatewayAttachment
+
 	noSmithyDocumentSerde
 }
 
@@ -2805,6 +2885,30 @@ type UniqueSources struct {
 
 	// The number of unique source IP addresses that connected to a domain.
 	Count int32
+
+	noSmithyDocumentSerde
+}
+
+// The VPC and subnets for a proxy mode firewall endpoint. This is used in CreateFirewall when
+// NoSourcePreservation is TRUE , to specify where Network Firewall creates the
+// firewall endpoint.
+//
+// This differs from VpcEndpointAssociation, which defines additional secondary endpoints for a firewall
+// in other VPCs.
+type VpcEndpoint struct {
+
+	// The subnets in which Network Firewall creates the firewall endpoint for a proxy
+	// mode firewall. Each subnet must belong to a different Availability Zone in the
+	// VPC.
+	//
+	// This member is required.
+	SubnetMappings []SubnetMapping
+
+	// The unique identifier of the VPC where Network Firewall creates the proxy mode
+	// firewall endpoint.
+	//
+	// This member is required.
+	VpcId *string
 
 	noSmithyDocumentSerde
 }

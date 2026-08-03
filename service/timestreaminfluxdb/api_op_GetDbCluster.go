@@ -59,6 +59,9 @@ type GetDbClusterOutput struct {
 	// Configuration for node modes in the DbCluster.
 	ClusterConfiguration *types.ClusterConfiguration
 
+	// The backup configurations for the DB cluster.
+	DbBackupConfigurations []types.DbBackupConfigurationOutput
+
 	// The Timestream for InfluxDB instance type that InfluxDB runs on.
 	DbInstanceType types.DbInstanceType
 
@@ -86,6 +89,9 @@ type GetDbClusterOutput struct {
 	// key-value pair holding InfluxDB authorization values: organization, bucket,
 	// username, and password.
 	InfluxAuthParametersSecretArn *string
+
+	// The Amazon Web Services KMS key ARN used for encryption of the DB cluster.
+	KmsKeyId *string
 
 	// The timestamp of the last completed maintenance operation on the DB cluster.
 	LastMaintenanceTime *time.Time

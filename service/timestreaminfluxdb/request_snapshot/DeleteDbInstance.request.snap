@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: AmazonTimestreamInfluxDB.DeleteDbInstance
 
-{"identifier":"__Identifier__"}
+{"identifier":"__Identifier__","retainAutomatedBackups":true}

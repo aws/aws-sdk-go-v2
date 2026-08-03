@@ -2,4 +2,4 @@ POST /clusters/__ClusterName__/assume-role-for-pod-identity
 
 Content-Type: application/json
 
-{"token":"__Token__"}
+{"eksNodeName":"__EksNodeName__","instanceId":"__InstanceId__","token":"__Token__","zone":"__Zone__"}

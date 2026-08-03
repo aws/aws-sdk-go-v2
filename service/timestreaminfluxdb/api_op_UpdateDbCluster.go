@@ -32,6 +32,9 @@ type UpdateDbClusterInput struct {
 	// This member is required.
 	DbClusterId *string
 
+	// A list of backup configurations to update for the DB cluster.
+	DbBackupConfigurations []types.DbBackupConfiguration
+
 	// Update the DB cluster to use the specified DB instance Type.
 	DbInstanceType types.DbInstanceType
 

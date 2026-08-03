@@ -3910,6 +3910,84 @@ func TestCheckResponseSnapshot_DisassociateMacSecKey(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListVirtualInterfaceRoutes(t *testing.T) {
+	want := &ListVirtualInterfaceRoutesOutput{
+		VirtualInterfaceId: ptr.String("__VirtualInterfaceId__"),
+		Routes: []types.Route{
+			{
+				Cidr:           ptr.String("__Cidr__"),
+				RouteDirection: types.RouteDirection("accepted"),
+				AddressFamily:  types.AddressFamily("ipv4"),
+				AsPath: []types.AsPathSegment{
+					{
+						PathType: types.AsPathType("seq"),
+						Path: []int64{
+							1,
+							1,
+						},
+					},
+					{
+						PathType: types.AsPathType("seq"),
+						Path: []int64{
+							1,
+							1,
+						},
+					},
+				},
+				Communities: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AwsLogicalDeviceId: ptr.String("__AwsLogicalDeviceId__"),
+				RouteInstalledAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Cidr:           ptr.String("__Cidr__"),
+				RouteDirection: types.RouteDirection("accepted"),
+				AddressFamily:  types.AddressFamily("ipv4"),
+				AsPath: []types.AsPathSegment{
+					{
+						PathType: types.AsPathType("seq"),
+						Path: []int64{
+							1,
+							1,
+						},
+					},
+					{
+						PathType: types.AsPathType("seq"),
+						Path: []int64{
+							1,
+							1,
+						},
+					},
+				},
+				Communities: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AwsLogicalDeviceId: ptr.String("__AwsLogicalDeviceId__"),
+				RouteInstalledAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListVirtualInterfaceRoutes.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListVirtualInterfaceRoutes(context.Background(), &ListVirtualInterfaceRoutesInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListVirtualInterfaceRoutes.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListVirtualInterfaceTestHistory(t *testing.T) {
 	want := &ListVirtualInterfaceTestHistoryOutput{
 		VirtualInterfaceTestHistory: []types.VirtualInterfaceTestHistory{

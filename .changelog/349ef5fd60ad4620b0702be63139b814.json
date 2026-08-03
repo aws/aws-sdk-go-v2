@@ -1,0 +1,8 @@
+{
+    "id": "349ef5fd-60ad-4620-b070-2be63139b814",
+    "type": "feature",
+    "description": "This release adds support for customer-managed backup restore, and encryption of new DbInstances and DbClusters using customer-managed KMS keys.",
+    "modules": [
+        "service/timestreaminfluxdb"
+    ]
+}

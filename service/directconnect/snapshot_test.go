@@ -698,6 +698,18 @@ func TestCheckSnapshot_DisassociateMacSecKey(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListVirtualInterfaceRoutes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListVirtualInterfaceRoutes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListVirtualInterfaceRoutes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListVirtualInterfaceTestHistory(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListVirtualInterfaceTestHistory(context.Background(), nil, func(o *Options) {
@@ -1446,6 +1458,18 @@ func TestUpdateSnapshot_DisassociateMacSecKey(t *testing.T) {
 	_, err := svc.DisassociateMacSecKey(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisassociateMacSecKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListVirtualInterfaceRoutes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListVirtualInterfaceRoutes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListVirtualInterfaceRoutes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "3e2c715f-6141-4d0f-ad35-689636347990",
+    "type": "documentation",
+    "description": "Updated descriptions for number of PreParseTextTransformations allowed per rule statement",
+    "modules": [
+        "service/wafv2"
+    ]
+}

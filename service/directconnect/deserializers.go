@@ -6144,6 +6144,120 @@ func awsAwsjson11_deserializeOpErrorDisassociateMacSecKey(response *smithyhttp.R
 	}
 }
 
+type awsAwsjson11_deserializeOpListVirtualInterfaceRoutes struct {
+}
+
+func (*awsAwsjson11_deserializeOpListVirtualInterfaceRoutes) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpListVirtualInterfaceRoutes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorListVirtualInterfaceRoutes(response, &metadata)
+	}
+	output := &ListVirtualInterfaceRoutesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentListVirtualInterfaceRoutesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorListVirtualInterfaceRoutes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("DirectConnectClientException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectClientException(response, errorBody)
+
+	case strings.EqualFold("DirectConnectServerException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectServerException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpListVirtualInterfaceTestHistory struct {
 }
 
@@ -7499,6 +7613,125 @@ func awsAwsjson11_deserializeDocumentAgreementList(v *[]types.CustomerAgreement,
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAsPathList(v *[]int64, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []int64
+	if *v == nil {
+		cv = []int64{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col int64
+		if value != nil {
+			jtv, ok := value.(json.Number)
+			if !ok {
+				return fmt.Errorf("expected LongAsn to be json.Number, got %T instead", value)
+			}
+			i64, err := jtv.Int64()
+			if err != nil {
+				return err
+			}
+			col = i64
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAsPathSegment(v **types.AsPathSegment, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AsPathSegment
+	if *v == nil {
+		sv = &types.AsPathSegment{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "path":
+			if err := awsAwsjson11_deserializeDocumentAsPathList(&sv.Path, value); err != nil {
+				return err
+			}
+
+		case "pathType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AsPathType to be of type string, got %T instead", value)
+				}
+				sv.PathType = types.AsPathType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAsPathSegmentList(v *[]types.AsPathSegment, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AsPathSegment
+	if *v == nil {
+		cv = []types.AsPathSegment{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AsPathSegment
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAsPathSegment(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAssociatedCoreNetwork(v **types.AssociatedCoreNetwork, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7897,6 +8130,42 @@ func awsAwsjson11_deserializeDocumentBGPPeerList(v *[]types.BGPPeer, value inter
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCommunityList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected CommunityEntry to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}
@@ -9862,6 +10131,99 @@ func awsAwsjson11_deserializeDocumentResourceTagList(v *[]types.ResourceTag, val
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRoute(v **types.Route, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Route
+	if *v == nil {
+		sv = &types.Route{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "addressFamily":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AddressFamily to be of type string, got %T instead", value)
+				}
+				sv.AddressFamily = types.AddressFamily(jtv)
+			}
+
+		case "asPath":
+			if err := awsAwsjson11_deserializeDocumentAsPathSegmentList(&sv.AsPath, value); err != nil {
+				return err
+			}
+
+		case "awsLogicalDeviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
+				}
+				sv.AwsLogicalDeviceId = ptr.String(jtv)
+			}
+
+		case "cidr":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteCidr to be of type string, got %T instead", value)
+				}
+				sv.Cidr = ptr.String(jtv)
+			}
+
+		case "communities":
+			if err := awsAwsjson11_deserializeDocumentCommunityList(&sv.Communities, value); err != nil {
+				return err
+			}
+
+		case "routeDirection":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteDirection to be of type string, got %T instead", value)
+				}
+				sv.RouteDirection = types.RouteDirection(jtv)
+			}
+
+		case "routeInstalledAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RouteInstalledAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected RouteInstalledAt to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentRouteFilterPrefix(v **types.RouteFilterPrefix, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9926,6 +10288,40 @@ func awsAwsjson11_deserializeDocumentRouteFilterPrefixList(v *[]types.RouteFilte
 		var col types.RouteFilterPrefix
 		destAddr := &col
 		if err := awsAwsjson11_deserializeDocumentRouteFilterPrefix(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRouteList(v *[]types.Route, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Route
+	if *v == nil {
+		cv = []types.Route{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Route
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentRoute(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -16069,6 +16465,60 @@ func awsAwsjson11_deserializeOpDocumentDisassociateMacSecKeyOutput(v **Disassoci
 		case "macSecKeys":
 			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentListVirtualInterfaceRoutesOutput(v **ListVirtualInterfaceRoutesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListVirtualInterfaceRoutesOutput
+	if *v == nil {
+		sv = &ListVirtualInterfaceRoutesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "routes":
+			if err := awsAwsjson11_deserializeDocumentRouteList(&sv.Routes, value); err != nil {
+				return err
+			}
+
+		case "virtualInterfaceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VirtualInterfaceId to be of type string, got %T instead", value)
+				}
+				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
 
 		default:

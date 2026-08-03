@@ -3235,6 +3235,67 @@ func (m *awsAwsjson11_serializeOpDisassociateMacSecKey) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListVirtualInterfaceRoutes struct {
+}
+
+func (*awsAwsjson11_serializeOpListVirtualInterfaceRoutes) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListVirtualInterfaceRoutes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListVirtualInterfaceRoutesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.ListVirtualInterfaceRoutes")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListVirtualInterfaceRoutesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListVirtualInterfaceTestHistory struct {
 }
 
@@ -3844,7 +3905,29 @@ func (m *awsAwsjson11_serializeOpUpdateVirtualInterfaceAttributes) HandleSeriali
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentAsPathList(v []int64, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Long(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentBGPPeerIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCommunityList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -4316,6 +4399,17 @@ func awsAwsjson11_serializeDocumentResourceArnList(v []string, value smithyjson.
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRouteFilterCidrStringList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRouteFilterPrefix(v *types.RouteFilterPrefix, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4338,6 +4432,44 @@ func awsAwsjson11_serializeDocumentRouteFilterPrefixList(v []types.RouteFilterPr
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRouteFilters(v *types.RouteFilters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AddressFamily) > 0 {
+		ok := object.Key("addressFamily")
+		ok.String(string(v.AddressFamily))
+	}
+
+	if v.AsPath != nil {
+		ok := object.Key("asPath")
+		if err := awsAwsjson11_serializeDocumentAsPathList(v.AsPath, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Cidrs != nil {
+		ok := object.Key("cidrs")
+		if err := awsAwsjson11_serializeDocumentRouteFilterCidrStringList(v.Cidrs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Communities != nil {
+		ok := object.Key("communities")
+		if err := awsAwsjson11_serializeDocumentCommunityList(v.Communities, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.RouteDirection) > 0 {
+		ok := object.Key("routeDirection")
+		ok.String(string(v.RouteDirection))
+	}
+
 	return nil
 }
 
@@ -5513,6 +5645,35 @@ func awsAwsjson11_serializeOpDocumentDisassociateMacSecKeyInput(v *DisassociateM
 	if v.SecretARN != nil {
 		ok := object.Key("secretARN")
 		ok.String(*v.SecretARN)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListVirtualInterfaceRoutesInput(v *ListVirtualInterfaceRoutesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("filters")
+		if err := awsAwsjson11_serializeDocumentRouteFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.VirtualInterfaceId != nil {
+		ok := object.Key("virtualInterfaceId")
+		ok.String(*v.VirtualInterfaceId)
 	}
 
 	return nil

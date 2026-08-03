@@ -350,11 +350,12 @@ type LabelNameCondition struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration parameters for Amazon Bedrock AgentCore logging, including logType
-// settings.
+// The configuration parameters for log delivery, including logType settings.
+// Applies to resource types that support configurable log delivery, such as Amazon
+// Bedrock Knowledge Bases and Elastic Load Balancing Application Load Balancers.
 type LogDeliveryParameters struct {
 
-	// The type of log that the source is sending.
+	// The types of logs to collect from the resource.
 	LogTypes []LogType
 
 	noSmithyDocumentSerde
@@ -426,9 +427,11 @@ type LogsBackupConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration for encrypting centralized log groups. This configuration is only
-// applied to destination log groups for which the corresponding source log groups
-// are encrypted using Customer Managed KMS Keys.
+// Configuration for encrypting centralized destination log groups. By default,
+// this configuration applies only to destination log groups whose corresponding
+// source log groups are encrypted using customer managed KMS keys. To encrypt all
+// destination log groups created by the rule, set EncryptionScope to
+// NEW_DESTINATION_LOG_GROUPS .
 type LogsEncryptionConfiguration struct {
 
 	// Configuration that determines the encryption strategy of the destination log
@@ -443,6 +446,22 @@ type LogsEncryptionConfiguration struct {
 	// AWS_OWNED KMS Key. ALLOW lets centralization go through while SKIP prevents
 	// centralization into the destination log group.
 	EncryptionConflictResolutionStrategy EncryptionConflictResolutionStrategy
+
+	// Determines which newly created destination log groups are encrypted with the
+	// configured KmsKeyArn when EncryptionStrategy is CUSTOMER_MANAGED .
+	//
+	// If you set this to ENCRYPTED_SOURCE_ONLY (the default), only destination log
+	// groups whose source log group is encrypted with a customer managed KMS key use
+	// the configured KmsKeyArn . Destination log groups derived from Amazon Web
+	// Services owned encrypted source log groups remain Amazon Web Services owned
+	// encrypted.
+	//
+	// If you set this to NEW_DESTINATION_LOG_GROUPS , every new destination log group
+	// created by this rule uses the configured KmsKeyArn , regardless of the source
+	// log group's encryption posture.
+	//
+	// This field is not valid when EncryptionStrategy is AWS_OWNED .
+	EncryptionScope EncryptionScope
 
 	// KMS Key ARN belonging to the primary destination account and region, to encrypt
 	// newly created central log groups in the primary destination.
@@ -655,8 +674,13 @@ type TelemetryDestinationConfiguration struct {
 	// resource type.
 	ELBLoadBalancerLoggingParameters *ELBLoadBalancerLoggingParameters
 
-	// Configuration parameters specific to Amazon Bedrock AgentCore logging when
-	// Amazon Bedrock AgentCore is the resource type.
+	//  The Amazon Resource Name (ARN) of the customer-managed Amazon Web Services KMS
+	// key used to encrypt the log groups created during telemetry rule remediation.
+	KmsKeyArn *string
+
+	// The configuration parameters for log delivery when the resource type supports
+	// configurable log types, such as Amazon Bedrock Knowledge Bases or Elastic Load
+	// Balancing Application Load Balancers.
 	LogDeliveryParameters *LogDeliveryParameters
 
 	//  Configuration parameters specific to MSK monitoring when MSK is the resource
@@ -819,8 +843,9 @@ type TelemetryRule struct {
 	// AllRegions .
 	Regions []string
 
-	//  The type of Amazon Web Services resource to configure telemetry for (e.g.,
-	// "AWS::EC2::VPC", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL").
+	//  The type of Amazon Web Services resource to configure telemetry for (for
+	// example, AWS::EC2::VPC , AWS::EKS::Cluster ,
+	// AWS::ElasticLoadBalancingV2::LoadBalancer , or AWS::Bedrock::KnowledgeBase ).
 	ResourceType ResourceType
 
 	//  The organizational scope to which the rule applies, specified using accounts

@@ -8337,6 +8337,15 @@ func awsRestjson1_deserializeDocumentLogsEncryptionConfiguration(v **types.LogsE
 				sv.EncryptionConflictResolutionStrategy = types.EncryptionConflictResolutionStrategy(jtv)
 			}
 
+		case "EncryptionScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionScope to be of type string, got %T instead", value)
+				}
+				sv.EncryptionScope = types.EncryptionScope(jtv)
+			}
+
 		case "EncryptionStrategy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9522,6 +9531,15 @@ func awsRestjson1_deserializeDocumentTelemetryDestinationConfiguration(v **types
 		case "ELBLoadBalancerLoggingParameters":
 			if err := awsRestjson1_deserializeDocumentELBLoadBalancerLoggingParameters(&sv.ELBLoadBalancerLoggingParameters, value); err != nil {
 				return err
+			}
+
+		case "KmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
 			}
 
 		case "LogDeliveryParameters":

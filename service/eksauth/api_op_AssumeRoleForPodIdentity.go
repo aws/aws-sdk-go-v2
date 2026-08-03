@@ -43,6 +43,15 @@ type AssumeRoleForPodIdentityInput struct {
 	// This member is required.
 	Token *string
 
+	// The Kubernetes node name of the worker node where the pod is running.
+	EksNodeName *string
+
+	// The Amazon EC2 instance ID of the worker node where the pod is running.
+	InstanceId *string
+
+	// The Availability Zone ID of the worker node where the pod is running.
+	Zone *string
+
 	noSmithyDocumentSerde
 }
 

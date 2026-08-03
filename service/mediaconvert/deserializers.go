@@ -11870,6 +11870,15 @@ func awsRestjson1_deserializeDocumentCodecMetadata(v **types.CodecMetadata, valu
 				return err
 			}
 
+		case "fieldOrder":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.FieldOrder = ptr.String(jtv)
+			}
+
 		case "height":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12255,6 +12264,19 @@ func awsRestjson1_deserializeDocumentContainer(v **types.Container, value interf
 
 	for key, value := range shape {
 		switch key {
+		case "bitRate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BitRate = ptr.Int64(i64)
+			}
+
 		case "duration":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -20312,7 +20334,7 @@ func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWat
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPatternHttpsKantarmedia to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringPatternHttpsKantarmedia55Prod to be of type string, got %T instead", value)
 				}
 				sv.KantarServerUrl = ptr.String(jtv)
 			}
@@ -21817,6 +21839,15 @@ func awsRestjson1_deserializeDocumentMovSettings(v **types.MovSettings, value in
 
 	for key, value := range shape {
 		switch key {
+		case "audioDuration":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmfcAudioDuration to be of type string, got %T instead", value)
+				}
+				sv.AudioDuration = types.CmfcAudioDuration(jtv)
+			}
+
 		case "clapAtom":
 			if value != nil {
 				jtv, ok := value.(string)

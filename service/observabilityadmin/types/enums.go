@@ -106,6 +106,30 @@ func (EncryptionConflictResolutionStrategy) Values() []EncryptionConflictResolut
 	}
 }
 
+type EncryptionScope string
+
+// Enum values for EncryptionScope
+const (
+	// Only destination log groups whose source log group is encrypted with a customer
+	// managed KMS key use the configured KmsKeyArn . This is the default behavior.
+	EncryptionScopeEncryptedSourceOnly EncryptionScope = "ENCRYPTED_SOURCE_ONLY"
+	// Every new destination log group created by this rule uses the configured
+	// KmsKeyArn , regardless of whether the source log group is encrypted with a
+	// customer managed key or Amazon Web Services owned encryption.
+	EncryptionScopeNewDestinationLogGroups EncryptionScope = "NEW_DESTINATION_LOG_GROUPS"
+)
+
+// Values returns all known values for EncryptionScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionScope) Values() []EncryptionScope {
+	return []EncryptionScope{
+		"ENCRYPTED_SOURCE_ONLY",
+		"NEW_DESTINATION_LOG_GROUPS",
+	}
+}
+
 type EncryptionStrategy string
 
 // Enum values for EncryptionStrategy

@@ -1,0 +1,8 @@
+{
+    "id": "11a423ac-6abf-4739-831c-2e2a74d42fbb",
+    "type": "feature",
+    "description": "Added eksNodeName, instanceId, and zone optional parameters to the AssumeRoleForPodIdentity API.",
+    "modules": [
+        "service/eksauth"
+    ]
+}

@@ -468,6 +468,40 @@ func TestCheckRequestSnapshot_CreateFirewall(t *testing.T) {
 			},
 		},
 		AvailabilityZoneChangeProtection: true,
+		NatGatewayMappings: []types.NatGatewayMapping{
+			{
+				NatGatewayId: ptr.String("__NatGatewayId__"),
+			},
+			{
+				NatGatewayId: ptr.String("__NatGatewayId__"),
+			},
+		},
+		ProxySettings: &types.ProxySettings{
+			ListenerProperties: []types.ListenerProperty{
+				{
+					Port: ptr.Int32(1),
+					Type: types.ListenerPropertyType("HTTP"),
+				},
+				{
+					Port: ptr.Int32(1),
+					Type: types.ListenerPropertyType("HTTP"),
+				},
+			},
+		},
+		NoSourcePreservation: true,
+		VpcEndpoint: &types.VpcEndpoint{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetMappings: []types.SubnetMapping{
+				{
+					SubnetId:      ptr.String("__SubnetId__"),
+					IPAddressType: types.IPAddressType("DUALSTACK"),
+				},
+				{
+					SubnetId:      ptr.String("__SubnetId__"),
+					IPAddressType: types.IPAddressType("DUALSTACK"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3982,6 +4016,47 @@ func TestCheckRequestSnapshot_UpdateProxyRulePriorities(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateProxySettings(t *testing.T) {
+	input := &UpdateProxySettingsInput{
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName: ptr.String("__FirewallName__"),
+		UpdateToken:  ptr.String("__UpdateToken__"),
+		ProxySettings: &types.ProxySettings{
+			ListenerProperties: []types.ListenerProperty{
+				{
+					Port: ptr.Int32(1),
+					Type: types.ListenerPropertyType("HTTP"),
+				},
+				{
+					Port: ptr.Int32(1),
+					Type: types.ListenerPropertyType("HTTP"),
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateProxySettings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProxySettings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 	input := &UpdateRuleGroupInput{
 		UpdateToken:   ptr.String("__UpdateToken__"),
@@ -4867,6 +4942,40 @@ func TestUpdateRequestSnapshot_CreateFirewall(t *testing.T) {
 			},
 		},
 		AvailabilityZoneChangeProtection: true,
+		NatGatewayMappings: []types.NatGatewayMapping{
+			{
+				NatGatewayId: ptr.String("__NatGatewayId__"),
+			},
+			{
+				NatGatewayId: ptr.String("__NatGatewayId__"),
+			},
+		},
+		ProxySettings: &types.ProxySettings{
+			ListenerProperties: []types.ListenerProperty{
+				{
+					Port: ptr.Int32(1),
+					Type: types.ListenerPropertyType("HTTP"),
+				},
+				{
+					Port: ptr.Int32(1),
+					Type: types.ListenerPropertyType("HTTP"),
+				},
+			},
+		},
+		NoSourcePreservation: true,
+		VpcEndpoint: &types.VpcEndpoint{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetMappings: []types.SubnetMapping{
+				{
+					SubnetId:      ptr.String("__SubnetId__"),
+					IPAddressType: types.IPAddressType("DUALSTACK"),
+				},
+				{
+					SubnetId:      ptr.String("__SubnetId__"),
+					IPAddressType: types.IPAddressType("DUALSTACK"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8377,6 +8486,47 @@ func TestUpdateRequestSnapshot_UpdateProxyRulePriorities(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProxyRulePriorities"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateProxySettings(t *testing.T) {
+	input := &UpdateProxySettingsInput{
+		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallName: ptr.String("__FirewallName__"),
+		UpdateToken:  ptr.String("__UpdateToken__"),
+		ProxySettings: &types.ProxySettings{
+			ListenerProperties: []types.ListenerProperty{
+				{
+					Port: ptr.Int32(1),
+					Type: types.ListenerPropertyType("HTTP"),
+				},
+				{
+					Port: ptr.Int32(1),
+					Type: types.ListenerPropertyType("HTTP"),
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateProxySettings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProxySettings"); err != nil {
 		t.Fatal(err)
 	}
 }
