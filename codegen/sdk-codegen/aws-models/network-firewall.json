@@ -722,6 +722,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If Network Firewall fails to create or delete the firewall endpoint in the subnet, it populates this with the reason for the error or failure and how to resolve it. \n         A <code>FAILED</code> status indicates a non-recoverable state, and a <code>ERROR</code> status indicates an issue that you can fix. \n         Depending on the error, it can take as many as 15 minutes to populate this field. For more information about the causes for failiure or errors and solutions available for this field, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html\">Troubleshooting firewall endpoint failures</a> in the <i>Network Firewall Developer Guide</i>.</p>"
                     }
+                },
+                "DnsName": {
+                    "target": "com.amazonaws.networkfirewall#DnsName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS name that resolves to the firewall endpoint in the subnet. This is populated for proxy mode firewalls, where clients direct traffic to the firewall's proxy using this name. </p>"
+                    }
                 }
             },
             "traits": {
@@ -1458,6 +1464,31 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Optional. A setting indicating whether the firewall is protected against changes to its Availability Zone configuration. When set to <code>TRUE</code>, you cannot add or remove Availability Zones without first disabling this protection using <a>UpdateAvailabilityZoneChangeProtection</a>.</p>\n         <p>Default value: <code>FALSE</code>\n         </p>"
+                    }
+                },
+                "NatGatewayMappings": {
+                    "target": "com.amazonaws.networkfirewall#NatGatewayMappingsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The NAT gateways that the firewall uses to proxy traffic when <code>NoSourcePreservation</code> is <code>TRUE</code>. Network Firewall attaches the firewall to each NAT gateway that you specify, so that egress traffic is proxied through the NAT gateway. </p>"
+                    }
+                },
+                "ProxySettings": {
+                    "target": "com.amazonaws.networkfirewall#ProxySettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The listener configuration for a proxy mode firewall, used when <code>NoSourcePreservation</code> is <code>TRUE</code>. This specifies the ports and protocols on which the firewall's proxy listens for traffic. </p>"
+                    }
+                },
+                "NoSourcePreservation": {
+                    "target": "com.amazonaws.networkfirewall#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Optional. Indicates whether the firewall operates in proxy mode, in which the source IP address of the traffic is not preserved. When set to <code>TRUE</code>, the firewall proxies traffic through a NAT gateway and the traffic reaching the destination uses the NAT gateway's IP address as the source. </p>\n         <p>When you set this to <code>TRUE</code>, you must specify <code>NatGatewayMappings</code> and <code>VpcEndpoint</code> instead of a top-level <code>VpcId</code> and <code>SubnetMappings</code>. </p>\n         <p>You can't change this setting after you create the firewall. </p>\n         <p>Default value: <code>FALSE</code>\n         </p>"
+                    }
+                },
+                "VpcEndpoint": {
+                    "target": "com.amazonaws.networkfirewall#VpcEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC and subnets for the firewall endpoint, used when <code>NoSourcePreservation</code> is <code>TRUE</code>. Network Firewall creates the firewall endpoint in the subnets that you specify here. </p>\n         <p>For proxy mode firewalls, provide the firewall's VPC and endpoint subnets through this parameter instead of the top-level <code>VpcId</code> and <code>SubnetMappings</code>. </p>"
                     }
                 }
             },
@@ -4809,6 +4840,9 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.networkfirewall#DnsName": {
+            "type": "string"
+        },
         "com.amazonaws.networkfirewall#Domain": {
             "type": "string"
         },
@@ -5011,6 +5045,31 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A setting indicating whether the firewall is protected against changes to its Availability Zone configuration. When set to <code>TRUE</code>, you must first disable this protection before adding or removing Availability Zones.</p>"
+                    }
+                },
+                "NatGatewayMappings": {
+                    "target": "com.amazonaws.networkfirewall#NatGatewayMappingsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The NAT gateways that the firewall uses to proxy traffic. This is set for proxy mode firewalls, where <code>NoSourcePreservation</code> is <code>TRUE</code>. </p>"
+                    }
+                },
+                "ProxySettings": {
+                    "target": "com.amazonaws.networkfirewall#ProxySettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The listener configuration for the firewall's proxy. This is set for proxy mode firewalls, where <code>NoSourcePreservation</code> is <code>TRUE</code>. </p>"
+                    }
+                },
+                "NoSourcePreservation": {
+                    "target": "com.amazonaws.networkfirewall#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the firewall operates in proxy mode, in which the source IP address of the traffic is not preserved. When this value is <code>TRUE</code>, the firewall proxies traffic through a NAT gateway and uses the NAT gateway's IP address as the source for traffic reaching the destination. </p>"
+                    }
+                },
+                "VpcEndpoint": {
+                    "target": "com.amazonaws.networkfirewall#VpcEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC and subnets for the firewall endpoint. This is set for proxy mode firewalls, where <code>NoSourcePreservation</code> is <code>TRUE</code>. </p>"
                     }
                 }
             },
@@ -7327,12 +7386,108 @@
                 "smithy.api#documentation": "<p>Criteria for Network Firewall to use to inspect an individual packet in stateless rule inspection. Each match attributes set can include one or more items such as IP address, CIDR range, port number, protocol, and TCP flags. </p>"
             }
         },
+        "com.amazonaws.networkfirewall#NatGatewayAttachment": {
+            "type": "structure",
+            "members": {
+                "NatGatewayId": {
+                    "target": "com.amazonaws.networkfirewall#NatGatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the NAT gateway to use with proxy resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.networkfirewall#NatGatewayAttachmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the NAT gateway attachment. </p>\n         <p>When this value is <code>READY</code>, the attachment is available to proxy traffic. Otherwise, this value reflects its state, for example <code>CREATING</code> or <code>DELETING</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.networkfirewall#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If Network Firewall encounters an issue with the NAT gateway attachment, it populates this with an explanation of the problem. </p>"
+                    }
+                },
+                "DnsName": {
+                    "target": "com.amazonaws.networkfirewall#DnsName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS name that resolves to the firewall's proxy for traffic sent through this NAT gateway attachment. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition and status of the attachment between a proxy mode firewall and a NAT gateway that proxies its traffic. </p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#NatGatewayAttachmentStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READY"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#NatGatewayAttachmentsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkfirewall#NatGatewayAttachment"
+            }
+        },
         "com.amazonaws.networkfirewall#NatGatewayId": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.networkfirewall#NatGatewayMapping": {
+            "type": "structure",
+            "members": {
+                "NatGatewayId": {
+                    "target": "com.amazonaws.networkfirewall#NatGatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the NAT gateway to use with proxy resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A NAT gateway that a proxy mode firewall uses to proxy traffic. This is used in <a>CreateFirewall</a> when <code>NoSourcePreservation</code> is <code>TRUE</code>. </p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#NatGatewayMappingsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkfirewall#NatGatewayMapping"
             }
         },
         "com.amazonaws.networkfirewall#NatGatewayPort": {
@@ -7584,6 +7739,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#UpdateProxyRulePriorities"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#UpdateProxySettings"
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#UpdateRuleGroup"
@@ -9566,6 +9724,21 @@
                 "smithy.api#documentation": "<p>Evaluation points in the traffic flow where rules are applied. There are three phases in a traffic where the rule match is applied. </p>"
             }
         },
+        "com.amazonaws.networkfirewall#ProxySettings": {
+            "type": "structure",
+            "members": {
+                "ListenerProperties": {
+                    "target": "com.amazonaws.networkfirewall#ListenerProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Listener properties for HTTP and HTTPS traffic. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The listener configuration for a proxy mode firewall. This specifies the ports and protocols on which the firewall's proxy listens for traffic. </p>"
+            }
+        },
         "com.amazonaws.networkfirewall#ProxyState": {
             "type": "enum",
             "members": {
@@ -11320,6 +11493,12 @@
                     "target": "com.amazonaws.networkfirewall#SyncStateConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration status of the firewall endpoint in a single VPC subnet. Network Firewall\n         provides each endpoint with the rules that are configured in the firewall policy. Each time\n         you add a subnet or modify the associated firewall policy, Network Firewall synchronizes the\n          rules in the endpoint, so it can properly filter network traffic. </p>"
+                    }
+                },
+                "NatGatewayAttachments": {
+                    "target": "com.amazonaws.networkfirewall#NatGatewayAttachmentsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the NAT gateway attachments for a proxy mode firewall in the Availability Zone. This reflects the attachment of the firewall to each NAT gateway that proxies its traffic. </p>"
                     }
                 }
             },
@@ -13370,6 +13549,105 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.networkfirewall#UpdateProxySettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkfirewall#UpdateProxySettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkfirewall#UpdateProxySettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidTokenException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ResourceOwnerCheckException"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the proxy listener configuration of a proxy mode firewall. Proxy mode firewalls are created with <code>NoSourcePreservation</code> set to <code>TRUE</code>. Use this operation to change the ports and protocols on which the firewall's proxy listens for traffic. </p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#UpdateProxySettingsRequest": {
+            "type": "structure",
+            "members": {
+                "FirewallArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the firewall.</p>\n         <p>You must specify the ARN or the name, and you can specify both. </p>"
+                    }
+                },
+                "FirewallName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p>\n         <p>You must specify the ARN or the name, and you can specify both. </p>"
+                    }
+                },
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>\n         <p>To make an unconditional change to the firewall, omit the token in your update request. Without the token, Network Firewall performs your updates regardless of whether the firewall has changed since you last retrieved it.</p>\n         <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>"
+                    }
+                },
+                "ProxySettings": {
+                    "target": "com.amazonaws.networkfirewall#ProxySettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proxy listener configuration to set on the firewall. This specifies the ports and protocols on which the firewall's proxy listens for traffic. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.networkfirewall#UpdateProxySettingsResponse": {
+            "type": "structure",
+            "members": {
+                "FirewallArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the firewall.</p>"
+                    }
+                },
+                "FirewallName": {
+                    "target": "com.amazonaws.networkfirewall#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p>"
+                    }
+                },
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>\n         <p>To make an unconditional change to the firewall, omit the token in your update request. Without the token, Network Firewall performs your updates regardless of whether the firewall has changed since you last retrieved it.</p>\n         <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>"
+                    }
+                },
+                "ProxySettings": {
+                    "target": "com.amazonaws.networkfirewall#ProxySettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated proxy listener configuration on the firewall. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.networkfirewall#UpdateRuleGroup": {
             "type": "operation",
             "input": {
@@ -13730,6 +14008,28 @@
         },
         "com.amazonaws.networkfirewall#VendorName": {
             "type": "string"
+        },
+        "com.amazonaws.networkfirewall#VpcEndpoint": {
+            "type": "structure",
+            "members": {
+                "VpcId": {
+                    "target": "com.amazonaws.networkfirewall#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the VPC where Network Firewall creates the proxy mode firewall endpoint. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SubnetMappings": {
+                    "target": "com.amazonaws.networkfirewall#SubnetMappings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subnets in which Network Firewall creates the firewall endpoint for a proxy mode firewall. Each subnet must belong to a different Availability Zone in the VPC. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The VPC and subnets for a proxy mode firewall endpoint. This is used in <a>CreateFirewall</a> when <code>NoSourcePreservation</code> is <code>TRUE</code>, to specify where Network Firewall creates the firewall endpoint. </p>\n         <p>This differs from <a>VpcEndpointAssociation</a>, which defines additional secondary endpoints for a firewall in other VPCs. </p>"
+            }
         },
         "com.amazonaws.networkfirewall#VpcEndpointAssociation": {
             "type": "structure",
