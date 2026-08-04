@@ -1990,6 +1990,23 @@
                 }
             }
         },
+        "com.amazonaws.ec2#AggregationStatusEnum": {
+            "type": "enum",
+            "members": {
+                "INCLUDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "included"
+                    }
+                },
+                "EXCLUDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "excluded"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#AllocateAddress": {
             "type": "operation",
             "input": {
@@ -2720,6 +2737,9 @@
                     "target": "com.amazonaws.ec2#AssociateAddress"
                 },
                 {
+                    "target": "com.amazonaws.ec2#AssociateApplicationStatusCheck"
+                },
+                {
                     "target": "com.amazonaws.ec2#AssociateCapacityReservationBillingOwner"
                 },
                 {
@@ -2853,6 +2873,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#CopyVolumes"
+                },
+                {
+                    "target": "com.amazonaws.ec2#CreateApplicationStatusCheck"
                 },
                 {
                     "target": "com.amazonaws.ec2#CreateCapacityManagerDataExport"
@@ -3171,6 +3194,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#CreateVpnGateway"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DeleteApplicationStatusCheck"
                 },
                 {
                     "target": "com.amazonaws.ec2#DeleteCapacityManagerDataExport"
@@ -3495,6 +3521,15 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#DescribeAggregateIdFormat"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DescribeApplicationStatus"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DescribeApplicationStatusCheckAssociations"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DescribeApplicationStatusChecks"
                 },
                 {
                     "target": "com.amazonaws.ec2#DescribeAvailabilityZones"
@@ -4070,6 +4105,9 @@
                     "target": "com.amazonaws.ec2#DisableAllowedImagesSettings"
                 },
                 {
+                    "target": "com.amazonaws.ec2#DisableApplicationStatusCheckSuppression"
+                },
+                {
                     "target": "com.amazonaws.ec2#DisableAwsNetworkPerformanceMetricSubscription"
                 },
                 {
@@ -4130,6 +4168,9 @@
                     "target": "com.amazonaws.ec2#DisassociateAddress"
                 },
                 {
+                    "target": "com.amazonaws.ec2#DisassociateApplicationStatusCheck"
+                },
+                {
                     "target": "com.amazonaws.ec2#DisassociateCapacityReservationBillingOwner"
                 },
                 {
@@ -4185,6 +4226,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#EnableAllowedImagesSettings"
+                },
+                {
+                    "target": "com.amazonaws.ec2#EnableApplicationStatusCheckSuppression"
                 },
                 {
                     "target": "com.amazonaws.ec2#EnableAwsNetworkPerformanceMetricSubscription"
@@ -4509,6 +4553,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyAddressAttribute"
+                },
+                {
+                    "target": "com.amazonaws.ec2#ModifyApplicationStatusCheck"
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyAvailabilityZoneGroup"
@@ -6727,6 +6774,521 @@
                 }
             }
         },
+        "com.amazonaws.ec2#ApplicationStatus": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusEnum",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Status",
+                        "smithy.api#documentation": "<p>The current instance-level application status. This status is derived from application status checks with <code>Aggregation</code> set to <code>included</code>. Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ok</code> – All included checks passed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>impaired</code> – At least one included check failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>initializing</code> – At least one included check is initializing, and no included check is impaired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>insufficient-data</code> – At least one included check has insufficient data, and no included check is impaired or initializing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>not-applicable</code> – No checks with <code>Aggregation</code> set to <code>included</code> apply to the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>suppressed</code> – Application status reporting is suppressed for the instance.</p>\n            </li>\n         </ul>\n         <p>Checks with <code>Aggregation</code> set to <code>excluded</code> do not affect this value.</p>",
+                        "smithy.api#xmlName": "status"
+                    }
+                },
+                "StatusTimeStamp": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StatusTimeStamp",
+                        "smithy.api#documentation": "<p>The date and time of the last status update.</p>",
+                        "smithy.api#xmlName": "statusTimeStamp"
+                    }
+                },
+                "StatusSince": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StatusSince",
+                        "smithy.api#documentation": "<p>The date and time when the current status started.</p>",
+                        "smithy.api#xmlName": "statusSince"
+                    }
+                },
+                "ResumeAt": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ResumeAt",
+                        "smithy.api#documentation": "<p>The date and time when application status reporting resumes after suppression.</p>",
+                        "smithy.api#xmlName": "resumeAt"
+                    }
+                },
+                "Details": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusDetailSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "DetailSet",
+                        "smithy.api#documentation": "<p>Details about the application status checks for the instance.</p>",
+                        "smithy.api#xmlName": "detailSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the application-level health status for an instance.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ApplicationStatusCheckAssociationObject": {
+            "type": "structure",
+            "members": {
+                "ApplicationStatusCheckId": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusCheckId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ApplicationStatusCheckId",
+                        "smithy.api#documentation": "<p>The ID of the application status check.</p>",
+                        "smithy.api#xmlName": "applicationStatusCheckId"
+                    }
+                },
+                "AssociationType": {
+                    "target": "com.amazonaws.ec2#AssociationTypeEnum",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AssociationType",
+                        "smithy.api#documentation": "<p>The type of target that the application status check is associated with. Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>tag</code> – The check applies to current and future instances with a matching tag key-value pair.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-id</code> – The check applies to a specific instance.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "associationType"
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Key",
+                        "smithy.api#documentation": "<p>The key for the association. This value is present only for tag-based associations, where it contains the tag key. For instance-based associations, this value is absent.</p>",
+                        "smithy.api#xmlName": "key"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Value",
+                        "smithy.api#documentation": "<p>The value for the association target. For tag-based associations, this is the tag value. For instance-based associations, this is the instance ID (for example, <code>i-0123456789abcdef0</code>).</p>",
+                        "smithy.api#xmlName": "value"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an application status check association. Each item in the <code>associationSet</code> of a <code>DescribeApplicationStatusCheckAssociations</code> response is of this type.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ApplicationStatusCheckAssociationSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ApplicationStatusCheckAssociationObject",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ApplicationStatusCheckEnum": {
+            "type": "enum",
+            "members": {
+                "PASSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "passed"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                },
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "initializing"
+                    }
+                },
+                "INSUFFICIENT_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "insufficient-data"
+                    }
+                },
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "not-applicable"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#ApplicationStatusCheckId": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#ApplicationStatusCheckIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ApplicationStatusCheckId",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ApplicationStatusCheckResponseObject": {
+            "type": "structure",
+            "members": {
+                "ApplicationStatusCheckId": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusCheckId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ApplicationStatusCheckId",
+                        "smithy.api#documentation": "<p>The ID of the application status check.</p>",
+                        "smithy.api#xmlName": "applicationStatusCheckId"
+                    }
+                },
+                "Aggregation": {
+                    "target": "com.amazonaws.ec2#AggregationStatusEnum",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Aggregation",
+                        "smithy.api#documentation": "<p>The aggregation setting for the application status check. When set to <code>included</code>, the result of this check contributes to the instance-level application status. When set to <code>excluded</code>, the check runs independently and does not affect the instance-level status.</p>",
+                        "smithy.api#xmlName": "aggregation"
+                    }
+                },
+                "HealthCheckPaths": {
+                    "target": "com.amazonaws.ec2#HealthCheckPathResponseList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "HealthCheckPathSet",
+                        "smithy.api#documentation": "<p>The health check paths for the application status check.</p>",
+                        "smithy.api#xmlName": "healthCheckPathSet"
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.ec2#NetworkProtocolEnum",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Protocol",
+                        "smithy.api#documentation": "<p>The protocol used for the health check.</p>",
+                        "smithy.api#xmlName": "protocol"
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Port",
+                        "smithy.api#documentation": "<p>The port used for the health check.</p>",
+                        "smithy.api#xmlName": "port"
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Path",
+                        "smithy.api#documentation": "<p>The URL path used for the health check HTTP request.</p>",
+                        "smithy.api#xmlName": "path"
+                    }
+                },
+                "DeviceIndex": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "DeviceIndex",
+                        "smithy.api#documentation": "<p>The index of the network device used for the health check. The value is greater than or equal to 0.</p>",
+                        "smithy.api#xmlName": "deviceIndex"
+                    }
+                },
+                "IpVersion": {
+                    "target": "com.amazonaws.ec2#IpVersionEnum",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpVersion",
+                        "smithy.api#documentation": "<p>The IP version used for the health check.</p>",
+                        "smithy.api#xmlName": "ipVersion"
+                    }
+                },
+                "IpScope": {
+                    "target": "com.amazonaws.ec2#IpScopeEnum",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IpScope",
+                        "smithy.api#documentation": "<p>The IP scope used for the health check.</p>",
+                        "smithy.api#xmlName": "ipScope"
+                    }
+                },
+                "Interval": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Interval",
+                        "smithy.api#documentation": "<p>The interval, in seconds, between health checks. Valid value: 60.</p>",
+                        "smithy.api#xmlName": "interval"
+                    }
+                },
+                "Timeout": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Timeout",
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, to wait for a health check response. Valid values: 1 to 30.</p>",
+                        "smithy.api#xmlName": "timeout"
+                    }
+                },
+                "FailureThreshold": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "FailureThreshold",
+                        "smithy.api#documentation": "<p>The number of consecutive failed health checks before the application status is considered impaired. The value must be greater than 0.</p>",
+                        "smithy.api#xmlName": "failureThreshold"
+                    }
+                },
+                "SuccessThreshold": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SuccessThreshold",
+                        "smithy.api#documentation": "<p>The number of consecutive successful health checks before the application status is considered healthy. The value must be greater than 0.</p>",
+                        "smithy.api#xmlName": "successThreshold"
+                    }
+                },
+                "StatusCodeMatcher": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StatusCodeMatcher",
+                        "smithy.api#documentation": "<p>The comma-separated list of individual HTTP status codes or ranges that indicate a successful health check response.</p>",
+                        "smithy.api#xmlName": "statusCodeMatcher"
+                    }
+                },
+                "InitializationGracePeriodSeconds": {
+                    "target": "com.amazonaws.ec2#InitializationGracePeriodSeconds",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InitializationGracePeriodSeconds",
+                        "smithy.api#documentation": "<p>The number of seconds to wait before starting health checks after an instance is launched. Valid values: 1 to 600.</p>",
+                        "smithy.api#xmlName": "initializationGracePeriodSeconds"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "LastUpdatedAt",
+                        "smithy.api#documentation": "<p>The date and time when the application status check was last updated.</p>",
+                        "smithy.api#xmlName": "lastUpdatedAt"
+                    }
+                },
+                "TargetTagAssociations": {
+                    "target": "com.amazonaws.ec2#CustomKeyValuePairResponseSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TargetTagAssociationSet",
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">tags</a> associated with the application status check. Instances with these tags are automatically monitored by this check.</p>",
+                        "smithy.api#xmlName": "targetTagAssociationSet"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ec2#TagList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TagSet",
+                        "smithy.api#documentation": "<p>The tags assigned to the application status check.</p>",
+                        "smithy.api#xmlName": "tagSet"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CreationTime",
+                        "smithy.api#documentation": "<p>The date and time when the application status check was created.</p>",
+                        "smithy.api#xmlName": "creationTime"
+                    }
+                },
+                "ModifyTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ModifyTime",
+                        "smithy.api#documentation": "<p>The date and time when the application status check was last modified.</p>",
+                        "smithy.api#xmlName": "modifyTime"
+                    }
+                },
+                "DeletionTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "DeletionTime",
+                        "smithy.api#documentation": "<p>The date and time when the application status check was deleted.</p>",
+                        "smithy.api#xmlName": "deletionTime"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an application status check.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ApplicationStatusCheckResponseSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ApplicationStatusCheckResponseObject",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ApplicationStatusDetail": {
+            "type": "structure",
+            "members": {
+                "ApplicationStatusCheckId": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusCheckId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ApplicationStatusCheckId",
+                        "smithy.api#documentation": "<p>The ID of the application status check.</p>",
+                        "smithy.api#xmlName": "applicationStatusCheckId"
+                    }
+                },
+                "CheckUpdateTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CheckUpdateTime",
+                        "smithy.api#documentation": "<p>The date and time when the check was last updated.</p>",
+                        "smithy.api#xmlName": "checkUpdateTime"
+                    }
+                },
+                "Aggregation": {
+                    "target": "com.amazonaws.ec2#AggregationStatusEnum",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Aggregation",
+                        "smithy.api#documentation": "<p>The aggregation setting for the application status check. When set to <code>included</code>, the result of this check contributes to the instance-level application status. When set to <code>excluded</code>, the check runs independently and does not affect the instance-level status.</p>",
+                        "smithy.api#xmlName": "aggregation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusCheckEnum",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Status",
+                        "smithy.api#documentation": "<p>The status of the individual application status check. Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>passed</code> – The check reached its success threshold.</p>\n            </li>\n            <li>\n               <p>\n                  <code>failed</code> – The check reached its failure threshold.</p>\n            </li>\n            <li>\n               <p>\n                  <code>initializing</code> – The check is initializing or has not reached a success or failure threshold.</p>\n            </li>\n            <li>\n               <p>\n                  <code>insufficient-data</code> – The check does not have enough data to determine a result.</p>\n            </li>\n            <li>\n               <p>\n                  <code>not-applicable</code> – The check does not apply to the instance.</p>\n            </li>\n         </ul>\n         <p>This value reflects the check result and is not affected by aggregation or suppression.</p>",
+                        "smithy.api#xmlName": "status"
+                    }
+                },
+                "StatusTimeStamp": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StatusTimeStamp",
+                        "smithy.api#documentation": "<p>The date and time of the last status update for this check.</p>",
+                        "smithy.api#xmlName": "statusTimeStamp"
+                    }
+                },
+                "StatusSince": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StatusSince",
+                        "smithy.api#documentation": "<p>The date and time when the current status started for this check.</p>",
+                        "smithy.api#xmlName": "statusSince"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusReason",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Reason",
+                        "smithy.api#documentation": "<p>The reason for the current status.</p>",
+                        "smithy.api#xmlName": "reason"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the details of an application status check for an instance.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ApplicationStatusDetailSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ApplicationStatusDetail",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ApplicationStatusEnum": {
+            "type": "enum",
+            "members": {
+                "OK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ok"
+                    }
+                },
+                "IMPAIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "impaired"
+                    }
+                },
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "initializing"
+                    }
+                },
+                "INSUFFICIENT_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "insufficient-data"
+                    }
+                },
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "not-applicable"
+                    }
+                },
+                "SUPPRESSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "suppressed"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#ApplicationStatusReason": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Code",
+                        "smithy.api#documentation": "<p>The reason code for the application status check result. Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ResponseCodeMatched</code> – The HTTP status code returned by the health check matched the configured <code>StatusCodeMatcher</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ResponseCodeMismatch</code> – The HTTP status code returned by the health check did not match the configured <code>StatusCodeMatcher</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ConnectionTimeout</code> – The connection to the target timed out.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ResponseTimeout</code> – The health check timed out while waiting for a response from the target.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ConnectionRefused</code> – The target refused the health check connection.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ConnectionReset</code> – The target reset the health check connection before returning a response.</p>\n            </li>\n         </ul>\n         <p>Current health check results use the values in the preceding list. Legacy results that do not contain structured reason metadata can instead contain a producer error type, such as <code>Http Status Code</code> or <code>HttpConnectTimeoutException</code>.</p>\n         <p>For <code>ResponseCodeMatched</code> and <code>ResponseCodeMismatch</code>, the <code>statusCode</code> field contains the returned HTTP status code. The <code>protocol</code> field contains the protocol used for the health check.</p>",
+                        "smithy.api#xmlName": "code"
+                    }
+                },
+                "StatusCode": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StatusCode",
+                        "smithy.api#documentation": "<p>The HTTP status code returned by the health check.</p>",
+                        "smithy.api#xmlName": "statusCode"
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Protocol",
+                        "smithy.api#documentation": "<p>The protocol used for the health check. Possible values: <code>HTTP</code> and <code>HTTPS</code>.</p>",
+                        "smithy.api#xmlName": "protocol"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the reason for an application status check result.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ApplicationStatusSummary": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.ec2#SummaryStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Status",
+                        "smithy.api#documentation": "<p>The current status.</p>",
+                        "smithy.api#xmlName": "status"
+                    }
+                },
+                "ImpairedSince": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ImpairedSince",
+                        "smithy.api#documentation": "<p>The date and time when the application status became impaired.</p>",
+                        "smithy.api#xmlName": "impairedSince"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of the application-level health status for an instance.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ApplicationStatusesResponseType": {
+            "type": "structure",
+            "members": {
+                "Instances": {
+                    "target": "com.amazonaws.ec2#InstanceApplicationStatusSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceSet",
+                        "smithy.api#documentation": "<p>The application status information for the instances.</p>",
+                        "smithy.api#xmlName": "instanceSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the application statuses for instances.</p>"
+            }
+        },
         "com.amazonaws.ec2#ApplyCancellationCharges": {
             "type": "enum",
             "members": {
@@ -7491,6 +8053,110 @@
                         "aws.protocols#ec2QueryName": "AssociationId",
                         "smithy.api#documentation": "<p>The ID that represents the association of the Elastic IP address with an instance.</p>",
                         "smithy.api#xmlName": "associationId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#AssociateApplicationStatusCheck": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#AssociateApplicationStatusCheckRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#AssociateApplicationStatusCheckResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Associates an application status check with instances or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">tags</a>. Once you create an association, health monitoring automatically begins for the specified instances or for instances that match the specified tags. The following rules apply:</p>\n         <ul>\n            <li>\n               <p>You must specify either <code>TargetTagAssociations</code> or <code>InstanceIds</code>, but not both. Specifying both results in an <code>InvalidParameterCombination</code> error.</p>\n            </li>\n            <li>\n               <p>The application status check must already exist and belong to your account.</p>\n            </li>\n            <li>\n               <p>Tag keys must not be blank.</p>\n            </li>\n            <li>\n               <p>Maximum 50 tag associations per application status check.</p>\n            </li>\n            <li>\n               <p>Use <code>DisassociateApplicationStatusCheck</code> to remove associations.</p>\n            </li>\n            <li>\n               <p>When you associate <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">tags</a>, the application status check automatically monitors all current and future instances that have the specified tags.</p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To associate an application status check with tags",
+                        "documentation": "This example associates an application status check with instances matching the specified tag.",
+                        "input": {
+                            "ApplicationStatusCheckId": "asc-0123456789abcdef0",
+                            "TargetTagAssociations": [
+                                {
+                                    "Key": "env",
+                                    "Value": "prod"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "SuccessfulResults": [
+                                {
+                                    "ApplicationStatusCheckId": "asc-0123456789abcdef0",
+                                    "AssociationType": "EC2TAG",
+                                    "AssociationValue": "env=prod"
+                                }
+                            ],
+                            "UnsuccessfulResults": []
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#AssociateApplicationStatusCheckRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationStatusCheckId": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusCheckId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the application status check to associate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetTagAssociations": {
+                    "target": "com.amazonaws.ec2#CustomKeyValuePairRequestSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">tags</a> to associate the application status check with. Each tag is a key-value pair. When you associate tags, the application status check automatically monitors all instances that have the specified tags.</p>",
+                        "smithy.api#xmlName": "TargetTagAssociation"
+                    }
+                },
+                "InstanceIds": {
+                    "target": "com.amazonaws.ec2#InstanceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the instances to associate with the application status check.</p>",
+                        "smithy.api#xmlName": "InstanceId"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the \n  request, and provides an error response. If you have the required permissions, the error response is \n  <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#AssociateApplicationStatusCheckResult": {
+            "type": "structure",
+            "members": {
+                "SuccessfulResults": {
+                    "target": "com.amazonaws.ec2#SuccessfulAssociationResponseSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SuccessfulResultSet",
+                        "smithy.api#documentation": "<p>The associations that were successfully created.</p>",
+                        "smithy.api#xmlName": "successfulResultSet"
+                    }
+                },
+                "UnsuccessfulResults": {
+                    "target": "com.amazonaws.ec2#UnsuccessfulAssociationResponseSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "UnsuccessfulResultSet",
+                        "smithy.api#documentation": "<p>The associations that failed to be created.</p>",
+                        "smithy.api#xmlName": "unsuccessfulResultSet"
                     }
                 }
             },
@@ -8960,6 +9626,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "disassociated"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#AssociationTypeEnum": {
+            "type": "enum",
+            "members": {
+                "TAG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tag"
+                    }
+                },
+                "INSTANCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "instance-id"
                     }
                 }
             }
@@ -11122,7 +11805,7 @@
                 "target": "com.amazonaws.ec2#BundleInstanceResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Bundles an Amazon instance store-backed Windows instance.</p>\n         <p>During bundling, only the root device volume (C:\\) is bundled. Data on other instance\n      store volumes is not preserved.</p>\n         <note>\n            <p>This action is no longer supported. To create an AMI, use\n        <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html\">CreateImage</a>.\n        For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html\">\n        Create an Amazon EBS-backed AMI</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Bundles an Amazon instance store-backed Windows instance.</p>\n         <p>During bundling, only the root device volume (C:\\) is bundled. Data on other instance\n      store volumes is not preserved.</p>\n         <note>\n            <p>BundleInstance is no longer supported. To create an AMI, use\n        <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html\">CreateImage</a> instead.\n        For more information about creating an Amazon EBS-backed AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html\">\n        Create an Amazon EBS-backed AMI</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.ec2#BundleInstanceRequest": {
@@ -11595,7 +12278,7 @@
                 "target": "com.amazonaws.ec2#CancelBundleTaskResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a bundling operation for an instance store-backed Windows instance.</p>"
+                "smithy.api#documentation": "<p>Cancels a bundling operation for an instance store-backed Windows instance.</p>\n         <note>\n            <p>CancelBundleTask is no longer supported because <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BundleInstance.html\">BundleInstance</a>,\n        the operation it cancels, is no longer supported.</p>\n         </note>"
             }
         },
         "com.amazonaws.ec2#CancelBundleTaskRequest": {
@@ -17962,6 +18645,176 @@
                 "smithy.api#documentation": "<p>The CPU performance to consider, using an instance family as the baseline reference.</p>"
             }
         },
+        "com.amazonaws.ec2#CreateApplicationStatusCheck": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#CreateApplicationStatusCheckRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#CreateApplicationStatusCheckResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an application status check for monitoring the health of applications running on your instances. You can configure the protocol, port, path, and thresholds for the health check. The following rules apply:</p>\n         <ul>\n            <li>\n               <p>You can create a maximum of 50 application status checks per account.</p>\n            </li>\n            <li>\n               <p>Health checks do not start until you associate the check with instances or tags using <code>AssociateApplicationStatusCheck</code>.</p>\n            </li>\n            <li>\n               <p>The <code>Timeout</code> value must be less than the <code>Interval</code> value.</p>\n            </li>\n            <li>\n               <p>The <code>Path</code> must start with a forward slash (<code>/</code>). Default: <code>/</code>.</p>\n            </li>\n            <li>\n               <p>If you do not specify <code>Aggregation</code>, it defaults to <code>included</code>, which means the check contributes to the instance-level application status.</p>\n            </li>\n            <li>\n               <p>Default values: <code>Interval</code> is 60 seconds, <code>Timeout</code> is 6 seconds, <code>FailureThreshold</code> is 2, <code>SuccessThreshold</code> is 5, <code>StatusCodeMatcher</code> is <code>200</code>, <code>InitializationGracePeriodSeconds</code> is 300 seconds.</p>\n            </li>\n            <li>\n               <p>You can tag the application status check during creation. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tag your Amazon EC2 resources</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create an application status check",
+                        "documentation": "This example creates an application status check that monitors HTTP health on port 80.",
+                        "input": {
+                            "Protocol": "http",
+                            "Port": 80,
+                            "Path": "/health",
+                            "Aggregation": "included"
+                        },
+                        "output": {
+                            "ApplicationStatusCheck": {
+                                "ApplicationStatusCheckId": "asc-0123456789abcdef0",
+                                "Protocol": "http",
+                                "Port": 80,
+                                "Path": "/health",
+                                "Aggregation": "included",
+                                "Interval": 10,
+                                "Timeout": 5,
+                                "FailureThreshold": 3,
+                                "SuccessThreshold": 2
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#CreateApplicationStatusCheckRequest": {
+            "type": "structure",
+            "members": {
+                "HealthCheckPaths": {
+                    "target": "com.amazonaws.ec2#HealthCheckPathRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The health check paths to use for the application status check. Health check paths define the network path from a source subnet to one or more destination subnets for cross-Availability Zone or Availability Zone to Local Zone health checking. If omitted, health checks are performed in the same subnet as the instance.</p>",
+                        "smithy.api#xmlName": "HealthCheckPath"
+                    }
+                },
+                "Aggregation": {
+                    "target": "com.amazonaws.ec2#AggregationStatusEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation setting for the application status check. When set to <code>included</code>, the result of this check contributes to the instance-level application status reported by <code>DescribeApplicationStatus</code>. When set to <code>excluded</code>, the check runs independently and does not affect the instance-level status. Valid values: <code>included</code> | <code>excluded</code>.</p>"
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.ec2#NetworkProtocolEnum",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The protocol to use for the health check. Valid values: <code>http</code> | <code>https</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.ec2#PortNumber",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The port to use for the health check. Valid values: 1 to 65535.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL path to use for the health check HTTP request (for example, <code>/health</code> or <code>/status</code>).</p>"
+                    }
+                },
+                "DeviceIndex": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index of the network device to use for the health check. The value must be greater than or equal to 0.</p>"
+                    }
+                },
+                "IpVersion": {
+                    "target": "com.amazonaws.ec2#IpVersionEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP version to use for the health check. Valid values: <code>ipv4</code> and <code>ipv6</code>.</p>"
+                    }
+                },
+                "IpScope": {
+                    "target": "com.amazonaws.ec2#IpScopeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP scope to use for the health check. Valid value: <code>private</code>.</p>"
+                    }
+                },
+                "Interval": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interval, in seconds, between health checks. Valid value: 60.</p>"
+                    }
+                },
+                "Timeout": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, to wait for a health check response before considering it failed. Valid values: 1 to 30. The value must be less than <code>Interval</code>.</p>"
+                    }
+                },
+                "FailureThreshold": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of consecutive failed health checks before the application status is considered impaired. The value must be greater than 0.</p>"
+                    }
+                },
+                "SuccessThreshold": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of consecutive successful health checks before the application status is considered healthy. The value must be greater than 0.</p>"
+                    }
+                },
+                "StatusCodeMatcher": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status codes that indicate a successful health check response. Specify a comma-separated list of individual status codes or ranges, for example, <code>200,202,300-399</code>. For a range, the first value must be less than the second value. Maximum length: 64 characters. Default: <code>200</code>.</p>"
+                    }
+                },
+                "InitializationGracePeriodSeconds": {
+                    "target": "com.amazonaws.ec2#InitializationGracePeriodSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds to wait before starting health checks after an instance is launched. Valid values: 1 to 600.</p>"
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.ec2#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the application status check.</p>",
+                        "smithy.api#xmlName": "TagSpecification"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the \n  request, and provides an error response. If you have the required permissions, the error response is \n  <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#CreateApplicationStatusCheckResult": {
+            "type": "structure",
+            "members": {
+                "ApplicationStatusCheck": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusCheckResponseObject",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ApplicationStatusCheck",
+                        "smithy.api#documentation": "<p>Information about the application status check.</p>",
+                        "smithy.api#xmlName": "applicationStatusCheck"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#CreateCapacityManagerDataExport": {
             "type": "operation",
             "input": {
@@ -19772,7 +20625,7 @@
                     "target": "com.amazonaws.ec2#FlowLogResourceIds",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The IDs of the resources to monitor. For example, if the resource type is\n                <code>VPC</code>, specify the IDs of the VPCs.</p>\n         <p>Constraints: Maximum of 25 for transit gateway resource types. Maximum of 1000 for the\n            other resource types.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the resources to monitor. For example, if the resource type is\n                <code>VPC</code>, specify the IDs of the VPCs.</p>\n         <p>Constraints: Maximum of 25 for transit gateway resource types. Maximum of 300 for the\n            other resource types.</p>",
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "ResourceId"
                     }
@@ -23990,9 +24843,7 @@
                 "Ipv4CidrBlock": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The IPv4 CIDR block for the secondary network. The CIDR block size must be between /12 and /28.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The IPv4 CIDR block for the secondary network. The CIDR block size must be between /12 and /28.</p>"
                     }
                 },
                 "NetworkType": {
@@ -28384,6 +29235,68 @@
         "com.amazonaws.ec2#CurrentGenerationFlag": {
             "type": "boolean"
         },
+        "com.amazonaws.ec2#CustomKeyValuePairRequestSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#CustomTagKeyValueRequestPair",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#CustomKeyValuePairResponseSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#CustomTagKeyValueResponsePair",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#CustomTagKeyValueRequestPair": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the tag.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the tag.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a tag key-value pair for an application status check association request.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CustomTagKeyValueResponsePair": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Key",
+                        "smithy.api#documentation": "<p>The key of the tag.</p>",
+                        "smithy.api#xmlName": "key"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Value",
+                        "smithy.api#documentation": "<p>The value of the tag.</p>",
+                        "smithy.api#xmlName": "value"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a tag key-value pair for an application status check association.</p>"
+            }
+        },
         "com.amazonaws.ec2#CustomerGateway": {
             "type": "structure",
             "members": {
@@ -28935,6 +29848,81 @@
         },
         "com.amazonaws.ec2#DefaultingDhcpOptionsId": {
             "type": "string"
+        },
+        "com.amazonaws.ec2#DeleteApplicationStatusCheck": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DeleteApplicationStatusCheckRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DeleteApplicationStatusCheckResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an application status check. The following rules apply:</p>\n         <ul>\n            <li>\n               <p>Deleting a check automatically removes all of its associations.</p>\n            </li>\n            <li>\n               <p>Use <code>DescribeApplicationStatusChecks</code> to view existing checks before deleting.</p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete an application status check",
+                        "documentation": "This example deletes the specified application status check.",
+                        "input": {
+                            "ApplicationStatusCheckId": "asc-0123456789abcdef0"
+                        },
+                        "output": {
+                            "ApplicationStatusCheck": {
+                                "ApplicationStatusCheckId": "asc-0123456789abcdef0",
+                                "Protocol": "http",
+                                "Port": 80,
+                                "Path": "/health",
+                                "Aggregation": "included"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#DeleteApplicationStatusCheckRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationStatusCheckId": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusCheckId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the application status check to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the \n  request, and provides an error response. If you have the required permissions, the error response is \n  <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DeleteApplicationStatusCheckResult": {
+            "type": "structure",
+            "members": {
+                "ApplicationStatusCheck": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusCheckResponseObject",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ApplicationStatusCheck",
+                        "smithy.api#documentation": "<p>Information about the deleted application status check.</p>",
+                        "smithy.api#xmlName": "applicationStatusCheck"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ec2#DeleteCapacityManagerDataExport": {
             "type": "operation",
@@ -35302,6 +36290,331 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#DescribeApplicationStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeApplicationStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeApplicationStatusResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the application status for the specified instances. Returns the aggregated application health status for each instance. The following rules apply:</p>\n         <ul>\n            <li>\n               <p>The instance-level status is derived from all application status checks with the aggregation setting set to <code>included</code>.</p>\n            </li>\n            <li>\n               <p>Use <code>DescribeApplicationStatusChecks</code> to view the configuration of individual checks.</p>\n            </li>\n            <li>\n               <p>Use <code>EnableApplicationStatusCheckSuppression</code> to temporarily suppress health check results from affecting the instance-level status.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.ec2#DescribeApplicationStatusCheckAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeApplicationStatusCheckAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeApplicationStatusCheckAssociationsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the associations for one or more application status checks. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-application-status-checks.html\">Application\n                status checks</a>. To avoid timeouts and retrieve complete results, use the\n            pagination parameters.</p>\n         <note>\n            <p>The order of the elements in the response, including those within nested\n                structures, might vary.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.ec2#DescribeApplicationStatusCheckAssociationsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeApplicationStatusCheckAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationStatusCheckIds": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusCheckIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the application status checks for which to describe associations.</p>",
+                        "smithy.api#xmlName": "ApplicationStatusCheckId"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters to use to limit the results.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>association-type</code> – The type of association. Valid values: <code>tag</code> and <code>instance-id</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#DescribeApplicationStatusCheckAssociationsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this request.\n         To get the next page of items, make another request with the token returned in the output.\n\t        For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the \n  request, and provides an error response. If you have the required permissions, the error response is \n  <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeApplicationStatusCheckAssociationsResult": {
+            "type": "structure",
+            "members": {
+                "Associations": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusCheckAssociationSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AssociationSet",
+                        "smithy.api#documentation": "<p>The associations for the specified application status checks.</p>",
+                        "smithy.api#xmlName": "associationSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to include in another request to get the next page of items. This value is <code>null</code> when there\n         are no more items to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ec2#TagList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TagSet",
+                        "smithy.api#documentation": "<p>The tags associated with the application status checks.</p>",
+                        "smithy.api#xmlName": "tagSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeApplicationStatusChecks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeApplicationStatusChecksRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeApplicationStatusChecksResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes one or more application status checks. Returns configuration details for your application status checks, including protocol, port, path, thresholds, and associations. The following rules apply:</p>\n         <ul>\n            <li>\n               <p>If you do not specify any application status check IDs, all checks in your account are returned.</p>\n            </li>\n            <li>\n               <p>Use <code>DescribeApplicationStatus</code> to see the actual health status of instances.</p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To describe application status checks",
+                        "documentation": "This example describes the specified application status checks.",
+                        "input": {
+                            "ApplicationStatusCheckIds": [
+                                "asc-0123456789abcdef0"
+                            ]
+                        },
+                        "output": {
+                            "ApplicationStatusChecks": [
+                                {
+                                    "ApplicationStatusCheckId": "asc-0123456789abcdef0",
+                                    "Protocol": "http",
+                                    "Port": 80,
+                                    "Path": "/health",
+                                    "Aggregation": "included",
+                                    "Interval": 10,
+                                    "Timeout": 5,
+                                    "FailureThreshold": 3,
+                                    "SuccessThreshold": 2
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "To describe application status checks using filters",
+                        "documentation": "This example uses filters to describe application status checks with a specific tag.",
+                        "input": {
+                            "Filters": [
+                                {
+                                    "Name": "tag:Environment",
+                                    "Values": [
+                                        "Production"
+                                    ]
+                                }
+                            ],
+                            "MaxResults": 10
+                        },
+                        "output": {
+                            "ApplicationStatusChecks": [
+                                {
+                                    "ApplicationStatusCheckId": "asc-0123456789abcdef0",
+                                    "Protocol": "http",
+                                    "Port": 80,
+                                    "Path": "/health",
+                                    "Aggregation": "included",
+                                    "Interval": 10,
+                                    "Timeout": 5,
+                                    "FailureThreshold": 3,
+                                    "SuccessThreshold": 2
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#DescribeApplicationStatusChecksMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeApplicationStatusChecksRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationStatusCheckIds": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusCheckIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the application status checks to describe.</p>",
+                        "smithy.api#xmlName": "ApplicationStatusCheckId"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aggregation</code> – The aggregation setting. Valid values: <code>included</code> and <code>excluded</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#DescribeApplicationStatusChecksMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this request.\n         To get the next page of items, make another request with the token returned in the output.\n\t        For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>"
+                    }
+                },
+                "IncludeAll": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to include recently deleted application status checks that remain available during the deletion grace period. If you omit this parameter or set it to <code>false</code>, the response includes only active checks.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the \n  request, and provides an error response. If you have the required permissions, the error response is \n  <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeApplicationStatusChecksResult": {
+            "type": "structure",
+            "members": {
+                "ApplicationStatusChecks": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusCheckResponseSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ApplicationStatusCheckSet",
+                        "smithy.api#documentation": "<p>Information about the application status checks.</p>",
+                        "smithy.api#xmlName": "applicationStatusCheckSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to include in another request to get the next page of items. This value is <code>null</code> when there\n         are no more items to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeApplicationStatusMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeApplicationStatusRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceIds": {
+                    "target": "com.amazonaws.ec2#InstanceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the instances for which to describe application status.</p>",
+                        "smithy.api#xmlName": "InstanceId"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>availability-zone-id</code> – The ID of the Availability Zone.</p>\n            </li>\n            <li>\n               <p>\n                  <code>status</code> – The instance-level application status. For valid values and their meanings, see <code>ApplicationStatus</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#DescribeApplicationStatusMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this request.\n         To get the next page of items, make another request with the token returned in the output.\n\t        For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the \n  request, and provides an error response. If you have the required permissions, the error response is \n  <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeApplicationStatusResult": {
+            "type": "structure",
+            "members": {
+                "ApplicationStatuses": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusesResponseType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ApplicationStatusesResponseType",
+                        "smithy.api#documentation": "<p>The application statuses for the specified instances.</p>",
+                        "smithy.api#xmlName": "applicationStatusesResponseType"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to include in another request to get the next page of items. This value is <code>null</code> when there\n         are no more items to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#DescribeAvailabilityZones": {
             "type": "operation",
             "input": {
@@ -36541,7 +37854,7 @@
                 "CapacityReservationIds": {
                     "target": "com.amazonaws.ec2#CapacityReservationIdSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Capacity Reservation IDs.</p>\n         <p>Default: Describes all your Capacity Reservations.</p>\n         <p>Constraints: Maximum 100 explicitly specified Capacity Reservation IDs.</p>",
+                        "smithy.api#documentation": "<p>The Capacity Reservation IDs.</p>\n         <p>Default: Describes all your Capacity Reservations.</p>\n         <p>Constraints: Maximum 10 explicitly specified Capacity Reservation IDs.</p>",
                         "smithy.api#xmlName": "CapacityReservationId"
                     }
                 },
@@ -41122,7 +42435,7 @@
                 "target": "com.amazonaws.ec2#DescribeInstanceStatusResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the status of the specified instances or all of your instances. By default,\n            only running instances are described, unless you specifically indicate to return the\n            status of all instances.</p>\n         <p>Instance status includes the following components:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Status checks</b> - Amazon EC2 performs status\n                    checks on running EC2 instances to identify hardware and software issues. For\n                    more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html\">Status checks for your instances</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html\">Troubleshoot\n                        instances with failed status checks</a> in the <i>Amazon EC2 User\n                        Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Scheduled events</b> - Amazon EC2 can schedule\n                    events (such as reboot, stop, or terminate) for your instances related to\n                    hardware issues, software updates, or system maintenance. For more information,\n                    see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html\">Scheduled events for your instances</a> in the <i>Amazon EC2 User\n                        Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Instance state</b> - You can manage your instances\n                    from the moment you launch them through their termination. For more information,\n                    see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance\n                        lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>The Amazon EC2 API follows an eventual consistency model. This means that the result of an\n            API command you run that creates or modifies resources might not be immediately\n            available to all subsequent commands you run. For guidance on how to manage eventual\n            consistency, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/eventual-consistency.html\">Eventual consistency in the\n                Amazon EC2 API</a> in the <i>Amazon EC2 Developer\n            Guide</i>.</p>\n         <note>\n            <p>The order of the elements in the response, including those within nested\n                structures, might vary. Applications should not assume the elements appear in a\n                particular order.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Describes the status of the specified instances or all of your instances. By default,\n            only running instances are described, unless you specifically indicate to return the\n            status of all instances.</p>\n         <p>Instance status includes the following components:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Status checks</b> - Amazon EC2 performs status\n                    checks on running EC2 instances to identify hardware and software issues. For\n                    more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html\">Status checks for your instances</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html\">Troubleshoot\n                        instances with failed status checks</a> in the <i>Amazon EC2 User\n                        Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Application status checks</b> - Amazon EC2 reports\n                    application-level health status for instances, indicating whether applications\n                    running on the instance are functioning properly.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Scheduled events</b> - Amazon EC2 can schedule\n                    events (such as reboot, stop, or terminate) for your instances related to\n                    hardware issues, software updates, or system maintenance. For more information,\n                    see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html\">Scheduled events for your instances</a> in the <i>Amazon EC2 User\n                        Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Instance state</b> - You can manage your instances\n                    from the moment you launch them through their termination. For more information,\n                    see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance\n                        lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>The Amazon EC2 API follows an eventual consistency model. This means that the result of an\n            API command you run that creates or modifies resources might not be immediately\n            available to all subsequent commands you run. For guidance on how to manage eventual\n            consistency, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/eventual-consistency.html\">Eventual consistency in the\n                Amazon EC2 API</a> in the <i>Amazon EC2 Developer\n            Guide</i>.</p>\n         <note>\n            <p>The order of the elements in the response, including those within nested\n                structures, might vary. Applications should not assume the elements appear in a\n                particular order.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "To describe the status of an instance",
@@ -41252,7 +42565,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>availability-zone</code> - The Availability Zone of the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>availability-zone-id</code> - The ID of the Availability Zone of the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>event.code</code> - The code for the scheduled event\n                        (<code>instance-reboot</code> | <code>system-reboot</code> |\n                        <code>system-maintenance</code> | <code>instance-retirement</code> |\n                        <code>instance-stop</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>event.description</code> - A description of the event.</p>\n            </li>\n            <li>\n               <p>\n                  <code>event.instance-event-id</code> - The ID of the event whose date and time\n                    you are modifying.</p>\n            </li>\n            <li>\n               <p>\n                  <code>event.not-after</code> - The latest end time for the scheduled event\n                    (for example, <code>2014-09-15T17:15:20.000Z</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>event.not-before</code> - The earliest start time for the scheduled\n                    event (for example, <code>2014-09-15T17:15:20.000Z</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>event.not-before-deadline</code> - The deadline for starting the event\n                    (for example, <code>2014-09-15T17:15:20.000Z</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-state-code</code> - The code for the instance state, as a\n                    16-bit unsigned integer. The high byte is used for internal purposes and should\n                    be ignored. The low byte is set based on the state represented. The valid values\n                    are 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64\n                    (stopping), and 80 (stopped).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-state-name</code> - The state of the instance\n                        (<code>pending</code> | <code>running</code> | <code>shutting-down</code> |\n                        <code>terminated</code> | <code>stopping</code> |\n                    <code>stopped</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-status.reachability</code> - Filters on instance status where\n                    the name is <code>reachability</code> (<code>passed</code> | <code>failed</code>\n                    | <code>initializing</code> | <code>insufficient-data</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-status.status</code> - The status of the instance\n                        (<code>ok</code> | <code>impaired</code> | <code>initializing</code> |\n                        <code>insufficient-data</code> | <code>not-applicable</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>operator.managed</code> - A Boolean that indicates whether this is a\n                    managed instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>operator.principal</code> - The principal that manages the instance.\n                    Only valid for managed instances, where <code>managed</code> is\n                        <code>true</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>system-status.reachability</code> - Filters on system status where the\n                    name is <code>reachability</code> (<code>passed</code> | <code>failed</code> |\n                        <code>initializing</code> | <code>insufficient-data</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>system-status.status</code> - The system status of the instance\n                        (<code>ok</code> | <code>impaired</code> | <code>initializing</code> |\n                        <code>insufficient-data</code> | <code>not-applicable</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>attached-ebs-status.status</code> - The status of the attached EBS volume \n                    for the instance (<code>ok</code> | <code>impaired</code> | <code>initializing</code> | \n                    <code>insufficient-data</code> | <code>not-applicable</code>).</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>availability-zone</code> - The Availability Zone of the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>availability-zone-id</code> - The ID of the Availability Zone of the\n                    instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>event.code</code> - The code for the scheduled event\n                        (<code>instance-reboot</code> | <code>system-reboot</code> |\n                        <code>system-maintenance</code> | <code>instance-retirement</code> |\n                        <code>instance-stop</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>event.description</code> - A description of the event.</p>\n            </li>\n            <li>\n               <p>\n                  <code>event.instance-event-id</code> - The ID of the event whose date and time\n                    you are modifying.</p>\n            </li>\n            <li>\n               <p>\n                  <code>event.not-after</code> - The latest end time for the scheduled event\n                    (for example, <code>2014-09-15T17:15:20.000Z</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>event.not-before</code> - The earliest start time for the scheduled\n                    event (for example, <code>2014-09-15T17:15:20.000Z</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>event.not-before-deadline</code> - The deadline for starting the event\n                    (for example, <code>2014-09-15T17:15:20.000Z</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-state-code</code> - The code for the instance state, as a\n                    16-bit unsigned integer. The high byte is used for internal purposes and should\n                    be ignored. The low byte is set based on the state represented. The valid values\n                    are 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64\n                    (stopping), and 80 (stopped).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-state-name</code> - The state of the instance\n                        (<code>pending</code> | <code>running</code> | <code>shutting-down</code> |\n                        <code>terminated</code> | <code>stopping</code> |\n                    <code>stopped</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-status.reachability</code> - Filters on instance status where\n                    the name is <code>reachability</code> (<code>passed</code> | <code>failed</code>\n                    | <code>initializing</code> | <code>insufficient-data</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-status.status</code> - The status of the instance\n                        (<code>ok</code> | <code>impaired</code> | <code>initializing</code> |\n                        <code>insufficient-data</code> | <code>not-applicable</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>operator.managed</code> - A Boolean that indicates whether this is a\n                    managed instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>operator.principal</code> - The principal that manages the instance.\n                    Only valid for managed instances, where <code>managed</code> is\n                        <code>true</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>system-status.reachability</code> - Filters on system status where the\n                    name is <code>reachability</code> (<code>passed</code> | <code>failed</code> |\n                        <code>initializing</code> | <code>insufficient-data</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>system-status.status</code> - The system status of the instance\n                        (<code>ok</code> | <code>impaired</code> | <code>initializing</code> |\n                        <code>insufficient-data</code> | <code>not-applicable</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>attached-ebs-status.status</code> - The status of the attached EBS volume \n                    for the instance (<code>ok</code> | <code>impaired</code> | <code>initializing</code> | \n                    <code>insufficient-data</code> | <code>not-applicable</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>application-status.status</code> - The application status of the instance\n                    (<code>ok</code> | <code>impaired</code> | <code>initializing</code> |\n                    <code>insufficient-data</code> | <code>not-applicable</code>).</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -54756,6 +56069,89 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#DisableApplicationStatusCheckSuppression": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DisableApplicationStatusCheckSuppressionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DisableApplicationStatusCheckSuppressionResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Disables suppression of application status checks for the specified instances. After suppression is disabled, health check results resume affecting the instance-level application status. You can specify a maximum of 100 instance IDs per request.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To disable application status check suppression",
+                        "documentation": "This example disables application status check suppression for the specified instance, resuming normal status reporting.",
+                        "input": {
+                            "InstanceIds": [
+                                "i-0123456789abcdef0"
+                            ]
+                        },
+                        "output": {
+                            "SuccessfulResults": [
+                                {
+                                    "InstanceId": "i-0123456789abcdef0"
+                                }
+                            ],
+                            "UnsuccessfulResults": []
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#DisableApplicationStatusCheckSuppressionRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceIds": {
+                    "target": "com.amazonaws.ec2#InstanceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the instances for which to disable application status check suppression.</p>",
+                        "smithy.api#xmlName": "InstanceId"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the \n  request, and provides an error response. If you have the required permissions, the error response is \n  <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DisableApplicationStatusCheckSuppressionResult": {
+            "type": "structure",
+            "members": {
+                "SuccessfulResults": {
+                    "target": "com.amazonaws.ec2#SuccessfulSuppressionResponseSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SuccessfulResultSet",
+                        "smithy.api#documentation": "<p>The instances for which suppression was successfully disabled.</p>",
+                        "smithy.api#xmlName": "successfulResultSet"
+                    }
+                },
+                "UnsuccessfulResults": {
+                    "target": "com.amazonaws.ec2#UnsuccessfulSuppressionResponseSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "UnsuccessfulResultSet",
+                        "smithy.api#documentation": "<p>The instances for which suppression failed to be disabled.</p>",
+                        "smithy.api#xmlName": "unsuccessfulResultSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#DisableAwsNetworkPerformanceMetricSubscription": {
             "type": "operation",
             "input": {
@@ -56075,6 +57471,110 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DisassociateApplicationStatusCheck": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DisassociateApplicationStatusCheckRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DisassociateApplicationStatusCheckResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates an application status check from instances or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">tags</a>. After disassociation, health monitoring stops for the affected instances. The following rules apply:</p>\n         <ul>\n            <li>\n               <p>You must specify either <code>TargetTagAssociations</code> or <code>InstanceIds</code>, but not both. Specifying both results in an <code>InvalidParameterCombination</code> error.</p>\n            </li>\n            <li>\n               <p>The application status check must already exist and belong to your account.</p>\n            </li>\n            <li>\n               <p>Tag keys must not be blank.</p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To disassociate an application status check from tags",
+                        "documentation": "This example disassociates an application status check from instances matching the specified tag.",
+                        "input": {
+                            "ApplicationStatusCheckId": "asc-0123456789abcdef0",
+                            "TargetTagAssociations": [
+                                {
+                                    "Key": "env",
+                                    "Value": "prod"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "SuccessfulResults": [
+                                {
+                                    "ApplicationStatusCheckId": "asc-0123456789abcdef0",
+                                    "AssociationType": "EC2TAG",
+                                    "AssociationValue": "env=prod"
+                                }
+                            ],
+                            "UnsuccessfulResults": []
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#DisassociateApplicationStatusCheckRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationStatusCheckId": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusCheckId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the application status check to disassociate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetTagAssociations": {
+                    "target": "com.amazonaws.ec2#CustomKeyValuePairRequestSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">tags</a> to disassociate from the application status check. Specify the same key-value pairs that were used during association.</p>",
+                        "smithy.api#xmlName": "TargetTagAssociation"
+                    }
+                },
+                "InstanceIds": {
+                    "target": "com.amazonaws.ec2#InstanceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the instances to disassociate from the application status check.</p>",
+                        "smithy.api#xmlName": "InstanceId"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the \n  request, and provides an error response. If you have the required permissions, the error response is \n  <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DisassociateApplicationStatusCheckResult": {
+            "type": "structure",
+            "members": {
+                "SuccessfulResults": {
+                    "target": "com.amazonaws.ec2#SuccessfulAssociationResponseSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SuccessfulResultSet",
+                        "smithy.api#documentation": "<p>The associations that were successfully removed.</p>",
+                        "smithy.api#xmlName": "successfulResultSet"
+                    }
+                },
+                "UnsuccessfulResults": {
+                    "target": "com.amazonaws.ec2#UnsuccessfulAssociationResponseSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "UnsuccessfulResultSet",
+                        "smithy.api#documentation": "<p>The associations that failed to be removed.</p>",
+                        "smithy.api#xmlName": "unsuccessfulResultSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ec2#DisassociateCapacityReservationBillingOwner": {
@@ -59026,6 +60526,97 @@
                         "aws.protocols#ec2QueryName": "AllowedImagesSettingsState",
                         "smithy.api#documentation": "<p>Returns <code>enabled</code> or <code>audit-mode</code> if the request succeeds;\n      otherwise, it returns an error.</p>",
                         "smithy.api#xmlName": "allowedImagesSettingsState"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#EnableApplicationStatusCheckSuppression": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#EnableApplicationStatusCheckSuppressionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#EnableApplicationStatusCheckSuppressionResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Suppresses application status checks for the specified instances. While suppressed, health checks continue to run but do not affect the instance-level application status. The following rules apply:</p>\n         <ul>\n            <li>\n               <p>Maximum 100 instance IDs per request.</p>\n            </li>\n            <li>\n               <p>Use <code>DisableApplicationStatusCheckSuppression</code> to resume normal health check reporting.</p>\n            </li>\n            <li>\n               <p>If you do not specify <code>DurationSeconds</code>, suppression continues indefinitely until you call <code>DisableApplicationStatusCheckSuppression</code>.</p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To enable application status check suppression",
+                        "documentation": "This example suppresses application status check reporting for the specified instance for one hour.",
+                        "input": {
+                            "InstanceIds": [
+                                "i-0123456789abcdef0"
+                            ],
+                            "DurationSeconds": 3600
+                        },
+                        "output": {
+                            "SuccessfulResults": [
+                                {
+                                    "InstanceId": "i-0123456789abcdef0",
+                                    "ResumeAt": "2026-05-14T19:30:00.000Z"
+                                }
+                            ],
+                            "UnsuccessfulResults": []
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#EnableApplicationStatusCheckSuppressionRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceIds": {
+                    "target": "com.amazonaws.ec2#InstanceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the instances for which to suppress application status checks.</p>",
+                        "smithy.api#xmlName": "InstanceId"
+                    }
+                },
+                "DurationSeconds": {
+                    "target": "com.amazonaws.ec2#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration, in seconds, for which to suppress application status checks. If omitted, the application status check is suppressed indefinitely until you call <code>DisableApplicationStatusCheckSuppression</code>.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the \n  request, and provides an error response. If you have the required permissions, the error response is \n  <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#EnableApplicationStatusCheckSuppressionResult": {
+            "type": "structure",
+            "members": {
+                "SuccessfulResults": {
+                    "target": "com.amazonaws.ec2#SuccessfulSuppressionResponseSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SuccessfulResultSet",
+                        "smithy.api#documentation": "<p>The instances for which suppression was successfully enabled.</p>",
+                        "smithy.api#xmlName": "successfulResultSet"
+                    }
+                },
+                "UnsuccessfulResults": {
+                    "target": "com.amazonaws.ec2#UnsuccessfulSuppressionResponseSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "UnsuccessfulResultSet",
+                        "smithy.api#documentation": "<p>The instances for which suppression failed to be enabled.</p>",
+                        "smithy.api#xmlName": "unsuccessfulResultSet"
                     }
                 }
             },
@@ -66493,7 +68084,7 @@
                     }
                 },
                 "UefiData": {
-                    "target": "com.amazonaws.ec2#String",
+                    "target": "com.amazonaws.ec2#SensitiveString",
                     "traits": {
                         "aws.protocols#ec2QueryName": "UefiData",
                         "smithy.api#documentation": "<p>Base64 representation of the non-volatile UEFI variable store.</p>",
@@ -70389,6 +71980,175 @@
                         "smithy.api#enumValue": "invalid"
                     }
                 }
+            }
+        },
+        "com.amazonaws.ec2#HealthCheckPathDestinationRequestObject": {
+            "type": "structure",
+            "members": {
+                "SubnetId": {
+                    "target": "com.amazonaws.ec2#SubnetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the subnet for the destination.</p>"
+                    }
+                },
+                "SecurityGroupId": {
+                    "target": "com.amazonaws.ec2#SecurityGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the security group for the destination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a destination for a health check path in a request. Destinations can be in a different Availability Zone than the source (cross-AZ) or in a Local Zone (AZ to Local Zone), enabling remote health validation of your application.</p>"
+            }
+        },
+        "com.amazonaws.ec2#HealthCheckPathDestinationRequestSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#HealthCheckPathDestinationRequestObject",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#HealthCheckPathDestinationResponseList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#HealthCheckPathDestinationResponseObject",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#HealthCheckPathDestinationResponseObject": {
+            "type": "structure",
+            "members": {
+                "SubnetId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SubnetId",
+                        "smithy.api#documentation": "<p>The ID of the subnet for the destination.</p>",
+                        "smithy.api#xmlName": "subnetId"
+                    }
+                },
+                "SecurityGroupId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SecurityGroupId",
+                        "smithy.api#documentation": "<p>The ID of the security group for the destination.</p>",
+                        "smithy.api#xmlName": "securityGroupId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a destination for a health check path.</p>"
+            }
+        },
+        "com.amazonaws.ec2#HealthCheckPathRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#HealthCheckPathRequestObject",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#HealthCheckPathRequestObject": {
+            "type": "structure",
+            "members": {
+                "Source": {
+                    "target": "com.amazonaws.ec2#HealthCheckPathSourceRequestObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source for the health check path.</p>"
+                    }
+                },
+                "Destinations": {
+                    "target": "com.amazonaws.ec2#HealthCheckPathDestinationRequestSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destinations for the health check path.</p>",
+                        "smithy.api#xmlName": "Destination"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a health check path for an application status check request.</p>"
+            }
+        },
+        "com.amazonaws.ec2#HealthCheckPathResponseList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#HealthCheckPathResponseObject",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#HealthCheckPathResponseObject": {
+            "type": "structure",
+            "members": {
+                "Source": {
+                    "target": "com.amazonaws.ec2#HealthCheckPathSourceResponseObject",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Source",
+                        "smithy.api#documentation": "<p>The source for the health check path.</p>",
+                        "smithy.api#xmlName": "source"
+                    }
+                },
+                "Destinations": {
+                    "target": "com.amazonaws.ec2#HealthCheckPathDestinationResponseList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "DestinationSet",
+                        "smithy.api#documentation": "<p>The destinations for the health check path.</p>",
+                        "smithy.api#xmlName": "destinationSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a health check path for an application status check.</p>"
+            }
+        },
+        "com.amazonaws.ec2#HealthCheckPathSourceRequestObject": {
+            "type": "structure",
+            "members": {
+                "SubnetId": {
+                    "target": "com.amazonaws.ec2#SubnetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the subnet for the source.</p>"
+                    }
+                },
+                "SecurityGroupId": {
+                    "target": "com.amazonaws.ec2#SecurityGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the security group for the source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the source for a health check path in a request. The source defines the subnet and security group where a health check elastic network interface (ENI) is created to originate health check traffic.</p>"
+            }
+        },
+        "com.amazonaws.ec2#HealthCheckPathSourceResponseObject": {
+            "type": "structure",
+            "members": {
+                "SubnetId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SubnetId",
+                        "smithy.api#documentation": "<p>The ID of the subnet for the source.</p>",
+                        "smithy.api#xmlName": "subnetId"
+                    }
+                },
+                "SecurityGroupId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SecurityGroupId",
+                        "smithy.api#documentation": "<p>The ID of the security group for the source.</p>",
+                        "smithy.api#xmlName": "securityGroupId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the source for a health check path.</p>"
             }
         },
         "com.amazonaws.ec2#HibernationFlag": {
@@ -74483,6 +76243,15 @@
                 }
             }
         },
+        "com.amazonaws.ec2#InitializationGracePeriodSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": -1,
+                    "max": 600
+                }
+            }
+        },
         "com.amazonaws.ec2#InitializationStatusDetails": {
             "type": "structure",
             "members": {
@@ -75041,6 +76810,63 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes an instance.</p>"
+            }
+        },
+        "com.amazonaws.ec2#InstanceApplicationStatus": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.ec2#InstanceId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceId",
+                        "smithy.api#documentation": "<p>The ID of the instance.</p>",
+                        "smithy.api#xmlName": "instanceId"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZone",
+                        "smithy.api#documentation": "<p>The Availability Zone of the instance.</p>",
+                        "smithy.api#xmlName": "availabilityZone"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZoneId",
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone of the instance.</p>",
+                        "smithy.api#xmlName": "availabilityZoneId"
+                    }
+                },
+                "ApplicationStatus": {
+                    "target": "com.amazonaws.ec2#ApplicationStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ApplicationStatus",
+                        "smithy.api#documentation": "<p>The application status for the instance.</p>",
+                        "smithy.api#xmlName": "applicationStatus"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ec2#TagList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TagSet",
+                        "smithy.api#documentation": "<p>The tags assigned to the instance.</p>",
+                        "smithy.api#xmlName": "tagSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the application status for an instance.</p>"
+            }
+        },
+        "com.amazonaws.ec2#InstanceApplicationStatusSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#InstanceApplicationStatus",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
             }
         },
         "com.amazonaws.ec2#InstanceAttachmentEnaSrdSpecification": {
@@ -78240,10 +80066,18 @@
                         "smithy.api#documentation": "<p>Reports impaired functionality that stems from an attached Amazon EBS volume that is \n            unreachable and unable to complete I/O operations.</p>",
                         "smithy.api#xmlName": "attachedEbsStatus"
                     }
+                },
+                "ApplicationStatus": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusSummary",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ApplicationStatus",
+                        "smithy.api#documentation": "<p>Reports impaired functionality that stems from issues with applications running on the instance.</p>",
+                        "smithy.api#xmlName": "applicationStatus"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the status of an instance.</p>"
+                "smithy.api#documentation": "<p>Describes the status of an instance, including system status, instance status,\n            attached EBS status, and application status.</p>"
             }
         },
         "com.amazonaws.ec2#InstanceStatusDetails": {
@@ -87886,6 +89720,17 @@
                 }
             }
         },
+        "com.amazonaws.ec2#IpScopeEnum": {
+            "type": "enum",
+            "members": {
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "private"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#IpSource": {
             "type": "enum",
             "members": {
@@ -87905,6 +89750,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "none"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#IpVersionEnum": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv4"
+                    }
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv6"
                     }
                 }
             }
@@ -98109,6 +99971,172 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#ModifyApplicationStatusCheck": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifyApplicationStatusCheckRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifyApplicationStatusCheckResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies an existing application status check. You can update the protocol, port, path, thresholds, and other configuration settings. The following rules apply:</p>\n         <ul>\n            <li>\n               <p>The application status check must exist and belong to your account.</p>\n            </li>\n            <li>\n               <p>Changes take effect on the next health check interval.</p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To modify an application status check",
+                        "documentation": "This example modifies the port and path of an existing application status check.",
+                        "input": {
+                            "ApplicationStatusCheckId": "asc-0123456789abcdef0",
+                            "Port": 8080,
+                            "Path": "/healthv2"
+                        },
+                        "output": {
+                            "ApplicationStatusCheck": {
+                                "ApplicationStatusCheckId": "asc-0123456789abcdef0",
+                                "Protocol": "http",
+                                "Port": 8080,
+                                "Path": "/healthv2",
+                                "Aggregation": "included",
+                                "Interval": 10,
+                                "Timeout": 5,
+                                "FailureThreshold": 3,
+                                "SuccessThreshold": 2
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#ModifyApplicationStatusCheckRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationStatusCheckId": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusCheckId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the application status check to modify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Aggregation": {
+                    "target": "com.amazonaws.ec2#AggregationStatusEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation setting for the application status check. When set to <code>included</code>, the result of this check contributes to the instance-level application status reported by <code>DescribeApplicationStatus</code>. When set to <code>excluded</code>, the check runs independently and does not affect the instance-level status. Valid values: <code>included</code> | <code>excluded</code>.</p>"
+                    }
+                },
+                "HealthCheckPaths": {
+                    "target": "com.amazonaws.ec2#HealthCheckPathRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The health check paths to use for the application status check.</p>",
+                        "smithy.api#xmlName": "HealthCheckPath"
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.ec2#NetworkProtocolEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol to use for the health check. Valid values: <code>http</code> | <code>https</code>.</p>"
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.ec2#PortNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port to use for the health check. Valid values: 1 to 65535.</p>"
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL path to use for the health check HTTP request (for example, <code>/health</code> or <code>/status</code>).</p>"
+                    }
+                },
+                "DeviceIndex": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index of the network device to use for the health check. The value must be greater than or equal to 0.</p>"
+                    }
+                },
+                "IpVersion": {
+                    "target": "com.amazonaws.ec2#IpVersionEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP version to use for the health check. Valid values: <code>ipv4</code> and <code>ipv6</code>.</p>"
+                    }
+                },
+                "IpScope": {
+                    "target": "com.amazonaws.ec2#IpScopeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP scope to use for the health check. Valid value: <code>private</code>.</p>"
+                    }
+                },
+                "Interval": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interval, in seconds, between health checks. Valid value: 60.</p>"
+                    }
+                },
+                "Timeout": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, to wait for a health check response before considering it failed. Valid values: 1 to 30. The value must be less than <code>Interval</code>.</p>"
+                    }
+                },
+                "FailureThreshold": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of consecutive failed health checks before the application status is considered impaired. The value must be greater than 0.</p>"
+                    }
+                },
+                "SuccessThreshold": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of consecutive successful health checks before the application status is considered healthy. The value must be greater than 0.</p>"
+                    }
+                },
+                "StatusCodeMatcher": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status codes that indicate a successful health check response. Specify a comma-separated list of individual status codes or ranges, for example, <code>200,202,300-399</code>. For a range, the first value must be less than the second value. Maximum length: 64 characters.</p>"
+                    }
+                },
+                "InitializationGracePeriodSeconds": {
+                    "target": "com.amazonaws.ec2#InitializationGracePeriodSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds to wait before starting health checks after an instance is launched. Valid values: 1 to 600.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the \n  request, and provides an error response. If you have the required permissions, the error response is \n  <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#ModifyApplicationStatusCheckResult": {
+            "type": "structure",
+            "members": {
+                "ApplicationStatusCheck": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusCheckResponseObject",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ApplicationStatusCheck",
+                        "smithy.api#documentation": "<p>Information about the modified application status check.</p>",
+                        "smithy.api#xmlName": "applicationStatusCheck"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#ModifyAvailabilityZoneGroup": {
             "type": "operation",
             "input": {
@@ -107903,6 +109931,23 @@
         "com.amazonaws.ec2#NetworkPerformance": {
             "type": "string"
         },
+        "com.amazonaws.ec2#NetworkProtocolEnum": {
+            "type": "enum",
+            "members": {
+                "HTTP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "http"
+                    }
+                },
+                "HTTPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "https"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#NeuronDeviceCoreCount": {
             "type": "integer"
         },
@@ -110111,6 +112156,15 @@
                 }
             }
         },
+        "com.amazonaws.ec2#PortNumber": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 65535
+                }
+            }
+        },
         "com.amazonaws.ec2#PortRange": {
             "type": "structure",
             "members": {
@@ -111024,7 +113078,7 @@
                 "target": "com.amazonaws.ec2#ProvisionByoipCidrResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services resources through bring your own IP \n         addresses (BYOIP) and creates a corresponding address pool. After the address range is\n         provisioned, it is ready to be advertised.</p>\n         <p>Amazon Web Services verifies that you own the address range and are authorized to advertise it. \n         You must ensure that the address range is registered to you and that you created an \n         RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. \n         For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">Bring your own IP addresses (BYOIP)</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         <p>Provisioning an address range is an asynchronous operation, so the call returns immediately,\n         but the address range is not ready to use until its status changes from <code>pending-provision</code>\n          to <code>provisioned</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/byoip-onboard.html\">Onboard your address range</a>.</p>"
+                "smithy.api#documentation": "<p>Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services resources through bring your own IP \n         addresses (BYOIP) and creates a corresponding address pool. After the address range is\n         provisioned, it is ready to be advertised.</p>\n         <p>Amazon Web Services verifies that you own the address range and are authorized to advertise it. \n         You must ensure that the address range is registered to you and that you created an \n         RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. \n         For the Amazon Web Services GovCloud (US) Regions, authorize only ASN 8987. For the Amazon Web Services\n         European Sovereign Cloud, authorize ASNs 16509 and 214101.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">Bring your own IP addresses (BYOIP)</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         <p>Provisioning an address range is an asynchronous operation, so the call returns immediately,\n         but the address range is not ready to use until its status changes from <code>pending-provision</code>\n          to <code>provisioned</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/byoip-onboard.html\">Onboard your address range</a>.</p>"
             }
         },
         "com.amazonaws.ec2#ProvisionByoipCidrRequest": {
@@ -117596,6 +119650,12 @@
                     "traits": {
                         "smithy.api#enumValue": "capacity-reservation-cancellation-quote"
                     }
+                },
+                "application_status_check": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "application-status-check"
+                    }
                 }
             }
         },
@@ -123513,6 +125573,9 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.ec2#SensitiveString": {
+            "type": "string"
+        },
         "com.amazonaws.ec2#SensitiveUrl": {
             "type": "string",
             "traits": {
@@ -127906,6 +129969,47 @@
                 }
             }
         },
+        "com.amazonaws.ec2#SuccessfulAssociationResponseObject": {
+            "type": "structure",
+            "members": {
+                "ApplicationStatusCheckId": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusCheckId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ApplicationStatusCheckId",
+                        "smithy.api#documentation": "<p>The ID of the application status check.</p>",
+                        "smithy.api#xmlName": "applicationStatusCheckId"
+                    }
+                },
+                "AssociationType": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AssociationType",
+                        "smithy.api#documentation": "<p>The type of association. Valid values: <code>EC2TAG</code> and <code>INSTANCE_ID</code>.</p>",
+                        "smithy.api#xmlName": "associationType"
+                    }
+                },
+                "AssociationValue": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AssociationValue",
+                        "smithy.api#documentation": "<p>The association value. For <code>EC2TAG</code>, the value is formatted as <code>key=value</code>. For <code>INSTANCE_ID</code>, the value is the instance ID.</p>",
+                        "smithy.api#xmlName": "associationValue"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a successful application status check association.</p>"
+            }
+        },
+        "com.amazonaws.ec2#SuccessfulAssociationResponseSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#SuccessfulAssociationResponseObject",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#SuccessfulInstanceCreditSpecificationItem": {
             "type": "structure",
             "members": {
@@ -127951,6 +130055,47 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ec2#SuccessfulQueuedPurchaseDeletion",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#SuccessfulSuppressionResponseObject": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.ec2#InstanceId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceId",
+                        "smithy.api#documentation": "<p>The ID of the instance.</p>",
+                        "smithy.api#xmlName": "instanceId"
+                    }
+                },
+                "SuppressAt": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SuppressAt",
+                        "smithy.api#documentation": "<p>The date and time when suppression started.</p>",
+                        "smithy.api#xmlName": "suppressAt"
+                    }
+                },
+                "ResumeAt": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ResumeAt",
+                        "smithy.api#documentation": "<p>The date and time when suppression ends and health checks resume.</p>",
+                        "smithy.api#xmlName": "resumeAt"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a successful application status check suppression.</p>"
+            }
+        },
+        "com.amazonaws.ec2#SuccessfulSuppressionResponseSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#SuccessfulSuppressionResponseObject",
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }
@@ -133896,6 +136041,55 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#UnsuccessfulAssociationResponseObject": {
+            "type": "structure",
+            "members": {
+                "ApplicationStatusCheckId": {
+                    "target": "com.amazonaws.ec2#ApplicationStatusCheckId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ApplicationStatusCheckId",
+                        "smithy.api#documentation": "<p>The ID of the application status check.</p>",
+                        "smithy.api#xmlName": "applicationStatusCheckId"
+                    }
+                },
+                "AssociationType": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AssociationType",
+                        "smithy.api#documentation": "<p>The type of association. Valid values: <code>EC2TAG</code> and <code>INSTANCE_ID</code>.</p>",
+                        "smithy.api#xmlName": "associationType"
+                    }
+                },
+                "AssociationValue": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AssociationValue",
+                        "smithy.api#documentation": "<p>The association value. For <code>EC2TAG</code>, the value is formatted as <code>key=value</code>. For <code>INSTANCE_ID</code>, the value is the instance ID.</p>",
+                        "smithy.api#xmlName": "associationValue"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Reason",
+                        "smithy.api#documentation": "<p>The reason the association failed.</p>",
+                        "smithy.api#xmlName": "reason"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an unsuccessful application status check association.</p>"
+            }
+        },
+        "com.amazonaws.ec2#UnsuccessfulAssociationResponseSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#UnsuccessfulAssociationResponseObject",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#UnsuccessfulInstanceCreditSpecificationErrorCode": {
             "type": "enum",
             "members": {
@@ -134043,6 +136237,55 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ec2#UnsuccessfulItem",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#UnsuccessfulSuppressionResponseObject": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.ec2#InstanceId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceId",
+                        "smithy.api#documentation": "<p>The ID of the instance.</p>",
+                        "smithy.api#xmlName": "instanceId"
+                    }
+                },
+                "SuppressAt": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SuppressAt",
+                        "smithy.api#documentation": "<p>The date and time when suppression was attempted.</p>",
+                        "smithy.api#xmlName": "suppressAt"
+                    }
+                },
+                "ResumeAt": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ResumeAt",
+                        "smithy.api#documentation": "<p>The date and time when health checks would have resumed.</p>",
+                        "smithy.api#xmlName": "resumeAt"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Reason",
+                        "smithy.api#documentation": "<p>The reason the suppression failed.</p>",
+                        "smithy.api#xmlName": "reason"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an unsuccessful application status check suppression.</p>"
+            }
+        },
+        "com.amazonaws.ec2#UnsuccessfulSuppressionResponseSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#UnsuccessfulSuppressionResponseObject",
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }

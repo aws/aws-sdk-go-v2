@@ -17488,6 +17488,72 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services Lambda function tags used as resource filter criteria.</p>"
                     }
+                },
+                "cloudProvider": {
+                    "target": "com.amazonaws.inspector2#ResourceStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud providers used as resource filter criteria.</p>"
+                    }
+                },
+                "cloudProviderAccountId": {
+                    "target": "com.amazonaws.inspector2#ResourceStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider account IDs used as resource filter criteria.</p>"
+                    }
+                },
+                "cloudProviderOrgId": {
+                    "target": "com.amazonaws.inspector2#ResourceStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider organization IDs used as resource filter criteria.</p>"
+                    }
+                },
+                "cloudProviderRegion": {
+                    "target": "com.amazonaws.inspector2#ResourceStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider regions used as resource filter criteria.</p>"
+                    }
+                },
+                "cloudVmInstanceTags": {
+                    "target": "com.amazonaws.inspector2#ResourceMapFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud VM instance tags used as resource filter criteria.</p>"
+                    }
+                },
+                "cloudContainerImageTags": {
+                    "target": "com.amazonaws.inspector2#ResourceStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud container image tags used as resource filter criteria.</p>"
+                    }
+                },
+                "cloudContainerRepositoryName": {
+                    "target": "com.amazonaws.inspector2#ResourceStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud container repository names used as resource filter criteria.</p>"
+                    }
+                },
+                "cloudContainerRegistryName": {
+                    "target": "com.amazonaws.inspector2#ResourceStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud container registry names used as resource filter criteria.</p>"
+                    }
+                },
+                "cloudServerlessFunctionName": {
+                    "target": "com.amazonaws.inspector2#ResourceStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud serverless function names used as resource filter criteria.</p>"
+                    }
+                },
+                "cloudServerlessFunctionRuntime": {
+                    "target": "com.amazonaws.inspector2#ResourceStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud serverless function runtimes used as resource filter criteria.</p>"
+                    }
+                },
+                "cloudServerlessFunctionTags": {
+                    "target": "com.amazonaws.inspector2#ResourceMapFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud serverless function tags used as resource filter criteria.</p>"
+                    }
                 }
             },
             "traits": {
