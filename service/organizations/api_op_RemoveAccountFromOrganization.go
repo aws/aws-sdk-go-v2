@@ -21,7 +21,7 @@ import (
 //
 // When an account is removed from an organization, Organizations logs a
 // membership event in CloudTrail. The event is an AccountDepartedOrganization
-// event with departedMethod:Removed and departedTime . This event is available
+// event with departureMethod:REMOVED and departureTime . This event is available
 // only in the management account's event history.
 //
 //   - You can remove an account from your organization only if the account is

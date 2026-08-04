@@ -1531,31 +1531,6 @@ func (MarketingSource) Values() []MarketingSource {
 	}
 }
 
-type MarketSegment string
-
-// Enum values for MarketSegment
-const (
-	MarketSegmentEnterprise MarketSegment = "Enterprise"
-	MarketSegmentLarge      MarketSegment = "Large"
-	MarketSegmentMedium     MarketSegment = "Medium"
-	MarketSegmentSmall      MarketSegment = "Small"
-	MarketSegmentMicro      MarketSegment = "Micro"
-)
-
-// Values returns all known values for MarketSegment. Note that this can be
-// expanded in the future, and so it is only as up to date as the client.
-//
-// The ordering of this slice is not guaranteed to be stable across updates.
-func (MarketSegment) Values() []MarketSegment {
-	return []MarketSegment{
-		"Enterprise",
-		"Large",
-		"Medium",
-		"Small",
-		"Micro",
-	}
-}
-
 type NationalSecurity string
 
 // Enum values for NationalSecurity

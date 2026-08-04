@@ -25077,6 +25077,61 @@ func awsRestjson1_deserializeDocumentResourceFilterCriteria(v **types.ResourceFi
 				return err
 			}
 
+		case "cloudContainerImageTags":
+			if err := awsRestjson1_deserializeDocumentResourceStringFilterList(&sv.CloudContainerImageTags, value); err != nil {
+				return err
+			}
+
+		case "cloudContainerRegistryName":
+			if err := awsRestjson1_deserializeDocumentResourceStringFilterList(&sv.CloudContainerRegistryName, value); err != nil {
+				return err
+			}
+
+		case "cloudContainerRepositoryName":
+			if err := awsRestjson1_deserializeDocumentResourceStringFilterList(&sv.CloudContainerRepositoryName, value); err != nil {
+				return err
+			}
+
+		case "cloudProvider":
+			if err := awsRestjson1_deserializeDocumentResourceStringFilterList(&sv.CloudProvider, value); err != nil {
+				return err
+			}
+
+		case "cloudProviderAccountId":
+			if err := awsRestjson1_deserializeDocumentResourceStringFilterList(&sv.CloudProviderAccountId, value); err != nil {
+				return err
+			}
+
+		case "cloudProviderOrgId":
+			if err := awsRestjson1_deserializeDocumentResourceStringFilterList(&sv.CloudProviderOrgId, value); err != nil {
+				return err
+			}
+
+		case "cloudProviderRegion":
+			if err := awsRestjson1_deserializeDocumentResourceStringFilterList(&sv.CloudProviderRegion, value); err != nil {
+				return err
+			}
+
+		case "cloudServerlessFunctionName":
+			if err := awsRestjson1_deserializeDocumentResourceStringFilterList(&sv.CloudServerlessFunctionName, value); err != nil {
+				return err
+			}
+
+		case "cloudServerlessFunctionRuntime":
+			if err := awsRestjson1_deserializeDocumentResourceStringFilterList(&sv.CloudServerlessFunctionRuntime, value); err != nil {
+				return err
+			}
+
+		case "cloudServerlessFunctionTags":
+			if err := awsRestjson1_deserializeDocumentResourceMapFilterList(&sv.CloudServerlessFunctionTags, value); err != nil {
+				return err
+			}
+
+		case "cloudVmInstanceTags":
+			if err := awsRestjson1_deserializeDocumentResourceMapFilterList(&sv.CloudVmInstanceTags, value); err != nil {
+				return err
+			}
+
 		case "ec2InstanceTags":
 			if err := awsRestjson1_deserializeDocumentResourceMapFilterList(&sv.Ec2InstanceTags, value); err != nil {
 				return err

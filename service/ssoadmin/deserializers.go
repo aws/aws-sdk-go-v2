@@ -14611,6 +14611,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeInstanceOutput(v **DescribeInstan
 				sv.OwnerAccountId = ptr.String(jtv)
 			}
 
+		case "PermissionSetsEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.PermissionSetsEnabled = ptr.Bool(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)

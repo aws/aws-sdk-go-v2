@@ -74,6 +74,11 @@ type GetEngagementInvitationOutput struct {
 	// of the opportunity shared by AWS.
 	EngagementTitle *string
 
+	// The enrichment data for the engagement associated with this invitation. You can
+	// view propensity scores, program eligibility, and lead readiness assessments
+	// before taking action on the invitation.
+	EnrichmentContext *types.EnrichmentContext
+
 	// A list of active members currently part of the Engagement. This array contains
 	// a maximum of 10 members, each represented by an object with the following
 	// properties.

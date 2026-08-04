@@ -73,6 +73,9 @@ type DescribeInstanceOutput struct {
 	// created.
 	OwnerAccountId *string
 
+	// Indicates whether permission sets are enabled for this Identity Center instance.
+	PermissionSetsEnabled *bool
+
 	// The status of the instance.
 	Status types.InstanceStatus
 

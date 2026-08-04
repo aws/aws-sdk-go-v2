@@ -1,0 +1,8 @@
+{
+    "id": "8f6ed073-d469-4822-9bf0-ed0c001724d4",
+    "type": "feature",
+    "description": "Adding Azure SBOM export capability.",
+    "modules": [
+        "service/inspector2"
+    ]
+}

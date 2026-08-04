@@ -16,7 +16,7 @@ import (
 //
 // When an account leaves an organization, Organizations logs a membership event
 // in CloudTrail. The event is an AccountDepartedOrganization event with
-// departedMethod:Left and departedTime . This event is available only in the
+// departureMethod:LEFT and departureTime . This event is available only in the
 // management account's event history.
 //
 //   - The management account in an organization with all features enabled can set

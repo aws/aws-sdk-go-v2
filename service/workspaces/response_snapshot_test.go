@@ -1348,15 +1348,17 @@ func TestCheckResponseSnapshot_DescribeClientProperties(t *testing.T) {
 			{
 				ResourceId: ptr.String("__ResourceId__"),
 				ClientProperties: &types.ClientProperties{
-					ReconnectEnabled: types.ReconnectEnum("ENABLED"),
-					LogUploadEnabled: types.LogUploadEnum("ENABLED"),
+					ReconnectEnabled:       types.ReconnectEnum("ENABLED"),
+					LogUploadEnabled:       types.LogUploadEnum("ENABLED"),
+					ClientExperiencePolicy: ptr.String("__ClientExperiencePolicy__"),
 				},
 			},
 			{
 				ResourceId: ptr.String("__ResourceId__"),
 				ClientProperties: &types.ClientProperties{
-					ReconnectEnabled: types.ReconnectEnum("ENABLED"),
-					LogUploadEnabled: types.LogUploadEnum("ENABLED"),
+					ReconnectEnabled:       types.ReconnectEnum("ENABLED"),
+					LogUploadEnabled:       types.LogUploadEnum("ENABLED"),
+					ClientExperiencePolicy: ptr.String("__ClientExperiencePolicy__"),
 				},
 			},
 		},

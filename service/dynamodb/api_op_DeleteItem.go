@@ -222,6 +222,9 @@ type DeleteItemOutput struct {
 	// returned if the ReturnConsumedCapacity parameter was specified. For more
 	// information, see [Provisioned capacity mode]in the Amazon DynamoDB Developer Guide.
 	//
+	// If the table has vector indexes, the response includes a VectorIndexes field
+	// with VectorWriteRequestBytes consumed for each affected vector index.
+	//
 	// [Provisioned capacity mode]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
 	ConsumedCapacity *types.ConsumedCapacity
 

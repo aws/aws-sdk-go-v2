@@ -698,6 +698,261 @@ type AnalysisSecurityGroupRule struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the application-level health status for an instance.
+type ApplicationStatus struct {
+
+	// Details about the application status checks for the instance.
+	Details []ApplicationStatusDetail
+
+	// The date and time when application status reporting resumes after suppression.
+	ResumeAt *time.Time
+
+	// The current instance-level application status. This status is derived from
+	// application status checks with Aggregation set to included . Possible values:
+	//
+	//   - ok – All included checks passed.
+	//
+	//   - impaired – At least one included check failed.
+	//
+	//   - initializing – At least one included check is initializing, and no included
+	//   check is impaired.
+	//
+	//   - insufficient-data – At least one included check has insufficient data, and
+	//   no included check is impaired or initializing.
+	//
+	//   - not-applicable – No checks with Aggregation set to included apply to the
+	//   instance.
+	//
+	//   - suppressed – Application status reporting is suppressed for the instance.
+	//
+	// Checks with Aggregation set to excluded do not affect this value.
+	Status ApplicationStatusEnum
+
+	// The date and time when the current status started.
+	StatusSince *time.Time
+
+	// The date and time of the last status update.
+	StatusTimeStamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Information about an application status check association. Each item in the
+// associationSet of a DescribeApplicationStatusCheckAssociations response is of
+// this type.
+type ApplicationStatusCheckAssociationObject struct {
+
+	// The ID of the application status check.
+	ApplicationStatusCheckId *string
+
+	// The type of target that the application status check is associated with.
+	// Possible values:
+	//
+	//   - tag – The check applies to current and future instances with a matching tag
+	//   key-value pair.
+	//
+	//   - instance-id – The check applies to a specific instance.
+	AssociationType AssociationTypeEnum
+
+	// The key for the association. This value is present only for tag-based
+	// associations, where it contains the tag key. For instance-based associations,
+	// this value is absent.
+	Key *string
+
+	// The value for the association target. For tag-based associations, this is the
+	// tag value. For instance-based associations, this is the instance ID (for
+	// example, i-0123456789abcdef0 ).
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes an application status check.
+type ApplicationStatusCheckResponseObject struct {
+
+	// The aggregation setting for the application status check. When set to included ,
+	// the result of this check contributes to the instance-level application status.
+	// When set to excluded , the check runs independently and does not affect the
+	// instance-level status.
+	Aggregation AggregationStatusEnum
+
+	// The ID of the application status check.
+	ApplicationStatusCheckId *string
+
+	// The date and time when the application status check was created.
+	CreationTime *time.Time
+
+	// The date and time when the application status check was deleted.
+	DeletionTime *time.Time
+
+	// The index of the network device used for the health check. The value is greater
+	// than or equal to 0.
+	DeviceIndex *int32
+
+	// The number of consecutive failed health checks before the application status is
+	// considered impaired. The value must be greater than 0.
+	FailureThreshold *int32
+
+	// The health check paths for the application status check.
+	HealthCheckPaths []HealthCheckPathResponseObject
+
+	// The number of seconds to wait before starting health checks after an instance
+	// is launched. Valid values: 1 to 600.
+	InitializationGracePeriodSeconds *int32
+
+	// The interval, in seconds, between health checks. Valid value: 60.
+	Interval *int32
+
+	// The IP scope used for the health check.
+	IpScope IpScopeEnum
+
+	// The IP version used for the health check.
+	IpVersion IpVersionEnum
+
+	// The date and time when the application status check was last updated.
+	LastUpdatedAt *time.Time
+
+	// The date and time when the application status check was last modified.
+	ModifyTime *time.Time
+
+	// The URL path used for the health check HTTP request.
+	Path *string
+
+	// The port used for the health check.
+	Port *int32
+
+	// The protocol used for the health check.
+	Protocol NetworkProtocolEnum
+
+	// The comma-separated list of individual HTTP status codes or ranges that
+	// indicate a successful health check response.
+	StatusCodeMatcher *string
+
+	// The number of consecutive successful health checks before the application
+	// status is considered healthy. The value must be greater than 0.
+	SuccessThreshold *int32
+
+	// The tags assigned to the application status check.
+	Tags []Tag
+
+	// The [tags] associated with the application status check. Instances with these tags
+	// are automatically monitored by this check.
+	//
+	// [tags]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+	TargetTagAssociations []CustomTagKeyValueResponsePair
+
+	// The amount of time, in seconds, to wait for a health check response. Valid
+	// values: 1 to 30.
+	Timeout *int32
+
+	noSmithyDocumentSerde
+}
+
+// Describes the details of an application status check for an instance.
+type ApplicationStatusDetail struct {
+
+	// The aggregation setting for the application status check. When set to included ,
+	// the result of this check contributes to the instance-level application status.
+	// When set to excluded , the check runs independently and does not affect the
+	// instance-level status.
+	Aggregation AggregationStatusEnum
+
+	// The ID of the application status check.
+	ApplicationStatusCheckId *string
+
+	// The date and time when the check was last updated.
+	CheckUpdateTime *time.Time
+
+	// The reason for the current status.
+	Reason *ApplicationStatusReason
+
+	// The status of the individual application status check. Possible values:
+	//
+	//   - passed – The check reached its success threshold.
+	//
+	//   - failed – The check reached its failure threshold.
+	//
+	//   - initializing – The check is initializing or has not reached a success or
+	//   failure threshold.
+	//
+	//   - insufficient-data – The check does not have enough data to determine a
+	//   result.
+	//
+	//   - not-applicable – The check does not apply to the instance.
+	//
+	// This value reflects the check result and is not affected by aggregation or
+	// suppression.
+	Status ApplicationStatusCheckEnum
+
+	// The date and time when the current status started for this check.
+	StatusSince *time.Time
+
+	// The date and time of the last status update for this check.
+	StatusTimeStamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes the application statuses for instances.
+type ApplicationStatusesResponseType struct {
+
+	// The application status information for the instances.
+	Instances []InstanceApplicationStatus
+
+	noSmithyDocumentSerde
+}
+
+// Describes the reason for an application status check result.
+type ApplicationStatusReason struct {
+
+	// The reason code for the application status check result. Possible values:
+	//
+	//   - ResponseCodeMatched – The HTTP status code returned by the health check
+	//   matched the configured StatusCodeMatcher .
+	//
+	//   - ResponseCodeMismatch – The HTTP status code returned by the health check did
+	//   not match the configured StatusCodeMatcher .
+	//
+	//   - ConnectionTimeout – The connection to the target timed out.
+	//
+	//   - ResponseTimeout – The health check timed out while waiting for a response
+	//   from the target.
+	//
+	//   - ConnectionRefused – The target refused the health check connection.
+	//
+	//   - ConnectionReset – The target reset the health check connection before
+	//   returning a response.
+	//
+	// Current health check results use the values in the preceding list. Legacy
+	// results that do not contain structured reason metadata can instead contain a
+	// producer error type, such as Http Status Code or HttpConnectTimeoutException .
+	//
+	// For ResponseCodeMatched and ResponseCodeMismatch , the statusCode field
+	// contains the returned HTTP status code. The protocol field contains the
+	// protocol used for the health check.
+	Code *string
+
+	// The protocol used for the health check. Possible values: HTTP and HTTPS .
+	Protocol *string
+
+	// The HTTP status code returned by the health check.
+	StatusCode *int32
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of the application-level health status for an instance.
+type ApplicationStatusSummary struct {
+
+	// The date and time when the application status became impaired.
+	ImpairedSince *time.Time
+
+	// The current status.
+	Status SummaryStatus
+
+	noSmithyDocumentSerde
+}
+
 // An Autonomous System Number (ASN) and BYOIP CIDR association.
 type AsnAssociation struct {
 
@@ -3964,6 +4219,31 @@ type CustomerGateway struct {
 
 	// The type of VPN connection the customer gateway supports ( ipsec.1 ).
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a tag key-value pair for an application status check association
+// request.
+type CustomTagKeyValueRequestPair struct {
+
+	// The key of the tag.
+	Key *string
+
+	// The value of the tag.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a tag key-value pair for an application status check association.
+type CustomTagKeyValueResponsePair struct {
+
+	// The key of the tag.
+	Key *string
+
+	// The value of the tag.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -7351,6 +7631,82 @@ type GroupIdentifier struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a destination for a health check path in a request. Destinations can
+// be in a different Availability Zone than the source (cross-AZ) or in a Local
+// Zone (AZ to Local Zone), enabling remote health validation of your application.
+type HealthCheckPathDestinationRequestObject struct {
+
+	// The ID of the security group for the destination.
+	SecurityGroupId *string
+
+	// The ID of the subnet for the destination.
+	SubnetId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a destination for a health check path.
+type HealthCheckPathDestinationResponseObject struct {
+
+	// The ID of the security group for the destination.
+	SecurityGroupId *string
+
+	// The ID of the subnet for the destination.
+	SubnetId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a health check path for an application status check request.
+type HealthCheckPathRequestObject struct {
+
+	// The destinations for the health check path.
+	Destinations []HealthCheckPathDestinationRequestObject
+
+	// The source for the health check path.
+	Source *HealthCheckPathSourceRequestObject
+
+	noSmithyDocumentSerde
+}
+
+// Describes a health check path for an application status check.
+type HealthCheckPathResponseObject struct {
+
+	// The destinations for the health check path.
+	Destinations []HealthCheckPathDestinationResponseObject
+
+	// The source for the health check path.
+	Source *HealthCheckPathSourceResponseObject
+
+	noSmithyDocumentSerde
+}
+
+// Describes the source for a health check path in a request. The source defines
+// the subnet and security group where a health check elastic network interface
+// (ENI) is created to originate health check traffic.
+type HealthCheckPathSourceRequestObject struct {
+
+	// The ID of the security group for the source.
+	SecurityGroupId *string
+
+	// The ID of the subnet for the source.
+	SubnetId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the source for a health check path.
+type HealthCheckPathSourceResponseObject struct {
+
+	// The ID of the security group for the source.
+	SecurityGroupId *string
+
+	// The ID of the subnet for the source.
+	SubnetId *string
+
+	noSmithyDocumentSerde
+}
+
 // Indicates whether your instance is configured for hibernation. This parameter
 // is valid only if the instance meets the [hibernation prerequisites]. For more information, see [Hibernate your Amazon EC2 instance] in the
 // Amazon EC2 User Guide.
@@ -8953,6 +9309,27 @@ type Instance struct {
 
 	// The ID of the VPC in which the instance is running.
 	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the application status for an instance.
+type InstanceApplicationStatus struct {
+
+	// The application status for the instance.
+	ApplicationStatus *ApplicationStatus
+
+	// The Availability Zone of the instance.
+	AvailabilityZone *string
+
+	// The ID of the Availability Zone of the instance.
+	AvailabilityZoneId *string
+
+	// The ID of the instance.
+	InstanceId *string
+
+	// The tags assigned to the instance.
+	Tags []Tag
 
 	noSmithyDocumentSerde
 }
@@ -10887,8 +11264,13 @@ type InstanceStateChange struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the status of an instance.
+// Describes the status of an instance, including system status, instance status,
+// attached EBS status, and application status.
 type InstanceStatus struct {
+
+	// Reports impaired functionality that stems from issues with applications running
+	// on the instance.
+	ApplicationStatus *ApplicationStatusSummary
 
 	// Reports impaired functionality that stems from an attached Amazon EBS volume
 	// that is unreachable and unable to complete I/O operations.
@@ -22736,6 +23118,22 @@ type Subscription struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a successful application status check association.
+type SuccessfulAssociationResponseObject struct {
+
+	// The ID of the application status check.
+	ApplicationStatusCheckId *string
+
+	// The type of association. Valid values: EC2TAG and INSTANCE_ID .
+	AssociationType *string
+
+	// The association value. For EC2TAG , the value is formatted as key=value . For
+	// INSTANCE_ID , the value is the instance ID.
+	AssociationValue *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the burstable performance instance whose credit option for CPU usage
 // was successfully modified.
 type SuccessfulInstanceCreditSpecificationItem struct {
@@ -22751,6 +23149,21 @@ type SuccessfulQueuedPurchaseDeletion struct {
 
 	// The ID of the Reserved Instance.
 	ReservedInstancesId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a successful application status check suppression.
+type SuccessfulSuppressionResponseObject struct {
+
+	// The ID of the instance.
+	InstanceId *string
+
+	// The date and time when suppression ends and health checks resume.
+	ResumeAt *time.Time
+
+	// The date and time when suppression started.
+	SuppressAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -24515,6 +24928,25 @@ type TunnelOption struct {
 	noSmithyDocumentSerde
 }
 
+// Describes an unsuccessful application status check association.
+type UnsuccessfulAssociationResponseObject struct {
+
+	// The ID of the application status check.
+	ApplicationStatusCheckId *string
+
+	// The type of association. Valid values: EC2TAG and INSTANCE_ID .
+	AssociationType *string
+
+	// The association value. For EC2TAG , the value is formatted as key=value . For
+	// INSTANCE_ID , the value is the instance ID.
+	AssociationValue *string
+
+	// The reason the association failed.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the burstable performance instance whose credit option for CPU usage
 // was not modified.
 type UnsuccessfulInstanceCreditSpecificationItem struct {
@@ -24565,6 +24997,24 @@ type UnsuccessfulItemError struct {
 
 	// The error message accompanying the error code.
 	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes an unsuccessful application status check suppression.
+type UnsuccessfulSuppressionResponseObject struct {
+
+	// The ID of the instance.
+	InstanceId *string
+
+	// The reason the suppression failed.
+	Reason *string
+
+	// The date and time when health checks would have resumed.
+	ResumeAt *time.Time
+
+	// The date and time when suppression was attempted.
+	SuppressAt *time.Time
 
 	noSmithyDocumentSerde
 }

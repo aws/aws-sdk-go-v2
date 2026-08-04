@@ -1,0 +1,8 @@
+{
+    "id": "9ebe413e-5fef-4a67-bbeb-c1f1b32a5f38",
+    "type": "feature",
+    "description": "Partners can now create leads with only 5 required fields and free-text values for all other fields, reducing import friction. Engagement invitations now include enrichment data (propensity scores, lead readiness) directly in the response.",
+    "modules": [
+        "service/partnercentralselling"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "19878b5f-79fc-4ca8-a5c2-959a05259e28",
+    "type": "documentation",
+    "description": "Improved accuracy of CloudTrail event documentation for AWS Organizations membership operations.",
+    "modules": [
+        "service/organizations"
+    ]
+}

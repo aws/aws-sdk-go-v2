@@ -278,6 +278,18 @@ func TestCheckSnapshot_AssociateAddress(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateApplicationStatusCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateCapacityReservationBillingOwner(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateCapacityReservationBillingOwner(context.Background(), nil, func(o *Options) {
@@ -811,6 +823,18 @@ func TestCheckSnapshot_CopyVolumes(t *testing.T) {
 	_, err := svc.CopyVolumes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CopyVolumes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateApplicationStatusCheck")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2083,6 +2107,18 @@ func TestCheckSnapshot_CreateVpnGateway(t *testing.T) {
 	_, err := svc.CreateVpnGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateVpnGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteApplicationStatusCheck")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3379,6 +3415,42 @@ func TestCheckSnapshot_DescribeAggregateIdFormat(t *testing.T) {
 	_, err := svc.DescribeAggregateIdFormat(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeAggregateIdFormat")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeApplicationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeApplicationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeApplicationStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeApplicationStatusCheckAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeApplicationStatusCheckAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeApplicationStatusCheckAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeApplicationStatusChecks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeApplicationStatusChecks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeApplicationStatusChecks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5678,6 +5750,18 @@ func TestCheckSnapshot_DisableAllowedImagesSettings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisableApplicationStatusCheckSuppression(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableApplicationStatusCheckSuppression(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableApplicationStatusCheckSuppression")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisableAwsNetworkPerformanceMetricSubscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableAwsNetworkPerformanceMetricSubscription(context.Background(), nil, func(o *Options) {
@@ -5918,6 +6002,18 @@ func TestCheckSnapshot_DisassociateAddress(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateApplicationStatusCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisassociateCapacityReservationBillingOwner(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateCapacityReservationBillingOwner(context.Background(), nil, func(o *Options) {
@@ -6139,6 +6235,18 @@ func TestCheckSnapshot_EnableAllowedImagesSettings(t *testing.T) {
 	_, err := svc.EnableAllowedImagesSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "EnableAllowedImagesSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_EnableApplicationStatusCheckSuppression(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableApplicationStatusCheckSuppression(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableApplicationStatusCheckSuppression")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7435,6 +7543,18 @@ func TestCheckSnapshot_ModifyAddressAttribute(t *testing.T) {
 	_, err := svc.ModifyAddressAttribute(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyAddressAttribute")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyApplicationStatusCheck")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -9577,6 +9697,18 @@ func TestUpdateSnapshot_AssociateAddress(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AssociateApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateApplicationStatusCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AssociateCapacityReservationBillingOwner(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateCapacityReservationBillingOwner(context.Background(), nil, func(o *Options) {
@@ -10110,6 +10242,18 @@ func TestUpdateSnapshot_CopyVolumes(t *testing.T) {
 	_, err := svc.CopyVolumes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CopyVolumes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateApplicationStatusCheck")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -11382,6 +11526,18 @@ func TestUpdateSnapshot_CreateVpnGateway(t *testing.T) {
 	_, err := svc.CreateVpnGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateVpnGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteApplicationStatusCheck")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -12678,6 +12834,42 @@ func TestUpdateSnapshot_DescribeAggregateIdFormat(t *testing.T) {
 	_, err := svc.DescribeAggregateIdFormat(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeAggregateIdFormat")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeApplicationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeApplicationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeApplicationStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeApplicationStatusCheckAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeApplicationStatusCheckAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeApplicationStatusCheckAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeApplicationStatusChecks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeApplicationStatusChecks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeApplicationStatusChecks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -14977,6 +15169,18 @@ func TestUpdateSnapshot_DisableAllowedImagesSettings(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisableApplicationStatusCheckSuppression(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableApplicationStatusCheckSuppression(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableApplicationStatusCheckSuppression")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisableAwsNetworkPerformanceMetricSubscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableAwsNetworkPerformanceMetricSubscription(context.Background(), nil, func(o *Options) {
@@ -15217,6 +15421,18 @@ func TestUpdateSnapshot_DisassociateAddress(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateApplicationStatusCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisassociateCapacityReservationBillingOwner(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateCapacityReservationBillingOwner(context.Background(), nil, func(o *Options) {
@@ -15438,6 +15654,18 @@ func TestUpdateSnapshot_EnableAllowedImagesSettings(t *testing.T) {
 	_, err := svc.EnableAllowedImagesSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "EnableAllowedImagesSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_EnableApplicationStatusCheckSuppression(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableApplicationStatusCheckSuppression(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableApplicationStatusCheckSuppression")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -16734,6 +16962,18 @@ func TestUpdateSnapshot_ModifyAddressAttribute(t *testing.T) {
 	_, err := svc.ModifyAddressAttribute(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyAddressAttribute")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyApplicationStatusCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyApplicationStatusCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyApplicationStatusCheck")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

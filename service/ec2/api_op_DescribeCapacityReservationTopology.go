@@ -52,7 +52,7 @@ type DescribeCapacityReservationTopologyInput struct {
 	//
 	// Default: Describes all your Capacity Reservations.
 	//
-	// Constraints: Maximum 100 explicitly specified Capacity Reservation IDs.
+	// Constraints: Maximum 10 explicitly specified Capacity Reservation IDs.
 	CapacityReservationIds []string
 
 	// Checks whether you have the required permissions for the operation, without

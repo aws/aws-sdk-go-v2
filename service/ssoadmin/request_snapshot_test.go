@@ -2482,6 +2482,7 @@ func TestCheckRequestSnapshot_UpdateInstance(t *testing.T) {
 			KeyType:   types.KmsKeyType("AWS_OWNED_KMS_KEY"),
 			KmsKeyArn: ptr.String("__KmsKeyArn__"),
 		},
+		PermissionSetsEnabled: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4920,6 +4921,7 @@ func TestUpdateRequestSnapshot_UpdateInstance(t *testing.T) {
 			KeyType:   types.KmsKeyType("AWS_OWNED_KMS_KEY"),
 			KmsKeyArn: ptr.String("__KmsKeyArn__"),
 		},
+		PermissionSetsEnabled: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -31,12 +31,6 @@ func (c *Client) CreateSecondaryNetwork(ctx context.Context, params *CreateSecon
 
 type CreateSecondaryNetworkInput struct {
 
-	// The IPv4 CIDR block for the secondary network. The CIDR block size must be
-	// between /12 and /28.
-	//
-	// This member is required.
-	Ipv4CidrBlock *string
-
 	// The type of secondary network.
 	//
 	// This member is required.
@@ -53,6 +47,10 @@ type CreateSecondaryNetworkInput struct {
 	// required permissions, the error response is DryRunOperation . Otherwise, it is
 	// UnauthorizedOperation .
 	DryRun *bool
+
+	// The IPv4 CIDR block for the secondary network. The CIDR block size must be
+	// between /12 and /28.
+	Ipv4CidrBlock *string
 
 	// The tags to assign to the secondary network.
 	TagSpecifications []types.TagSpecification

@@ -54,6 +54,7 @@
         "api_op_RestoreTableFromBackup.go",
         "api_op_RestoreTableToPointInTime.go",
         "api_op_Scan.go",
+        "api_op_SearchVectors.go",
         "api_op_TagResource.go",
         "api_op_TransactGetItems.go",
         "api_op_TransactWriteItems.go",

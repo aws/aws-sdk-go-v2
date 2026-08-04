@@ -1,0 +1,8 @@
+{
+    "id": "7d39a63a-e36f-462f-9097-6d584c6a5a25",
+    "type": "feature",
+    "description": "Amazon Connect Customer now supports up to 50 attachments per email, increased from the previous limit of 10. The individual maximum attachment size limit of 20 MB and the total email size limit of 25 MB still hold true.",
+    "modules": [
+        "service/connect"
+    ]
+}

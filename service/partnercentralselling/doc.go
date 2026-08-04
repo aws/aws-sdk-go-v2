@@ -3,9 +3,7 @@
 // Package partnercentralselling provides the API client, operations, and
 // parameter types for Partner Central Selling API.
 //
-// # AWS Partner Central API for Selling
-//
-// # AWS Partner Central API for Selling Reference Guide
+// # Partner Central
 //
 // This Amazon Web Services (AWS) Partner Central API reference is designed to
 // help [AWS Partners]integrate Customer Relationship Management (CRM) systems with AWS Partner

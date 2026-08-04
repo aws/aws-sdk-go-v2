@@ -1,0 +1,8 @@
+{
+    "id": "ec1c40c7-26cc-43f7-ad62-fa24782fd449",
+    "type": "feature",
+    "description": "AWS IAM Identity Center now lets you create organization-level instances without enabling multi-account permissions. You can enable multi-account permissions during instance creation or later via console or API, which then provisions the necessary service-linked roles.",
+    "modules": [
+        "service/ssoadmin"
+    ]
+}

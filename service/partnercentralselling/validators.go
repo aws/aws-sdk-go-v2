@@ -1465,9 +1465,6 @@ func validateLeadCustomer(v *types.LeadCustomer) error {
 	if v.CompanyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CompanyName"))
 	}
-	if v.Address == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Address"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1480,18 +1477,6 @@ func validateLeadInteraction(v *types.LeadInteraction) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LeadInteraction"}
-	if v.SourceType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
-	}
-	if v.SourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceId"))
-	}
-	if v.SourceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceName"))
-	}
-	if v.CustomerAction == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CustomerAction"))
-	}
 	if v.Contact == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Contact"))
 	} else if v.Contact != nil {
@@ -1531,9 +1516,6 @@ func validateLeadInvitationCustomer(v *types.LeadInvitationCustomer) error {
 	if v.CompanyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CompanyName"))
 	}
-	if len(v.CountryCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("CountryCode"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1546,15 +1528,6 @@ func validateLeadInvitationInteraction(v *types.LeadInvitationInteraction) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LeadInvitationInteraction"}
-	if v.SourceType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
-	}
-	if v.SourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceId"))
-	}
-	if v.SourceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceName"))
-	}
 	if v.ContactBusinessTitle == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactBusinessTitle"))
 	}
@@ -2118,12 +2091,6 @@ func validateOpCreateEngagementInput(v *CreateEngagementInput) error {
 	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
-	}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
-	}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if v.Contexts != nil {
 		if err := validateEngagementContexts(v.Contexts); err != nil {

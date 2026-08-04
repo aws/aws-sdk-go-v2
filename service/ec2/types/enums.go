@@ -269,6 +269,25 @@ func (Affinity) Values() []Affinity {
 	}
 }
 
+type AggregationStatusEnum string
+
+// Enum values for AggregationStatusEnum
+const (
+	AggregationStatusEnumIncluded AggregationStatusEnum = "included"
+	AggregationStatusEnumExcluded AggregationStatusEnum = "excluded"
+)
+
+// Values returns all known values for AggregationStatusEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AggregationStatusEnum) Values() []AggregationStatusEnum {
+	return []AggregationStatusEnum{
+		"included",
+		"excluded",
+	}
+}
+
 type AllocationState string
 
 // Enum values for AllocationState
@@ -479,6 +498,58 @@ func (ApplianceModeSupportValue) Values() []ApplianceModeSupportValue {
 	}
 }
 
+type ApplicationStatusCheckEnum string
+
+// Enum values for ApplicationStatusCheckEnum
+const (
+	ApplicationStatusCheckEnumPassed           ApplicationStatusCheckEnum = "passed"
+	ApplicationStatusCheckEnumFailed           ApplicationStatusCheckEnum = "failed"
+	ApplicationStatusCheckEnumInitializing     ApplicationStatusCheckEnum = "initializing"
+	ApplicationStatusCheckEnumInsufficientData ApplicationStatusCheckEnum = "insufficient-data"
+	ApplicationStatusCheckEnumNotApplicable    ApplicationStatusCheckEnum = "not-applicable"
+)
+
+// Values returns all known values for ApplicationStatusCheckEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationStatusCheckEnum) Values() []ApplicationStatusCheckEnum {
+	return []ApplicationStatusCheckEnum{
+		"passed",
+		"failed",
+		"initializing",
+		"insufficient-data",
+		"not-applicable",
+	}
+}
+
+type ApplicationStatusEnum string
+
+// Enum values for ApplicationStatusEnum
+const (
+	ApplicationStatusEnumOk               ApplicationStatusEnum = "ok"
+	ApplicationStatusEnumImpaired         ApplicationStatusEnum = "impaired"
+	ApplicationStatusEnumInitializing     ApplicationStatusEnum = "initializing"
+	ApplicationStatusEnumInsufficientData ApplicationStatusEnum = "insufficient-data"
+	ApplicationStatusEnumNotApplicable    ApplicationStatusEnum = "not-applicable"
+	ApplicationStatusEnumSuppressed       ApplicationStatusEnum = "suppressed"
+)
+
+// Values returns all known values for ApplicationStatusEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationStatusEnum) Values() []ApplicationStatusEnum {
+	return []ApplicationStatusEnum{
+		"ok",
+		"impaired",
+		"initializing",
+		"insufficient-data",
+		"not-applicable",
+		"suppressed",
+	}
+}
+
 type ApplyCancellationCharges string
 
 // Enum values for ApplyCancellationCharges
@@ -639,6 +710,25 @@ func (AssociationStatusCode) Values() []AssociationStatusCode {
 		"association-failed",
 		"disassociating",
 		"disassociated",
+	}
+}
+
+type AssociationTypeEnum string
+
+// Enum values for AssociationTypeEnum
+const (
+	AssociationTypeEnumTag        AssociationTypeEnum = "tag"
+	AssociationTypeEnumInstanceId AssociationTypeEnum = "instance-id"
+)
+
+// Values returns all known values for AssociationTypeEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationTypeEnum) Values() []AssociationTypeEnum {
+	return []AssociationTypeEnum{
+		"tag",
+		"instance-id",
 	}
 }
 
@@ -8071,6 +8161,23 @@ func (IpamTier) Values() []IpamTier {
 	}
 }
 
+type IpScopeEnum string
+
+// Enum values for IpScopeEnum
+const (
+	IpScopeEnumPrivate IpScopeEnum = "private"
+)
+
+// Values returns all known values for IpScopeEnum. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IpScopeEnum) Values() []IpScopeEnum {
+	return []IpScopeEnum{
+		"private",
+	}
+}
+
 type IpSource string
 
 // Enum values for IpSource
@@ -8127,6 +8234,25 @@ func (Ipv6SupportValue) Values() []Ipv6SupportValue {
 	return []Ipv6SupportValue{
 		"enable",
 		"disable",
+	}
+}
+
+type IpVersionEnum string
+
+// Enum values for IpVersionEnum
+const (
+	IpVersionEnumIpv4 IpVersionEnum = "ipv4"
+	IpVersionEnumIpv6 IpVersionEnum = "ipv6"
+)
+
+// Values returns all known values for IpVersionEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IpVersionEnum) Values() []IpVersionEnum {
+	return []IpVersionEnum{
+		"ipv4",
+		"ipv6",
 	}
 }
 
@@ -9261,6 +9387,25 @@ func (NetworkInterfaceType) Values() []NetworkInterfaceType {
 	}
 }
 
+type NetworkProtocolEnum string
+
+// Enum values for NetworkProtocolEnum
+const (
+	NetworkProtocolEnumHttp  NetworkProtocolEnum = "http"
+	NetworkProtocolEnumHttps NetworkProtocolEnum = "https"
+)
+
+// Values returns all known values for NetworkProtocolEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkProtocolEnum) Values() []NetworkProtocolEnum {
+	return []NetworkProtocolEnum{
+		"http",
+		"https",
+	}
+}
+
 type NitroEnclavesSupport string
 
 // Enum values for NitroEnclavesSupport
@@ -10194,6 +10339,7 @@ const (
 	ResourceTypeVpnConcentrator                                        ResourceType = "vpn-concentrator"
 	ResourceTypeIpamPoolAllocation                                     ResourceType = "ipam-pool-allocation"
 	ResourceTypeCapacityReservationCancellationQuote                   ResourceType = "capacity-reservation-cancellation-quote"
+	ResourceTypeApplicationStatusCheck                                 ResourceType = "application-status-check"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -10311,6 +10457,7 @@ func (ResourceType) Values() []ResourceType {
 		"vpn-concentrator",
 		"ipam-pool-allocation",
 		"capacity-reservation-cancellation-quote",
+		"application-status-check",
 	}
 }
 

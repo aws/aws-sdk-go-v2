@@ -1,0 +1,8 @@
+{
+    "id": "5eb0be3f-01a1-487b-a14f-f20e03bd2d95",
+    "type": "feature",
+    "description": "Updating endpoint generation logic",
+    "modules": [
+        "service/iam"
+    ]
+}

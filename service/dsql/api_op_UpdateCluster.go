@@ -43,11 +43,14 @@ import (
 //
 //   - Each peer cluster: exact ARN of each specified peer cluster
 //
-// dsql:RemovePeerCluster Permission to remove peer clusters. The
-// dsql:RemovePeerCluster permission uses a wildcard ARN pattern to simplify
-// permission management during updates.
+// dsql:RemovePeerCluster Permission to remove peer clusters. When you list peer
+// clusters in multiRegionProperties.clusters , you need this permission for each
+// current peer cluster that your list omits.
 //
-// Resources: arn:aws:dsql:*:account-id:cluster/*
+// Resources:
+//
+//   - Each removed peer cluster: exact ARN of each removed peer cluster, in its
+//     own Region
 //
 // dsql:PutWitnessRegion Permission to set a witness Region.
 //
@@ -58,14 +61,12 @@ import (
 // This permission is checked both in the cluster Region and in the witness
 // Region.
 //
-//   - The witness region specified in multiRegionProperties.witnessRegion cannot
+//   - The witness Region specified in multiRegionProperties.witnessRegion cannot
 //     be the same as the cluster's Region.
 //
-//   - When updating clusters with peer relationships, permissions are checked for
-//     both adding and removing peers.
-//
-//   - The dsql:RemovePeerCluster permission uses a wildcard ARN pattern to
-//     simplify permission management during updates.
+//   - When you list peer clusters in multiRegionProperties.clusters , you need
+//     dsql:AddPeerCluster for every peer cluster in your request. You need
+//     dsql:RemovePeerCluster only for the peer clusters that the update removes.
 func (c *Client) UpdateCluster(ctx context.Context, params *UpdateClusterInput, optFns ...func(*Options)) (*UpdateClusterOutput, error) {
 	if params == nil {
 		params = &UpdateClusterInput{}
@@ -104,6 +105,9 @@ type UpdateClusterInput struct {
 	// The KMS key that encrypts and protects the data on your cluster. You can
 	// specify the ARN, ID, or alias of an existing key or have Amazon Web Services
 	// create a default key for you.
+	//
+	// To switch to the key owned by Amazon Web Services, specify the reserved value
+	// AWS_OWNED_KMS_KEY .
 	KmsEncryptionKey *string
 
 	// The new multi-Region cluster configuration settings to be applied during an

@@ -1961,17 +1961,17 @@ func TestCheckRequestSnapshot_UpdateEngagementContext(t *testing.T) {
 			Value: types.UpdateLeadContext{
 				QualificationStatus: ptr.String("__QualificationStatus__"),
 				Customer: &types.LeadCustomer{
-					Industry:    types.Industry("Aerospace"),
+					Industry:    ptr.String("__Industry__"),
 					CompanyName: ptr.String("__CompanyName__"),
 					WebsiteUrl:  ptr.String("__WebsiteUrl__"),
-					Address: &types.AddressSummary{
+					Address: &types.LeadAddress{
 						City:          ptr.String("__City__"),
 						PostalCode:    ptr.String("__PostalCode__"),
 						StateOrRegion: ptr.String("__StateOrRegion__"),
-						CountryCode:   types.CountryCode("US"),
+						CountryCode:   ptr.String("__CountryCode__"),
 					},
 					AwsMaturity:   ptr.String("__AwsMaturity__"),
-					MarketSegment: types.MarketSegment("Enterprise"),
+					MarketSegment: ptr.String("__MarketSegment__"),
 				},
 				Interaction: &types.LeadInteraction{
 					SourceType:      ptr.String("__SourceType__"),
@@ -3948,17 +3948,17 @@ func TestUpdateRequestSnapshot_UpdateEngagementContext(t *testing.T) {
 			Value: types.UpdateLeadContext{
 				QualificationStatus: ptr.String("__QualificationStatus__"),
 				Customer: &types.LeadCustomer{
-					Industry:    types.Industry("Aerospace"),
+					Industry:    ptr.String("__Industry__"),
 					CompanyName: ptr.String("__CompanyName__"),
 					WebsiteUrl:  ptr.String("__WebsiteUrl__"),
-					Address: &types.AddressSummary{
+					Address: &types.LeadAddress{
 						City:          ptr.String("__City__"),
 						PostalCode:    ptr.String("__PostalCode__"),
 						StateOrRegion: ptr.String("__StateOrRegion__"),
-						CountryCode:   types.CountryCode("US"),
+						CountryCode:   ptr.String("__CountryCode__"),
 					},
 					AwsMaturity:   ptr.String("__AwsMaturity__"),
-					MarketSegment: types.MarketSegment("Enterprise"),
+					MarketSegment: ptr.String("__MarketSegment__"),
 				},
 				Interaction: &types.LeadInteraction{
 					SourceType:      ptr.String("__SourceType__"),

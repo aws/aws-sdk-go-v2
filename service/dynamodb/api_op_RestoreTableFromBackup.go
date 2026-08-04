@@ -80,6 +80,12 @@ type RestoreTableFromBackupInput struct {
 	// The new server-side encryption settings for the restored table.
 	SSESpecificationOverride *types.SSESpecification
 
+	// The vector indexes for the restored table. If not specified, all vector indexes
+	// from the backup are restored. The indexes provided must match existing vector
+	// indexes from the backup. You can choose to exclude some or all of the vector
+	// indexes at the time of restore.
+	VectorIndexOverride []types.VectorIndex
+
 	noSmithyDocumentSerde
 }
 

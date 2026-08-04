@@ -590,6 +590,18 @@ func TestCheckSnapshot_Scan(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SearchVectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchVectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchVectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -1266,6 +1278,18 @@ func TestUpdateSnapshot_Scan(t *testing.T) {
 	_, err := svc.Scan(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "Scan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchVectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchVectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchVectors")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

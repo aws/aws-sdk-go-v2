@@ -11,6 +11,18 @@ import (
 
 // Update the details for the instance of IAM Identity Center that is owned by the
 // Amazon Web Services account.
+//
+// In a single UpdateInstance request, you can perform only one of the following
+// operations:
+//
+//   - Update the encryption configuration of the instance by specifying
+//     EncryptionConfiguration .
+//
+//   - Enable permission sets for the instance by specifying PermissionSetsEnabled .
+//
+// A request that specifies both EncryptionConfiguration and PermissionSetsEnabled
+// returns a ValidationException . To perform both operations, call UpdateInstance
+// separately for each. The two calls can be made in parallel.
 func (c *Client) UpdateInstance(ctx context.Context, params *UpdateInstanceInput, optFns ...func(*Options)) (*UpdateInstanceOutput, error) {
 	if params == nil {
 		params = &UpdateInstanceInput{}
@@ -42,6 +54,14 @@ type UpdateInstanceInput struct {
 
 	// Updates the instance name.
 	Name *string
+
+	// Enables permission sets for this Identity Center instance. The only accepted
+	// value is true . After permission sets are enabled, they cannot be disabled.
+	//
+	// You can't set EncryptionConfiguration and PermissionSetsEnabled in the same
+	// request. To configure both, make two separate UpdateInstance calls. These calls
+	// can be made in parallel.
+	PermissionSetsEnabled *bool
 
 	noSmithyDocumentSerde
 }

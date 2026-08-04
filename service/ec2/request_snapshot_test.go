@@ -890,6 +890,49 @@ func TestCheckRequestSnapshot_AssociateAddress(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_AssociateApplicationStatusCheck(t *testing.T) {
+	input := &AssociateApplicationStatusCheckInput{
+		ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+		TargetTagAssociations: []types.CustomTagKeyValueRequestPair{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateApplicationStatusCheck(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateApplicationStatusCheck"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_AssociateCapacityReservationBillingOwner(t *testing.T) {
 	input := &AssociateCapacityReservationBillingOwnerInput{
 		DryRun:                          ptr.Bool(true),
@@ -2700,6 +2743,109 @@ func TestCheckRequestSnapshot_CopyVolumes(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CopyVolumes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateApplicationStatusCheck(t *testing.T) {
+	input := &CreateApplicationStatusCheckInput{
+		HealthCheckPaths: []types.HealthCheckPathRequestObject{
+			{
+				Source: &types.HealthCheckPathSourceRequestObject{
+					SubnetId:        ptr.String("__SubnetId__"),
+					SecurityGroupId: ptr.String("__SecurityGroupId__"),
+				},
+				Destinations: []types.HealthCheckPathDestinationRequestObject{
+					{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+					{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+				},
+			},
+			{
+				Source: &types.HealthCheckPathSourceRequestObject{
+					SubnetId:        ptr.String("__SubnetId__"),
+					SecurityGroupId: ptr.String("__SecurityGroupId__"),
+				},
+				Destinations: []types.HealthCheckPathDestinationRequestObject{
+					{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+					{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+				},
+			},
+		},
+		Aggregation:                      types.AggregationStatusEnum("included"),
+		Protocol:                         types.NetworkProtocolEnum("http"),
+		Port:                             ptr.Int32(1),
+		Path:                             ptr.String("__Path__"),
+		DeviceIndex:                      ptr.Int32(1),
+		IpVersion:                        types.IpVersionEnum("ipv4"),
+		IpScope:                          types.IpScopeEnum("private"),
+		Interval:                         ptr.Int32(1),
+		Timeout:                          ptr.Int32(1),
+		FailureThreshold:                 ptr.Int32(1),
+		SuccessThreshold:                 ptr.Int32(1),
+		StatusCodeMatcher:                ptr.String("__StatusCodeMatcher__"),
+		InitializationGracePeriodSeconds: ptr.Int32(1),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateApplicationStatusCheck(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateApplicationStatusCheck"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -11405,6 +11551,35 @@ func TestCheckRequestSnapshot_CreateVpnGateway(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteApplicationStatusCheck(t *testing.T) {
+	input := &DeleteApplicationStatusCheckInput{
+		ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+		ClientToken:              ptr.String("__ClientToken__"),
+		DryRun:                   ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteApplicationStatusCheck(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteApplicationStatusCheck"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteCapacityManagerDataExport(t *testing.T) {
 	input := &DeleteCapacityManagerDataExportInput{
 		CapacityManagerDataExportId: ptr.String("__CapacityManagerDataExportId__"),
@@ -14544,6 +14719,154 @@ func TestCheckRequestSnapshot_DescribeAggregateIdFormat(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAggregateIdFormat"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeApplicationStatus(t *testing.T) {
+	input := &DescribeApplicationStatusInput{
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeApplicationStatus(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeApplicationStatus"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeApplicationStatusCheckAssociations(t *testing.T) {
+	input := &DescribeApplicationStatusCheckAssociationsInput{
+		ApplicationStatusCheckIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeApplicationStatusCheckAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeApplicationStatusCheckAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeApplicationStatusChecks(t *testing.T) {
+	input := &DescribeApplicationStatusChecksInput{
+		ApplicationStatusCheckIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		IncludeAll: ptr.Bool(true),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeApplicationStatusChecks(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeApplicationStatusChecks"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -23309,6 +23632,38 @@ func TestCheckRequestSnapshot_DisableAllowedImagesSettings(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DisableApplicationStatusCheckSuppression(t *testing.T) {
+	input := &DisableApplicationStatusCheckSuppressionInput{
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisableApplicationStatusCheckSuppression(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisableApplicationStatusCheckSuppression"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DisableAwsNetworkPerformanceMetricSubscription(t *testing.T) {
 	input := &DisableAwsNetworkPerformanceMetricSubscriptionInput{
 		Source:      ptr.String("__Source__"),
@@ -23888,6 +24243,49 @@ func TestCheckRequestSnapshot_DisassociateAddress(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DisassociateApplicationStatusCheck(t *testing.T) {
+	input := &DisassociateApplicationStatusCheckInput{
+		ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+		TargetTagAssociations: []types.CustomTagKeyValueRequestPair{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateApplicationStatusCheck(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateApplicationStatusCheck"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DisassociateCapacityReservationBillingOwner(t *testing.T) {
 	input := &DisassociateCapacityReservationBillingOwnerInput{
 		DryRun:                          ptr.Bool(true),
@@ -24453,6 +24851,39 @@ func TestCheckRequestSnapshot_EnableAllowedImagesSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "EnableAllowedImagesSettings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_EnableApplicationStatusCheckSuppression(t *testing.T) {
+	input := &EnableApplicationStatusCheckSuppressionInput{
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DurationSeconds: ptr.Int32(1),
+		ClientToken:     ptr.String("__ClientToken__"),
+		DryRun:          ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.EnableApplicationStatusCheckSuppression(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "EnableApplicationStatusCheckSuppression"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -28585,6 +29016,82 @@ func TestCheckRequestSnapshot_ModifyAddressAttribute(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyAddressAttribute"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ModifyApplicationStatusCheck(t *testing.T) {
+	input := &ModifyApplicationStatusCheckInput{
+		ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+		Aggregation:              types.AggregationStatusEnum("included"),
+		HealthCheckPaths: []types.HealthCheckPathRequestObject{
+			{
+				Source: &types.HealthCheckPathSourceRequestObject{
+					SubnetId:        ptr.String("__SubnetId__"),
+					SecurityGroupId: ptr.String("__SecurityGroupId__"),
+				},
+				Destinations: []types.HealthCheckPathDestinationRequestObject{
+					{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+					{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+				},
+			},
+			{
+				Source: &types.HealthCheckPathSourceRequestObject{
+					SubnetId:        ptr.String("__SubnetId__"),
+					SecurityGroupId: ptr.String("__SecurityGroupId__"),
+				},
+				Destinations: []types.HealthCheckPathDestinationRequestObject{
+					{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+					{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+				},
+			},
+		},
+		Protocol:                         types.NetworkProtocolEnum("http"),
+		Port:                             ptr.Int32(1),
+		Path:                             ptr.String("__Path__"),
+		DeviceIndex:                      ptr.Int32(1),
+		IpVersion:                        types.IpVersionEnum("ipv4"),
+		IpScope:                          types.IpScopeEnum("private"),
+		Interval:                         ptr.Int32(1),
+		Timeout:                          ptr.Int32(1),
+		FailureThreshold:                 ptr.Int32(1),
+		SuccessThreshold:                 ptr.Int32(1),
+		StatusCodeMatcher:                ptr.String("__StatusCodeMatcher__"),
+		InitializationGracePeriodSeconds: ptr.Int32(1),
+		ClientToken:                      ptr.String("__ClientToken__"),
+		DryRun:                           ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyApplicationStatusCheck(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyApplicationStatusCheck"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -38932,6 +39439,49 @@ func TestUpdateRequestSnapshot_AssociateAddress(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_AssociateApplicationStatusCheck(t *testing.T) {
+	input := &AssociateApplicationStatusCheckInput{
+		ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+		TargetTagAssociations: []types.CustomTagKeyValueRequestPair{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateApplicationStatusCheck(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateApplicationStatusCheck"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_AssociateCapacityReservationBillingOwner(t *testing.T) {
 	input := &AssociateCapacityReservationBillingOwnerInput{
 		DryRun:                          ptr.Bool(true),
@@ -40742,6 +41292,109 @@ func TestUpdateRequestSnapshot_CopyVolumes(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CopyVolumes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateApplicationStatusCheck(t *testing.T) {
+	input := &CreateApplicationStatusCheckInput{
+		HealthCheckPaths: []types.HealthCheckPathRequestObject{
+			{
+				Source: &types.HealthCheckPathSourceRequestObject{
+					SubnetId:        ptr.String("__SubnetId__"),
+					SecurityGroupId: ptr.String("__SecurityGroupId__"),
+				},
+				Destinations: []types.HealthCheckPathDestinationRequestObject{
+					{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+					{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+				},
+			},
+			{
+				Source: &types.HealthCheckPathSourceRequestObject{
+					SubnetId:        ptr.String("__SubnetId__"),
+					SecurityGroupId: ptr.String("__SecurityGroupId__"),
+				},
+				Destinations: []types.HealthCheckPathDestinationRequestObject{
+					{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+					{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+				},
+			},
+		},
+		Aggregation:                      types.AggregationStatusEnum("included"),
+		Protocol:                         types.NetworkProtocolEnum("http"),
+		Port:                             ptr.Int32(1),
+		Path:                             ptr.String("__Path__"),
+		DeviceIndex:                      ptr.Int32(1),
+		IpVersion:                        types.IpVersionEnum("ipv4"),
+		IpScope:                          types.IpScopeEnum("private"),
+		Interval:                         ptr.Int32(1),
+		Timeout:                          ptr.Int32(1),
+		FailureThreshold:                 ptr.Int32(1),
+		SuccessThreshold:                 ptr.Int32(1),
+		StatusCodeMatcher:                ptr.String("__StatusCodeMatcher__"),
+		InitializationGracePeriodSeconds: ptr.Int32(1),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateApplicationStatusCheck(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateApplicationStatusCheck"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -49447,6 +50100,35 @@ func TestUpdateRequestSnapshot_CreateVpnGateway(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteApplicationStatusCheck(t *testing.T) {
+	input := &DeleteApplicationStatusCheckInput{
+		ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+		ClientToken:              ptr.String("__ClientToken__"),
+		DryRun:                   ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteApplicationStatusCheck(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteApplicationStatusCheck"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteCapacityManagerDataExport(t *testing.T) {
 	input := &DeleteCapacityManagerDataExportInput{
 		CapacityManagerDataExportId: ptr.String("__CapacityManagerDataExportId__"),
@@ -52586,6 +53268,154 @@ func TestUpdateRequestSnapshot_DescribeAggregateIdFormat(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAggregateIdFormat"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeApplicationStatus(t *testing.T) {
+	input := &DescribeApplicationStatusInput{
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeApplicationStatus(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeApplicationStatus"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeApplicationStatusCheckAssociations(t *testing.T) {
+	input := &DescribeApplicationStatusCheckAssociationsInput{
+		ApplicationStatusCheckIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeApplicationStatusCheckAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeApplicationStatusCheckAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeApplicationStatusChecks(t *testing.T) {
+	input := &DescribeApplicationStatusChecksInput{
+		ApplicationStatusCheckIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		IncludeAll: ptr.Bool(true),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeApplicationStatusChecks(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeApplicationStatusChecks"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -61351,6 +62181,38 @@ func TestUpdateRequestSnapshot_DisableAllowedImagesSettings(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DisableApplicationStatusCheckSuppression(t *testing.T) {
+	input := &DisableApplicationStatusCheckSuppressionInput{
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisableApplicationStatusCheckSuppression(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisableApplicationStatusCheckSuppression"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DisableAwsNetworkPerformanceMetricSubscription(t *testing.T) {
 	input := &DisableAwsNetworkPerformanceMetricSubscriptionInput{
 		Source:      ptr.String("__Source__"),
@@ -61930,6 +62792,49 @@ func TestUpdateRequestSnapshot_DisassociateAddress(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DisassociateApplicationStatusCheck(t *testing.T) {
+	input := &DisassociateApplicationStatusCheckInput{
+		ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+		TargetTagAssociations: []types.CustomTagKeyValueRequestPair{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateApplicationStatusCheck(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateApplicationStatusCheck"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DisassociateCapacityReservationBillingOwner(t *testing.T) {
 	input := &DisassociateCapacityReservationBillingOwnerInput{
 		DryRun:                          ptr.Bool(true),
@@ -62495,6 +63400,39 @@ func TestUpdateRequestSnapshot_EnableAllowedImagesSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "EnableAllowedImagesSettings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_EnableApplicationStatusCheckSuppression(t *testing.T) {
+	input := &EnableApplicationStatusCheckSuppressionInput{
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DurationSeconds: ptr.Int32(1),
+		ClientToken:     ptr.String("__ClientToken__"),
+		DryRun:          ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.EnableApplicationStatusCheckSuppression(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "EnableApplicationStatusCheckSuppression"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -66627,6 +67565,82 @@ func TestUpdateRequestSnapshot_ModifyAddressAttribute(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyAddressAttribute"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ModifyApplicationStatusCheck(t *testing.T) {
+	input := &ModifyApplicationStatusCheckInput{
+		ApplicationStatusCheckId: ptr.String("__ApplicationStatusCheckId__"),
+		Aggregation:              types.AggregationStatusEnum("included"),
+		HealthCheckPaths: []types.HealthCheckPathRequestObject{
+			{
+				Source: &types.HealthCheckPathSourceRequestObject{
+					SubnetId:        ptr.String("__SubnetId__"),
+					SecurityGroupId: ptr.String("__SecurityGroupId__"),
+				},
+				Destinations: []types.HealthCheckPathDestinationRequestObject{
+					{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+					{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+				},
+			},
+			{
+				Source: &types.HealthCheckPathSourceRequestObject{
+					SubnetId:        ptr.String("__SubnetId__"),
+					SecurityGroupId: ptr.String("__SecurityGroupId__"),
+				},
+				Destinations: []types.HealthCheckPathDestinationRequestObject{
+					{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+					{
+						SubnetId:        ptr.String("__SubnetId__"),
+						SecurityGroupId: ptr.String("__SecurityGroupId__"),
+					},
+				},
+			},
+		},
+		Protocol:                         types.NetworkProtocolEnum("http"),
+		Port:                             ptr.Int32(1),
+		Path:                             ptr.String("__Path__"),
+		DeviceIndex:                      ptr.Int32(1),
+		IpVersion:                        types.IpVersionEnum("ipv4"),
+		IpScope:                          types.IpScopeEnum("private"),
+		Interval:                         ptr.Int32(1),
+		Timeout:                          ptr.Int32(1),
+		FailureThreshold:                 ptr.Int32(1),
+		SuccessThreshold:                 ptr.Int32(1),
+		StatusCodeMatcher:                ptr.String("__StatusCodeMatcher__"),
+		InitializationGracePeriodSeconds: ptr.Int32(1),
+		ClientToken:                      ptr.String("__ClientToken__"),
+		DryRun:                           ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyApplicationStatusCheck(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyApplicationStatusCheck"); err != nil {
 		t.Fatal(err)
 	}
 }

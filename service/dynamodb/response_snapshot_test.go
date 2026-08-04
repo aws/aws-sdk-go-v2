@@ -170,6 +170,12 @@ func TestCheckResponseSnapshot_BatchExecuteStatement(t *testing.T) {
 						CapacityUnits:      ptr.Float64(1.0),
 					},
 				},
+				VectorIndexes: map[string]types.VectorCapacity{
+					"key0": {
+						VectorSearchRequestBytes: ptr.Float64(1.0),
+						VectorWriteRequestBytes:  ptr.Float64(1.0),
+					},
+				},
 			},
 			{
 				TableName:          ptr.String("__TableName__"),
@@ -193,6 +199,12 @@ func TestCheckResponseSnapshot_BatchExecuteStatement(t *testing.T) {
 						ReadCapacityUnits:  ptr.Float64(1.0),
 						WriteCapacityUnits: ptr.Float64(1.0),
 						CapacityUnits:      ptr.Float64(1.0),
+					},
+				},
+				VectorIndexes: map[string]types.VectorCapacity{
+					"key0": {
+						VectorSearchRequestBytes: ptr.Float64(1.0),
+						VectorWriteRequestBytes:  ptr.Float64(1.0),
 					},
 				},
 			},
@@ -281,6 +293,12 @@ func TestCheckResponseSnapshot_BatchGetItem(t *testing.T) {
 						CapacityUnits:      ptr.Float64(1.0),
 					},
 				},
+				VectorIndexes: map[string]types.VectorCapacity{
+					"key0": {
+						VectorSearchRequestBytes: ptr.Float64(1.0),
+						VectorWriteRequestBytes:  ptr.Float64(1.0),
+					},
+				},
 			},
 			{
 				TableName:          ptr.String("__TableName__"),
@@ -304,6 +322,12 @@ func TestCheckResponseSnapshot_BatchGetItem(t *testing.T) {
 						ReadCapacityUnits:  ptr.Float64(1.0),
 						WriteCapacityUnits: ptr.Float64(1.0),
 						CapacityUnits:      ptr.Float64(1.0),
+					},
+				},
+				VectorIndexes: map[string]types.VectorCapacity{
+					"key0": {
+						VectorSearchRequestBytes: ptr.Float64(1.0),
+						VectorWriteRequestBytes:  ptr.Float64(1.0),
 					},
 				},
 			},
@@ -415,6 +439,12 @@ func TestCheckResponseSnapshot_BatchWriteItem(t *testing.T) {
 						CapacityUnits:      ptr.Float64(1.0),
 					},
 				},
+				VectorIndexes: map[string]types.VectorCapacity{
+					"key0": {
+						VectorSearchRequestBytes: ptr.Float64(1.0),
+						VectorWriteRequestBytes:  ptr.Float64(1.0),
+					},
+				},
 			},
 			{
 				TableName:          ptr.String("__TableName__"),
@@ -438,6 +468,12 @@ func TestCheckResponseSnapshot_BatchWriteItem(t *testing.T) {
 						ReadCapacityUnits:  ptr.Float64(1.0),
 						WriteCapacityUnits: ptr.Float64(1.0),
 						CapacityUnits:      ptr.Float64(1.0),
+					},
+				},
+				VectorIndexes: map[string]types.VectorCapacity{
+					"key0": {
+						VectorSearchRequestBytes: ptr.Float64(1.0),
+						VectorWriteRequestBytes:  ptr.Float64(1.0),
 					},
 				},
 			},
@@ -962,6 +998,68 @@ func TestCheckResponseSnapshot_CreateTable(t *testing.T) {
 				Status:              types.TableStatus("CREATING"),
 			},
 			MultiRegionConsistency: types.MultiRegionConsistency("EVENTUAL"),
+			VectorIndexes: []types.VectorIndexDescription{
+				{
+					IndexName: ptr.String("__IndexName__"),
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					IndexStatus:      types.IndexStatus("CREATING"),
+					Backfilling:      ptr.Bool(true),
+					IndexSizeBytes:   ptr.Int64(1),
+					ItemCount:        ptr.Int64(1),
+					IndexArn:         ptr.String("__IndexArn__"),
+				},
+				{
+					IndexName: ptr.String("__IndexName__"),
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					IndexStatus:      types.IndexStatus("CREATING"),
+					Backfilling:      ptr.Bool(true),
+					IndexSizeBytes:   ptr.Int64(1),
+					ItemCount:        ptr.Int64(1),
+					IndexArn:         ptr.String("__IndexArn__"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateTable.response")
@@ -1135,6 +1233,58 @@ func TestCheckResponseSnapshot_DeleteBackup(t *testing.T) {
 					KMSMasterKeyArn:                ptr.String("__KMSMasterKeyArn__"),
 					InaccessibleEncryptionDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VectorIndexes: []types.VectorIndexInfo{
+					{
+						IndexName: ptr.String("__IndexName__"),
+						VectorAttribute: &types.VectorAttributeDefinition{
+							AttributeName: ptr.String("__AttributeName__"),
+						},
+						SearchSchema: []types.SearchSchemaElement{
+							{
+								AttributeName:           ptr.String("__AttributeName__"),
+								SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+							},
+							{
+								AttributeName:           ptr.String("__AttributeName__"),
+								SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+							},
+						},
+						Projection: &types.Projection{
+							ProjectionType: types.ProjectionType("ALL"),
+							NonKeyAttributes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Dimensions:       ptr.Int64(1),
+						DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					},
+					{
+						IndexName: ptr.String("__IndexName__"),
+						VectorAttribute: &types.VectorAttributeDefinition{
+							AttributeName: ptr.String("__AttributeName__"),
+						},
+						SearchSchema: []types.SearchSchemaElement{
+							{
+								AttributeName:           ptr.String("__AttributeName__"),
+								SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+							},
+							{
+								AttributeName:           ptr.String("__AttributeName__"),
+								SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+							},
+						},
+						Projection: &types.Projection{
+							ProjectionType: types.ProjectionType("ALL"),
+							NonKeyAttributes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Dimensions:       ptr.Int64(1),
+						DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					},
+				},
 			},
 		},
 	}
@@ -1184,6 +1334,12 @@ func TestCheckResponseSnapshot_DeleteItem(t *testing.T) {
 					ReadCapacityUnits:  ptr.Float64(1.0),
 					WriteCapacityUnits: ptr.Float64(1.0),
 					CapacityUnits:      ptr.Float64(1.0),
+				},
+			},
+			VectorIndexes: map[string]types.VectorCapacity{
+				"key0": {
+					VectorSearchRequestBytes: ptr.Float64(1.0),
+					VectorWriteRequestBytes:  ptr.Float64(1.0),
 				},
 			},
 		},
@@ -1572,6 +1728,68 @@ func TestCheckResponseSnapshot_DeleteTable(t *testing.T) {
 				Status:              types.TableStatus("CREATING"),
 			},
 			MultiRegionConsistency: types.MultiRegionConsistency("EVENTUAL"),
+			VectorIndexes: []types.VectorIndexDescription{
+				{
+					IndexName: ptr.String("__IndexName__"),
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					IndexStatus:      types.IndexStatus("CREATING"),
+					Backfilling:      ptr.Bool(true),
+					IndexSizeBytes:   ptr.Int64(1),
+					ItemCount:        ptr.Int64(1),
+					IndexArn:         ptr.String("__IndexArn__"),
+				},
+				{
+					IndexName: ptr.String("__IndexName__"),
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					IndexStatus:      types.IndexStatus("CREATING"),
+					Backfilling:      ptr.Bool(true),
+					IndexSizeBytes:   ptr.Int64(1),
+					ItemCount:        ptr.Int64(1),
+					IndexArn:         ptr.String("__IndexArn__"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteTable.response")
@@ -1744,6 +1962,58 @@ func TestCheckResponseSnapshot_DescribeBackup(t *testing.T) {
 					SSEType:                        types.SSEType("AES256"),
 					KMSMasterKeyArn:                ptr.String("__KMSMasterKeyArn__"),
 					InaccessibleEncryptionDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				VectorIndexes: []types.VectorIndexInfo{
+					{
+						IndexName: ptr.String("__IndexName__"),
+						VectorAttribute: &types.VectorAttributeDefinition{
+							AttributeName: ptr.String("__AttributeName__"),
+						},
+						SearchSchema: []types.SearchSchemaElement{
+							{
+								AttributeName:           ptr.String("__AttributeName__"),
+								SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+							},
+							{
+								AttributeName:           ptr.String("__AttributeName__"),
+								SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+							},
+						},
+						Projection: &types.Projection{
+							ProjectionType: types.ProjectionType("ALL"),
+							NonKeyAttributes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Dimensions:       ptr.Int64(1),
+						DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					},
+					{
+						IndexName: ptr.String("__IndexName__"),
+						VectorAttribute: &types.VectorAttributeDefinition{
+							AttributeName: ptr.String("__AttributeName__"),
+						},
+						SearchSchema: []types.SearchSchemaElement{
+							{
+								AttributeName:           ptr.String("__AttributeName__"),
+								SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+							},
+							{
+								AttributeName:           ptr.String("__AttributeName__"),
+								SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+							},
+						},
+						Projection: &types.Projection{
+							ProjectionType: types.ProjectionType("ALL"),
+							NonKeyAttributes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Dimensions:       ptr.Int64(1),
+						DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					},
 				},
 			},
 		},
@@ -2561,6 +2831,58 @@ func TestCheckResponseSnapshot_DescribeImport(t *testing.T) {
 						},
 					},
 				},
+				VectorIndexes: []types.VectorIndex{
+					{
+						IndexName: ptr.String("__IndexName__"),
+						VectorAttribute: &types.VectorAttributeDefinition{
+							AttributeName: ptr.String("__AttributeName__"),
+						},
+						SearchSchema: []types.SearchSchemaElement{
+							{
+								AttributeName:           ptr.String("__AttributeName__"),
+								SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+							},
+							{
+								AttributeName:           ptr.String("__AttributeName__"),
+								SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+							},
+						},
+						Projection: &types.Projection{
+							ProjectionType: types.ProjectionType("ALL"),
+							NonKeyAttributes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Dimensions:       ptr.Int64(1),
+						DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					},
+					{
+						IndexName: ptr.String("__IndexName__"),
+						VectorAttribute: &types.VectorAttributeDefinition{
+							AttributeName: ptr.String("__AttributeName__"),
+						},
+						SearchSchema: []types.SearchSchemaElement{
+							{
+								AttributeName:           ptr.String("__AttributeName__"),
+								SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+							},
+							{
+								AttributeName:           ptr.String("__AttributeName__"),
+								SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+							},
+						},
+						Projection: &types.Projection{
+							ProjectionType: types.ProjectionType("ALL"),
+							NonKeyAttributes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Dimensions:       ptr.Int64(1),
+						DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					},
+				},
 			},
 			StartTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			EndTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -2982,6 +3304,68 @@ func TestCheckResponseSnapshot_DescribeTable(t *testing.T) {
 				Status:              types.TableStatus("CREATING"),
 			},
 			MultiRegionConsistency: types.MultiRegionConsistency("EVENTUAL"),
+			VectorIndexes: []types.VectorIndexDescription{
+				{
+					IndexName: ptr.String("__IndexName__"),
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					IndexStatus:      types.IndexStatus("CREATING"),
+					Backfilling:      ptr.Bool(true),
+					IndexSizeBytes:   ptr.Int64(1),
+					ItemCount:        ptr.Int64(1),
+					IndexArn:         ptr.String("__IndexArn__"),
+				},
+				{
+					IndexName: ptr.String("__IndexName__"),
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					IndexStatus:      types.IndexStatus("CREATING"),
+					Backfilling:      ptr.Bool(true),
+					IndexSizeBytes:   ptr.Int64(1),
+					ItemCount:        ptr.Int64(1),
+					IndexArn:         ptr.String("__IndexArn__"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeTable.response")
@@ -3482,6 +3866,12 @@ func TestCheckResponseSnapshot_ExecuteStatement(t *testing.T) {
 					CapacityUnits:      ptr.Float64(1.0),
 				},
 			},
+			VectorIndexes: map[string]types.VectorCapacity{
+				"key0": {
+					VectorSearchRequestBytes: ptr.Float64(1.0),
+					VectorWriteRequestBytes:  ptr.Float64(1.0),
+				},
+			},
 		},
 		LastEvaluatedKey: map[string]types.AttributeValue{
 			"key0": &types.AttributeValueMemberS{
@@ -3549,6 +3939,12 @@ func TestCheckResponseSnapshot_ExecuteTransaction(t *testing.T) {
 						CapacityUnits:      ptr.Float64(1.0),
 					},
 				},
+				VectorIndexes: map[string]types.VectorCapacity{
+					"key0": {
+						VectorSearchRequestBytes: ptr.Float64(1.0),
+						VectorWriteRequestBytes:  ptr.Float64(1.0),
+					},
+				},
 			},
 			{
 				TableName:          ptr.String("__TableName__"),
@@ -3572,6 +3968,12 @@ func TestCheckResponseSnapshot_ExecuteTransaction(t *testing.T) {
 						ReadCapacityUnits:  ptr.Float64(1.0),
 						WriteCapacityUnits: ptr.Float64(1.0),
 						CapacityUnits:      ptr.Float64(1.0),
+					},
+				},
+				VectorIndexes: map[string]types.VectorCapacity{
+					"key0": {
+						VectorSearchRequestBytes: ptr.Float64(1.0),
+						VectorWriteRequestBytes:  ptr.Float64(1.0),
 					},
 				},
 			},
@@ -3670,6 +4072,12 @@ func TestCheckResponseSnapshot_GetItem(t *testing.T) {
 					ReadCapacityUnits:  ptr.Float64(1.0),
 					WriteCapacityUnits: ptr.Float64(1.0),
 					CapacityUnits:      ptr.Float64(1.0),
+				},
+			},
+			VectorIndexes: map[string]types.VectorCapacity{
+				"key0": {
+					VectorSearchRequestBytes: ptr.Float64(1.0),
+					VectorWriteRequestBytes:  ptr.Float64(1.0),
 				},
 			},
 		},
@@ -3839,6 +4247,58 @@ func TestCheckResponseSnapshot_ImportTable(t *testing.T) {
 							ReadUnitsPerSecond:  ptr.Int64(1),
 							WriteUnitsPerSecond: ptr.Int64(1),
 						},
+					},
+				},
+				VectorIndexes: []types.VectorIndex{
+					{
+						IndexName: ptr.String("__IndexName__"),
+						VectorAttribute: &types.VectorAttributeDefinition{
+							AttributeName: ptr.String("__AttributeName__"),
+						},
+						SearchSchema: []types.SearchSchemaElement{
+							{
+								AttributeName:           ptr.String("__AttributeName__"),
+								SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+							},
+							{
+								AttributeName:           ptr.String("__AttributeName__"),
+								SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+							},
+						},
+						Projection: &types.Projection{
+							ProjectionType: types.ProjectionType("ALL"),
+							NonKeyAttributes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Dimensions:       ptr.Int64(1),
+						DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					},
+					{
+						IndexName: ptr.String("__IndexName__"),
+						VectorAttribute: &types.VectorAttributeDefinition{
+							AttributeName: ptr.String("__AttributeName__"),
+						},
+						SearchSchema: []types.SearchSchemaElement{
+							{
+								AttributeName:           ptr.String("__AttributeName__"),
+								SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+							},
+							{
+								AttributeName:           ptr.String("__AttributeName__"),
+								SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+							},
+						},
+						Projection: &types.Projection{
+							ProjectionType: types.ProjectionType("ALL"),
+							NonKeyAttributes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Dimensions:       ptr.Int64(1),
+						DistanceFunction: types.VectorDistanceFunction("COSINE"),
 					},
 				},
 			},
@@ -4166,6 +4626,12 @@ func TestCheckResponseSnapshot_PutItem(t *testing.T) {
 					CapacityUnits:      ptr.Float64(1.0),
 				},
 			},
+			VectorIndexes: map[string]types.VectorCapacity{
+				"key0": {
+					VectorSearchRequestBytes: ptr.Float64(1.0),
+					VectorWriteRequestBytes:  ptr.Float64(1.0),
+				},
+			},
 		},
 		ItemCollectionMetrics: &types.ItemCollectionMetrics{
 			ItemCollectionKey: map[string]types.AttributeValue{
@@ -4260,6 +4726,12 @@ func TestCheckResponseSnapshot_Query(t *testing.T) {
 					ReadCapacityUnits:  ptr.Float64(1.0),
 					WriteCapacityUnits: ptr.Float64(1.0),
 					CapacityUnits:      ptr.Float64(1.0),
+				},
+			},
+			VectorIndexes: map[string]types.VectorCapacity{
+				"key0": {
+					VectorSearchRequestBytes: ptr.Float64(1.0),
+					VectorWriteRequestBytes:  ptr.Float64(1.0),
 				},
 			},
 		},
@@ -4616,6 +5088,68 @@ func TestCheckResponseSnapshot_RestoreTableFromBackup(t *testing.T) {
 				Status:              types.TableStatus("CREATING"),
 			},
 			MultiRegionConsistency: types.MultiRegionConsistency("EVENTUAL"),
+			VectorIndexes: []types.VectorIndexDescription{
+				{
+					IndexName: ptr.String("__IndexName__"),
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					IndexStatus:      types.IndexStatus("CREATING"),
+					Backfilling:      ptr.Bool(true),
+					IndexSizeBytes:   ptr.Int64(1),
+					ItemCount:        ptr.Int64(1),
+					IndexArn:         ptr.String("__IndexArn__"),
+				},
+				{
+					IndexName: ptr.String("__IndexName__"),
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					IndexStatus:      types.IndexStatus("CREATING"),
+					Backfilling:      ptr.Bool(true),
+					IndexSizeBytes:   ptr.Int64(1),
+					ItemCount:        ptr.Int64(1),
+					IndexArn:         ptr.String("__IndexArn__"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RestoreTableFromBackup.response")
@@ -4970,6 +5504,68 @@ func TestCheckResponseSnapshot_RestoreTableToPointInTime(t *testing.T) {
 				Status:              types.TableStatus("CREATING"),
 			},
 			MultiRegionConsistency: types.MultiRegionConsistency("EVENTUAL"),
+			VectorIndexes: []types.VectorIndexDescription{
+				{
+					IndexName: ptr.String("__IndexName__"),
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					IndexStatus:      types.IndexStatus("CREATING"),
+					Backfilling:      ptr.Bool(true),
+					IndexSizeBytes:   ptr.Int64(1),
+					ItemCount:        ptr.Int64(1),
+					IndexArn:         ptr.String("__IndexArn__"),
+				},
+				{
+					IndexName: ptr.String("__IndexName__"),
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					IndexStatus:      types.IndexStatus("CREATING"),
+					Backfilling:      ptr.Bool(true),
+					IndexSizeBytes:   ptr.Int64(1),
+					ItemCount:        ptr.Int64(1),
+					IndexArn:         ptr.String("__IndexArn__"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RestoreTableToPointInTime.response")
@@ -5034,6 +5630,12 @@ func TestCheckResponseSnapshot_Scan(t *testing.T) {
 					CapacityUnits:      ptr.Float64(1.0),
 				},
 			},
+			VectorIndexes: map[string]types.VectorCapacity{
+				"key0": {
+					VectorSearchRequestBytes: ptr.Float64(1.0),
+					VectorWriteRequestBytes:  ptr.Float64(1.0),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("Scan.response")
@@ -5050,6 +5652,48 @@ func TestCheckResponseSnapshot_Scan(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "Scan.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_SearchVectors(t *testing.T) {
+	want := &SearchVectorsOutput{
+		ConsumedCapacity: &types.VectorCapacity{
+			VectorSearchRequestBytes: ptr.Float64(1.0),
+			VectorWriteRequestBytes:  ptr.Float64(1.0),
+		},
+		SearchResults: []types.SearchResultItem{
+			{
+				Item: map[string]types.AttributeValue{
+					"key0": &types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				Score: 1.0,
+			},
+			{
+				Item: map[string]types.AttributeValue{
+					"key0": &types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+				Score: 1.0,
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("SearchVectors.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SearchVectors(context.Background(), &SearchVectorsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SearchVectors.response", err)
 	}
 }
 
@@ -5099,6 +5743,12 @@ func TestCheckResponseSnapshot_TransactGetItems(t *testing.T) {
 						CapacityUnits:      ptr.Float64(1.0),
 					},
 				},
+				VectorIndexes: map[string]types.VectorCapacity{
+					"key0": {
+						VectorSearchRequestBytes: ptr.Float64(1.0),
+						VectorWriteRequestBytes:  ptr.Float64(1.0),
+					},
+				},
 			},
 			{
 				TableName:          ptr.String("__TableName__"),
@@ -5122,6 +5772,12 @@ func TestCheckResponseSnapshot_TransactGetItems(t *testing.T) {
 						ReadCapacityUnits:  ptr.Float64(1.0),
 						WriteCapacityUnits: ptr.Float64(1.0),
 						CapacityUnits:      ptr.Float64(1.0),
+					},
+				},
+				VectorIndexes: map[string]types.VectorCapacity{
+					"key0": {
+						VectorSearchRequestBytes: ptr.Float64(1.0),
+						VectorWriteRequestBytes:  ptr.Float64(1.0),
 					},
 				},
 			},
@@ -5187,6 +5843,12 @@ func TestCheckResponseSnapshot_TransactWriteItems(t *testing.T) {
 						CapacityUnits:      ptr.Float64(1.0),
 					},
 				},
+				VectorIndexes: map[string]types.VectorCapacity{
+					"key0": {
+						VectorSearchRequestBytes: ptr.Float64(1.0),
+						VectorWriteRequestBytes:  ptr.Float64(1.0),
+					},
+				},
 			},
 			{
 				TableName:          ptr.String("__TableName__"),
@@ -5210,6 +5872,12 @@ func TestCheckResponseSnapshot_TransactWriteItems(t *testing.T) {
 						ReadCapacityUnits:  ptr.Float64(1.0),
 						WriteCapacityUnits: ptr.Float64(1.0),
 						CapacityUnits:      ptr.Float64(1.0),
+					},
+				},
+				VectorIndexes: map[string]types.VectorCapacity{
+					"key0": {
+						VectorSearchRequestBytes: ptr.Float64(1.0),
+						VectorWriteRequestBytes:  ptr.Float64(1.0),
 					},
 				},
 			},
@@ -5890,6 +6558,12 @@ func TestCheckResponseSnapshot_UpdateItem(t *testing.T) {
 					CapacityUnits:      ptr.Float64(1.0),
 				},
 			},
+			VectorIndexes: map[string]types.VectorCapacity{
+				"key0": {
+					VectorSearchRequestBytes: ptr.Float64(1.0),
+					VectorWriteRequestBytes:  ptr.Float64(1.0),
+				},
+			},
 		},
 		ItemCollectionMetrics: &types.ItemCollectionMetrics{
 			ItemCollectionKey: map[string]types.AttributeValue{
@@ -6281,6 +6955,68 @@ func TestCheckResponseSnapshot_UpdateTable(t *testing.T) {
 				Status:              types.TableStatus("CREATING"),
 			},
 			MultiRegionConsistency: types.MultiRegionConsistency("EVENTUAL"),
+			VectorIndexes: []types.VectorIndexDescription{
+				{
+					IndexName: ptr.String("__IndexName__"),
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					IndexStatus:      types.IndexStatus("CREATING"),
+					Backfilling:      ptr.Bool(true),
+					IndexSizeBytes:   ptr.Int64(1),
+					ItemCount:        ptr.Int64(1),
+					IndexArn:         ptr.String("__IndexArn__"),
+				},
+				{
+					IndexName: ptr.String("__IndexName__"),
+					SearchSchema: []types.SearchSchemaElement{
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+						{
+							AttributeName:           ptr.String("__AttributeName__"),
+							SearchSchemaElementType: types.SearchSchemaElementType("HASH"),
+						},
+					},
+					Projection: &types.Projection{
+						ProjectionType: types.ProjectionType("ALL"),
+						NonKeyAttributes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					VectorAttribute: &types.VectorAttributeDefinition{
+						AttributeName: ptr.String("__AttributeName__"),
+					},
+					Dimensions:       ptr.Int64(1),
+					DistanceFunction: types.VectorDistanceFunction("COSINE"),
+					IndexStatus:      types.IndexStatus("CREATING"),
+					Backfilling:      ptr.Bool(true),
+					IndexSizeBytes:   ptr.Int64(1),
+					ItemCount:        ptr.Int64(1),
+					IndexArn:         ptr.String("__IndexArn__"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateTable.response")

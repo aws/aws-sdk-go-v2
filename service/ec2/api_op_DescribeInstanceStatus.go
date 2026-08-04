@@ -25,6 +25,10 @@ import (
 //     to identify hardware and software issues. For more information, see [Status checks for your instances]and [Troubleshoot instances with failed status checks]in
 //     the Amazon EC2 User Guide.
 //
+//   - Application status checks - Amazon EC2 reports application-level health
+//     status for instances, indicating whether applications running on the instance
+//     are functioning properly.
+//
 //   - Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or
 //     terminate) for your instances related to hardware issues, software updates, or
 //     system maintenance. For more information, see [Scheduled events for your instances]in the Amazon EC2 User Guide.
@@ -122,6 +126,9 @@ type DescribeInstanceStatusInput struct {
 	//
 	//   - attached-ebs-status.status - The status of the attached EBS volume for the
 	//   instance ( ok | impaired | initializing | insufficient-data | not-applicable ).
+	//
+	//   - application-status.status - The application status of the instance ( ok |
+	//   impaired | initializing | insufficient-data | not-applicable ).
 	Filters []types.Filter
 
 	// When true , includes the health status for all instances. When false , includes

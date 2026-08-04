@@ -170,6 +170,14 @@ type UpdateTableInput struct {
 	// STANDARD_INFREQUENT_ACCESS .
 	TableClass types.TableClass
 
+	// A list of vector indexes to be added to or removed from the table. You can add
+	// or remove one vector index for each UpdateTable operation.
+	//
+	// To add a vector index, specify IndexName , VectorAttribute , Dimensions ,
+	// DistanceFunction , and Projection . To remove a vector index, specify only the
+	// IndexName .
+	VectorIndexUpdates []types.VectorIndexUpdate
+
 	// Represents the warm throughput (in read units per second and write units per
 	// second) for updating a table.
 	WarmThroughput *types.WarmThroughput

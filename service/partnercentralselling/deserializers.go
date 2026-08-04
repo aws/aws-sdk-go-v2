@@ -8638,6 +8638,47 @@ func awsAwsjson10_deserializeDocumentEngagementSummaryList(v *[]types.Engagement
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentEnrichmentContext(v **types.EnrichmentContext, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EnrichmentContext
+	if *v == nil {
+		sv = &types.EnrichmentContext{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LeadInsights":
+			if err := awsAwsjson10_deserializeDocumentLeadInsights(&sv.LeadInsights, value); err != nil {
+				return err
+			}
+
+		case "ProspectingResultAws":
+			if err := awsAwsjson10_deserializeDocumentInvitationProspectingResultAws(&sv.ProspectingResultAws, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentExpectedContractDuration(v **types.ExpectedContractDuration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8837,6 +8878,114 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentInvitationProspectingResultAws(v **types.InvitationProspectingResultAws, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvitationProspectingResultAws
+	if *v == nil {
+		sv = &types.InvitationProspectingResultAws{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Customer":
+			if err := awsAwsjson10_deserializeDocumentProspectingResultCustomer(&sv.Customer, value); err != nil {
+				return err
+			}
+
+		case "Insights":
+			if err := awsAwsjson10_deserializeDocumentProspectingInsights(&sv.Insights, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentLeadAddress(v **types.LeadAddress, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LeadAddress
+	if *v == nil {
+		sv = &types.LeadAddress{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "City":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.City = ptr.String(jtv)
+			}
+
+		case "CountryCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LeadCountryCode to be of type string, got %T instead", value)
+				}
+				sv.CountryCode = ptr.String(jtv)
+			}
+
+		case "PostalCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PostalCode = ptr.String(jtv)
+			}
+
+		case "StateOrRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StateOrRegion = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentLeadContact(v **types.LeadContact, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8863,7 +9012,7 @@ func awsAwsjson10_deserializeDocumentLeadContact(v **types.LeadContact, value in
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected JobTitle to be of type string, got %T instead", value)
+					return fmt.Errorf("expected LeadJobTitle to be of type string, got %T instead", value)
 				}
 				sv.BusinessTitle = ptr.String(jtv)
 			}
@@ -8872,7 +9021,7 @@ func awsAwsjson10_deserializeDocumentLeadContact(v **types.LeadContact, value in
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Email to be of type string, got %T instead", value)
+					return fmt.Errorf("expected LeadEmail to be of type string, got %T instead", value)
 				}
 				sv.Email = ptr.String(jtv)
 			}
@@ -8899,7 +9048,7 @@ func awsAwsjson10_deserializeDocumentLeadContact(v **types.LeadContact, value in
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected PhoneNumber to be of type string, got %T instead", value)
+					return fmt.Errorf("expected LeadPhoneNumber to be of type string, got %T instead", value)
 				}
 				sv.Phone = ptr.String(jtv)
 			}
@@ -8991,7 +9140,7 @@ func awsAwsjson10_deserializeDocumentLeadCustomer(v **types.LeadCustomer, value 
 	for key, value := range shape {
 		switch key {
 		case "Address":
-			if err := awsAwsjson10_deserializeDocumentAddressSummary(&sv.Address, value); err != nil {
+			if err := awsAwsjson10_deserializeDocumentLeadAddress(&sv.Address, value); err != nil {
 				return err
 			}
 
@@ -9017,25 +9166,25 @@ func awsAwsjson10_deserializeDocumentLeadCustomer(v **types.LeadCustomer, value 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Industry to be of type string, got %T instead", value)
+					return fmt.Errorf("expected LeadIndustry to be of type string, got %T instead", value)
 				}
-				sv.Industry = types.Industry(jtv)
+				sv.Industry = ptr.String(jtv)
 			}
 
 		case "MarketSegment":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected MarketSegment to be of type string, got %T instead", value)
+					return fmt.Errorf("expected LeadMarketSegment to be of type string, got %T instead", value)
 				}
-				sv.MarketSegment = types.MarketSegment(jtv)
+				sv.MarketSegment = ptr.String(jtv)
 			}
 
 		case "WebsiteUrl":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected CompanyWebsiteUrl to be of type string, got %T instead", value)
+					return fmt.Errorf("expected LeadWebsiteUrl to be of type string, got %T instead", value)
 				}
 				sv.WebsiteUrl = ptr.String(jtv)
 			}
@@ -9115,7 +9264,7 @@ func awsAwsjson10_deserializeDocumentLeadInteraction(v **types.LeadInteraction, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected EngagementCustomerBusinessProblem to be of type string, got %T instead", value)
+					return fmt.Errorf("expected LeadBusinessProblem to be of type string, got %T instead", value)
 				}
 				sv.BusinessProblem = ptr.String(jtv)
 			}
@@ -9270,34 +9419,34 @@ func awsAwsjson10_deserializeDocumentLeadInvitationCustomer(v **types.LeadInvita
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected CountryCode to be of type string, got %T instead", value)
+					return fmt.Errorf("expected LeadCountryCode to be of type string, got %T instead", value)
 				}
-				sv.CountryCode = types.CountryCode(jtv)
+				sv.CountryCode = ptr.String(jtv)
 			}
 
 		case "Industry":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Industry to be of type string, got %T instead", value)
+					return fmt.Errorf("expected LeadIndustry to be of type string, got %T instead", value)
 				}
-				sv.Industry = types.Industry(jtv)
+				sv.Industry = ptr.String(jtv)
 			}
 
 		case "MarketSegment":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected MarketSegment to be of type string, got %T instead", value)
+					return fmt.Errorf("expected LeadMarketSegment to be of type string, got %T instead", value)
 				}
-				sv.MarketSegment = types.MarketSegment(jtv)
+				sv.MarketSegment = ptr.String(jtv)
 			}
 
 		case "WebsiteUrl":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected CompanyWebsiteUrl to be of type string, got %T instead", value)
+					return fmt.Errorf("expected LeadWebsiteUrl to be of type string, got %T instead", value)
 				}
 				sv.WebsiteUrl = ptr.String(jtv)
 			}
@@ -13564,6 +13713,11 @@ func awsAwsjson10_deserializeOpDocumentGetEngagementInvitationOutput(v **GetEnga
 					return fmt.Errorf("expected EngagementTitle to be of type string, got %T instead", value)
 				}
 				sv.EngagementTitle = ptr.String(jtv)
+			}
+
+		case "EnrichmentContext":
+			if err := awsAwsjson10_deserializeDocumentEnrichmentContext(&sv.EnrichmentContext, value); err != nil {
+				return err
 			}
 
 		case "ExistingMembers":

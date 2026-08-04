@@ -10,6 +10,11 @@ import (
 )
 
 // Cancels a bundling operation for an instance store-backed Windows instance.
+//
+// CancelBundleTask is no longer supported because [BundleInstance], the operation it cancels, is
+// no longer supported.
+//
+// [BundleInstance]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BundleInstance.html
 func (c *Client) CancelBundleTask(ctx context.Context, params *CancelBundleTaskInput, optFns ...func(*Options)) (*CancelBundleTaskOutput, error) {
 	if params == nil {
 		params = &CancelBundleTaskInput{}

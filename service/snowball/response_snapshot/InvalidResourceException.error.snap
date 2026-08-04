@@ -3,4 +3,4 @@ Accept: application/cbor
 Content-Type: application/cbor
 Smithy-Protocol: rpc-v2-cbor
 
-£f__typexInvalidResourceExceptiongMessagek__Message__lResourceTypep__ResourceType__
+£gMessagek__Message__lResourceTypep__ResourceType__f__typexInvalidResourceException

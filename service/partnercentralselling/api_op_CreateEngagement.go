@@ -46,16 +46,6 @@ type CreateEngagementInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// Provides a description of the Engagement .
-	//
-	// This member is required.
-	Description *string
-
-	// Specifies the title of the Engagement .
-	//
-	// This member is required.
-	Title *string
-
 	// The Contexts field is a required array of objects, with a maximum of 5 contexts
 	// allowed, specifying detailed information about customer projects associated with
 	// the Engagement. Each context object contains a Type field indicating the
@@ -70,6 +60,12 @@ type CreateEngagementInput struct {
 	// effective collaboration between parties by providing relevant customer and
 	// project information.
 	Contexts []types.EngagementContextDetails
+
+	// Provides a description of the Engagement .
+	Description *string
+
+	// Specifies the title of the Engagement .
+	Title *string
 
 	noSmithyDocumentSerde
 }

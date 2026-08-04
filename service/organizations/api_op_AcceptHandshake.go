@@ -31,10 +31,10 @@ import (
 // When a handshake is accepted, Organizations logs membership events in
 // CloudTrail, available only in the management account's event history. If the
 // account was standalone and joined a new organization, an
-// AccountJoinedOrganization event is logged with joinedMethod:Invited and
+// AccountJoinedOrganization event is logged with joinedMethod:INVITED and
 // joinedTime fields. If the account departed one organization and joined another,
-// both an AccountDepartedOrganization event with departedMethod:Left and
-// departedTime and an AccountJoinedOrganization event with joinedMethod:Invited
+// both an AccountDepartedOrganization event with departureMethod:LEFT and
+// departureTime and an AccountJoinedOrganization event with joinedMethod:INVITED
 // and joinedTime are logged in their respective management accounts.
 //
 // [Enabling all features]: https://docs.aws.amazon.com/organizations/latest/userguide/manage-begin-all-features-standard-migration.html#manage-approve-all-features-invite

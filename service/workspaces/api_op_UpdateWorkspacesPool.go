@@ -9,7 +9,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// End of support notice: On December 31, 2027, Amazon Web Services will end
+// support for Amazon WorkSpaces Pools. After December 31, 2027, you will no longer
+// be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools
+// resources. For more information, see [Amazon WorkSpaces Pools end of support].
+//
 // Updates the specified pool.
+//
+// [Amazon WorkSpaces Pools end of support]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
 func (c *Client) UpdateWorkspacesPool(ctx context.Context, params *UpdateWorkspacesPoolInput, optFns ...func(*Options)) (*UpdateWorkspacesPoolOutput, error) {
 	if params == nil {
 		params = &UpdateWorkspacesPoolInput{}

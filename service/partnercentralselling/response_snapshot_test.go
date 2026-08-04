@@ -736,6 +736,35 @@ func TestCheckResponseSnapshot_GetEngagementInvitation(t *testing.T) {
 				WebsiteUrl:  ptr.String("__WebsiteUrl__"),
 			},
 		},
+		EnrichmentContext: &types.EnrichmentContext{
+			ProspectingResultAws: &types.InvitationProspectingResultAws{
+				Customer: &types.ProspectingResultCustomer{
+					AccountName: ptr.String("__AccountName__"),
+					Geo:         ptr.String("__Geo__"),
+					Region:      ptr.String("__Region__"),
+					SubRegion:   ptr.String("__SubRegion__"),
+					Country:     types.CountryCode("US"),
+					Industry:    types.Industry("Aerospace"),
+					SubIndustry: ptr.String("__SubIndustry__"),
+					Segment:     ptr.String("__Segment__"),
+					CompanySize: ptr.String("__CompanySize__"),
+					EligiblePrograms: []string{
+						"__Member__",
+						"__Member__",
+					},
+					PublicProfileSummary: ptr.String("__PublicProfileSummary__"),
+				},
+				Insights: &types.ProspectingInsights{
+					MarketplaceEngagementScore: ptr.String("__MarketplaceEngagementScore__"),
+					SolutionScore:              ptr.String("__SolutionScore__"),
+					SolutionCategory:           ptr.String("__SolutionCategory__"),
+					SolutionSubCategory:        ptr.String("__SolutionSubCategory__"),
+				},
+			},
+			LeadInsights: &types.LeadInsights{
+				LeadReadinessScore: ptr.String("__LeadReadinessScore__"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetEngagementInvitation.response")
 	if errors.Is(err, fs.ErrNotExist) {
