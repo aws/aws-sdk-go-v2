@@ -1,6 +1,8 @@
 package http
 
 import (
+	"crypto/fips140"
+	"crypto/tls"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -156,5 +158,70 @@ func TestBuildableClient_KeepsSecurityTokenOnSameHost(t *testing.T) {
 
 	if resp.StatusCode != http.StatusOK {
 		t.Errorf("expect 200 code, got %d", resp.StatusCode)
+	}
+}
+
+func TestDefaultTLSCurvePreferences(t *testing.T) {
+	cases := map[string]struct {
+		FIPSEnabled bool
+		Expect      []tls.CurveID
+	}{
+		"fips disabled defers to go defaults": {
+			FIPSEnabled: false,
+			Expect:      nil,
+		},
+		"fips enabled restricts to approved curves": {
+			FIPSEnabled: true,
+			Expect:      []tls.CurveID{tls.CurveP256, tls.CurveP384, tls.CurveP521},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			curves := defaultTLSCurvePreferences(c.FIPSEnabled)
+
+			if e, a := len(c.Expect), len(curves); e != a {
+				t.Fatalf("expect %v curves, got %v (%v)", e, a, curves)
+			}
+			for i, expect := range c.Expect {
+				if e, a := expect, curves[i]; e != a {
+					t.Errorf("expect curve %v at %v, got %v", e, i, a)
+				}
+			}
+		})
+	}
+}
+
+func TestDefaultTLSCurvePreferences_NoX25519UnderFIPS(t *testing.T) {
+	// X25519 and the X25519MLKEM768 hybrid are not FIPS-approved; crypto/ecdh
+	// rejects them under GODEBUG=fips140=only, which is what broke every
+	// handshake made by the default client.
+	for _, curve := range defaultTLSCurvePreferences(true) {
+		if curve == tls.X25519 || curve == tls.X25519MLKEM768 {
+			t.Errorf("expect no non-approved curve under FIPS, got %v", curve)
+		}
+	}
+}
+
+func TestDefaultHTTPTransport_TLSConfig(t *testing.T) {
+	tr := defaultHTTPTransport()
+
+	if tr.TLSClientConfig == nil {
+		t.Fatal("expect TLS client config, got none")
+	}
+	if e, a := DefaultHTTPTransportTLSMinVersion, tr.TLSClientConfig.MinVersion; e != a {
+		t.Errorf("expect min version %v, got %v", e, a)
+	}
+
+	// The transport must mirror whatever mode the process is actually running in:
+	// untouched preferences normally, NIST-only when the FIPS module is active.
+	expect := defaultTLSCurvePreferences(fips140.Enabled())
+	if e, a := len(expect), len(tr.TLSClientConfig.CurvePreferences); e != a {
+		t.Fatalf("expect %v curves, got %v", e, a)
+	}
+	for i, curve := range expect {
+		if e, a := curve, tr.TLSClientConfig.CurvePreferences[i]; e != a {
+			t.Errorf("expect curve %v at %v, got %v", e, i, a)
+		}
 	}
 }
