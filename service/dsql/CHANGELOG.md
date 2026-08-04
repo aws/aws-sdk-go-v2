@@ -1,3 +1,7 @@
+# v1.16.4 (2026-08-04)
+
+* **Documentation**: UpdateCluster now checks the RemovePeerCluster permission on the specific cluster being removed, not a wildcard and docs now clarify how to set kmsEncryptionKey so the cluster uses the AWS-owned key.
+
 # v1.16.3 (2026-07-31.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

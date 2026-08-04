@@ -1,3 +1,28 @@
+# Release (2026-08-04)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.16.4](service/dsql/CHANGELOG.md#v1164-2026-08-04)
+  * **Documentation**: UpdateCluster now checks the RemovePeerCluster permission on the specific cluster being removed, not a wildcard and docs now clarify how to set kmsEncryptionKey so the cluster uses the AWS-owned key.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.63.0](service/dynamodb/CHANGELOG.md#v1630-2026-08-04)
+  * **Feature**: Vector indexes are a type of index in Amazon DynamoDB that enable similarity search on vector embedding stored in your table items. Vector indexes use approximate nearest neighbor search to find items whose vectors are most similar to a query vector that you provide.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.319.0](service/ec2/CHANGELOG.md#v13190-2026-08-04)
+  * **Feature**: Amazon EC2 now supports Application Status Checks, a new status check that monitors your application's health through configurable HTTP(S) paths and ports, so you can detect and automatically respond to application-level impairments.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.58.0](service/iam/CHANGELOG.md#v1580-2026-08-04)
+  * **Feature**: Updating endpoint generation logic
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.54.0](service/inspector2/CHANGELOG.md#v1540-2026-08-04)
+  * **Feature**: Adding Azure SBOM export capability.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.53.4](service/organizations/CHANGELOG.md#v1534-2026-08-04)
+  * **Documentation**: Improved accuracy of CloudTrail event documentation for AWS Organizations membership operations.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.23.0](service/partnercentralselling/CHANGELOG.md#v1230-2026-08-04)
+  * **Feature**: Partners can now create leads with only 5 required fields and free-text values for all other fields, reducing import friction. Engagement invitations now include enrichment data (propensity scores, lead readiness) directly in the response.
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.43.0](service/ssoadmin/CHANGELOG.md#v1430-2026-08-04)
+  * **Feature**: AWS IAM Identity Center now lets you create organization-level instances without enabling multi-account permissions. You can enable multi-account permissions during instance creation or later via console or API, which then provisions the necessary service-linked roles.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.73.0](service/workspaces/CHANGELOG.md#v1730-2026-08-04)
+  * **Feature**: Added ClientExperiencePolicy to ClientProperties object for ModifyClientProperties and DescribeClientProperties APIs.
+
 # Release (2026-08-03)
 
 ## General Highlights

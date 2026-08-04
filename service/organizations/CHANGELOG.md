@@ -1,3 +1,7 @@
+# v1.53.4 (2026-08-04)
+
+* **Documentation**: Improved accuracy of CloudTrail event documentation for AWS Organizations membership operations.
+
 # v1.53.3 (2026-07-31.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

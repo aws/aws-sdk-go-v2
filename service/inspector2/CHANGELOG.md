@@ -1,3 +1,7 @@
+# v1.54.0 (2026-08-04)
+
+* **Feature**: Adding Azure SBOM export capability.
+
 # v1.53.3 (2026-07-31.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

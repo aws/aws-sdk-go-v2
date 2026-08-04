@@ -1,8 +1,0 @@
-{
-    "id": "afa0cab7-be76-4c4b-b9e5-7798441a838b",
-    "type": "documentation",
-    "description": "UpdateCluster now checks the RemovePeerCluster permission on the specific cluster being removed, not a wildcard and docs now clarify how to set kmsEncryptionKey so the cluster uses the AWS-owned key.",
-    "modules": [
-        "service/dsql"
-    ]
-}

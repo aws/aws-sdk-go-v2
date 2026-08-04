@@ -1,3 +1,7 @@
+# v1.319.0 (2026-08-04)
+
+* **Feature**: Amazon EC2 now supports Application Status Checks, a new status check that monitors your application's health through configurable HTTP(S) paths and ports, so you can detect and automatically respond to application-level impairments.
+
 # v1.318.1 (2026-07-31.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

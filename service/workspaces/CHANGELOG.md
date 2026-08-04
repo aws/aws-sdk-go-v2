@@ -1,3 +1,7 @@
+# v1.73.0 (2026-08-04)
+
+* **Feature**: Added ClientExperiencePolicy to ClientProperties object for ModifyClientProperties and DescribeClientProperties APIs.
+
 # v1.72.3 (2026-07-31.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

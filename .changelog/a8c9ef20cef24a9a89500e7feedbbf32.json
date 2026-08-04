@@ -1,8 +1,0 @@
-{
-    "id": "a8c9ef20-cef2-4a9a-8950-0e7feedbbf32",
-    "type": "feature",
-    "description": "Added ClientExperiencePolicy to ClientProperties object for ModifyClientProperties and DescribeClientProperties APIs.",
-    "modules": [
-        "service/workspaces"
-    ]
-}

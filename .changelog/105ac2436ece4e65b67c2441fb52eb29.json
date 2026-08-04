@@ -1,8 +1,0 @@
-{
-    "id": "105ac243-6ece-4e65-b67c-2441fb52eb29",
-    "type": "feature",
-    "description": "Amazon EC2 now supports Application Status Checks, a new status check that monitors your application's health through configurable HTTP(S) paths and ports, so you can detect and automatically respond to application-level impairments.",
-    "modules": [
-        "service/ec2"
-    ]
-}
