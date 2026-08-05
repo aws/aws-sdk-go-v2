@@ -807,7 +807,9 @@ func deserializeCBOR_BillingConfiguration(v smithycbor.Value) (*types.BillingCon
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "BillingMode" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_BillingMode(sv)
 			if err != nil {
 				return nil, err
@@ -1218,7 +1220,9 @@ func deserializeCBOR_SupportedInstanceConfiguration(v smithycbor.Value) (*types.
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "BillingMode" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_BillingMode(sv)
 			if err != nil {
 				return nil, err
@@ -1227,7 +1231,9 @@ func deserializeCBOR_SupportedInstanceConfiguration(v smithycbor.Value) (*types.
 		}
 
 		if key == "PlatformType" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_PlatformTypeEnum(sv)
 			if err != nil {
 				return nil, err
@@ -1236,7 +1242,9 @@ func deserializeCBOR_SupportedInstanceConfiguration(v smithycbor.Value) (*types.
 		}
 
 		if key == "Tenancy" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_InstanceConfigurationTenancyEnum(sv)
 			if err != nil {
 				return nil, err
@@ -1389,7 +1397,9 @@ func deserializeCBOR_ValidationException(v smithycbor.Value) (*types.ValidationE
 		}
 
 		if key == "Reason" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ValidationExceptionReason(sv)
 			if err != nil {
 				return nil, err
@@ -1489,7 +1499,9 @@ func deserializeCBOR_WorkspaceInstance(v smithycbor.Value) (*types.WorkspaceInst
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ProvisionState" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ProvisionStateEnum(sv)
 			if err != nil {
 				return nil, err
@@ -1664,7 +1676,9 @@ func deserializeCBOR_GetWorkspaceInstanceOutput(v smithycbor.Value) (*GetWorkspa
 		}
 
 		if key == "ProvisionState" {
-
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ProvisionStateEnum(sv)
 			if err != nil {
 				return nil, err
