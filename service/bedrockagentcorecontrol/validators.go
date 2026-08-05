@@ -5452,6 +5452,40 @@ func validateHttpApiSchemaConfiguration(v *types.HttpApiSchemaConfiguration) err
 	}
 }
 
+func validateHttpConnectorSource(v *types.HttpConnectorSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpConnectorSource"}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHttpConnectorTargetConfiguration(v *types.HttpConnectorTargetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpConnectorTargetConfiguration"}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateHttpConnectorSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHttpTargetConfiguration(v types.HttpTargetConfiguration) error {
 	if v == nil {
 		return nil
@@ -5461,6 +5495,11 @@ func validateHttpTargetConfiguration(v types.HttpTargetConfiguration) error {
 	case *types.HttpTargetConfigurationMemberAgentcoreRuntime:
 		if err := validateRuntimeTargetConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[agentcoreRuntime]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.HttpTargetConfigurationMemberConnector:
+		if err := validateHttpConnectorTargetConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[connector]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.HttpTargetConfigurationMemberPassthrough:

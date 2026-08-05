@@ -7767,6 +7767,67 @@ func (m *awsAwsjson11_serializeOpGetDataCatalogEncryptionSettings) HandleSeriali
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetDataCatalogExportConfiguration struct {
+}
+
+func (*awsAwsjson11_serializeOpGetDataCatalogExportConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetDataCatalogExportConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetDataCatalogExportConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetDataCatalogExportConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetDataCatalogExportConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetDataflowGraph struct {
 }
 
@@ -13789,6 +13850,67 @@ func (m *awsAwsjson11_serializeOpPutDataCatalogEncryptionSettings) HandleSeriali
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentPutDataCatalogEncryptionSettingsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpPutDataCatalogExportConfiguration struct {
+}
+
+func (*awsAwsjson11_serializeOpPutDataCatalogExportConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpPutDataCatalogExportConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutDataCatalogExportConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.PutDataCatalogExportConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentPutDataCatalogExportConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -23002,6 +23124,23 @@ func awsAwsjson11_serializeDocumentExecutionProperty(v *types.ExecutionProperty,
 	if v.MaxConcurrentRuns != 0 {
 		ok := object.Key("MaxConcurrentRuns")
 		ok.Integer(v.MaxConcurrentRuns)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentExportEncryptionConfiguration(v *types.ExportEncryptionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("KmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
+	if v.SseAlgorithm != nil {
+		ok := object.Key("SseAlgorithm")
+		ok.String(*v.SseAlgorithm)
 	}
 
 	return nil
@@ -33926,6 +34065,13 @@ func awsAwsjson11_serializeOpDocumentGetDataCatalogEncryptionSettingsInput(v *Ge
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGetDataCatalogExportConfigurationInput(v *GetDataCatalogExportConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentGetDataflowGraphInput(v *GetDataflowGraphInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -36381,6 +36527,30 @@ func awsAwsjson11_serializeOpDocumentPutDataCatalogEncryptionSettingsInput(v *Pu
 		if err := awsAwsjson11_serializeDocumentDataCatalogEncryptionSettings(v.DataCatalogEncryptionSettings, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentPutDataCatalogExportConfigurationInput(v *PutDataCatalogExportConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("EncryptionConfiguration")
+		if err := awsAwsjson11_serializeDocumentExportEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ExportSetting) > 0 {
+		ok := object.Key("ExportSetting")
+		ok.String(string(v.ExportSetting))
 	}
 
 	return nil

@@ -27210,7 +27210,7 @@ func awsRestjson1_deserializeDocumentJobDetailsEntity(v **types.JobDetailsEntity
 	for key, value := range shape {
 		switch key {
 		case "jobAttachmentSettings":
-			if err := awsRestjson1_deserializeDocumentJobAttachmentSettings(&sv.JobAttachmentSettings, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentJobDetailsJobAttachmentSettings(&sv.JobAttachmentSettings, value); err != nil {
 				return err
 			}
 
@@ -27321,6 +27321,55 @@ func awsRestjson1_deserializeDocumentJobDetailsError(v **types.JobDetailsError, 
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJobDetailsJobAttachmentSettings(v **types.JobDetailsJobAttachmentSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JobDetailsJobAttachmentSettings
+	if *v == nil {
+		sv = &types.JobDetailsJobAttachmentSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "rootPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Prefix to be of type string, got %T instead", value)
+				}
+				sv.RootPrefix = ptr.String(jtv)
+			}
+
+		case "s3BucketName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3BucketName to be of type string, got %T instead", value)
+				}
+				sv.S3BucketName = ptr.String(jtv)
 			}
 
 		default:

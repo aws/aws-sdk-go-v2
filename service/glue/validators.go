@@ -3690,6 +3690,26 @@ func (m *validateOpPutDataCatalogEncryptionSettings) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutDataCatalogExportConfiguration struct {
+}
+
+func (*validateOpPutDataCatalogExportConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutDataCatalogExportConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutDataCatalogExportConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutDataCatalogExportConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutDataQualityProfileAnnotation struct {
 }
 
@@ -5744,6 +5764,10 @@ func addOpPutAttachmentValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutDataCatalogEncryptionSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutDataCatalogEncryptionSettings{}, middleware.After)
+}
+
+func addOpPutDataCatalogExportConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutDataCatalogExportConfiguration{}, middleware.After)
 }
 
 func addOpPutDataQualityProfileAnnotationValidationMiddleware(stack *middleware.Stack) error {
@@ -14434,6 +14458,21 @@ func validateOpPutDataCatalogEncryptionSettingsInput(v *PutDataCatalogEncryption
 		if err := validateDataCatalogEncryptionSettings(v.DataCatalogEncryptionSettings); err != nil {
 			invalidParams.AddNested("DataCatalogEncryptionSettings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutDataCatalogExportConfigurationInput(v *PutDataCatalogExportConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutDataCatalogExportConfigurationInput"}
+	if len(v.ExportSetting) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ExportSetting"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

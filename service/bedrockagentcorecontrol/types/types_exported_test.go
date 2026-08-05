@@ -948,6 +948,9 @@ func ExampleHttpTargetConfiguration_outputUsage() {
 	case *types.HttpTargetConfigurationMemberAgentcoreRuntime:
 		_ = v.Value // Value is types.RuntimeTargetConfiguration
 
+	case *types.HttpTargetConfigurationMemberConnector:
+		_ = v.Value // Value is types.HttpConnectorTargetConfiguration
+
 	case *types.HttpTargetConfigurationMemberPassthrough:
 		_ = v.Value // Value is types.PassthroughTargetConfiguration
 
@@ -961,6 +964,7 @@ func ExampleHttpTargetConfiguration_outputUsage() {
 }
 
 var _ *types.RuntimeTargetConfiguration
+var _ *types.HttpConnectorTargetConfiguration
 var _ *types.PassthroughTargetConfiguration
 
 func ExampleInferenceTargetConfiguration_outputUsage() {

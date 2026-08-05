@@ -1,0 +1,8 @@
+{
+    "id": "8d1fd289-7074-4290-9558-19f449ce5216",
+    "type": "feature",
+    "description": "AWS Deadline Cloud now reports persistent volume costs alongside compute and license costs. Customers can view per-fleet storage costs in Usage Explorer by selecting the Usage Type grouping, helping them better understand the costs of their infrastructure.",
+    "modules": [
+        "service/deadline"
+    ]
+}

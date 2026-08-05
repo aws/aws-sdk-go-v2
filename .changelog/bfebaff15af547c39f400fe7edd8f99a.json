@@ -1,0 +1,8 @@
+{
+    "id": "bfebaff1-5af5-47c3-9f40-0fe7edd8f99a",
+    "type": "feature",
+    "description": "Added the PutDataCatalogExportConfiguration to export Glue Data Catalog metadata to systems tables stored in S3 Tables.",
+    "modules": [
+        "service/glue"
+    ]
+}

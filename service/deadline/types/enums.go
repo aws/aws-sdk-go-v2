@@ -1497,8 +1497,9 @@ type UsageType string
 
 // Enum values for UsageType
 const (
-	UsageTypeCompute UsageType = "COMPUTE"
-	UsageTypeLicense UsageType = "LICENSE"
+	UsageTypeCompute          UsageType = "COMPUTE"
+	UsageTypeLicense          UsageType = "LICENSE"
+	UsageTypePersistentVolume UsageType = "PERSISTENT_VOLUME"
 )
 
 // Values returns all known values for UsageType. Note that this can be expanded
@@ -1509,6 +1510,7 @@ func (UsageType) Values() []UsageType {
 	return []UsageType{
 		"COMPUTE",
 		"LICENSE",
+		"PERSISTENT_VOLUME",
 	}
 }
 

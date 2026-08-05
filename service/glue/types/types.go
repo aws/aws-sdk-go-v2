@@ -5003,6 +5003,19 @@ type ExecutionProperty struct {
 	noSmithyDocumentSerde
 }
 
+// The encryption configuration for exported data catalog metadata.
+type ExportEncryptionConfiguration struct {
+
+	// The ARN of the KMS key used to encrypt the exported data.
+	KmsKeyArn *string
+
+	// The server-side encryption algorithm used for the exported data. Valid values
+	// are AES256 and aws:kms .
+	SseAlgorithm *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies configuration properties for an exporting labels task run.
 type ExportLabelsTaskRunProperties struct {
 

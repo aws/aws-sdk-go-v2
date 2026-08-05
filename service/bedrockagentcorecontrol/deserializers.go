@@ -42607,6 +42607,123 @@ func awsRestjson1_deserializeDocumentHttpApiSchemaConfiguration(v **types.HttpAp
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentHttpConnectorParameters(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ConnectorParameterValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHttpConnectorSource(v **types.HttpConnectorSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HttpConnectorSource
+	if *v == nil {
+		sv = &types.HttpConnectorSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "connectorId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorId to be of type string, got %T instead", value)
+				}
+				sv.ConnectorId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHttpConnectorTargetConfiguration(v **types.HttpConnectorTargetConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HttpConnectorTargetConfiguration
+	if *v == nil {
+		sv = &types.HttpConnectorTargetConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "parameters":
+			if err := awsRestjson1_deserializeDocumentHttpConnectorParameters(&sv.Parameters, value); err != nil {
+				return err
+			}
+
+		case "source":
+			if err := awsRestjson1_deserializeDocumentHttpConnectorSource(&sv.Source, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentHttpHeadersMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -42671,6 +42788,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.HttpTargetConfigurationMemberAgentcoreRuntime{Value: mv}
+			break loop
+
+		case "connector":
+			var mv types.HttpConnectorTargetConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentHttpConnectorTargetConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.HttpTargetConfigurationMemberConnector{Value: mv}
 			break loop
 
 		case "passthrough":

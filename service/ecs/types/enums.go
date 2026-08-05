@@ -1231,6 +1231,7 @@ const (
 	InstanceHealthCheckTypeContainerRuntime   InstanceHealthCheckType = "CONTAINER_RUNTIME"
 	InstanceHealthCheckTypeAcceleratedCompute InstanceHealthCheckType = "ACCELERATED_COMPUTE"
 	InstanceHealthCheckTypeDaemon             InstanceHealthCheckType = "DAEMON"
+	InstanceHealthCheckTypeAgentConnectivity  InstanceHealthCheckType = "AGENT_CONNECTIVITY"
 )
 
 // Values returns all known values for InstanceHealthCheckType. Note that this can
@@ -1242,6 +1243,7 @@ func (InstanceHealthCheckType) Values() []InstanceHealthCheckType {
 		"CONTAINER_RUNTIME",
 		"ACCELERATED_COMPUTE",
 		"DAEMON",
+		"AGENT_CONNECTIVITY",
 	}
 }
 
@@ -2193,6 +2195,7 @@ const (
 	TaskStopCodeServiceSchedulerInitiated TaskStopCode = "ServiceSchedulerInitiated"
 	TaskStopCodeSpotInterruption          TaskStopCode = "SpotInterruption"
 	TaskStopCodeTerminationNotice         TaskStopCode = "TerminationNotice"
+	TaskStopCodeInfrastructureHealth      TaskStopCode = "InfrastructureHealth"
 )
 
 // Values returns all known values for TaskStopCode. Note that this can be
@@ -2207,6 +2210,7 @@ func (TaskStopCode) Values() []TaskStopCode {
 		"ServiceSchedulerInitiated",
 		"SpotInterruption",
 		"TerminationNotice",
+		"InfrastructureHealth",
 	}
 }
 

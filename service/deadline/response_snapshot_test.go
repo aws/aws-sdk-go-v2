@@ -476,7 +476,7 @@ func TestCheckResponseSnapshot_BatchGetJobEntity(t *testing.T) {
 			&types.JobEntityMemberJobDetails{
 				Value: types.JobDetailsEntity{
 					JobId: ptr.String("__JobId__"),
-					JobAttachmentSettings: &types.JobAttachmentSettings{
+					JobAttachmentSettings: &types.JobDetailsJobAttachmentSettings{
 						S3BucketName: ptr.String("__S3BucketName__"),
 						RootPrefix:   ptr.String("__RootPrefix__"),
 					},
@@ -516,7 +516,7 @@ func TestCheckResponseSnapshot_BatchGetJobEntity(t *testing.T) {
 			&types.JobEntityMemberJobDetails{
 				Value: types.JobDetailsEntity{
 					JobId: ptr.String("__JobId__"),
-					JobAttachmentSettings: &types.JobAttachmentSettings{
+					JobAttachmentSettings: &types.JobDetailsJobAttachmentSettings{
 						S3BucketName: ptr.String("__S3BucketName__"),
 						RootPrefix:   ptr.String("__RootPrefix__"),
 					},

@@ -2085,6 +2085,7 @@ const (
 	TargetTypeAgentcoreRuntime TargetType = "AGENTCORE_RUNTIME"
 	TargetTypePassthrough      TargetType = "PASSTHROUGH"
 	TargetTypeProvider         TargetType = "PROVIDER"
+	TargetTypeHttpConnector    TargetType = "HTTP_CONNECTOR"
 )
 
 // Values returns all known values for TargetType. Note that this can be expanded
@@ -2102,6 +2103,7 @@ func (TargetType) Values() []TargetType {
 		"AGENTCORE_RUNTIME",
 		"PASSTHROUGH",
 		"PROVIDER",
+		"HTTP_CONNECTOR",
 	}
 }
 

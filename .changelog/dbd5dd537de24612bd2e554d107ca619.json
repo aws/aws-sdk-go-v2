@@ -1,0 +1,8 @@
+{
+    "id": "dbd5dd53-7de2-4612-bd2e-554d107ca619",
+    "type": "feature",
+    "description": "Adding support for fine-grained access control for AgentCore Memory through managed AgentCore Gateway HTTP Connectors.",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

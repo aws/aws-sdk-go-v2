@@ -247,8 +247,9 @@ type CertificateAuthorityConfiguration struct {
 
 	// Name of the algorithm your private CA uses to sign certificate requests.
 	//
-	// This parameter should not be confused with the SigningAlgorithm parameter used
-	// to sign certificates when they are issued.
+	// This parameter should not be confused with the SigningAlgorithm parameter of
+	// the IssueCertificate API action, which is used to sign certificates when they
+	// are issued.
 	//
 	// This member is required.
 	SigningAlgorithm SigningAlgorithm
@@ -357,7 +358,7 @@ type CrlConfiguration struct {
 
 	// Specifies whether to create a complete or partitioned CRL. This setting
 	// determines the maximum number of certificates that the certificate authority can
-	// issue and revoke. For more information, see Amazon Web Services Private CA quotas.
+	// issue and revoke. For more information, see [Amazon Web Services Private CA quotas].
 	//
 	//   - COMPLETE - The default setting. Amazon Web Services Private CA maintains a
 	//   single CRL ﬁle for all unexpired certiﬁcates issued by a CA that have been
@@ -374,6 +375,7 @@ type CrlConfiguration struct {
 	//   extension as critical, which your client must be able to process.
 	//
 	// [RFC 5280]: https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.9
+	// [Amazon Web Services Private CA quotas]: https://docs.aws.amazon.com/general/latest/gr/pca.html#limits_pca
 	CrlType CrlType
 
 	// Name inserted into the certificate CRL Distribution Points extension that
@@ -402,7 +404,7 @@ type CrlConfiguration struct {
 	//
 	// The S3BucketName parameter must conform to the [S3 bucket naming rules].
 	//
-	// [bucket policy]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#s3-policies
+	// [bucket policy]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies
 	// [S3 bucket naming rules]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
 	// [UpdateCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html
 	S3BucketName *string
@@ -423,7 +425,7 @@ type CrlConfiguration struct {
 	//
 	// For more information, see [Blocking public access to the S3 bucket].
 	//
-	// [Blocking public access to the S3 bucket]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#s3-bpa
+	// [Blocking public access to the S3 bucket]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-bpa
 	S3ObjectAcl S3ObjectAcl
 
 	noSmithyDocumentSerde
@@ -443,7 +445,7 @@ type CrlDistributionPointExtensionConfiguration struct {
 	// through CSR or API passthrough.
 	//
 	// Only set this if you have another way to distribute the CRL Distribution Points
-	// ffor certificates issued by your CA, such as the Matter Distributed Compliance
+	// for certificates issued by your CA, such as the Matter Distributed Compliance
 	// Ledger
 	//
 	// This configuration cannot be enabled with a custom CNAME set.

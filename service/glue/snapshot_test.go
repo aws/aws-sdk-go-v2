@@ -1586,6 +1586,18 @@ func TestCheckSnapshot_GetDataCatalogEncryptionSettings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDataCatalogExportConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataCatalogExportConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataCatalogExportConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDataflowGraph(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataflowGraph(context.Background(), nil, func(o *Options) {
@@ -2767,6 +2779,18 @@ func TestCheckSnapshot_PutDataCatalogEncryptionSettings(t *testing.T) {
 	_, err := svc.PutDataCatalogEncryptionSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutDataCatalogEncryptionSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutDataCatalogExportConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutDataCatalogExportConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutDataCatalogExportConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5149,6 +5173,18 @@ func TestUpdateSnapshot_GetDataCatalogEncryptionSettings(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDataCatalogExportConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataCatalogExportConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataCatalogExportConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDataflowGraph(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDataflowGraph(context.Background(), nil, func(o *Options) {
@@ -6330,6 +6366,18 @@ func TestUpdateSnapshot_PutDataCatalogEncryptionSettings(t *testing.T) {
 	_, err := svc.PutDataCatalogEncryptionSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutDataCatalogEncryptionSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutDataCatalogExportConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutDataCatalogExportConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutDataCatalogExportConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

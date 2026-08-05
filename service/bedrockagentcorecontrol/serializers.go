@@ -17695,6 +17695,50 @@ func awsRestjson1_serializeDocumentHttpApiSchemaConfiguration(v *types.HttpApiSc
 	return nil
 }
 
+func awsRestjson1_serializeDocumentHttpConnectorParameters(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHttpConnectorSource(v *types.HttpConnectorSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConnectorId != nil {
+		ok := object.Key("connectorId")
+		ok.String(*v.ConnectorId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHttpConnectorTargetConfiguration(v *types.HttpConnectorTargetConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Parameters != nil {
+		ok := object.Key("parameters")
+		if err := awsRestjson1_serializeDocumentHttpConnectorParameters(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Source != nil {
+		ok := object.Key("source")
+		if err := awsRestjson1_serializeDocumentHttpConnectorSource(v.Source, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentHttpHeadersMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -17714,6 +17758,12 @@ func awsRestjson1_serializeDocumentHttpTargetConfiguration(v types.HttpTargetCon
 	case *types.HttpTargetConfigurationMemberAgentcoreRuntime:
 		av := object.Key("agentcoreRuntime")
 		if err := awsRestjson1_serializeDocumentRuntimeTargetConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.HttpTargetConfigurationMemberConnector:
+		av := object.Key("connector")
+		if err := awsRestjson1_serializeDocumentHttpConnectorTargetConfiguration(&uv.Value, av); err != nil {
 			return err
 		}
 

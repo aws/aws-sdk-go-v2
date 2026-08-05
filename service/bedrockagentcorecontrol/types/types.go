@@ -3959,12 +3959,40 @@ type HttpApiSchemaConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The source identifying the HTTP connector integration.
+type HttpConnectorSource struct {
+
+	// The identifier for the HTTP connector integration.
+	//
+	// This member is required.
+	ConnectorId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for an HTTP connector target. Use this configuration when you
+// want to route HTTP requests through a managed connector.
+type HttpConnectorTargetConfiguration struct {
+
+	// The source configuration identifying which HTTP connector to use.
+	//
+	// This member is required.
+	Source *HttpConnectorSource
+
+	// The resource parameters for this connector (for example, memoryId ). The service
+	// validates these parameters against the request path at runtime.
+	Parameters map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // The HTTP target configuration for a gateway target. Contains the configuration
 // for HTTP-based target endpoints.
 //
 // The following types satisfy this interface:
 //
 //	HttpTargetConfigurationMemberAgentcoreRuntime
+//	HttpTargetConfigurationMemberConnector
 //	HttpTargetConfigurationMemberPassthrough
 type HttpTargetConfiguration interface {
 	isHttpTargetConfiguration()
@@ -3979,6 +4007,16 @@ type HttpTargetConfigurationMemberAgentcoreRuntime struct {
 }
 
 func (*HttpTargetConfigurationMemberAgentcoreRuntime) isHttpTargetConfiguration() {}
+
+// The connector-based configuration for the HTTP target. Use this configuration
+// when you want to route HTTP requests through a managed connector.
+type HttpTargetConfigurationMemberConnector struct {
+	Value HttpConnectorTargetConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*HttpTargetConfigurationMemberConnector) isHttpTargetConfiguration() {}
 
 // The passthrough configuration for the HTTP target. A passthrough target
 // forwards requests directly to an external HTTP endpoint.
