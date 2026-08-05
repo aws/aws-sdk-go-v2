@@ -1,8 +1,0 @@
-{
-    "id": "90e45191-c9a9-49a7-b8df-9186e86a7c6b",
-    "type": "feature",
-    "description": "Private Certificate Authority service now supports RSASSA-PSS signing algorithm.",
-    "modules": [
-        "service/acmpca"
-    ]
-}

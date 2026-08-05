@@ -1,3 +1,8 @@
+# v1.54.0 (2026-08-05)
+
+* **Feature**: Adding support for fine-grained access control for AgentCore Memory through managed AgentCore Gateway HTTP Connectors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.1 (2026-07-31.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

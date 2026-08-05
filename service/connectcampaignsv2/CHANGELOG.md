@@ -1,3 +1,7 @@
+# v1.18.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2026-07-31.2)
 
 * **Feature**: Launching feature for abandonment rate pacing control for outbound campaigns.

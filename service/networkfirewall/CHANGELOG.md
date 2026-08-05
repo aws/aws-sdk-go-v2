@@ -1,3 +1,7 @@
+# v1.67.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.67.0 (2026-08-03)
 
 * **Feature**: This launch allows customers to use Network Firewall as an explicit Proxy and protect their workloads against threat of data exfiltration.

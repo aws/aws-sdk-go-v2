@@ -1,3 +1,7 @@
+# v1.68.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.68.0 (2026-07-31.2)
 
 * **Feature**: Adding support for enhanced Git experience in Sagemaker Unified Studio.

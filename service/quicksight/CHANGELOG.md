@@ -1,3 +1,7 @@
+# v1.123.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.123.0 (2026-07-31.2)
 
 * **Feature**: Adding TopicV2 management APIs, adding possibility to use Topics in Analysis

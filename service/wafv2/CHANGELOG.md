@@ -1,3 +1,7 @@
+# v1.77.3 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.77.2 (2026-08-03)
 
 * **Documentation**: Updated descriptions for number of PreParseTextTransformations allowed per rule statement

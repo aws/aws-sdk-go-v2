@@ -1,3 +1,7 @@
+# v1.38.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.0 (2026-07-31.2)
 
 * **Feature**: This release adds a new optional TranscriptFormat parameter to the Amazon Transcribe streaming API, letting customers select spoken or written form for numeric and formatted output.

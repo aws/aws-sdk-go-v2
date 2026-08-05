@@ -1,3 +1,7 @@
+# v1.124.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.124.0 (2026-07-31.2)
 
 * **Feature**: Adds StorageOperationStatus and StorageOperationPercentProgress to DescribeDBInstances, letting you monitor RDS storage initialization and optimization progress.

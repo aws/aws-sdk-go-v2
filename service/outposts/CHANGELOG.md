@@ -1,3 +1,7 @@
+# v1.66.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.66.0 (2026-07-31.2)
 
 * **Feature**: Adds the "EKS" value to the AWSServiceName enum and marks the Address field as sensitive.

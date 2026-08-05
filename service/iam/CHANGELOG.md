@@ -1,3 +1,7 @@
+# v1.58.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.58.0 (2026-08-04)
 
 * **Feature**: Updating endpoint generation logic

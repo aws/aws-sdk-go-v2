@@ -1,3 +1,7 @@
+# v1.57.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.0 (2026-07-31.2)
 
 * **Feature**: Added support for mid-conversation tool changes in the Amazon Bedrock Converse and ConverseStream APIs

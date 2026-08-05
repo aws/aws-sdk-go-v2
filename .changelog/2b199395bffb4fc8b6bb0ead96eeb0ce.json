@@ -1,8 +1,0 @@
-{
-    "id": "2b199395-bffb-4fc8-b6bb-0ead96eeb0ce",
-    "type": "feature",
-    "description": "New enum values added for Agent Connectivity issues",
-    "modules": [
-        "service/ecs"
-    ]
-}

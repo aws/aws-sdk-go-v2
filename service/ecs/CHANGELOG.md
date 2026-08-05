@@ -1,3 +1,8 @@
+# v1.90.0 (2026-08-05)
+
+* **Feature**: New enum values added for Agent Connectivity issues
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.89.3 (2026-07-31.2)
 
 * **Dependency Update**: Updated to the latest SDK module versions

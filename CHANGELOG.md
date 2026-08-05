@@ -1,3 +1,20 @@
+# Release (2026-08-05)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.50.0](service/acmpca/CHANGELOG.md#v1500-2026-08-05)
+  * **Feature**: Private Certificate Authority service now supports RSASSA-PSS signing algorithm.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.54.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1540-2026-08-05)
+  * **Feature**: Adding support for fine-grained access control for AgentCore Memory through managed AgentCore Gateway HTTP Connectors.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.36.0](service/deadline/CHANGELOG.md#v1360-2026-08-05)
+  * **Feature**: AWS Deadline Cloud now reports persistent volume costs alongside compute and license costs. Customers can view per-fleet storage costs in Usage Explorer by selecting the Usage Type grouping, helping them better understand the costs of their infrastructure.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.90.0](service/ecs/CHANGELOG.md#v1900-2026-08-05)
+  * **Feature**: New enum values added for Agent Connectivity issues
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.152.0](service/glue/CHANGELOG.md#v11520-2026-08-05)
+  * **Feature**: Added the PutDataCatalogExportConfiguration to export Glue Data Catalog metadata to systems tables stored in S3 Tables.
+
 # Release (2026-08-04)
 
 ## General Highlights

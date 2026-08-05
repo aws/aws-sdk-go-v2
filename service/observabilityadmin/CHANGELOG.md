@@ -1,3 +1,7 @@
+# v1.22.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2026-08-03)
 
 * **Feature**: Launch CMK support for Telemetry Enablement Organization and Account Rules.
