@@ -12871,6 +12871,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DAEMON"
                     }
+                },
+                "AGENT_CONNECTIVITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT_CONNECTIVITY"
+                    }
                 }
             }
         },
@@ -22782,6 +22788,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "TerminationNotice"
+                    }
+                },
+                "INFRASTRUCTURE_HEALTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InfrastructureHealth"
                     }
                 }
             }

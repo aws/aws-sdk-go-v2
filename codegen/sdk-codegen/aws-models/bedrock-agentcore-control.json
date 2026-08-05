@@ -3742,6 +3742,17 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ConnectorParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of a connector parameter (for example, <code>memoryId</code>). The name must start with a letter and contain only letters, digits, underscores, and hyphens.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#ConnectorParameterOverride": {
             "type": "structure",
             "members": {
@@ -3773,6 +3784,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.bedrockagentcorecontrol#ConnectorParameterOverride"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ConnectorParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The value of a connector parameter.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#ConnectorSource": {
@@ -19570,6 +19591,58 @@
                 "smithy.api#documentation": "<p>The API schema configuration for an HTTP target. This schema defines the API structure that the target exposes.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#HttpConnectorParameters": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ConnectorParameterName"
+            },
+            "value": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ConnectorParameterValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A map of resource parameters for an HTTP connector target. Each entry maps a parameter name to its value.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HttpConnectorSource": {
+            "type": "structure",
+            "members": {
+                "connectorId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the HTTP connector integration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source identifying the HTTP connector integration.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HttpConnectorTargetConfiguration": {
+            "type": "structure",
+            "members": {
+                "source": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HttpConnectorSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration identifying which HTTP connector to use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HttpConnectorParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource parameters for this connector (for example, <code>memoryId</code>). The service validates these parameters against the request path at runtime.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for an HTTP connector target. Use this configuration when you want to route HTTP requests through a managed connector.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#HttpHeaderKey": {
             "type": "string",
             "traits": {
@@ -19634,6 +19707,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#PassthroughTargetConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The passthrough configuration for the HTTP target. A passthrough target forwards requests directly to an external HTTP endpoint.</p>"
+                    }
+                },
+                "connector": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HttpConnectorTargetConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connector-based configuration for the HTTP target. Use this configuration when you want to route HTTP requests through a managed connector.</p>"
                     }
                 }
             },
@@ -31536,6 +31615,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "PROVIDER"
+                    }
+                },
+                "HTTP_CONNECTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP_CONNECTOR"
                     }
                 }
             }
