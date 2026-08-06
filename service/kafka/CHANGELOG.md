@@ -1,3 +1,7 @@
+# v1.58.0 (2026-08-06)
+
+* **Feature**: MSK Clusters can now deliver authorizer logs alongside broker logs to the destinations defined by you
+
 # v1.57.2 (2026-08-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

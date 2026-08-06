@@ -1,8 +1,0 @@
-{
-    "id": "4fac7943-5001-4b6b-af8c-eaca0a4efab0",
-    "type": "feature",
-    "description": "MSK Clusters can now deliver authorizer logs alongside broker logs to the destinations defined by you",
-    "modules": [
-        "service/kafka"
-    ]
-}

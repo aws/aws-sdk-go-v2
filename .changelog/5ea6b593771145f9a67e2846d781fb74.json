@@ -1,8 +1,0 @@
-{
-    "id": "5ea6b593-7711-45f9-a67e-2846d781fb74",
-    "type": "feature",
-    "description": "Add support for capacity provider sessions in Amazon Bedrock AgentCore. Customers can now delete an active session running on a runtime instance launched through their capacity provider.",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}

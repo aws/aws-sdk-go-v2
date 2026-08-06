@@ -1,3 +1,7 @@
+# v1.42.0 (2026-08-06)
+
+* **Feature**: Adds support for service generated insights across runs, jobs, and tests.
+
 # v1.41.4 (2026-08-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

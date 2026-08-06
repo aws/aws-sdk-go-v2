@@ -1,3 +1,7 @@
+# v1.76.0 (2026-08-06)
+
+* **Feature**: Security Hub is adding a new public API, ListFreeTrialStatusesV2 to describe the free trial statuses of the Security Hub service and its opt-in features.
+
 # v1.75.4 (2026-08-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

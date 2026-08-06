@@ -1,3 +1,7 @@
+# v1.14.0 (2026-08-06)
+
+* **Feature**: Add support for WhatsApp Conversions APIs.
+
 # v1.13.4 (2026-08-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

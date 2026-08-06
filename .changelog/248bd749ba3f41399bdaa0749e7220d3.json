@@ -1,8 +1,0 @@
-{
-    "id": "248bd749-ba3f-4139-9bda-a0749e7220d3",
-    "type": "feature",
-    "description": "Agent Registry's Public Preview release",
-    "modules": [
-        "service/agentregistry"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.82.0 (2026-08-06)
+
+* **Feature**: This release adds index category support to the CloudWatch Logs DescribeFieldIndexes API. Customers can filter and identify DEFAULT, CUSTOM, AUTO, and INACTIVE field indexes.
+
 # v1.81.1 (2026-08-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

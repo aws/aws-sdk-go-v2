@@ -1,8 +1,0 @@
-{
-    "id": "bb322555-5f9f-468d-b63b-048b46487241",
-    "type": "feature",
-    "description": "AWS Elemental MediaTailor now supports concurrent function execution. The new Concurrent Executor function type runs multiple independent child functions in parallel within a single lifecycle hook, reducing pipeline latency to the duration of the slowest call instead of the sum of all calls.",
-    "modules": [
-        "service/mediatailor"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "0282f24c-f7e3-4cdb-8230-8e36f14f1bbc",
-    "type": "feature",
-    "description": "Add support for WhatsApp Conversions APIs.",
-    "modules": [
-        "service/socialmessaging"
-    ]
-}

@@ -1,3 +1,48 @@
+# Release (2026-08-06)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/agentregistry`: [v1.0.0](service/agentregistry/CHANGELOG.md#v100-2026-08-06)
+  * **Release**: New AWS service client module
+  * **Feature**: Agent Registry's Public Preview release
+* `github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol`: [v1.0.0](service/agentregistrycontrol/CHANGELOG.md#v100-2026-08-06)
+  * **Release**: New AWS service client module
+  * **Feature**: Agent Registry's Public Preview release
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.71.0](service/autoscaling/CHANGELOG.md#v1710-2026-08-06)
+  * **Feature**: EC2 Auto Scaling now supports being managed by other AWS services via the operator field.
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.60.0](service/backup/CHANGELOG.md#v1600-2026-08-06)
+  * **Feature**: AWS Backup now lets you create read-only access points for Amazon S3 recovery points, enabling you to access backup data using S3 APIs without initiating a restore.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.37.0](service/bedrockagentcore/CHANGELOG.md#v1370-2026-08-06)
+  * **Feature**: Add support for capacity provider sessions in Amazon Bedrock AgentCore. Customers can now delete an active session running on a runtime instance launched through their capacity provider.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.55.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1550-2026-08-06)
+  * **Feature**: Add support for Gateway rate limits and Runtime instances in Amazon Bedrock AgentCore. Customers can now configure rate limits scoped to control request rates, token consumption rates, and active connection rates. Customers can now create capacity providers to launch runtimes on their EC2 instances.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.82.0](service/cloudwatchlogs/CHANGELOG.md#v1820-2026-08-06)
+  * **Feature**: This release adds index category support to the CloudWatch Logs DescribeFieldIndexes API. Customers can filter and identify DEFAULT, CUSTOM, AUTO, and INACTIVE field indexes.
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.42.0](service/devicefarm/CHANGELOG.md#v1420-2026-08-06)
+  * **Feature**: Adds support for service generated insights across runs, jobs, and tests.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.320.0](service/ec2/CHANGELOG.md#v13200-2026-08-06)
+  * **Feature**: Adds a new optional IncludeLocalZones parameter to the Spot Placement Score API that defaults to false. When set to true, the Spot Placement Score API will consider the relevant Local Zones with Spot capacity when computing the Spot Placement Score.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.61.0](service/gamelift/CHANGELOG.md#v1610-2026-08-06)
+  * **Feature**: Adds support for C8a, C8i, C9g, M8a, M8i, and M9g EC2 instance type families for managed EC2 and container fleets. Also adds explicit anchors on most string regexes.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.58.0](service/kafka/CHANGELOG.md#v1580-2026-08-06)
+  * **Feature**: MSK Clusters can now deliver authorizer logs alongside broker logs to the destinations defined by you
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.20.0](service/marketplaceagreement/CHANGELOG.md#v1200-2026-08-06)
+  * **Feature**: GetAgreementTerms now returns a new term variant in AcceptedTerm, netPaymentTerm, with a paymentDuePeriod field (example "P30D").
+* `github.com/aws/aws-sdk-go-v2/service/marketplacediscovery`: [v1.4.0](service/marketplacediscovery/CHANGELOG.md#v140-2026-08-06)
+  * **Feature**: GetOfferTerms now returns netPaymentTerm in offerTerms, specifying payment due period after invoice date. The paymentDuePeriod field uses ISO 8601 duration format (e.g., "P30D" for net 30 days). This is a backward-compatible addition. See API documentation for full structure and examples.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.64.0](service/mediatailor/CHANGELOG.md#v1640-2026-08-06)
+  * **Feature**: AWS Elemental MediaTailor now supports concurrent function execution. The new Concurrent Executor function type runs multiple independent child functions in parallel within a single lifecycle hook, reducing pipeline latency to the duration of the slowest call instead of the sum of all calls.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.107.0](service/s3/CHANGELOG.md#v11070-2026-08-06)
+  * **Feature**: AWS Backup now lets you create read-only access points for Amazon S3 recovery points, enabling you to access backup data using S3 APIs without initiating a restore.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.264.0](service/sagemaker/CHANGELOG.md#v12640-2026-08-06)
+  * **Feature**: Releases new Model Customization SequenceLength parameter for Training and g7 instance types for Training and Processing.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.76.0](service/securityhub/CHANGELOG.md#v1760-2026-08-06)
+  * **Feature**: Security Hub is adding a new public API, ListFreeTrialStatusesV2 to describe the free trial statuses of the Security Hub service and its opt-in features.
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.14.0](service/socialmessaging/CHANGELOG.md#v1140-2026-08-06)
+  * **Feature**: Add support for WhatsApp Conversions APIs.
+
 # Release (2026-08-05)
 
 ## General Highlights

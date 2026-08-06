@@ -1,3 +1,7 @@
+# v1.264.0 (2026-08-06)
+
+* **Feature**: Releases new Model Customization SequenceLength parameter for Training and g7 instance types for Training and Processing.
+
 # v1.263.2 (2026-08-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

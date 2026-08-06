@@ -1,3 +1,7 @@
+# v1.71.0 (2026-08-06)
+
+* **Feature**: EC2 Auto Scaling now supports being managed by other AWS services via the operator field.
+
 # v1.70.4 (2026-08-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

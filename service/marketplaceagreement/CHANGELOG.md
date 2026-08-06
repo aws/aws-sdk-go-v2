@@ -1,3 +1,7 @@
+# v1.20.0 (2026-08-06)
+
+* **Feature**: GetAgreementTerms now returns a new term variant in AcceptedTerm, netPaymentTerm, with a paymentDuePeriod field (example "P30D").
+
 # v1.19.4 (2026-08-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

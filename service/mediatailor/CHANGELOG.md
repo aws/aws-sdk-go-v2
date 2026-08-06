@@ -1,3 +1,7 @@
+# v1.64.0 (2026-08-06)
+
+* **Feature**: AWS Elemental MediaTailor now supports concurrent function execution. The new Concurrent Executor function type runs multiple independent child functions in parallel within a single lifecycle hook, reducing pipeline latency to the duration of the slowest call instead of the sum of all calls.
+
 # v1.63.4 (2026-08-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions
